@@ -9,8 +9,14 @@
 .card .header{
     background: #d8edf6;
     padding: 10px 15px 0px;
-    color: blue;
+    color: #0000ff;
+}
+.card-body{
+    background: #ffffff;
 }
 .card-body .input-group{
     margin-top: 15px;
+}
+.card-footer p span{
+    color: #0000ff;
 }
