@@ -19,7 +19,7 @@
                     <form [formGroup]="loginForm" (ngSubmit)="login()">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input id="title" class="form-control" [formControl]="loginForm.controls['username']" placeholder="Username">
+                            <input id="title" class="form-control" [formControl]="loginForm.controls['usernameOrEmail']" placeholder="Username or Email">
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, ConnectionBackend, RequestOptions, RequestOptionsArgs, Response, Headers, Request } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 // tslint:disable-next-line:import-blacklist
 import 'rxjs/Rx';
-import { Observable } from 'rxjs';
 
 @Injectable()
-export class CustomHttp extends Http {
+export class CustomHttpInterceptor extends Http {
   constructor(backend: ConnectionBackend, defaultOptions: RequestOptions) {
     super(backend, defaultOptions);
   }

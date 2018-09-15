@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { NgForm, NgModel, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthenticationService } from 'src/app/auth/authentication.service';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { NgForm, NgModel, FormsModule, ReactiveFormsModule } from '@angular/form
   providers: [
     NgForm,
     NgModel,
-    FormsModule
+    FormsModule,
+    AuthenticationService
   ],
   declarations: [LoginComponent]
 })
