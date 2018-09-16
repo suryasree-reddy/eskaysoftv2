@@ -14,7 +14,6 @@ export class AuthenticationService {
 
   authenticateUser(user) {
     return this.http.post(environment.api.url + 'auth/signin', user).subscribe(res => {
-      console.log(res);
       if( res ){
         localStorage.setItem('id_token', JSON.stringify(res));
         this.router.navigate(['dashboard']);

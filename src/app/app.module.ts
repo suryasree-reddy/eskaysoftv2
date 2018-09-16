@@ -1,4 +1,4 @@
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BsDropdownModule, TypeaheadModule } from 'ngx-bootstrap';
 import { AppRouter } from './app.router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -19,7 +19,8 @@ import { CustomHttpInterceptor } from 'src/app/security/custom-http.interceptor'
     BrowserModule,
     AppRouter,
     HttpClientModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    TypeaheadModule.forRoot()
   ],
   providers: [CustomHttpInterceptor,
     {

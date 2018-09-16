@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: url("assets/images/Body-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 60px;
+  overflow-y: auto;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.line {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid grey;
+}
+
+.input-group {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.input-group{
+  .caret {
+    position: absolute;
+    top: 45px;
+    right: 10px;
+    z-index: 10;
+  }
+}
+
+.mr-l-10{
+  margin-left: 10px;
+}
+
+

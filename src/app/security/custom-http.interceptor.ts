@@ -7,8 +7,9 @@ export class CustomHttpInterceptor implements HttpInterceptor {
     constructor() {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        const token = JSON.parse(localStorage.getItem('id_token'));
         const headers = req.headers
-            .set('Authorization', localStorage.getItem('id_token'));
+            .set('Authorization', token.tokenType + ' ' + token.accessToken );
         const authReq = req.clone({ headers });
         return next.handle(authReq);
     }

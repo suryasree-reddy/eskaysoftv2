@@ -24,8 +24,8 @@
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
-            ],            
+              "src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -124,5 +124,10 @@
       }
     }
   },
-  "defaultProject": "eskaysoft"
+  "defaultProject": "eskaysoft",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

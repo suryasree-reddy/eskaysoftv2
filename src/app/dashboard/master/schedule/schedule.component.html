@@ -1,3 +1,36 @@
-<p>
-  schedule works!
-</p>
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-5">
+      <h3>Schedule</h3>
+      <form [formGroup]="scheduleForm" (ngSubmit)="addSchedule()">
+        <div class="row">
+          <div class="error-text col-xs-12" *ngIf="formError">
+            <p class="text-danger">All fields are mandatory!!</p>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <p>Schedule Name: *</p>
+          <input id="scheduleName" class="form-control" [formControl]="scheduleForm.controls['scheduleName']">
+        </div>
+        <div class="input-group">
+          <p>Schedule Index: *</p>
+          <input id="scheduleIndex" class="form-control" [formControl]="scheduleForm.controls['scheduleIndex']">
+        </div>
+        <div class="input-group">
+          <p>Schedule Type: *</p>
+          <input id="scheduleType" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="code"
+            [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" class="form-control">
+          <span class="caret"></span>
+        </div>
+
+        <div class="input-group">
+          <button type="button" class="btn btn-primary">Reset</button>
+          <button type="submit" class="btn btn-primary mr-l-10">Save</button>
+        </div>
+
+      </form>
+    </div>
+    <div class="col-md-7"></div>
+  </div>
+</div>
