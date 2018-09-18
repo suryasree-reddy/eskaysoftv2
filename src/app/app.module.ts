@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CustomHttpInterceptor } from 'src/app/security/custom-http.interceptor';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CustomHttpInterceptor } from 'src/app/security/custom-http.interceptor'
     AppRouter,
     HttpClientModule,
     BsDropdownModule.forRoot(),
-    TypeaheadModule.forRoot()
+    TypeaheadModule.forRoot(),
+    AgGridModule.withComponents([])
   ],
   providers: [CustomHttpInterceptor,
     {

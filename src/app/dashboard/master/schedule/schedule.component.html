@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-5">
       <h3>Schedule</h3>
-      <form [formGroup]="scheduleForm" (ngSubmit)="addSchedule()">
+      <form [formGroup]="scheduleForm" (ngSubmit)="save()">
         <div class="row">
           <div class="error-text col-xs-12" *ngIf="formError">
             <p class="text-danger">All fields are mandatory!!</p>
@@ -18,19 +18,61 @@
           <input id="scheduleIndex" class="form-control" [formControl]="scheduleForm.controls['scheduleIndex']">
         </div>
         <div class="input-group">
-          <p>Schedule Type: *</p>
+          <p>Schedule Type: </p>
           <input id="scheduleType" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="code"
             [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" class="form-control">
           <span class="caret"></span>
         </div>
 
         <div class="input-group">
-          <button type="button" class="btn btn-primary">Reset</button>
+          <button type="button" (click)="resetForm()" class="btn btn-primary">Reset</button>
           <button type="submit" class="btn btn-primary mr-l-10">Save</button>
+          <button type="button" *ngIf="editSchedule && editSchedule.deleteFlag" (click)="delete()" class="btn btn-danger float-right">Delete</button>
         </div>
 
       </form>
     </div>
-    <div class="col-md-7"></div>
+    <div class="col-md-7">
+      <br /><br />
+      <div class="row search-wrapper">
+        <div class="col-md-2"> Search By:</div>
+        <div class="col-md-3">
+          <div class="row">
+              <select [(ngModel)]="searchBy" class="form-control">
+                <option *ngFor="let item of scheduleListColumns" [value]="item.field">{{item.headerName}}</option>
+              </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <input [(ngModel)]="searchKey" class="form-control" placeholder="Search here">
+        </div>
+
+
+
+
+      </div>
+      <!-- {{scheduleList | json}} -->
+      <ag-grid-angular #agGrid style="height: 500px; width: 100%;" class="ag-theme-balham" [rowData]="scheduleList" [columnDefs]="scheduleListColumns" [rowSelection]="single" (gridReady)="onGridReady($event)" [navigateToNextCell]="navigateToNextCell">
+      </ag-grid-angular>
+
+<!-- {{scheduleList | json}} -->
+<!-- 
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Schedule Name</th>
+            <th>Schedule Index</th>
+            <th>Schedule Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of scheduleList" (click)="editable(s)">
+            <td> {{s.scheduleName}} </td>
+            <td> {{s.scheduleIndex}} </td>
+            <td> {{s.scheduleType}} </td>
+          </tr>
+        </tbody>
+      </table> -->
+    </div>
   </div>
 </div>
