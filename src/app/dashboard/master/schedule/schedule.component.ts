@@ -20,16 +20,16 @@ export class ScheduleComponent implements OnInit {
   public scheduleList: any = [];
   public scheduleListColumns = [
     { headerName: 'Schedule Name', field: 'scheduleName' },
-    { headerName: 'Schedule Index', field: 'scheduleIndex' },
+    { headerName: 'Schedule Index', field: 'scheduleIndex', filter: "agNumberColumnFilter" },
     { headerName: 'Schedule Type', field: 'scheduleType' }
   ];
   editSchedule: any;
 
 
 
-  // private gridApi;
+  private gridApi;
   private gridColumnApi;
-  // private rowSelection;
+  private rowSelection;
  
   constructor(
     private fb: FormBuilder,
@@ -54,6 +54,7 @@ export class ScheduleComponent implements OnInit {
     this.searchBy = this.scheduleListColumns[0].field;
     this.getScheduleTypes();
 
+    this.rowSelection = "single";
 
   }
 
@@ -108,8 +109,18 @@ export class ScheduleComponent implements OnInit {
 
 
 
-
-
+  onSelectionChanged() {
+    const selectedRows = this.gridApi.getSelectedRows();
+    this.editable(selectedRows[0]);
+    localStorage.setItem('ag-activeRow', JSON.stringify(selectedRows[0]));
+    let selectedRowsString = "";
+    selectedRows.forEach(function(selectedRow, index) {
+      if (index !== 0) {
+        selectedRowsString += ", ";
+      }
+      selectedRowsString += selectedRow.scheduleName;
+    });
+  }
 
   navigateToNextCell(params){
     // const selectedRows= params.key;
@@ -178,8 +189,6 @@ export class ScheduleComponent implements OnInit {
       
     }
 
-
-
   }
 
 
@@ -189,9 +198,10 @@ export class ScheduleComponent implements OnInit {
   }
 
   onGridReady(params){
-    // this.gridApi = params.api;
+    this.gridApi = params.api;
+    // this.gridColumnApi = params.columnApi;
+
     params.api.sizeColumnsToFit();
-    this.gridColumnApi = params.columnApi;
 
     const columns = params.columnApi.getAllDisplayedVirtualColumns();
     // const colIds = columns.map((Column) => {

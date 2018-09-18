@@ -16,12 +16,17 @@ export class SubscheduleComponent implements OnInit {
   subScheduleList: any = [];
   scheduleList: any = [];
   editSubSchedule: any;
+
+  private gridApi;
+  private rowSelection;
   private gridColumnApi;
-  public scheduleListColumns = [
+  public subScheduleListColumns = [
     { headerName: 'Sub-Schedule Name', field: 'subScheduleName' },
-    { headerName: 'Schedule Id', field: 'scheduleId' },
-    { headerName: 'Sub-Schedule Index', field: 'subScheduleIndex' }
+    { headerName: 'Schedule Id', field: 'scheduleId', filter: "agNumberColumnFilter"  },
+    { headerName: 'Sub-Schedule Index', field: 'subScheduleIndex', filter: "agNumberColumnFilter"  }
   ];
+
+
 
   constructor(private fb: FormBuilder,
     private subScheduleService: SubscheduleService) { }
@@ -38,18 +43,19 @@ export class SubscheduleComponent implements OnInit {
     this.subScheduleService.getAll();
     this.subScheduleService.subSchedules.subscribe(list => {
       this.subScheduleList = list;
+      localStorage.setItem('rowDataLength', JSON.stringify(this.scheduleList.length));
     })
 
     this.subScheduleService.getAllSchedules().subscribe(res => {
       this.scheduleList = res;
     })
 
+    this.rowSelection = "single";
 
   }
 
 
   save() {
-    console.log(this.subScheduleForm.value);
     if (this.subScheduleForm.valid) {
       if(this.subScheduleForm.value.id){
         this.subScheduleService.update(this.subScheduleForm.value);
@@ -78,6 +84,18 @@ export class SubscheduleComponent implements OnInit {
   }
 
 
+  onSelectionChanged() {
+    const selectedRows = this.gridApi.getSelectedRows();
+    this.editable(selectedRows[0]);
+    localStorage.setItem('ag-activeRow', JSON.stringify(selectedRows[0]));
+    let selectedRowsString = "";
+    selectedRows.forEach(function(selectedRow, index) {
+      if (index !== 0) {
+        selectedRowsString += ", ";
+      }
+      selectedRowsString += selectedRow.scheduleName;
+    });
+  }
 
 
   navigateToNextCell(params){
@@ -158,8 +176,9 @@ export class SubscheduleComponent implements OnInit {
   }
 
   onGridReady(params){
+    this.gridApi = params.api;
     params.api.sizeColumnsToFit();
-    this.gridColumnApi = params.columnApi;
+    // this.gridColumnApi = params.columnApi;
     const columns = params.columnApi.getAllDisplayedVirtualColumns();
 
     columns.forEach((column) => {
