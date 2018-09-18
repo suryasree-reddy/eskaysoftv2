@@ -26,8 +26,9 @@ export class ScheduleService {
   createSchedule(schedule) {
     console.log(schedule);
     return this.httpClient.post('https://eskaysoft.synectiks.com/api/v1/schedules/', schedule).subscribe(res => {
-      this.scheduleArr.unshift(res);
-      this.schedules.next(this.scheduleArr);
+      // this.scheduleArr.unshift(res);
+      // this.schedules.next(this.scheduleArr);
+      this.getAllSchedules();
     })
   }
 

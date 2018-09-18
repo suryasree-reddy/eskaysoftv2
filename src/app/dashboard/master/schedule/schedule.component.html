@@ -51,11 +51,9 @@
 
 
       </div>
-      <!-- {{scheduleList | json}} -->
-      <ag-grid-angular #agGrid style="height: 500px; width: 100%;" class="ag-theme-balham" [rowData]="scheduleList" [columnDefs]="scheduleListColumns" [rowSelection]="single" (gridReady)="onGridReady($event)" [navigateToNextCell]="navigateToNextCell">
+      <ag-grid-angular #agGrid style="height: 400px; width: 100%;" class="ag-theme-balham" [rowData]="scheduleList" [columnDefs]="scheduleListColumns" [rowSelection]="single" (gridReady)="onGridReady($event)" [navigateToNextCell]="navigateToNextCell">
       </ag-grid-angular>
 
-<!-- {{scheduleList | json}} -->
 <!-- 
       <table border="1">
         <thead>
