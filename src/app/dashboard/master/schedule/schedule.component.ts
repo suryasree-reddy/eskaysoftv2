@@ -4,6 +4,7 @@ import { ScheduleService } from './schedule.service';
 import { ViewChild } from '@angular/core';
 import { Column } from 'ag-grid-community';
 
+
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
@@ -31,6 +32,7 @@ export class ScheduleComponent implements OnInit {
   private gridColumnApi;
   private rowSelection;
  
+ 
   constructor(
     private fb: FormBuilder,
     private scheduleService: ScheduleService
@@ -57,8 +59,6 @@ export class ScheduleComponent implements OnInit {
     this.rowSelection = "single";
 
   }
-
-  
   
 
   getScheduleTypes() {
@@ -218,9 +218,8 @@ export class ScheduleComponent implements OnInit {
       });
     });
 
-
   }
 
-
-
 }
+
+
