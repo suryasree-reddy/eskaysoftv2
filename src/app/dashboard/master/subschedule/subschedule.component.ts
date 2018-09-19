@@ -28,6 +28,7 @@ export class SubscheduleComponent implements OnInit {
     { headerName: 'Sub-Schedule Name', field: 'subScheduleName' },
     { headerName: 'Schedule Id', field: 'scheduleId', filter: "agNumberColumnFilter"  },
     { headerName: 'Sub-Schedule Index', field: 'subScheduleIndex', filter: "agNumberColumnFilter"  }
+    
   ];
 
   scheduleTypes: any;
@@ -54,6 +55,7 @@ export class SubscheduleComponent implements OnInit {
       subScheduleName: ['', Validators.required],
       subScheduleIndex: ['', Validators.required],
       scheduleId: ['', Validators.required],
+      scheduleName: []
     });
 
     this.subScheduleService.getAll();
@@ -71,6 +73,9 @@ export class SubscheduleComponent implements OnInit {
 
   }
 
+  onSelectSchedule(event){
+    this.subScheduleForm.value.scheduleId = event.item.id;
+  }
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-md'});
@@ -119,6 +124,7 @@ export class SubscheduleComponent implements OnInit {
 
 
   save() {
+    // console.log(this.subScheduleForm.value);
     if (this.subScheduleForm.valid) {
       if(this.subScheduleForm.value.id){
         this.subScheduleService.update(this.subScheduleForm.value);

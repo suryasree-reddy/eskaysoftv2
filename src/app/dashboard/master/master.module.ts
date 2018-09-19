@@ -22,7 +22,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
   ],
   providers: [NgForm,
     NgModel,
-    FormsModule,],
+    FormsModule
+  ],
   declarations: [ScheduleComponent, SubscheduleComponent]
 })
 export class MasterModule { }

@@ -8,7 +8,7 @@
             <p class="text-danger">All fields are mandatory!!</p>
           </div>
         </div>
-      
+
         <div class="input-group">
           <p>Sub-schedule Name: *</p>
           <input id="subScheduleName" class="form-control" [formControl]="subScheduleForm.controls['subScheduleName']">
@@ -19,8 +19,12 @@
 
           <select [formControl]="subScheduleForm.controls['scheduleId']" class="form-control">
             <option *ngFor="let item of scheduleList" [value]="item.id">{{item.scheduleName}}</option>
-          </select>
-          
+          </select> -->
+
+          <input id="scheduleType" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="scheduleName"
+            [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control">
+          <span class="caret"></span>
+
         </div>
         <div class="input-group">
           <p>Sub-schedule Index: * </p>
