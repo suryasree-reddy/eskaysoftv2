@@ -21,7 +21,8 @@ export class ScheduleComponent implements OnInit {
   public scheduleListColumns = [
     { headerName: 'Schedule Name', field: 'scheduleName' },
     { headerName: 'Schedule Index', field: 'scheduleIndex', filter: "agNumberColumnFilter" },
-    { headerName: 'Schedule Type', field: 'scheduleType' }
+    { headerName: 'Schedule Type', field: 'scheduleType' },
+    { headerName: 'Delete Status', field: 'deleteFlag'  }
   ];
   editSchedule: any;
 

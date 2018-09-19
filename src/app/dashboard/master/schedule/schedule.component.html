@@ -48,7 +48,7 @@
         </div>
       </div> -->
 
-      <ag-grid-angular #agGrid style="height: 400px; width: 100%;" class="ag-theme-balham" [rowData]="scheduleList" [columnDefs]="scheduleListColumns" [rowSelection]="rowSelection" (gridReady)="onGridReady($event)" [navigateToNextCell]="navigateToNextCell" (selectionChanged)="onSelectionChanged($event)" [paginationAutoPageSize]="true" [pagination]="true" [enableFilter]="true">
+      <ag-grid-angular #agGrid style="height: 400px; width: 100%;" class="ag-theme-balham" [rowData]="scheduleList" [columnDefs]="scheduleListColumns" [rowSelection]="rowSelection" (gridReady)="onGridReady($event)" [navigateToNextCell]="navigateToNextCell" (selectionChanged)="onSelectionChanged($event)" [paginationAutoPageSize]="true" [pagination]="true" [enableFilter]="true" [enableSorting]="true">
       </ag-grid-angular>
 
 <!-- 

@@ -20,7 +20,8 @@ import { BsDropdownModule } from 'ngx-bootstrap';
   ],
   providers: [NgForm,
     NgModel,
-    FormsModule,],
+    FormsModule
+  ],
   declarations: [ScheduleComponent, SubscheduleComponent]
 })
 export class MasterModule { }
