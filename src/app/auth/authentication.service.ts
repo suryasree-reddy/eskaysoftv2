@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -7,17 +8,22 @@ import { tokenNotExpired } from 'angular2-jwt';
 @Injectable()
 export class AuthenticationService {
 
+  public badCredentials: Subject<boolean> = new Subject<boolean>();
   
   constructor(private http: HttpClient,
     private router: Router) {
   }
 
   authenticateUser(user) {
-    return this.http.post(environment.api.url + 'auth/signin', user).subscribe(res => {
+    this.http.post(environment.api.url + 'auth/signin', user).subscribe(res => {
       if( res ){
         localStorage.setItem('id_token', JSON.stringify(res));
         this.router.navigate(['dashboard']);
       }
+      this.badCredentials.next(true);
+
+    }, (error) => {
+      this.badCredentials.next(true);
     });
   }
 

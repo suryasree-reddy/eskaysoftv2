@@ -9,7 +9,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
-  public isUnauthorized: boolean;
+  public badCredentials: boolean;
+  public formError: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -21,12 +22,20 @@ export class LoginComponent implements OnInit {
       usernameOrEmail: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    this.authService.badCredentials.subscribe(res => {
+      this.badCredentials = res;
+    })
   }
 
   login() {
     //this.isUnauthorized = false;
-    console.log(this.loginForm.value);
-    this.authService.authenticateUser(this.loginForm.value);
+    // console.log(this.loginForm.value);
+    if(this.loginForm.valid){
+      this.authService.authenticateUser(this.loginForm.value);
+    }else{
+      this.formError = true;
+    }
   }
 
 }

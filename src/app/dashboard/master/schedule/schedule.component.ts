@@ -23,8 +23,11 @@ export class ScheduleComponent implements OnInit {
     { headerName: 'Schedule Name', field: 'scheduleName' },
     { headerName: 'Schedule Index', field: 'scheduleIndex', filter: "agNumberColumnFilter" },
     { headerName: 'Schedule Type', field: 'scheduleType' },
-    { headerName: 'Delete Status', field: 'deleteFlag'  }
+    { headerName: 'Delete Status', field: 'deleteFlag', cellRenderer: 'deltaIndicator'   }
   ];
+  public componentProvider = {
+    deltaIndicator: this.deltaIndicator
+  }
   editSchedule: any;
 
 
@@ -61,6 +64,21 @@ export class ScheduleComponent implements OnInit {
 
   }
   
+  deltaIndicator(params) {
+    var element = document.createElement("span");
+    var imageElement = document.createElement("img");
+
+    // visually indicate if this months value is higher or lower than last months value
+    if (params.value) {
+        imageElement.src = "https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/images/fire-plus.png"
+    } else {
+        imageElement.src = "https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/images/fire-minus.png"
+    }
+    element.appendChild(imageElement);
+    element.appendChild(document.createTextNode(params.value));
+    return element;
+}
+
 
   getScheduleTypes() {
     this.scheduleTypes = [{
