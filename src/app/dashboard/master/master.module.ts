@@ -7,6 +7,7 @@ import { SubscheduleComponent } from './subschedule/subschedule.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { AgGridModule } from 'ag-grid-angular';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { BsDropdownModule } from 'ngx-bootstrap';
     TypeaheadModule,
     AgGridModule,
     BsDropdownModule,
-    FormsModule
+    FormsModule,
+    ModalModule
   ],
   providers: [NgForm,
     NgModel,

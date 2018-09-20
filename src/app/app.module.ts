@@ -1,3 +1,4 @@
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { AuthGuard } from './security/auth-guard.service';
 import { BsDropdownModule, TypeaheadModule } from 'ngx-bootstrap';
 import { AppRouter } from './app.router';
@@ -24,6 +25,7 @@ import { AuthenticationService } from './auth/authentication.service';
     HttpClientModule,
     BsDropdownModule.forRoot(),
     TypeaheadModule.forRoot(),
+    ModalModule.forRoot(),
     AgGridModule.withComponents([])
   ],
   providers: [CustomHttpInterceptor,

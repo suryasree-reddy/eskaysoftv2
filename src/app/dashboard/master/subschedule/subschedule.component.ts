@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SubscheduleService } from './subschedule.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { ScheduleService } from 'src/app/dashboard/master/schedule/schedule.service';
 
 
 @Component({
@@ -10,6 +13,7 @@ import { SubscheduleService } from './subschedule.service';
 })
 export class SubscheduleComponent implements OnInit {
 
+  public scheduleForm: FormGroup;
   public subScheduleForm: FormGroup;
   public formError: boolean = false; 
   public formErrorMsg: string;
@@ -27,13 +31,25 @@ export class SubscheduleComponent implements OnInit {
     
   ];
 
-
+  scheduleTypes: any;
+  modalRef: BsModalRef;
+  message: string;
 
   constructor(private fb: FormBuilder,
-    private subScheduleService: SubscheduleService) { }
+    private subScheduleService: SubscheduleService,
+    private modalService: BsModalService,
+    private scheduleService: ScheduleService) { }
 
 
   ngOnInit() {
+    this.scheduleForm = this.fb.group({
+      id: [],
+      scheduleName: ['', Validators.required],
+      scheduleIndex: ['', Validators.required],
+      scheduleType: ['', Validators.required],
+    });
+
+
     this.subScheduleForm = this.fb.group({
       subScheduleId: [],
       subScheduleName: ['', Validators.required],
@@ -52,6 +68,7 @@ export class SubscheduleComponent implements OnInit {
       this.scheduleList = res;
     })
 
+    this.getScheduleTypes();
     this.rowSelection = "single";
 
   }
@@ -59,6 +76,52 @@ export class SubscheduleComponent implements OnInit {
   onSelectSchedule(event){
     this.subScheduleForm.value.scheduleId = event.item.id;
   }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+  }
+ 
+  // confirm(): void {
+  //   this.subScheduleService.getAll();
+  //   this.message = 'Confirmed!';
+  //   this.modalRef.hide();
+  // }
+ 
+  // decline(): void {
+  //   this.message = 'Declined!';
+  //   this.modalRef.hide();
+  // }
+
+  getScheduleTypes() {
+    this.scheduleTypes = [{
+      "code": "ASS",
+      "description": "Assets"
+    }, {
+      "code": "LIA",
+      "description": "Liabilities"
+    }, {
+      "code": "TRADE",
+      "description": "Trading"
+    }, {
+      "code": "PNL",
+      "description": "Profit & Loss"
+    }]
+  }
+
+  saveSchedule() {
+    if (this.scheduleForm.valid) {
+      this.scheduleService.createSchedule(this.scheduleForm.value);
+      this.modalRef.hide();
+    } else {
+      this.formError = true;
+    }
+
+  }
+
+  resetScheduleForm(){
+    this.scheduleForm.reset();
+  }
+
 
   save() {
     // console.log(this.subScheduleForm.value);
