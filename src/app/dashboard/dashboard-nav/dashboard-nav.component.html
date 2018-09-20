@@ -4,8 +4,8 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="col-sm-6">
-        <div class="btn-group" dropdown>
-          <button id="buttonMaster" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+        <div class="btn-group" dropdown #dropdown1="bs-dropdown" [autoClose]="false">
+          <button id="buttonMaster" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic"  (mouseenter) ="dropdown1.isOpen=true"  (mouseleave) ="dropdown1.isOpen=false">
             Master
           </button>
           <ul id="dropdownMaster" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
@@ -15,8 +15,8 @@
         </div>
       </div>
       <div class="col-sm-6">
-        <div class="btn-group" dropdown>
-          <button id="buttonMaster" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+        <div class="btn-group" dropdown  #dropdown2="bs-dropdown" [autoClose]="false">
+          <button id="buttonMaster" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic"  (mouseenter) ="dropdown2.isOpen=true"  (mouseleave) ="dropdown2.isOpen=false">
             Purchase
           </button>
           <ul id="dropdownMaster" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
@@ -28,8 +28,8 @@
     </div>
     <div class="col-sm-3">
       <div class="col-sm-6">
-        <div class="btn-group" dropdown>
-          <button id="buttonMaster" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+        <div class="btn-group" dropdown  #dropdown3="bs-dropdown" [autoClose]="false">
+          <button id="buttonMaster" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic"  (mouseenter) ="dropdown3.isOpen=true"  (mouseleave) ="dropdown3.isOpen=false">
             Sales
           </button>
           <ul id="dropdownMaster" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
@@ -39,8 +39,8 @@
         </div>
       </div>
       <div class="col-sm-6">
-        <div class="btn-group" dropdown>
-          <button id="buttonMaster" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+        <div class="btn-group" dropdown  #dropdown4="bs-dropdown" [autoClose]="false">
+          <button id="buttonMaster" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic"  (mouseenter) ="dropdown4.isOpen=true"  (mouseleave) ="dropdown4.isOpen=false">
             Inventory Reports
           </button>
           <ul id="dropdownMaster" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
@@ -52,8 +52,8 @@
     </div>
     <div class="col-sm-3">
       <div class="col-sm-6">
-        <div class="btn-group" dropdown>
-          <button id="buttonMaster" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+        <div class="btn-group" dropdown  #dropdown5="bs-dropdown" [autoClose]="false">
+          <button id="buttonMaster" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic"  (mouseenter) ="dropdown5.isOpen=true"  (mouseleave) ="dropdown5.isOpen=false">
             Finance
           </button>
           <ul id="dropdownMaster" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
@@ -63,8 +63,8 @@
         </div>
       </div>
       <div class="col-sm-6">
-        <div class="btn-group" dropdown>
-          <button id="buttonMaster" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+        <div class="btn-group" dropdown  #dropdown6="bs-dropdown" [autoClose]="false">
+          <button id="buttonMaster" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic"  (mouseenter) ="dropdown6.isOpen=true"  (mouseleave) ="dropdown6.isOpen=false">
             Finance Reports
           </button>
           <ul id="dropdownMaster" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
@@ -76,8 +76,8 @@
     </div>
     <div class="col-sm-3">
       <div class="col-sm-6">
-        <div class="btn-group" dropdown>
-          <button id="buttonMaster" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+        <div class="btn-group" dropdown  #dropdown7="bs-dropdown" [autoClose]="false">
+          <button id="buttonMaster" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic"  (mouseenter) ="dropdown7.isOpen=true"  (mouseleave) ="dropdown7.isOpen=false">
             GST Reports
           </button>
           <ul id="dropdownMaster" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
@@ -87,8 +87,8 @@
         </div>
       </div>
       <div class="col-sm-6">
-        <div class="btn-group" dropdown>
-          <button id="buttonMaster" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+        <div class="btn-group" dropdown  #dropdown8="bs-dropdown" [autoClose]="false">
+          <button id="buttonMaster" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic"  (mouseenter) ="dropdown8.isOpen=true"  (mouseleave) ="dropdown8.isOpen=false">
             Miscellaneous
           </button>
           <ul id="dropdownMaster" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
