@@ -15,6 +15,8 @@ export class ScheduleComponent implements OnInit {
   public scheduleTypes: any = [];
   public formError: boolean = false; 
   public formErrorMsg: string;
+  public deleteFlag: boolean = true;
+  public nameFlag: boolean = false;
 
   public searchBy: string;
   public scheduleList: any = [];
@@ -86,6 +88,7 @@ export class ScheduleComponent implements OnInit {
       }else{
         this.scheduleService.createSchedule(this.scheduleForm.value);
       }
+      this.resetForm();
     } else {
       this.formError = true;
     }
@@ -95,10 +98,14 @@ export class ScheduleComponent implements OnInit {
   resetForm(){
     this.scheduleForm.reset();
     this.editSchedule = null;
+    this.deleteFlag = true;
+    this.nameFlag = false;
   }
   editable(s){
     this.editSchedule = s;
     this.scheduleForm.reset(s); 
+    this.deleteFlag = !this.editSchedule.deleteFlag;
+    this.nameFlag = true;
   }
 
   delete(){
