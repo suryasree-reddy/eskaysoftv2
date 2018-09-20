@@ -41,6 +41,32 @@ body {
   }
 }
 
+.ag-theme-balham {
+  background-color: rgba(250,250,250,0.7);
+
+  .ag-row{
+    background-color: transparent;
+  }
+  .ag-header-cell{
+    background-color: #e1f3f3;
+    font-weight: bold;
+    font-size: 13px;
+
+    .ag-header-cell-menu-button{
+      opacity: 1 !important;
+    }
+  }
+  .ag-cell{
+    border-right: 1px solid #ccc;
+  }
+  .ag-paging-panel{
+    color: #333;
+
+    .ag-paging-button{
+      opacity: 1;
+    }
+  }
+}
 .mr-l-10{
   margin-left: 10px;
 }
