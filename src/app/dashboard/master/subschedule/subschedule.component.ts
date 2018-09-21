@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SubscheduleService } from './subschedule.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -22,6 +22,7 @@ export class SubscheduleComponent implements OnInit {
   scheduleList: any = [];
   editSubSchedule: any;
   public selectedSchedule: any;
+  @ViewChild('focus') focusField: ElementRef;
 
   private gridApi;
   private rowSelection;
@@ -70,6 +71,7 @@ export class SubscheduleComponent implements OnInit {
       this.scheduleList = res;
     })
 
+    this.focusField.nativeElement.focus();
     this.getScheduleTypes();
     this.rowSelection = "single";
 
@@ -107,6 +109,7 @@ export class SubscheduleComponent implements OnInit {
         });
         this.scheduleForm.reset();
         this.modalRef.hide();
+        
       }, (error) => {
         this.formServerError = true;
       });
@@ -132,6 +135,7 @@ export class SubscheduleComponent implements OnInit {
         this.subScheduleService.update(this.subScheduleForm.value).subscribe(res => {
           this.subScheduleService.getAll();
           this.formSuccess = true;
+          this.focusField.nativeElement.focus();
         }, (error) => {
           this.formServerError = true;
         });
@@ -139,6 +143,7 @@ export class SubscheduleComponent implements OnInit {
         this.subScheduleService.create(this.subScheduleForm.value).subscribe(res => {
           this.subScheduleService.getAll();
           this.formSuccess = true;
+          this.focusField.nativeElement.focus();
         }, (error) => {
           this.formServerError = true;
         });
@@ -157,6 +162,8 @@ export class SubscheduleComponent implements OnInit {
   }
   editable(s){
     this.editSubSchedule = s;
+    this.selectedSchedule = {};
+    this.selectedSchedule.id = s.scheduleId;
     this.subScheduleForm.reset(s); 
   }
 
@@ -164,6 +171,7 @@ export class SubscheduleComponent implements OnInit {
     this.subScheduleService.delete( this.editSubSchedule.subScheduleId ).subscribe(res => {
       this.subScheduleService.getAll();
       this.formSuccess = true;
+      this.focusField.nativeElement.focus();
     }, (error) => {
       this.formServerError = true;
     });

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ScheduleService } from './schedule.service';
 import { ViewChild } from '@angular/core';
@@ -17,6 +17,7 @@ export class ScheduleComponent implements OnInit {
   public formRequiredError: boolean = false; 
   public formServerError: boolean = false;
 
+  @ViewChild('focus') focusField: ElementRef;
   public deleteFlag: boolean = true;
   public nameFlag: boolean = false;
 
@@ -61,6 +62,7 @@ export class ScheduleComponent implements OnInit {
     })
 
     this.searchBy = this.scheduleListColumns[0].field;
+    this.focusField.nativeElement.focus();
     this.getScheduleTypes();
 
     this.rowSelection = "single";
@@ -106,6 +108,7 @@ export class ScheduleComponent implements OnInit {
         this.scheduleService.updateSchedule(this.scheduleForm.value).subscribe(res => {
           this.scheduleService.getAllSchedules();
           this.resetForm();
+          this.focusField.nativeElement.focus();
         }, (error) => {
           this.formServerError = true;
         });
@@ -113,6 +116,7 @@ export class ScheduleComponent implements OnInit {
         this.scheduleService.createSchedule(this.scheduleForm.value).subscribe(res => {
           this.scheduleService.getAllSchedules();
           this.resetForm();
+          this.focusField.nativeElement.focus();
         }, (error) => {
           this.formServerError = true;
         });
@@ -141,6 +145,7 @@ export class ScheduleComponent implements OnInit {
     this.scheduleService.deleteSchedule( this.editSchedule.id ).subscribe(res => {
       this.scheduleService.getAllSchedules();
       this.resetForm();
+      this.focusField.nativeElement.focus();
       localStorage.removeItem('ag-activeRow');
     }, (error) => {
       this.formServerError = true;
