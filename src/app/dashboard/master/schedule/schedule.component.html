@@ -4,8 +4,11 @@
       <h3>Schedule</h3>
       <form [formGroup]="scheduleForm" (ngSubmit)="save()" autocomplete="off">
         <div class="row">
-          <div class="error-text col-xs-12" *ngIf="formError">
+          <div class="error-text col-xs-12" *ngIf="formRequiredError">
             <p class="text-danger">All fields are mandatory!!</p>
+          </div>
+          <div class="error-text col-xs-12" *ngIf="formServerError">
+            <p class="text-danger">Could not save. Try again later!!</p>
           </div>
         </div>
 
@@ -34,40 +37,10 @@
     </div>
     <div class="col-md-7">
       <br /><br />
-      <!-- <div class="row search-wrapper">
-        <div class="col-md-2"> Search By:</div>
-        <div class="col-md-3">
-          <div class="row">
-              <select [(ngModel)]="searchBy" class="form-control">
-                <option *ngFor="let item of scheduleListColumns" [value]="item.field">{{item.headerName}}</option>
-              </select>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <input [(ngModel)]="searchKey" class="form-control" placeholder="Search here">
-        </div>
-      </div> -->
 
       <ag-grid-angular #agGrid style="height: 400px; width: 100%;" class="ag-theme-balham" [rowData]="scheduleList" [columnDefs]="scheduleListColumns" [rowSelection]="rowSelection" (gridReady)="onGridReady($event)" [navigateToNextCell]="navigateToNextCell" (selectionChanged)="onSelectionChanged($event)" [paginationAutoPageSize]="true" [pagination]="true" [enableFilter]="true" [enableSorting]="true" [components]= "componentProvider">
       </ag-grid-angular>
 
-<!-- 
-      <table border="1">
-        <thead>
-          <tr>
-            <th>Schedule Name</th>
-            <th>Schedule Index</th>
-            <th>Schedule Type</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let s of scheduleList" (click)="editable(s)">
-            <td> {{s.scheduleName}} </td>
-            <td> {{s.scheduleIndex}} </td>
-            <td> {{s.scheduleType}} </td>
-          </tr>
-        </tbody>
-      </table> -->
     </div>
   </div>
 </div>

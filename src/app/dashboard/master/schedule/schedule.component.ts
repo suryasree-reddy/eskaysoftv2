@@ -14,8 +14,8 @@ export class ScheduleComponent implements OnInit {
 
   public scheduleForm: FormGroup;
   public scheduleTypes: any = [];
-  public formError: boolean = false; 
-  public formErrorMsg: string;
+  public formRequiredError: boolean = false; 
+  public formServerError: boolean = false;
 
   public searchBy: string;
   public scheduleList: any = [];
@@ -70,9 +70,9 @@ export class ScheduleComponent implements OnInit {
 
     // visually indicate if this months value is higher or lower than last months value
     if (params.value) {
-        imageElement.src = "https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/images/fire-plus.png"
+        imageElement.src = "assets/images/right.png"
     } else {
-        imageElement.src = "https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/images/fire-minus.png"
+        imageElement.src = "assets/images/cancel.png"
     }
     element.appendChild(imageElement);
     element.appendChild(document.createTextNode(params.value));
@@ -100,12 +100,20 @@ export class ScheduleComponent implements OnInit {
   save() {
     if (this.scheduleForm.valid) {
       if(this.scheduleForm.value.id){
-        this.scheduleService.updateSchedule(this.scheduleForm.value);
+        this.scheduleService.updateSchedule(this.scheduleForm.value).subscribe(res => {
+          this.scheduleService.getAllSchedules();
+        }, (error) => {
+          this.formServerError = true;
+        });
       }else{
-        this.scheduleService.createSchedule(this.scheduleForm.value);
+        this.scheduleService.createSchedule(this.scheduleForm.value).subscribe(res => {
+          this.scheduleService.getAllSchedules();
+        }, (error) => {
+          this.formServerError = true;
+        });
       }
     } else {
-      this.formError = true;
+      this.formRequiredError = true;
     }
 
   }
@@ -120,9 +128,14 @@ export class ScheduleComponent implements OnInit {
   }
 
   delete(){
-    this.scheduleService.deleteSchedule( this.editSchedule.id );
-    this.resetForm();
-    localStorage.removeItem('ag-activeRow');
+    this.scheduleService.deleteSchedule( this.editSchedule.id ).subscribe(res => {
+      this.scheduleService.getAllSchedules();
+      this.resetForm();
+      localStorage.removeItem('ag-activeRow');
+    }, (error) => {
+      this.formServerError = true;
+    });
+    
   }
 
 

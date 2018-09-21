@@ -24,24 +24,15 @@ export class ScheduleService {
   }
 
   createSchedule(schedule) {
-    console.log(schedule);
-    return this.httpClient.post('https://eskaysoft.synectiks.com/api/v1/schedules/', schedule).subscribe(res => {
-      // this.scheduleArr.unshift(res);
-      // this.schedules.next(this.scheduleArr);
-      this.getAllSchedules();
-    })
+    // console.log(schedule);
+    return this.httpClient.post('https://eskaysoft.synectiks.com/api/v1/schedules/', schedule);
   }
 
   updateSchedule(schedule) {
-
-    return this.httpClient.put('https://eskaysoft.synectiks.com/api/v1/schedules/', schedule).subscribe(res => {
-      this.getAllSchedules();
-    })
+    return this.httpClient.put('https://eskaysoft.synectiks.com/api/v1/schedules/', schedule);
   }
 
   deleteSchedule(scheduleId) {
-    return this.httpClient.delete('https://eskaysoft.synectiks.com/api/v1/schedules/'+ scheduleId).subscribe(res => {
-      this.getAllSchedules();
-    })
+    return this.httpClient.delete('https://eskaysoft.synectiks.com/api/v1/schedules/'+ scheduleId);
   }
 }

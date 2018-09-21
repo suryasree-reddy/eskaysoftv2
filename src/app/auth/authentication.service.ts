@@ -20,7 +20,7 @@ export class AuthenticationService {
         localStorage.setItem('id_token', JSON.stringify(res));
         this.router.navigate(['dashboard']);
       }
-      this.badCredentials.next(true);
+      this.badCredentials.next(false);
 
     }, (error) => {
       this.badCredentials.next(true);
