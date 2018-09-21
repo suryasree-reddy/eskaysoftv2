@@ -17,6 +17,9 @@ export class ScheduleComponent implements OnInit {
   public formRequiredError: boolean = false; 
   public formServerError: boolean = false;
 
+  public deleteFlag: boolean = true;
+  public nameFlag: boolean = false;
+
   public searchBy: string;
   public scheduleList: any = [];
   public scheduleListColumns = [
@@ -75,7 +78,7 @@ export class ScheduleComponent implements OnInit {
         imageElement.src = "assets/images/cancel.png"
     }
     element.appendChild(imageElement);
-    element.appendChild(document.createTextNode(params.value));
+    // element.appendChild(document.createTextNode(params.value));
     return element;
 }
 
@@ -102,16 +105,19 @@ export class ScheduleComponent implements OnInit {
       if(this.scheduleForm.value.id){
         this.scheduleService.updateSchedule(this.scheduleForm.value).subscribe(res => {
           this.scheduleService.getAllSchedules();
+          this.resetForm();
         }, (error) => {
           this.formServerError = true;
         });
       }else{
         this.scheduleService.createSchedule(this.scheduleForm.value).subscribe(res => {
           this.scheduleService.getAllSchedules();
+          this.resetForm();
         }, (error) => {
           this.formServerError = true;
         });
       }
+      
     } else {
       this.formRequiredError = true;
     }
@@ -121,10 +127,14 @@ export class ScheduleComponent implements OnInit {
   resetForm(){
     this.scheduleForm.reset();
     this.editSchedule = null;
+    this.deleteFlag = true;
+    this.nameFlag = false;
   }
   editable(s){
     this.editSchedule = s;
     this.scheduleForm.reset(s); 
+    this.deleteFlag = !this.editSchedule.deleteFlag;
+    this.nameFlag = true;
   }
 
   delete(){

@@ -15,11 +15,13 @@ export class SubscheduleComponent implements OnInit {
 
   public scheduleForm: FormGroup;
   public subScheduleForm: FormGroup;
-  public formError: boolean = false; 
-  public formErrorMsg: string;
+  public formRequiredError: boolean = false; 
+  public formServerError: boolean = false;
+  public formSuccess: boolean = false;
   subScheduleList: any = [];
   scheduleList: any = [];
   editSubSchedule: any;
+  public selectedSchedule: any;
 
   private gridApi;
   private rowSelection;
@@ -54,7 +56,7 @@ export class SubscheduleComponent implements OnInit {
       subScheduleId: [],
       subScheduleName: ['', Validators.required],
       subScheduleIndex: ['', Validators.required],
-      scheduleId: ['', Validators.required],
+      scheduleId: [],
       scheduleName: []
     });
 
@@ -74,24 +76,13 @@ export class SubscheduleComponent implements OnInit {
   }
 
   onSelectSchedule(event){
-    this.subScheduleForm.value.scheduleId = event.item.id;
+    this.selectedSchedule = event.item;
   }
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-md'});
   }
  
-  // confirm(): void {
-  //   this.subScheduleService.getAll();
-  //   this.message = 'Confirmed!';
-  //   this.modalRef.hide();
-  // }
- 
-  // decline(): void {
-  //   this.message = 'Declined!';
-  //   this.modalRef.hide();
-  // }
-
   getScheduleTypes() {
     this.scheduleTypes = [{
       "code": "ASS",
@@ -110,10 +101,18 @@ export class SubscheduleComponent implements OnInit {
 
   saveSchedule() {
     if (this.scheduleForm.valid) {
-      this.scheduleService.createSchedule(this.scheduleForm.value);
-      this.modalRef.hide();
+      this.scheduleService.createSchedule(this.scheduleForm.value).subscribe(res => {
+        this.subScheduleService.getAllSchedules().subscribe(res => {
+          this.scheduleList = res;
+        });
+        this.scheduleForm.reset();
+        this.modalRef.hide();
+      }, (error) => {
+        this.formServerError = true;
+      });
+      
     } else {
-      this.formError = true;
+      this.formRequiredError = true;
     }
 
   }
@@ -124,22 +123,37 @@ export class SubscheduleComponent implements OnInit {
 
 
   save() {
-    // console.log(this.subScheduleForm.value);
-    if (this.subScheduleForm.valid) {
-      if(this.subScheduleForm.value.id){
-        this.subScheduleService.update(this.subScheduleForm.value);
+    this.formRequiredError = false;
+
+    if (this.subScheduleForm.valid && this.selectedSchedule && this.selectedSchedule.id) {
+      this.subScheduleForm.value.scheduleId = this.selectedSchedule.id;
+      console.log(this.subScheduleForm.value);
+      if(this.subScheduleForm.value.subScheduleId){
+        this.subScheduleService.update(this.subScheduleForm.value).subscribe(res => {
+          this.subScheduleService.getAll();
+          this.formSuccess = true;
+        }, (error) => {
+          this.formServerError = true;
+        });
       }else{
-        this.subScheduleService.create(this.subScheduleForm.value);
+        this.subScheduleService.create(this.subScheduleForm.value).subscribe(res => {
+          this.subScheduleService.getAll();
+          this.formSuccess = true;
+        }, (error) => {
+          this.formServerError = true;
+        });
       }
+      this.resetForm();
+      
     } else {
-      this.formError = true;
+      this.formRequiredError = true;
     }
 
   }
 
   resetForm(){
     this.subScheduleForm.reset();
-    this.editSubSchedule = {};
+    this.editSubSchedule = null;
   }
   editable(s){
     this.editSubSchedule = s;
@@ -147,7 +161,12 @@ export class SubscheduleComponent implements OnInit {
   }
 
   delete(){
-    this.subScheduleService.delete( this.editSubSchedule.subScheduleId );
+    this.subScheduleService.delete( this.editSubSchedule.subScheduleId ).subscribe(res => {
+      this.subScheduleService.getAll();
+      this.formSuccess = true;
+    }, (error) => {
+      this.formServerError = true;
+    });
     this.resetForm();
     localStorage.removeItem('ag-activeRow');
   }

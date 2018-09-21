@@ -28,23 +28,15 @@ export class SubscheduleService {
 
 
   create(subSchedule) {
-    return this.httpClient.post('https://eskaysoft.synectiks.com/api/v1/subschedules/', subSchedule).subscribe(res => {
-      // this.subScheduleArr.unshift(res);
-      // this.subSchedules.next(this.subScheduleArr);
-      this.getAll();
-    })
+    return this.httpClient.post('https://eskaysoft.synectiks.com/api/v1/subschedules/', subSchedule);
   }
 
   update(subSchedule) {
     
-    return this.httpClient.put('https://eskaysoft.synectiks.com/api/v1/subschedules/', subSchedule).subscribe(res => {
-      this.getAll();
-    })
+    return this.httpClient.put('https://eskaysoft.synectiks.com/api/v1/subschedules/', subSchedule);
   }
 
   delete(ssId) {
-    return this.httpClient.delete('https://eskaysoft.synectiks.com/api/v1/subschedules/' + ssId).subscribe(res => {
-      this.getAll();
-    })
+    return this.httpClient.delete('https://eskaysoft.synectiks.com/api/v1/subschedules/' + ssId);
   }
 }

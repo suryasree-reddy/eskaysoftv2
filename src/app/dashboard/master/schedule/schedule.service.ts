@@ -24,7 +24,6 @@ export class ScheduleService {
   }
 
   createSchedule(schedule) {
-    // console.log(schedule);
     return this.httpClient.post('https://eskaysoft.synectiks.com/api/v1/schedules/', schedule);
   }
 

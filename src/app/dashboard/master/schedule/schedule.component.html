@@ -14,7 +14,7 @@
 
         <div class="input-group">
           <p>Schedule Name: *</p>
-          <input id="scheduleName" class="form-control" [formControl]="scheduleForm.controls['scheduleName']">
+          <input id="scheduleName" [readonly]="nameFlag"  class="form-control" [formControl]="scheduleForm.controls['scheduleName']">
         </div>
         <div class="input-group">
           <p>Schedule Index: *</p>
@@ -30,7 +30,7 @@
         <div class="input-group">
           <button type="button" (click)="resetForm()" class="btn btn-primary">Reset</button>
           <button type="submit" class="btn btn-primary mr-l-10">Save</button>
-          <button type="button" *ngIf="editSchedule && editSchedule.deleteFlag" (click)="delete()" class="btn btn-danger float-right">Delete</button>
+          <button type="button" [disabled]="deleteFlag" (click)="delete()" class="btn btn-danger float-right">Delete</button>
         </div>
 
       </form>
