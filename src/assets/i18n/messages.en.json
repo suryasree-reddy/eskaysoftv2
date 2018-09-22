@@ -1,0 +1,20 @@
+{
+  "schedule": {
+    "title": "Schedule",
+    "name": "Schedule Name",
+    "index": "﻿Schedule Index",
+    "type": "﻿Schedule Type",
+    "status": "﻿Status",
+    "paramexample": "Hallo {{name}}!"
+  },
+  "button": {
+    "save": "Save",
+    "reset": "Reset",
+    "delete": "﻿Delete"
+  },
+  "message": {
+    "save": "Saved successfully!",
+    "mandatory": "All fields are mandatory!!",
+    "error": "Could not save. Try again later!!"
+  }
+}

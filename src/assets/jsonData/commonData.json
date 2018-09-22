@@ -1,0 +1,15 @@
+{
+  ScheduleTypes: [{
+    "code": "ASS",
+    "description": "Assets"
+  }, {
+    "code": "LIA",
+    "description": "Liabilities"
+  }, {
+    "code": "TRADE",
+    "description": "Trading"
+  }, {
+    "code": "PNL",
+    "description": "Profit & Loss"
+  }]
+}

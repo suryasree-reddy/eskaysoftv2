@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ScheduleService } from './schedule.service';
 import { ViewChild } from '@angular/core';
 import { Column } from 'ag-grid-community';
+import {TranslateService} from '@ngx-translate/core';
 
+import { MasterService } from '../master.service';
 
 @Component({
   selector: 'app-schedule',
@@ -15,7 +17,7 @@ export class ScheduleComponent implements OnInit {
   public scheduleForm: FormGroup;
   public scheduleTypes: any = [];
   public formSuccess: boolean = false;
-  public formRequiredError: boolean = false; 
+  public formRequiredError: boolean = false;
   public formServerError: boolean = false;
 
   @ViewChild('focus') focusField: ElementRef;
@@ -24,6 +26,7 @@ export class ScheduleComponent implements OnInit {
 
   public searchBy: string;
   public scheduleList: any = [];
+
   public scheduleListColumns = [
     { headerName: 'Schedule Name', field: 'scheduleName' },
     { headerName: 'Schedule Index', field: 'scheduleIndex', filter: 'agNumberColumnFilter', width: 100 },
@@ -34,18 +37,19 @@ export class ScheduleComponent implements OnInit {
     deltaIndicator: this.deltaIndicator
   }
   editSchedule: any;
-
-
-
   private gridApi;
   private gridColumnApi;
   private rowSelection;
- 
- 
+
+
   constructor(
     private fb: FormBuilder,
-    private scheduleService: ScheduleService
-  ) { }
+    private scheduleService: ScheduleService,
+    private translate: TranslateService,
+    public masterService: MasterService
+  ) {  translate.setDefaultLang('messages.en');
+
+ }
 
 
   ngOnInit() {
@@ -56,7 +60,12 @@ export class ScheduleComponent implements OnInit {
       scheduleType: ['', Validators.required],
     });
 
+
+    //console.log("--777-", this.masterService.getData("jj"));
+
+
     this.scheduleService.getAllSchedules();
+//   this.masterService.getData("schedules/");
     this.scheduleService.schedules.subscribe(list => {
       this.scheduleList = list;
       localStorage.setItem('rowDataLength', JSON.stringify(this.scheduleList.length));
@@ -69,7 +78,7 @@ export class ScheduleComponent implements OnInit {
     this.rowSelection = "single";
 
   }
-  
+
   deltaIndicator(params) {
     var element = document.createElement("span");
     var imageElement = document.createElement("img");
@@ -104,7 +113,7 @@ export class ScheduleComponent implements OnInit {
 
 
   save() {
-    
+
     if (this.scheduleForm.valid) {
       if(confirm('Are you sure!!')){
         if(this.scheduleForm.value.id){
@@ -157,7 +166,7 @@ export class ScheduleComponent implements OnInit {
   }
   editable(s){
     this.editSchedule = s;
-    this.scheduleForm.reset(s); 
+    this.scheduleForm.reset(s);
     this.deleteFlag = !this.editSchedule.deleteFlag;
     this.nameFlag = true;
   }
@@ -201,7 +210,7 @@ export class ScheduleComponent implements OnInit {
 
     const nxt = suggestedNextCell.column.gridApi;
     localStorage.setItem('ag-curCell', '0');
-    
+
     switch(params.key){
       case KEY_DOWN:
         const nextRowIndex = suggestedNextCell.rowIndex;
@@ -213,7 +222,7 @@ export class ScheduleComponent implements OnInit {
           if(''+curCell === localStorage.getItem('ag-nxtCell')){
             localStorage.setItem('ag-activeRow', JSON.stringify(node.data));
             node.setSelected(true);
-            
+
           }
           curCell = curCell + 1;
           localStorage.setItem('ag-curCell', curCell.toString());
@@ -235,7 +244,7 @@ export class ScheduleComponent implements OnInit {
           if(''+curCell === localStorage.getItem('ag-nxtCell')){
             localStorage.setItem('ag-activeRow', JSON.stringify(node.data));
             node.setSelected(true);
-            
+
           }
           curCell = curCell + 1;
           localStorage.setItem('ag-curCell', curCell.toString());
@@ -252,10 +261,10 @@ export class ScheduleComponent implements OnInit {
           return suggestedNextCell;
         }
 
-      
-      default: 
+
+      default:
         throw 'ag-grid has gone away';
-      
+
     }
 
   }
@@ -295,5 +304,3 @@ export class ScheduleComponent implements OnInit {
   }
 
 }
-
-
