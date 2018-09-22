@@ -75,9 +75,9 @@ export class ScheduleComponent implements OnInit {
 
     // visually indicate if this months value is higher or lower than last months value
     if (params.value) {
-        imageElement.src = "assets/images/right.png"
+        imageElement.src = "assets/images/right.jpg"
     } else {
-        imageElement.src = "assets/images/cancel.png"
+        imageElement.src = "assets/images/cancel.jpg"
     }
     element.appendChild(imageElement);
     // element.appendChild(document.createTextNode(params.value));
