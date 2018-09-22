@@ -5,7 +5,7 @@
       <form [formGroup]="subScheduleForm" (ngSubmit)="save()" autocomplete="off">
         <div class="row">
           <div class="error-text col-xs-12" *ngIf="formSuccess">
-            <p class="text-success">Form saved successfully!</p>
+            <p class="text-success">Saved successfully!</p>
           </div>
           <div class="error-text col-xs-12" *ngIf="formRequiredError">
             <p class="text-danger">All fields are mandatory!!</p>

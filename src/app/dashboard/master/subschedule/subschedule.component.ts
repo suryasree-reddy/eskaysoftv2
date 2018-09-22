@@ -15,10 +15,10 @@ export class SubscheduleComponent implements OnInit {
 
   public scheduleForm: FormGroup;
   public subScheduleForm: FormGroup;
-  public formRequiredError: boolean = false; 
+  public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public formSuccess: boolean = false;
-  public scFormRequiredError: boolean = false; 
+  public scFormRequiredError: boolean = false;
   public scFormServerError: boolean = false;
   public scFormSuccess: boolean = false;
   subScheduleList: any = [];
@@ -32,9 +32,9 @@ export class SubscheduleComponent implements OnInit {
   private gridColumnApi;
   public subScheduleListColumns = [
     { headerName: 'Sub-Schedule Name', field: 'subScheduleName' },
-    { headerName: 'Schedule Id', field: 'scheduleId', filter: "agNumberColumnFilter"  },
-    { headerName: 'Sub-Schedule Index', field: 'subScheduleIndex', filter: "agNumberColumnFilter"  }
-    
+    { headerName: 'Schedule Id', field: 'scheduleId', filter: "agNumberColumnFilter", width: 80 },
+    { headerName: 'Sub-Schedule Index', field: 'subScheduleIndex', filter: "agNumberColumnFilter", width: 100 }
+
   ];
 
   scheduleTypes: any;
@@ -80,16 +80,16 @@ export class SubscheduleComponent implements OnInit {
 
   }
 
-  onSelectSchedule(event){
+  onSelectSchedule(event) {
     this.selectedSchedule = event.item;
   }
 
   openModal(template: TemplateRef<any>) {
     this.resetScheduleForm();
     this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
-    this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
- 
+
   getScheduleTypes() {
     this.scheduleTypes = [{
       "code": "ASS",
@@ -107,25 +107,28 @@ export class SubscheduleComponent implements OnInit {
   }
 
   saveSchedule() {
-    if (this.scheduleForm.valid) {
-      this.scheduleService.createSchedule(this.scheduleForm.value).subscribe(res => {
-        this.subScheduleService.getAllSchedules().subscribe(res => {
-          this.scheduleList = res;
+    if (confirm('Are you sure!!')) {
+
+      if (this.scheduleForm.valid) {
+        this.scheduleService.createSchedule(this.scheduleForm.value).subscribe(res => {
+          this.subScheduleService.getAllSchedules().subscribe(res => {
+            this.scheduleList = res;
+          });
+          this.scheduleForm.reset();
+          this.modalRef.hide();
+
+        }, (error) => {
+          this.scServerErrMsg();
         });
-        this.scheduleForm.reset();
-        this.modalRef.hide();
-        
-      }, (error) => {
-        this.scServerErrMsg();
-      });
-      
-    } else {
-      this.scRequiredErrMsg();
+
+      } else {
+        this.scRequiredErrMsg();
+      }
     }
 
   }
 
-  resetScheduleForm(){
+  resetScheduleForm() {
     this.scheduleForm.reset();
   }
 
@@ -134,78 +137,83 @@ export class SubscheduleComponent implements OnInit {
     this.formRequiredError = false;
 
     if (this.subScheduleForm.valid && this.selectedSchedule && this.selectedSchedule.id) {
-      this.subScheduleForm.value.scheduleId = this.selectedSchedule.id;
-      console.log(this.subScheduleForm.value);
-      if(this.subScheduleForm.value.subScheduleId){
-        this.subScheduleService.update(this.subScheduleForm.value).subscribe(res => {
-          this.subScheduleService.getAll();
-          this.successMsg();
-        }, (error) => {
-          this.serverErrMsg();
-        });
-      }else{
-        this.subScheduleService.create(this.subScheduleForm.value).subscribe(res => {
-          this.subScheduleService.getAll();
-          this.successMsg();
-        }, (error) => {
-          this.serverErrMsg();
-        });
+      if (confirm('Are you sure!!')) {
+        this.subScheduleForm.value.scheduleId = this.selectedSchedule.id;
+        console.log(this.subScheduleForm.value);
+        if (this.subScheduleForm.value.subScheduleId) {
+          this.subScheduleService.update(this.subScheduleForm.value).subscribe(res => {
+            this.subScheduleService.getAll();
+            this.successMsg();
+          }, (error) => {
+            this.serverErrMsg();
+          });
+        } else {
+          this.subScheduleService.create(this.subScheduleForm.value).subscribe(res => {
+            this.subScheduleService.getAll();
+            this.successMsg();
+          }, (error) => {
+            this.serverErrMsg();
+          });
+        }
+        this.resetForm();
       }
-      this.resetForm();
-      
     } else {
       this.requiredErrMsg();
     }
 
+
   }
 
-  successMsg(){
+  successMsg() {
     this.formSuccess = true;
     this.formRequiredError = this.formServerError = false;
   }
 
-  requiredErrMsg(){
+  requiredErrMsg() {
     this.formRequiredError = true;
     this.formSuccess = this.formServerError = false;
   }
 
-  serverErrMsg(){
-    this.formServerError  = true;
+  serverErrMsg() {
+    this.formServerError = true;
     this.formRequiredError = this.formSuccess = false;
   }
 
-  scRequiredErrMsg(){
+  scRequiredErrMsg() {
     this.scFormRequiredError = true;
     this.scFormSuccess = this.scFormServerError = false;
   }
 
-  scServerErrMsg(){
-    this.scFormServerError  = true;
+  scServerErrMsg() {
+    this.scFormServerError = true;
     this.scFormRequiredError = this.scFormSuccess = false;
   }
 
 
-  resetForm(){
+  resetForm() {
+    this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.subScheduleForm.reset();
     this.editSubSchedule = null;
     this.focusField.nativeElement.focus();
   }
-  editable(s){
+  editable(s) {
     this.editSubSchedule = s;
     this.selectedSchedule = {};
     this.selectedSchedule.id = s.scheduleId;
-    this.subScheduleForm.reset(s); 
+    this.subScheduleForm.reset(s);
   }
 
-  delete(){
-    this.subScheduleService.delete( this.editSubSchedule.subScheduleId ).subscribe(res => {
-      this.subScheduleService.getAll();
-      this.successMsg();
-    }, (error) => {
-      this.serverErrMsg();
-    });
-    this.resetForm();
-    localStorage.removeItem('ag-activeRow');
+  delete() {
+    if (confirm('Are you sure!!')) {
+      this.subScheduleService.delete(this.editSubSchedule.subScheduleId).subscribe(res => {
+        this.subScheduleService.getAll();
+        this.successMsg();
+      }, (error) => {
+        this.serverErrMsg();
+      });
+      this.resetForm();
+      localStorage.removeItem('ag-activeRow');
+    }
   }
 
 
@@ -214,7 +222,7 @@ export class SubscheduleComponent implements OnInit {
     this.editable(selectedRows[0]);
     localStorage.setItem('ag-activeRow', JSON.stringify(selectedRows[0]));
     let selectedRowsString = "";
-    selectedRows.forEach(function(selectedRow, index) {
+    selectedRows.forEach(function (selectedRow, index) {
       if (index !== 0) {
         selectedRowsString += ", ";
       }
@@ -223,7 +231,7 @@ export class SubscheduleComponent implements OnInit {
   }
 
 
-  navigateToNextCell(params){
+  navigateToNextCell(params) {
     // const selectedRows= params.key;
     let previousCell = params.previousCellDef;
     const suggestedNextCell = params.nextCellDef;
@@ -233,8 +241,8 @@ export class SubscheduleComponent implements OnInit {
 
     const nxt = suggestedNextCell.column.gridApi;
     localStorage.setItem('ag-curCell', '0');
-    
-    switch(params.key){
+
+    switch (params.key) {
       case KEY_DOWN:
         const nextRowIndex = suggestedNextCell.rowIndex;
         localStorage.setItem('ag-nxtCell', JSON.stringify(nextRowIndex));
@@ -242,16 +250,16 @@ export class SubscheduleComponent implements OnInit {
         nxt.forEachNode((node) => {
           let curCell = parseInt(localStorage.getItem('ag-curCell'), 10);
 
-          if(''+curCell === localStorage.getItem('ag-nxtCell')){
+          if ('' + curCell === localStorage.getItem('ag-nxtCell')) {
             localStorage.setItem('ag-activeRow', JSON.stringify(node.data));
             node.setSelected(true);
-            
+
           }
           curCell = curCell + 1;
           localStorage.setItem('ag-curCell', curCell.toString());
         });
 
-        if(nextRowIndex <= 0){
+        if (nextRowIndex <= 0) {
           return null;
         } else {
           return suggestedNextCell;
@@ -264,10 +272,10 @@ export class SubscheduleComponent implements OnInit {
         nxt.forEachNode((node) => {
           let curCell = parseInt(localStorage.getItem('ag-curCell'), 10);
 
-          if(''+curCell === localStorage.getItem('ag-nxtCell')){
+          if ('' + curCell === localStorage.getItem('ag-nxtCell')) {
             localStorage.setItem('ag-activeRow', JSON.stringify(node.data));
             node.setSelected(true);
-            
+
           }
           curCell = curCell + 1;
           localStorage.setItem('ag-curCell', curCell.toString());
@@ -278,16 +286,16 @@ export class SubscheduleComponent implements OnInit {
 
         const prevRowIndex = previousCell.rowIndex - 1;
         const renderedRowCount = parseInt(localStorage.getItem('rowDataLength'), 10);
-        if(prevRowIndex >= renderedRowCount){
+        if (prevRowIndex >= renderedRowCount) {
           return null
         } else {
           return suggestedNextCell;
         }
 
-      
-      default: 
+
+      default:
         throw 'ag-grid has gone away';
-      
+
     }
 
 
@@ -296,11 +304,11 @@ export class SubscheduleComponent implements OnInit {
 
 
 
-  fun(){
+  fun() {
     this.editable(JSON.parse(localStorage.getItem('ag-activeRow')));
   }
 
-  onGridReady(params){
+  onGridReady(params) {
     this.gridApi = params.api;
     params.api.sizeColumnsToFit();
     // this.gridColumnApi = params.columnApi;
@@ -310,7 +318,7 @@ export class SubscheduleComponent implements OnInit {
       const ele = document.querySelector('div.ag-body-container');
 
       ele.addEventListener('keydown', (e) => {
-        if(e['key'] === 'Enter'){
+        if (e['key'] === 'Enter') {
           this.fun();
         }
       });

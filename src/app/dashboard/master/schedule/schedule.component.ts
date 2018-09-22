@@ -14,6 +14,7 @@ export class ScheduleComponent implements OnInit {
 
   public scheduleForm: FormGroup;
   public scheduleTypes: any = [];
+  public formSuccess: boolean = false;
   public formRequiredError: boolean = false; 
   public formServerError: boolean = false;
 
@@ -25,9 +26,9 @@ export class ScheduleComponent implements OnInit {
   public scheduleList: any = [];
   public scheduleListColumns = [
     { headerName: 'Schedule Name', field: 'scheduleName' },
-    { headerName: 'Schedule Index', field: 'scheduleIndex', filter: "agNumberColumnFilter" },
-    { headerName: 'Schedule Type', field: 'scheduleType' },
-    { headerName: 'Delete Status', field: 'deleteFlag', cellRenderer: 'deltaIndicator', suppressFilter: true }
+    { headerName: 'Schedule Index', field: 'scheduleIndex', filter: 'agNumberColumnFilter', width: 100 },
+    { headerName: 'Schedule Type', field: 'scheduleType', width: 100 },
+    { headerName: 'Status', field: 'deleteFlag', cellRenderer: 'deltaIndicator', suppressFilter: true, width: 50 }
   ];
   public componentProvider = {
     deltaIndicator: this.deltaIndicator
@@ -103,27 +104,47 @@ export class ScheduleComponent implements OnInit {
 
 
   save() {
+    
     if (this.scheduleForm.valid) {
-      if(this.scheduleForm.value.id){
-        this.scheduleService.updateSchedule(this.scheduleForm.value).subscribe(res => {
-          this.scheduleService.getAllSchedules();
-          this.resetForm();
-        }, (error) => {
-          this.formServerError = true;
-        });
-      }else{
-        this.scheduleService.createSchedule(this.scheduleForm.value).subscribe(res => {
-          this.scheduleService.getAllSchedules();
-          this.resetForm();
-        }, (error) => {
-          this.formServerError = true;
-        });
+      if(confirm('Are you sure!!')){
+        if(this.scheduleForm.value.id){
+          this.scheduleService.updateSchedule(this.scheduleForm.value).subscribe(res => {
+            this.scheduleService.getAllSchedules();
+            this.resetForm();
+            this.successMsg();
+          }, (error) => {
+            this.serverErrMsg();
+          });
+        }else{
+          this.scheduleService.createSchedule(this.scheduleForm.value).subscribe(res => {
+            this.scheduleService.getAllSchedules();
+            this.resetForm();
+            this.successMsg();
+          }, (error) => {
+            this.serverErrMsg();
+          });
+        }
       }
-      
     } else {
-      this.formRequiredError = true;
+      this.requiredErrMsg()
     }
 
+  }
+
+
+  successMsg() {
+    this.formSuccess = true;
+    this.formRequiredError = this.formServerError = false;
+  }
+
+  requiredErrMsg() {
+    this.formRequiredError = true;
+    this.formSuccess = this.formServerError = false;
+  }
+
+  serverErrMsg() {
+    this.formServerError = true;
+    this.formRequiredError = this.formSuccess = false;
   }
 
   resetForm(){
@@ -131,6 +152,7 @@ export class ScheduleComponent implements OnInit {
     this.editSchedule = null;
     this.deleteFlag = true;
     this.nameFlag = false;
+    this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.focusField.nativeElement.focus();
   }
   editable(s){
@@ -141,14 +163,16 @@ export class ScheduleComponent implements OnInit {
   }
 
   delete(){
-    this.scheduleService.deleteSchedule( this.editSchedule.id ).subscribe(res => {
-      this.scheduleService.getAllSchedules();
-      this.resetForm();
-      localStorage.removeItem('ag-activeRow');
-    }, (error) => {
-      this.formServerError = true;
-    });
-    
+    if(confirm('Are you sure!!')){
+      this.scheduleService.deleteSchedule( this.editSchedule.id ).subscribe(res => {
+        this.scheduleService.getAllSchedules();
+        this.resetForm();
+        localStorage.removeItem('ag-activeRow');
+        this.successMsg()
+      }, (error) => {
+        this.serverErrMsg();
+      });
+    }
   }
 
 
@@ -259,6 +283,11 @@ export class ScheduleComponent implements OnInit {
       ele.addEventListener('keydown', (e) => {
         if(e['key'] === 'Enter'){
           this.fun();
+        }
+        if(e['key'] === 'Tab'){
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
         }
       });
     });
