@@ -51,7 +51,7 @@
       <ag-grid-angular #agGrid style="height: 400px; width: 100%;" class="ag-theme-balham" [rowData]="subScheduleList"
         [columnDefs]="subScheduleListColumns" [rowSelection]="rowSelection" (gridReady)="onGridReady($event)"
         [navigateToNextCell]="navigateToNextCell" (selectionChanged)="onSelectionChanged($event)"
-        [paginationAutoPageSize]="true" [pagination]="true">
+        [paginationAutoPageSize]="true" [pagination]="true" [enableFilter]="true" [enableSorting]="true" >
       </ag-grid-angular>
 
 
@@ -70,8 +70,11 @@
   <div class="modal-body">
     <form [formGroup]="scheduleForm" (ngSubmit)="saveSchedule()" autocomplete="off">
       <div class="row">
-        <div class="error-text col-xs-12" *ngIf="formError">
+        <div class="error-text col-xs-12" *ngIf="scFormRequiredError">
           <p class="text-danger">All fields are mandatory!!</p>
+        </div>
+        <div class="error-text col-xs-12" *ngIf="scFormServerError">
+          <p class="text-danger">Could not save. Try again later!!</p>
         </div>
       </div>
 

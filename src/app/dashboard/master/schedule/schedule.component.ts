@@ -108,7 +108,6 @@ export class ScheduleComponent implements OnInit {
         this.scheduleService.updateSchedule(this.scheduleForm.value).subscribe(res => {
           this.scheduleService.getAllSchedules();
           this.resetForm();
-          this.focusField.nativeElement.focus();
         }, (error) => {
           this.formServerError = true;
         });
@@ -116,7 +115,6 @@ export class ScheduleComponent implements OnInit {
         this.scheduleService.createSchedule(this.scheduleForm.value).subscribe(res => {
           this.scheduleService.getAllSchedules();
           this.resetForm();
-          this.focusField.nativeElement.focus();
         }, (error) => {
           this.formServerError = true;
         });
@@ -133,6 +131,7 @@ export class ScheduleComponent implements OnInit {
     this.editSchedule = null;
     this.deleteFlag = true;
     this.nameFlag = false;
+    this.focusField.nativeElement.focus();
   }
   editable(s){
     this.editSchedule = s;
@@ -145,7 +144,6 @@ export class ScheduleComponent implements OnInit {
     this.scheduleService.deleteSchedule( this.editSchedule.id ).subscribe(res => {
       this.scheduleService.getAllSchedules();
       this.resetForm();
-      this.focusField.nativeElement.focus();
       localStorage.removeItem('ag-activeRow');
     }, (error) => {
       this.formServerError = true;

@@ -18,6 +18,9 @@ export class SubscheduleComponent implements OnInit {
   public formRequiredError: boolean = false; 
   public formServerError: boolean = false;
   public formSuccess: boolean = false;
+  public scFormRequiredError: boolean = false; 
+  public scFormServerError: boolean = false;
+  public scFormSuccess: boolean = false;
   subScheduleList: any = [];
   scheduleList: any = [];
   editSubSchedule: any;
@@ -82,6 +85,8 @@ export class SubscheduleComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
+    this.resetScheduleForm();
+    this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, {class: 'modal-md'});
   }
  
@@ -111,11 +116,11 @@ export class SubscheduleComponent implements OnInit {
         this.modalRef.hide();
         
       }, (error) => {
-        this.formServerError = true;
+        this.scServerErrMsg();
       });
       
     } else {
-      this.formRequiredError = true;
+      this.scRequiredErrMsg();
     }
 
   }
@@ -134,31 +139,56 @@ export class SubscheduleComponent implements OnInit {
       if(this.subScheduleForm.value.subScheduleId){
         this.subScheduleService.update(this.subScheduleForm.value).subscribe(res => {
           this.subScheduleService.getAll();
-          this.formSuccess = true;
-          this.focusField.nativeElement.focus();
+          this.successMsg();
         }, (error) => {
-          this.formServerError = true;
+          this.serverErrMsg();
         });
       }else{
         this.subScheduleService.create(this.subScheduleForm.value).subscribe(res => {
           this.subScheduleService.getAll();
-          this.formSuccess = true;
-          this.focusField.nativeElement.focus();
+          this.successMsg();
         }, (error) => {
-          this.formServerError = true;
+          this.serverErrMsg();
         });
       }
       this.resetForm();
       
     } else {
-      this.formRequiredError = true;
+      this.requiredErrMsg();
     }
 
   }
 
+  successMsg(){
+    this.formSuccess = true;
+    this.formRequiredError = this.formServerError = false;
+  }
+
+  requiredErrMsg(){
+    this.formRequiredError = true;
+    this.formSuccess = this.formServerError = false;
+  }
+
+  serverErrMsg(){
+    this.formServerError  = true;
+    this.formRequiredError = this.formSuccess = false;
+  }
+
+  scRequiredErrMsg(){
+    this.scFormRequiredError = true;
+    this.scFormSuccess = this.scFormServerError = false;
+  }
+
+  scServerErrMsg(){
+    this.scFormServerError  = true;
+    this.scFormRequiredError = this.scFormSuccess = false;
+  }
+
+
   resetForm(){
     this.subScheduleForm.reset();
     this.editSubSchedule = null;
+    this.focusField.nativeElement.focus();
   }
   editable(s){
     this.editSubSchedule = s;
@@ -170,10 +200,9 @@ export class SubscheduleComponent implements OnInit {
   delete(){
     this.subScheduleService.delete( this.editSubSchedule.subScheduleId ).subscribe(res => {
       this.subScheduleService.getAll();
-      this.formSuccess = true;
-      this.focusField.nativeElement.focus();
+      this.successMsg();
     }, (error) => {
-      this.formServerError = true;
+      this.serverErrMsg();
     });
     this.resetForm();
     localStorage.removeItem('ag-activeRow');
