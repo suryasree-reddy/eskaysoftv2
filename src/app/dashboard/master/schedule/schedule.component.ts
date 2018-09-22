@@ -27,7 +27,7 @@ export class ScheduleComponent implements OnInit {
     { headerName: 'Schedule Name', field: 'scheduleName' },
     { headerName: 'Schedule Index', field: 'scheduleIndex', filter: "agNumberColumnFilter" },
     { headerName: 'Schedule Type', field: 'scheduleType' },
-    { headerName: 'Delete Status', field: 'deleteFlag', cellRenderer: 'deltaIndicator'   }
+    { headerName: 'Delete Status', field: 'deleteFlag', cellRenderer: 'deltaIndicator', suppressFilter: true }
   ];
   public componentProvider = {
     deltaIndicator: this.deltaIndicator
