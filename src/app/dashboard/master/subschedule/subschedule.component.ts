@@ -142,13 +142,11 @@ export class SubscheduleComponent implements OnInit {
           });
         } else {
           this.masterService.createRecord("subschedules/", this.subScheduleForm.value).subscribe(res => {
-
             this.successMsg();
           }, (error) => {
             this.serverErrMsg();
           });
         }
-        this.resetForm();
       }
     } else {
       this.requiredErrMsg();
@@ -162,7 +160,6 @@ export class SubscheduleComponent implements OnInit {
       }, (error) => {
         this.serverErrMsg();
       });
-      this.resetForm();
       localStorage.removeItem('ag-activeRow');
     }
   }
@@ -170,6 +167,7 @@ export class SubscheduleComponent implements OnInit {
   successMsg() {
     this.formSuccess = true;
     this.formRequiredError = this.formServerError = false;
+    this.resetForm();
   }
 
   requiredErrMsg() {

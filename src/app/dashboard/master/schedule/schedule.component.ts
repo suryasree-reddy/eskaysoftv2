@@ -84,14 +84,12 @@ export class ScheduleComponent implements OnInit {
       if (confirm('Are you sure!!')) {
         if (this.scheduleForm.value.id) {
           this.masterService.updateRecord('schedules/', this.scheduleForm.value).subscribe(res => {
-            this.resetForm();
             this.successMsg();
           }, (error) => {
             this.serverErrMsg();
           });
         } else {
           this.masterService.createRecord('schedules/', this.scheduleForm.value).subscribe(res => {
-            this.resetForm();
             this.successMsg();
           }, (error) => {
             this.serverErrMsg();
@@ -106,7 +104,6 @@ export class ScheduleComponent implements OnInit {
   delete() {
     if (confirm('Are you sure!!')) {
       this.masterService.deleteRecord('schedules/', this.editSchedule.id).subscribe(res => {
-        this.resetForm();
         localStorage.removeItem('ag-activeRow');
         this.successMsg()
       }, (error) => {
@@ -118,6 +115,7 @@ export class ScheduleComponent implements OnInit {
   successMsg() {
     this.formSuccess = true;
     this.formRequiredError = this.formServerError = false;
+    this.resetForm();
   }
 
   requiredErrMsg() {
