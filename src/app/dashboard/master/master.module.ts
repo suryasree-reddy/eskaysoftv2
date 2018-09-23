@@ -12,7 +12,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
-import { MasterService } from './master.service';
 
 @NgModule({
   imports: [
@@ -35,8 +34,7 @@ import { MasterService } from './master.service';
   ],
   providers: [NgForm,
     NgModel,
-    FormsModule,
-    MasterService
+    FormsModule
   ],
   declarations: [ScheduleComponent, SubscheduleComponent]
 })

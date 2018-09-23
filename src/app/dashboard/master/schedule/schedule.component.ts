@@ -1,10 +1,8 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ScheduleService } from './schedule.service';
 import { ViewChild } from '@angular/core';
 import { Column } from 'ag-grid-community';
-import {TranslateService} from '@ngx-translate/core';
-
+import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 
 @Component({
@@ -44,12 +42,12 @@ export class ScheduleComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private scheduleService: ScheduleService,
     private translate: TranslateService,
-    public masterService: MasterService
-  ) {  translate.setDefaultLang('messages.en');
+    private masterService: MasterService
+  ) {
+    translate.setDefaultLang('messages.en');
 
- }
+  }
 
 
   ngOnInit() {
@@ -60,39 +58,43 @@ export class ScheduleComponent implements OnInit {
       scheduleType: ['', Validators.required],
     });
 
-
-    //console.log("--777-", this.masterService.getData("jj"));
-
-
-    this.scheduleService.getAllSchedules();
-//   this.masterService.getData("schedules/");
-    this.scheduleService.schedules.subscribe(list => {
-      this.scheduleList = list;
-      localStorage.setItem('rowDataLength', JSON.stringify(this.scheduleList.length));
-    })
+    this.loadGridData();
 
     this.searchBy = this.scheduleListColumns[0].field;
     this.focusField.nativeElement.focus();
     this.getScheduleTypes();
-
     this.rowSelection = "single";
 
+    //  this.masterService.getLocalJsonData();
+    //  this.masterService.dataObject.subscribe(list => {
+    //    this.scheduleTypes = list;
+    //    console.log("this.scheduleTypes--", list.ScheduleTypes)
+    //  })
   }
 
+  loadGridData() {
+    this.masterService.getData("schedules/");
+    this.masterService.dataObject.subscribe(list => {
+      this.scheduleList = list;
+      localStorage.setItem('rowDataLength', JSON.stringify(this.scheduleList.length));
+    });
+  }
   deltaIndicator(params) {
     var element = document.createElement("span");
     var imageElement = document.createElement("img");
 
     // visually indicate if this months value is higher or lower than last months value
     if (params.value) {
-        imageElement.src = "assets/images/right.jpg"
+      imageElement.src = "assets/images/right.jpg"
     } else {
-        imageElement.src = "assets/images/cancel.jpg"
+      imageElement.src = "assets/images/cancel.jpg"
     }
     element.appendChild(imageElement);
     // element.appendChild(document.createTextNode(params.value));
     return element;
-}
+  }
+
+
 
 
   getScheduleTypes() {
@@ -115,18 +117,18 @@ export class ScheduleComponent implements OnInit {
   save() {
 
     if (this.scheduleForm.valid) {
-      if(confirm('Are you sure!!')){
-        if(this.scheduleForm.value.id){
-          this.scheduleService.updateSchedule(this.scheduleForm.value).subscribe(res => {
-            this.scheduleService.getAllSchedules();
+      if (confirm('Are you sure!!')) {
+        if (this.scheduleForm.value.id) {
+          this.masterService.updateRecord('schedules/', this.scheduleForm.value).subscribe(res => {
+
             this.resetForm();
             this.successMsg();
           }, (error) => {
             this.serverErrMsg();
           });
-        }else{
-          this.scheduleService.createSchedule(this.scheduleForm.value).subscribe(res => {
-            this.scheduleService.getAllSchedules();
+        } else {
+          this.masterService.createRecord('schedules/', this.scheduleForm.value).subscribe(res => {
+
             this.resetForm();
             this.successMsg();
           }, (error) => {
@@ -156,25 +158,25 @@ export class ScheduleComponent implements OnInit {
     this.formRequiredError = this.formSuccess = false;
   }
 
-  resetForm(){
+  resetForm() {
     this.scheduleForm.reset();
     this.editSchedule = null;
     this.deleteFlag = true;
     this.nameFlag = false;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
+    this.loadGridData();
     this.focusField.nativeElement.focus();
   }
-  editable(s){
+  editable(s) {
     this.editSchedule = s;
     this.scheduleForm.reset(s);
     this.deleteFlag = !this.editSchedule.deleteFlag;
     this.nameFlag = true;
   }
 
-  delete(){
-    if(confirm('Are you sure!!')){
-      this.scheduleService.deleteSchedule( this.editSchedule.id ).subscribe(res => {
-        this.scheduleService.getAllSchedules();
+  delete() {
+    if (confirm('Are you sure!!')) {
+      this.masterService.deleteRecord('schedules/', this.editSchedule.id).subscribe(res => {
         this.resetForm();
         localStorage.removeItem('ag-activeRow');
         this.successMsg()
@@ -200,7 +202,7 @@ export class ScheduleComponent implements OnInit {
     });
   }
 
-  navigateToNextCell(params){
+  navigateToNextCell(params) {
     // const selectedRows= params.key;
     let previousCell = params.previousCellDef;
     const suggestedNextCell = params.nextCellDef;
@@ -211,7 +213,7 @@ export class ScheduleComponent implements OnInit {
     const nxt = suggestedNextCell.column.gridApi;
     localStorage.setItem('ag-curCell', '0');
 
-    switch(params.key){
+    switch (params.key) {
       case KEY_DOWN:
         const nextRowIndex = suggestedNextCell.rowIndex;
         localStorage.setItem('ag-nxtCell', JSON.stringify(nextRowIndex));
@@ -219,7 +221,7 @@ export class ScheduleComponent implements OnInit {
         nxt.forEachNode((node) => {
           let curCell = parseInt(localStorage.getItem('ag-curCell'), 10);
 
-          if(''+curCell === localStorage.getItem('ag-nxtCell')){
+          if ('' + curCell === localStorage.getItem('ag-nxtCell')) {
             localStorage.setItem('ag-activeRow', JSON.stringify(node.data));
             node.setSelected(true);
 
@@ -228,7 +230,7 @@ export class ScheduleComponent implements OnInit {
           localStorage.setItem('ag-curCell', curCell.toString());
         });
 
-        if(nextRowIndex <= 0){
+        if (nextRowIndex <= 0) {
           return null;
         } else {
           return suggestedNextCell;
@@ -241,7 +243,7 @@ export class ScheduleComponent implements OnInit {
         nxt.forEachNode((node) => {
           let curCell = parseInt(localStorage.getItem('ag-curCell'), 10);
 
-          if(''+curCell === localStorage.getItem('ag-nxtCell')){
+          if ('' + curCell === localStorage.getItem('ag-nxtCell')) {
             localStorage.setItem('ag-activeRow', JSON.stringify(node.data));
             node.setSelected(true);
 
@@ -255,7 +257,7 @@ export class ScheduleComponent implements OnInit {
 
         const prevRowIndex = previousCell.rowIndex - 1;
         const renderedRowCount = parseInt(localStorage.getItem('rowDataLength'), 10);
-        if(prevRowIndex >= renderedRowCount){
+        if (prevRowIndex >= renderedRowCount) {
           return null
         } else {
           return suggestedNextCell;
@@ -271,11 +273,11 @@ export class ScheduleComponent implements OnInit {
 
 
 
-  fun(){
+  fun() {
     this.editable(JSON.parse(localStorage.getItem('ag-activeRow')));
   }
 
-  onGridReady(params){
+  onGridReady(params) {
     this.gridApi = params.api;
     // this.gridColumnApi = params.columnApi;
 
@@ -290,10 +292,10 @@ export class ScheduleComponent implements OnInit {
       const ele = document.querySelector('div.ag-body-container');
 
       ele.addEventListener('keydown', (e) => {
-        if(e['key'] === 'Enter'){
+        if (e['key'] === 'Enter') {
           this.fun();
         }
-        if(e['key'] === 'Tab'){
+        if (e['key'] === 'Tab') {
           e.preventDefault();
           e.stopPropagation();
           return false;

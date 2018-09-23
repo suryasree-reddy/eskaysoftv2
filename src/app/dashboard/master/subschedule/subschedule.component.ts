@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SubscheduleService } from './subschedule.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { ScheduleService } from 'src/app/dashboard/master/schedule/schedule.service';
+import { MasterService } from '../master.service';
 
 
 @Component({
@@ -44,7 +44,7 @@ export class SubscheduleComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private subScheduleService: SubscheduleService,
     private modalService: BsModalService,
-    private scheduleService: ScheduleService) { }
+    private masterService: MasterService) { }
 
 
   ngOnInit() {
@@ -110,7 +110,7 @@ export class SubscheduleComponent implements OnInit {
     if (confirm('Are you sure!!')) {
 
       if (this.scheduleForm.valid) {
-        this.scheduleService.createSchedule(this.scheduleForm.value).subscribe(res => {
+        this.masterService.createRecord(this.scheduleForm.value).subscribe(res => {
           this.subScheduleService.getAllSchedules().subscribe(res => {
             this.scheduleList = res;
           });
