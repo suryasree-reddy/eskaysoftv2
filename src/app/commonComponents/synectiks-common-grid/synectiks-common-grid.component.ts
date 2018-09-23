@@ -58,7 +58,7 @@ export class SynectiksCommonGridComponent implements OnInit {
   onSelectionChanged() {
     const selectedRows = this.gridApi.getSelectedRows();
     this.valueChange.emit(selectedRows[0]);
-    localStorage.setItem('ag-activeRow', JSON.stringify(selectedRows[0]));
+  //  localStorage.setItem('ag-activeRow', JSON.stringify(selectedRows[0]));
     let selectedRowsString = "";
     selectedRows.forEach(function(selectedRow, index) {
       if (index !== 0) {
@@ -85,7 +85,7 @@ export class SynectiksCommonGridComponent implements OnInit {
             let curCell = parseInt(localStorage.getItem('ag-curCell'), 10);
 
             if ('' + curCell === localStorage.getItem('ag-nxtCell')) {
-              localStorage.setItem('ag-activeRow', JSON.stringify(node.data));
+            //  localStorage.setItem('ag-activeRow', JSON.stringify(node.data));
               node.setSelected(true);
 
             }
@@ -107,7 +107,7 @@ export class SynectiksCommonGridComponent implements OnInit {
             let curCell = parseInt(localStorage.getItem('ag-curCell'), 10);
 
             if ('' + curCell === localStorage.getItem('ag-nxtCell')) {
-              localStorage.setItem('ag-activeRow', JSON.stringify(node.data));
+              //localStorage.setItem('ag-activeRow', JSON.stringify(node.data));
               node.setSelected(true);
 
             }
@@ -135,7 +135,8 @@ export class SynectiksCommonGridComponent implements OnInit {
   }
 
   fun() {
-    this.editable(JSON.parse(localStorage.getItem('ag-activeRow')));
+    //this.editable(JSON.parse(localStorage.getItem('ag-activeRow')));
+      this.valueChange.emit(selectedRows[0]);
   }
 
   onGridReady(params) {
@@ -148,7 +149,7 @@ export class SynectiksCommonGridComponent implements OnInit {
 
       ele.addEventListener('keydown', (e) => {
         if (e['key'] === 'Enter') {
-          this.fun();
+        //  this.fun();
         }
         if (e['key'] === 'Tab') {
           e.preventDefault();

@@ -46,7 +46,6 @@ export class ScheduleComponent implements OnInit {
     this.masterService.getData("schedules/");
     this.masterService.dataObject.subscribe(list => {
       this.scheduleList = list;
-      this.gridDataList = list;
       localStorage.setItem('rowDataLength', JSON.stringify(this.scheduleList.length));
     });
   }
