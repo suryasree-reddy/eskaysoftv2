@@ -27,14 +27,15 @@ export class SubscheduleComponent implements OnInit {
   scheduleTypes: any;
   modalRef: BsModalRef;
   message: string;
+  public subScheduleListColumns;
 
   @ViewChild('focus') focusField: ElementRef;
 
-  public subScheduleListColumns = [
+  /*public subScheduleListColumns = [
     { headerName: 'Sub-Schedule Name', field: 'subScheduleName' },
     { headerName: 'Schedule Id', field: 'scheduleId', filter: "agNumberColumnFilter", width: 80 },
     { headerName: 'Sub-Schedule Index', field: 'subScheduleIndex', filter: "agNumberColumnFilter", width: 100 }
-  ];
+  ];*/
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
@@ -92,19 +93,10 @@ export class SubscheduleComponent implements OnInit {
   }
 
   getScheduleTypes() {
-    this.scheduleTypes = [{
-      "code": "ASS",
-      "description": "Assets"
-    }, {
-      "code": "LIA",
-      "description": "Liabilities"
-    }, {
-      "code": "TRADE",
-      "description": "Trading"
-    }, {
-      "code": "PNL",
-      "description": "Profit & Loss"
-    }]
+    this.masterService.getLocalJsonData().subscribe(data => {
+      this.scheduleTypes = data.ScheduleTypes;
+      this.subScheduleListColumns = data.SubScheduleListColumns;
+    });
   }
 
   saveSchedule() {

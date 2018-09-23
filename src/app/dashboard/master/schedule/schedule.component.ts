@@ -18,17 +18,10 @@ export class ScheduleComponent implements OnInit {
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public scheduleList: any = [];
-
+  public scheduleListColumns;
   @ViewChild('focus') focusField: ElementRef;
 
-  public scheduleListColumns = [
-    { headerName: 'Schedule Name', field: 'scheduleName' },
-    { headerName: 'Schedule Index', field: 'scheduleIndex', filter: 'agNumberColumnFilter', width: 100 },
-    { headerName: 'Schedule Type', field: 'scheduleType', width: 100 },
-    { headerName: 'Status', field: 'deleteFlag', cellRenderer: 'deltaIndicator', suppressFilter: true, width: 50 }
-  ];
-
-  constructor(private fb: FormBuilder, private translate: TranslateService, private masterService: MasterService ) {
+  constructor(private fb: FormBuilder, private translate: TranslateService, private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
 
@@ -47,11 +40,6 @@ export class ScheduleComponent implements OnInit {
     this.loadGridData();
     this.focusField.nativeElement.focus();
     this.getScheduleTypes();
-    //  this.masterService.getLocalJsonData();
-    //  this.masterService.dataObject.subscribe(list => {
-    //    this.scheduleTypes = list;
-    //    console.log("this.scheduleTypes--", list.ScheduleTypes)
-    //  })
   }
 
   loadGridData() {
@@ -64,19 +52,10 @@ export class ScheduleComponent implements OnInit {
   }
 
   getScheduleTypes() {
-    this.scheduleTypes = [{
-      "code": "ASS",
-      "description": "Assets"
-    }, {
-      "code": "LIA",
-      "description": "Liabilities"
-    }, {
-      "code": "TRADE",
-      "description": "Trading"
-    }, {
-      "code": "PNL",
-      "description": "Profit & Loss"
-    }]
+    this.masterService.getLocalJsonData().subscribe(data => {
+      this.scheduleTypes = data.ScheduleTypes;
+      this.scheduleListColumns = data.ScheduleListColumns;
+    });
   }
 
   save() {
