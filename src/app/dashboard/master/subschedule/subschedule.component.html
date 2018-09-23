@@ -48,12 +48,13 @@
     <div class="col-md-7">
       <br /><br />
 
-      <ag-grid-angular #agGrid style="height: 400px; width: 100%;" class="ag-theme-balham" [rowData]="subScheduleList"
+    <!--  <ag-grid-angular #agGrid style="height: 400px; width: 100%;" class="ag-theme-balham" [rowData]="subScheduleList"
         [columnDefs]="subScheduleListColumns" [rowSelection]="rowSelection" (gridReady)="onGridReady($event)"
         [navigateToNextCell]="navigateToNextCell" (selectionChanged)="onSelectionChanged($event)"
         [paginationAutoPageSize]="true" [pagination]="true" [enableFilter]="true" [enableSorting]="true" >
-      </ag-grid-angular>
+      </ag-grid-angular>-->
 
+      <app-synectiks-common-grid [gridDataList]="subScheduleList" (valueChange)='valueChange($event)' [gridColumnList]="subScheduleListColumns"></app-synectiks-common-grid>
 
     </div>
   </div>

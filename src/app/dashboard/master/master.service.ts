@@ -1,7 +1,8 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs/Rx';
+import { Observable } from "rxjs/Observable";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class MasterService {
   public dataObject: Subject<any> = new Subject<any>();
   public resposeArray: any = [];
 
+private _localUrl: string ="assets/jsonData/commonData.json"
   constructor(private httpClient: HttpClient) { }
 
   END_POINt = 'https://eskaysoft.synectiks.com/api/v1/';
@@ -26,11 +28,9 @@ export class MasterService {
   }
 
   getLocalJsonData() {
-    return this.httpClient.get("assets/jsonData/commonData.json").subscribe(data => {
-      console.log("res--", res.ScheduleTypes);
-      this.resposeArray = res.ScheduleTypes;
-      this.dataObject.next(this.resposeArray);
-    })
+  //  return this.httpClient.get(this._localUrl);
+    
+
   }
 
   createRecord(tragetServiceName, requestObj) {

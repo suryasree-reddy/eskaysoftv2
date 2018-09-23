@@ -13,6 +13,8 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 
+import { SynectiksCommonGridComponent } from '../../commonComponents/synectiks-common-grid/synectiks-common-grid.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -36,7 +38,7 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
     NgModel,
     FormsModule
   ],
-  declarations: [ScheduleComponent, SubscheduleComponent]
+  declarations: [ScheduleComponent, SubscheduleComponent, SynectiksCommonGridComponent]
 })
 export class MasterModule { }
 export function HttpLoaderFactory(http: HttpClient) {
