@@ -1,10 +1,8 @@
 import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SubscheduleService } from './subschedule.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { MasterService } from '../master.service';
-
 
 @Component({
   selector: 'app-subschedule',
@@ -42,7 +40,7 @@ export class SubscheduleComponent implements OnInit {
   message: string;
 
   constructor(private fb: FormBuilder,
-    private subScheduleService: SubscheduleService,
+
     private modalService: BsModalService,
     private masterService: MasterService) { }
 
@@ -64,15 +62,9 @@ export class SubscheduleComponent implements OnInit {
       scheduleName: []
     });
 
-    this.subScheduleService.getAll();
-    this.subScheduleService.subSchedules.subscribe(list => {
-      this.subScheduleList = list;
-      localStorage.setItem('rowDataLength', JSON.stringify(this.scheduleList.length));
-    })
+    this.loadGriddata();
 
-    this.subScheduleService.getAllSchedules().subscribe(res => {
-      this.scheduleList = res;
-    })
+    this.loadScheduleData();
 
     this.focusField.nativeElement.focus();
     this.getScheduleTypes();
@@ -80,6 +72,20 @@ export class SubscheduleComponent implements OnInit {
 
   }
 
+  loadScheduleData() {
+    this.masterService.getParentData("schedules/").subscribe(list => {
+      this.scheduleList = list;
+
+    })
+  }
+
+  loadGriddata() {
+    this.masterService.getData("subschedules/");
+    this.masterService.dataObject.subscribe(list => {
+      this.subScheduleList = list;
+      localStorage.setItem('rowDataLength', JSON.stringify(this.scheduleList.length));
+    })
+  }
   onSelectSchedule(event) {
     this.selectedSchedule = event.item;
   }
@@ -111,9 +117,7 @@ export class SubscheduleComponent implements OnInit {
 
       if (this.scheduleForm.valid) {
         this.masterService.createRecord(this.scheduleForm.value).subscribe(res => {
-          this.subScheduleService.getAllSchedules().subscribe(res => {
-            this.scheduleList = res;
-          });
+
           this.scheduleForm.reset();
           this.modalRef.hide();
 
@@ -139,17 +143,16 @@ export class SubscheduleComponent implements OnInit {
     if (this.subScheduleForm.valid && this.selectedSchedule && this.selectedSchedule.id) {
       if (confirm('Are you sure!!')) {
         this.subScheduleForm.value.scheduleId = this.selectedSchedule.id;
-        console.log(this.subScheduleForm.value);
+
         if (this.subScheduleForm.value.subScheduleId) {
-          this.subScheduleService.update(this.subScheduleForm.value).subscribe(res => {
-            this.subScheduleService.getAll();
+          this.masterService.updateRecord("subschedules/", this.subScheduleForm.value).subscribe(res => {
             this.successMsg();
           }, (error) => {
             this.serverErrMsg();
           });
         } else {
-          this.subScheduleService.create(this.subScheduleForm.value).subscribe(res => {
-            this.subScheduleService.getAll();
+          this.masterService.createRecord("subschedules/", this.subScheduleForm.value).subscribe(res => {
+
             this.successMsg();
           }, (error) => {
             this.serverErrMsg();
@@ -195,6 +198,8 @@ export class SubscheduleComponent implements OnInit {
     this.subScheduleForm.reset();
     this.editSubSchedule = null;
     this.focusField.nativeElement.focus();
+    this.loadGriddata();
+    this.loadScheduleData();
   }
   editable(s) {
     this.editSubSchedule = s;
@@ -205,8 +210,7 @@ export class SubscheduleComponent implements OnInit {
 
   delete() {
     if (confirm('Are you sure!!')) {
-      this.subScheduleService.delete(this.editSubSchedule.subScheduleId).subscribe(res => {
-        this.subScheduleService.getAll();
+      this.masterService.deleteRecord("subschedules/", this.editSubSchedule.subScheduleId).subscribe(res => {
         this.successMsg();
       }, (error) => {
         this.serverErrMsg();
@@ -222,7 +226,7 @@ export class SubscheduleComponent implements OnInit {
     this.editable(selectedRows[0]);
     localStorage.setItem('ag-activeRow', JSON.stringify(selectedRows[0]));
     let selectedRowsString = "";
-    selectedRows.forEach(function (selectedRow, index) {
+    selectedRows.forEach(function(selectedRow, index) {
       if (index !== 0) {
         selectedRowsString += ", ";
       }

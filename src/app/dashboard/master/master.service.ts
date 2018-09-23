@@ -21,6 +21,10 @@ export class MasterService {
     })
   }
 
+  getParentData(tragetServiceName) {
+    return this.httpClient.get(this.END_POINt + tragetServiceName);
+  }
+
   getLocalJsonData() {
     return this.httpClient.get("assets/jsonData/commonData.json").subscribe(data => {
       console.log("res--", res.ScheduleTypes);
