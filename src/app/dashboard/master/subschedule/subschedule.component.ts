@@ -28,7 +28,6 @@ export class SubscheduleComponent implements OnInit {
   modalRef: BsModalRef;
   message: string;
   public subScheduleListColumns;
-
   @ViewChild('focus') focusField: ElementRef;
 
   /*public subScheduleListColumns = [
@@ -65,7 +64,7 @@ export class SubscheduleComponent implements OnInit {
     this.loadScheduleData();
     this.focusField.nativeElement.focus();
     this.getScheduleTypes();
-    this.rowSelection = "single";
+
   }
 
   loadScheduleData() {
@@ -94,8 +93,9 @@ export class SubscheduleComponent implements OnInit {
 
   getScheduleTypes() {
     this.masterService.getLocalJsonData().subscribe(data => {
-      this.scheduleTypes = data.ScheduleTypes;
-      this.subScheduleListColumns = data.SubScheduleListColumns;
+    data as object [];
+      this.scheduleTypes = data["ScheduleTypes"];
+      this.subScheduleListColumns = data["SubScheduleListColumns"];
     });
   }
 
@@ -103,9 +103,9 @@ export class SubscheduleComponent implements OnInit {
     if (confirm('Are you sure!!')) {
 
       if (this.scheduleForm.valid) {
-        this.masterService.createRecord(this.scheduleForm.value).subscribe(res => {
+        this.masterService.createRecord("subschedules/", this.scheduleForm.value).subscribe(res => {
+            this.modalRef.hide();
           this.scheduleForm.reset();
-          this.modalRef.hide();
 
         }, (error) => {
           this.scServerErrMsg();

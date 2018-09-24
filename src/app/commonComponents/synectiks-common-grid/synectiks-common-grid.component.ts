@@ -21,10 +21,10 @@ export class SynectiksCommonGridComponent implements OnInit {
 
   private gridApi;
   private gridColumnApi;
-  private rowSelection;
+
 
   public selectedRow: any[];
-  @ViewChild('focus') focusField: ElementRef;
+  //@ViewChild('focus') focusField: ElementRef;
 
   public componentProvider = {
     deltaIndicator: this.deltaIndicator
@@ -136,7 +136,7 @@ export class SynectiksCommonGridComponent implements OnInit {
 
   fun() {
     //this.editable(JSON.parse(localStorage.getItem('ag-activeRow')));
-      this.valueChange.emit(selectedRows[0]);
+    //  this.valueChange.emit(selectedRows[0]);
   }
 
   onGridReady(params) {

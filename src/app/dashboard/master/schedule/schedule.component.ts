@@ -19,10 +19,18 @@ export class ScheduleComponent implements OnInit {
   public formServerError: boolean = false;
   public scheduleList: any = [];
   public scheduleListColumns;
-  @ViewChild('focus') focusField: ElementRef;
+  public editSchedule;
+  public deleteFlag;
+  public nameFlag;
+
+
+
+ //public jsonData;
+  //@ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder, private translate: TranslateService, private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
+    //  jsonData : object [];
   }
 
   valueChange(selectedRow: any[]): void {
@@ -38,7 +46,7 @@ export class ScheduleComponent implements OnInit {
     });
 
     this.loadGridData();
-    this.focusField.nativeElement.focus();
+  //  this.focusField.nativeElement.focus();
     this.getScheduleTypes();
   }
 
@@ -52,8 +60,9 @@ export class ScheduleComponent implements OnInit {
 
   getScheduleTypes() {
     this.masterService.getLocalJsonData().subscribe(data => {
-      this.scheduleTypes = data.ScheduleTypes;
-      this.scheduleListColumns = data.ScheduleListColumns;
+       data as object [];
+        this.scheduleTypes =data["ScheduleTypes"];
+        this.scheduleListColumns = data["ScheduleListColumns"]
     });
   }
 
@@ -113,7 +122,7 @@ export class ScheduleComponent implements OnInit {
     this.nameFlag = false;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
-    this.focusField.nativeElement.focus();
+  //  this.focusField.nativeElement.focus();
   }
 
   editable(s) {
