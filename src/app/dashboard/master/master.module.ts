@@ -14,6 +14,18 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 
 import { SynectiksCommonGridComponent } from '../../commonComponents/synectiks-common-grid/synectiks-common-grid.component';
+import { StatesComponent } from './states/states.component';
+import { DistrictsComponent } from './districts/districts.component';
+import { AreasComponent } from './areas/areas.component';
+import { BusinessexecutivesComponent } from './businessexecutives/businessexecutives.component';
+import { BankinformationComponent } from './bankinformation/bankinformation.component';
+import { ManufacturerComponent } from './manufacturer/manufacturer.component';
+import { CompanyGroupComponent } from './company-group/company-group.component';
+import { CompaniesComponent } from './companies/companies.component';
+import { ProductGroupComponent } from './product-group/product-group.component';
+import { ProductCategoryComponent } from './product-category/product-category.component';
+import { ProductComponent } from './product/product.component';
+import { AccountsInfoComponent } from './accounts-info/accounts-info.component';
 
 @NgModule({
   imports: [
@@ -38,7 +50,7 @@ import { SynectiksCommonGridComponent } from '../../commonComponents/synectiks-c
     NgModel,
     FormsModule
   ],
-  declarations: [ScheduleComponent, SubscheduleComponent, SynectiksCommonGridComponent]
+  declarations: [ScheduleComponent, SubscheduleComponent, SynectiksCommonGridComponent, StatesComponent, DistrictsComponent, AreasComponent, BusinessexecutivesComponent, BankinformationComponent, ManufacturerComponent, CompanyGroupComponent, CompaniesComponent, ProductGroupComponent, ProductCategoryComponent, ProductComponent, AccountsInfoComponent]
 })
 export class MasterModule { }
 export function HttpLoaderFactory(http: HttpClient) {
