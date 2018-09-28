@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 //import { SynectiksCommonGridComponent } from '../../../commonComponents/synectiks-common-grid/synectiks-common-grid.component';
@@ -26,7 +25,7 @@ export class ScheduleComponent implements OnInit {
 
 
  //public jsonData;
-  //@ViewChild('focus') focusField: ElementRef;
+  @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder, private translate: TranslateService, private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
@@ -46,7 +45,7 @@ export class ScheduleComponent implements OnInit {
     });
 
     this.loadGridData();
-  //  this.focusField.nativeElement.focus();
+    this.focusField.nativeElement.focus();
     this.getScheduleTypes();
   }
 
@@ -122,7 +121,7 @@ export class ScheduleComponent implements OnInit {
     this.nameFlag = false;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
-  //  this.focusField.nativeElement.focus();
+    this.focusField.nativeElement.focus();
   }
 
   editable(s) {

@@ -20,6 +20,7 @@ export class SubscheduleComponent implements OnInit {
   public scFormRequiredError: boolean = false;
   public scFormServerError: boolean = false;
   public scFormSuccess: boolean = false;
+  public nameFlag;
   subScheduleList: any = [];
   scheduleList: any = [];
   editSubSchedule: any;
@@ -188,10 +189,12 @@ export class SubscheduleComponent implements OnInit {
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.subScheduleForm.reset();
     this.editSubSchedule = null;
+    this.nameFlag = false;
     this.focusField.nativeElement.focus();
   }
 
   editable(s) {
+    this.nameFlag = true;
     this.editSubSchedule = s;
     this.selectedSchedule = {};
     this.selectedSchedule.id = s.scheduleId;
