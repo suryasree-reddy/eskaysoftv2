@@ -22,5 +22,10 @@
     { "headerName": "Sub-Schedule Name", "field": "subScheduleName" },
     { "headerName": "Schedule Id", "field": "scheduleId", "filter": "agNumberColumnFilter",  "width": 80 },
     { "headerName": "Sub-Schedule Index", "field": "subScheduleIndex", "filter": "agNumberColumnFilter",  "width": 100 }
+  ],
+  "StateListColumns": [
+    { "headerName": "State Name", "field": "stateName" },
+    { "headerName": "State Code", "field": "stateCode", "filter": "agNumberColumnFilter",  "width": 80 },
+    { "headerName": "Zone", "field": "zone", "filter": "agNumberColumnFilter",  "width": 100 }
   ]
 }
