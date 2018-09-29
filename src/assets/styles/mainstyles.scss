@@ -91,10 +91,28 @@ body {
 .mr-l-10 {
   margin-left: 10px;
 }
-
 //appcomponent
+.wrapper {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
 
-.wrapper{
-    padding-top: 60px;
-    padding-bottom: 60px;
+// businessexecutives
+table {
+  width: 100%;
+  td {
+    padding: 5px;
+  }
+  th {
+    padding: 5px;
+    background-color: #f0f9f7;
+  }
+}
+
+.search-wrapper {
+  padding-bottom: 10px;
+}
+
+.float-right {
+  float: right;
 }

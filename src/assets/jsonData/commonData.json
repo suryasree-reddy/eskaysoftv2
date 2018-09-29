@@ -30,6 +30,23 @@
   ],
   "DistrictsColumns": [
     { "headerName": "District Name", "field": "districtName" },
-    { "headerName": "State Name", "field": "stateName" }   
+    { "headerName": "State Name", "field": "stateName" }
+  ],
+  "BusinessExecutiveColumns": [
+    { "headerName": "Name", "field": "name" },
+    { "headerName": "Address", "field": "address" },
+    { "headerName": "Town", "field": "town" },
+    { "headerName": "Mobile", "field": "mobile" }
+  ],
+  "BankInformationColumns": [
+    { "headerName": "Name", "field": "name" },
+    { "headerName": "Address", "field": "address" }
+  ],
+  "ManfacturerColumns": [
+    { "headerName": "Manfacturer Name", "field": "manfacturerName" }
+  ],
+  "CompanyGroupColumns": [
+    { "headerName": "Company Group", "field": "companyGroup" }
   ]
+
 }

@@ -2,16 +2,17 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
+import '../../../../assets/styles/mainstyles.scss';
 //import { SynectiksCommonGridComponent } from '../../../commonComponents/synectiks-common-grid/synectiks-common-grid.component';
 
 @Component({
   selector: 'app-schedule',
-  templateUrl: './schedule.component.html',
-  styleUrls: ['./schedule.component.scss']
+  templateUrl: './schedule.component.html'
 })
 export class ScheduleComponent implements OnInit {
 
   public scheduleForm: FormGroup;
+  private endPoint: string = "schedules/";
   public scheduleTypes: any = [];
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
@@ -50,7 +51,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   loadGridData() {
-    this.masterService.getData("schedules/");
+    this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
       this.scheduleList = list;
       localStorage.setItem('rowDataLength', JSON.stringify(this.scheduleList.length));
@@ -69,13 +70,13 @@ export class ScheduleComponent implements OnInit {
     if (this.scheduleForm.valid) {
       if (confirm('Are you sure!!')) {
         if (this.scheduleForm.value.id) {
-          this.masterService.updateRecord('schedules/', this.scheduleForm.value).subscribe(res => {
+          this.masterService.updateRecord(this.endPoint, this.scheduleForm.value).subscribe(res => {
             this.successMsg();
           }, (error) => {
             this.serverErrMsg();
           });
         } else {
-          this.masterService.createRecord('schedules/', this.scheduleForm.value).subscribe(res => {
+          this.masterService.createRecord(this.endPoint, this.scheduleForm.value).subscribe(res => {
             this.successMsg();
           }, (error) => {
             this.serverErrMsg();
@@ -89,7 +90,7 @@ export class ScheduleComponent implements OnInit {
 
   delete() {
     if (confirm('Are you sure!!')) {
-      this.masterService.deleteRecord('schedules/', this.editSchedule.id).subscribe(res => {
+      this.masterService.deleteRecord(this.endPoint, this.editSchedule.id).subscribe(res => {
         localStorage.removeItem('ag-activeRow');
         this.successMsg()
       }, (error) => {

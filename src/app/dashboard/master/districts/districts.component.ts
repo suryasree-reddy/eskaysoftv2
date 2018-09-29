@@ -4,38 +4,37 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
-
+import '../../../../assets/styles/mainstyles.scss';
 
 @Component({
   selector: 'app-districts',
-  templateUrl: './districts.component.html',
-  styleUrls: ['./districts.component.scss']
+  templateUrl: './districts.component.html'
 })
 export class DistrictsComponent implements OnInit {
-  public districtsForm: FormGroup;  
+  public districtsForm: FormGroup;
   public statesForm: FormGroup;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
-  public formServerError: boolean = false;  
+  public formServerError: boolean = false;
   public scFormRequiredError: boolean = false;
   public scFormServerError: boolean = false;
   public scFormSuccess: boolean = false;
   public districtsList: any = [];
   public statesList: any = [];
   public districtsColumns;
-  public editDistricts; 
+  public editDistricts;
   public nameFlag;
   public selectedState:any;
   modalRef: BsModalRef;
   message: string;
- 
+
   @ViewChild('focus') focusField: ElementRef;
 
-  constructor(private fb: FormBuilder, private translate: TranslateService, 
+  constructor(private fb: FormBuilder, private translate: TranslateService,
     private modalService: BsModalService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
-    
+
   }
 
   valueChange(selectedRow: any[]): void {
@@ -55,15 +54,15 @@ export class DistrictsComponent implements OnInit {
     });
     this.districtsForm = this.fb.group({
       id: [],
-      districtsName: ['', Validators.required],      
+      districtsName: ['', Validators.required],
       stateId: [],
       stateName: []
     });
 
     this.loadStatesData();
     this.loadGridData();
-    this.focusField.nativeElement.focus(); 
-    this.getDistrictsTypes();   
+    this.focusField.nativeElement.focus();
+    this.getDistrictsTypes();
   }
 
   loadStatesData() {
@@ -82,7 +81,7 @@ export class DistrictsComponent implements OnInit {
 
   getDistrictsTypes() {
     this.masterService.getLocalJsonData().subscribe(data => {
-       data as object [];        
+       data as object [];
         this.districtsColumns = data["DistrictsColumns"]
     });
   }
@@ -168,7 +167,7 @@ export class DistrictsComponent implements OnInit {
   }
   resetForm() {
     this.districtsForm.reset();
-    this.editDistricts = null;    
+    this.editDistricts = null;
     this.nameFlag = false;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();

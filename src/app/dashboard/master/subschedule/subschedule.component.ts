@@ -4,15 +4,16 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { MasterService } from '../master.service';
 import { TranslateService } from '@ngx-translate/core';
+import '../../../../assets/styles/mainstyles.scss';
 
 @Component({
   selector: 'app-subschedule',
-  templateUrl: './subschedule.component.html',
-  styleUrls: ['./subschedule.component.scss']
+  templateUrl: './subschedule.component.html'
 })
 export class SubscheduleComponent implements OnInit {
 
   public scheduleForm: FormGroup;
+  private endPoint: string = "subschedules/";
   public subScheduleForm: FormGroup;
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
@@ -31,11 +32,7 @@ export class SubscheduleComponent implements OnInit {
   public subScheduleListColumns;
   @ViewChild('focus') focusField: ElementRef;
 
-  /*public subScheduleListColumns = [
-    { headerName: 'Sub-Schedule Name', field: 'subScheduleName' },
-    { headerName: 'Schedule Id', field: 'scheduleId', filter: "agNumberColumnFilter", width: 80 },
-    { headerName: 'Sub-Schedule Index', field: 'subScheduleIndex', filter: "agNumberColumnFilter", width: 100 }
-  ];*/
+
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
@@ -75,7 +72,7 @@ export class SubscheduleComponent implements OnInit {
   }
 
   loadGriddata() {
-    this.masterService.getData("subschedules/");
+    this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
       this.subScheduleList = list;
       localStorage.setItem('rowDataLength', JSON.stringify(this.scheduleList.length));
@@ -104,7 +101,7 @@ export class SubscheduleComponent implements OnInit {
     if (confirm('Are you sure!!')) {
 
       if (this.scheduleForm.valid) {
-        this.masterService.createRecord("subschedules/", this.scheduleForm.value).subscribe(res => {
+        this.masterService.createRecord(this.endPoint, this.scheduleForm.value).subscribe(res => {
             this.modalRef.hide();
           this.scheduleForm.reset();
 
@@ -128,13 +125,13 @@ export class SubscheduleComponent implements OnInit {
       if (confirm('Are you sure!!')) {
         this.subScheduleForm.value.scheduleId = this.selectedSchedule.id;
         if (this.subScheduleForm.value.subScheduleId) {
-          this.masterService.updateRecord("subschedules/", this.subScheduleForm.value).subscribe(res => {
+          this.masterService.updateRecord(this.endPoint, this.subScheduleForm.value).subscribe(res => {
             this.successMsg();
           }, (error) => {
             this.serverErrMsg();
           });
         } else {
-          this.masterService.createRecord("subschedules/", this.subScheduleForm.value).subscribe(res => {
+          this.masterService.createRecord(this.endPoint, this.subScheduleForm.value).subscribe(res => {
             this.successMsg();
           }, (error) => {
             this.serverErrMsg();
@@ -148,7 +145,7 @@ export class SubscheduleComponent implements OnInit {
 
   delete() {
     if (confirm('Are you sure!!')) {
-      this.masterService.deleteRecord("subschedules/", this.editSubSchedule.subScheduleId).subscribe(res => {
+      this.masterService.deleteRecord(this.endPoint, this.editSubSchedule.subScheduleId).subscribe(res => {
         this.successMsg();
       }, (error) => {
         this.serverErrMsg();
