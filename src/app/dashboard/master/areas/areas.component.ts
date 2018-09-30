@@ -23,7 +23,7 @@ export class AreasComponent implements OnInit {
   public gridColumnNamesList;
   public gridSelectedRow;
   public selectedTypeahead: any;
-
+public deleteFlag: boolean =true;
   editSubSchedule: any;
   scheduleTypes: any;
   modalRef: BsModalRef;
@@ -186,6 +186,7 @@ export class AreasComponent implements OnInit {
     this.areaForm.reset();
     this.gridSelectedRow = null;
     this.nameFlag = false;
+    this.deleteFlag = true;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
@@ -195,6 +196,7 @@ export class AreasComponent implements OnInit {
     this.gridSelectedRow = s;
     this.areaForm.reset(s);
     this.nameFlag = true;
+    this.deleteFlag = false;
   }
 
   resetBusinessExecutiveForm() {

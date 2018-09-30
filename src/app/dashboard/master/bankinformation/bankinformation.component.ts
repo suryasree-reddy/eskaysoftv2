@@ -19,7 +19,7 @@ export class BankinformationComponent implements OnInit {
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public nameFlag;
-
+  public deleteFlag: boolean =true;
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder, private translate: TranslateService, private masterService: MasterService) {
@@ -111,6 +111,7 @@ export class BankinformationComponent implements OnInit {
     this.nameFlag = false;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
+    this.deleteFlag = true;
     this.focusField.nativeElement.focus();
   }
 
@@ -118,6 +119,7 @@ export class BankinformationComponent implements OnInit {
     this.gridSelectedRow = s;
     this.bankInformationForm.reset(s);
     this.nameFlag = true;
+    this.deleteFlag = false;
   }
 
 }

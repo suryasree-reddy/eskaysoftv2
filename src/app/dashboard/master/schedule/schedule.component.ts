@@ -20,17 +20,13 @@ export class ScheduleComponent implements OnInit {
   public scheduleList: any = [];
   public scheduleListColumns;
   public editSchedule;
-  public deleteFlag;
+  public deleteFlag: boolean =true;
+  public saveBtnFlag: boolean = false;
   public nameFlag;
-
-
-
- //public jsonData;
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder, private translate: TranslateService, private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
-    //  jsonData : object [];
   }
 
   valueChange(selectedRow: any[]): void {

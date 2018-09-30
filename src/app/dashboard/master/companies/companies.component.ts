@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompaniesComponent implements OnInit {
 
+  public deleteFlag: boolean =true;
   constructor() { }
 
   ngOnInit() {

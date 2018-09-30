@@ -19,6 +19,7 @@ export class ManufacturerComponent implements OnInit {
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public nameFlag;
+  public deleteFlag: boolean =true;
 
   @ViewChild('focus') focusField: ElementRef;
 
@@ -108,6 +109,7 @@ export class ManufacturerComponent implements OnInit {
     this.manufacturerForm.reset();
     this.gridSelectedRow = null;
     this.nameFlag = false;
+      this.deleteFlag = true;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
@@ -117,6 +119,7 @@ export class ManufacturerComponent implements OnInit {
     this.gridSelectedRow = s;
     this.manufacturerForm.reset(s);
     this.nameFlag = true;
+      this.deleteFlag = false;
   }
 
 }

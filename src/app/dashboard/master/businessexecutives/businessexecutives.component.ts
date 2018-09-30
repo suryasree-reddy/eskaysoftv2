@@ -19,6 +19,7 @@ export class BusinessexecutivesComponent implements OnInit {
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public nameFlag;
+  public deleteFlag: boolean =true;
 
   @ViewChild('focus') focusField: ElementRef;
 
@@ -111,6 +112,7 @@ export class BusinessexecutivesComponent implements OnInit {
     this.businessExecutiveForm.reset();
     this.gridSelectedRow = null;
     this.nameFlag = false;
+    this.deleteFlag = true;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
@@ -119,6 +121,7 @@ export class BusinessexecutivesComponent implements OnInit {
   editable(s) {
     this.gridSelectedRow = s;
     this.businessExecutiveForm.reset(s);
+    this.deleteFlag = false;
     this.nameFlag = true;
   }
 
