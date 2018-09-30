@@ -76,46 +76,12 @@ export class AreasComponent implements OnInit {
   }
 
   loadGridData() {
-    this.typeaheadDataList;
     this.masterService.getData(this.areaEndPoint);
     this.masterService.dataObject.subscribe(list => {
-
-const c = _.assign([], list, this.typeaheadDataList);
-
-var arrResult =   _(list).keyBy('businessExecutiveId').merge(_.keyBy(this.typeaheadDataList, 'id')).values() .value(); // get the value (array) out of the sequence
-
-
-
-//  _.mergeByKey(arr1, arr2, 'member');
-    /*  for (let item in list) {
-        var tempAreaInfoData = {};
-        tempAreaInfoData.areaId = item.areaId;
-        tempAreaInfoData.areaName = item.areaName;
-        for (let executiveObj in this.typeaheadDataList) {
-          if (angular.equals(item.businessExecutiveId, executiveObj.executiveId)) {
-              tempAreaInfoData.executiveId = item.businessExecutiveId;
-              tempAreaInfoData.executiveName = executiveObj.executiveName;
-          }
-        }
-      }
-
-      angular.forEach(list, function (item) {
-          var tempAreaInfoData = {};
-          tempAreaInfoData.areaId = item.areaId;
-          tempAreaInfoData.areaName = item.areaName;
-          angular.forEach(this.typeaheadDataList, function (executiveObj) {
-              if (angular.equals(item.businessExecutiveId, executiveObj.executiveId)) {
-                  tempAreaInfoData.executiveId = item.businessExecutiveId;
-                  tempAreaInfoData.executiveName = executiveObj.executiveName;
-              }
-          });
-
-        this.gridDataList.push(tempAreaInfoData);
-
-      });*/
-
-
-
+      const temp = this.typeaheadDataList;
+      this.gridDataList = _.map(list, function(item) {
+        return _.merge(item, _.find(temp, function(o) { return o.id == item.businessExecutiveId }));
+      });
       localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
     })
   }
@@ -142,7 +108,7 @@ var arrResult =   _(list).keyBy('businessExecutiveId').merge(_.keyBy(this.typeah
             this.serverErrMsg();
           });
         } else {
-            this.areaForm.value.businessExecutiveId = this.selectedTypeahead.id;
+          this.areaForm.value.businessExecutiveId = this.selectedTypeahead.id;
           this.masterService.createRecord(this.areaEndPoint, this.areaForm.value).subscribe(res => {
             this.successMsg();
           }, (error) => {
@@ -186,7 +152,6 @@ var arrResult =   _(list).keyBy('businessExecutiveId').merge(_.keyBy(this.typeah
   resetForm() {
     this.businessExecutiveForm.reset();
     this.areaForm.reset();
-
     this.gridSelectedRow = null;
     this.nameFlag = false;
     this.formRequiredError = this.formServerError = this.formSuccess = false;

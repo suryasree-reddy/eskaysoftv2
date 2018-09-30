@@ -43,7 +43,7 @@
   ],
   "AreaColumns": [
     { "headerName": "Company Group", "field": "areaName" },
-    { "headerName": "Executive Name", "field": "businessExecutiveId" }
+    { "headerName": "Executive Name", "field": "name" }
   ],
   "CompanyColumns": [
     { "headerName": "Company Group", "field": "companyGroup" }
