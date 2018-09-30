@@ -40,7 +40,7 @@
             <div class="input-group">
               <button type="button" (click)="resetForm()" class="btn btn-primary">Reset</button>
               <button type="submit" class="btn btn-primary mr-l-10">Save</button>
-              <button type="button" *ngIf="editSubSchedule" (click)="delete()" class="btn btn-danger float-right">Delete</button>
+              <button type="button" [disabled]="deleteFlag" (click)="delete()" class="btn btn-danger float-right">Delete</button>
             </div>
 
       </form>

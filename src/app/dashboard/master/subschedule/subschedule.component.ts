@@ -30,10 +30,9 @@ export class SubscheduleComponent implements OnInit {
   scheduleTypes: any;
   modalRef: BsModalRef;
   message: string;
+  public deleteFlag: boolean =true;
   public subScheduleListColumns;
   @ViewChild('focus') focusField: ElementRef;
-
-
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
@@ -63,7 +62,6 @@ export class SubscheduleComponent implements OnInit {
     this.loadScheduleData();
     this.focusField.nativeElement.focus();
     this.getScheduleTypes();
-
   }
 
   loadScheduleData() {
@@ -188,6 +186,7 @@ export class SubscheduleComponent implements OnInit {
     this.subScheduleForm.reset();
     this.editSubSchedule = null;
     this.nameFlag = false;
+    this.deleteFlag = true;
     this.focusField.nativeElement.focus();
   }
 
@@ -196,6 +195,7 @@ export class SubscheduleComponent implements OnInit {
     this.editSubSchedule = s;
     this.selectedSchedule = {};
     this.selectedSchedule.id = s.scheduleId;
+    this.deleteFlag = false;
     this.subScheduleForm.reset(s);
   }
 

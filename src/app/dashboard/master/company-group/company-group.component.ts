@@ -108,7 +108,7 @@ export class CompanyGroupComponent implements OnInit {
       this.companyGroupForm.reset();
       this.gridSelectedRow = null;
       this.nameFlag = false;
-        this.deleteFlag = true;
+      this.deleteFlag = true;
       this.formRequiredError = this.formServerError = this.formSuccess = false;
       this.loadGridData();
       this.focusField.nativeElement.focus();
@@ -118,7 +118,7 @@ export class CompanyGroupComponent implements OnInit {
       this.gridSelectedRow = s;
       this.companyGroupForm.reset(s);
       this.nameFlag = true;
-        this.deleteFlag = false;
+      this.deleteFlag = false;
     }
 
 }
