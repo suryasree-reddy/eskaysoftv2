@@ -1,17 +1,10 @@
 {
-  "ScheduleTypes": [{
-    "code": "ASS",
-    "description": "Assets"
-  }, {
-    "code": "LIA",
-    "description": "Liabilities"
-  }, {
-    "code": "TRADE",
-    "description": "Trading"
-  }, {
-    "code": "PNL",
-    "description": "Profit & Loss"
-  }],
+  "ScheduleTypes": [
+    { "code": "ASS", "description": "Assets" },
+    { "code": "LIA", "description": "Liabilities" },
+    { "code": "TRADE", "description": "Trading" },
+    { "code": "PNL", "description": "Profit & Loss" }
+  ],
   "ScheduleListColumns": [
     { "headerName": "Schedule Name", "field": "scheduleName" },
     { "headerName": "Schedule Index", "field": "scheduleIndex", "filter": "agNumberColumnFilter", "width": 100 },
@@ -46,6 +39,13 @@
     { "headerName": "Manfacturer Name", "field": "manfacturerName" }
   ],
   "CompanyGroupColumns": [
+    { "headerName": "Company Group", "field": "companyGroup" }
+  ],
+  "AreaColumns": [
+    { "headerName": "Company Group", "field": "areaName" },
+    { "headerName": "Executive Name", "field": "businessExecutiveId" }
+  ],
+  "CompanyColumns": [
     { "headerName": "Company Group", "field": "companyGroup" }
   ]
 
