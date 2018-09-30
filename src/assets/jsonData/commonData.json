@@ -42,7 +42,7 @@
     { "headerName": "Company Group", "field": "companyGroup" }
   ],
   "AreaColumns": [
-    { "headerName": "Company Group", "field": "areaName" },
+    { "headerName": "Area Name", "field": "areaName" },
     { "headerName": "Executive Name", "field": "name" }
   ],
   "CompanyColumns": [

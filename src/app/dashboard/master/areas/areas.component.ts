@@ -78,6 +78,7 @@ export class AreasComponent implements OnInit {
   loadGridData() {
     this.masterService.getData(this.areaEndPoint);
     this.masterService.dataObject.subscribe(list => {
+      this.gridDataList = list;
       const temp = this.typeaheadDataList;
       this.gridDataList = _.map(list, function(item) {
         return _.merge(item, _.find(temp, function(o) { return o.id == item.businessExecutiveId }));
@@ -95,6 +96,27 @@ export class AreasComponent implements OnInit {
 
   loadSelectedTypeahead(event) {
       this.selectedTypeahead = event.item;
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.resetBusinessExecutiveForm();
+    this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
+    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+  }
+
+  saveBusinessExecutive() {
+      if (this.businessExecutiveForm.valid) {
+        if (confirm('Are you sure!!')) {
+          this.masterService.createRecord(this.beEndPoint, this.businessExecutiveForm.value).subscribe(res => {
+            this.modalRef.hide();
+            this.businessExecutiveForm.reset();
+          }, (error) => {
+            this.scServerErrMsg();
+          });
+        }
+      } else {
+        this.scRequiredErrMsg();
+      }
   }
 
   save() {
@@ -149,6 +171,16 @@ export class AreasComponent implements OnInit {
     this.formRequiredError = this.formSuccess = false;
   }
 
+  scRequiredErrMsg() {
+    this.scFormRequiredError = true;
+    this.scFormSuccess = this.scFormServerError = false;
+  }
+
+  scServerErrMsg() {
+    this.scFormServerError = true;
+    this.scFormRequiredError = this.scFormSuccess = false;
+  }
+
   resetForm() {
     this.businessExecutiveForm.reset();
     this.areaForm.reset();
@@ -164,4 +196,10 @@ export class AreasComponent implements OnInit {
     this.areaForm.reset(s);
     this.nameFlag = true;
   }
+
+  resetBusinessExecutiveForm() {
+    this.businessExecutiveForm.reset();
+  }
+
+
 }
