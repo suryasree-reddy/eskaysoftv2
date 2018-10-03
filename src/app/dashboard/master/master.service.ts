@@ -16,7 +16,7 @@ export class MasterService {
 
   constructor(private httpClient: HttpClient) { }
 
-  END_POINt = 'https://eskaysoft.synectiks.com/api/v1/';
+  END_POINt = 'http://10.10.10.101:808/api/';
 
   getData(tragetServiceName) {
     return this.httpClient.get(this.END_POINt + tragetServiceName).subscribe(res => {

@@ -26,6 +26,10 @@ import { ProductGroupComponent } from './product-group/product-group.component';
 import { ProductCategoryComponent } from './product-category/product-category.component';
 import { ProductComponent } from './product/product.component';
 import { AccountsInfoComponent } from './accounts-info/accounts-info.component';
+import { AccountsOpeningsComponent } from './accounts-openings/accounts-openings.component';
+import { ContactComponent } from './contact/contact.component';
+import { CustomerwiseDiscountComponent } from './customerwise-discount/customerwise-discount.component';
+import { PurchaseComponent } from './purchase/purchase.component';
 
 @NgModule({
   imports: [
@@ -50,7 +54,7 @@ import { AccountsInfoComponent } from './accounts-info/accounts-info.component';
     NgModel,
     FormsModule
   ],
-  declarations: [ScheduleComponent, SubscheduleComponent, SynectiksCommonGridComponent, StatesComponent, DistrictsComponent, AreasComponent, BusinessexecutivesComponent, BankinformationComponent, ManufacturerComponent, CompanyGroupComponent, CompaniesComponent, ProductGroupComponent, ProductCategoryComponent, ProductComponent, AccountsInfoComponent]
+  declarations: [ScheduleComponent, SubscheduleComponent, SynectiksCommonGridComponent, StatesComponent, DistrictsComponent, AreasComponent, BusinessexecutivesComponent, BankinformationComponent, ManufacturerComponent, CompanyGroupComponent, CompaniesComponent, ProductGroupComponent, ProductCategoryComponent, ProductComponent, AccountsInfoComponent, AccountsOpeningsComponent, ContactComponent, CustomerwiseDiscountComponent, PurchaseComponent]
 })
 export class MasterModule { }
 export function HttpLoaderFactory(http: HttpClient) {

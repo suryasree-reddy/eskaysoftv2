@@ -47,6 +47,20 @@
   ],
   "CompanyColumns": [
     { "headerName": "Company Group", "field": "companyGroup" }
+  ],
+  "CustomerDiscountColumns": [
+    { "headerName": "Company Description", "field": "company" },
+    { "headerName": "Discount", "field": "discount" },
+    { "headerName": "C.Discount", "field": "cdisc" }
+  ],
+  "ProductColumns": [
+    { "headerName": "Product Name", "field": "productName" }
+  ],
+  "ProductCategoryColumns": [
+    { "headerName": "Product Category", "field": "productCategory" }
+  ],
+  "ProductGroupColumns": [
+    { "headerName": "Product Group", "field": "productGroup" }
   ]
 
 }

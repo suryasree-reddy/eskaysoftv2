@@ -1,17 +1,18 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit,ViewChild, ElementRef  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
 
-@Component({
-  selector: 'app-companies',
-  templateUrl: './companies.component.html'
-})
-export class CompaniesComponent implements OnInit {
 
-  public companyForm: FormGroup;
-    private endPoint: string = "company/";
+@Component({
+  selector: 'app-customerwise-discount',
+  templateUrl: './customerwise-discount.component.html',
+  })
+export class CustomerwiseDiscountComponent implements OnInit {
+
+  public customerDiscountForm: FormGroup;
+    private endPoint: string = "customerdiscount/";
     public gridDataList: any = [];
     public gridColumnNamesList;
     public gridSelectedRow;
@@ -27,9 +28,9 @@ export class CompaniesComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.companyForm = this.fb.group({
+      this.customerDiscountForm = this.fb.group({
         id: [],
-        companyGroup: ['', Validators.required]
+        customerDiscount: ['', Validators.required]
       });
       this.loadGridData();
       this.getGridCloumsList();
@@ -43,7 +44,7 @@ export class CompaniesComponent implements OnInit {
     getGridCloumsList() {
       this.masterService.getLocalJsonData().subscribe(data => {
         data as object[];
-        this.gridColumnNamesList = data["CompanyColumns"];
+        this.gridColumnNamesList = data["CustomerDiscountColumns"];
       });
     }
 
@@ -56,16 +57,16 @@ export class CompaniesComponent implements OnInit {
     }
 
     save() {
-      if (this.companyForm.valid) {
+      if (this.customerDiscountForm.valid) {
         if (confirm('Are you sure!!')) {
-          if (this.companyForm.value.id) {
-            this.masterService.updateRecord(this.endPoint, this.companyForm.value).subscribe(res => {
+          if (this.customerDiscountForm.value.id) {
+            this.masterService.updateRecord(this.endPoint, this.customerDiscountForm.value).subscribe(res => {
               this.successMsg();
             }, (error) => {
               this.serverErrMsg();
             });
           } else {
-            this.masterService.createRecord(this.endPoint, this.companyForm.value).subscribe(res => {
+            this.masterService.createRecord(this.endPoint, this.customerDiscountForm.value).subscribe(res => {
               this.successMsg();
             }, (error) => {
               this.serverErrMsg();
@@ -105,7 +106,7 @@ export class CompaniesComponent implements OnInit {
     }
 
     resetForm() {
-      this.companyForm.reset();
+      this.customerDiscountForm.reset();
       this.gridSelectedRow = null;
       this.nameFlag = false;
       this.deleteFlag = true;
@@ -116,9 +117,10 @@ export class CompaniesComponent implements OnInit {
 
     editable(s) {
       this.gridSelectedRow = s;
-      this.companyForm.reset(s);
+      this.customerDiscountForm.reset(s);
       this.nameFlag = true;
       this.deleteFlag = false;
     }
 
 }
+

@@ -1,3 +1,97 @@
-<p>
-  product works!
-</p>
+<div class="col-md-12">
+    <div class="row">
+      <div class="col-md-5">
+        <h3>Product</h3>
+        <form [formGroup]="productForm" (ngSubmit)="save()" autocomplete="off">
+          <div class="row">
+            <div class="error-text col-xs-12" *ngIf="formSuccess">
+              <p class="text-success">{{'message.save' | translate }}</p>
+            </div>
+            <div class="error-text col-xs-12" *ngIf="formRequiredError">
+              <p class="text-danger">{{'message.mandatory' | translate }}</p>
+            </div>
+            <div class="error-text col-xs-12" *ngIf="formServerError">
+              <p class="text-danger">{{'message.error' | translate }}</p>
+            </div>
+          </div>
+         
+      
+          <div class="col-md-6 col-lt">
+            <p>Name: *</p>
+            <input id="productName" #focus [readonly]="nameFlag"  class="form-control" [formControl]="productForm.controls['productName']">
+          </div>
+            <div class="col-md-3 col-rt">
+              <p>Strip Pack: *</p>
+              <input id="stripPack"  #focus [readonly]="nameFlag"  class="form-control" [formControl]="productForm.controls['stripPack']">
+          </div>
+        
+            <div class="col-md-3 col-rt">
+              <p>Packing: *</p>
+              <input id="packing" #focus [readonly]="nameFlag"  class="form-control" [formControl]="productForm.controls['packing']">
+            </div>
+        
+              <div class="col-md-6 col-lt">
+                <p>Box Qty: *</p>
+                <input id="boxQty" class="form-control" [formControl]="productForm.controls['boxQty']">
+            </div>
+         
+            <div class="col-md-3 col-rt">
+              <p>Group: *</p>
+              <input id="group" class="form-control" [formControl]="productForm.controls['group']">
+          </div>
+        
+          <div class="col-md-3 col-rt">
+            <p>Case Qty: *</p>
+            <input id="caseQty" class="form-control" [formControl]="productForm.controls['caseQty']">
+        </div>
+        <div class="col-md-3 col-lt">
+          <p>Category: *</p>
+          <input id="category" class="form-control" [formControl]="productForm.controls['category']">
+      </div>
+      <div class="col-md-3 col-lt">
+          <p>Contents: *</p>
+          <input id="contents" class="form-control" [formControl]="productForm.controls['contents']">
+      </div>
+      <div class="col-md-6 col-rt">
+          <p>Net Rate: *</p>
+          <input id="netRate" class="form-control" [formControl]="productForm.controls['netRate']">
+      </div>
+      <div class="col-md-6 col-lt">
+          <p>Is Net Rate Item: *</p>
+          <input id="isNetItem" class="form-control" [formControl]="productForm.controls['isNetItem']">
+      </div>
+      <div class="col-md-6 col-rt">
+          <p>Scheme Qty: *</p>
+          <input id="schemeQty" class="form-control" [formControl]="productForm.controls['schemeQty']">
+      </div>
+      <div class="col-md-3 col-lt">
+          <p>Free: *</p>
+          <input id="free" class="form-control" [formControl]="productForm.controls['free']">
+      </div>
+      <div class="col-md-3 col-lt">
+          <p>Tax(%): *</p>
+          <input id="tax" class="form-control" [formControl]="productForm.controls['tax']">
+      </div>
+      <div class="col-md-6 col-rt">
+          <p>Product Code: *</p>
+          <input id="productCode" class="form-control" [formControl]="productForm.controls['productCode']">
+      </div>
+    </div>
+              <div class="input-group">
+                <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
+                <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
+                <button type="button" [disabled]="deleteFlag" (click)="delete()" class="btn btn-danger float-right">{{'button.delete' | translate }}</button>
+              </div>
+        </form>
+      </div>
+  
+      <div class="col-md-7">
+        <br /><br />
+  
+        <app-synectiks-common-grid [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [gridColumnList]="gridColumnNamesList"></app-synectiks-common-grid>
+      </div>
+  
+    </div>
+  
+  </div>
+  
