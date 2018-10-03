@@ -2,6 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Rx';
+import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable({
@@ -16,7 +17,7 @@ export class MasterService {
 
   constructor(private httpClient: HttpClient) { }
 
-  END_POINt = 'https://eskaysoft.synectiks.com/api/v1/';
+  END_POINt = environment.api.url+"v1/";
 
   getData(tragetServiceName) {
     return this.httpClient.get(this.END_POINt + tragetServiceName).subscribe(res => {
