@@ -23,7 +23,7 @@
   ],
   "DistrictsColumns": [
     { "headerName": "District Name", "field": "districtName" },
-    { "headerName": "State Name", "field": "stateName" }
+    { "headerName": "State Name", "field": "statesName" }
   ],
   "BusinessExecutiveColumns": [
     { "headerName": "Name", "field": "name" },

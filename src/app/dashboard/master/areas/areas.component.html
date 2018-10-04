@@ -22,7 +22,7 @@
 
           <div class="input-group">
             <p>Executive Name: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
-            <input id="businessExecutiveId" formControlName="businessExecutiveId" [typeahead]="typeaheadDataList" typeaheadOptionField="name"
+            <input id="businessExecutiveId" formControlName="businessExecutiveName" [typeahead]="typeaheadDataList" typeaheadOptionField="name"
               [typeaheadOptionsLimit]="7"   [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control">
               <span class="caret"></span>
         </div>

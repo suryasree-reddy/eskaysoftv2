@@ -17,11 +17,11 @@
   
           <div class="input-group">
             <p>District Name: *</p>
-            <input id="districtName" #focus [readonly]="nameFlag"  class="form-control" [formControl]="districtsForm.controls['districtsName']">
+            <input id="districtName" #focus [readonly]="nameFlag"  class="form-control" [formControl]="districtsForm.controls['districtName']">
           </div>
             <div class="input-group">
               <p>State Name: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
-              <input id="stateName" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="stateName"
+              <input id="stateName" formControlName="statesName" [typeahead]="statesList" typeaheadOptionField="stateName"
                 [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control">
                 <span class="caret"></span>
           </div>
@@ -29,7 +29,7 @@
               <div class="input-group">
                 <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
                 <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-                <button type="button" *ngIf="editDistricts" (click)="delete()" class="btn btn-danger float-right">{{'button.delete' | translate }}</button>
+                <button type="button" [disabled]="deleteFlag" (click)="delete()" class="btn btn-danger float-right">{{'button.delete' | translate }}</button>
               </div>
         </form>
       </div>

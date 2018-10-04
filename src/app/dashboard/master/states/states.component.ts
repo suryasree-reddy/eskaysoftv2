@@ -17,7 +17,7 @@ export class StatesComponent implements OnInit {
   public statesList: any = [];
   public statesListColumns;
   public editStates;
-  public deleteFlag;
+  public deleteFlag: boolean =true;
   public nameFlag;
 
 

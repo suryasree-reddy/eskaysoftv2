@@ -52,7 +52,8 @@ public deleteFlag: boolean =true;
     this.areaForm = this.fb.group({
       areaId: [],
       areaName: ['', Validators.required],
-      businessExecutiveId: []
+      businessExecutiveId: [],
+      businessExecutiveName:[]
     });
 
     this.businessExecutiveForm = this.fb.group({

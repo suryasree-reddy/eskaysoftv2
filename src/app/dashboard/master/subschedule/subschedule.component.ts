@@ -100,7 +100,7 @@ export class SubscheduleComponent implements OnInit {
     if (confirm('Are you sure!!')) {
 
       if (this.scheduleForm.valid) {
-        this.masterService.createRecord(this.endPoint, this.scheduleForm.value).subscribe(res => {
+        this.masterService.createRecord("schedules/", this.scheduleForm.value).subscribe(res => {
             this.modalRef.hide();
           this.scheduleForm.reset();
 

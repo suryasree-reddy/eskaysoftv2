@@ -25,6 +25,7 @@ export class DistrictsComponent implements OnInit {
   public districtsColumns;
   public editDistricts;
   public nameFlag;
+  public deleteFlag: boolean =true;
   public selectedState:any;
   modalRef: BsModalRef;
   message: string;
@@ -42,7 +43,7 @@ export class DistrictsComponent implements OnInit {
     this.editable(selectedRow);
   }
   openModal(template: TemplateRef<any>) {
-    //this.resetScheduleForm();
+    this.resetStatesForm();
     this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
@@ -54,10 +55,10 @@ export class DistrictsComponent implements OnInit {
       zone: ['', Validators.required],
     });
     this.districtsForm = this.fb.group({
-      id: [],
-      districtsName: ['', Validators.required],
-      stateId: [],
-      stateName: []
+      districtId: [],
+      districtName: ['', Validators.required],
+      statesId: [],
+      statesName: []
     });
 
     this.loadStatesData();
@@ -70,6 +71,10 @@ export class DistrictsComponent implements OnInit {
     this.masterService.getParentData("states/").subscribe(list => {
       this.statesList = list;
     })
+  }
+
+  onSelectState(event) {
+    this.selectedState = event.item;
   }
 
   loadGridData() {
@@ -85,32 +90,6 @@ export class DistrictsComponent implements OnInit {
        data as object [];
         this.districtsColumns = data["DistrictsColumns"]
     });
-  }
-
-  onSelectState(event) {
-    this.selectedState = event.item;
-  }
-
-  save() {
-    if (this.districtsForm.valid) {
-      if (confirm('Are you sure!!')) {
-        if (this.districtsForm.value.id) {
-          this.masterService.updateRecord('districts/', this.districtsForm.value).subscribe(res => {
-            this.successMsg();
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        } else {
-          this.masterService.createRecord('districts/', this.districtsForm.value).subscribe(res => {
-            this.successMsg();
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        }
-      }
-    } else {
-      this.requiredErrMsg()
-    }
   }
 
   saveState() {
@@ -131,6 +110,34 @@ export class DistrictsComponent implements OnInit {
     }
   }
 
+  resetStatesForm(){
+    this.statesForm.reset();
+  }
+
+  save() {
+    this.formRequiredError = false;
+    if (this.districtsForm.valid && this.selectedState && this.selectedState.id) {
+      if (confirm('Are you sure!!')) {
+        this.districtsForm.value.statesId = this.selectedState.id;
+        if (this.districtsForm.value.districtId) {
+          this.masterService.updateRecord('districts/', this.districtsForm.value).subscribe(res => {
+            this.successMsg();
+          }, (error) => {
+            this.serverErrMsg();
+          });
+        } else {
+          this.masterService.createRecord('districts/', this.districtsForm.value).subscribe(res => {
+            this.successMsg();
+          }, (error) => {
+            this.serverErrMsg();
+          });
+        }
+      }
+    } else {
+      this.requiredErrMsg();
+    }
+  }
+  
   delete() {
     if (confirm('Are you sure!!')) {
       this.masterService.deleteRecord('districts/', this.editDistricts.id).subscribe(res => {
@@ -167,20 +174,24 @@ export class DistrictsComponent implements OnInit {
     this.scFormRequiredError = this.scFormSuccess = false;
   }
   resetForm() {
+    this.loadGridData();
+    this.loadStatesData();
+    this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.districtsForm.reset();
     this.editDistricts = null;
     this.nameFlag = false;
-    this.formRequiredError = this.formServerError = this.formSuccess = false;
-    this.loadGridData();
+    this.deleteFlag = false;     
     this.focusField.nativeElement.focus();
   }
-  resetStatesForm(){
-    this.statesForm.reset();
-  }
+ 
   editable(s) {
     this.editDistricts = s;
     this.districtsForm.reset(s);
-    this.nameFlag = true;
+    this.nameFlag = true;    
+    this.selectedState = {};
+    this.selectedState.id = s.stateId;
+    this.deleteFlag = false;
+    this.districtsForm.reset(s);
   }
 
 }
