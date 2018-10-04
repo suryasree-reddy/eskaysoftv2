@@ -23,9 +23,7 @@ export class AreasComponent implements OnInit {
   public gridColumnNamesList;
   public gridSelectedRow;
   public selectedTypeahead: any;
-public deleteFlag: boolean =true;
-  editSubSchedule: any;
-  scheduleTypes: any;
+  public deleteFlag: boolean =true;
   modalRef: BsModalRef;
   message: string;
 
