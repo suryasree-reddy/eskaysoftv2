@@ -10,8 +10,7 @@ import { Observable } from 'rxjs/Observable';
 export class MasterService {
   public dataObject: Subject<any> = new Subject<any>();
   public resposeArray: any = [];
-
-  //private _localUrl: string = "assets/jsonData/commonData.json"
+  gridDataList: Observable<any[]> = this.dataObject.asObservable().distinctUntilChanged();
   private _localUrl: string = "./assets/jsonData/commonData.json"
 
   constructor(private httpClient: HttpClient) { }
@@ -23,6 +22,11 @@ export class MasterService {
       this.resposeArray = res;
       this.dataObject.next(this.resposeArray);
     })
+  }
+  getDataNew(tragetServiceName): Observable<any> {
+      return this.httpClient.get(tragetServiceName).map(res => {
+          this.dataObject.next(res);
+      });
   }
 
   getParentData(tragetServiceName) {

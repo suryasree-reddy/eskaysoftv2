@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
+import { Observable } from 'rxjs/Observable';
 //import { SynectiksCommonGridComponent } from '../../../commonComponents/synectiks-common-grid/synectiks-common-grid.component';
 
 @Component({
@@ -23,6 +24,7 @@ export class ScheduleComponent implements OnInit {
   public deleteFlag: boolean =true;
   public saveBtnFlag: boolean = false;
   public nameFlag;
+  public gridDataList: Observable<any[]>;
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder, private translate: TranslateService, private masterService: MasterService) {
@@ -47,6 +49,11 @@ export class ScheduleComponent implements OnInit {
   }
 
   loadGridData() {
+
+    this.gridDataList = this.masterService.gridDataList;
+    this.masterService.getDataNew(this.endPoint).subscribe();
+    console.log("New this.gridDataList-", this.gridDataList);
+
     this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
       this.scheduleList = list;
