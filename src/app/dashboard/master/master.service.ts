@@ -16,7 +16,7 @@ export class MasterService {
 
   constructor(private httpClient: HttpClient) { }
 
-  END_POINt = 'http://183.82.119.84:8080/api/v1/';
+  END_POINt = 'http://183.82.119.84:8000/api/v1/';
 
   getData(tragetServiceName) {
     return this.httpClient.get(this.END_POINt + tragetServiceName).subscribe(res => {
