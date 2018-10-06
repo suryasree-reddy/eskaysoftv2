@@ -126,7 +126,7 @@ loadGridColumns(params){
     // if your data is set on the gridOptions,
     //below code for settimeout gridReady get's called before data is bound.
     // so waiting time out for 5 sec
-    setTimeout(this.loadGridColumns(params) => , 5000);
+    setTimeout(this.loadGridColumns(params), 5000);
   }
 
 }
