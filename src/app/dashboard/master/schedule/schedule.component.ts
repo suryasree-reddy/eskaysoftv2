@@ -143,6 +143,7 @@ export class ScheduleComponent implements OnInit {
     this.deleteFlag = true;
     this.duplicateSchIndex=false;
     this.nameFlag = false;
+    this.lastSchIndex;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
