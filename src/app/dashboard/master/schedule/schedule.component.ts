@@ -4,6 +4,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
 import { Observable } from 'rxjs/Observable';
+import * as _ from 'lodash';
+
 //import { SynectiksCommonGridComponent } from '../../../commonComponents/synectiks-common-grid/synectiks-common-grid.component';
 
 @Component({
@@ -50,8 +52,19 @@ export class ScheduleComponent implements OnInit {
   }
 
   validateFormOnBlur() {
-    
-  }
+      this.formRequiredError=false;
+      var schIndex = this.scheduleForm.value.scheduleIndex;
+      if(this.lastSchIndex != schIndex){
+        let duplcateIndex = this.masterService.hasDataExist(this.scheduleList, 'scheduleIndex', schIndex);
+         if (schIndex != "" && duplcateIndex) {
+            this.duplicateSchIndex =true;
+          }else{
+              this.duplicateSchIndex =false;
+          }
+      }else{
+        this.duplicateSchIndex =false;
+      }
+    }
 
   loadGridData() {
 

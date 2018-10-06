@@ -78,10 +78,7 @@ export class AreasComponent implements OnInit {
     this.masterService.getData(this.areaEndPoint);
     this.masterService.dataObject.subscribe(list => {
       this.gridDataList = list;
-      const temp = this.typeaheadDataList;
-      this.gridDataList = _.map(list, function(item) {
-        return _.merge(item, _.find(temp, function(o) { return o.id == item.businessExecutiveId }));
-      });
+      this.gridDataList = this.masterService.mergeObjects(list,this.typeaheadDataList, 'businessExecutiveId', 'id');
       localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
     })
   }
