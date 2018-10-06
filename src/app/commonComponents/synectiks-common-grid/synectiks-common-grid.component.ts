@@ -1,11 +1,8 @@
 import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
-import { Column } from 'ag-grid-community';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-synectiks-common-grid',
-  templateUrl: './synectiks-common-grid.component.html',
-  styleUrls: ['./synectiks-common-grid.component.scss']
+  templateUrl: './synectiks-common-grid.component.html']
 })
 export class SynectiksCommonGridComponent implements OnInit {
 
@@ -108,26 +105,28 @@ export class SynectiksCommonGridComponent implements OnInit {
     }
   }
 
+loadGridColumns(params){
+  const columns = params.columnApi.getAllDisplayedVirtualColumns();
+  /*columns.forEach((column) => {
+    const ele = document.querySelector('div.ag-body-container');
+
+    ele.addEventListener('keydown', (e) => {
+      if (e['key'] === 'Tab') {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    });
+  });*/
+}
+
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();
     // if your data is set on the gridOptions,
     //below code for settimeout gridReady get's called before data is bound.
     // so waiting time out for 5 sec
-    setTimeout(() => {
-      const columns = params.columnApi.getAllDisplayedVirtualColumns();
-      columns.forEach((column) => {
-        const ele = document.querySelector('div.ag-body-container');
-
-        ele.addEventListener('keydown', (e) => {
-          if (e['key'] === 'Tab') {
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
-          }
-        });
-      });
-    }, 5000);
+    setTimeout(this.loadGridColumns(params) => , 5000);
   }
 
 }
