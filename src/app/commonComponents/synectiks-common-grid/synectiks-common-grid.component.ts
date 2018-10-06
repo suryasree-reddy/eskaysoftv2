@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angu
 
 @Component({
   selector: 'app-synectiks-common-grid',
-  templateUrl: './synectiks-common-grid.component.html']
+  templateUrl: './synectiks-common-grid.component.html'
 })
 export class SynectiksCommonGridComponent implements OnInit {
 
