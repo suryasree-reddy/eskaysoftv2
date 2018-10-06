@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { Column } from 'ag-grid-community';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -10,62 +9,40 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class SynectiksCommonGridComponent implements OnInit {
 
-
   @Input() rowSelection;
   @Input() gridDataList: any = [];
   @Input() gridColumnList: any = [];
-  @Input() deleteFlag: boolean = true;
-  @Input() searchBy: string;
-
   @Output() valueChange = new EventEmitter();
 
-  private gridApi;
-  private gridColumnApi;
-
-
-  public selectedRow: any[];
-  //@ViewChild('focus') focusField: ElementRef;
+  private gridApi = null;
+  private gridColumnApi = null;
 
   public componentProvider = {
     deltaIndicator: this.deltaIndicator
   }
 
-  constructor(private fb: FormBuilder, private translate: TranslateService) {
-    translate.setDefaultLang('messages.en');
-  }
+  constructor() { }
 
   ngOnInit() {
-    //  this.searchBy = this.gridColumnList[0].field;
-    //this.focusField.nativeElement.focus();
     this.rowSelection = "single";
+    this.gridColumnList = null;
+    this.gridDataList = null;
   }
 
   deltaIndicator(params) {
     var element = document.createElement("span");
     var imageElement = document.createElement("img");
-
-    // visually indicate if this months value is higher or lower than last months value
     if (params.value) {
       imageElement.src = "assets/images/right.jpg"
     } else {
       imageElement.src = "assets/images/cancel.jpg"
     }
     element.appendChild(imageElement);
-    // element.appendChild(document.createTextNode(params.value));
     return element;
   }
 
   onSelectionChanged() {
-    const selectedRows = this.gridApi.getSelectedRows();
-    this.valueChange.emit(selectedRows[0]);
-  //  localStorage.setItem('ag-activeRow', JSON.stringify(selectedRows[0]));
-    let selectedRowsString = "";
-    selectedRows.forEach(function(selectedRow, index) {
-      if (index !== 0) {
-        selectedRowsString += ", ";
-      }
-      selectedRowsString += selectedRow.scheduleName;
-    });
+    this.valueChange.emit(this.gridApi.getSelectedRows()[0]);
   }
 
   navigateToNextCell(params) {
@@ -85,7 +62,7 @@ export class SynectiksCommonGridComponent implements OnInit {
             let curCell = parseInt(localStorage.getItem('ag-curCell'), 10);
 
             if ('' + curCell === localStorage.getItem('ag-nxtCell')) {
-            //  localStorage.setItem('ag-activeRow', JSON.stringify(node.data));
+              //  localStorage.setItem('ag-activeRow', JSON.stringify(node.data));
               node.setSelected(true);
 
             }
@@ -129,35 +106,28 @@ export class SynectiksCommonGridComponent implements OnInit {
           throw 'ag-grid has gone away';
       }
     }
-
-
-
-  }
-
-  fun() {
-    //this.editable(JSON.parse(localStorage.getItem('ag-activeRow')));
-    //  this.valueChange.emit(selectedRows[0]);
   }
 
   onGridReady(params) {
     this.gridApi = params.api;
-    params.api.sizeColumnsToFit();
+    this.gridApi.sizeColumnsToFit();
+    // if your data is set on the gridOptions,
+    //below code for settimeout gridReady get's called before data is bound.
+    // so waiting time out for 5 sec
+    setTimeout(() => {
+      const columns = params.columnApi.getAllDisplayedVirtualColumns();
+      columns.forEach((column) => {
+        const ele = document.querySelector('div.ag-body-container');
 
-    const columns = params.columnApi.getAllDisplayedVirtualColumns();
-    columns.forEach((column) => {
-      const ele = document.querySelector('div.ag-body-container');
-
-      ele.addEventListener('keydown', (e) => {
-        if (e['key'] === 'Enter') {
-        //  this.fun();
-        }
-        if (e['key'] === 'Tab') {
-          e.preventDefault();
-          e.stopPropagation();
-          return false;
-        }
+        ele.addEventListener('keydown', (e) => {
+          if (e['key'] === 'Tab') {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+        });
       });
-    });
+    }, 5000);
   }
 
 }
