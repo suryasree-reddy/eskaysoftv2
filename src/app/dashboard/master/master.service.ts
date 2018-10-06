@@ -23,8 +23,9 @@ export class MasterService {
       this.dataObject.next(this.resposeArray);
     })
   }
-  getDataNew(tragetServiceName): Observable<any> {
-      return this.httpClient.get(tragetServiceName).map(res => {
+
+  getDataNew(tragetServiceName): Observable<any> { // for future reference
+      return this.httpClient.get(this.END_POINt + tragetServiceName).map(res => {
           this.dataObject.next(res);
       });
   }

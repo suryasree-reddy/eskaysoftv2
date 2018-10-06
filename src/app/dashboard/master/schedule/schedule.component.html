@@ -10,6 +10,9 @@
           <div class="error-text col-xs-12" *ngIf="formRequiredError">
             <p class="text-danger">{{'message.mandatory' | translate }}</p>
           </div>
+          <div class="error-text col-xs-12" *ngIf="duplicateSchIndex">
+            <p class="text-danger">Duplicate Index !!</p>
+          </div>
           <div class="error-text col-xs-12" *ngIf="formServerError">
             <p class="text-danger">{{'message.error' | translate }}</p>
           </div>
@@ -17,16 +20,16 @@
 
         <div class="input-group">
           <p>{{'schedule.name' | translate }}: *</p>
-          <input id="scheduleName" #focus [readonly]="nameFlag"  class="form-control" [formControl]="scheduleForm.controls['scheduleName']">
+          <input id="scheduleName" #focus [readonly]="nameFlag" class="form-control" [formControl]="scheduleForm.controls['scheduleName']">
         </div>
           <div class="input-group">
             <p>{{'schedule.index' | translate }}: *</p>
-            <input id="scheduleIndex" class="form-control" [formControl]="scheduleForm.controls['scheduleIndex']">
+            <input id="scheduleIndex" class="form-control" (blur)="validateFormOnBlur()" [formControl]="scheduleForm.controls['scheduleIndex']">
         </div>
             <div class="input-group">
               <p>{{'schedule.type' | translate }}: *</p>
              <input id="scheduleType" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="code"
-            [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" class="form-control">
+            [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"   class="form-control">
               <span class="caret"></span>
             </div>
 

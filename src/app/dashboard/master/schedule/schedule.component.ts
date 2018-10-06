@@ -22,9 +22,10 @@ export class ScheduleComponent implements OnInit {
   public scheduleListColumns;
   public editSchedule;
   public deleteFlag: boolean =true;
-  public saveBtnFlag: boolean = false;
+  public duplicateSchIndex: boolean = false;
   public nameFlag;
   public gridDataList: Observable<any[]>;
+  public lastSchIndex;
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder, private translate: TranslateService, private masterService: MasterService) {
@@ -48,11 +49,26 @@ export class ScheduleComponent implements OnInit {
     this.getScheduleTypes();
   }
 
+  validateFormOnBlur() {
+    this.formRequiredError=false;
+    var schIndex = this.scheduleForm.value.scheduleIndex;
+    if(this.lastSchIndex != schIndex){
+      var duplcateIndex = _.find(this.scheduleList, function(o) { return o.scheduleIndex == schIndex });
+       if (schIndex != "" && duplcateIndex != undefined) {
+          this.duplicateSchIndex =true;
+        }else{
+            this.duplicateSchIndex =false;
+        }
+    }else{
+      this.duplicateSchIndex =false;
+    }
+  }
+
   loadGridData() {
 
-    this.gridDataList = this.masterService.gridDataList;
-    this.masterService.getDataNew(this.endPoint).subscribe();
-    console.log("New this.gridDataList-", this.gridDataList);
+  //  this.gridDataList = this.masterService.gridDataList;
+  //  this.masterService.getDataNew(this.endPoint).subscribe();
+  //  console.log("New this.gridDataList-", this.gridDataList);
 
     this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
@@ -70,7 +86,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   save() {
-    if (this.scheduleForm.valid) {
+    if (this.scheduleForm.valid && !this.duplicateSchIndex) {
       if (confirm('Are you sure!!')) {
         if (this.scheduleForm.value.id) {
           this.masterService.updateRecord(this.endPoint, this.scheduleForm.value).subscribe(res => {
@@ -109,8 +125,11 @@ export class ScheduleComponent implements OnInit {
   }
 
   requiredErrMsg() {
-    this.formRequiredError = true;
-    this.formSuccess = this.formServerError = false;
+    if(!this.duplicateSchIndex ){
+      this.formRequiredError = true;
+      this.formSuccess = this.formServerError = false;
+    }
+
   }
 
   serverErrMsg() {
@@ -122,6 +141,7 @@ export class ScheduleComponent implements OnInit {
     this.scheduleForm.reset();
     this.editSchedule = null;
     this.deleteFlag = true;
+    this.duplicateSchIndex=false;
     this.nameFlag = false;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
@@ -131,7 +151,9 @@ export class ScheduleComponent implements OnInit {
   editable(s) {
     this.editSchedule = s;
     this.scheduleForm.reset(s);
+    this.lastSchIndex = this.editSchedule.scheduleIndex;
     this.deleteFlag = !this.editSchedule.deleteFlag;
+      this.duplicateSchIndex=false;
     this.nameFlag = true;
   }
 
