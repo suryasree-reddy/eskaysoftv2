@@ -13,6 +13,9 @@
             <div class="error-text col-xs-12" *ngIf="formServerError">
               <p class="text-danger">{{'message.error' | translate }}</p>
             </div>
+            <div class="error-text col-xs-12" *ngIf="isduplicate">
+              <p class="text-danger">Duplicate Recod Exits.</p>
+            </div>
           </div>
   
           <div class="input-group">

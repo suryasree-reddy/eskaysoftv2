@@ -50,18 +50,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   validateFormOnBlur() {
-    this.formRequiredError=false;
-    var schIndex = this.scheduleForm.value.scheduleIndex;
-    if(this.lastSchIndex != schIndex){
-      var duplcateIndex = _.find(this.scheduleList, function(o) { return o.scheduleIndex == schIndex });
-       if (schIndex != "" && duplcateIndex != undefined) {
-          this.duplicateSchIndex =true;
-        }else{
-            this.duplicateSchIndex =false;
-        }
-    }else{
-      this.duplicateSchIndex =false;
-    }
+    
   }
 
   loadGridData() {

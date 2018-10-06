@@ -18,8 +18,9 @@
   ],
   "StateListColumns": [
     { "headerName": "State Name", "field": "stateName" },
-    { "headerName": "State Code", "field": "stateCode", "filter": "agNumberColumnFilter",  "width": 80 },
-    { "headerName": "Zone", "field": "zone",  "width": 100 }
+    { "headerName": "State Code", "field": "stateCode", "filter": "agNumberColumnFilter",  "width": 60 },
+    { "headerName": "Zone", "field": "zone",  "width": 70 },
+    { "headerName": "Status", "field": "deleteFlag", "cellRenderer": "deltaIndicator", "suppressFilter": true, "width": 50 }
   ],
   "DistrictsColumns": [
     { "headerName": "District Name", "field": "districtName" },
@@ -29,7 +30,8 @@
     { "headerName": "Name", "field": "name" },
     { "headerName": "Address", "field": "address" },
     { "headerName": "Town", "field": "town" },
-    { "headerName": "Mobile", "field": "mobile" }
+    { "headerName": "Mobile", "field": "mobile" },
+    { "headerName": "Status", "field": "deleteFlag", "cellRenderer": "deltaIndicator", "suppressFilter": true, "width": 50 }
   ],
   "BankInformationColumns": [
     { "headerName": "Name", "field": "name" },
@@ -39,7 +41,8 @@
     { "headerName": "Manfacturer Name", "field": "manfacturerName" }
   ],
   "CompanyGroupColumns": [
-    { "headerName": "Company Group", "field": "companyGroup" }
+    { "headerName": "Company Group", "field": "companyGroup" },
+    { "headerName": "Status", "field": "deleteFlag", "cellRenderer": "deltaIndicator", "suppressFilter": true, "width": 50 }
   ],
   "AreaColumns": [
     { "headerName": "Area Name", "field": "areaName" },

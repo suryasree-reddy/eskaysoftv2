@@ -15,6 +15,7 @@ export class DistrictsComponent implements OnInit {
   public districtsForm: FormGroup;
   public statesForm: FormGroup;
   public formSuccess: boolean = false;
+  public isduplicate: boolean = false;
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public scFormRequiredError: boolean = false;
@@ -99,7 +100,7 @@ export class DistrictsComponent implements OnInit {
         this.masterService.createRecord("states/", this.statesForm.value).subscribe(res => {
             this.modalRef.hide();
           this.statesForm.reset();
-
+          this.loadStatesData();
         }, (error) => {
           this.scServerErrMsg();
         });
@@ -113,34 +114,45 @@ export class DistrictsComponent implements OnInit {
   resetStatesForm(){
     this.statesForm.reset();
   }
-
+  
+  verifyNameDuplicates():boolean{
+    let distNmaeList = this.districtsList.map((item)=>{return item.districtName});
+    console.log(distNmaeList);
+    return distNmaeList.some((element)=>{
+      return element.toLowerCase() === this.districtsForm.value.districtName.toLowerCase();
+    });
+  }
   save() {
     this.formRequiredError = false;
-    if (this.districtsForm.valid && this.selectedState && this.selectedState.id) {
-      if (confirm('Are you sure!!')) {
-        this.districtsForm.value.statesId = this.selectedState.id;
-        if (this.districtsForm.value.districtId) {
-          this.masterService.updateRecord('districts/', this.districtsForm.value).subscribe(res => {
-            this.successMsg();
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        } else {
-          this.masterService.createRecord('districts/', this.districtsForm.value).subscribe(res => {
-            this.successMsg();
-          }, (error) => {
-            this.serverErrMsg();
-          });
+    if(!this.verifyNameDuplicates()){
+      if (this.districtsForm.valid && this.selectedState && this.selectedState.id ) {
+        if (confirm('Are you sure!!')) {
+          this.districtsForm.value.statesId = this.selectedState.id;
+          if (this.districtsForm.value.districtId) {
+            this.masterService.updateRecord('districts/', this.districtsForm.value).subscribe(res => {
+              this.successMsg();
+            }, (error) => {
+              this.serverErrMsg();
+            });
+          } else {
+            this.masterService.createRecord('districts/', this.districtsForm.value).subscribe(res => {
+              this.successMsg();
+            }, (error) => {
+              this.serverErrMsg();
+            });
+          }
         }
-      }
-    } else {
-      this.requiredErrMsg();
+      } else {
+        this.requiredErrMsg();
+      }      
+    } else{
+      this.duplicateMsg();
     }
   }
   
   delete() {
     if (confirm('Are you sure!!')) {
-      this.masterService.deleteRecord('districts/', this.editDistricts.id).subscribe(res => {
+      this.masterService.deleteRecord('districts/', this.editDistricts.districtId).subscribe(res => {
         localStorage.removeItem('ag-activeRow');
         this.successMsg()
       }, (error) => {
@@ -151,32 +163,37 @@ export class DistrictsComponent implements OnInit {
 
   successMsg() {
     this.formSuccess = true;
-    this.formRequiredError = this.formServerError = false;
+    this.formRequiredError = this.formServerError = this.isduplicate = false;
     this.resetForm();
+  }
+
+  duplicateMsg() {
+    this.isduplicate = true;
+    this.formRequiredError = this.formServerError =this.formSuccess = false;    
   }
 
   requiredErrMsg() {
     this.formRequiredError = true;
-    this.formSuccess = this.formServerError = false;
+    this.formSuccess = this.formServerError = this.isduplicate = false;
   }
 
   serverErrMsg() {
     this.formServerError = true;
-    this.formRequiredError = this.formSuccess = false;
+    this.formRequiredError = this.formSuccess = this.isduplicate = false;
   }
   scRequiredErrMsg() {
     this.scFormRequiredError = true;
-    this.scFormSuccess = this.scFormServerError = false;
+    this.scFormSuccess = this.scFormServerError = this.isduplicate = false;
   }
 
   scServerErrMsg() {
     this.scFormServerError = true;
-    this.scFormRequiredError = this.scFormSuccess = false;
+    this.scFormRequiredError = this.scFormSuccess = this.isduplicate = false;
   }
   resetForm() {
     this.loadGridData();
     this.loadStatesData();
-    this.formRequiredError = this.formServerError = this.formSuccess = false;
+    this.formRequiredError = this.formServerError = this.formSuccess = this.isduplicate = false;
     this.districtsForm.reset();
     this.editDistricts = null;
     this.nameFlag = false;
