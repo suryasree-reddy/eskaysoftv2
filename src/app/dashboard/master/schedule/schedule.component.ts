@@ -150,6 +150,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   editable(s) {
+    this.formRequiredError=false;
     this.editSchedule = s;
     this.scheduleForm.reset(s);
     this.lastSchIndex = this.editSchedule.scheduleIndex;

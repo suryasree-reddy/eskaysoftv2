@@ -13,7 +13,7 @@
   ],
   "SubScheduleListColumns": [
     { "headerName": "Sub-Schedule Name", "field": "subScheduleName" },
-    { "headerName": "Schedule Id", "field": "scheduleId", "filter": "agNumberColumnFilter",  "width": 80 },
+    { "headerName": "Schedule Name", "field": "scheduleName", "filter": "agNumberColumnFilter",  "width": 80 },
     { "headerName": "Sub-Schedule Index", "field": "subScheduleIndex", "filter": "agNumberColumnFilter",  "width": 100 }
   ],
   "StateListColumns": [
