@@ -62,4 +62,15 @@ export class MasterService {
     });
 
   }
+
+  verifyDuplicates(valList, val, isString:boolean):boolean{   
+    return valList.some((element)=>{
+      if(isString){
+        return element.toLowerCase() === val.toLowerCase();
+      }else {
+        return element === val;
+      }
+      
+    });
+  }
 }

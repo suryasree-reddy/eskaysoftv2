@@ -16,6 +16,7 @@ export class DistrictsComponent implements OnInit {
   public statesForm: FormGroup;
   public formSuccess: boolean = false;
   public isduplicate: boolean = false;
+  public isStateduplicate: boolean = false;
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public scFormRequiredError: boolean = false;
@@ -94,37 +95,45 @@ export class DistrictsComponent implements OnInit {
   }
 
   saveState() {
-    if (confirm('Are you sure!!')) {
+    if(!this.verifyStatesDuplicates()){
+      if (confirm('Are you sure!!')) {
+        if (this.statesForm.valid) {
+          this.masterService.createRecord("states/", this.statesForm.value).subscribe(res => {
+              this.modalRef.hide();
+            this.statesForm.reset();
+            this.loadStatesData();
+          }, (error) => {
+            this.scServerErrMsg();
+          });
 
-      if (this.statesForm.valid) {
-        this.masterService.createRecord("states/", this.statesForm.value).subscribe(res => {
-            this.modalRef.hide();
-          this.statesForm.reset();
-          this.loadStatesData();
-        }, (error) => {
-          this.scServerErrMsg();
-        });
-
-      } else {
-        this.scRequiredErrMsg();
+        } else {
+          this.scRequiredErrMsg();
+        }
       }
+    }else{
+      this.scDuplicateMsg();
     }
   }
 
-  resetStatesForm(){
-    this.statesForm.reset();
+ 
+  verifyStatesDuplicates(){
+    let stateNameList = this.statesList.map((item)=>{return item.stateName});
+    let isDuplicate = this.masterService.verifyDuplicates(stateNameList, this.statesForm.value.stateName, true);
+    if(!isDuplicate){
+      let stateNameList = this.statesList.map((item)=>{return item.stateCode});
+      isDuplicate = this.masterService.verifyDuplicates(stateNameList, parseInt(this.statesForm.value.stateCode), false);
+    }
+    return isDuplicate;    
   }
-  
-  verifyNameDuplicates():boolean{
-    let distNmaeList = this.districtsList.map((item)=>{return item.districtName});
-    console.log(distNmaeList);
-    return distNmaeList.some((element)=>{
-      return element.toLowerCase() === this.districtsForm.value.districtName.toLowerCase();
-    });
+
+  verifyDistDuplicates(){
+    let distNameList = this.districtsList.map((item)=>{return item.districtName});
+    return this.masterService.verifyDuplicates(distNameList, this.districtsForm.value.districtName, true);      
   }
+
   save() {
     this.formRequiredError = false;
-    if(!this.verifyNameDuplicates()){
+    if(!this.verifyDistDuplicates()){
       if (this.districtsForm.valid && this.selectedState && this.selectedState.id ) {
         if (confirm('Are you sure!!')) {
           this.districtsForm.value.statesId = this.selectedState.id;
@@ -179,16 +188,21 @@ export class DistrictsComponent implements OnInit {
 
   serverErrMsg() {
     this.formServerError = true;
-    this.formRequiredError = this.formSuccess = this.isduplicate = false;
+    this.formRequiredError = this.formSuccess = this.isStateduplicate = false;
   }
   scRequiredErrMsg() {
     this.scFormRequiredError = true;
-    this.scFormSuccess = this.scFormServerError = this.isduplicate = false;
+    this.scFormSuccess = this.scFormServerError = this.isStateduplicate = false;
+  }
+
+  scDuplicateMsg() {
+    this.isStateduplicate = true;
+    this.scFormRequiredError = this.scFormSuccess = this.scFormServerError = false;
   }
 
   scServerErrMsg() {
     this.scFormServerError = true;
-    this.scFormRequiredError = this.scFormSuccess = this.isduplicate = false;
+    this.scFormRequiredError = this.scFormSuccess = this.isStateduplicate = false;
   }
   resetForm() {
     this.loadGridData();
@@ -199,6 +213,11 @@ export class DistrictsComponent implements OnInit {
     this.nameFlag = false;
     this.deleteFlag = false;     
     this.focusField.nativeElement.focus();
+  }
+
+  resetStatesForm(){
+    this.scFormServerError = this.scFormRequiredError = this.scFormSuccess = this.isStateduplicate = false;
+    this.statesForm.reset();
   }
  
   editable(s) {

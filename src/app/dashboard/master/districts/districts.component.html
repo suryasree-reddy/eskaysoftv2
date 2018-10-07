@@ -63,6 +63,9 @@
           <div class="error-text col-xs-12" *ngIf="scFormServerError">
             <p class="text-danger">Could not save. Try again later!!</p>
           </div>
+          <div class="error-text col-xs-12" *ngIf="isStateduplicate">
+            <p class="text-danger">Duplicate Recod Exits.</p>
+          </div>
         </div>
   
         <div class="input-group">
