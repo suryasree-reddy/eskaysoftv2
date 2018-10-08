@@ -13,9 +13,10 @@
         <span class="glyphicon glyphicon-cog"></span>Settings
       </button>
       <ul id="dropdownMaster" (mouseenter) ="dropdown1.isOpen=true"  (mouseleave) ="dropdown1.isOpen=false" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-        <li role="menuitem"><a class="dropdown-item" [routerLink]="['']">User Profile</a></li>
+        <li role="menuitem"><a class="dropdown-item" [routerLink]="['admin/userProfile']">User Profile</a></li>
         <li role="menuitem"><a class="dropdown-item" [routerLink]="['']">Create User</a></li>
-        <li role="menuitem"><a class="dropdown-item" [routerLink]="['']">Update User</a></li>              
+        <li role="menuitem"><a class="dropdown-item" [routerLink]="['']">Update User</a></li>
+        <li role="menuitem"><a class="dropdown-item" [routerLink]="['']">Change Password</a></li>                            
       </ul>
     </div>
 </span>
