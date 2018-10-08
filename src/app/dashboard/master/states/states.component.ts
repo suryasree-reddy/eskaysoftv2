@@ -18,6 +18,7 @@ export class StatesComponent implements OnInit {
   public statesListColumns;
   public editStates;
   public deleteFlag: boolean =true;
+  public saveBtnFlag: boolean =false;
   public nameFlag;
 
 
@@ -113,6 +114,7 @@ export class StatesComponent implements OnInit {
     this.statesForm.reset();
     this.editStates = null;
     this.deleteFlag = true;
+    this.saveBtnFlag = false;
     this.nameFlag = false;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
@@ -122,7 +124,7 @@ export class StatesComponent implements OnInit {
   editable(s) {
     this.editStates = s;
     this.statesForm.reset(s);
-    this.deleteFlag = !this.editStates.deleteFlag;
+    this.saveBtnFlag = this.deleteFlag = !this.editStates.deleteFlag;
     this.nameFlag = true;
   }
 }

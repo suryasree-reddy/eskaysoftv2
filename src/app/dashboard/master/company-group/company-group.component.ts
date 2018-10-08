@@ -20,6 +20,8 @@ export class CompanyGroupComponent implements OnInit {
     public formServerError: boolean = false;
     public nameFlag;
     public deleteFlag: boolean =true;
+    public saveBtnFlag: boolean =false;
+
     @ViewChild('focus') focusField: ElementRef;
 
     constructor(private fb: FormBuilder, private translate: TranslateService, private masterService: MasterService) {
@@ -109,6 +111,8 @@ export class CompanyGroupComponent implements OnInit {
       this.gridSelectedRow = null;
       this.nameFlag = false;
       this.deleteFlag = true;
+      this.saveBtnFlag = false;
+
       this.formRequiredError = this.formServerError = this.formSuccess = false;
       this.loadGridData();
       this.focusField.nativeElement.focus();
@@ -119,6 +123,7 @@ export class CompanyGroupComponent implements OnInit {
       this.companyGroupForm.reset(s);
       this.nameFlag = true;
       this.deleteFlag = false;
+        this.saveBtnFlag = this.deleteFlag = !this.gridSelectedRow.deleteFlag;
     }
 
 }

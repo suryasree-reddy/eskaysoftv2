@@ -14,7 +14,7 @@
               <p class="text-danger">{{'message.error' | translate }}</p>
             </div>
           </div>
-  
+
             <div class="input-group">
               <p>State Name: *</p>
               <input id="stateName" #focus [readonly]="nameFlag" class="form-control" [formControl]="statesForm.controls['stateName']">
@@ -27,22 +27,21 @@
                 <p>Zone: *</p>
                 <input id="zone"  class="form-control" [formControl]="statesForm.controls['zone']">
               </div>
-            
+
               <div class="input-group">
                 <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
-                <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
+                <button type="submit" [disabled]="saveBtnFlag" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
                 <button type="button" [disabled]="deleteFlag" (click)="delete()" class="btn btn-danger float-right">{{'button.delete' | translate }}</button>
               </div>
         </form>
       </div>
-  
+
       <div class="col-md-7">
         <br /><br />
-  
+
         <app-synectiks-common-grid [gridDataList]="statesList" (valueChange)='valueChange($event)' [gridColumnList]="statesListColumns"></app-synectiks-common-grid>
       </div>
-  
+
     </div>
-  
+
   </div>
-  
