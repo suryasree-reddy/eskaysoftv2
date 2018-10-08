@@ -5,6 +5,9 @@ import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
 import { Observable } from 'rxjs/Observable';
 import * as _ from 'lodash';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 
 //import { SynectiksCommonGridComponent } from '../../../commonComponents/synectiks-common-grid/synectiks-common-grid.component';
 
@@ -24,13 +27,17 @@ export class ScheduleComponent implements OnInit {
   public scheduleListColumns;
   public editSchedule;
   public deleteFlag: boolean =true;
+  public saveBtnFlag: boolean =false;
   public duplicateSchIndex: boolean = false;
   public nameFlag;
   public gridDataList: Observable<any[]>;
   public lastSchIndex;
+  modalRef: BsModalRef;
   @ViewChild('focus') focusField: ElementRef;
+  private saveConfirmationMessage:string = "Are you sure you want to save Schedule?";
+  private deleteConfirmationMessage:string = "Are you sure you want to delete Schedule?";
 
-  constructor(private fb: FormBuilder, private translate: TranslateService, private masterService: MasterService) {
+  constructor(private fb: FormBuilder, private modalService: BsModalService, private translate: TranslateService, private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
 
@@ -87,38 +94,72 @@ export class ScheduleComponent implements OnInit {
     });
   }
 
-  save() {
+validateFormOnSave():boolean{
+  if (this.scheduleForm.valid && !this.duplicateSchIndex) {
+    return true;
+  }else {
+    this.requiredErrMsg();
+      return false;
+  }
+}
+
+  save(){
+    if (this.scheduleForm.value.id) {
+      this.masterService.updateRecord(this.endPoint, this.scheduleForm.value).subscribe(res => {
+        this.successMsg();
+      }, (error) => {
+        this.serverErrMsg();
+      });
+    } else {
+      this.masterService.createRecord(this.endPoint, this.scheduleForm.value).subscribe(res => {
+        this.successMsg();
+      }, (error) => {
+        this.serverErrMsg();
+      });
+    }
+  }
+
+  saveForm() {
     if (this.scheduleForm.valid && !this.duplicateSchIndex) {
-      if (confirm('Are you sure!!')) {
-        if (this.scheduleForm.value.id) {
-          this.masterService.updateRecord(this.endPoint, this.scheduleForm.value).subscribe(res => {
-            this.successMsg();
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        } else {
-          this.masterService.createRecord(this.endPoint, this.scheduleForm.value).subscribe(res => {
-            this.successMsg();
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        }
-      }
+      this.showConfirmationModal('Save');
     } else {
       this.requiredErrMsg()
     }
   }
 
   delete() {
-    if (confirm('Are you sure!!')) {
       this.masterService.deleteRecord(this.endPoint, this.editSchedule.id).subscribe(res => {
         localStorage.removeItem('ag-activeRow');
         this.successMsg()
       }, (error) => {
         this.serverErrMsg();
       });
-    }
+
   }
+
+  showConfirmationModal(eventType): boolean {
+    var msg;
+      if(eventType === "Delete"){
+        msg =this.deleteConfirmationMessage;
+      }else{
+        msg =this.saveConfirmationMessage;
+      }
+       const modal = this.modalService.show(ConfirmationModelDialogComponent);
+       (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
+           'Schedule',
+           msg
+       );
+
+       (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
+          if (result) {
+             if(eventType === "Delete"){
+               this.delete();
+             }else{
+               this.save();
+             }
+          }
+       });
+   }
 
   successMsg() {
     this.formSuccess = true;
@@ -143,6 +184,7 @@ export class ScheduleComponent implements OnInit {
     this.scheduleForm.reset();
     this.editSchedule = null;
     this.deleteFlag = true;
+    this.saveBtnFlag = false;
     this.duplicateSchIndex=false;
     this.nameFlag = false;
     this.lastSchIndex;
@@ -156,8 +198,8 @@ export class ScheduleComponent implements OnInit {
     this.editSchedule = s;
     this.scheduleForm.reset(s);
     this.lastSchIndex = this.editSchedule.scheduleIndex;
-    this.deleteFlag = !this.editSchedule.deleteFlag;
-      this.duplicateSchIndex=false;
+    this.saveBtnFlag = this.deleteFlag = !this.editSchedule.deleteFlag;
+    this.duplicateSchIndex=false;
     this.nameFlag = true;
   }
 

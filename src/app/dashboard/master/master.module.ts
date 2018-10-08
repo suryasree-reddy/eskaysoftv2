@@ -14,6 +14,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 
 import { SynectiksCommonGridComponent } from '../../commonComponents/synectiks-common-grid/synectiks-common-grid.component';
+import { ConfirmationModelDialogComponent } from '../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
+
 import { StatesComponent } from './states/states.component';
 import { DistrictsComponent } from './districts/districts.component';
 import { AreasComponent } from './areas/areas.component';
@@ -40,7 +42,7 @@ import { PurchaseComponent } from './purchase/purchase.component';
     AgGridModule,
     BsDropdownModule,
     FormsModule,
-    ModalModule,
+    ModalModule.forRoot(),
     HttpClientModule,
         TranslateModule.forRoot({
             loader: {
@@ -54,7 +56,8 @@ import { PurchaseComponent } from './purchase/purchase.component';
     NgModel,
     FormsModule
   ],
-  declarations: [ScheduleComponent, SubscheduleComponent, SynectiksCommonGridComponent, StatesComponent, DistrictsComponent, AreasComponent, BusinessexecutivesComponent, BankinformationComponent, ManufacturerComponent, CompanyGroupComponent, CompaniesComponent, ProductGroupComponent, ProductCategoryComponent, ProductComponent, AccountsInfoComponent, AccountsOpeningsComponent, ContactComponent, CustomerwiseDiscountComponent, PurchaseComponent]
+  declarations: [ScheduleComponent, SubscheduleComponent, ConfirmationModelDialogComponent, SynectiksCommonGridComponent, StatesComponent, DistrictsComponent, AreasComponent, BusinessexecutivesComponent, BankinformationComponent, ManufacturerComponent, CompanyGroupComponent, CompaniesComponent, ProductGroupComponent, ProductCategoryComponent, ProductComponent, AccountsInfoComponent, AccountsOpeningsComponent, ContactComponent, CustomerwiseDiscountComponent, PurchaseComponent]
+  entryComponents: [ ConfirmationModelDialogComponent ]
 })
 export class MasterModule { }
 export function HttpLoaderFactory(http: HttpClient) {

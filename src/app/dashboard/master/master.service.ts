@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { ConfirmationModelDialogComponent } from '../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
 
 @Injectable({
@@ -14,7 +17,7 @@ export class MasterService {
   gridDataList: Observable<any[]> = this.dataObject.asObservable().distinctUntilChanged();
   private _localUrl: string = "./assets/jsonData/commonData.json"
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private modalService: BsModalService) { }
 
   END_POINt = 'http://183.82.119.84:8000/api/v1/';
 
@@ -63,14 +66,36 @@ export class MasterService {
 
   }
 
-  verifyDuplicates(valList, val, isString:boolean):boolean{   
+  verifyDuplicates(valList, val, isString:boolean):boolean{
     return valList.some((element)=>{
       if(isString){
         return element.toLowerCase() === val.toLowerCase();
       }else {
         return element === val;
       }
-      
+
     });
   }
+
+  /*showConfirmationModal(): boolean {
+       const modal = this.modalService.show(ConfirmationModelDialogComponent);
+       (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
+           'Title of modal',
+           'Body text'
+       );
+
+      return (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
+          if (result === true) {
+              // when pressed Yes
+            if(eventType == 'Delete'){
+              this.delete();
+            }else {
+              this.save();
+            }
+          } else {
+            console.log("elsee");
+            return;
+          }
+      });
+   }*/
 }
