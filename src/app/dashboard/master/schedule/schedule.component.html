@@ -10,8 +10,8 @@
           <div class="error-text col-xs-12" *ngIf="formRequiredError">
             <p class="text-danger">{{'message.mandatory' | translate }}</p>
           </div>
-          <div class="error-text col-xs-12" *ngIf="duplicateSchIndex">
-            <p class="text-danger">Duplicate Index !!</p>
+          <div class="error-text col-xs-12" *ngIf="duplicateMessage != null">
+            <p class="text-danger" [textContent]="duplicateMessage"></p>
           </div>
           <div class="error-text col-xs-12" *ngIf="formServerError">
             <p class="text-danger">{{'message.error' | translate }}</p>
@@ -20,7 +20,7 @@
 
         <div class="input-group">
           <p>{{'schedule.name' | translate }}: *</p>
-          <input id="scheduleName" #focus [readonly]="nameFlag" class="form-control" [formControl]="scheduleForm.controls['scheduleName']">
+          <input id="scheduleName" #focus [readonly]="nameFlag" (blur)="checkForDuplicateScheduleName()"class="form-control" [formControl]="scheduleForm.controls['scheduleName']">
         </div>
           <div class="input-group">
             <p>{{'schedule.index' | translate }}: *</p>

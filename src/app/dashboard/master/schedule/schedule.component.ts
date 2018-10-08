@@ -28,11 +28,13 @@ export class ScheduleComponent implements OnInit {
   public editSchedule;
   public deleteFlag: boolean =true;
   public saveBtnFlag: boolean =false;
-  public duplicateSchIndex: boolean = false;
+  public duplicateMessage: string = null;
   public nameFlag;
   public gridDataList: Observable<any[]>;
   public lastSchIndex;
   modalRef: BsModalRef;
+  private duplicateSchName: boolean= false;
+  private duplicateSchIndex: boolean= false;
   @ViewChild('focus') focusField: ElementRef;
   private saveConfirmationMessage:string = "Are you sure you want to save Schedule?";
   private deleteConfirmationMessage:string = "Are you sure you want to delete Schedule?";
@@ -64,15 +66,27 @@ export class ScheduleComponent implements OnInit {
       this.formRequiredError=false;
       var schIndex = this.scheduleForm.value.scheduleIndex;
       if(this.lastSchIndex != schIndex){
-        let duplcateIndex = this.masterService.hasDataExist(this.scheduleList, 'scheduleIndex', schIndex);
-         if (schIndex != "" && duplcateIndex) {
-            this.duplicateSchIndex =true;
-          }else{
-              this.duplicateSchIndex =false;
-          }
-      }else{
-        this.duplicateSchIndex =false;
+        this.duplicateSchIndex = this.masterService.hasDataExist(this.scheduleList, 'scheduleIndex', schIndex);
+        this.getDuplicateErrorMessages();
       }
+    }
+
+getDuplicateErrorMessages(): void{
+  this.duplicateMessage= null;
+  if(this.duplicateSchName && this.duplicateSchIndex){
+    this.duplicateMessage = "The Schedule Name & Schedule Index already exists.";
+  }else if(this.duplicateSchIndex){
+    this.duplicateMessage = "The Schedule Index "+this.scheduleForm.value.scheduleIndex+" already exists.";
+  } else if(this.duplicateSchName){
+    this.duplicateMessage = "The Schedule Name "+this.scheduleForm.value.scheduleName+" already exists.";
+  }
+}
+
+    checkForDuplicateScheduleName(){
+      this.duplicateSchName = this.masterService.hasDataExist(this.scheduleList, 'scheduleName', this.scheduleForm.value.scheduleName);
+        this.getDuplicateErrorMessages();
+
+
     }
 
   loadGridData() {
@@ -97,7 +111,7 @@ export class ScheduleComponent implements OnInit {
   }
 
 validateFormOnSave():boolean{
-  if (this.scheduleForm.valid && !this.duplicateSchIndex) {
+  if (this.scheduleForm.valid &&  this.duplicateMessage ==null) {
     return true;
   }else {
     this.requiredErrMsg();
@@ -122,7 +136,7 @@ validateFormOnSave():boolean{
   }
 
   saveForm() {
-    if (this.scheduleForm.valid && !this.duplicateSchIndex) {
+    if (this.scheduleForm.valid && this.duplicateMessage ==null) {
       this.showConfirmationModal('Save');
     //    this.masterService.showConfirmationModal();
     } else {
@@ -188,7 +202,7 @@ showInformationModal(eventType){
   }
 
   requiredErrMsg() {
-    if(!this.duplicateSchIndex ){
+    if(this.duplicateMessage ==null){
       this.formRequiredError = true;
       this.formSuccess = this.formServerError = false;
     }
@@ -205,7 +219,7 @@ showInformationModal(eventType){
     this.editSchedule = null;
     this.deleteFlag = true;
     this.saveBtnFlag = false;
-    this.duplicateSchIndex=false;
+    this.duplicateMessage =null;
     this.nameFlag = false;
     this.lastSchIndex;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
@@ -219,7 +233,7 @@ showInformationModal(eventType){
     this.scheduleForm.reset(s);
     this.lastSchIndex = this.editSchedule.scheduleIndex;
     this.saveBtnFlag = this.deleteFlag = !this.editSchedule.deleteFlag;
-    this.duplicateSchIndex=false;
+    this.duplicateMessage =null;
     this.nameFlag = true;
   }
 

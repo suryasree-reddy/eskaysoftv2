@@ -56,7 +56,13 @@ export class MasterService {
   }
 
   hasDataExist(listObj, key, value): boolean {
-    return _.find(listObj, function(o) { return _.get(o, key) == value }) != undefined;
+    if(_.isString(value)){
+          return _.find(listObj, function(o) { return _.get(o, key).toLowerCase() == value.toLowerCase() }) != undefined;
+      }
+      else{
+          return _.find(listObj, function(o) { return _.get(o, key) == value }) != undefined;
+      }
+
   }
 
   mergeObjects(arr1, arr2, key1, key2): any[]{
@@ -67,7 +73,6 @@ export class MasterService {
   }
 
   verifyDuplicates(valList, val, isString:boolean):boolean{
-    return valList.some((element)=>{
       if(isString){
         return element.toLowerCase() === val.toLowerCase();
       }else {
