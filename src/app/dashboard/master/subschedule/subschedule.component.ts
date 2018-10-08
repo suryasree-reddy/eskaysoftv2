@@ -106,7 +106,7 @@ export class SubscheduleComponent implements OnInit {
   }
 
   saveSchedule() {
-    if (this.scheduleForm.valid) {
+    if (this.scheduleForm.valid && this.duplicateMessage == null) {
       this.showConfirmationModal("SaveSchedule");
     } else {
       this.scRequiredErrMsg();
@@ -115,9 +115,10 @@ export class SubscheduleComponent implements OnInit {
 
   saveScheduleForm() {
     this.masterService.createRecord("schedules/", this.scheduleForm.value).subscribe(res => {
+
+      this.showInformationModal("SaveSchedule");
       this.modalRef.hide();
       this.scheduleForm.reset();
-      this.showInformationModal("Save");
     }, (error) => {
       this.scServerErrMsg();
     });
@@ -205,8 +206,10 @@ export class SubscheduleComponent implements OnInit {
   }
 
   scRequiredErrMsg() {
-    this.scFormRequiredError = true;
-    this.scFormSuccess = this.scFormServerError = false;
+    if (this.duplicateMessage == null) {
+      this.scFormRequiredError = true;
+      this.scFormSuccess = this.scFormServerError = false;
+    }
   }
 
   scServerErrMsg() {
@@ -240,14 +243,20 @@ export class SubscheduleComponent implements OnInit {
 
   showInformationModal(eventType) {
     var msg;
+    var title;
     if (eventType === "Delete") {
       msg = 'subschedule.deleteInformationMessage';
-    } else {
+      title = 'Sub-Schedule';
+    } else if (eventType === "SaveSchedule") {
+      title = 'Schedule';
+      msg = 'schedule.saveInformationMessage';
+    }else {
+      title = 'Sub-Schedule';
       msg = 'subschedule.saveInformationMessage';
     }
     const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
-      'Sub-Schedule',
+      title,
       msg,
       ''
     );
@@ -256,14 +265,20 @@ export class SubscheduleComponent implements OnInit {
 
   showConfirmationModal(eventType): void {
     var msg;
+    var title;
     if (eventType === "Delete") {
+      title = 'Sub-Schedule';
       msg = 'subschedule.deleteConfirmationMessage';
-    } else {
+    } else if (eventType === "SaveSchedule") {
+      title = 'Schedule';
+      msg = 'schedule.saveConfirmationMessage';
+    }else {
+      title = 'Sub-Schedule';
       msg = 'subschedule.saveConfirmationMessage';
     }
     const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
-      'Sub-Schedule',
+      title,
       msg,
       'green',
       ''
