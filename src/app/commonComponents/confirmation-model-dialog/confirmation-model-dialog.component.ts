@@ -4,8 +4,7 @@ import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-confirmation-model-dialog',
-  templateUrl: './confirmation-model-dialog.component.html',
-  styleUrls: ['./confirmation-model-dialog.component.scss']
+  templateUrl: './confirmation-model-dialog.component.html'
 })
 
 
@@ -24,7 +23,7 @@ export class ConfirmationModelDialogComponent   implements OnInit {
         this.onClose = new Subject();
     }
 
-    public showConfirmationModal(title: string, body: string): void {
+    public showConfirmationModal(title: string, body: string, color:string): void {
         this.title = title;
         this.body =  body;
         this.active = true;
