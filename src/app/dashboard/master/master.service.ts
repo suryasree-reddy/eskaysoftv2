@@ -62,17 +62,16 @@ export class MasterService {
       else{
           return _.find(listObj, function(o) { return _.get(o, key) == value }) != undefined;
       }
-
   }
 
   mergeObjects(arr1, arr2, key1, key2): any[]{
     return  _.map(arr1, function(item) {
       return _.merge(item, _.find(arr2, function(o) { return _.get(item, key1) == _.get(o, key2) }));
     });
-
   }
 
   verifyDuplicates(valList, val, isString:boolean):boolean{
+    return valList.some((element)=>{
       if(isString){
         return element.toLowerCase() === val.toLowerCase();
       }else {
@@ -81,6 +80,7 @@ export class MasterService {
 
     });
   }
+
 
   /*showConfirmationModal(): boolean {
     var resltValue = false;
