@@ -56,7 +56,7 @@ import { PurchaseComponent } from './purchase/purchase.component';
     NgModel,
     FormsModule
   ],
-  declarations: [ScheduleComponent, SubscheduleComponent, ConfirmationModelDialogComponent, SynectiksCommonGridComponent, StatesComponent, DistrictsComponent, AreasComponent, BusinessexecutivesComponent, BankinformationComponent, ManufacturerComponent, CompanyGroupComponent, CompaniesComponent, ProductGroupComponent, ProductCategoryComponent, ProductComponent, AccountsInfoComponent, AccountsOpeningsComponent, ContactComponent, CustomerwiseDiscountComponent, PurchaseComponent]
+  declarations: [ScheduleComponent, SubscheduleComponent, ConfirmationModelDialogComponent, SynectiksCommonGridComponent, StatesComponent, DistrictsComponent, AreasComponent, BusinessexecutivesComponent, BankinformationComponent, ManufacturerComponent, CompanyGroupComponent, CompaniesComponent, ProductGroupComponent, ProductCategoryComponent, ProductComponent, AccountsInfoComponent, AccountsOpeningsComponent, ContactComponent, CustomerwiseDiscountComponent, PurchaseComponent],
   entryComponents: [ ConfirmationModelDialogComponent ]
 })
 export class MasterModule { }

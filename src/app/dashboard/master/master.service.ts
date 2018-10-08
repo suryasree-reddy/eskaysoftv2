@@ -77,25 +77,20 @@ export class MasterService {
     });
   }
 
-  /*showConfirmationModal(): boolean {
+  showConfirmationModal(): boolean {
+    var resltValue = false;
        const modal = this.modalService.show(ConfirmationModelDialogComponent);
        (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
            'Title of modal',
-           'Body text'
+           'Body text',
+           'green'
        );
 
-      return (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
-          if (result === true) {
-              // when pressed Yes
-            if(eventType == 'Delete'){
-              this.delete();
-            }else {
-              this.save();
-            }
-          } else {
-            console.log("elsee");
-            return;
-          }
+      (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
+
+         resltValue = result;
+
       });
-   }*/
+      return resltValue;
+   }
 }

@@ -123,7 +123,8 @@ validateFormOnSave():boolean{
 
   saveForm() {
     if (this.scheduleForm.valid && !this.duplicateSchIndex) {
-      this.showConfirmationModal('Save');
+    this.showConfirmationModal('Save');
+      //  this.masterService.showConfirmationModal('Save');
     } else {
       this.requiredErrMsg()
     }
@@ -155,7 +156,7 @@ showInformationModal(eventType){
 
 
 }
-  showConfirmationModal(eventType): boolean {
+  showConfirmationModal(eventType): void {
     var msg;
       if(eventType === "Delete"){
         msg =this.deleteConfirmationMessage;
@@ -165,7 +166,8 @@ showInformationModal(eventType){
        const modal = this.modalService.show(ConfirmationModelDialogComponent);
        (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
            'Schedule',
-           msg
+           msg,
+           'green'
        );
 
        (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
