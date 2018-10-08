@@ -11,6 +11,7 @@ import { Subject } from 'rxjs/Subject';
 
 export class ConfirmationModelDialogComponent   implements OnInit {
     public active: boolean = false;
+    public activeInformation: boolean = false;
     public body: string;
     public title: string;
     public onClose: Subject<boolean>;
@@ -29,6 +30,12 @@ export class ConfirmationModelDialogComponent   implements OnInit {
         this.active = true;
     }
 
+    public showInformationModal(title: string, body: string): void {
+        this.title = title;
+        this.body =  body;
+        this.activeInformation = true;
+    }
+
     public onConfirm(): void {
         this.active = false;
         this.onClose.next(true);
@@ -37,6 +44,7 @@ export class ConfirmationModelDialogComponent   implements OnInit {
 
     public onCancel(): void {
         this.active = false;
+        this.activeInformation = false;
         this.onClose.next(false);
         this._bsModalRef.hide();
     }

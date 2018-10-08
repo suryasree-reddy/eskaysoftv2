@@ -36,6 +36,8 @@ export class ScheduleComponent implements OnInit {
   @ViewChild('focus') focusField: ElementRef;
   private saveConfirmationMessage:string = "Are you sure you want to save Schedule?";
   private deleteConfirmationMessage:string = "Are you sure you want to delete Schedule?";
+  private saveInformationMessage:string = "Schedule record has been saved successfully.";
+  private deleteInformationMessage:string = "Schedule record has been deleted successfully.";
 
   constructor(private fb: FormBuilder, private modalService: BsModalService, private translate: TranslateService, private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
@@ -106,13 +108,13 @@ validateFormOnSave():boolean{
   save(){
     if (this.scheduleForm.value.id) {
       this.masterService.updateRecord(this.endPoint, this.scheduleForm.value).subscribe(res => {
-        this.successMsg();
+        this.showInformationModal("Save");
       }, (error) => {
         this.serverErrMsg();
       });
     } else {
       this.masterService.createRecord(this.endPoint, this.scheduleForm.value).subscribe(res => {
-        this.successMsg();
+        this.showInformationModal("Save");
       }, (error) => {
         this.serverErrMsg();
       });
@@ -130,13 +132,29 @@ validateFormOnSave():boolean{
   delete() {
       this.masterService.deleteRecord(this.endPoint, this.editSchedule.id).subscribe(res => {
         localStorage.removeItem('ag-activeRow');
-        this.successMsg()
+        this.showInformationModal("Delete");
       }, (error) => {
         this.serverErrMsg();
       });
 
   }
 
+showInformationModal(eventType){
+    var msg;
+    if(eventType === "Delete"){
+      msg =this.deleteInformationMessage;
+    }else{
+      msg =this.saveInformationMessage;
+    }
+  const modal = this.modalService.show(ConfirmationModelDialogComponent);
+  (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
+      'Schedule',
+      msg
+  );
+  (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {this.successMsg(); });
+
+
+}
   showConfirmationModal(eventType): boolean {
     var msg;
       if(eventType === "Delete"){
