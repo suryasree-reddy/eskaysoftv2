@@ -123,8 +123,8 @@ validateFormOnSave():boolean{
 
   saveForm() {
     if (this.scheduleForm.valid && !this.duplicateSchIndex) {
-    this.showConfirmationModal('Save');
-      //  this.masterService.showConfirmationModal('Save');
+      this.showConfirmationModal('Save');
+    //    this.masterService.showConfirmationModal();
     } else {
       this.requiredErrMsg()
     }

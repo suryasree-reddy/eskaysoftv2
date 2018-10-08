@@ -77,7 +77,7 @@ export class MasterService {
     });
   }
 
-  showConfirmationModal(): boolean {
+  /*showConfirmationModal(): boolean {
     var resltValue = false;
        const modal = this.modalService.show(ConfirmationModelDialogComponent);
        (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
@@ -92,5 +92,5 @@ export class MasterService {
 
       });
       return resltValue;
-   }
+   }*/
 }
