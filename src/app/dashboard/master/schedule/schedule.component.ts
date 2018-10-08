@@ -64,9 +64,8 @@ export class ScheduleComponent implements OnInit {
 
   validateFormOnBlur() {
       this.formRequiredError=false;
-      var schIndex = this.scheduleForm.value.scheduleIndex;
-      if(this.lastSchIndex != schIndex){
-        this.duplicateSchIndex = this.masterService.hasDataExist(this.scheduleList, 'scheduleIndex', schIndex);
+      if(this.lastSchIndex != this.scheduleForm.value.scheduleIndex){
+        this.duplicateSchIndex = this.masterService.hasDataExist(this.scheduleList, 'scheduleIndex', parseInt(this.scheduleForm.value.scheduleIndex));
         this.getDuplicateErrorMessages();
       }
     }

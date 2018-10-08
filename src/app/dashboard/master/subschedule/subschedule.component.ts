@@ -80,6 +80,9 @@ export class SubscheduleComponent implements OnInit {
 
   onSelectSchedule(event) {
     this.selectedSchedule = event.item;
+    const temp = this.selectedSchedule.id ;
+    const selectedScheduleNameList= _.filter(this.subScheduleList, function(o) { return o.scheduleId == temp });
+    this.subScheduleForm.patchValue({subScheduleIndex: selectedScheduleNameList.length+1})
   }
 
   openModal(template: TemplateRef<any>) {
