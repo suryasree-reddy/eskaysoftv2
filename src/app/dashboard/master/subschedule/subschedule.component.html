@@ -40,7 +40,7 @@
             <div class="input-group">
               <button type="button" (click)="resetForm()" class="btn btn-primary">Reset</button>
               <button type="submit" class="btn btn-primary mr-l-10">Save</button>
-              <button type="button" [disabled]="deleteFlag" (click)="delete()" class="btn btn-danger float-right">Delete</button>
+              <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">Delete</button>
             </div>
 
       </form>
@@ -75,6 +75,9 @@
         <div class="error-text col-xs-12" *ngIf="scFormRequiredError">
           <p class="text-danger">All fields are mandatory!!</p>
         </div>
+        <div class="error-text col-xs-12" *ngIf="duplicateMessage != null">
+          <p class="text-danger" [textContent]="duplicateMessage" [translate]="duplicateMessage" [translateParams]="{duplicateMessageParam: duplicateMessageParam}"></p>
+        </div>
         <div class="error-text col-xs-12" *ngIf="scFormServerError">
           <p class="text-danger">Could not save. Try again later!!</p>
         </div>
@@ -82,11 +85,11 @@
 
       <div class="input-group">
         <p>Schedule Name: *</p>
-        <input id="scheduleName" class="form-control" [formControl]="scheduleForm.controls['scheduleName']">
+        <input id="scheduleName" class="form-control" (blur)="checkForDuplicateScheduleName()" [formControl]="scheduleForm.controls['scheduleName']">
       </div>
         <div class="input-group">
           <p>Schedule Index: *</p>
-          <input id="scheduleIndex" class="form-control" [formControl]="scheduleForm.controls['scheduleIndex']">
+          <input id="scheduleIndex" class="form-control" (blur)="validateFormOnBlur()" [formControl]="scheduleForm.controls['scheduleIndex']">
       </div>
           <div class="input-group">
             <p>Schedule Type: </p>
