@@ -178,7 +178,7 @@ export class DistrictsComponent implements OnInit {
 
   duplicateMsg() {
     this.isduplicate = true;
-    this.formRequiredError = this.formServerError =this.formSuccess = false;    
+    this.formRequiredError = this.formServerError = this.formSuccess = false;    
   }
 
   requiredErrMsg() {

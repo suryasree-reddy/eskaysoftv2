@@ -21,6 +21,12 @@
     "deleteInformationMessage": "Sub-Schedule record has been deleted successfully.",
     "duplicateNameErrorMessage":"The Sub-Schedule Name '{{duplicateMessageParam}}' already exists with this name."
   },
+  "states": {
+    "saveConfirmationMessage": "Are you sure you want to save State?",
+    "deleteConfirmationMessage" : "Are you sure you want to delete State?",
+    "saveInformationMessage": "State record has been saved successfully.",
+    "deleteInformationMessage": "State record has been deleted successfully."
+  },
   "button": {
     "save": "Save",
     "reset": "Reset",
