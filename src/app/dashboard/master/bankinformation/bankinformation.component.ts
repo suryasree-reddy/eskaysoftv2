@@ -1,8 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
+import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-bankinformation',
@@ -20,10 +24,16 @@ export class BankinformationComponent implements OnInit {
   public formServerError: boolean = false;
   public nameFlag;
   public deleteFlag: boolean =true;
+  modalRef: BsModalRef;
+  message: string;
+
+
   @ViewChild('focus') focusField: ElementRef;
 
-  constructor(private fb: FormBuilder, private translate: TranslateService, private masterService: MasterService) {
-    translate.setDefaultLang('messages.en');
+  constructor(private fb: FormBuilder, 
+    private translate: TranslateService,
+    private modalService: BsModalService, 
+    private masterService: MasterService) { translate.setDefaultLang('messages.en');
   }
 
   ngOnInit() {
@@ -58,35 +68,44 @@ export class BankinformationComponent implements OnInit {
 
   save() {
     if (this.bankInformationForm.valid) {
-      if (confirm('Are you sure!!')) {
+   
         if (this.bankInformationForm.value.id) {
           this.masterService.updateRecord(this.endPoint, this.bankInformationForm.value).subscribe(res => {
-            this.successMsg();
+            this.showInformationModal("Save");
           }, (error) => {
             this.serverErrMsg();
           });
         } else {
           this.masterService.createRecord(this.endPoint, this.bankInformationForm.value).subscribe(res => {
-            this.successMsg();
+            this.showInformationModal("Save");
           }, (error) => {
             this.serverErrMsg();
           });
         }
-      }
+     
     } else {
       this.requiredErrMsg()
     }
   }
 
+  saveForm() {
+    this.formRequiredError = false;
+    if (this.bankInformationForm.valid  ) {
+      this.showConfirmationModal("Save");
+    } else {
+      this.serverErrMsg()
+    }
+  }
+
   delete() {
-    if (confirm('Are you sure!!')) {
+    
       this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
         localStorage.removeItem('ag-activeRow');
-        this.successMsg()
+        this.showInformationModal("Delete");
       }, (error) => {
         this.serverErrMsg();
       });
-    }
+    
   }
 
   successMsg() {
@@ -120,6 +139,55 @@ export class BankinformationComponent implements OnInit {
     this.bankInformationForm.reset(s);
     this.nameFlag = true;
     this.deleteFlag = false;
+  }
+
+  
+  showInformationModal(eventType) {
+    var msg;
+    var title;
+    if (eventType === "Delete") {
+      msg = 'bankinfo.deleteInformationMessage';
+      title = 'Bank Information';
+    } else if (eventType === "Save") {
+      title = 'Bank Information';
+      msg = 'bankinfo.saveInformationMessage';
+    }
+    const modal = this.modalService.show(ConfirmationModelDialogComponent);
+    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
+      title,
+      msg,
+      ''
+    );
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
+  }
+
+  showConfirmationModal(eventType): void {
+    var msg;
+    var title;
+    if (eventType === "Delete") {
+      title = 'Bank Information';
+      msg = 'bankinfo.deleteConfirmationMessage';
+    } else if (eventType === "Save") {
+      title = 'Bank Information';
+      msg = 'bankinfo.saveConfirmationMessage';
+    }
+    const modal = this.modalService.show(ConfirmationModelDialogComponent);
+    (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
+      title,
+      msg,
+      'green',
+      ''
+    );
+
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
+      if (result) {
+        if (eventType === "Delete") {
+          this.delete();
+        }  else {
+          this.save();
+        }
+      }
+    });
   }
 
 }

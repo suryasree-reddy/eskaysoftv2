@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-5">
       <h3>Product Category</h3>
-      <form [formGroup]="productCategoryForm" (ngSubmit)="save()" autocomplete="off">
+      <form [formGroup]="productCategoryForm" (ngSubmit)="saveForm()" autocomplete="off">
         <div class="row">
           <div class="error-text col-xs-12" *ngIf="formSuccess">
             <p class="text-success">{{'message.save' | translate }}</p>
@@ -23,7 +23,7 @@
             <div class="input-group">
               <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
               <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-              <button type="button" [disabled]="deleteFlag" (click)="delete()" class="btn btn-danger float-right">{{'button.delete' | translate }}</button>
+              <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete' | translate }}</button>
             </div>
       </form>
     </div>

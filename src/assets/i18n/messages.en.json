@@ -27,6 +27,70 @@
     "saveInformationMessage": "State record has been saved successfully.",
     "deleteInformationMessage": "State record has been deleted successfully."
   },
+  "districts": {
+    "saveConfirmationMessage": "Are you sure you want to save District?",
+    "deleteConfirmationMessage" : "Are you sure you want to delete District?",
+    "saveInformationMessage": "District record has been saved successfully.",
+    "deleteInformationMessage": "District record has been deleted successfully."
+  },
+  "businessexecutive": {
+    "saveConfirmationMessage": "Are you sure you want to save Business Executive?",
+    "deleteConfirmationMessage" : "Are you sure you want to delete Business Executive?",
+    "saveInformationMessage": "Business Executive record has been saved successfully.",
+    "deleteInformationMessage": "Business Executive record has been deleted successfully.",
+    "duplicateErrorMessage":"The Business Executive Name & Mobile already exists.",
+    "duplicateNameErrorMessage":"The Business Executive Name '{{duplicateMessageParam}}' already exists with this name.",
+    "duplicateIndexErrorMessage":"The Mobile '{{duplicateMessageParam}}' already exists with this number.",
+    "paramexample": "The Mobile  {{name}}!"
+  },
+  "areas": {
+    "saveConfirmationMessage": "Are you sure you want to save Area?",
+    "deleteConfirmationMessage" : "Are you sure you want to delete Area?",
+    "saveInformationMessage": "Area record has been saved successfully.",
+    "deleteInformationMessage": "Area record has been deleted successfully."
+  },
+  "bankinfo": {
+    "saveConfirmationMessage": "Are you sure you want to save Bank Information?",
+    "deleteConfirmationMessage" : "Are you sure you want to delete Bank Information?",
+    "saveInformationMessage": "Bank Information record has been saved successfully.",
+    "deleteInformationMessage": "Bank Information record has been deleted successfully."
+  },
+  "manufacturer": {
+    "saveConfirmationMessage": "Are you sure you want to save Manufacturer?",
+    "deleteConfirmationMessage" : "Are you sure you want to delete Manufacturer?",
+    "saveInformationMessage": "Manufacturer record has been saved successfully.",
+    "deleteInformationMessage": "Manufacturer record has been deleted successfully."
+  },
+  "companygroup": {
+    "saveConfirmationMessage": "Are you sure you want to save Company Group?",
+    "deleteConfirmationMessage" : "Are you sure you want to delete Company Group?",
+    "saveInformationMessage": "Company Group record has been saved successfully.",
+    "deleteInformationMessage": "Company Group record has been deleted successfully."
+  },
+  "companies": {
+    "saveConfirmationMessage": "Are you sure you want to save Company?",
+    "deleteConfirmationMessage" : "Are you sure you want to delete Company?",
+    "saveInformationMessage": "Company record has been saved successfully.",
+    "deleteInformationMessage": "Company record has been deleted successfully."
+  },
+  "customerdiscount": {
+    "saveConfirmationMessage": "Are you sure you want to save Customerwise Discount?",
+    "deleteConfirmationMessage" : "Are you sure you want to delete Customerwise Discount?",
+    "saveInformationMessage": "Customerwise Discount record has been saved successfully.",
+    "deleteInformationMessage": "Customerwise Discount record has been deleted successfully."
+  },
+  "productcategory": {
+    "saveConfirmationMessage": "Are you sure you want to save Product Category?",
+    "deleteConfirmationMessage" : "Are you sure you want to delete Product Category?",
+    "saveInformationMessage": "Product Category record has been saved successfully.",
+    "deleteInformationMessage": "Product Category record has been deleted successfully."
+  },
+  "productgroup": {
+    "saveConfirmationMessage": "Are you sure you want to save Product Group?",
+    "deleteConfirmationMessage" : "Are you sure you want to delete Product Group?",
+    "saveInformationMessage": "Product Group record has been saved successfully.",
+    "deleteInformationMessage": "Product Group record has been deleted successfully."
+  },
   "button": {
     "save": "Save",
     "reset": "Reset",

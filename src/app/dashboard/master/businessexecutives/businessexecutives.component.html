@@ -2,7 +2,7 @@
     <div class="row">
       <div class="col-md-5">
         <h3>Business Executives</h3>
-        <form [formGroup]="businessExecutiveForm" (ngSubmit)="save()" autocomplete="off">
+        <form [formGroup]="businessExecutiveForm" (ngSubmit)="saveForm()" autocomplete="off">
           <div class="row">
             <div class="error-text col-xs-12" *ngIf="formSuccess">
               <p class="text-success">{{'message.save' | translate }}</p>
@@ -13,15 +13,18 @@
             <div class="error-text col-xs-12" *ngIf="formServerError">
               <p class="text-danger">{{'message.error' | translate }}</p>
             </div>
+            <div class="error-text col-xs-12" *ngIf="duplicateMessage != null">
+              <p class="text-danger" [textContent]="duplicateMessage" [translate]="duplicateMessage" [translateParams]="{duplicateMessageParam: duplicateMessageParam}"></p>
+            </div>
           </div>
 
           <div class="input-group">
             <p>Name: *</p>
-            <input id="name" #focus [readonly]="nameFlag"  class="form-control" [formControl]="businessExecutiveForm.controls['name']">
+            <input id="name" #focus [readonly]="nameFlag" (blur)="checkForDuplicateBusiExecName()"  class="form-control" [formControl]="businessExecutiveForm.controls['name']">
           </div>
             <div class="input-group">
               <p>Address: *</p>
-              <input id="address" class="form-control" [formControl]="businessExecutiveForm.controls['address']">
+              <input id="address" class="form-control"  [formControl]="businessExecutiveForm.controls['address']">
           </div>
           <div class="input-group">
               <p>Town: *</p>
@@ -29,13 +32,13 @@
             </div>
               <div class="input-group">
                 <p>Mobile: *</p>
-                <input id="mobile" class="form-control" [formControl]="businessExecutiveForm.controls['mobile']">
+                <input id="mobile" class="form-control"  (blur)="validateFormOnBlur()" [formControl]="businessExecutiveForm.controls['mobile']">
             </div>
 
               <div class="input-group">
                 <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
                 <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-                <button type="button" [disabled]="deleteFlag"  (click)="delete()" class="btn btn-danger float-right">{{'button.delete' | translate }}</button>
+                <button type="button" [disabled]="deleteFlag"  (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete' | translate }}</button>
               </div>
         </form>
       </div>

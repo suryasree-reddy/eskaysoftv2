@@ -37,8 +37,10 @@ export class ScheduleComponent implements OnInit {
   private duplicateSchIndex: boolean = false;
   @ViewChild('focus') focusField: ElementRef;
 
-  constructor(private fb: FormBuilder, private modalService: BsModalService, private translate: TranslateService, private masterService: MasterService) {
-    translate.setDefaultLang('messages.en');
+  constructor(private fb: FormBuilder,
+     private modalService: BsModalService,
+     private translate: TranslateService,
+     private masterService: MasterService) { translate.setDefaultLang('messages.en');
   }
 
   valueChange(selectedRow: any[]): void {

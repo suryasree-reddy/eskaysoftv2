@@ -213,5 +213,4 @@ export class StatesComponent implements OnInit {
     });
   }
   
-
 }

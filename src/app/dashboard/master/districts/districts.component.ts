@@ -5,6 +5,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
+import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
 
 @Component({
@@ -34,11 +35,11 @@ export class DistrictsComponent implements OnInit {
 
   @ViewChild('focus') focusField: ElementRef;
 
-  constructor(private fb: FormBuilder, private translate: TranslateService,
+  constructor(private fb: FormBuilder,
+    private translate: TranslateService,
     private modalService: BsModalService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
-
   }
 
   valueChange(selectedRow: any[]): void {
@@ -96,7 +97,7 @@ export class DistrictsComponent implements OnInit {
 
   saveState() {
     if(!this.verifyStatesDuplicates()){
-      if (confirm('Are you sure!!')) {
+    
         if (this.statesForm.valid) {
           this.masterService.createRecord("states/", this.statesForm.value).subscribe(res => {
               this.modalRef.hide();
@@ -109,7 +110,7 @@ export class DistrictsComponent implements OnInit {
         } else {
           this.scRequiredErrMsg();
         }
-      }
+      
     }else{
       this.scDuplicateMsg();
     }
@@ -135,22 +136,21 @@ export class DistrictsComponent implements OnInit {
     this.formRequiredError = false;
     if(!this.verifyDistDuplicates()){
       if (this.districtsForm.valid && this.selectedState && this.selectedState.id ) {
-        if (confirm('Are you sure!!')) {
           this.districtsForm.value.statesId = this.selectedState.id;
           if (this.districtsForm.value.districtId) {
             this.masterService.updateRecord('districts/', this.districtsForm.value).subscribe(res => {
-              this.successMsg();
+              this.showInformationModal("Save");
             }, (error) => {
               this.serverErrMsg();
             });
           } else {
             this.masterService.createRecord('districts/', this.districtsForm.value).subscribe(res => {
-              this.successMsg();
+              this.showInformationModal("Save");
             }, (error) => {
               this.serverErrMsg();
             });
           }
-        }
+        
       } else {
         this.requiredErrMsg();
       }      
@@ -158,16 +158,25 @@ export class DistrictsComponent implements OnInit {
       this.duplicateMsg();
     }
   }
+
+  saveForm() {
+    this.formRequiredError = false;
+    if (this.districtsForm.valid && !this.verifyDistDuplicates() ) {
+      this.showConfirmationModal("Save");
+    } else {
+      this.duplicateMsg()
+    }
+  }
   
   delete() {
-    if (confirm('Are you sure!!')) {
+
       this.masterService.deleteRecord('districts/', this.editDistricts.districtId).subscribe(res => {
         localStorage.removeItem('ag-activeRow');
-        this.successMsg()
+        this.showInformationModal("Delete");
       }, (error) => {
         this.serverErrMsg();
       });
-    }
+    
   }
 
   successMsg() {
@@ -228,6 +237,54 @@ export class DistrictsComponent implements OnInit {
     this.selectedState.id = s.stateId;
     this.deleteFlag = false;
     this.districtsForm.reset(s);
+  }
+
+  showInformationModal(eventType) {
+    var msg;
+    var title;
+    if (eventType === "Delete") {
+      msg = 'districts.deleteInformationMessage';
+      title = 'District';
+    } else if (eventType === "Save") {
+      title = 'District';
+      msg = 'districts.saveInformationMessage';
+    }
+    const modal = this.modalService.show(ConfirmationModelDialogComponent);
+    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
+      title,
+      msg,
+      ''
+    );
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
+  }
+
+  showConfirmationModal(eventType): void {
+    var msg;
+    var title;
+    if (eventType === "Delete") {
+      title = 'District';
+      msg = 'districts.deleteConfirmationMessage';
+    } else if (eventType === "Save") {
+      title = 'District';
+      msg = 'districts.saveConfirmationMessage';
+    }
+    const modal = this.modalService.show(ConfirmationModelDialogComponent);
+    (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
+      title,
+      msg,
+      'green',
+      ''
+    );
+
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
+      if (result) {
+        if (eventType === "Delete") {
+          this.delete();
+        }  else {
+          this.save();
+        }
+      }
+    });
   }
 
 }
