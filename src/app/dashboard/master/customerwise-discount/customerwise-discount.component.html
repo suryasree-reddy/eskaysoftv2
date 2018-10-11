@@ -13,11 +13,14 @@
           <div class="error-text col-xs-12" *ngIf="formServerError">
             <p class="text-danger">{{'message.error' | translate }}</p>
           </div>
+          <div class="error-text col-xs-12" *ngIf="duplicateMessage != null">
+            <p class="text-danger" [textContent]="duplicateMessage" [translate]="duplicateMessage" [translateParams]="{duplicateMessageParam: duplicateMessageParam}"></p>
+          </div>
         </div>
 
         <div class="input-group">
           <p>Customer</p>
-          <input id="customer" #focus [readonly]="nameFlag"  class="form-control"  [formControl]="customerDiscountForm.controls['customer']">
+          <input id="customer" #focus [readonly]="nameFlag" (blur)="checkForDuplicateCustomerName()" class="form-control"  [formControl]="customerDiscountForm.controls['customer']">
         </div>
         <div class="input-group">
           <p>Company</p>

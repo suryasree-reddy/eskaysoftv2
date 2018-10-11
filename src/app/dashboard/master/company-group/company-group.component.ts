@@ -25,6 +25,10 @@ export class CompanyGroupComponent implements OnInit {
     public nameFlag;
     public deleteFlag: boolean =true;
     public saveBtnFlag: boolean =false;
+    public companyGrp;
+    private duplicateCompanyGrp: boolean = false;
+    public duplicateMessage: string = null;
+    public duplicateMessageParam: string = null;
     modalRef: BsModalRef;
     message: string;
 
@@ -49,6 +53,21 @@ export class CompanyGroupComponent implements OnInit {
     valueChange(selectedRow: any[]): void {
       this.editable(selectedRow);
     }
+
+    
+  getDuplicateErrorMessages(): void {
+    this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
+     if (this.duplicateCompanyGrp) {
+      this.duplicateMessage = "companygroup.duplicateNameErrorMessage";
+      this.duplicateMessageParam=this.companyGroupForm.value.companyGroup;
+    }
+  }
+
+  checkForDuplicateCompanyGrp() {
+    this.duplicateCompanyGrp = this.masterService.hasDataExist(this.gridDataList, 'companyGroup', this.companyGroupForm.value.companyGroup);
+    this.getDuplicateErrorMessages();
+  }
 
     getGridCloumsList() {
       this.masterService.getLocalJsonData().subscribe(data => {

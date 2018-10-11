@@ -24,6 +24,10 @@ export class BankinformationComponent implements OnInit {
   public formServerError: boolean = false;
   public nameFlag;
   public deleteFlag: boolean =true;
+  public bankName;
+  private duplicateBankName: boolean = false;
+  public duplicateMessage: string = null;
+  public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
 
@@ -49,6 +53,20 @@ export class BankinformationComponent implements OnInit {
 
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
+  }
+
+  getDuplicateErrorMessages(): void {
+    this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
+     if (this.duplicateBankName) {
+      this.duplicateMessage = "bankinfo.duplicateNameErrorMessage";
+      this.duplicateMessageParam=this.bankInformationForm.value.name;
+    }
+  }
+
+  checkForDuplicateBankName() {
+    this.duplicateBankName = this.masterService.hasDataExist(this.gridDataList, 'name', this.bankInformationForm.value.name);
+    this.getDuplicateErrorMessages();
   }
 
   getGridCloumsList() {

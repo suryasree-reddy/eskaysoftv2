@@ -26,6 +26,10 @@ export class StatesComponent implements OnInit {
   public deleteFlag: boolean =true;
   public saveBtnFlag: boolean =false;
   public nameFlag;
+  public stateName;
+  private duplicateStateName: boolean = false;
+  public duplicateMessage: string = null;
+  public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
 
@@ -55,6 +59,21 @@ export class StatesComponent implements OnInit {
     this.focusField.nativeElement.focus();
     this.getStatesTypes();
   }
+
+  getDuplicateErrorMessages(): void {
+    this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
+     if (this.duplicateStateName) {
+      this.duplicateMessage = "states.duplicateNameErrorMessage";
+      this.duplicateMessageParam=this.statesForm.value.stateName;
+    }
+  }
+
+  checkForDuplicateStateName() {
+    this.duplicateStateName = this.masterService.hasDataExist(this.statesList, 'stateName', this.statesForm.value.stateName);
+    this.getDuplicateErrorMessages();
+  }
+
 
   loadGridData() {
     this.masterService.getData("states/");

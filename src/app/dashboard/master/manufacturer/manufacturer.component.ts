@@ -24,8 +24,13 @@ export class ManufacturerComponent implements OnInit {
   public formServerError: boolean = false;
   public nameFlag;
   public deleteFlag: boolean =true;
+  public manufName;
+  private duplicateManufName: boolean = false;
+  public duplicateMessage: string = null;
+  public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
+
 
 
   @ViewChild('focus') focusField: ElementRef;
@@ -48,6 +53,20 @@ export class ManufacturerComponent implements OnInit {
 
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
+  }
+
+  getDuplicateErrorMessages(): void {
+    this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
+     if (this.duplicateManufName) {
+      this.duplicateMessage = "manufacturer.duplicateNameErrorMessage";
+      this.duplicateMessageParam=this.manufacturerForm.value.manfacturerName;
+    }
+  }
+
+  checkForDuplicateManufName() {
+    this.duplicateManufName = this.masterService.hasDataExist(this.gridDataList, 'manfacturerName', this.manufacturerForm.value.manfacturerName);
+    this.getDuplicateErrorMessages();
   }
 
   getGridCloumsList() {

@@ -25,13 +25,15 @@
     "saveConfirmationMessage": "Are you sure you want to save State?",
     "deleteConfirmationMessage" : "Are you sure you want to delete State?",
     "saveInformationMessage": "State record has been saved successfully.",
-    "deleteInformationMessage": "State record has been deleted successfully."
+    "deleteInformationMessage": "State record has been deleted successfully.",
+    "duplicateNameErrorMessage":"The State '{{duplicateMessageParam}}' already exists with this name."
   },
   "districts": {
     "saveConfirmationMessage": "Are you sure you want to save District?",
     "deleteConfirmationMessage" : "Are you sure you want to delete District?",
     "saveInformationMessage": "District record has been saved successfully.",
-    "deleteInformationMessage": "District record has been deleted successfully."
+    "deleteInformationMessage": "District record has been deleted successfully.",
+    "duplicateNameErrorMessage":"The District '{{duplicateMessageParam}}' already exists with this name."
   },
   "businessexecutive": {
     "saveConfirmationMessage": "Are you sure you want to save Business Executive?",
@@ -47,49 +49,60 @@
     "saveConfirmationMessage": "Are you sure you want to save Area?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Area?",
     "saveInformationMessage": "Area record has been saved successfully.",
-    "deleteInformationMessage": "Area record has been deleted successfully."
+    "deleteInformationMessage": "Area record has been deleted successfully.",
+    "duplicateErrorMessage":"The Business Executive Name & Mobile already exists.",
+    "duplicateNameErrorMessage":"The Area Name '{{duplicateMessageParam}}' already exists with this name.",
+    "duplicateIndexErrorMessage":"The Mobile '{{duplicateMessageParam}}' already exists with this number.",
+    "paramexample": "The Mobile  {{name}}!"
   },
   "bankinfo": {
     "saveConfirmationMessage": "Are you sure you want to save Bank Information?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Bank Information?",
     "saveInformationMessage": "Bank Information record has been saved successfully.",
-    "deleteInformationMessage": "Bank Information record has been deleted successfully."
+    "deleteInformationMessage": "Bank Information record has been deleted successfully.",
+    "duplicateNameErrorMessage":"The Bank Name '{{duplicateMessageParam}}' already exists with this name."
   },
   "manufacturer": {
     "saveConfirmationMessage": "Are you sure you want to save Manufacturer?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Manufacturer?",
     "saveInformationMessage": "Manufacturer record has been saved successfully.",
-    "deleteInformationMessage": "Manufacturer record has been deleted successfully."
+    "deleteInformationMessage": "Manufacturer record has been deleted successfully.",
+    "duplicateNameErrorMessage":"The Manufacturer Name '{{duplicateMessageParam}}' already exists with this name."
   },
   "companygroup": {
     "saveConfirmationMessage": "Are you sure you want to save Company Group?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Company Group?",
     "saveInformationMessage": "Company Group record has been saved successfully.",
-    "deleteInformationMessage": "Company Group record has been deleted successfully."
+    "deleteInformationMessage": "Company Group record has been deleted successfully.",
+    "duplicateNameErrorMessage":"The Company Group '{{duplicateMessageParam}}' already exists with this name."
   },
   "companies": {
     "saveConfirmationMessage": "Are you sure you want to save Company?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Company?",
     "saveInformationMessage": "Company record has been saved successfully.",
-    "deleteInformationMessage": "Company record has been deleted successfully."
+    "deleteInformationMessage": "Company record has been deleted successfully.",
+    "duplicateNameErrorMessage":"The Company Code '{{duplicateMessageParam}}' already exists with this name."
   },
   "customerdiscount": {
     "saveConfirmationMessage": "Are you sure you want to save Customerwise Discount?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Customerwise Discount?",
     "saveInformationMessage": "Customerwise Discount record has been saved successfully.",
-    "deleteInformationMessage": "Customerwise Discount record has been deleted successfully."
+    "deleteInformationMessage": "Customerwise Discount record has been deleted successfully.",
+    "duplicateNameErrorMessage":"The Customer '{{duplicateMessageParam}}' already exists with this name."
   },
   "productcategory": {
     "saveConfirmationMessage": "Are you sure you want to save Product Category?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Product Category?",
     "saveInformationMessage": "Product Category record has been saved successfully.",
-    "deleteInformationMessage": "Product Category record has been deleted successfully."
+    "deleteInformationMessage": "Product Category record has been deleted successfully.",
+    "duplicateNameErrorMessage":"The Product Category '{{duplicateMessageParam}}' already exists with this name."
   },
   "productgroup": {
     "saveConfirmationMessage": "Are you sure you want to save Product Group?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Product Group?",
     "saveInformationMessage": "Product Group record has been saved successfully.",
-    "deleteInformationMessage": "Product Group record has been deleted successfully."
+    "deleteInformationMessage": "Product Group record has been deleted successfully.",
+    "duplicateNameErrorMessage":"The Product Group '{{duplicateMessageParam}}' already exists with this name."
   },
   "button": {
     "save": "Save",

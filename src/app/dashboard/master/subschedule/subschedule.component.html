@@ -13,6 +13,9 @@
           <div class="error-text col-xs-12" *ngIf="formServerError">
             <p class="text-danger">Could not save. Try again later!!</p>
           </div>
+          <div class="error-text col-xs-12" *ngIf="duplicateMessage != null">
+            <p class="text-danger" [textContent]="duplicateMessage" [translate]="duplicateMessage" [translateParams]="{duplicateMessageParam: duplicateMessageParam}"></p>
+          </div>
         </div>
 
         <div class="input-group">

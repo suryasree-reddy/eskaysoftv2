@@ -24,6 +24,10 @@ export class ProductGroupComponent implements OnInit {
   public formServerError: boolean = false;
   public nameFlag;
   public deleteFlag: boolean =true;
+  public prodGroup;
+  private duplicateProdGroup: boolean = false;
+  public duplicateMessage: string = null;
+  public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
 
@@ -38,7 +42,8 @@ export class ProductGroupComponent implements OnInit {
   ngOnInit() {
     this.productGroupForm = this.fb.group({
       id: [],
-      productGroup: ['', Validators.required]
+      productGroup: ['', Validators.required],
+      productGroupName:['', Validators.required]
     });
     this.loadGridData();
     this.getGridCloumsList();
@@ -47,6 +52,20 @@ export class ProductGroupComponent implements OnInit {
 
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
+  }
+
+  getDuplicateErrorMessages(): void {
+    this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
+     if (this.duplicateProdGroup) {
+      this.duplicateMessage = "productgroup.duplicateNameErrorMessage";
+      this.duplicateMessageParam=this.productGroupForm.value.productGroupName;
+    }
+  }
+
+  checkForDuplicateProdGroup() {
+    this.duplicateProdGroup = this.masterService.hasDataExist(this.gridDataList, 'productGroupName', this.productGroupForm.value.productGroupName);
+    this.getDuplicateErrorMessages();
   }
 
   getGridCloumsList() {

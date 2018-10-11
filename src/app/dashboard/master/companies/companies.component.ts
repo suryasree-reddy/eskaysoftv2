@@ -14,7 +14,7 @@ import * as _ from 'lodash';
 })
 export class CompaniesComponent implements OnInit {
 
-  public companyForm: FormGroup;
+    public companyForm: FormGroup;
     private endPoint: string = "company/";
     public gridDataList: any = [];
     public gridColumnNamesList;
@@ -24,6 +24,10 @@ export class CompaniesComponent implements OnInit {
     public formServerError: boolean = false;
     public nameFlag;
     public deleteFlag: boolean =true;
+    public companyCode;
+    private duplicateCompanyCode: boolean = false;
+    public duplicateMessage: string = null;
+    public duplicateMessageParam: string = null;
     modalRef: BsModalRef;
     message: string;
 
@@ -38,7 +42,8 @@ export class CompaniesComponent implements OnInit {
     ngOnInit() {
       this.companyForm = this.fb.group({
         id: [],
-        companyGroup: ['', Validators.required]
+        companyGroup: ['', Validators.required],
+        companyCode: ['', Validators.required]
       });
       this.loadGridData();
       this.getGridCloumsList();
@@ -47,6 +52,20 @@ export class CompaniesComponent implements OnInit {
 
     valueChange(selectedRow: any[]): void {
       this.editable(selectedRow);
+    }
+
+    getDuplicateErrorMessages(): void {
+      this.duplicateMessage = null;
+      this.duplicateMessageParam = null;
+       if (this.duplicateCompanyCode) {
+        this.duplicateMessage = "companies.duplicateNameErrorMessage";
+        this.duplicateMessageParam=this.companyForm.value.companyCode;
+      }
+    }
+  
+    checkForDuplicateCompanyCode() {
+      this.duplicateCompanyCode = this.masterService.hasDataExist(this.gridDataList, 'companyCode', this.companyForm.value.companyCode);
+      this.getDuplicateErrorMessages();
     }
 
     getGridCloumsList() {

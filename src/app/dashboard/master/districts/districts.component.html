@@ -16,11 +16,14 @@
             <div class="error-text col-xs-12" *ngIf="isduplicate">
               <p class="text-danger">Duplicate Record Exists.</p>
             </div>
+            <div class="error-text col-xs-12" *ngIf="duplicateMessage != null">
+              <p class="text-danger" [textContent]="duplicateMessage" [translate]="duplicateMessage" [translateParams]="{duplicateMessageParam: duplicateMessageParam}"></p>
+            </div>
           </div>
   
           <div class="input-group">
             <p>District Name: *</p>
-            <input id="districtName" #focus [readonly]="nameFlag"  class="form-control" [formControl]="districtsForm.controls['districtName']">
+            <input id="districtName" #focus [readonly]="nameFlag" (blur)="checkForDuplicateDistName()"  class="form-control" [formControl]="districtsForm.controls['districtName']">
           </div>
             <div class="input-group">
               <p>State Name: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>

@@ -25,11 +25,6 @@ export class AreasComponent implements OnInit {
   public gridSelectedRow;
   public selectedTypeahead: any;
   public deleteFlag: boolean =true;
-  modalRef: BsModalRef;
-  message: string;
-
-  @ViewChild('focus') focusField: ElementRef;
-
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public formSuccess: boolean = false;
@@ -37,6 +32,14 @@ export class AreasComponent implements OnInit {
   public scFormServerError: boolean = false;
   public scFormSuccess: boolean = false;
   public nameFlag;
+  public areaName;
+  private duplicateAreaName: boolean = false;
+  public duplicateMessage: string = null;
+  public duplicateMessageParam: string = null;
+  modalRef: BsModalRef;
+  message: string;
+  
+  @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
@@ -73,6 +76,40 @@ export class AreasComponent implements OnInit {
     this.masterService.getParentData(this.beEndPoint).subscribe(list => {
       this.typeaheadDataList = list;
     })
+  }
+
+  validateFormOnBlur() {
+    this.formRequiredError = false;
+    if (this.areaName != this.businessExecutiveForm.value.name) {
+      this.duplicateAreaName = this.masterService.hasDataExist(this.gridDataList, 'name', this.areaForm.value.name);
+      this.getDuplicateErrorMessages();
+    }
+  }
+
+  // checkForDuplicateBusiExecName() {
+  //   this.duplicateAreaName = this.masterService.hasDataExist(this.gridDataList, 'name', this.areaForm.value.name);
+  //   this.getDuplicateErrorMessages();
+  // }
+
+  getDuplicateErrorMessages(): void {
+    this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
+    if (this.duplicateAreaName) {
+      this.duplicateMessage = "areas.duplicateNameErrorMessage";
+      this.duplicateMessageParam=this.areaForm.value.name;
+
+    } else if (this.duplicateAreaName) {
+      this.duplicateMessage = "areas.duplicateNameErrorMessage";
+      this.duplicateMessageParam=this.areaForm.value.name;
+    }
+  }
+
+ 
+  getGridCloumsList() {
+    this.masterService.getLocalJsonData().subscribe(data => {
+      data as object[];
+      this.gridColumnNamesList = data["AreaName"];
+    });
   }
 
   loadGridData() {

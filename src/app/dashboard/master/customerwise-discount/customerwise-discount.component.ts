@@ -24,6 +24,10 @@ export class CustomerwiseDiscountComponent implements OnInit {
     public formServerError: boolean = false;
     public nameFlag;
     public deleteFlag: boolean =true;
+    public customerName;
+    private duplicateCustomerName: boolean = false;
+    public duplicateMessage: string = null;
+    public duplicateMessageParam: string = null;
     modalRef: BsModalRef;
     message: string;
 
@@ -47,6 +51,20 @@ export class CustomerwiseDiscountComponent implements OnInit {
 
     valueChange(selectedRow: any[]): void {
       this.editable(selectedRow);
+    }
+
+    getDuplicateErrorMessages(): void {
+      this.duplicateMessage = null;
+      this.duplicateMessageParam = null;
+       if (this.duplicateCustomerName) {
+        this.duplicateMessage = "customerdiscount.duplicateNameErrorMessage";
+        this.duplicateMessageParam=this.customerDiscountForm.value.customer;
+      }
+    }
+  
+    checkForDuplicateCustomerName() {
+      this.duplicateCustomerName = this.masterService.hasDataExist(this.gridDataList, 'customer', this.customerDiscountForm.value.customer);
+      this.getDuplicateErrorMessages();
     }
 
     getGridCloumsList() {

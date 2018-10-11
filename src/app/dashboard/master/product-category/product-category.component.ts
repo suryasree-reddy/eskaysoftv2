@@ -24,6 +24,10 @@ export class ProductCategoryComponent implements OnInit {
   public formServerError: boolean = false;
   public nameFlag;
   public deleteFlag: boolean =true;
+  public prodCategory;
+  private duplicateProdCategory: boolean = false;
+  public duplicateMessage: string = null;
+  public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
 
@@ -38,7 +42,8 @@ export class ProductCategoryComponent implements OnInit {
   ngOnInit() {
     this.productCategoryForm = this.fb.group({
       id: [],
-      productCategory: ['', Validators.required]
+      productCategory: ['', Validators.required],
+      productCategoryName: ['', Validators.required]
     });
     this.loadGridData();
     this.getGridCloumsList();
@@ -47,6 +52,20 @@ export class ProductCategoryComponent implements OnInit {
 
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
+  }
+
+  getDuplicateErrorMessages(): void {
+    this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
+     if (this.duplicateProdCategory) {
+      this.duplicateMessage = "productcategory.duplicateNameErrorMessage";
+      this.duplicateMessageParam=this.productCategoryForm.value.productCategoryName;
+    }
+  }
+
+  checkForDuplicateProdCategory() {
+    this.duplicateProdCategory = this.masterService.hasDataExist(this.gridDataList, 'productCategoryName', this.productCategoryForm.value.productCategoryName);
+    this.getDuplicateErrorMessages();
   }
 
   getGridCloumsList() {

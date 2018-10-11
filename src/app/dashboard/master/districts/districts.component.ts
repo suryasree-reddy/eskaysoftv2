@@ -30,6 +30,10 @@ export class DistrictsComponent implements OnInit {
   public nameFlag;
   public deleteFlag: boolean =true;
   public selectedState:any;
+  public distName;
+  private duplicateDistName: boolean = false;
+  public duplicateMessage: string = null;
+  public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
 
@@ -69,6 +73,22 @@ export class DistrictsComponent implements OnInit {
     this.focusField.nativeElement.focus();
     this.getDistrictsTypes();
   }
+
+
+  getDuplicateErrorMessages(): void {
+    this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
+     if (this.duplicateDistName) {
+      this.duplicateMessage = "districts.duplicateNameErrorMessage";
+      this.duplicateMessageParam=this.districtsForm.value.districtName;
+    }
+  }
+
+  checkForDuplicateDistName() {
+    this.duplicateDistName = this.masterService.hasDataExist(this.districtsList, 'districtName', this.districtsForm.value.districtName);
+    this.getDuplicateErrorMessages();
+  }
+
 
   loadStatesData() {
     this.masterService.getParentData("states/").subscribe(list => {
