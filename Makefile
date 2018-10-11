@@ -14,7 +14,7 @@ all: run
 
 binary:
 	$(call blue, "Building Angular build ready for containerisation...")
-	$(npm bin)/ng build 
+	ng build 
 
 uploadins3:
 	$(call blue, "Building Angular build tar ready for uploading in aws...")
