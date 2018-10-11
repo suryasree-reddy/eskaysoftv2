@@ -14,4 +14,35 @@ header{
     border: none;
     color: #337ab7;
     box-shadow: none;
-  }
+}
+.d-flex-resp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+  @media only screen and (max-width: 375px) {
+    .sm-btn-resp{
+        position: absolute;
+        top: -5px;
+        right: 9rem;
+    }
+    .d-flex-resp {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+ .sm-btn-resp{
+        position: absolute;
+        top: -5px;
+        right: 6rem;
+    }
+.log-resp {
+    margin-left: -2rem;
+}
+  
+}
