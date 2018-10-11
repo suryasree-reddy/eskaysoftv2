@@ -1,6 +1,7 @@
 FROM nginx:1.13.3-alpine
 ARG ESKAYSOFT_URL="https://s3.amazonaws.com/eskaysoft-releases/eskaysoft-latest.tar.gz"
 ENV ESKAYSOFT_PATHS_HOME="/usr/share/nginx/html"
+RUN apk add --update curl
 ## Copy our default nginx config
 COPY nginx/default.conf /etc/nginx/conf.d/
 ## Remove default nginx website
