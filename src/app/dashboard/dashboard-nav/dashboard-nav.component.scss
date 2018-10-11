@@ -1,5 +1,5 @@
 .dashboard-navbar {
-  background-color: #f8f8f8;
+  // background-color: #f8f8f8;
   width: 100%;
   margin-top: -10px;
   padding: 10px 15px;
@@ -11,3 +11,32 @@
   color: #666;
   box-shadow: none;
 }
+
+@media only screen and (max-width: 768px) {
+  .dashboard-navbar {
+    // background-color: #f8f8f8;
+    width: 100%;
+    margin: -10px -2.5rem;
+    padding: 10px 5px;
+  }
+ .mw-25 {
+  width: 20%
+ }
+ .ir-btn {
+   margin-left: 3rem;
+ }
+ .ir-btn-2 {
+  margin-left: 2rem;
+}
+ 
+}
+
+@media only screen and (max-width: 425px) {
+  .ir-btn {
+    margin-left: 0rem;
+  }
+  .ir-btn-2 {
+   margin-left: 0rem;
+ }
+}
+
