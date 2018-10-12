@@ -26,7 +26,9 @@
     "deleteConfirmationMessage" : "Are you sure you want to delete State?",
     "saveInformationMessage": "State record has been saved successfully.",
     "deleteInformationMessage": "State record has been deleted successfully.",
-    "duplicateNameErrorMessage":"The State '{{duplicateMessageParam}}' already exists with this name."
+    "duplicateNameErrorMessage":"The State '{{duplicateMessageParam}}' already exists with this name.",
+	"duplicateCodeErrorMessage":"The State code '{{duplicateMessageParam}}' already exists with this code.",
+	"duplicateZoneErrorMessage":"The State zone '{{duplicateMessageParam}}' already exists with this zone."
   },
   "districts": {
     "saveConfirmationMessage": "Are you sure you want to save District?",

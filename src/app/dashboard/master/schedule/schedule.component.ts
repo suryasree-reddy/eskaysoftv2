@@ -69,6 +69,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
+	  this.formRequiredError = false;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
     if (this.duplicateSchName && this.duplicateSchIndex) {

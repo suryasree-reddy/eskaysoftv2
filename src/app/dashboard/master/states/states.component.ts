@@ -17,7 +17,6 @@ export class StatesComponent implements OnInit {
   public statesForm: FormGroup;
   //private endPoint: string = "states/";
   public formSuccess: boolean = false;
-  public isduplicate: boolean = false;
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public statesList: any = [];
@@ -28,6 +27,7 @@ export class StatesComponent implements OnInit {
   public nameFlag;
   public stateName;
   private duplicateStateName: boolean = false;
+  private duplicateStateCode: boolean = false;
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
@@ -61,20 +61,39 @@ export class StatesComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
-    this.duplicateMessage = null;
+	this.formRequiredError = false;
+	
+	this.duplicateMessage = null;
     this.duplicateMessageParam = null;
      if (this.duplicateStateName) {
       this.duplicateMessage = "states.duplicateNameErrorMessage";
       this.duplicateMessageParam=this.statesForm.value.stateName;
-    }
+    }else if(this.duplicateStateCode){
+		this.duplicateMessage = "states.duplicateCodeErrorMessage";
+      this.duplicateMessageParam=this.statesForm.value.stateCode;
+	}
+	
   }
 
   checkForDuplicateStateName() {
+	
     this.duplicateStateName = this.masterService.hasDataExist(this.statesList, 'stateName', this.statesForm.value.stateName);
-    this.getDuplicateErrorMessages();
+	if(this.duplicateStateName){
+		const temp = this.statesForm.value.stateName;
+		const stateObj = _.filter(this.statesList, function(o) { return o.stateName.toLowerCase() == temp.toLowerCase() });
+		this.statesForm.patchValue({ stateCode: stateObj[0].stateCode })
+		this.statesForm.patchValue({ zone: stateObj[0].zone })
+	}
+	this.getDuplicateErrorMessages();
   }
 
+	checkForDuplicateStateCode() {
+		this.duplicateStateCode = this.masterService.hasDataExist(this.statesList, 'stateCode', parseInt(this.statesForm.value.stateCode));
+		this.getDuplicateErrorMessages();
+	}
 
+
+	
   loadGridData() {
     this.masterService.getData("states/");
     this.masterService.dataObject.subscribe(list => {
@@ -92,17 +111,16 @@ export class StatesComponent implements OnInit {
 
   saveState() {
     this.formRequiredError = false;
-    if (this.statesForm.valid && !this.verifyStatesDuplicates() ) {
+    if (this.statesForm.valid && this.duplicateMessage == null ) {
       this.showConfirmationModal("Save");
     } else {
-      this.duplicateMsg()
+      this.requiredErrMsg()
     }
   }
   
   save() {
-    if (this.statesForm.valid && !this.verifyStatesDuplicates()) {
-      //this.showConfirmationModal("Save");
-      
+    if (this.statesForm.valid && this.duplicateMessage == null) {
+   
         if (this.statesForm.value.id) {
           this.masterService.updateRecord('states/', this.statesForm.value).subscribe(res => {
             this.showInformationModal("Save");
@@ -122,17 +140,6 @@ export class StatesComponent implements OnInit {
     }
   }
 
-
-  verifyStatesDuplicates(){
-    let stateNameList = this.statesList.map((item)=>{return item.stateName});
-    let isDuplicate = this.masterService.verifyDuplicates(stateNameList, this.statesForm.value.stateName, true);
-    if(!isDuplicate){
-      let stateNameList = this.statesList.map((item)=>{return item.stateCode});
-      isDuplicate = this.masterService.verifyDuplicates(stateNameList, parseInt(this.statesForm.value.stateCode), false);
-    }
-    return isDuplicate;    
-  }
-
   delete() {
 
       this.masterService.deleteRecord('states/', this.editStates.id).subscribe(res => {
@@ -146,32 +153,33 @@ export class StatesComponent implements OnInit {
 
   successMsg() {
     this.formSuccess = true;
-    this.formRequiredError = this.formServerError = this.isduplicate = false;
+    this.formRequiredError = this.formServerError =  false;
     this.resetForm();
   }
 
   requiredErrMsg() {
-    this.formRequiredError = true;
-    this.formSuccess = this.formServerError = this.isduplicate = false;
+	  if(this.duplicateMessage == null){
+		  this.formRequiredError = true;
+		  this.formSuccess = this.formServerError =  false;
+	  }
+    
   }
 
   serverErrMsg() {
     this.formServerError = true;
-    this.formRequiredError = this.formSuccess = this.isduplicate = false;
-  }
-
-  duplicateMsg() {
-    this.isduplicate = true;
-    this.formRequiredError = this.formServerError = this.formSuccess = false;    
+    this.formRequiredError = this.formSuccess  = false;
   }
 
   resetForm() {
+	  
     this.statesForm.reset();
+	this.duplicateStateName = false;
+	this.duplicateStateCode = false;
     this.editStates = null;
     this.deleteFlag = true;
     this.saveBtnFlag = false;
     this.nameFlag = false;
-    this.formRequiredError = this.formServerError = this.formSuccess = this.isduplicate = false;
+    this.formRequiredError = this.formServerError = this.formSuccess  false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
   }

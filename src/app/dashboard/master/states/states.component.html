@@ -13,9 +13,6 @@
             <div class="error-text col-xs-12" *ngIf="formServerError">
               <p class="text-danger">{{'message.error' | translate }}</p>
             </div>
-            <div class="error-text col-xs-12" *ngIf="isduplicate">
-              <p class="text-danger">Duplicate Record Exists.</p>
-            </div>
             <div class="error-text col-xs-12" *ngIf="duplicateMessage != null">
               <p class="text-danger" [textContent]="duplicateMessage" [translate]="duplicateMessage" [translateParams]="{duplicateMessageParam: duplicateMessageParam}"></p>
             </div>
@@ -27,11 +24,11 @@
           </div>
           <div class="input-group">
               <p>Code: *</p>
-              <input id="stateCode" class="form-control" [formControl]="statesForm.controls['stateCode']">
+              <input id="stateCode" [readonly]="duplicateStateName" (blur)="checkForDuplicateStateCode()" class="form-control" [formControl]="statesForm.controls['stateCode']">
             </div>
             <div class="input-group">
                 <p>Zone: *</p>
-                <input id="zone"  class="form-control" [formControl]="statesForm.controls['zone']">
+                <input id="zone"  [readonly]="duplicateStateName" class="form-control" [formControl]="statesForm.controls['zone']">
               </div>
 
               <div class="input-group">

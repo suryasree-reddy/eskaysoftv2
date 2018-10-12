@@ -147,6 +147,7 @@ export class SubscheduleComponent implements OnInit {
 
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
+	this.formRequiredError = false;
     this.duplicateMessageParam = null;
     if (this.duplicateSchName && this.duplicateSchIndex) {
       this.duplicateMessage = "schedule.duplicateErrorMessage";
