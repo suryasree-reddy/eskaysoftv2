@@ -61,10 +61,11 @@ export class ScheduleComponent implements OnInit {
 
   validateFormOnBlur() {
     this.formRequiredError = false;
+	this.duplicateSchIndex = false;
     if (this.lastSchIndex != this.scheduleForm.value.scheduleIndex) {
       this.duplicateSchIndex = this.masterService.hasDataExist(this.scheduleList, 'scheduleIndex', parseInt(this.scheduleForm.value.scheduleIndex));
-      this.getDuplicateErrorMessages();
     }
+	this.getDuplicateErrorMessages();
   }
 
   getDuplicateErrorMessages(): void {
@@ -211,6 +212,8 @@ export class ScheduleComponent implements OnInit {
     this.editSchedule = null;
     this.deleteFlag = true;
     this.saveBtnFlag = false;
+	this.duplicateSchIndex = false;
+	this.duplicateSchName = false;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
     this.nameFlag = false;

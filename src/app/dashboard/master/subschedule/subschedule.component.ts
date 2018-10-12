@@ -35,7 +35,9 @@ export class SubscheduleComponent implements OnInit {
   public deleteFlag: boolean = true;
   public subScheduleListColumns;
   private duplicateSchName: boolean = false;
+  private duplicateSubSchName: boolean = false;
   private duplicateSchIndex: boolean = false;
+  
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   @ViewChild('focus') focusField: ElementRef;
@@ -127,6 +129,11 @@ export class SubscheduleComponent implements OnInit {
     this.scheduleForm.reset();
   }
 
+   checkForDuplicateSubScheduleName() {
+	  
+    this.duplicateSubSchName = this.masterService.hasDataExist(this.subScheduleList, 'subScheduleName', this.subScheduleForm.value.subScheduleName);
+    this.getDuplicateErrorMessages();
+  }
   checkForDuplicateScheduleName() {
     this.duplicateSchName = this.masterService.hasDataExist(this.scheduleList, 'scheduleName', this.scheduleForm.value.scheduleName);
     this.getDuplicateErrorMessages();
@@ -151,6 +158,9 @@ export class SubscheduleComponent implements OnInit {
     } else if (this.duplicateSchName) {
       this.duplicateMessage = "schedule.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.scheduleForm.value.scheduleName;
+    }else if (this.duplicateSubSchName) {
+      this.duplicateMessage = "subschedule.duplicateNameErrorMessage";
+      this.duplicateMessageParam = this.subScheduleForm.value.subScheduleName;
     }
   }
 
@@ -173,7 +183,7 @@ export class SubscheduleComponent implements OnInit {
 
   save() {
     this.formRequiredError = false;
-    if (this.subScheduleForm.valid && this.selectedSchedule && this.selectedSchedule.id) {
+    if (this.subScheduleForm.valid && this.selectedSchedule && this.selectedSchedule.id && this.duplicateMessage == null) {
       this.showConfirmationModal('Save');
     } else {
       this.requiredErrMsg();
@@ -196,8 +206,10 @@ export class SubscheduleComponent implements OnInit {
   }
 
   requiredErrMsg() {
-    this.formRequiredError = true;
-    this.formSuccess = this.formServerError = false;
+	  if (this.duplicateMessage == null) {
+		this.formRequiredError = true;
+		this.formSuccess = this.formServerError = false;
+	  }
   }
 
   serverErrMsg() {
@@ -227,6 +239,9 @@ export class SubscheduleComponent implements OnInit {
     this.deleteFlag = true;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
+	this.duplicateSchIndex = false;
+	this.duplicateSchName = false;
+	this.duplicateSubSchName = false;
     this.focusField.nativeElement.focus();
   }
 
