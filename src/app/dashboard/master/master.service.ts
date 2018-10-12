@@ -19,7 +19,7 @@ export class MasterService {
 
   constructor(private httpClient: HttpClient, private modalService: BsModalService) { }
 
-  END_POINt = 'http://183.82.119.84:8000/api/v1/';
+  END_POINt = 'https://eskaysoftapi.synectiks.com/api/v1/';
 
   getData(tragetServiceName) {
     return this.httpClient.get(this.END_POINt + tragetServiceName).subscribe(res => {

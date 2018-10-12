@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api: {
-    url: 'http://183.82.119.84:8000/api/'
+    url: 'https://eskaysoftapi.synectiks.com/api/'
   }
 };
 
