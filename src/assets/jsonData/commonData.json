@@ -51,7 +51,7 @@
   "CompanyColumns": [
     { "headerName": "Company Name", "field": "companyName" },
     { "headerName": "Company Code", "field": "companyCode" },
-    { "headerName": "Company Group", "field": "companyGroupName" },
+    { "headerName": "Company Group", "field": "companyGroup" },
     { "headerName": "Company Type", "field": "companyType" },
     { "headerName": "Company Status", "field": "companyStatus" },
     { "headerName": "Inv.Gen.Type", "field": "invGenType" },

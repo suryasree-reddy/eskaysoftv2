@@ -149,7 +149,7 @@ export class CompaniesComponent implements OnInit {
   }
 
   save() {
-  
+
       if (this.companyForm.value.id && this.selectedTypeahead && this.selectedTypeahead.id) {
         this.companyForm.value.companyGroupId = this.selectedTypeahead.id;
         this.masterService.updateRecord(this.endPoint, this.companyForm.value).subscribe(res => {

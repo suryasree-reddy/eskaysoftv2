@@ -24,7 +24,7 @@
             <div class="col-md-6 col-lt">
               <p>Company Group: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
 
-              <input id="companyGroupName" formControlName="companyGroupName" [typeahead]="typeaheadDataList" typeaheadOptionField="companyGroupName"
+              <input id="companyGroup" formControlName="companyGroup" [typeahead]="typeaheadDataList" typeaheadOptionField="companyGroup"
               [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control">
               <span class="caret"></span>
 
