@@ -37,6 +37,7 @@ export class AreasComponent implements OnInit {
   private duplicateBusExecName: boolean = false;
   public duplicateMessage: string = null;
   public childDuplicateMessage: string = null;
+  public childDuplicateMessageParam: string = null;
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
@@ -89,15 +90,16 @@ export class AreasComponent implements OnInit {
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
     this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
     this.formRequiredError = false;
     this.duplicateMessageParam = null;
     if (this.duplicateAreaName) {
       this.duplicateMessage = "areas.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.areaForm.value.areaName;
 
-    } else if (this.duplicateBusExecName) {
+    }  if (this.duplicateBusExecName) {
       this.childDuplicateMessage = "businessexecutive.duplicateNameErrorMessage";
-      this.duplicateMessageParam = this.businessExecutiveForm.value.name;
+      this.childDuplicateMessageParam = this.businessExecutiveForm.value.name;
     }
   }
 
@@ -231,6 +233,7 @@ export class AreasComponent implements OnInit {
     this.formRequiredError = false;
     this.duplicateMessage = null;
     this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
     this.focusField.nativeElement.focus();
   }
 
@@ -240,11 +243,16 @@ export class AreasComponent implements OnInit {
     this.formRequiredError = false;
     this.duplicateMessage = null;
     this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
     this.nameFlag = true;
     this.deleteFlag = false;
   }
 
   resetBusinessExecutiveForm() {
+    this.scFormRequiredError = false;
+    this.scFormServerError = false;
+    this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
     this.businessExecutiveForm.reset();
   }
 

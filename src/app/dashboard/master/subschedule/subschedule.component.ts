@@ -27,6 +27,7 @@ export class SubscheduleComponent implements OnInit {
   public nameFlag;
   subScheduleList: any = [];
   public childDuplicateMessage: string = null;
+  public childDuplicateMessageParam: string = null;
   scheduleList: any = [];
   editSubSchedule: any;
   public selectedSchedule: any;
@@ -128,7 +129,8 @@ export class SubscheduleComponent implements OnInit {
 
   resetScheduleForm() {
     this.scFormRequiredError = false;
-    this.childDuplicateMessage = null
+    this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
     this.scheduleForm.reset();
   }
 
@@ -148,11 +150,13 @@ export class SubscheduleComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
+      this.duplicateMessageParam = null;
     this.duplicateMessage = null;
-      this.childDuplicateMessage = null;
+    this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
 	this.formRequiredError = false;
   this.scFormRequiredError= false;
-    this.duplicateMessageParam = null;
+
     if (this.duplicateSubSchName) {
      this.duplicateMessage = "subschedule.duplicateNameErrorMessage";
      this.duplicateMessageParam = this.subScheduleForm.value.subScheduleName;
@@ -162,11 +166,11 @@ export class SubscheduleComponent implements OnInit {
 
     }  else if (this.duplicateSchIndex) {
       this.childDuplicateMessage = "schedule.duplicateIndexErrorMessage";
-      this.duplicateMessageParam = this.scheduleForm.value.scheduleIndex;
+      this.childDuplicateMessageParam = this.scheduleForm.value.scheduleIndex;
 
     } else if (this.duplicateSchName) {
       this.childDuplicateMessage = "schedule.duplicateNameErrorMessage";
-      this.duplicateMessageParam = this.scheduleForm.value.scheduleName;
+      this.childDuplicateMessageParam = this.scheduleForm.value.scheduleName;
     }
   }
 
@@ -247,6 +251,8 @@ export class SubscheduleComponent implements OnInit {
     this.duplicateMessage = null;
     this.childDuplicateMessage = null;
     this.duplicateMessageParam = null;
+    this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
 	this.duplicateSchIndex = false;
 	this.duplicateSchName = false;
 	this.duplicateSubSchName = false;
