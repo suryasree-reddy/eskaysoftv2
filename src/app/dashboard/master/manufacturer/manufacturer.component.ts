@@ -23,22 +23,20 @@ export class ManufacturerComponent implements OnInit {
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public nameFlag;
-  public deleteFlag: boolean =true;
+  public deleteFlag: boolean = true;
   public manufName;
   private duplicateManufName: boolean = false;
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
-
-
-
   @ViewChild('focus') focusField: ElementRef;
 
-  constructor(private fb: FormBuilder, 
+  constructor(private fb: FormBuilder,
     private translate: TranslateService,
-    private modalService: BsModalService, 
-    private masterService: MasterService) { translate.setDefaultLang('messages.en');
+    private modalService: BsModalService,
+    private masterService: MasterService) {
+      translate.setDefaultLang('messages.en');
   }
 
   ngOnInit() {
@@ -58,9 +56,10 @@ export class ManufacturerComponent implements OnInit {
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
-     if (this.duplicateManufName) {
+    this.formRequiredError = false;
+    if (this.duplicateManufName) {
       this.duplicateMessage = "manufacturer.duplicateNameErrorMessage";
-      this.duplicateMessageParam=this.manufacturerForm.value.manfacturerName;
+      this.duplicateMessageParam = this.manufacturerForm.value.manfacturerName;
     }
   }
 
@@ -85,45 +84,37 @@ export class ManufacturerComponent implements OnInit {
   }
 
   save() {
-    if (this.manufacturerForm.valid) {
-      
-        if (this.manufacturerForm.value.id) {
-          this.masterService.updateRecord(this.endPoint, this.manufacturerForm.value).subscribe(res => {
-            this.showInformationModal("Save");
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        } else {
-          this.masterService.createRecord(this.endPoint, this.manufacturerForm.value).subscribe(res => {
-            this.showInformationModal("Save");
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        }
-      
+    if (this.manufacturerForm.value.id) {
+      this.masterService.updateRecord(this.endPoint, this.manufacturerForm.value).subscribe(res => {
+        this.showInformationModal("Save");
+      }, (error) => {
+        this.serverErrMsg();
+      });
     } else {
-      this.requiredErrMsg()
+      this.masterService.createRecord(this.endPoint, this.manufacturerForm.value).subscribe(res => {
+        this.showInformationModal("Save");
+      }, (error) => {
+        this.serverErrMsg();
+      });
     }
   }
 
   saveForm() {
     this.formRequiredError = false;
-    if (this.manufacturerForm.valid ) {
+    if (this.manufacturerForm.valid && this.duplicateMessage == null) {
       this.showConfirmationModal("Save");
     } else {
-      this.serverErrMsg()
+      this.requiredErrMsg()
     }
   }
 
   delete() {
-   
-      this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
-        localStorage.removeItem('ag-activeRow');
-        this.showInformationModal("Delete");
-      }, (error) => {
-        this.serverErrMsg();
-      });
-    
+    this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
+      localStorage.removeItem('ag-activeRow');
+      this.showInformationModal("Delete");
+    }, (error) => {
+      this.serverErrMsg();
+    });
   }
 
   successMsg() {
@@ -133,8 +124,10 @@ export class ManufacturerComponent implements OnInit {
   }
 
   requiredErrMsg() {
-    this.formRequiredError = true;
-    this.formSuccess = this.formServerError = false;
+    if (this.duplicateMessage == null) {
+      this.formRequiredError = true;
+      this.formSuccess = this.formServerError = false;
+    }
   }
 
   serverErrMsg() {
@@ -146,7 +139,7 @@ export class ManufacturerComponent implements OnInit {
     this.manufacturerForm.reset();
     this.gridSelectedRow = null;
     this.nameFlag = false;
-      this.deleteFlag = true;
+    this.deleteFlag = true;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
@@ -156,10 +149,12 @@ export class ManufacturerComponent implements OnInit {
     this.gridSelectedRow = s;
     this.manufacturerForm.reset(s);
     this.nameFlag = true;
-      this.deleteFlag = false;
+    this.formRequiredError = false;
+    this.duplicateMessage = null;
+    this.deleteFlag = false;
   }
 
-   
+
   showInformationModal(eventType) {
     var msg;
     var title;
@@ -201,7 +196,7 @@ export class ManufacturerComponent implements OnInit {
       if (result) {
         if (eventType === "Delete") {
           this.delete();
-        }  else {
+        } else {
           this.save();
         }
       }

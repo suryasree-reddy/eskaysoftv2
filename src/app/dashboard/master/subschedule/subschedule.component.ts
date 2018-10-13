@@ -37,7 +37,7 @@ export class SubscheduleComponent implements OnInit {
   private duplicateSchName: boolean = false;
   private duplicateSubSchName: boolean = false;
   private duplicateSchIndex: boolean = false;
-  
+
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   @ViewChild('focus') focusField: ElementRef;
@@ -130,8 +130,7 @@ export class SubscheduleComponent implements OnInit {
   }
 
    checkForDuplicateSubScheduleName() {
-	  
-    this.duplicateSubSchName = this.masterService.hasDataExist(this.subScheduleList, 'subScheduleName', this.subScheduleForm.value.subScheduleName);
+	  this.duplicateSubSchName = this.masterService.hasDataExist(this.subScheduleList, 'subScheduleName', this.subScheduleForm.value.subScheduleName);
     this.getDuplicateErrorMessages();
   }
   checkForDuplicateScheduleName() {
@@ -249,6 +248,8 @@ export class SubscheduleComponent implements OnInit {
   editable(s) {
     this.nameFlag = true;
     this.editSubSchedule = s;
+    this.formRequiredError = false;
+    this.duplicateMessage = null;
     this.selectedSchedule = {};
     this.selectedSchedule.id = s.scheduleId;
     this.deleteFlag = false;

@@ -38,9 +38,10 @@ export class ScheduleComponent implements OnInit {
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
-     private modalService: BsModalService,
-     private translate: TranslateService,
-     private masterService: MasterService) { translate.setDefaultLang('messages.en');
+    private modalService: BsModalService,
+    private translate: TranslateService,
+    private masterService: MasterService) {
+      translate.setDefaultLang('messages.en');
   }
 
   valueChange(selectedRow: any[]): void {
@@ -61,15 +62,15 @@ export class ScheduleComponent implements OnInit {
 
   validateFormOnBlur() {
     this.formRequiredError = false;
-	this.duplicateSchIndex = false;
+    this.duplicateSchIndex = false;
     if (this.lastSchIndex != this.scheduleForm.value.scheduleIndex) {
       this.duplicateSchIndex = this.masterService.hasDataExist(this.scheduleList, 'scheduleIndex', parseInt(this.scheduleForm.value.scheduleIndex));
     }
-	this.getDuplicateErrorMessages();
+    this.getDuplicateErrorMessages();
   }
 
   getDuplicateErrorMessages(): void {
-	  this.formRequiredError = false;
+    this.formRequiredError = false;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
     if (this.duplicateSchName && this.duplicateSchIndex) {
@@ -77,11 +78,11 @@ export class ScheduleComponent implements OnInit {
 
     } else if (this.duplicateSchIndex) {
       this.duplicateMessage = "schedule.duplicateIndexErrorMessage";
-      this.duplicateMessageParam=this.scheduleForm.value.scheduleIndex;
+      this.duplicateMessageParam = this.scheduleForm.value.scheduleIndex;
 
     } else if (this.duplicateSchName) {
       this.duplicateMessage = "schedule.duplicateNameErrorMessage";
-      this.duplicateMessageParam=this.scheduleForm.value.scheduleName;
+      this.duplicateMessageParam = this.scheduleForm.value.scheduleName;
     }
   }
 
@@ -213,8 +214,8 @@ export class ScheduleComponent implements OnInit {
     this.editSchedule = null;
     this.deleteFlag = true;
     this.saveBtnFlag = false;
-	this.duplicateSchIndex = false;
-	this.duplicateSchName = false;
+    this.duplicateSchIndex = false;
+    this.duplicateSchName = false;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
     this.nameFlag = false;
@@ -232,6 +233,7 @@ export class ScheduleComponent implements OnInit {
     this.saveBtnFlag = this.deleteFlag = !this.editSchedule.deleteFlag;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
+    this.formRequiredError = false;
     this.nameFlag = true;
   }
 

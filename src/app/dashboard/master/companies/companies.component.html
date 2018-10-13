@@ -17,15 +17,17 @@
               <p class="text-danger" [textContent]="duplicateMessage" [translate]="duplicateMessage" [translateParams]="{duplicateMessageParam: duplicateMessageParam}"></p>
             </div>
           </div>
-  
+
           <div class="input-group">
             <p>Company Code: *</p>
-            <input id="companyCode" #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['customer']">
+            <input id="companyCode" #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['companyCode']">
           </div>
+
             <div class="input-group">
               <p>Company Name: *</p>
-              <input id="companyName" class="form-control">
+              <input id="companyName" class="form-control" [formControl]="companyForm.controls['companyName']">
           </div>
+
           <div>
             <div class="col-md-6 col-lt">
               <p>Company Group: *</p>
@@ -36,20 +38,22 @@
                 <input id="companyType" class="form-control" [formControl]="companyForm.controls['companyType']">
             </div>
           </div>
+
             <div class="input-group">
               <p>Company Status: *</p>
               <input id="companyStatus" class="form-control" [formControl]="companyForm.controls['companyStatus']">
           </div>
+
           <div >
-          <div class="col-md-6 col-lt">
-            <p>Inv.Gen.Type</p>
-            <input id="invGenType" class="form-control" [formControl]="companyForm.controls['invGenType']">
-        </div>
-        <div class="col-md-6 col-rt">
-          <p>Inv.Prefix</p>
-          <input id="invPrefix" class="form-control" [formControl]="companyForm.controls['invPrefix']">
-      </div>
-    </div>
+            <div class="col-md-6 col-lt">
+              <p>Inv.Gen.Type</p>
+              <input id="invGenType" class="form-control" [formControl]="companyForm.controls['invGenType']">
+            </div>
+            <div class="col-md-6 col-rt">
+              <p>Inv.Prefix</p>
+              <input id="invPrefix" class="form-control" [formControl]="companyForm.controls['invPrefix']">
+            </div>
+          </div>
               <div class="input-group">
                 <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
                 <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
@@ -57,14 +61,13 @@
               </div>
         </form>
       </div>
-  
+
       <div class="col-md-7">
         <br /><br />
-  
+
         <app-synectiks-common-grid [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [gridColumnList]="gridColumnNamesList"></app-synectiks-common-grid>
       </div>
-  
+
     </div>
-  
+
   </div>
-  

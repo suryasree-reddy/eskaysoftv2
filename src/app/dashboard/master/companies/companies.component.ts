@@ -30,12 +30,11 @@ export class CompaniesComponent implements OnInit {
     public duplicateMessageParam: string = null;
     modalRef: BsModalRef;
     message: string;
-
     @ViewChild('focus') focusField: ElementRef;
 
-    constructor(private fb: FormBuilder, 
-      private translate: TranslateService, 
-      private modalService: BsModalService, 
+    constructor(private fb: FormBuilder,
+      private translate: TranslateService,
+      private modalService: BsModalService,
       private masterService: MasterService) { translate.setDefaultLang('messages.en');
     }
 
@@ -43,7 +42,12 @@ export class CompaniesComponent implements OnInit {
       this.companyForm = this.fb.group({
         id: [],
         companyGroup: ['', Validators.required],
-        companyCode: ['', Validators.required]
+        companyCode: ['', Validators.required],
+        companyName: ['', Validators.required],
+        companyType: ['', Validators.required],
+        companyStatus: ['', Validators.required],
+        invGenType: ['', Validators.required],
+        invPrefix: ['', Validators.required]
       });
       this.loadGridData();
       this.getGridCloumsList();
@@ -62,7 +66,7 @@ export class CompaniesComponent implements OnInit {
         this.duplicateMessageParam=this.companyForm.value.companyCode;
       }
     }
-  
+
     checkForDuplicateCompanyCode() {
       this.duplicateCompanyCode = this.masterService.hasDataExist(this.gridDataList, 'companyCode', this.companyForm.value.companyCode);
       this.getDuplicateErrorMessages();
@@ -85,7 +89,6 @@ export class CompaniesComponent implements OnInit {
 
     save() {
       if (this.companyForm.valid) {
-       
           if (this.companyForm.value.id) {
             this.masterService.updateRecord(this.endPoint, this.companyForm.value).subscribe(res => {
               this.showInformationModal("Save");
@@ -99,7 +102,7 @@ export class CompaniesComponent implements OnInit {
               this.serverErrMsg();
             });
           }
-        
+
       } else {
         this.requiredErrMsg()
       }
@@ -112,17 +115,16 @@ export class CompaniesComponent implements OnInit {
       } else {
         this.serverErrMsg()
       }
-    } 
+    }
 
     delete() {
-     
         this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
           localStorage.removeItem('ag-activeRow');
           this.showInformationModal("Delete");
         }, (error) => {
           this.serverErrMsg();
         });
-      
+
     }
 
     successMsg() {
@@ -132,8 +134,10 @@ export class CompaniesComponent implements OnInit {
     }
 
     requiredErrMsg() {
-      this.formRequiredError = true;
-      this.formSuccess = this.formServerError = false;
+      if( this.duplicateMessage == null){
+        this.formRequiredError = true;
+        this.formSuccess = this.formServerError = false;
+      }
     }
 
     serverErrMsg() {
@@ -154,11 +158,13 @@ export class CompaniesComponent implements OnInit {
     editable(s) {
       this.gridSelectedRow = s;
       this.companyForm.reset(s);
+      this.formRequiredError = false;
+      this.duplicateMessage = null;
       this.nameFlag = true;
       this.deleteFlag = false;
     }
 
-     
+
   showInformationModal(eventType) {
     var msg;
     var title;

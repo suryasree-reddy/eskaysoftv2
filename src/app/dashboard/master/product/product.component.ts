@@ -20,6 +20,7 @@ export class ProductComponent implements OnInit {
   public formServerError: boolean = false;
   public nameFlag;
   public deleteFlag: boolean =true;
+  public duplicateMessage: string = null;
 
   @ViewChild('focus') focusField: ElementRef;
 
@@ -28,13 +29,13 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.productForm = this.fb.group({
+  /*  this.productForm = this.fb.group({
       id: [],
       productCategory: ['', Validators.required]
     });
     this.loadGridData();
     this.getGridCloumsList();
-    this.focusField.nativeElement.focus();
+    this.focusField.nativeElement.focus();*/
   }
 
   valueChange(selectedRow: any[]): void {
@@ -96,8 +97,10 @@ export class ProductComponent implements OnInit {
   }
 
   requiredErrMsg() {
-    this.formRequiredError = true;
-    this.formSuccess = this.formServerError = false;
+    if( this.duplicateMessage == null){
+      this.formRequiredError = true;
+      this.formSuccess = this.formServerError = false;
+    }
   }
 
   serverErrMsg() {
@@ -119,8 +122,9 @@ export class ProductComponent implements OnInit {
     this.gridSelectedRow = s;
     this.productForm.reset(s);
     this.nameFlag = true;
+    this.formRequiredError = false;
+    this.duplicateMessage = null;
       this.deleteFlag = false;
   }
 
 }
-

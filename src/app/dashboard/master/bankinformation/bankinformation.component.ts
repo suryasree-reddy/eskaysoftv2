@@ -23,21 +23,20 @@ export class BankinformationComponent implements OnInit {
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public nameFlag;
-  public deleteFlag: boolean =true;
+  public deleteFlag: boolean = true;
   public bankName;
   private duplicateBankName: boolean = false;
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
-
-
   @ViewChild('focus') focusField: ElementRef;
 
-  constructor(private fb: FormBuilder, 
+  constructor(private fb: FormBuilder,
     private translate: TranslateService,
-    private modalService: BsModalService, 
-    private masterService: MasterService) { translate.setDefaultLang('messages.en');
+    private modalService: BsModalService,
+    private masterService: MasterService) {
+    translate.setDefaultLang('messages.en');
   }
 
   ngOnInit() {
@@ -58,9 +57,10 @@ export class BankinformationComponent implements OnInit {
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
-     if (this.duplicateBankName) {
+    this.formRequiredError = false;
+    if (this.duplicateBankName) {
       this.duplicateMessage = "bankinfo.duplicateNameErrorMessage";
-      this.duplicateMessageParam=this.bankInformationForm.value.name;
+      this.duplicateMessageParam = this.bankInformationForm.value.name;
     }
   }
 
@@ -85,45 +85,38 @@ export class BankinformationComponent implements OnInit {
   }
 
   save() {
-    if (this.bankInformationForm.valid) {
-   
-        if (this.bankInformationForm.value.id) {
-          this.masterService.updateRecord(this.endPoint, this.bankInformationForm.value).subscribe(res => {
-            this.showInformationModal("Save");
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        } else {
-          this.masterService.createRecord(this.endPoint, this.bankInformationForm.value).subscribe(res => {
-            this.showInformationModal("Save");
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        }
-     
+    if (this.bankInformationForm.value.id) {
+      this.masterService.updateRecord(this.endPoint, this.bankInformationForm.value).subscribe(res => {
+        this.showInformationModal("Save");
+      }, (error) => {
+        this.serverErrMsg();
+      });
     } else {
-      this.requiredErrMsg()
+      this.masterService.createRecord(this.endPoint, this.bankInformationForm.value).subscribe(res => {
+        this.showInformationModal("Save");
+      }, (error) => {
+        this.serverErrMsg();
+      });
     }
   }
 
   saveForm() {
     this.formRequiredError = false;
-    if (this.bankInformationForm.valid  ) {
+    if (this.bankInformationForm.valid && this.duplicateMessage == null) {
       this.showConfirmationModal("Save");
     } else {
-      this.serverErrMsg()
+      this.requiredErrMsg()
     }
   }
 
   delete() {
-    
-      this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
-        localStorage.removeItem('ag-activeRow');
-        this.showInformationModal("Delete");
-      }, (error) => {
-        this.serverErrMsg();
-      });
-    
+    this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
+      localStorage.removeItem('ag-activeRow');
+      this.showInformationModal("Delete");
+    }, (error) => {
+      this.serverErrMsg();
+    });
+
   }
 
   successMsg() {
@@ -133,8 +126,10 @@ export class BankinformationComponent implements OnInit {
   }
 
   requiredErrMsg() {
-    this.formRequiredError = true;
-    this.formSuccess = this.formServerError = false;
+    if (this.duplicateMessage == null) {
+      this.formRequiredError = true;
+      this.formSuccess = this.formServerError = false;
+    }
   }
 
   serverErrMsg() {
@@ -145,6 +140,7 @@ export class BankinformationComponent implements OnInit {
   resetForm() {
     this.bankInformationForm.reset();
     this.gridSelectedRow = null;
+    this.duplicateMessage = null;
     this.nameFlag = false;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
@@ -155,11 +151,13 @@ export class BankinformationComponent implements OnInit {
   editable(s) {
     this.gridSelectedRow = s;
     this.bankInformationForm.reset(s);
+    this.formRequiredError = false;
+    this.duplicateMessage = null;
     this.nameFlag = true;
     this.deleteFlag = false;
   }
 
-  
+
   showInformationModal(eventType) {
     var msg;
     var title;
@@ -201,7 +199,7 @@ export class BankinformationComponent implements OnInit {
       if (result) {
         if (eventType === "Delete") {
           this.delete();
-        }  else {
+        } else {
           this.save();
         }
       }

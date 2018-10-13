@@ -24,7 +24,7 @@ export class AreasComponent implements OnInit {
   public gridColumnNamesList;
   public gridSelectedRow;
   public selectedTypeahead: any;
-  public deleteFlag: boolean =true;
+  public deleteFlag: boolean = true;
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public formSuccess: boolean = false;
@@ -38,7 +38,7 @@ export class AreasComponent implements OnInit {
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
-  
+
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
@@ -55,7 +55,7 @@ export class AreasComponent implements OnInit {
       areaId: [],
       areaName: ['', Validators.required],
       businessExecutiveId: [],
-      businessExecutiveName:[]
+      businessExecutiveName: []
     });
 
     this.businessExecutiveForm = this.fb.group({
@@ -86,25 +86,21 @@ export class AreasComponent implements OnInit {
     }
   }
 
-  // checkForDuplicateBusiExecName() {
-  //   this.duplicateAreaName = this.masterService.hasDataExist(this.gridDataList, 'name', this.areaForm.value.name);
-  //   this.getDuplicateErrorMessages();
-  // }
-
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
+    this.formRequiredError = false;
     this.duplicateMessageParam = null;
     if (this.duplicateAreaName) {
       this.duplicateMessage = "areas.duplicateNameErrorMessage";
-      this.duplicateMessageParam=this.areaForm.value.name;
+      this.duplicateMessageParam = this.areaForm.value.name;
 
     } else if (this.duplicateAreaName) {
       this.duplicateMessage = "areas.duplicateNameErrorMessage";
-      this.duplicateMessageParam=this.areaForm.value.name;
+      this.duplicateMessageParam = this.areaForm.value.name;
     }
   }
 
- 
+
   getGridCloumsList() {
     this.masterService.getLocalJsonData().subscribe(data => {
       data as object[];
@@ -116,7 +112,7 @@ export class AreasComponent implements OnInit {
     this.masterService.getData(this.areaEndPoint);
     this.masterService.dataObject.subscribe(list => {
       this.gridDataList = list;
-      this.gridDataList = this.masterService.mergeObjects(list,this.typeaheadDataList, 'businessExecutiveId', 'id');
+      this.gridDataList = this.masterService.mergeObjects(list, this.typeaheadDataList, 'businessExecutiveId', 'id');
       localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
     })
   }
@@ -129,7 +125,7 @@ export class AreasComponent implements OnInit {
   }
 
   loadSelectedTypeahead(event) {
-      this.selectedTypeahead = event.item;
+    this.selectedTypeahead = event.item;
   }
 
   openModal(template: TemplateRef<any>) {
@@ -139,64 +135,56 @@ export class AreasComponent implements OnInit {
   }
 
   saveBusinessExecutive() {
-      if (this.businessExecutiveForm.valid) {
-       
-          this.masterService.createRecord(this.beEndPoint, this.businessExecutiveForm.value).subscribe(res => {
-            this.modalRef.hide();
-            this.businessExecutiveForm.reset();
-          }, (error) => {
-            this.scServerErrMsg();
-          });
-        
-      } else {
-        this.scRequiredErrMsg();
-      }
+    if (this.businessExecutiveForm.valid) {
+      this.masterService.createRecord(this.beEndPoint, this.businessExecutiveForm.value).subscribe(res => {
+        this.modalRef.hide();
+        this.businessExecutiveForm.reset();
+      }, (error) => {
+        this.scServerErrMsg();
+      });
+
+    } else {
+      this.scRequiredErrMsg();
+    }
   }
 
   save() {
-    if (this.areaForm.valid) {
-     
-        if (this.areaForm.value.areaId && this.selectedTypeahead && this.selectedTypeahead.id) {
-          this.areaForm.value.businessExecutiveId = this.selectedTypeahead.id;
-          this.masterService.updateRecord(this.areaEndPoint, this.areaForm.value).subscribe(res => {
-            this.showInformationModal("Save");
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        } else {
-          this.areaForm.value.businessExecutiveId = this.selectedTypeahead.id;
-          this.masterService.createRecord(this.areaEndPoint, this.areaForm.value).subscribe(res => {
-            this.showInformationModal("Save");
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        }
-      
+
+    if (this.areaForm.value.areaId && this.selectedTypeahead && this.selectedTypeahead.id) {
+      this.areaForm.value.businessExecutiveId = this.selectedTypeahead.id;
+      this.masterService.updateRecord(this.areaEndPoint, this.areaForm.value).subscribe(res => {
+        this.showInformationModal("Save");
+      }, (error) => {
+        this.serverErrMsg();
+      });
+    } else {
+      this.areaForm.value.businessExecutiveId = this.selectedTypeahead.id;
+      this.masterService.createRecord(this.areaEndPoint, this.areaForm.value).subscribe(res => {
+        this.showInformationModal("Save");
+      }, (error) => {
+        this.serverErrMsg();
+      });
+    }
+  }
+
+
+  saveForm() {
+    this.formRequiredError = false;
+    if (this.areaForm.valid && this.duplicateMessage == null) {
+      this.showConfirmationModal("Save");
     } else {
       this.requiredErrMsg()
     }
   }
 
-  
-  saveForm() {
-    this.formRequiredError = false;
-    if (this.areaForm.valid ) {
-      this.showConfirmationModal("Save");
-    } else {
-      this.serverErrMsg()
-    }
-  }
-
-
   delete() {
-  
-      this.masterService.deleteRecord(this.areaEndPoint, this.gridSelectedRow.areaId).subscribe(res => {
-        localStorage.removeItem('ag-activeRow');
-        this.showInformationModal("Delete");
-      }, (error) => {
-        this.serverErrMsg();
-      });
-    
+    this.masterService.deleteRecord(this.areaEndPoint, this.gridSelectedRow.areaId).subscribe(res => {
+      localStorage.removeItem('ag-activeRow');
+      this.showInformationModal("Delete");
+    }, (error) => {
+      this.serverErrMsg();
+    });
+
   }
 
   successMsg() {
@@ -206,8 +194,10 @@ export class AreasComponent implements OnInit {
   }
 
   requiredErrMsg() {
-    this.formRequiredError = true;
-    this.formSuccess = this.formServerError = false;
+    if (this.duplicateMessage == null) {
+      this.formRequiredError = true;
+      this.formSuccess = this.formServerError = false;
+    }
   }
 
   serverErrMsg() {
@@ -233,12 +223,16 @@ export class AreasComponent implements OnInit {
     this.deleteFlag = true;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
+    this.formRequiredError = false;
+    this.duplicateMessage = null;
     this.focusField.nativeElement.focus();
   }
 
   editable(s) {
     this.gridSelectedRow = s;
     this.areaForm.reset(s);
+    this.formRequiredError = false;
+    this.duplicateMessage = null;
     this.nameFlag = true;
     this.deleteFlag = false;
   }
@@ -288,7 +282,7 @@ export class AreasComponent implements OnInit {
       if (result) {
         if (eventType === "Delete") {
           this.delete();
-        }  else {
+        } else {
           this.save();
         }
       }

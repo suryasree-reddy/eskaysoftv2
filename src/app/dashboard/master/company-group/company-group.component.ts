@@ -34,9 +34,9 @@ export class CompanyGroupComponent implements OnInit {
 
     @ViewChild('focus') focusField: ElementRef;
 
-    constructor(private fb: FormBuilder, 
-      private translate: TranslateService, 
-      private modalService: BsModalService, 
+    constructor(private fb: FormBuilder,
+      private translate: TranslateService,
+      private modalService: BsModalService,
       private masterService: MasterService) { translate.setDefaultLang('messages.en');
     }
 
@@ -54,9 +54,9 @@ export class CompanyGroupComponent implements OnInit {
       this.editable(selectedRow);
     }
 
-    
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
+    this.formRequiredError = false;
     this.duplicateMessageParam = null;
      if (this.duplicateCompanyGrp) {
       this.duplicateMessage = "companygroup.duplicateNameErrorMessage";
@@ -85,8 +85,8 @@ export class CompanyGroupComponent implements OnInit {
     }
 
     save() {
-      if (this.companyGroupForm.valid) {
-      
+
+
           if (this.companyGroupForm.value.id) {
             this.masterService.updateRecord(this.endPoint, this.companyGroupForm.value).subscribe(res => {
               this.showInformationModal("Save");
@@ -100,30 +100,28 @@ export class CompanyGroupComponent implements OnInit {
               this.serverErrMsg();
             });
           }
-        
+
+
+    }
+
+    saveForm() {
+      this.formRequiredError = false;
+      if (this.companyGroupForm.valid && this.duplicateMessage == null) {
+        this.showConfirmationModal("Save");
       } else {
         this.requiredErrMsg()
       }
     }
 
-    saveForm() {
-      this.formRequiredError = false;
-      if (this.companyGroupForm.valid ) {
-        this.showConfirmationModal("Save");
-      } else {
-        this.serverErrMsg()
-      }
-    }
-
     delete() {
-     
+
         this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
           localStorage.removeItem('ag-activeRow');
           this.showInformationModal("Delete");
         }, (error) => {
           this.serverErrMsg();
         });
-      
+
     }
 
     successMsg() {
@@ -133,8 +131,10 @@ export class CompanyGroupComponent implements OnInit {
     }
 
     requiredErrMsg() {
-      this.formRequiredError = true;
-      this.formSuccess = this.formServerError = false;
+      if( this.duplicateMessage == null){
+        this.formRequiredError = true;
+        this.formSuccess = this.formServerError = false;
+      }
     }
 
     serverErrMsg() {
@@ -159,10 +159,12 @@ export class CompanyGroupComponent implements OnInit {
       this.companyGroupForm.reset(s);
       this.nameFlag = true;
       this.deleteFlag = false;
+      this.formRequiredError = false;
+      this.duplicateMessage = null;
         this.saveBtnFlag = this.deleteFlag = !this.gridSelectedRow.deleteFlag;
     }
 
-     
+
   showInformationModal(eventType) {
     var msg;
     var title;

@@ -117,7 +117,7 @@ export class DistrictsComponent implements OnInit {
 
   saveState() {
     if(!this.verifyStatesDuplicates()){
-    
+
         if (this.statesForm.valid) {
           this.masterService.createRecord("states/", this.statesForm.value).subscribe(res => {
               this.modalRef.hide();
@@ -130,13 +130,13 @@ export class DistrictsComponent implements OnInit {
         } else {
           this.scRequiredErrMsg();
         }
-      
+
     }else{
       this.scDuplicateMsg();
     }
   }
 
- 
+
   verifyStatesDuplicates(){
     let stateNameList = this.statesList.map((item)=>{return item.stateName});
     let isDuplicate = this.masterService.verifyDuplicates(stateNameList, this.statesForm.value.stateName, true);
@@ -144,12 +144,12 @@ export class DistrictsComponent implements OnInit {
       let stateNameList = this.statesList.map((item)=>{return item.stateCode});
       isDuplicate = this.masterService.verifyDuplicates(stateNameList, parseInt(this.statesForm.value.stateCode), false);
     }
-    return isDuplicate;    
+    return isDuplicate;
   }
 
   verifyDistDuplicates(){
     let distNameList = this.districtsList.map((item)=>{return item.districtName});
-    return this.masterService.verifyDuplicates(distNameList, this.districtsForm.value.districtName, true);      
+    return this.masterService.verifyDuplicates(distNameList, this.districtsForm.value.districtName, true);
   }
 
   save() {
@@ -170,10 +170,10 @@ export class DistrictsComponent implements OnInit {
               this.serverErrMsg();
             });
           }
-        
+
       } else {
         this.requiredErrMsg();
-      }      
+      }
     } else{
       this.duplicateMsg();
     }
@@ -187,7 +187,7 @@ export class DistrictsComponent implements OnInit {
       this.duplicateMsg()
     }
   }
-  
+
   delete() {
 
       this.masterService.deleteRecord('districts/', this.editDistricts.districtId).subscribe(res => {
@@ -196,7 +196,7 @@ export class DistrictsComponent implements OnInit {
       }, (error) => {
         this.serverErrMsg();
       });
-    
+
   }
 
   successMsg() {
@@ -207,12 +207,14 @@ export class DistrictsComponent implements OnInit {
 
   duplicateMsg() {
     this.isduplicate = true;
-    this.formRequiredError = this.formServerError = this.formSuccess = false;    
+    this.formRequiredError = this.formServerError = this.formSuccess = false;
   }
 
   requiredErrMsg() {
-    this.formRequiredError = true;
-    this.formSuccess = this.formServerError = this.isduplicate = false;
+    if( this.duplicateMessage == null){
+      this.formRequiredError = true;
+      this.formSuccess = this.formServerError = false;
+    }
   }
 
   serverErrMsg() {
@@ -240,7 +242,9 @@ export class DistrictsComponent implements OnInit {
     this.districtsForm.reset();
     this.editDistricts = null;
     this.nameFlag = false;
-    this.deleteFlag = false;     
+    this.deleteFlag = false;
+    this.formRequiredError = false;
+    this.duplicateMessage = null;
     this.focusField.nativeElement.focus();
   }
 
@@ -248,11 +252,11 @@ export class DistrictsComponent implements OnInit {
     this.scFormServerError = this.scFormRequiredError = this.scFormSuccess = this.isStateduplicate = false;
     this.statesForm.reset();
   }
- 
+
   editable(s) {
     this.editDistricts = s;
     this.districtsForm.reset(s);
-    this.nameFlag = true;    
+    this.nameFlag = true;
     this.selectedState = {};
     this.selectedState.id = s.stateId;
     this.deleteFlag = false;

@@ -35,7 +35,7 @@ export class ProductGroupComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
      private translate: TranslateService,
-     private modalService: BsModalService,  
+     private modalService: BsModalService,
      private masterService: MasterService) {  translate.setDefaultLang('messages.en');
   }
 
@@ -85,7 +85,7 @@ export class ProductGroupComponent implements OnInit {
 
   save() {
     if (this.productGroupForm.valid) {
-     
+
         if (this.productGroupForm.value.id) {
           this.masterService.updateRecord(this.endPoint, this.productGroupForm.value).subscribe(res => {
             this.showInformationModal("Save");
@@ -99,7 +99,7 @@ export class ProductGroupComponent implements OnInit {
             this.serverErrMsg();
           });
         }
-      
+
     } else {
       this.requiredErrMsg()
     }
@@ -115,14 +115,14 @@ export class ProductGroupComponent implements OnInit {
   }
 
   delete() {
-   
+
       this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
         localStorage.removeItem('ag-activeRow');
         this.showInformationModal("Delete");
       }, (error) => {
         this.serverErrMsg();
       });
-    
+
   }
 
   successMsg() {
@@ -132,8 +132,10 @@ export class ProductGroupComponent implements OnInit {
   }
 
   requiredErrMsg() {
-    this.formRequiredError = true;
-    this.formSuccess = this.formServerError = false;
+    if( this.duplicateMessage == null){
+      this.formRequiredError = true;
+      this.formSuccess = this.formServerError = false;
+    }
   }
 
   serverErrMsg() {
@@ -155,10 +157,12 @@ export class ProductGroupComponent implements OnInit {
     this.gridSelectedRow = s;
     this.productGroupForm.reset(s);
     this.nameFlag = true;
+    this.formRequiredError = false;
+    this.duplicateMessage = null;
       this.deleteFlag = false;
   }
 
-  
+
   showInformationModal(eventType) {
     var msg;
     var title;
