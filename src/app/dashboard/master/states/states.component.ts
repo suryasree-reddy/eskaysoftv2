@@ -72,14 +72,17 @@ export class StatesComponent implements OnInit {
   }
 
   checkForDuplicateStateName() {
-    this.duplicateStateName = this.masterService.hasDataExist(this.statesList, 'stateName', this.statesForm.value.stateName);
-    if (this.duplicateStateName) {
-      const temp = this.statesForm.value.stateName;
-      const stateObj = _.filter(this.statesList, function(o) { return o.stateName.toLowerCase() == temp.toLowerCase() });
-      this.statesForm.patchValue({ stateCode: stateObj[0].stateCode })
-      this.statesForm.patchValue({ zone: stateObj[0].zone })
+    if(!this.nameFlag){
+      this.duplicateStateName = this.masterService.hasDataExist(this.statesList, 'stateName', this.statesForm.value.stateName);
+      if (this.duplicateStateName) {
+        const temp = this.statesForm.value.stateName;
+        const stateObj = _.filter(this.statesList, function(o) { return o.stateName.toLowerCase() == temp.toLowerCase() });
+        this.statesForm.patchValue({ stateCode: stateObj[0].stateCode })
+        this.statesForm.patchValue({ zone: stateObj[0].zone })
+      }
+      this.getDuplicateErrorMessages();
     }
-    this.getDuplicateErrorMessages();
+
   }
 
   checkForDuplicateStateCode() {

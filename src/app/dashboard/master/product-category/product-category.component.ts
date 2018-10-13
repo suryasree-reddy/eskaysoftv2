@@ -15,7 +15,7 @@ import * as _ from 'lodash';
 export class ProductCategoryComponent implements OnInit {
 
   public productCategoryForm: FormGroup;
-  private endPoint: string = "productCategory/";
+  private endPoint: string = "productcategory/";
   public gridDataList: any = [];
   public gridColumnNamesList;
   public gridSelectedRow;
@@ -41,8 +41,7 @@ export class ProductCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.productCategoryForm = this.fb.group({
-      id: [],
-      productCategory: ['', Validators.required],
+      productCategoryId: [],
       productCategoryName: ['', Validators.required]
     });
     this.loadGridData();
@@ -64,8 +63,11 @@ export class ProductCategoryComponent implements OnInit {
   }
 
   checkForDuplicateProdCategory() {
-    this.duplicateProdCategory = this.masterService.hasDataExist(this.gridDataList, 'productCategoryName', this.productCategoryForm.value.productCategoryName);
-    this.getDuplicateErrorMessages();
+        if(!this.nameFlag){
+        this.duplicateProdCategory = this.masterService.hasDataExist(this.gridDataList, 'productCategoryName', this.productCategoryForm.value.productCategoryName);
+        this.getDuplicateErrorMessages();
+      }
+
   }
 
   getGridCloumsList() {
@@ -84,9 +86,7 @@ export class ProductCategoryComponent implements OnInit {
   }
 
   save() {
-    if (this.productCategoryForm.valid) {
-
-        if (this.productCategoryForm.value.id) {
+      if (this.productCategoryForm.value.productCategoryId) {
           this.masterService.updateRecord(this.endPoint, this.productCategoryForm.value).subscribe(res => {
             this.showInformationModal("Save");
           }, (error) => {
@@ -100,23 +100,21 @@ export class ProductCategoryComponent implements OnInit {
           });
         }
 
-    } else {
-      this.requiredErrMsg()
-    }
+
   }
 
   saveForm() {
     this.formRequiredError = false;
-    if (this.productCategoryForm.valid ) {
+    if (this.productCategoryForm.valid && this.duplicateMessage == null ) {
       this.showConfirmationModal("Save");
     } else {
-      this.serverErrMsg()
+      this.requiredErrMsg();
     }
   }
 
   delete() {
 
-      this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
+      this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.productCategoryId).subscribe(res => {
         localStorage.removeItem('ag-activeRow');
         this.showInformationModal("Delete");
       }, (error) => {
@@ -147,8 +145,10 @@ export class ProductCategoryComponent implements OnInit {
     this.productCategoryForm.reset();
     this.gridSelectedRow = null;
     this.nameFlag = false;
-      this.deleteFlag = true;
+    this.deleteFlag = true;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
+    this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
     this.loadGridData();
     this.focusField.nativeElement.focus();
   }

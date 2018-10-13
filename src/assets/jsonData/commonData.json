@@ -60,10 +60,10 @@
     { "headerName": "Product Name", "field": "productName" }
   ],
   "ProductCategoryColumns": [
-    { "headerName": "Product Category", "field": "productCategory" }
+    { "headerName": "Product Category", "field": "productCategoryName" }
   ],
   "ProductGroupColumns": [
-    { "headerName": "Product Group", "field": "productGroup" }
+    { "headerName": "Product Group", "field": "productGroupName" }
   ]
 
 }

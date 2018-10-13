@@ -15,7 +15,7 @@ import * as _ from 'lodash';
 export class ProductGroupComponent implements OnInit {
 
   public productGroupForm: FormGroup;
-  private endPoint: string = "productGroup/";
+  private endPoint: string = "productgroup/";
   public gridDataList: any = [];
   public gridColumnNamesList;
   public gridSelectedRow;
@@ -42,7 +42,6 @@ export class ProductGroupComponent implements OnInit {
   ngOnInit() {
     this.productGroupForm = this.fb.group({
       id: [],
-      productGroup: ['', Validators.required],
       productGroupName:['', Validators.required]
     });
     this.loadGridData();
@@ -55,6 +54,7 @@ export class ProductGroupComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
+    this.formRequiredError = false;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
      if (this.duplicateProdGroup) {
@@ -64,8 +64,11 @@ export class ProductGroupComponent implements OnInit {
   }
 
   checkForDuplicateProdGroup() {
-    this.duplicateProdGroup = this.masterService.hasDataExist(this.gridDataList, 'productGroupName', this.productGroupForm.value.productGroupName);
-    this.getDuplicateErrorMessages();
+    if(!this.nameFlag){
+      this.duplicateProdGroup = this.masterService.hasDataExist(this.gridDataList, 'productGroupName', this.productGroupForm.value.productGroupName);
+      this.getDuplicateErrorMessages();
+    }
+
   }
 
   getGridCloumsList() {
@@ -84,9 +87,7 @@ export class ProductGroupComponent implements OnInit {
   }
 
   save() {
-    if (this.productGroupForm.valid) {
-
-        if (this.productGroupForm.value.id) {
+          if (this.productGroupForm.value.id) {
           this.masterService.updateRecord(this.endPoint, this.productGroupForm.value).subscribe(res => {
             this.showInformationModal("Save");
           }, (error) => {
@@ -99,18 +100,14 @@ export class ProductGroupComponent implements OnInit {
             this.serverErrMsg();
           });
         }
-
-    } else {
-      this.requiredErrMsg()
-    }
   }
 
   saveForm() {
     this.formRequiredError = false;
-    if (this.productGroupForm.valid ) {
+    if (this.productGroupForm.valid && this.duplicateMessage == null ) {
       this.showConfirmationModal("Save");
     } else {
-      this.serverErrMsg()
+      this.requiredErrMsg()
     }
   }
 
@@ -147,7 +144,8 @@ export class ProductGroupComponent implements OnInit {
     this.productGroupForm.reset();
     this.gridSelectedRow = null;
     this.nameFlag = false;
-      this.deleteFlag = true;
+    this.deleteFlag = true;
+    this.duplicateMessage = null
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();

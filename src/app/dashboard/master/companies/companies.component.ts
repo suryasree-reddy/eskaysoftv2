@@ -70,8 +70,11 @@ export class CompaniesComponent implements OnInit {
     }
 
     checkForDuplicateCompanyCode() {
-      this.duplicateCompanyCode = this.masterService.hasDataExist(this.gridDataList, 'companyCode', this.companyForm.value.companyCode);
-      this.getDuplicateErrorMessages();
+      if(!this.nameFlag){
+        this.duplicateCompanyCode = this.masterService.hasDataExist(this.gridDataList, 'companyCode', this.companyForm.value.companyCode);
+        this.getDuplicateErrorMessages();
+      }
+
     }
 
     getGridCloumsList() {

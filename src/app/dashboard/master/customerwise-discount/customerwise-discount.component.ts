@@ -67,8 +67,11 @@ export class CustomerwiseDiscountComponent implements OnInit {
   }
 
   checkForDuplicateCustomerName() {
-    this.duplicateCustomerName = this.masterService.hasDataExist(this.gridDataList, 'customer', this.customerDiscountForm.value.customer);
-    this.getDuplicateErrorMessages();
+        if(!this.nameFlag){
+        this.duplicateCustomerName = this.masterService.hasDataExist(this.gridDataList, 'customer', this.customerDiscountForm.value.customer);
+        this.getDuplicateErrorMessages();
+      }
+
   }
 
   getGridCloumsList() {

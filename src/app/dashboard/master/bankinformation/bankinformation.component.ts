@@ -65,8 +65,10 @@ export class BankinformationComponent implements OnInit {
   }
 
   checkForDuplicateBankName() {
-    this.duplicateBankName = this.masterService.hasDataExist(this.gridDataList, 'name', this.bankInformationForm.value.name);
-    this.getDuplicateErrorMessages();
+      if(!this.nameFlag){
+        this.duplicateBankName = this.masterService.hasDataExist(this.gridDataList, 'name', this.bankInformationForm.value.name);
+        this.getDuplicateErrorMessages();
+      }
   }
 
   getGridCloumsList() {

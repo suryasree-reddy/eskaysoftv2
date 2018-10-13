@@ -135,8 +135,11 @@ export class SubscheduleComponent implements OnInit {
   }
 
    checkForDuplicateSubScheduleName() {
-	  this.duplicateSubSchName = this.masterService.hasDataExist(this.subScheduleList, 'subScheduleName', this.subScheduleForm.value.subScheduleName);
-    this.getDuplicateErrorMessages();
+     if(!this.nameFlag){
+       this.duplicateSubSchName = this.masterService.hasDataExist(this.subScheduleList, 'subScheduleName', this.subScheduleForm.value.subScheduleName);
+       this.getDuplicateErrorMessages();
+     }
+
   }
   checkForDuplicateScheduleName() {
     this.duplicateSchName = this.masterService.hasDataExist(this.scheduleList, 'scheduleName', this.scheduleForm.value.scheduleName);

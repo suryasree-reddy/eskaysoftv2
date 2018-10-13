@@ -83,8 +83,10 @@ export class AreasComponent implements OnInit {
 
   validateFormOnBlur() {
     this.formRequiredError = false;
-      this.duplicateAreaName = this.masterService.hasDataExist(this.gridDataList, 'areaName', this.areaForm.value.areaName);
-      this.getDuplicateErrorMessages();
+      if(!this.nameFlag){
+        this.duplicateAreaName = this.masterService.hasDataExist(this.gridDataList, 'areaName', this.areaForm.value.areaName);
+        this.getDuplicateErrorMessages();
+      }
   }
 
   getDuplicateErrorMessages(): void {

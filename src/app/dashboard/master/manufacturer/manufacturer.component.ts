@@ -64,8 +64,11 @@ export class ManufacturerComponent implements OnInit {
   }
 
   checkForDuplicateManufName() {
-    this.duplicateManufName = this.masterService.hasDataExist(this.gridDataList, 'manfacturerName', this.manufacturerForm.value.manfacturerName);
-    this.getDuplicateErrorMessages();
+        if(!this.nameFlag){
+        this.duplicateManufName = this.masterService.hasDataExist(this.gridDataList, 'manfacturerName', this.manufacturerForm.value.manfacturerName);
+        this.getDuplicateErrorMessages();
+      }
+
   }
 
   getGridCloumsList() {

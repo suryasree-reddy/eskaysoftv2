@@ -98,10 +98,11 @@ export class DistrictsComponent implements OnInit {
   }
 
   checkForDuplicateDistName() {
-    this.duplicateDistName = this.masterService.hasDataExist(this.districtsList, 'districtName', this.districtsForm.value.districtName);
-    this.getDuplicateErrorMessages();
+        if(!this.nameFlag){
+        this.duplicateDistName = this.masterService.hasDataExist(this.districtsList, 'districtName', this.districtsForm.value.districtName);
+        this.getDuplicateErrorMessages();
+      }
   }
-
 
   loadStatesData() {
     this.masterService.getParentData("states/").subscribe(list => {

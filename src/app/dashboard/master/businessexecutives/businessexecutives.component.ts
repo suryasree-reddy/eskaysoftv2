@@ -83,8 +83,11 @@ export class BusinessexecutivesComponent implements OnInit {
   }
 
   checkForDuplicateBusiExecName() {
-    this.duplicateBusExecName = this.masterService.hasDataExist(this.gridDataList, 'name', this.businessExecutiveForm.value.name);
-    this.getDuplicateErrorMessages();
+        if(!this.nameFlag){
+        this.duplicateBusExecName = this.masterService.hasDataExist(this.gridDataList, 'name', this.businessExecutiveForm.value.name);
+        this.getDuplicateErrorMessages();
+      }
+
   }
 
   getGridCloumsList() {

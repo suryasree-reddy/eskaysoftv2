@@ -65,8 +65,11 @@ export class CompanyGroupComponent implements OnInit {
   }
 
   checkForDuplicateCompanyGrp() {
-    this.duplicateCompanyGrp = this.masterService.hasDataExist(this.gridDataList, 'companyGroup', this.companyGroupForm.value.companyGroup);
-    this.getDuplicateErrorMessages();
+      if(!this.nameFlag){
+        this.duplicateCompanyGrp = this.masterService.hasDataExist(this.gridDataList, 'companyGroup', this.companyGroupForm.value.companyGroup);
+        this.getDuplicateErrorMessages();
+      }
+
   }
 
     getGridCloumsList() {

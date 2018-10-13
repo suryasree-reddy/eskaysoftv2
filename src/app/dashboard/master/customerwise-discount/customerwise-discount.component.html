@@ -6,7 +6,7 @@
         <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
         [formServerError]="formServerError" [duplicateMessage]="duplicateMessage"
          [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
-         
+
         <div class="input-group">
           <p>Customer</p>
           <input id="customer" #focus [readonly]="nameFlag" (blur)="checkForDuplicateCustomerName()" class="form-control"  [formControl]="customerDiscountForm.controls['customer']">

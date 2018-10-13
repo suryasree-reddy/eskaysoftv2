@@ -65,8 +65,8 @@ export class ScheduleComponent implements OnInit {
     this.duplicateSchIndex = false;
     if (this.lastSchIndex != this.scheduleForm.value.scheduleIndex) {
       this.duplicateSchIndex = this.masterService.hasDataExist(this.scheduleList, 'scheduleIndex', parseInt(this.scheduleForm.value.scheduleIndex));
+      this.getDuplicateErrorMessages();
     }
-    this.getDuplicateErrorMessages();
   }
 
   getDuplicateErrorMessages(): void {
@@ -87,8 +87,11 @@ export class ScheduleComponent implements OnInit {
   }
 
   checkForDuplicateScheduleName() {
-    this.duplicateSchName = this.masterService.hasDataExist(this.scheduleList, 'scheduleName', this.scheduleForm.value.scheduleName);
-    this.getDuplicateErrorMessages();
+    if(!this.nameFlag){
+      this.duplicateSchName = this.masterService.hasDataExist(this.scheduleList, 'scheduleName', this.scheduleForm.value.scheduleName);
+      this.getDuplicateErrorMessages();
+    }
+
   }
 
   loadGridData() {
