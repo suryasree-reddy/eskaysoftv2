@@ -82,10 +82,8 @@ export class AreasComponent implements OnInit {
 
   validateFormOnBlur() {
     this.formRequiredError = false;
-    if (this.areaName != this.businessExecutiveForm.value.name) {
-      this.duplicateAreaName = this.masterService.hasDataExist(this.gridDataList, 'name', this.areaForm.value.name);
+      this.duplicateAreaName = this.masterService.hasDataExist(this.gridDataList, 'areaName', this.areaForm.value.areaName);
       this.getDuplicateErrorMessages();
-    }
   }
 
   getDuplicateErrorMessages(): void {
@@ -95,7 +93,7 @@ export class AreasComponent implements OnInit {
     this.duplicateMessageParam = null;
     if (this.duplicateAreaName) {
       this.duplicateMessage = "areas.duplicateNameErrorMessage";
-      this.duplicateMessageParam = this.areaForm.value.name;
+      this.duplicateMessageParam = this.areaForm.value.areaName;
 
     } else if (this.duplicateBusExecName) {
       this.childDuplicateMessage = "businessexecutive.duplicateNameErrorMessage";

@@ -20,7 +20,7 @@
 
           <div class="input-group">
             <p>Area Name: *</p>
-            <input id="areaName" #focus [readonly]="nameFlag" (blur)="validateFormOnBlur"  class="form-control" [formControl]="areaForm.controls['areaName']">
+            <input id="areaName" #focus [readonly]="nameFlag" (blur)="validateFormOnBlur()"  class="form-control" [formControl]="areaForm.controls['areaName']">
           </div>
 
           <div class="input-group">

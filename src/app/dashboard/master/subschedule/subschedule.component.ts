@@ -118,7 +118,6 @@ export class SubscheduleComponent implements OnInit {
 
   saveScheduleForm() {
     this.masterService.createRecord("schedules/", this.scheduleForm.value).subscribe(res => {
-
       this.showInformationModal("SaveSchedule");
       this.modalRef.hide();
       this.scheduleForm.reset();
@@ -126,7 +125,11 @@ export class SubscheduleComponent implements OnInit {
       this.scServerErrMsg();
     });
   }
+
   resetScheduleForm() {
+    this.scFormRequiredError = false;
+    this.childDuplicateMessage= false;
+    this.childDuplicateMessage = null
     this.scheduleForm.reset();
   }
 
