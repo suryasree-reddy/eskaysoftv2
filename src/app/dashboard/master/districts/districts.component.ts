@@ -146,11 +146,8 @@ export class DistrictsComponent implements OnInit {
   }
 
   checkForDuplicateStateCode() {
-    this.duplicateStateCode = false;
-    if(this.prevStateCode != this.statesForm.value.stateCode){
-      this.duplicateStateCode = this.masterService.hasDataExist(this.statesList, 'stateCode', parseInt(this.statesForm.value.stateCode));
-    }
-      this.getDuplicateErrorMessages();
+    this.duplicateStateCode = this.masterService.hasDataExist(this.statesList, 'stateCode', parseInt(this.statesForm.value.stateCode));
+    this.getDuplicateErrorMessages();
   }
 
   checkForDuplicateStateName() {
