@@ -153,19 +153,20 @@ export class SubscheduleComponent implements OnInit {
 	this.formRequiredError = false;
   this.scFormRequiredError= false;
     this.duplicateMessageParam = null;
+    if (this.duplicateSubSchName) {
+     this.duplicateMessage = "subschedule.duplicateNameErrorMessage";
+     this.duplicateMessageParam = this.subScheduleForm.value.subScheduleName;
+   }
     if (this.duplicateSchName && this.duplicateSchIndex) {
       this.childDuplicateMessage = "schedule.duplicateErrorMessage";
 
-    } else if (this.duplicateSchIndex) {
+    }  else if (this.duplicateSchIndex) {
       this.childDuplicateMessage = "schedule.duplicateIndexErrorMessage";
       this.duplicateMessageParam = this.scheduleForm.value.scheduleIndex;
 
     } else if (this.duplicateSchName) {
       this.childDuplicateMessage = "schedule.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.scheduleForm.value.scheduleName;
-    }else if (this.duplicateSubSchName) {
-      this.duplicateMessage = "subschedule.duplicateNameErrorMessage";
-      this.duplicateMessageParam = this.subScheduleForm.value.subScheduleName;
     }
   }
 

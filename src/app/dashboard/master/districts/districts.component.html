@@ -48,7 +48,7 @@
 
         <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
         [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
-         [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+         [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
       <div class="input-group">
           <p>State Name: *</p>
@@ -56,7 +56,7 @@
       </div>
       <div class="input-group">
           <p>Code: *</p>
-          <input id="stateCode" class="form-control" [formControl]="statesForm.controls['stateCode']">
+          <input id="stateCode" class="form-control" (blur)="checkForDuplicateStateCode()" [formControl]="statesForm.controls['stateCode']">
         </div>
         <div class="input-group">
             <p>Zone: *</p>

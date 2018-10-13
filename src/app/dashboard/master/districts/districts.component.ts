@@ -36,6 +36,7 @@ export class DistrictsComponent implements OnInit {
   private duplicateDistName: boolean = false;
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
+  public childDuplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
   public childDuplicateMessage: string = null;
@@ -81,15 +82,18 @@ export class DistrictsComponent implements OnInit {
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
+    this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
+
      if (this.duplicateDistName) {
       this.duplicateMessage = "districts.duplicateNameErrorMessage";
       this.duplicateMessageParam=this.districtsForm.value.districtName;
-    }else if (this.duplicateStateName) {
+    } if (this.duplicateStateName) {
       this.childDuplicateMessage = "states.duplicateNameErrorMessage";
-      this.duplicateMessageParam = this.statesForm.value.stateName;
+      this.childDuplicateMessageParam = this.statesForm.value.stateName;
     } else if (this.duplicateStateCode) {
       this.childDuplicateMessage = "states.duplicateCodeErrorMessage";
-      this.duplicateMessageParam = this.statesForm.value.stateCode;
+      this.childDuplicateMessageParam = this.statesForm.value.stateCode;
     }
   }
 
@@ -125,7 +129,7 @@ export class DistrictsComponent implements OnInit {
   }
 
   saveState() {
-    
+
 
         if (this.statesForm.valid) {
           this.masterService.createRecord("states/", this.statesForm.value).subscribe(res => {
@@ -139,8 +143,14 @@ export class DistrictsComponent implements OnInit {
         } else {
           this.scRequiredErrMsg();
         }
+  }
 
-
+  checkForDuplicateStateCode() {
+    this.duplicateStateCode = false;
+    if(this.prevStateCode != this.statesForm.value.stateCode){
+      this.duplicateStateCode = this.masterService.hasDataExist(this.statesList, 'stateCode', parseInt(this.statesForm.value.stateCode));
+    }
+      this.getDuplicateErrorMessages();
   }
 
   checkForDuplicateStateName() {
@@ -255,6 +265,9 @@ export class DistrictsComponent implements OnInit {
     this.deleteFlag = false;
     this.formRequiredError = false;
     this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
+    this.childDuplicateMessageParam = null;
+
     this.focusField.nativeElement.focus();
   }
 
