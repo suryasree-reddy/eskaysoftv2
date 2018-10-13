@@ -16,6 +16,8 @@ export class DistrictsComponent implements OnInit {
   public districtsForm: FormGroup;
   public statesForm: FormGroup;
   public formSuccess: boolean = false;
+  private duplicateStateName: boolean = false;
+  private duplicateStateCode: boolean = false;
   public isduplicate: boolean = false;
   public isStateduplicate: boolean = false;
   public formRequiredError: boolean = false;
@@ -36,6 +38,7 @@ export class DistrictsComponent implements OnInit {
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
+  public childDuplicateMessage: string = null;
 
   @ViewChild('focus') focusField: ElementRef;
 
@@ -81,6 +84,12 @@ export class DistrictsComponent implements OnInit {
      if (this.duplicateDistName) {
       this.duplicateMessage = "districts.duplicateNameErrorMessage";
       this.duplicateMessageParam=this.districtsForm.value.districtName;
+    }else if (this.duplicateStateName) {
+      this.childDuplicateMessage = "states.duplicateNameErrorMessage";
+      this.duplicateMessageParam = this.statesForm.value.stateName;
+    } else if (this.duplicateStateCode) {
+      this.childDuplicateMessage = "states.duplicateCodeErrorMessage";
+      this.duplicateMessageParam = this.statesForm.value.stateCode;
     }
   }
 
@@ -116,7 +125,7 @@ export class DistrictsComponent implements OnInit {
   }
 
   saveState() {
-    if(!this.verifyStatesDuplicates()){
+    
 
         if (this.statesForm.valid) {
           this.masterService.createRecord("states/", this.statesForm.value).subscribe(res => {
@@ -131,21 +140,20 @@ export class DistrictsComponent implements OnInit {
           this.scRequiredErrMsg();
         }
 
-    }else{
-      this.scDuplicateMsg();
-    }
+
   }
 
-
-  verifyStatesDuplicates(){
-    let stateNameList = this.statesList.map((item)=>{return item.stateName});
-    let isDuplicate = this.masterService.verifyDuplicates(stateNameList, this.statesForm.value.stateName, true);
-    if(!isDuplicate){
-      let stateNameList = this.statesList.map((item)=>{return item.stateCode});
-      isDuplicate = this.masterService.verifyDuplicates(stateNameList, parseInt(this.statesForm.value.stateCode), false);
+  checkForDuplicateStateName() {
+    this.duplicateStateName = this.masterService.hasDataExist(this.statesList, 'stateName', this.statesForm.value.stateName);
+    if (this.duplicateStateName) {
+      const temp = this.statesForm.value.stateName;
+      const stateObj = _.filter(this.statesList, function(o) { return o.stateName.toLowerCase() == temp.toLowerCase() });
+      this.statesForm.patchValue({ stateCode: stateObj[0].stateCode })
+      this.statesForm.patchValue({ zone: stateObj[0].zone })
     }
-    return isDuplicate;
+    this.getDuplicateErrorMessages();
   }
+
 
   verifyDistDuplicates(){
     let distNameList = this.districtsList.map((item)=>{return item.districtName});
@@ -235,11 +243,13 @@ export class DistrictsComponent implements OnInit {
     this.scFormServerError = true;
     this.scFormRequiredError = this.scFormSuccess = this.isStateduplicate = false;
   }
+
   resetForm() {
     this.loadGridData();
     this.loadStatesData();
     this.formRequiredError = this.formServerError = this.formSuccess = this.isduplicate = false;
     this.districtsForm.reset();
+    this.childDuplicateMessage = null;
     this.editDistricts = null;
     this.nameFlag = false;
     this.deleteFlag = false;
@@ -258,6 +268,7 @@ export class DistrictsComponent implements OnInit {
     this.districtsForm.reset(s);
     this.nameFlag = true;
     this.selectedState = {};
+    this.childDuplicateMessage = null;
     this.selectedState.id = s.stateId;
     this.deleteFlag = false;
     this.districtsForm.reset(s);

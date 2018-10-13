@@ -15,7 +15,7 @@ import * as _ from 'lodash';
 export class CustomerwiseDiscountComponent implements OnInit {
 
   public customerDiscountForm: FormGroup;
-  private endPoint: string = "customerdiscount/";
+  private endPoint: string = "customerwisediscount/";
   public gridDataList: any = [];
   public gridColumnNamesList;
   public gridSelectedRow;

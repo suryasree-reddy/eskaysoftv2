@@ -3,20 +3,9 @@
       <div class="col-md-5">
         <h3>Company Group</h3>
         <form [formGroup]="companyGroupForm" (ngSubmit)="saveForm()" autocomplete="off">
-          <div class="row">
-            <div class="error-text col-xs-12" *ngIf="formSuccess">
-              <p class="text-success">{{'message.save' | translate }}</p>
-            </div>
-            <div class="error-text col-xs-12" *ngIf="formRequiredError">
-              <p class="text-danger">{{'message.mandatory' | translate }}</p>
-            </div>
-            <div class="error-text col-xs-12" *ngIf="formServerError">
-              <p class="text-danger">{{'message.error' | translate }}</p>
-            </div>
-            <div class="error-text col-xs-12" *ngIf="duplicateMessage != null">
-              <p class="text-danger" [textContent]="duplicateMessage" [translate]="duplicateMessage" [translateParams]="{duplicateMessageParam: duplicateMessageParam}"></p>
-            </div>
-          </div>
+          <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
+          [formServerError]="formServerError" [duplicateMessage]="duplicateMessage"
+           [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
           <div class="input-group">
             <p>Company Group: *</p>
