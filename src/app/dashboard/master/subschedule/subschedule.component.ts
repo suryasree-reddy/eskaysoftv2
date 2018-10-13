@@ -128,7 +128,7 @@ export class SubscheduleComponent implements OnInit {
 
   resetScheduleForm() {
     this.scFormRequiredError = false;
-    this.childDuplicateMessage= false;
+    //this.childDuplicateMessage= false;
     this.childDuplicateMessage = null
     this.scheduleForm.reset();
   }
