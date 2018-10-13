@@ -7,23 +7,25 @@
           [formServerError]="formServerError" [duplicateMessage]="duplicateMessage"
            [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
+           <div class="input-group">
+             <p>Company Name: *</p>
+             <input id="companyName"  #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyName()"  class="form-control" [formControl]="companyForm.controls['companyName']">
+         </div>
+
+
           <div class="input-group">
             <p>Company Code: *</p>
-            <input id="companyCode" #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['companyCode']">
+            <input id="companyCode" (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['companyCode']">
           </div>
 
-            <div class="input-group">
-              <p>Company Name: *</p>
-              <input id="companyName" class="form-control" [formControl]="companyForm.controls['companyName']">
-          </div>
 
           <div>
 
             <div class="col-md-6 col-lt">
               <p>Company Group: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
 
-              <input id="companyGroup" formControlName="companyGroup" [typeahead]="scheduleList" typeaheadOptionField="companyGroup"
-              [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control">
+              <input id="companyGroupName" formControlName="companyGroupName" [typeahead]="typeaheadDataList" typeaheadOptionField="companyGroupName"
+              [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control">
               <span class="caret"></span>
 
             </div>
@@ -66,3 +68,30 @@
     </div>
 
   </div>
+
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Create Company Group </h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="companyGroupForm" (ngSubmit)="saveChildForm()" autocomplete="off">
+        <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
+        [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
+         [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+
+        <div class="input-group">
+          <p>Company Group: *</p>
+          <input id="companyGroup" #focus (blur)="checkForDuplicateCompanyGrp()" class="form-control"
+          [formControl]="companyGroupForm.controls['companyGroup']">
+        </div>
+
+            <div class="input-group">
+              <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
+              <button type="submit"  class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
+            </div>
+      </form>
+    </div>
+  </ng-template>

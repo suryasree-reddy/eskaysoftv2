@@ -83,7 +83,9 @@
     "deleteConfirmationMessage" : "Are you sure you want to delete Company?",
     "saveInformationMessage": "Company record has been saved successfully.",
     "deleteInformationMessage": "Company record has been deleted successfully.",
-    "duplicateNameErrorMessage":"The Company Code '{{duplicateMessageParam}}' already exists with this name."
+    "duplicateCodeErrorMessage":"The Company Code '{{duplicateMessageParam}}' already exists with this code.",
+    "duplicateNameErrorMessage":"The Company Name '{{duplicateMessageParam}}' already exists with this code.",
+    "duplicateErrorMessage":"The Company Name & Company Code already exists."
   },
   "customerdiscount": {
     "saveConfirmationMessage": "Are you sure you want to save Customerwise Discount?",

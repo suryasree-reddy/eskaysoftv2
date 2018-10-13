@@ -69,7 +69,6 @@ export class CompanyGroupComponent implements OnInit {
         this.duplicateCompanyGrp = this.masterService.hasDataExist(this.gridDataList, 'companyGroup', this.companyGroupForm.value.companyGroup);
         this.getDuplicateErrorMessages();
       }
-
   }
 
     getGridCloumsList() {
@@ -88,9 +87,7 @@ export class CompanyGroupComponent implements OnInit {
     }
 
     save() {
-
-
-          if (this.companyGroupForm.value.id) {
+      if (this.companyGroupForm.value.id) {
             this.masterService.updateRecord(this.endPoint, this.companyGroupForm.value).subscribe(res => {
               this.showInformationModal("Save");
             }, (error) => {
@@ -103,8 +100,6 @@ export class CompanyGroupComponent implements OnInit {
               this.serverErrMsg();
             });
           }
-
-
     }
 
     saveForm() {

@@ -78,7 +78,7 @@ export class AreasComponent implements OnInit {
   loadTypeaheadData() {
     this.masterService.getParentData(this.beEndPoint).subscribe(list => {
       this.typeaheadDataList = list;
-    })
+    });
   }
 
   validateFormOnBlur() {
