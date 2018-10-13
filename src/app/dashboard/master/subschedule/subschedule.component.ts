@@ -26,6 +26,7 @@ export class SubscheduleComponent implements OnInit {
   public scFormSuccess: boolean = false;
   public nameFlag;
   subScheduleList: any = [];
+  public childDuplicateMessage: string = null;
   scheduleList: any = [];
   editSubSchedule: any;
   public selectedSchedule: any;
@@ -108,7 +109,7 @@ export class SubscheduleComponent implements OnInit {
   }
 
   saveSchedule() {
-    if (this.scheduleForm.valid && this.duplicateMessage == null) {
+    if (this.scheduleForm.valid && this.childDuplicateMessage == null) {
       this.showConfirmationModal("SaveSchedule");
     } else {
       this.scRequiredErrMsg();
@@ -146,17 +147,19 @@ export class SubscheduleComponent implements OnInit {
 
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
+      this.childDuplicateMessage = null;
 	this.formRequiredError = false;
+  this.scFormRequiredError= false;
     this.duplicateMessageParam = null;
     if (this.duplicateSchName && this.duplicateSchIndex) {
-      this.duplicateMessage = "schedule.duplicateErrorMessage";
+      this.childDuplicateMessage = "schedule.duplicateErrorMessage";
 
     } else if (this.duplicateSchIndex) {
-      this.duplicateMessage = "schedule.duplicateIndexErrorMessage";
+      this.childDuplicateMessage = "schedule.duplicateIndexErrorMessage";
       this.duplicateMessageParam = this.scheduleForm.value.scheduleIndex;
 
     } else if (this.duplicateSchName) {
-      this.duplicateMessage = "schedule.duplicateNameErrorMessage";
+      this.childDuplicateMessage = "schedule.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.scheduleForm.value.scheduleName;
     }else if (this.duplicateSubSchName) {
       this.duplicateMessage = "subschedule.duplicateNameErrorMessage";
@@ -218,7 +221,7 @@ export class SubscheduleComponent implements OnInit {
   }
 
   scRequiredErrMsg() {
-    if (this.duplicateMessage == null) {
+    if (this.childDuplicateMessage == null) {
       this.scFormRequiredError = true;
       this.scFormSuccess = this.scFormServerError = false;
     }
@@ -234,10 +237,12 @@ export class SubscheduleComponent implements OnInit {
     this.loadScheduleData();
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.subScheduleForm.reset();
+    this.scFormRequiredError= false;
     this.editSubSchedule = null;
     this.nameFlag = false;
     this.deleteFlag = true;
     this.duplicateMessage = null;
+    this.childDuplicateMessage = null;
     this.duplicateMessageParam = null;
 	this.duplicateSchIndex = false;
 	this.duplicateSchName = false;
@@ -250,6 +255,7 @@ export class SubscheduleComponent implements OnInit {
     this.editSubSchedule = s;
     this.formRequiredError = false;
     this.duplicateMessage = null;
+    this.childDuplicateMessage = null;
     this.selectedSchedule = {};
     this.selectedSchedule.id = s.scheduleId;
     this.deleteFlag = false;

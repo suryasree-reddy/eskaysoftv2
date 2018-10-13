@@ -65,11 +65,14 @@
           <div class="error-text col-xs-12" *ngIf="formServerError">
             <p class="text-danger">{{'message.error' | translate }}</p>
           </div>
+          <div class="error-text col-xs-12" *ngIf="childDuplicateMessage != null">
+            <p class="text-danger" [textContent]="duplicateMessage" [translate]="childDuplicateMessage" [translateParams]="{duplicateMessageParam: duplicateMessageParam}"></p>
+          </div>
         </div>
 
         <div class="input-group">
         	<p>Name: *</p>
-        	<input id="name" class="form-control" [formControl]="businessExecutiveForm.controls['name']">
+        	<input id="name" class="form-control" (blur) = "checkForDuplicateBusiExecName()" [formControl]="businessExecutiveForm.controls['name']">
         </div>
 
         <div class="input-group">

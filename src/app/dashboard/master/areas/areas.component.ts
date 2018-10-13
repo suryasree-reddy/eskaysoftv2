@@ -34,7 +34,9 @@ export class AreasComponent implements OnInit {
   public nameFlag;
   public areaName;
   private duplicateAreaName: boolean = false;
+  private duplicateBusExecName: boolean = false;
   public duplicateMessage: string = null;
+  public childDuplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
@@ -88,18 +90,23 @@ export class AreasComponent implements OnInit {
 
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
+    this.childDuplicateMessage = null;
     this.formRequiredError = false;
     this.duplicateMessageParam = null;
     if (this.duplicateAreaName) {
       this.duplicateMessage = "areas.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.areaForm.value.name;
 
-    } else if (this.duplicateAreaName) {
-      this.duplicateMessage = "areas.duplicateNameErrorMessage";
-      this.duplicateMessageParam = this.areaForm.value.name;
+    } else if (this.duplicateBusExecName) {
+      this.childDuplicateMessage = "businessexecutive.duplicateNameErrorMessage";
+      this.duplicateMessageParam = this.businessExecutiveForm.value.name;
     }
   }
 
+  checkForDuplicateBusiExecName() {
+    this.duplicateBusExecName = this.masterService.hasDataExist(this.typeaheadDataList, 'name', this.businessExecutiveForm.value.name);
+    this.getDuplicateErrorMessages();
+  }
 
   getGridCloumsList() {
     this.masterService.getLocalJsonData().subscribe(data => {
@@ -225,6 +232,7 @@ export class AreasComponent implements OnInit {
     this.loadGridData();
     this.formRequiredError = false;
     this.duplicateMessage = null;
+    this.childDuplicateMessage = null;
     this.focusField.nativeElement.focus();
   }
 
@@ -233,6 +241,7 @@ export class AreasComponent implements OnInit {
     this.areaForm.reset(s);
     this.formRequiredError = false;
     this.duplicateMessage = null;
+    this.childDuplicateMessage = null;
     this.nameFlag = true;
     this.deleteFlag = false;
   }
