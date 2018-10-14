@@ -52,7 +52,9 @@ export class SubscheduleComponent implements OnInit {
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
   }
-
+  onInitialDataLoad(dataList:any[]){
+    this.subScheduleList = dataList;
+  }
   ngOnInit() {
     this.scheduleForm = this.fb.group({
       id: [],
@@ -68,7 +70,7 @@ export class SubscheduleComponent implements OnInit {
       scheduleId: [],
       scheduleName: []
     });
-    this.loadGriddata();
+    //this.loadGriddata();
     this.loadScheduleData();
     this.focusField.nativeElement.focus();
     this.getScheduleTypes();

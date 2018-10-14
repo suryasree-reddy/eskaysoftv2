@@ -45,7 +45,7 @@ export class CompanyGroupComponent implements OnInit {
         id: [],
         companyGroup: ['', Validators.required]
       });
-      this.loadGridData();
+      //this.loadGridData();
       this.getGridCloumsList();
       this.focusField.nativeElement.focus();
     }
@@ -53,7 +53,9 @@ export class CompanyGroupComponent implements OnInit {
     valueChange(selectedRow: any[]): void {
       this.editable(selectedRow);
     }
-
+    onInitialDataLoad(dataList:any[]){
+      this.gridDataList = dataList;
+    }
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
     this.formRequiredError = false;

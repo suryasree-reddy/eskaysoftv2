@@ -13,6 +13,7 @@ import * as _ from 'lodash';
   templateUrl: './districts.component.html'
 })
 export class DistrictsComponent implements OnInit {
+  private endPoint: string = "districts/";
   public districtsForm: FormGroup;
   public statesForm: FormGroup;
   public formSuccess: boolean = false;
@@ -53,6 +54,10 @@ export class DistrictsComponent implements OnInit {
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
   }
+
+  onInitialDataLoad(dataList:any[]){
+    this.districtsList = dataList;
+  }
   openModal(template: TemplateRef<any>) {
     this.resetStatesForm();
     this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
@@ -73,7 +78,7 @@ export class DistrictsComponent implements OnInit {
     });
 
     this.loadStatesData();
-    this.loadGridData();
+    //this.loadGridData();
     this.focusField.nativeElement.focus();
     this.getDistrictsTypes();
   }
@@ -115,7 +120,7 @@ export class DistrictsComponent implements OnInit {
   }
 
   loadGridData() {
-    this.masterService.getData("districts/");
+    this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
       this.districtsList = list;
       localStorage.setItem('rowDataLength', JSON.stringify(this.districtsList.length));
@@ -174,13 +179,13 @@ export class DistrictsComponent implements OnInit {
       if (this.districtsForm.valid && this.selectedState && this.selectedState.id ) {
           this.districtsForm.value.statesId = this.selectedState.id;
           if (this.districtsForm.value.districtId) {
-            this.masterService.updateRecord('districts/', this.districtsForm.value).subscribe(res => {
+            this.masterService.updateRecord(this.endPoint, this.districtsForm.value).subscribe(res => {
               this.showInformationModal("Save");
             }, (error) => {
               this.serverErrMsg();
             });
           } else {
-            this.masterService.createRecord('districts/', this.districtsForm.value).subscribe(res => {
+            this.masterService.createRecord(this.endPoint, this.districtsForm.value).subscribe(res => {
               this.showInformationModal("Save");
             }, (error) => {
               this.serverErrMsg();
@@ -206,7 +211,7 @@ export class DistrictsComponent implements OnInit {
 
   delete() {
 
-      this.masterService.deleteRecord('districts/', this.editDistricts.districtId).subscribe(res => {
+      this.masterService.deleteRecord(this.endPoint, this.editDistricts.districtId).subscribe(res => {
         localStorage.removeItem('ag-activeRow');
         this.showInformationModal("Delete");
       }, (error) => {

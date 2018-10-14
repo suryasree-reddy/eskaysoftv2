@@ -46,6 +46,9 @@ export class StatesComponent implements OnInit {
     this.editable(selectedRow);
   }
 
+  onInitialDataLoad(dataList:any[]){
+    this.statesList = dataList;
+  }
   ngOnInit() {
     this.statesForm = this.fb.group({
       id: [],
@@ -53,7 +56,7 @@ export class StatesComponent implements OnInit {
       stateCode: ['', Validators.required],
       zone: ['', Validators.required],
     });
-    this.loadGridData();
+    //this.loadGridData();
     this.focusField.nativeElement.focus();
     this.getStatesTypes();
   }
