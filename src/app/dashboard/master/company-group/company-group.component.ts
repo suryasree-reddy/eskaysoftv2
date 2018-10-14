@@ -24,7 +24,6 @@ export class CompanyGroupComponent implements OnInit {
     public formServerError: boolean = false;
     public nameFlag;
     public deleteFlag: boolean =true;
-    public saveBtnFlag: boolean =false;
     public companyGrp;
     private duplicateCompanyGrp: boolean = false;
     public duplicateMessage: string = null;
@@ -147,8 +146,6 @@ export class CompanyGroupComponent implements OnInit {
       this.gridSelectedRow = null;
       this.nameFlag = false;
       this.deleteFlag = true;
-      this.saveBtnFlag = false;
-
       this.formRequiredError = this.formServerError = this.formSuccess = false;
       this.loadGridData();
       this.focusField.nativeElement.focus();
@@ -161,7 +158,7 @@ export class CompanyGroupComponent implements OnInit {
       this.deleteFlag = false;
       this.formRequiredError = false;
       this.duplicateMessage = null;
-        this.saveBtnFlag = this.deleteFlag = !this.gridSelectedRow.deleteFlag;
+      this.deleteFlag = !this.gridSelectedRow.deleteFlag;
     }
 
 

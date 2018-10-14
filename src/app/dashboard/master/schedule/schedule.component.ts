@@ -26,7 +26,6 @@ export class ScheduleComponent implements OnInit {
   public scheduleListColumns;
   public editSchedule;
   public deleteFlag: boolean = true;
-  public saveBtnFlag: boolean = false;
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   public nameFlag;
@@ -219,7 +218,6 @@ export class ScheduleComponent implements OnInit {
     this.scheduleForm.reset();
     this.editSchedule = null;
     this.deleteFlag = true;
-    this.saveBtnFlag = false;
     this.duplicateSchIndex = false;
     this.duplicateSchName = false;
     this.duplicateMessage = null;
@@ -236,7 +234,7 @@ export class ScheduleComponent implements OnInit {
     this.editSchedule = s;
     this.scheduleForm.reset(s);
     this.lastSchIndex = this.editSchedule.scheduleIndex;
-    this.saveBtnFlag = this.deleteFlag = !this.editSchedule.deleteFlag;
+    this.deleteFlag = !this.editSchedule.deleteFlag;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
     this.formRequiredError = false;

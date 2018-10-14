@@ -14,7 +14,7 @@
 
               <div class="input-group">
                 <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
-                <button *ngIf="!nameFlag" type="submit" [disabled]="saveBtnFlag" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
+                <button *ngIf="!nameFlag" type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
                 <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete' | translate }}</button>
               </div>
         </form>
