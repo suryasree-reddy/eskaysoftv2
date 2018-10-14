@@ -1,8 +1,12 @@
-import { Component, OnInit,  ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
+import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-product',
@@ -11,6 +15,8 @@ import '../../../../assets/styles/mainstyles.scss';
 export class ProductComponent implements OnInit {
 
   public productForm: FormGroup;
+  public productGroupName: FormGroup;
+  public productCategoryForm: FormGroup;
   private endPoint: string = "product/";
   public gridDataList: any = [];
   public gridColumnNamesList;
@@ -29,13 +35,26 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
-  /*  this.productForm = this.fb.group({
+    this.productForm = this.fb.group({
       id: [],
-      productCategory: ['', Validators.required]
+      productCategory: ['', Validators.required],
+      code:[],
+      name: ['', Validators.required],
+      packing: ['', Validators.required],
+      boxQty: ['', Validators.required],
+      productGroupId: ['', Validators.required],
+      caseQty: ['', Validators.required],
+      productCategoryId: ['', Validators.required],
+      netRate: ['', Validators.required],
+      isNetRateItem: ['', Validators.required],
+      schemeQty: ['', Validators.required],
+      free: ['', Validators.required],
+      contents: ['', Validators.required],
+      tax: ['', Validators.required],
     });
     this.loadGridData();
     this.getGridCloumsList();
-    this.focusField.nativeElement.focus();*/
+    // this.focusField.nativeElement.focus();
   }
 
   valueChange(selectedRow: any[]): void {

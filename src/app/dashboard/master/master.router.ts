@@ -12,6 +12,7 @@ import { ManufacturerComponent } from './manufacturer/manufacturer.component';
 import { CompanyGroupComponent } from './company-group/company-group.component';
 import { CompaniesComponent } from './companies/companies.component';
 import { AccountsOpeningsComponent } from './accounts-openings/accounts-openings.component';
+import { AccountsInfoComponent } from './accounts-info/accounts-info.component';
 import { ContactComponent } from './contact/contact.component';
 import { CustomerwiseDiscountComponent } from './customerwise-discount/customerwise-discount.component';
 import { PurchaseComponent } from './purchase/purchase.component';
@@ -33,6 +34,7 @@ export const masterRouter: Routes = [
     { path: 'companyGroup', component: CompanyGroupComponent, canActivate: [AuthGuard]  },
     { path: 'companies', component: CompaniesComponent, canActivate: [AuthGuard]  },
     { path: 'accountsOpenings', component: AccountsOpeningsComponent, canActivate: [AuthGuard]  },
+    { path: 'accountsInformation', component: AccountsInfoComponent, canActivate: [AuthGuard]  },
     { path: 'contact', component: ContactComponent, canActivate: [AuthGuard]  },
     { path: 'customerDiscount', component: CustomerwiseDiscountComponent, canActivate: [AuthGuard]  },
     { path: 'purchase', component: PurchaseComponent, canActivate: [AuthGuard]  },
