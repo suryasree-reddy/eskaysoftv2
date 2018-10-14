@@ -6,12 +6,12 @@
     { "code": "PNL", "description": "Profit & Loss" }
   ],
   "ScheduleListColumns": [
-    { "headerName": "Schedule Name", "field": "scheduleName" ,  
+    { "headerName": "Schedule Name", "field": "scheduleName" ,
       "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
     }},
-    { "headerName": "Schedule Index", "field": "scheduleIndex", "filter": "agNumberColumnFilter", 
+    { "headerName": "Schedule Index", "field": "scheduleIndex", "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": ["equals", "lessThan", "greaterThan"],
         "newRowsAction": "keep"
@@ -21,12 +21,12 @@
     { "headerName": "Status", "field": "deleteFlag", "cellRenderer": "deltaIndicator", "suppressFilter": true, "width": 50 }
   ],
   "SubScheduleListColumns": [
-    { "headerName": "Sub-Schedule Name", "field": "subScheduleName", 
+    { "headerName": "Sub-Schedule Name", "field": "subScheduleName",
       "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
     }},
-    { "headerName": "Schedule Name", "field": "scheduleName", 
+    { "headerName": "Schedule Name", "field": "scheduleName",
       "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
@@ -37,7 +37,7 @@
     }, "width": 100 }
   ],
   "StateListColumns": [
-    { "headerName": "State Name", "field": "stateName", 
+    { "headerName": "State Name", "field": "stateName",
       "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
@@ -46,10 +46,6 @@
       "filterOptions": ["equals", "lessThan", "greaterThan"],
       "newRowsAction": "keep"
     }, "width": 60 },
-    { "headerName": "Zone", "field": "zone", "filterParams": {
-      "filterOptions": ["contains"],
-      "newRowsAction": "keep"
-    }, "width": 70 },
     { "headerName": "Status", "field": "deleteFlag", "cellRenderer": "deltaIndicator", "suppressFilter": true, "width": 50 }
   ],
   "DistrictsColumns": [

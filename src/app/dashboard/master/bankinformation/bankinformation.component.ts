@@ -45,11 +45,15 @@ export class BankinformationComponent implements OnInit {
       name: ['', Validators.required],
       address: ['', Validators.required]
     });
-    this.loadGridData();
+    //this.loadGridData();
     this.getGridCloumsList();
     this.focusField.nativeElement.focus();
   }
 
+  onInitialDataLoad(dataList:any[]){
+    this.gridDataList = dataList;
+  }
+  
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
   }
