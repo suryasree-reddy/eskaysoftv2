@@ -24,16 +24,16 @@
 
                 <div class="col-md-6 col-lt">
                     <p>Group: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
-                    <input id="productGroupId" formControlName="productGroup" [typeahead]="typeaheadDataList"
-                        typeaheadOptionField="productGroup" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
+                    <input id="productGroupName" formControlName="productGroupName" [typeahead]="typeaheadDataList"
+                        typeaheadOptionField="productGroupName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                         (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control">
                     <span class="caret"></span>
                 </div>
 
                 <div class="col-md-6 col-lt">
                     <p>Category: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
-                    <input id="productCategoryId" formControlName="productForm" [typeahead]="typeaheadDataList"
-                        typeaheadOptionField="productForm" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
+                    <input id="productCategoryName" formControlName="productCategoryName" [typeahead]="typeaheadDataList"
+                        typeaheadOptionField="productCategoryName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                         (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control">
                     <span class="caret"></span>
                 </div>
@@ -88,7 +88,7 @@
 
                 <div class="col-md-6 col-lt">
                     <p>Product Code: *</p>
-                    <input id="code" class="form-control" [formControl]="productForm.controls['code']">
+                    <input id="code"  class="form-control" [formControl]="productForm.controls['code']">
                 </div>
 
 
@@ -103,10 +103,9 @@
 
         <div class="col-md-7">
             <br /><br />
-
-            <app-synectiks-common-grid [gridDataList]="gridDataList" (valueChange)='valueChange($event)'
-                [gridColumnList]="gridColumnNamesList"></app-synectiks-common-grid>
-        </div>
+            <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="scheduleList"
+            (valueChange)='valueChange($event)' [gridColumnList]="scheduleListColumns"></app-synectiks-common-grid>
+</div>
 
     </div>
 

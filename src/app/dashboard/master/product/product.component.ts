@@ -38,27 +38,32 @@ export class ProductComponent implements OnInit {
     this.productForm = this.fb.group({
       id: [],
       productCategory: ['', Validators.required],
-      code:[],
+      productCategory: ['', Validators.required],
       name: ['', Validators.required],
       packing: ['', Validators.required],
       boxQty: ['', Validators.required],
-      productGroupId: ['', Validators.required],
+      productGroupName: ['', Validators.required],
       caseQty: ['', Validators.required],
-      productCategoryId: ['', Validators.required],
+      productCategoryName: ['', Validators.required],
       netRate: ['', Validators.required],
       isNetRateItem: ['', Validators.required],
       schemeQty: ['', Validators.required],
       free: ['', Validators.required],
       contents: ['', Validators.required],
       tax: ['', Validators.required],
+      code: ['', Validators.required]
     });
-    this.loadGridData();
+    //this.loadGridData();
     this.getGridCloumsList();
     // this.focusField.nativeElement.focus();
   }
 
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
+  }
+
+  onInitialDataLoad(dataList:any[]){
+    this.gridDataList = dataList;
   }
 
   getGridCloumsList() {
