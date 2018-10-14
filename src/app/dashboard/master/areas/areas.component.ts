@@ -53,6 +53,9 @@ export class AreasComponent implements OnInit {
     this.editable(selectedRow);
   }
 
+  onInitialDataLoad(dataList:any[]){
+    this.gridDataList = dataList;
+  }
   ngOnInit() {
     this.areaForm = this.fb.group({
       areaId: [],
@@ -70,7 +73,7 @@ export class AreasComponent implements OnInit {
     });
 
     this.loadTypeaheadData();
-    this.loadGridData();
+    //this.loadGridData();
     this.focusField.nativeElement.focus();
     this.getJsonData();
   }

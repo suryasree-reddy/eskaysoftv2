@@ -24,7 +24,6 @@ export class CompanyGroupComponent implements OnInit {
     public formServerError: boolean = false;
     public nameFlag;
     public deleteFlag: boolean =true;
-    public saveBtnFlag: boolean =false;
     public companyGrp;
     private duplicateCompanyGrp: boolean = false;
     public duplicateMessage: string = null;
@@ -45,7 +44,7 @@ export class CompanyGroupComponent implements OnInit {
         id: [],
         companyGroup: ['', Validators.required]
       });
-      this.loadGridData();
+      //this.loadGridData();
       this.getGridCloumsList();
       this.focusField.nativeElement.focus();
     }
@@ -53,7 +52,9 @@ export class CompanyGroupComponent implements OnInit {
     valueChange(selectedRow: any[]): void {
       this.editable(selectedRow);
     }
-
+    onInitialDataLoad(dataList:any[]){
+      this.gridDataList = dataList;
+    }
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
     this.formRequiredError = false;
@@ -145,8 +146,6 @@ export class CompanyGroupComponent implements OnInit {
       this.gridSelectedRow = null;
       this.nameFlag = false;
       this.deleteFlag = true;
-      this.saveBtnFlag = false;
-
       this.formRequiredError = this.formServerError = this.formSuccess = false;
       this.loadGridData();
       this.focusField.nativeElement.focus();
@@ -159,7 +158,7 @@ export class CompanyGroupComponent implements OnInit {
       this.deleteFlag = false;
       this.formRequiredError = false;
       this.duplicateMessage = null;
-        this.saveBtnFlag = this.deleteFlag = !this.gridSelectedRow.deleteFlag;
+      this.deleteFlag = !this.gridSelectedRow.deleteFlag;
     }
 
 

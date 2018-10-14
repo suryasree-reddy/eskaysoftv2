@@ -24,7 +24,6 @@ export class StatesComponent implements OnInit {
   public statesListColumns;
   public editStates;
   public deleteFlag: boolean = true;
-  public saveBtnFlag: boolean = false;
   public nameFlag;
   public stateName;
   private duplicateStateName: boolean = false;
@@ -46,6 +45,9 @@ export class StatesComponent implements OnInit {
     this.editable(selectedRow);
   }
 
+  onInitialDataLoad(dataList:any[]){
+    this.statesList = dataList;
+  }
   ngOnInit() {
     this.statesForm = this.fb.group({
       id: [],
@@ -53,7 +55,7 @@ export class StatesComponent implements OnInit {
       stateCode: ['', Validators.required],
       zone: ['', Validators.required],
     });
-    this.loadGridData();
+    //this.loadGridData();
     this.focusField.nativeElement.focus();
     this.getStatesTypes();
   }
@@ -168,7 +170,6 @@ export class StatesComponent implements OnInit {
     this.editStates = null;
     this.prevStateCode = null;
     this.deleteFlag = true;
-    this.saveBtnFlag = false;
     this.nameFlag = false;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
@@ -179,7 +180,7 @@ export class StatesComponent implements OnInit {
     this.editStates = s;
     this.prevStateCode =  s.stateCode
     this.statesForm.reset(s);
-    this.saveBtnFlag = this.deleteFlag = !this.editStates.deleteFlag;
+    this.deleteFlag = !this.editStates.deleteFlag;
     this.formRequiredError = false;
     this.duplicateMessage = null;
     this.nameFlag = true;

@@ -48,7 +48,7 @@ export class BusinessexecutivesComponent implements OnInit {
       town: ['', Validators.required],
       mobile: ['', Validators.required]
     });
-    this.loadGridData();
+    //this.loadGridData();
     this.getGridCloumsList();
     this.focusField.nativeElement.focus();
   }
@@ -57,6 +57,10 @@ export class BusinessexecutivesComponent implements OnInit {
     this.editable(selectedRow);
   }
 
+  onInitialDataLoad(dataList:any[]){
+    this.gridDataList = dataList;
+  }
+  
   validateFormOnBlur() {
     this.formRequiredError = false;
     if (this.busiExecNum != this.businessExecutiveForm.value.mobile) {

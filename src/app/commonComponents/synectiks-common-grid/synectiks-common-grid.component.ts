@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
+import { MasterService } from 'src/app/dashboard/master/master.service';
 
 @Component({
   selector: 'app-synectiks-common-grid',
@@ -8,8 +9,11 @@ export class SynectiksCommonGridComponent implements OnInit {
 
   @Input() rowSelection;
   @Input() gridDataList: any = [];
+  @Input() endPoint : string;
   @Input() gridColumnList: any = [];
-  @Output() valueChange = new EventEmitter();
+  @Output() valueChange = new EventEmitter();  
+  @Output() intialLoad = new EventEmitter(); 
+  private rowModelType;
 
   private gridApi = null;
   private gridColumnApi = null;
@@ -18,14 +22,19 @@ export class SynectiksCommonGridComponent implements OnInit {
     deltaIndicator: this.deltaIndicator
   }
 
-  constructor() { }
+  constructor(private masterService: MasterService) { 
+   
+  }
 
   ngOnInit() {
+    this.rowModelType = "infinite";
     this.rowSelection = "single";
     this.gridColumnList = null;
     this.gridDataList = null;
   }
-
+  redrawAllRows() {    
+    this.gridApi.RefreshView();
+  }
   deltaIndicator(params) {
     var element = document.createElement("span");
     var imageElement = document.createElement("img");
@@ -40,8 +49,8 @@ export class SynectiksCommonGridComponent implements OnInit {
 
   onSelectionChanged() {
     this.valueChange.emit(this.gridApi.getSelectedRows()[0]);
-  }
-
+  } 
+  
   navigateToNextCell(params) {
     let previousCell = params.previousCellDef;
     const suggestedNextCell = params.nextCellDef;
@@ -120,13 +129,119 @@ loadGridColumns(params){
   });*/
 }
 
-  onGridReady(params) {
+  onGridReady(params) {   
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();
     // if your data is set on the gridOptions,
     //below code for settimeout gridReady get's called before data is bound.
     // so waiting time out for 5 sec
     setTimeout(this.loadGridColumns(params), 5000);
+    this.masterService.getData(this.endPoint);
+    this.masterService.dataObject.subscribe(list => {
+      this.intialLoad.emit(list);
+      let dataSource = {
+        rowCount: null, // behave as infinite scroll
+        getRows: function (params) {
+            console.log('asking for ' + params.startRow + ' to ' + params.endRow);
+            // At this point in your code, you would call the server, using $http if in AngularJS 1.x.
+            // To make the demo look real, wait for 500ms before returning
+            setTimeout(function () {
+                // take a slice of the total rows
+                let dataAfterSortingAndFiltering = sortAndFilter(list, params.sortModel, params.filterModel);
+                let rowsThisPage = dataAfterSortingAndFiltering.slice(params.startRow, params.endRow);
+                // if on or after the last page, work out the last row.
+                let lastRow = -1;
+                if (dataAfterSortingAndFiltering.length <= params.endRow) {
+                    lastRow = dataAfterSortingAndFiltering.length;
+                }
+                // call the success callback
+                params.successCallback(rowsThisPage, lastRow);
+            }, 500);
+        }
+      };
+      params.api.setDatasource(dataSource);
+      localStorage.setItem('rowDataLength', JSON.stringify(list.length));
+    });
+    
   }
 
+  
+
+}
+function sortAndFilter(allOfTheData, sortModel, filterModel) {
+  
+  return sortData(sortModel, filterData(filterModel, allOfTheData));
+}
+
+function sortData(sortModel, data) {
+  var sortPresent = sortModel && sortModel.length > 0;
+  if (!sortPresent) {
+    return data;
+  }
+  var resultOfSort = data.slice();
+  resultOfSort.sort(function(a, b) {
+    for (var k = 0; k < sortModel.length; k++) {
+      var sortColModel = sortModel[k];
+      var valueA = a[sortColModel.colId];
+      var valueB = b[sortColModel.colId];
+      if (valueA == valueB) {
+        continue;
+      }
+      var sortDirection = sortColModel.sort === "asc" ? 1 : -1;
+      if (valueA > valueB) {
+        return sortDirection;
+      } else {
+        return sortDirection * -1;
+      }
+    }
+    return 0;
+  });
+  return resultOfSort;
+}
+
+function filterData(filterModel, data) {
+  var filterPresent = filterModel && Object.keys(filterModel).length > 0;
+  if (!filterPresent) {
+    return data;
+  }
+  var resultOfFilter = data;
+  for (var i = 0; i < Object.keys(filterModel).length; i++) {
+    var colName = Object.keys(filterModel)[i];    
+    resultOfFilter = filterSearch(colName, filterModel, resultOfFilter);  
+    
+  }
+  return resultOfFilter;
+}
+
+function filterSearch(colName, filterModel, tempFilter) {
+  var resultOfFilter = [];
+  for (var i = 0; i < tempFilter.length; i++) {
+    var item = tempFilter[i];
+    if (filterModel[colName]) {
+      var itemName = item[colName];
+      if (filterModel[colName].type == "contains") {
+        if (!itemName.includes(filterModel[colName].filter)) {
+          continue;
+        }
+      } else {
+        var allowedAge = filterModel[colName].filter;
+        if (filterModel[colName].type == "equals") {
+          if (itemName !== allowedAge) {
+            continue;
+          }
+        } else if (filterModel[colName].type == "lessThan") {
+          if (itemName >= allowedAge) {
+            continue;
+          }
+        } else {
+          if (itemName <= allowedAge) {
+            continue;
+          }
+        }
+      }
+
+    }
+    resultOfFilter.push(item);
+  }
+  return resultOfFilter;
 }

@@ -22,11 +22,10 @@ export class ScheduleComponent implements OnInit {
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
-  public scheduleList: any = [];
+  public scheduleList: any = []; 
   public scheduleListColumns;
   public editSchedule;
   public deleteFlag: boolean = true;
-  public saveBtnFlag: boolean = false;
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   public nameFlag;
@@ -34,8 +33,8 @@ export class ScheduleComponent implements OnInit {
   public lastSchIndex;
   modalRef: BsModalRef;
   private duplicateSchName: boolean = false;
-  private duplicateSchIndex: boolean = false;
-  @ViewChild('focus') focusField: ElementRef;
+  private duplicateSchIndex: boolean = false;  
+  @ViewChild('focus') focusField: ElementRef; 
 
   constructor(private fb: FormBuilder,
     private modalService: BsModalService,
@@ -46,6 +45,9 @@ export class ScheduleComponent implements OnInit {
 
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
+  } 
+  onInitialDataLoad(dataList:any[]){
+    this.scheduleList = dataList;
   }
 
   ngOnInit() {
@@ -55,7 +57,7 @@ export class ScheduleComponent implements OnInit {
       scheduleIndex: ['', Validators.required],
       scheduleType: ['', Validators.required],
     });
-    this.loadGridData();
+    //this.loadGridData();
     this.focusField.nativeElement.focus();
     this.getScheduleTypes();
   }
@@ -216,7 +218,6 @@ export class ScheduleComponent implements OnInit {
     this.scheduleForm.reset();
     this.editSchedule = null;
     this.deleteFlag = true;
-    this.saveBtnFlag = false;
     this.duplicateSchIndex = false;
     this.duplicateSchName = false;
     this.duplicateMessage = null;
@@ -224,7 +225,7 @@ export class ScheduleComponent implements OnInit {
     this.nameFlag = false;
     this.lastSchIndex;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
-    this.loadGridData();
+    this.loadGridData();    
     this.focusField.nativeElement.focus();
   }
 
@@ -233,11 +234,11 @@ export class ScheduleComponent implements OnInit {
     this.editSchedule = s;
     this.scheduleForm.reset(s);
     this.lastSchIndex = this.editSchedule.scheduleIndex;
-    this.saveBtnFlag = this.deleteFlag = !this.editSchedule.deleteFlag;
+    this.deleteFlag = !this.editSchedule.deleteFlag;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
     this.formRequiredError = false;
     this.nameFlag = true;
-  }
+  } 
 
 }

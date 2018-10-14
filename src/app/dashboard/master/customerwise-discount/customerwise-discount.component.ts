@@ -48,7 +48,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
       discount: ['', Validators.required],
 
     });
-    this.loadGridData();
+    //this.loadGridData();
     this.getGridCloumsList();
     this.focusField.nativeElement.focus();
   }
@@ -57,6 +57,9 @@ export class CustomerwiseDiscountComponent implements OnInit {
     this.editable(selectedRow);
   }
 
+  onInitialDataLoad(dataList:any[]){
+    this.gridDataList = dataList;
+  }
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;

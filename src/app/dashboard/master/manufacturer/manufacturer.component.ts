@@ -44,11 +44,14 @@ export class ManufacturerComponent implements OnInit {
       id: [],
       manfacturerName: ['', Validators.required]
     });
-    this.loadGridData();
+    //this.loadGridData();
     this.getGridCloumsList();
     this.focusField.nativeElement.focus();
   }
-
+  
+  onInitialDataLoad(dataList:any[]){
+    this.gridDataList = dataList;
+  }
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
   }

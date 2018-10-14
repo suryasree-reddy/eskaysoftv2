@@ -69,7 +69,7 @@ export class CompaniesComponent implements OnInit {
       companyGroup: ['', Validators.required]
     });
 
-    this.loadGridData();
+    //this.loadGridData();
     this.getGridCloumsList();
     this.loadTypeaheadData();
   }
@@ -77,7 +77,9 @@ export class CompaniesComponent implements OnInit {
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
   }
-
+  onInitialDataLoad(dataList:any[]){
+    this.gridDataList = dataList;
+  }
   checkForDuplicateCompanyGrp() {
     this.duplicateCompanyGrp = this.masterService.hasDataExist(this.typeaheadDataList, 'companyGroup', this.companyGroupForm.value.companyGroup);
     this.getDuplicateErrorMessages();
