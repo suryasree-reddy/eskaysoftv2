@@ -22,7 +22,7 @@ export class ScheduleComponent implements OnInit {
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
-  public scheduleList: any = [];
+  public scheduleList: any = []; 
   public scheduleListColumns;
   public editSchedule;
   public deleteFlag: boolean = true;
@@ -34,8 +34,8 @@ export class ScheduleComponent implements OnInit {
   public lastSchIndex;
   modalRef: BsModalRef;
   private duplicateSchName: boolean = false;
-  private duplicateSchIndex: boolean = false;
-  @ViewChild('focus') focusField: ElementRef;
+  private duplicateSchIndex: boolean = false;  
+  @ViewChild('focus') focusField: ElementRef; 
 
   constructor(private fb: FormBuilder,
     private modalService: BsModalService,
@@ -46,6 +46,9 @@ export class ScheduleComponent implements OnInit {
 
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
+  } 
+  onInitialDataLoad(dataList:any[]){
+    this.scheduleList = dataList;
   }
 
   ngOnInit() {
@@ -55,7 +58,7 @@ export class ScheduleComponent implements OnInit {
       scheduleIndex: ['', Validators.required],
       scheduleType: ['', Validators.required],
     });
-    this.loadGridData();
+    //this.loadGridData();
     this.focusField.nativeElement.focus();
     this.getScheduleTypes();
   }
@@ -224,7 +227,7 @@ export class ScheduleComponent implements OnInit {
     this.nameFlag = false;
     this.lastSchIndex;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
-    this.loadGridData();
+    this.loadGridData();    
     this.focusField.nativeElement.focus();
   }
 
@@ -238,6 +241,6 @@ export class ScheduleComponent implements OnInit {
     this.duplicateMessageParam = null;
     this.formRequiredError = false;
     this.nameFlag = true;
-  }
+  } 
 
 }

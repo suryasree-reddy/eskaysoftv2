@@ -6,8 +6,17 @@
     { "code": "PNL", "description": "Profit & Loss" }
   ],
   "ScheduleListColumns": [
-    { "headerName": "Schedule Name", "field": "scheduleName" },
-    { "headerName": "Schedule Index", "field": "scheduleIndex", "filter": "agNumberColumnFilter", "width": 100 },
+    { "headerName": "Schedule Name", "field": "scheduleName" ,  
+      "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    }},
+    { "headerName": "Schedule Index", "field": "scheduleIndex", "filter": "agNumberColumnFilter", 
+      "filterParams": {
+        "filterOptions": ["equals", "lessThan", "greaterThan"],
+        "newRowsAction": "keep"
+      },
+      "width": 100 },
     { "headerName": "Schedule Type", "field": "scheduleType", "width": 100 },
     { "headerName": "Status", "field": "deleteFlag", "cellRenderer": "deltaIndicator", "suppressFilter": true, "width": 50 }
   ],

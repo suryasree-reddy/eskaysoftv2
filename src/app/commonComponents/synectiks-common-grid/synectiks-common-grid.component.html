@@ -1,7 +1,8 @@
 <ag-grid-angular #agGrid style="height: 400px; width: 100%;" class="ag-theme-balham"
         [rowData]="gridDataList"
         [columnDefs]="gridColumnList" [rowSelection]="rowSelection" (gridReady)="onGridReady($event)"
-        [navigateToNextCell]="navigateToNextCell"
+        [navigateToNextCell]="navigateToNextCell"        
+        [rowModelType]="rowModelType"
         (selectionChanged)="onSelectionChanged($event)"
-        [paginationAutoPageSize]="true" [pagination]="true" [enableFilter]="true" [enableSorting]="true" [components]="componentProvider">
+        [paginationAutoPageSize]="true" [pagination]="true" [enableServerSideFilter]="true" [enableServerSideSorting]="true" [components]="componentProvider">
 </ag-grid-angular>
