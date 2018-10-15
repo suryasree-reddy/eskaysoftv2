@@ -13,10 +13,10 @@
                 </div>
 
 
-                <div class="col-md-3 col-lt">
+                <!--<div class="col-md-3 col-lt">
                     <p>Strip Pack: *</p>
                     <input id="id" class="form-control" [formControl]="productForm.controls['id']">
-                </div>
+                </div>-->
                 <div class="col-md-3 col-lt">
                     <p>Packing: *</p>
                     <input id="packing" class="form-control" [formControl]="productForm.controls['packing']">
@@ -24,17 +24,17 @@
 
                 <div class="col-md-6 col-lt">
                     <p>Group: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
-                    <input id="productGroupName" formControlName="productGroupName" [typeahead]="typeaheadDataList"
+                    <input id="productGroupName" formControlName="productGroupName" [typeahead]="typeaheadGroupDataList"
                         typeaheadOptionField="productGroupName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
-                        (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control">
+                        (typeaheadOnSelect)="loadSelectedGroupTypeahead($event)" class="form-control">
                     <span class="caret"></span>
                 </div>
 
                 <div class="col-md-6 col-lt">
                     <p>Category: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
-                    <input id="productCategoryName" formControlName="productCategoryName" [typeahead]="typeaheadDataList"
+                    <input id="productCategoryName" formControlName="productCategoryName" [typeahead]="typeaheadCategoryDataList"
                         typeaheadOptionField="productCategoryName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
-                        (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control">
+                        (typeaheadOnSelect)="loadSelectedCategoryTypeahead($event)" class="form-control">
                     <span class="caret"></span>
                 </div>
 
@@ -104,7 +104,7 @@
         <div class="col-md-7">
             <br /><br />
             <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="scheduleList"
-            (valueChange)='valueChange($event)' [gridColumnList]="scheduleListColumns"></app-synectiks-common-grid>
+            (valueChange)='valueChange($event)' [gridColumnList]="gridColumnNamesList"></app-synectiks-common-grid>
 </div>
 
     </div>

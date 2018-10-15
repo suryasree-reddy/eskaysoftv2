@@ -27,18 +27,27 @@ export class ProductComponent implements OnInit {
   public nameFlag;
   public deleteFlag: boolean =true;
   public duplicateMessage: string = null;
+  public typeaheadGroupDataList: any = [];
+public typeaheadCategoryDataList: any = [];
+public selectedCategoryTypeahead: any;
+public selectedGroupTypeahead: any;
+private pgEndPoint: string = "productgroup/";
+private pcEndPoint: string = "productcategory/";
+
 
   @ViewChild('focus') focusField: ElementRef;
 
-  constructor(private fb: FormBuilder, private translate: TranslateService, private masterService: MasterService) {
+  constructor(private fb: FormBuilder, private translate: TranslateService,
+    private modalService: BsModalService,
+    private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
 
   ngOnInit() {
     this.productForm = this.fb.group({
       id: [],
-      productCategory: ['', Validators.required],
-      productCategory: ['', Validators.required],
+      productGroupId: [],
+      productCategoryId: [],
       name: ['', Validators.required],
       packing: ['', Validators.required],
       boxQty: ['', Validators.required],
@@ -55,8 +64,40 @@ export class ProductComponent implements OnInit {
     });
     //this.loadGridData();
     this.getGridCloumsList();
+    this.loadGroupTypeaheadData();
+    this.loadCategoryTypeaheadData();
+    this.getJsonData();
     // this.focusField.nativeElement.focus();
   }
+
+  getJsonData() {
+    this.masterService.getLocalJsonData().subscribe(data => {
+      data as object[];
+      this.gridColumnNamesList = data["ProductColumns"];
+    });
+  }
+  loadGroupTypeaheadData() {
+      this.masterService.getParentData(this.pgEndPoint).subscribe(list => {
+        this.typeaheadGroupDataList = list;
+      });
+    }
+
+    loadCategoryTypeaheadData() {
+      this.masterService.getParentData(this.pcEndPoint).subscribe(list => {
+        this.typeaheadCategoryDataList = list;
+      });
+    }
+
+    loadSelectedGroupTypeahead(event) {
+      this.selectedGroupTypeahead = event.item;
+      this.productForm.patchValue({ productGroupId: event.item.id });
+    }
+
+
+    loadSelectedCategoryTypeahead(event) {
+      this.selectedCategoryTypeahead = event.item;
+        this.productForm.patchValue({ productCategoryId: event.item.productCategoryId });
+    }
 
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
@@ -81,9 +122,17 @@ export class ProductComponent implements OnInit {
     });
   }
 
+
+      saveForm() {
+      this.formRequiredError = false;
+      if (this.productForm.valid && this.duplicateMessage == null) {
+        this.showConfirmationModal("Save");
+      } else {
+        this.requiredErrMsg()
+      }
+    }
+
   save() {
-    if (this.productForm.valid) {
-      if (confirm('Are you sure!!')) {
         if (this.productForm.value.id) {
           this.masterService.updateRecord(this.endPoint, this.productForm.value).subscribe(res => {
             this.successMsg();
@@ -97,10 +146,6 @@ export class ProductComponent implements OnInit {
             this.serverErrMsg();
           });
         }
-      }
-    } else {
-      this.requiredErrMsg()
-    }
   }
 
   delete() {
@@ -149,6 +194,56 @@ export class ProductComponent implements OnInit {
     this.formRequiredError = false;
     this.duplicateMessage = null;
       this.deleteFlag = false;
+  }
+
+
+
+  showInformationModal(eventType) {
+    var msg;
+    var title;
+    if (eventType === "Delete") {
+      msg = 'product.deleteInformationMessage';
+      title = 'Product';
+    } else if (eventType === "Save") {
+      title = 'Product';
+      msg = 'product.saveInformationMessage';
+    }
+    const modal = this.modalService.show(ConfirmationModelDialogComponent);
+    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
+      title,
+      msg,
+      ''
+    );
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
+  }
+
+  showConfirmationModal(eventType): void {
+    var msg;
+    var title;
+    if (eventType === "Delete") {
+      title = 'Product';
+      msg = 'product.deleteConfirmationMessage';
+    } else if (eventType === "Save") {
+      title = 'Product';
+      msg = 'product.saveConfirmationMessage';
+    }
+    const modal = this.modalService.show(ConfirmationModelDialogComponent);
+    (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
+      title,
+      msg,
+      'green',
+      ''
+    );
+
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
+      if (result) {
+        if (eventType === "Delete") {
+          this.delete();
+        } else {
+          this.save();
+        }
+      }
+    });
   }
 
 }
