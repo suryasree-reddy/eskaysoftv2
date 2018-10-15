@@ -74,7 +74,16 @@ export class PurchaseComponent implements OnInit {
       remarks:[],
       DebitAdjustmentValue:[],
       creditAdjustmentValue:[],
-      invoiceValue:[]
+      invoiceValue:[],
+
+      gstPercent:[],
+      taxable:[],
+      cgstAmt:[],
+      sgstAmt:[],
+      inGstPercent:[],
+      inTaxable:[],
+      inCgstAmt:[],
+      inSgstAmt:[],
 
     });
     // this.loadGridData();
