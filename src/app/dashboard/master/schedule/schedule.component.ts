@@ -4,8 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
 import { Observable } from 'rxjs/Observable';
-import * as _ from 'lodash';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
@@ -45,7 +43,6 @@ export class ScheduleComponent implements OnInit {
   @ViewChild(ButtonsComponent) buttonsComponent:ButtonsComponent;
 
   constructor(private fb: FormBuilder,
-    private modalService: BsModalService,
     private translate: TranslateService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
@@ -54,6 +51,7 @@ export class ScheduleComponent implements OnInit {
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
   }
+
   onInitialDataLoad(dataList: any[]) {
     this.scheduleList = dataList;
   }
@@ -118,15 +116,6 @@ export class ScheduleComponent implements OnInit {
       this.scheduleTypes = data["ScheduleTypes"];
       this.scheduleListColumns = data["ScheduleListColumns"]
     });
-  }
-
-  validateFormOnSave(): boolean {
-    if (this.scheduleForm.valid && this.duplicateMessage == null) {
-      return true;
-    } else {
-      this.requiredErrMsg();
-      return false;
-    }
   }
 
   save() {
