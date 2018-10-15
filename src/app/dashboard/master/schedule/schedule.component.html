@@ -23,12 +23,12 @@
         </div>
 
         <app-buttons [title]="formTitle" [deleteConfirmMsg]="deleteConfirmMsg"
-                     [saveConfirmMsg]="saveConfirmMsg" [saveInfoMsg]="saveInfoMsg"
+                     [saveConfirmMsg]="saveConfirmMsg" [saveInfoMsg]="saveInfoMsg" [endPoint]="endPoint"
                      [deleteInfoMsg]="deleteInfoMsg" [duplicateMessage]="duplicateMessage"
                      [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
                      [hideDeleteBtn]=true [formObj]="scheduleForm" (saveRecord)="save()"
                      (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-                     (afterSuccess)="successMsg()" (resetForm)="resetForm()" ></app-buttons>
+                     (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
       </form>
     </div>
 

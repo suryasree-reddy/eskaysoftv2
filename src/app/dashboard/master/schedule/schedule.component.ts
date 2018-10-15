@@ -130,28 +130,11 @@ export class ScheduleComponent implements OnInit {
   }
 
   save() {
-    if (this.scheduleForm.value.id) {
-      this.masterService.updateRecord(this.endPoint, this.scheduleForm.value).subscribe(res => {
-        this.buttonsComponent.showInformationModal("Save");
-      }, (error) => {
-        this.serverErrMsg();
-      });
-    } else {
-      this.masterService.createRecord(this.endPoint, this.scheduleForm.value).subscribe(res => {
-        this.buttonsComponent.showInformationModal("Save");
-      }, (error) => {
-        this.serverErrMsg();
-      });
-    }
+    this.buttonsComponent.save();
   }
 
   delete() {
-    this.masterService.deleteRecord(this.endPoint, this.editSchedule.id).subscribe(res => {
-      localStorage.removeItem('ag-activeRow');
-      this.buttonsComponent.showInformationModal("Delete");
-    }, (error) => {
-      this.serverErrMsg();
-    });
+    this.buttonsComponent.delete();
   }
 
   successMsg() {

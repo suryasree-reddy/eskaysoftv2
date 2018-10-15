@@ -3,6 +3,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationModelDialogComponent } from '../confirmation-model-dialog/confirmation-model-dialog.component';
+import { MasterService } from 'src/app/dashboard/master/master.service';
 
 @Component({
   selector: 'app-buttons',
@@ -20,16 +21,18 @@ export class ButtonsComponent implements OnInit {
   @Input() formObj: any;
   @Input() title: string = null;
   @Input() duplicateMessage: string = null;
+  @Input() endPoint: string = null;
   @Output() saveRecord: EventEmitter<null> = new EventEmitter();
   @Output() deleteRecord: EventEmitter<null> = new EventEmitter();
   @Output() displayErrorMessages: EventEmitter<null> = new EventEmitter();
   @Output() afterSuccess: EventEmitter<null> = new EventEmitter();
   @Output() resetForm: EventEmitter<null> = new EventEmitter();
+  @Output() serverErrMsg: EventEmitter<null> = new EventEmitter();
 
   private displayMsg: string = null;
 
   constructor(
-    private translate: TranslateService,
+    private translate: TranslateService, private masterService:MasterService,
     private modalService: BsModalService) { translate.setDefaultLang('messages.en'); }
 
   ngOnInit() {
@@ -45,6 +48,31 @@ export class ButtonsComponent implements OnInit {
     } else {
       this.displayErrorMessages.emit();
     }
+  }
+
+  save() {
+    if (this.formObj.value.id) {
+      this.masterService.updateRecord(this.endPoint, this.formObj.value).subscribe(res => {
+        this.showInformationModal("Save");
+      }, (error) => {
+        this.serverErrMsg.emit();
+      });
+    } else {
+      this.masterService.createRecord(this.endPoint, this.formObj.value).subscribe(res => {
+        this.showInformationModal("Save");
+      }, (error) => {
+      this.serverErrMsg.emit();
+      });
+    }
+  }
+
+  delete() {
+    this.masterService.deleteRecord(this.endPoint, this.formObj.value.id).subscribe(res => {
+      localStorage.removeItem('ag-activeRow');
+      this.showInformationModal("Delete");
+    }, (error) => {
+      this.serverErrMsg.emit();
+    });
   }
 
   showInformationModal(eventType) {
