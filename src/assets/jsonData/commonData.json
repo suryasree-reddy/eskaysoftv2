@@ -143,7 +143,15 @@
     { "headerName": "C.Discount", "field": "cdisc" }
   ],
   "ProductColumns": [
-    { "headerName": "Product Name", "field": "productName", "filterParams": {
+    { "headerName": "Product Name", "field": "name", "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    } },
+    { "headerName": "Product Group", "field": "productGroupId", "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    } },
+    { "headerName": "Product Category", "field": "productCategoryId", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
     } }

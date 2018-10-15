@@ -16,6 +16,7 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
 import { SynectiksCommonGridComponent } from '../../commonComponents/synectiks-common-grid/synectiks-common-grid.component';
 import { ConfirmationModelDialogComponent } from '../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import { ErrormessagesComponent } from '../../commonComponents/errormessages/errormessages.component';
+import { ButtonsComponent } from '../../commonComponents/buttons/buttons.component';
 
 import { StatesComponent } from './states/states.component';
 import { DistrictsComponent } from './districts/districts.component';
@@ -57,7 +58,7 @@ import { PurchaseComponent } from './purchase/purchase.component';
     NgModel,
     FormsModule
   ],
-  declarations: [ScheduleComponent, SubscheduleComponent, ConfirmationModelDialogComponent, ErrormessagesComponent, SynectiksCommonGridComponent, StatesComponent, DistrictsComponent, AreasComponent, BusinessexecutivesComponent, BankinformationComponent, ManufacturerComponent, CompanyGroupComponent, CompaniesComponent, ProductGroupComponent, ProductCategoryComponent, ProductComponent, AccountsInfoComponent, AccountsOpeningsComponent, ContactComponent, CustomerwiseDiscountComponent, PurchaseComponent],
+  declarations: [ScheduleComponent, SubscheduleComponent, ButtonsComponent, ConfirmationModelDialogComponent, ErrormessagesComponent, SynectiksCommonGridComponent, StatesComponent, DistrictsComponent, AreasComponent, BusinessexecutivesComponent, BankinformationComponent, ManufacturerComponent, CompanyGroupComponent, CompaniesComponent, ProductGroupComponent, ProductCategoryComponent, ProductComponent, AccountsInfoComponent, AccountsOpeningsComponent, ContactComponent, CustomerwiseDiscountComponent, PurchaseComponent],
   entryComponents: [ ConfirmationModelDialogComponent ]
 })
 export class MasterModule { }

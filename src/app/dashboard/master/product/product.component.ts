@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -25,40 +25,86 @@ export class ProductComponent implements OnInit {
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public nameFlag;
-  public deleteFlag: boolean =true;
+  public deleteFlag: boolean = true;
   public duplicateMessage: string = null;
+  public typeaheadGroupDataList: any = [];
+  public typeaheadCategoryDataList: any = [];
+  public selectedCategoryTypeahead: any;
+  public selectedGroupTypeahead: any;
+  private pgEndPoint: string = "productgroup/";
+  private pcEndPoint: string = "productcategory/";
+
 
   @ViewChild('focus') focusField: ElementRef;
 
-  constructor(private fb: FormBuilder, private translate: TranslateService, private masterService: MasterService) {
+  constructor(private fb: FormBuilder, private translate: TranslateService,
+    private modalService: BsModalService,
+    private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
 
   ngOnInit() {
     this.productForm = this.fb.group({
       id: [],
-      productCategory: ['', Validators.required],
-      code:[],
+      productGroupId: [],
+      productCategoryId: [],
       name: ['', Validators.required],
       packing: ['', Validators.required],
       boxQty: ['', Validators.required],
-      productGroupId: ['', Validators.required],
+      productGroupName: ['', Validators.required],
       caseQty: ['', Validators.required],
-      productCategoryId: ['', Validators.required],
+      productCategoryName: ['', Validators.required],
       netRate: ['', Validators.required],
       isNetRateItem: ['', Validators.required],
       schemeQty: ['', Validators.required],
       free: ['', Validators.required],
       contents: ['', Validators.required],
       tax: ['', Validators.required],
+      code: ['', Validators.required]
     });
-    this.loadGridData();
+    //this.loadGridData();
     this.getGridCloumsList();
+    this.loadGroupTypeaheadData();
+    this.loadCategoryTypeaheadData();
+    this.getJsonData();
     // this.focusField.nativeElement.focus();
+  }
+
+  getJsonData() {
+    this.masterService.getLocalJsonData().subscribe(data => {
+      data as object[];
+      this.gridColumnNamesList = data["ProductColumns"];
+    });
+  }
+
+  loadGroupTypeaheadData() {
+    this.masterService.getParentData(this.pgEndPoint).subscribe(list => {
+      this.typeaheadGroupDataList = list;
+    });
+  }
+
+  loadCategoryTypeaheadData() {
+    this.masterService.getParentData(this.pcEndPoint).subscribe(list => {
+      this.typeaheadCategoryDataList = list;
+    });
+  }
+
+  loadSelectedGroupTypeahead(event) {
+    this.selectedGroupTypeahead = event.item;
+    this.productForm.patchValue({ productGroupId: event.item.id });
+  }
+
+  loadSelectedCategoryTypeahead(event) {
+    this.selectedCategoryTypeahead = event.item;
+    this.productForm.patchValue({ productCategoryId: event.item.productCategoryId });
   }
 
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
+  }
+
+  onInitialDataLoad(dataList: any[]) {
+    this.gridDataList = dataList;
   }
 
   getGridCloumsList() {
@@ -76,25 +122,28 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  save() {
-    if (this.productForm.valid) {
-      if (confirm('Are you sure!!')) {
-        if (this.productForm.value.id) {
-          this.masterService.updateRecord(this.endPoint, this.productForm.value).subscribe(res => {
-            this.successMsg();
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        } else {
-          this.masterService.createRecord(this.endPoint, this.productForm.value).subscribe(res => {
-            this.successMsg();
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        }
-      }
+  saveForm() {
+    this.formRequiredError = false;
+    if (this.productForm.valid && this.duplicateMessage == null) {
+      this.showConfirmationModal("Save");
     } else {
       this.requiredErrMsg()
+    }
+  }
+
+  save() {
+    if (this.productForm.value.id) {
+      this.masterService.updateRecord(this.endPoint, this.productForm.value).subscribe(res => {
+        this.successMsg();
+      }, (error) => {
+        this.serverErrMsg();
+      });
+    } else {
+      this.masterService.createRecord(this.endPoint, this.productForm.value).subscribe(res => {
+        this.successMsg();
+      }, (error) => {
+        this.serverErrMsg();
+      });
     }
   }
 
@@ -116,7 +165,7 @@ export class ProductComponent implements OnInit {
   }
 
   requiredErrMsg() {
-    if( this.duplicateMessage == null){
+    if (this.duplicateMessage == null) {
       this.formRequiredError = true;
       this.formSuccess = this.formServerError = false;
     }
@@ -131,7 +180,7 @@ export class ProductComponent implements OnInit {
     this.productForm.reset();
     this.gridSelectedRow = null;
     this.nameFlag = false;
-      this.deleteFlag = true;
+    this.deleteFlag = true;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
@@ -143,7 +192,55 @@ export class ProductComponent implements OnInit {
     this.nameFlag = true;
     this.formRequiredError = false;
     this.duplicateMessage = null;
-      this.deleteFlag = false;
+    this.deleteFlag = false;
+  }
+
+  showInformationModal(eventType) {
+    var msg;
+    var title;
+    if (eventType === "Delete") {
+      msg = 'product.deleteInformationMessage';
+      title = 'Product';
+    } else if (eventType === "Save") {
+      title = 'Product';
+      msg = 'product.saveInformationMessage';
+    }
+    const modal = this.modalService.show(ConfirmationModelDialogComponent);
+    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
+      title,
+      msg,
+      ''
+    );
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
+  }
+
+  showConfirmationModal(eventType): void {
+    var msg;
+    var title;
+    if (eventType === "Delete") {
+      title = 'Product';
+      msg = 'product.deleteConfirmationMessage';
+    } else if (eventType === "Save") {
+      title = 'Product';
+      msg = 'product.saveConfirmationMessage';
+    }
+    const modal = this.modalService.show(ConfirmationModelDialogComponent);
+    (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
+      title,
+      msg,
+      'green',
+      ''
+    );
+
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
+      if (result) {
+        if (eventType === "Delete") {
+          this.delete();
+        } else {
+          this.save();
+        }
+      }
+    });
   }
 
 }

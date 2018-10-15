@@ -107,6 +107,12 @@
     "saveInformationMessage": "Product Group record has been saved successfully.",
     "deleteInformationMessage": "Product Group record has been deleted successfully.",
     "duplicateNameErrorMessage":"The Product Group '{{duplicateMessageParam}}' already exists with this name."
+  },"product": {
+    "saveConfirmationMessage": "Are you sure you want to save Product Group?",
+    "deleteConfirmationMessage" : "Are you sure you want to delete Product Group?",
+    "saveInformationMessage": "Product record has been saved successfully.",
+    "deleteInformationMessage": "Product record has been deleted successfully.",
+    "duplicateNameErrorMessage":"The Product Group '{{duplicateMessageParam}}' already exists with this name."
   },
   "button": {
     "save": "Save",
