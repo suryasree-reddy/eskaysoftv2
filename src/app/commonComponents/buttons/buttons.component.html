@@ -1,0 +1,5 @@
+<div class="input-group">
+  <button type="button" (click)="reset()" class="btn btn-primary"  [translate]="'button.reset'"></button>
+  <button *ngIf="hideSaveBtn" type="button" (click)="saveForm()" class="btn btn-primary mr-l-10" [translate]="'button.save'"></button>
+  <button *ngIf="hideDeleteBtn" type="button" [disabled]="isBtnDeleteDisable" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right" [translate]="'button.delete'"></button>
+</div>

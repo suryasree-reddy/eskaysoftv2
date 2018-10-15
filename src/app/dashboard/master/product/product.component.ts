@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -25,14 +25,14 @@ export class ProductComponent implements OnInit {
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public nameFlag;
-  public deleteFlag: boolean =true;
+  public deleteFlag: boolean = true;
   public duplicateMessage: string = null;
   public typeaheadGroupDataList: any = [];
-public typeaheadCategoryDataList: any = [];
-public selectedCategoryTypeahead: any;
-public selectedGroupTypeahead: any;
-private pgEndPoint: string = "productgroup/";
-private pcEndPoint: string = "productcategory/";
+  public typeaheadCategoryDataList: any = [];
+  public selectedCategoryTypeahead: any;
+  public selectedGroupTypeahead: any;
+  private pgEndPoint: string = "productgroup/";
+  private pcEndPoint: string = "productcategory/";
 
 
   @ViewChild('focus') focusField: ElementRef;
@@ -76,34 +76,34 @@ private pcEndPoint: string = "productcategory/";
       this.gridColumnNamesList = data["ProductColumns"];
     });
   }
+
   loadGroupTypeaheadData() {
-      this.masterService.getParentData(this.pgEndPoint).subscribe(list => {
-        this.typeaheadGroupDataList = list;
-      });
-    }
+    this.masterService.getParentData(this.pgEndPoint).subscribe(list => {
+      this.typeaheadGroupDataList = list;
+    });
+  }
 
-    loadCategoryTypeaheadData() {
-      this.masterService.getParentData(this.pcEndPoint).subscribe(list => {
-        this.typeaheadCategoryDataList = list;
-      });
-    }
+  loadCategoryTypeaheadData() {
+    this.masterService.getParentData(this.pcEndPoint).subscribe(list => {
+      this.typeaheadCategoryDataList = list;
+    });
+  }
 
-    loadSelectedGroupTypeahead(event) {
-      this.selectedGroupTypeahead = event.item;
-      this.productForm.patchValue({ productGroupId: event.item.id });
-    }
+  loadSelectedGroupTypeahead(event) {
+    this.selectedGroupTypeahead = event.item;
+    this.productForm.patchValue({ productGroupId: event.item.id });
+  }
 
-
-    loadSelectedCategoryTypeahead(event) {
-      this.selectedCategoryTypeahead = event.item;
-        this.productForm.patchValue({ productCategoryId: event.item.productCategoryId });
-    }
+  loadSelectedCategoryTypeahead(event) {
+    this.selectedCategoryTypeahead = event.item;
+    this.productForm.patchValue({ productCategoryId: event.item.productCategoryId });
+  }
 
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
   }
 
-  onInitialDataLoad(dataList:any[]){
+  onInitialDataLoad(dataList: any[]) {
     this.gridDataList = dataList;
   }
 
@@ -122,30 +122,29 @@ private pcEndPoint: string = "productcategory/";
     });
   }
 
-
-      saveForm() {
-      this.formRequiredError = false;
-      if (this.productForm.valid && this.duplicateMessage == null) {
-        this.showConfirmationModal("Save");
-      } else {
-        this.requiredErrMsg()
-      }
+  saveForm() {
+    this.formRequiredError = false;
+    if (this.productForm.valid && this.duplicateMessage == null) {
+      this.showConfirmationModal("Save");
+    } else {
+      this.requiredErrMsg()
     }
+  }
 
   save() {
-        if (this.productForm.value.id) {
-          this.masterService.updateRecord(this.endPoint, this.productForm.value).subscribe(res => {
-            this.successMsg();
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        } else {
-          this.masterService.createRecord(this.endPoint, this.productForm.value).subscribe(res => {
-            this.successMsg();
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        }
+    if (this.productForm.value.id) {
+      this.masterService.updateRecord(this.endPoint, this.productForm.value).subscribe(res => {
+        this.successMsg();
+      }, (error) => {
+        this.serverErrMsg();
+      });
+    } else {
+      this.masterService.createRecord(this.endPoint, this.productForm.value).subscribe(res => {
+        this.successMsg();
+      }, (error) => {
+        this.serverErrMsg();
+      });
+    }
   }
 
   delete() {
@@ -166,7 +165,7 @@ private pcEndPoint: string = "productcategory/";
   }
 
   requiredErrMsg() {
-    if( this.duplicateMessage == null){
+    if (this.duplicateMessage == null) {
       this.formRequiredError = true;
       this.formSuccess = this.formServerError = false;
     }
@@ -181,7 +180,7 @@ private pcEndPoint: string = "productcategory/";
     this.productForm.reset();
     this.gridSelectedRow = null;
     this.nameFlag = false;
-      this.deleteFlag = true;
+    this.deleteFlag = true;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
@@ -193,10 +192,8 @@ private pcEndPoint: string = "productcategory/";
     this.nameFlag = true;
     this.formRequiredError = false;
     this.duplicateMessage = null;
-      this.deleteFlag = false;
+    this.deleteFlag = false;
   }
-
-
 
   showInformationModal(eventType) {
     var msg;
