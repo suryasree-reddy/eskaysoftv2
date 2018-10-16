@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
-import * as _ from 'lodash';
+import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 
 @Component({
   selector: 'app-businessexecutives',
   templateUrl: './businessexecutives.component.html'
 })
+
 export class BusinessexecutivesComponent implements OnInit {
 
   public businessExecutiveForm: FormGroup;
@@ -31,13 +31,19 @@ export class BusinessexecutivesComponent implements OnInit {
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
+  private formTitle: string = "Business Executive";
+  private deleteConfirmMsg: string = "businessexecutive.deleteConfirmationMessage";
+  private saveConfirmMsg: string = "businessexecutive.saveConfirmationMessage";
+  private saveInfoMsg: string = "businessexecutive.saveInformationMessage";
+  private deleteInfoMsg: string = "businessexecutive.deleteInformationMessage";
+
+  @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
-    private modalService: BsModalService,
     private masterService: MasterService) {
-      translate.setDefaultLang('messages.en');
+    translate.setDefaultLang('messages.en');
   }
 
   ngOnInit() {
@@ -57,10 +63,10 @@ export class BusinessexecutivesComponent implements OnInit {
     this.editable(selectedRow);
   }
 
-  onInitialDataLoad(dataList:any[]){
+  onInitialDataLoad(dataList: any[]) {
     this.gridDataList = dataList;
   }
-  
+
   validateFormOnBlur() {
     this.formRequiredError = false;
     if (this.busiExecNum != this.businessExecutiveForm.value.mobile) {
@@ -87,11 +93,10 @@ export class BusinessexecutivesComponent implements OnInit {
   }
 
   checkForDuplicateBusiExecName() {
-        if(!this.nameFlag){
-        this.duplicateBusExecName = this.masterService.hasDataExist(this.gridDataList, 'name', this.businessExecutiveForm.value.name);
-        this.getDuplicateErrorMessages();
-      }
-
+    if (!this.nameFlag) {
+      this.duplicateBusExecName = this.masterService.hasDataExist(this.gridDataList, 'name', this.businessExecutiveForm.value.name);
+      this.getDuplicateErrorMessages();
+    }
   }
 
   getGridCloumsList() {
@@ -110,37 +115,11 @@ export class BusinessexecutivesComponent implements OnInit {
   }
 
   save() {
-    if (this.businessExecutiveForm.value.id != null) {
-      this.masterService.updateRecord(this.endPoint, this.businessExecutiveForm.value).subscribe(res => {
-        this.showInformationModal("Save");
-      }, (error) => {
-        this.serverErrMsg();
-      });
-    } else {
-      this.masterService.createRecord(this.endPoint, this.businessExecutiveForm.value).subscribe(res => {
-        this.showInformationModal("Save");
-      }, (error) => {
-        this.serverErrMsg();
-      });
-    }
-  }
-
-  saveForm() {
-    this.formRequiredError = false;
-    if (this.businessExecutiveForm.valid && this.duplicateMessage == null) {
-      this.showConfirmationModal("Save");
-    } else {
-      this.requiredErrMsg()
-    }
+    this.buttonsComponent.save();
   }
 
   delete() {
-    this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
-      localStorage.removeItem('ag-activeRow');
-      this.showInformationModal("Delete");
-    }, (error) => {
-      this.serverErrMsg();
-    });
+    this.buttonsComponent.delete();
   }
 
   successMsg() {
@@ -151,8 +130,8 @@ export class BusinessexecutivesComponent implements OnInit {
 
   requiredErrMsg() {
     if (this.duplicateMessage == null) {
-    this.formRequiredError = true;
-    this.formSuccess = this.formServerError = false;
+      this.formRequiredError = true;
+      this.formSuccess = this.formServerError = false;
     }
   }
 
@@ -179,55 +158,6 @@ export class BusinessexecutivesComponent implements OnInit {
     this.duplicateMessage = null;
     this.deleteFlag = false;
     this.nameFlag = true;
-  }
-
-
-  showInformationModal(eventType) {
-    var msg;
-    var title;
-    if (eventType === "Delete") {
-      msg = 'businessexecutive.deleteInformationMessage';
-      title = 'Business Executive';
-    } else if (eventType === "Save") {
-      title = 'Business Executive';
-      msg = 'businessexecutive.saveInformationMessage';
-    }
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
-      title,
-      msg,
-      ''
-    );
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
-  }
-
-  showConfirmationModal(eventType): void {
-    var msg;
-    var title;
-    if (eventType === "Delete") {
-      title = 'Business Executive';
-      msg = 'businessexecutive.deleteConfirmationMessage';
-    } else if (eventType === "Save") {
-      title = 'Business Executive';
-      msg = 'businessexecutive.saveConfirmationMessage';
-    }
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
-      title,
-      msg,
-      'green',
-      ''
-    );
-
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
-      if (result) {
-        if (eventType === "Delete") {
-          this.delete();
-        } else {
-          this.save();
-        }
-      }
-    });
   }
 
 }

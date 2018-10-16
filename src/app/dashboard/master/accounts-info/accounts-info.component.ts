@@ -11,7 +11,7 @@ import * as _ from 'lodash';
 @Component({
   selector: 'app-accounts-info',
   templateUrl: './accounts-info.component.html'
-  
+
 })
 export class AccountsInfoComponent implements OnInit {
   public accInfoForm: FormGroup;
@@ -89,7 +89,7 @@ export class AccountsInfoComponent implements OnInit {
     // //this.loadGridData();
     // this.focusField.nativeElement.focus();
     // this.getJsonData();
-  
+
   }
 
 }

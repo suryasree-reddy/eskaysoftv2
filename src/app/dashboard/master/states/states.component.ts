@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
+import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 import * as _ from 'lodash';
 
 @Component({
@@ -16,7 +16,7 @@ export class StatesComponent implements OnInit {
 
   public statesForm: FormGroup;
   private endPoint: string = "states/";
-  private prevStateCode: string  = null;
+  private prevStateCode: string = null;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
@@ -32,11 +32,17 @@ export class StatesComponent implements OnInit {
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
+  private formTitle: string = "State";
+  private deleteConfirmMsg: string = "states.deleteConfirmationMessage";
+  private saveConfirmMsg: string = "states.saveConfirmationMessage";
+  private saveInfoMsg: string = "states.saveInformationMessage";
+  private deleteInfoMsg: string = "states.deleteInformationMessage";
+
+  @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
-    private modalService: BsModalService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
@@ -45,9 +51,10 @@ export class StatesComponent implements OnInit {
     this.editable(selectedRow);
   }
 
-  onInitialDataLoad(dataList:any[]){
+  onInitialDataLoad(dataList: any[]) {
     this.statesList = dataList;
   }
+
   ngOnInit() {
     this.statesForm = this.fb.group({
       id: [],
@@ -74,7 +81,7 @@ export class StatesComponent implements OnInit {
   }
 
   checkForDuplicateStateName() {
-    if(!this.nameFlag){
+    if (!this.nameFlag) {
       this.duplicateStateName = this.masterService.hasDataExist(this.statesList, 'stateName', this.statesForm.value.stateName);
       if (this.duplicateStateName) {
         const temp = this.statesForm.value.stateName;
@@ -84,15 +91,14 @@ export class StatesComponent implements OnInit {
       }
       this.getDuplicateErrorMessages();
     }
-
   }
 
   checkForDuplicateStateCode() {
     this.duplicateStateCode = false;
-    if(this.prevStateCode != this.statesForm.value.stateCode){
+    if (this.prevStateCode != this.statesForm.value.stateCode) {
       this.duplicateStateCode = this.masterService.hasDataExist(this.statesList, 'stateCode', parseInt(this.statesForm.value.stateCode));
     }
-      this.getDuplicateErrorMessages();
+    this.getDuplicateErrorMessages();
   }
 
   loadGridData() {
@@ -110,39 +116,12 @@ export class StatesComponent implements OnInit {
     });
   }
 
-  saveState() {
-    this.formRequiredError = false;
-    if (this.statesForm.valid && this.duplicateMessage == null) {
-      this.showConfirmationModal("Save");
-    } else {
-      this.requiredErrMsg()
-    }
-  }
-
   save() {
-    if (this.statesForm.value.id) {
-      this.masterService.updateRecord(this.endPoint, this.statesForm.value).subscribe(res => {
-        this.showInformationModal("Save");
-      }, (error) => {
-        this.serverErrMsg();
-      });
-    } else {
-      this.masterService.createRecord(this.endPoint, this.statesForm.value).subscribe(res => {
-        this.showInformationModal("Save");
-      }, (error) => {
-        this.serverErrMsg();
-      });
-    }
+    this.buttonsComponent.save();
   }
 
   delete() {
-    this.masterService.deleteRecord(this.endPoint, this.editStates.id).subscribe(res => {
-      this.showInformationModal("Delete");
-      localStorage.removeItem('ag-activeRow');
-      this.successMsg()
-    }, (error) => {
-      this.serverErrMsg();
-    });
+    this.buttonsComponent.delete();
   }
 
   successMsg() {
@@ -178,60 +157,12 @@ export class StatesComponent implements OnInit {
 
   editable(s) {
     this.editStates = s;
-    this.prevStateCode =  s.stateCode
+    this.prevStateCode = s.stateCode
     this.statesForm.reset(s);
     this.deleteFlag = !this.editStates.deleteFlag;
     this.formRequiredError = false;
     this.duplicateMessage = null;
     this.nameFlag = true;
-  }
-
-  showInformationModal(eventType) {
-    var msg;
-    var title;
-    if (eventType === "Delete") {
-      msg = 'states.deleteInformationMessage';
-      title = 'State';
-    } else if (eventType === "Save") {
-      title = 'State';
-      msg = 'states.saveInformationMessage';
-    }
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
-      title,
-      msg,
-      ''
-    );
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
-  }
-
-  showConfirmationModal(eventType): void {
-    var msg;
-    var title;
-    if (eventType === "Delete") {
-      title = 'State';
-      msg = 'states.deleteConfirmationMessage';
-    } else if (eventType === "Save") {
-      title = 'State';
-      msg = 'states.saveConfirmationMessage';
-    }
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
-      title,
-      msg,
-      'green',
-      ''
-    );
-
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
-      if (result) {
-        if (eventType === "Delete") {
-          this.delete();
-        } else {
-          this.save();
-        }
-      }
-    });
   }
 
 }

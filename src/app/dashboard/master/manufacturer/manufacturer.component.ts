@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
-import * as _ from 'lodash';
+import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 
 @Component({
   selector: 'app-manufacturer',
@@ -30,13 +29,19 @@ export class ManufacturerComponent implements OnInit {
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
+  private formTitle: string = "Manufacturer";
+  private deleteConfirmMsg: string = "manufacturer.deleteConfirmationMessage";
+  private saveConfirmMsg: string = "manufacturer.saveConfirmationMessage";
+  private saveInfoMsg: string = "manufacturer.saveInformationMessage";
+  private deleteInfoMsg: string = "manufacturer.deleteInformationMessage";
+
+  @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
-    private modalService: BsModalService,
     private masterService: MasterService) {
-      translate.setDefaultLang('messages.en');
+    translate.setDefaultLang('messages.en');
   }
 
   ngOnInit() {
@@ -48,10 +53,11 @@ export class ManufacturerComponent implements OnInit {
     this.getGridCloumsList();
     this.focusField.nativeElement.focus();
   }
-  
-  onInitialDataLoad(dataList:any[]){
+
+  onInitialDataLoad(dataList: any[]) {
     this.gridDataList = dataList;
   }
+
   valueChange(selectedRow: any[]): void {
     this.editable(selectedRow);
   }
@@ -67,11 +73,10 @@ export class ManufacturerComponent implements OnInit {
   }
 
   checkForDuplicateManufName() {
-        if(!this.nameFlag){
-        this.duplicateManufName = this.masterService.hasDataExist(this.gridDataList, 'manfacturerName', this.manufacturerForm.value.manfacturerName);
-        this.getDuplicateErrorMessages();
-      }
-
+    if (!this.nameFlag) {
+      this.duplicateManufName = this.masterService.hasDataExist(this.gridDataList, 'manfacturerName', this.manufacturerForm.value.manfacturerName);
+      this.getDuplicateErrorMessages();
+    }
   }
 
   getGridCloumsList() {
@@ -90,37 +95,11 @@ export class ManufacturerComponent implements OnInit {
   }
 
   save() {
-    if (this.manufacturerForm.value.id) {
-      this.masterService.updateRecord(this.endPoint, this.manufacturerForm.value).subscribe(res => {
-        this.showInformationModal("Save");
-      }, (error) => {
-        this.serverErrMsg();
-      });
-    } else {
-      this.masterService.createRecord(this.endPoint, this.manufacturerForm.value).subscribe(res => {
-        this.showInformationModal("Save");
-      }, (error) => {
-        this.serverErrMsg();
-      });
-    }
-  }
-
-  saveForm() {
-    this.formRequiredError = false;
-    if (this.manufacturerForm.valid && this.duplicateMessage == null) {
-      this.showConfirmationModal("Save");
-    } else {
-      this.requiredErrMsg()
-    }
+    this.buttonsComponent.save();
   }
 
   delete() {
-    this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
-      localStorage.removeItem('ag-activeRow');
-      this.showInformationModal("Delete");
-    }, (error) => {
-      this.serverErrMsg();
-    });
+    this.buttonsComponent.delete();
   }
 
   successMsg() {
@@ -158,55 +137,6 @@ export class ManufacturerComponent implements OnInit {
     this.formRequiredError = false;
     this.duplicateMessage = null;
     this.deleteFlag = false;
-  }
-
-
-  showInformationModal(eventType) {
-    var msg;
-    var title;
-    if (eventType === "Delete") {
-      msg = 'manufacturer.deleteInformationMessage';
-      title = 'Manufacturer';
-    } else if (eventType === "Save") {
-      title = 'Manufacturer';
-      msg = 'manufacturer.saveInformationMessage';
-    }
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
-      title,
-      msg,
-      ''
-    );
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
-  }
-
-  showConfirmationModal(eventType): void {
-    var msg;
-    var title;
-    if (eventType === "Delete") {
-      title = 'Manufacturer';
-      msg = 'manufacturer.deleteConfirmationMessage';
-    } else if (eventType === "Save") {
-      title = 'Manufacturer';
-      msg = 'manufacturer.saveConfirmationMessage';
-    }
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
-      title,
-      msg,
-      'green',
-      ''
-    );
-
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
-      if (result) {
-        if (eventType === "Delete") {
-          this.delete();
-        } else {
-          this.save();
-        }
-      }
-    });
   }
 
 }

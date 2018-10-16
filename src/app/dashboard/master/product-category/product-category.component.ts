@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
-import * as _ from 'lodash';
+import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 
 @Component({
   selector: 'app-product-category',
@@ -23,20 +22,26 @@ export class ProductCategoryComponent implements OnInit {
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public nameFlag;
-  public deleteFlag: boolean =true;
+  public deleteFlag: boolean = true;
   public prodCategory;
   private duplicateProdCategory: boolean = false;
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
+  private formTitle: string = "Product Category";
+  private deleteConfirmMsg: string = "productcategory.deleteConfirmationMessage";
+  private saveConfirmMsg: string = "productcategory.saveConfirmationMessage";
+  private saveInfoMsg: string = "productcategory.saveInformationMessage";
+  private deleteInfoMsg: string = "productcategory.deleteInformationMessage";
 
+  @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
-     private translate: TranslateService,
-     private modalService: BsModalService,
-     private masterService: MasterService) { translate.setDefaultLang('messages.en');
+    private translate: TranslateService,
+    private masterService: MasterService) {
+      translate.setDefaultLang('messages.en');
   }
 
   ngOnInit() {
@@ -44,12 +49,12 @@ export class ProductCategoryComponent implements OnInit {
       productCategoryId: [],
       productCategoryName: ['', Validators.required]
     });
-  //  this.loadGridData();
+    //  this.loadGridData();
     this.getGridCloumsList();
     this.focusField.nativeElement.focus();
   }
 
-  onInitialDataLoad(dataList:any[]){
+  onInitialDataLoad(dataList: any[]) {
     this.gridDataList = dataList;
   }
 
@@ -60,17 +65,17 @@ export class ProductCategoryComponent implements OnInit {
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
-     if (this.duplicateProdCategory) {
+    if (this.duplicateProdCategory) {
       this.duplicateMessage = "productcategory.duplicateNameErrorMessage";
-      this.duplicateMessageParam=this.productCategoryForm.value.productCategoryName;
+      this.duplicateMessageParam = this.productCategoryForm.value.productCategoryName;
     }
   }
 
   checkForDuplicateProdCategory() {
-        if(!this.nameFlag){
-        this.duplicateProdCategory = this.masterService.hasDataExist(this.gridDataList, 'productCategoryName', this.productCategoryForm.value.productCategoryName);
-        this.getDuplicateErrorMessages();
-      }
+    if (!this.nameFlag) {
+      this.duplicateProdCategory = this.masterService.hasDataExist(this.gridDataList, 'productCategoryName', this.productCategoryForm.value.productCategoryName);
+      this.getDuplicateErrorMessages();
+    }
 
   }
 
@@ -90,41 +95,16 @@ export class ProductCategoryComponent implements OnInit {
   }
 
   save() {
-      if (this.productCategoryForm.value.productCategoryId) {
-          this.masterService.updateRecord(this.endPoint, this.productCategoryForm.value).subscribe(res => {
-            this.showInformationModal("Save");
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        } else {
-          this.masterService.createRecord(this.endPoint, this.productCategoryForm.value).subscribe(res => {
-            this.showInformationModal("Save");
-          }, (error) => {
-            this.serverErrMsg();
-          });
-        }
-
-
-  }
-
-  saveForm() {
-    this.formRequiredError = false;
-    if (this.productCategoryForm.valid && this.duplicateMessage == null ) {
-      this.showConfirmationModal("Save");
-    } else {
-      this.requiredErrMsg();
-    }
+  	this.buttonsComponent.save();
   }
 
   delete() {
-
-      this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.productCategoryId).subscribe(res => {
-        localStorage.removeItem('ag-activeRow');
-        this.showInformationModal("Delete");
-      }, (error) => {
-        this.serverErrMsg();
-      });
-
+    this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.productCategoryId).subscribe(res => {
+      localStorage.removeItem('ag-activeRow');
+      this.buttonsComponent.showInformationModal("Delete");
+    }, (error) => {
+      this.serverErrMsg();
+    });
   }
 
   successMsg() {
@@ -134,7 +114,7 @@ export class ProductCategoryComponent implements OnInit {
   }
 
   requiredErrMsg() {
-    if( this.duplicateMessage == null){
+    if (this.duplicateMessage == null) {
       this.formRequiredError = true;
       this.formSuccess = this.formServerError = false;
     }
@@ -163,56 +143,8 @@ export class ProductCategoryComponent implements OnInit {
     this.formRequiredError = false;
     this.duplicateMessage = null;
     this.nameFlag = true;
-      this.deleteFlag = false;
+    this.deleteFlag = false;
   }
 
-
-  showInformationModal(eventType) {
-    var msg;
-    var title;
-    if (eventType === "Delete") {
-      msg = 'productcategory.deleteInformationMessage';
-      title = 'Product Category';
-    } else if (eventType === "Save") {
-      title = 'Product Category';
-      msg = 'productcategory.saveInformationMessage';
-    }
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
-      title,
-      msg,
-      ''
-    );
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
-  }
-
-  showConfirmationModal(eventType): void {
-    var msg;
-    var title;
-    if (eventType === "Delete") {
-      title = 'Product Category';
-      msg = 'productcategory.deleteConfirmationMessage';
-    } else if (eventType === "Save") {
-      title = 'Product Category';
-      msg = 'productcategory.saveConfirmationMessage';
-    }
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
-      title,
-      msg,
-      'green',
-      ''
-    );
-
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
-      if (result) {
-        if (eventType === "Delete") {
-          this.delete();
-        }  else {
-          this.save();
-        }
-      }
-    });
-  }
 
 }
