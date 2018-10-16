@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
+import $ from "jquery";
 
 @Component({
   selector: 'app-accounts-info',
