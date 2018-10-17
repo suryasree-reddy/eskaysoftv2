@@ -22,7 +22,6 @@
             <li role="menuitem"><a class="dropdown-item" [routerLink]="['accountsInformation']">Accounts Information</a></li>
             <li role="menuitem"><a class="dropdown-item" [routerLink]="['contact']">Contacts</a></li>
             <li role="menuitem"><a class="dropdown-item" [routerLink]="['customerDiscount']">Customerwise Discount</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase']">Purchase</a></li>
             <li role="menuitem"><a class="dropdown-item" [routerLink]="['product']">Product</a></li>
             <li role="menuitem"><a class="dropdown-item" [routerLink]="['productCategory']">Product Category</a></li>
             <li role="menuitem"><a class="dropdown-item" [routerLink]="['productGroup']">Product Group</a></li>
@@ -35,6 +34,7 @@
             Purchase
           </button>
           <ul (mouseenter) ="dropdown2.isOpen=true"  (mouseleave) ="dropdown2.isOpen=false" id="dropdownMaster" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase']">Purchase</a></li>
             <li role="menuitem"><a class="dropdown-item" [routerLink]="['schedule']">Action</a></li>
             <li role="menuitem"><a class="dropdown-item" [routerLink]="['schedule']">Another action</a></li>
           </ul>

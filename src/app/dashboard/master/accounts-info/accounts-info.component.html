@@ -1,28 +1,23 @@
+<!-- Acc Info Start -->
+
 <div class="col-md-5">
   <h3>Account Information</h3>
-  <form [formGroup]="areaForm" (ngSubmit)="saveForm()" autocomplete="off">
-    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="formServerError"
-      [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
-
-  </form>
+  <!-- <form [formGroup]="areaForm" (ngSubmit)="saveForm()" autocomplete="off">
+  <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="formServerError"
+    [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+</form> -->
 </div>
 
-<div class="col-md-12 mr-b-2" >
+<div class="col-md-12 mr-b-2">
   <div class="row">
 
     <!-- Panel Start -->
     <div class="container-fluid">
 
       <div id="tab" class='col-xs-12 col-sm-12'>
-        <ul class="nav nav-pills tab">
-          <li class="active"><a data-toggle="tab" href="#genInfo">General Information</a></li>
-          <li><a data-toggle="tab" href="#regInfo">Registration Information</a></li>
-          <li><a data-toggle="tab">Credentials</a></li>
-          <li><a data-toggle="tab">Others</a></li>
-        </ul>
-
-        <div class="tab-content clearfix">
-          <div id="genInfo" class="tab-pane fade in active">
+        <tabset type="pills">
+          <tab heading="General Information">
+            <!-- General Info Start -->
             <form class="form">
               <div class="col-md-4 col-lt">
                 <p>Account Name: *</p>
@@ -82,12 +77,13 @@
                 <p>Short Name: *</p>
                 <input id="shortName" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['shortName']">
               </div>
-
-
             </form>
-          </div>
+            <!-- General Info Ends -->
+          </tab>
+          <tab heading="Registration Information">
 
-          <div id="regInfo" class="tab-pane fade">
+            <!-- Regs Info Starts -->
+
             <form class="form">
 
               <div class="col-md-4 col-lt">
@@ -149,10 +145,14 @@
               </div>
 
             </form>
-          </div>
 
+            <!-- Regs Info Ends -->
 
-          <div id="credentials" class="tab-pane fade">
+          </tab>
+          <tab heading="Credentials">
+
+            <!-- Credentials Starts -->
+
             <form class="form">
 
               <div class="col-md-4 col-lt">
@@ -174,9 +174,14 @@
               </div>
 
             </form>
-          </div>
 
-          <div id="others" class="tab-pane fade">
+            <!-- Credentials Ends -->
+
+          </tab>
+          <tab heading="Others">
+
+            <!-- Others Starts -->
+
             <form class="form">
 
               <div class="col-md-4 col-lt">
@@ -212,13 +217,20 @@
 
 
             </form>
-          </div>
+
+            <!-- Others Ends -->
+
+          </tab>
+        </tabset>
+
+        <div class="tab-content clearfix">
+
+
+
+
 
         </div>
       </div>
-
-
-
 
       <!-- Panel End -->
 
@@ -226,3 +238,4 @@
     </div>
   </div>
 </div>
+<!-- Acc Info Ends -->

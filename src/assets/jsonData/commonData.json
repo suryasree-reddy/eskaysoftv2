@@ -36,6 +36,13 @@
       "newRowsAction": "keep"
     }, "width": 100 }
   ],
+  "StateZone": [
+    { "code": "East", "description": "East" },
+    { "code": "West", "description": "West" },
+    { "code": "North", "description": "North" },
+    { "code": "South", "description": "South" },
+    { "code": "Central", "description": "Central" }
+  ],
   "StateListColumns": [
     { "headerName": "State Name", "field": "stateName",
       "filterParams": {

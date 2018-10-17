@@ -15,10 +15,13 @@
               <p>Code: *</p>
               <input id="stateCode" [readonly]="duplicateStateName" (blur)="checkForDuplicateStateCode()" class="form-control" [formControl]="statesForm.controls['stateCode']">
             </div>
-            <div class="input-group">
-                <p>Zone: *</p>
-                <input id="zone"  [readonly]="duplicateStateName" class="form-control" [formControl]="statesForm.controls['zone']">
-              </div>
+            
+              <div class="input-group">
+                  <p>Zone: *</p>
+                 <input id="zone" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
+                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"   class="form-control">
+                  <span class="caret"></span>
+            </div>
 
               <app-buttons [title]="formTitle" [deleteConfirmMsg]="deleteConfirmMsg"
                            [saveConfirmMsg]="saveConfirmMsg" [saveInfoMsg]="saveInfoMsg" [endPoint]="endPoint"

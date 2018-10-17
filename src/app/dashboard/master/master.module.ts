@@ -4,9 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { NgForm, NgModel, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubscheduleComponent } from './subschedule/subschedule.component';
-import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { AgGridModule } from 'ag-grid-angular';
-import { BsDropdownModule } from 'ngx-bootstrap';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
@@ -34,6 +32,8 @@ import { AccountsOpeningsComponent } from './accounts-openings/accounts-openings
 import { ContactComponent } from './contact/contact.component';
 import { CustomerwiseDiscountComponent } from './customerwise-discount/customerwise-discount.component';
 import { PurchaseComponent } from './purchase/purchase.component';
+import { BsDropdownModule, TypeaheadModule, TabsModule  } from 'ngx-bootstrap';
+
 
 @NgModule({
   imports: [
@@ -42,7 +42,9 @@ import { PurchaseComponent } from './purchase/purchase.component';
     ReactiveFormsModule,
     TypeaheadModule,
     AgGridModule,
-    BsDropdownModule,
+    BsDropdownModule.forRoot(),
+    TypeaheadModule.forRoot(),
+    TabsModule.forRoot(), 
     FormsModule,
     ModalModule.forRoot(),
     HttpClientModule,

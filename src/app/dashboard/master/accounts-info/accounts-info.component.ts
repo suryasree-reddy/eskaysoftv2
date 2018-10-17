@@ -1,5 +1,6 @@
 import { Component, OnInit, NgModule,  TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BsDropdownModule, TypeaheadModule, TabsModule  } from 'ngx-bootstrap';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { MasterService } from '../master.service';
@@ -7,13 +8,23 @@ import { TranslateService } from '@ngx-translate/core';
 import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
-import $ from "jquery";
+// import $ from "jquery";
+
 
 @Component({
   selector: 'app-accounts-info',
   templateUrl: './accounts-info.component.html'
 
 })
+
+@NgModule({
+  imports: [
+ BsDropdownModule.forRoot(),
+    TypeaheadModule.forRoot(),
+    TabsModule.forRoot(), 
+  ],
+})
+
 export class AccountsInfoComponent implements OnInit {
   public accInfoForm: FormGroup;
   private areaEndPoint: string = "accountsInformation/";

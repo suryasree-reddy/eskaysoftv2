@@ -21,6 +21,7 @@ export class StatesComponent implements OnInit {
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public statesList: any = [];
+  public stateZone: any[];
   public statesListColumns;
   public editStates;
   public deleteFlag: boolean = true;
@@ -65,8 +66,18 @@ export class StatesComponent implements OnInit {
     //this.loadGridData();
     this.focusField.nativeElement.focus();
     this.getStatesTypes();
+    this.getZone();
   }
 
+
+  getZone() {
+    this.masterService.getLocalJsonData().subscribe(data => {
+      data as object[];
+      this.stateZone = data["StateZone"];
+      this.statesListColumns = data["StateListColumns"]
+    });
+  }
+  
   getDuplicateErrorMessages(): void {
     this.formRequiredError = false;
     this.duplicateMessage = null;
