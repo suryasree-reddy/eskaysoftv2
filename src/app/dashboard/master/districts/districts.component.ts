@@ -71,7 +71,7 @@ export class DistrictsComponent implements OnInit {
       zone: ['', Validators.required],
     });
     this.districtsForm = this.fb.group({
-      districtId: [],
+      id: [],
       districtName: ['', Validators.required],
       statesId: [],
       statesName: []
@@ -178,7 +178,7 @@ export class DistrictsComponent implements OnInit {
     if(!this.verifyDistDuplicates()){
       if (this.districtsForm.valid && this.selectedState && this.selectedState.id ) {
           this.districtsForm.value.statesId = this.selectedState.id;
-          if (this.districtsForm.value.districtId) {
+          if (this.districtsForm.value.id) {
             this.masterService.updateRecord(this.endPoint, this.districtsForm.value).subscribe(res => {
               this.showInformationModal("Save");
             }, (error) => {
@@ -211,7 +211,7 @@ export class DistrictsComponent implements OnInit {
 
   delete() {
 
-      this.masterService.deleteRecord(this.endPoint, this.editDistricts.districtId).subscribe(res => {
+      this.masterService.deleteRecord(this.endPoint, this.editDistricts.id).subscribe(res => {
         localStorage.removeItem('ag-activeRow');
         this.showInformationModal("Delete");
       }, (error) => {

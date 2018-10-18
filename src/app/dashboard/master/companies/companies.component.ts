@@ -52,7 +52,7 @@ export class CompaniesComponent implements OnInit {
 
   ngOnInit() {
     this.companyForm = this.fb.group({
-      companyId: [],
+      id: [],
       companyGroupId: [],
       companyGroupName: [],
       companyGroup:['', Validators.required],

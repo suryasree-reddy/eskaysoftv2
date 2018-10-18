@@ -58,7 +58,7 @@ export class AreasComponent implements OnInit {
   }
   ngOnInit() {
     this.areaForm = this.fb.group({
-      areaId: [],
+      id: [],
       areaName: ['', Validators.required],
       businessExecutiveId: [],
       businessExecutiveName: []
@@ -162,7 +162,7 @@ export class AreasComponent implements OnInit {
 
   save() {
 
-    if (this.areaForm.value.areaId && this.selectedTypeahead && this.selectedTypeahead.id) {
+    if (this.areaForm.value.id && this.selectedTypeahead && this.selectedTypeahead.id) {
       this.areaForm.value.businessExecutiveId = this.selectedTypeahead.id;
       this.masterService.updateRecord(this.areaEndPoint, this.areaForm.value).subscribe(res => {
         this.showInformationModal("Save");
@@ -190,7 +190,7 @@ export class AreasComponent implements OnInit {
   }
 
   delete() {
-    this.masterService.deleteRecord(this.areaEndPoint, this.gridSelectedRow.areaId).subscribe(res => {
+    this.masterService.deleteRecord(this.areaEndPoint, this.gridSelectedRow.id).subscribe(res => {
       localStorage.removeItem('ag-activeRow');
       this.showInformationModal("Delete");
     }, (error) => {

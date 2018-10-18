@@ -46,7 +46,7 @@ export class ProductCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.productCategoryForm = this.fb.group({
-      productCategoryId: [],
+      id: [],
       productCategoryName: ['', Validators.required]
     });
     //  this.loadGridData();
@@ -99,7 +99,7 @@ export class ProductCategoryComponent implements OnInit {
   }
 
   delete() {
-    this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.productCategoryId).subscribe(res => {
+    this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
       localStorage.removeItem('ag-activeRow');
       this.buttonsComponent.showInformationModal("Delete");
     }, (error) => {

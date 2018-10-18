@@ -53,7 +53,7 @@ export class ProductComponent implements OnInit {
 
   @ViewChild('focus') focusField: ElementRef;
 
-  constructor(private fb: FormBuilder, 
+  constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private modalService: BsModalService,
     private masterService: MasterService) {
@@ -96,7 +96,7 @@ export class ProductComponent implements OnInit {
       companyId: [],
       companyCode: ['', Validators.required]
     });
-    
+
     //this.loadGridData();
     this.getGridCloumsList();
     this.loadGroupTypeaheadData();
@@ -143,7 +143,7 @@ loadCompanyTypeaheadData(){
 
   loadSelectedCategoryTypeahead(event) {
     this.selectedCategoryTypeahead = event.item;
-    this.productForm.patchValue({ productCategoryId: event.item.productCategoryId });
+    this.productForm.patchValue({ productCategoryId: event.item.id });
   }
 
   valueChange(selectedRow: any[]): void {
@@ -241,7 +241,7 @@ loadCompanyTypeaheadData(){
     }
   }
 
-  
+
   saveChildForm() {
     this.scFormRequiredError = false;
     if (this.productGroupForm.valid && this.childDuplicateMessage == null) {

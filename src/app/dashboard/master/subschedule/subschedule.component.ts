@@ -64,7 +64,7 @@ export class SubscheduleComponent implements OnInit {
     });
 
     this.subScheduleForm = this.fb.group({
-      subScheduleId: [],
+      id: [],
       subScheduleName: ['', Validators.required],
       subScheduleIndex: ['', Validators.required],
       scheduleId: [],
@@ -181,7 +181,7 @@ export class SubscheduleComponent implements OnInit {
 
   saveForm() {
     this.subScheduleForm.value.scheduleId = this.selectedSchedule.id;
-    if (this.subScheduleForm.value.subScheduleId) {
+    if (this.subScheduleForm.value.id) {
       this.masterService.updateRecord(this.endPoint, this.subScheduleForm.value).subscribe(res => {
         this.showInformationModal("Save");
       }, (error) => {
@@ -206,7 +206,7 @@ export class SubscheduleComponent implements OnInit {
   }
 
   delete() {
-    this.masterService.deleteRecord(this.endPoint, this.editSubSchedule.subScheduleId).subscribe(res => {
+    this.masterService.deleteRecord(this.endPoint, this.editSubSchedule.id).subscribe(res => {
       this.showInformationModal("Delete");
     }, (error) => {
       this.serverErrMsg();

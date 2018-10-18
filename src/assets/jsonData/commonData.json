@@ -158,7 +158,7 @@
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
     } },
-    { "headerName": "Product Category", "field": "productCategoryId", "filterParams": {
+    { "headerName": "Product Category", "field": "id", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
     } }
