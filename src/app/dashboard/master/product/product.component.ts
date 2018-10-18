@@ -28,11 +28,14 @@ export class ProductComponent implements OnInit {
   public deleteFlag: boolean = true;
   public duplicateMessage: string = null;
   public typeaheadGroupDataList: any = [];
+  public typeaheadCompanyDataList: any = [];
   public typeaheadCategoryDataList: any = [];
   public selectedCategoryTypeahead: any;
   public selectedGroupTypeahead: any;
+  public selectedCompanyTypeahead: any;
   private pgEndPoint: string = "productgroup/";
   private pcEndPoint: string = "productcategory/";
+  private cEndPoint: string = "company/";
 
 
   @ViewChild('focus') focusField: ElementRef;
@@ -46,6 +49,7 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     this.productForm = this.fb.group({
       id: [],
+      companyId:[],
       productGroupId: [],
       productCategoryId: [],
       name: ['', Validators.required],
@@ -66,6 +70,7 @@ export class ProductComponent implements OnInit {
     this.getGridCloumsList();
     this.loadGroupTypeaheadData();
     this.loadCategoryTypeaheadData();
+    this.loadCompanyTypeaheadData();
     this.getJsonData();
     // this.focusField.nativeElement.focus();
   }
@@ -76,6 +81,12 @@ export class ProductComponent implements OnInit {
       this.gridColumnNamesList = data["ProductColumns"];
     });
   }
+
+loadCompanyTypeaheadData(){
+  this.masterService.getParentData(this.cEndPoint).subscribe(list => {
+    this.typeaheadCompanyDataList = list;
+  });
+}
 
   loadGroupTypeaheadData() {
     this.masterService.getParentData(this.pgEndPoint).subscribe(list => {
@@ -92,6 +103,11 @@ export class ProductComponent implements OnInit {
   loadSelectedGroupTypeahead(event) {
     this.selectedGroupTypeahead = event.item;
     this.productForm.patchValue({ productGroupId: event.item.id });
+  }
+
+  loadSelectedCompanyTypeahead(event) {
+    this.selectedCompanyTypeahead = event.item;
+    this.productForm.patchValue({ companyId: event.item.id });
   }
 
   loadSelectedCategoryTypeahead(event) {

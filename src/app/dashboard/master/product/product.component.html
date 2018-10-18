@@ -19,19 +19,19 @@
                 </div>-->
 
                 <!-- <div class="col-md-6 col-lt input-group ">
-                   
+
                     <input id="address" type="text" class="form-control" [formControl]="userProfileForm.controls['address']"
                       placeholder="Address">
                       <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                   </div> -->
-                
+
                 <div class="col-md-6 col-lt">
-                    <p>Company Group: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create</a>)</p>
-      
-                    <input id="companyGroup" formControlName="companyGroup" [typeahead]="typeaheadDataList" typeaheadOptionField="companyGroup"
-                    [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control">
-                     <span class="caret"></span> 
-                    
+                    <p>Company: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create</a>)</p>
+
+                    <input id="companyId" formControlName="companyId" [typeahead]="typeaheadCompanyDataList" typeaheadOptionField="companyId"
+                    [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control">
+                     <span class="caret"></span>
+
                   </div>
 
                 <div class="col-md-6 col-lt">
@@ -53,7 +53,7 @@
                 <div class="col-md-3 col-lt">
                     <p>Packing: *</p>
                     <input id="packing" class="form-control" [formControl]="productForm.controls['packing']">
-                </div> 
+                </div>
 
                 <div class="col-md-3 col-lt">
                     <p>Box Qty: *</p>
