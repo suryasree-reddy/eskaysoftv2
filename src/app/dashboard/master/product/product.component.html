@@ -26,16 +26,16 @@
                   </div> -->
 
                 <div class="col-md-6 col-lt">
-                    <p>Company: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create</a>)</p>
+                    <p>Company: * &emsp; (<a style="cursor: pointer"  (click)="openModal(cmpTemplate)">create</a>)</p>
 
-                    <input id="companyId" formControlName="companyId" [typeahead]="typeaheadCompanyDataList" typeaheadOptionField="companyId"
+                    <input id="companyCode" formControlName="companyCode" [typeahead]="typeaheadCompanyDataList" typeaheadOptionField="companyCode"
                     [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control">
                      <span class="caret"></span>
 
                   </div>
 
                 <div class="col-md-6 col-lt">
-                    <p>Group: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
+                    <p>Product Group: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
                     <input id="productGroupName" formControlName="productGroupName" [typeahead]="typeaheadGroupDataList"
                         typeaheadOptionField="productGroupName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                         (typeaheadOnSelect)="loadSelectedGroupTypeahead($event)" class="form-control">
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="col-md-6 col-lt">
-                    <p>Category: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
+                    <p>Product Category: * &emsp; (<a style="cursor: pointer" (click)="openModal(pcTemplate)">create </a>)</p>
                     <input id="productCategoryName" formControlName="productCategoryName" [typeahead]="typeaheadCategoryDataList"
                         typeaheadOptionField="productCategoryName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                         (typeaheadOnSelect)="loadSelectedCategoryTypeahead($event)" class="form-control">
@@ -124,7 +124,7 @@
     </div>
 
 </div>
-
+<!-- Product Group Modal -->
 <ng-template #template>
     <div class="modal-header">
         <h4 class="modal-title pull-left">Create Product Group </h4>
@@ -139,14 +139,65 @@
 
             <div class="input-group">
                 <p>Product Group: *</p>
-                <input id="productGroup" #focus class="form-control" [formControl]="productGroupForm.controls['productGroup']">
+                <input id="productGroupName" #focus (blur)="checkForDuplicateProdGroup()" class="form-control" [formControl]="productGroupForm.controls['productGroupName']">
             </div>
 
             <div class="input-group">
-                <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate
-                    }}</button>
+                <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
                 <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
             </div>
         </form>
     </div>
 </ng-template>
+<!-- Product Category Modal -->
+<ng-template #pcTemplate>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Create Product Category </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="productCategoryForm" (ngSubmit)="saveChildPCForm()" autocomplete="off">
+            <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess" [formServerError]="scFormServerError"
+                [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+
+            <div class="input-group">
+                <p>Product Category: *</p>
+                <input id="productCategoryName" #focus (blur)="checkForDuplicateProdCategory()" class="form-control" [formControl]="productCategoryForm.controls['productCategoryName']">
+            </div>
+
+            <div class="input-group">
+                <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
+                <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<!-- Company Modal -->
+<ng-template #cmpTemplate>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Create Company </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="companyForm" (ngSubmit)="saveChildCmpForm()" autocomplete="off">
+            <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess" [formServerError]="scFormServerError"
+                [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+
+            <div class="input-group">
+                <p>Company: *</p>
+                <input id="companyCode" #focus (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['companyCode']">
+            </div>
+
+            <div class="input-group">
+                <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
+                <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
