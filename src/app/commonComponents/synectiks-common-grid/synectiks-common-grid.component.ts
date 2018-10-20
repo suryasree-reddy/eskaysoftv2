@@ -115,7 +115,8 @@ export class SynectiksCommonGridComponent implements OnInit {
   }
 
 loadGridColumns(params){
-  const columns = params.columnApi.getAllDisplayedVirtualColumns();
+  params.api.sizeColumnsToFit();
+//  const columns = params.columnApi.getAllDisplayedVirtualColumns();
   /*columns.forEach((column) => {
     const ele = document.querySelector('div.ag-body-container');
 
@@ -131,14 +132,15 @@ loadGridColumns(params){
 
   onGridReady(params) {
     this.gridApi = params.api;
-    this.gridApi.sizeColumnsToFit();
+//  this.gridApi.sizeColumnsToFit();
     // if your data is set on the gridOptions,
     //below code for settimeout gridReady get's called before data is bound.
     // so waiting time out for 5 sec
-    //setTimeout(this.loadGridColumns(params), 5000);
+    setTimeout(this.loadGridColumns(params), 500);
     this.loadGridColumns(params);
     this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
+
       this.intialLoad.emit(list);
       let dataSource = {
         rowCount: null, // behave as infinite scroll
@@ -160,6 +162,7 @@ loadGridColumns(params){
             };
         }
       };
+
       params.api.setDatasource(dataSource);
       localStorage.setItem('rowDataLength', JSON.stringify(list.length));
     });
