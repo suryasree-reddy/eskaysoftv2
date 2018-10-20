@@ -10,31 +10,38 @@
       "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    }},
+    },
+    "suppressSizeToFit": false},
     { "headerName": "Schedule Index", "field": "scheduleIndex", "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": ["equals", "lessThan", "greaterThan"],
         "newRowsAction": "keep"
       },
-      "width": 100 },
-    { "headerName": "Schedule Type", "field": "scheduleType", "width": 100 },
-    { "headerName": "Status", "field": "deleteFlag", "cellRenderer": "deltaIndicator", "suppressFilter": true, "width": 50 }
+      "width": 100,
+      "suppressSizeToFit": false },
+    { "headerName": "Schedule Type", "field": "scheduleType", "width": 100,
+    "suppressSizeToFit": false },
+    { "headerName": "Status", "field": "deleteFlag", "cellRenderer": "deltaIndicator", "suppressFilter": true, "width": 50,
+    "suppressSizeToFit": false }
   ],
   "SubScheduleListColumns": [
     { "headerName": "Sub-Schedule Name", "field": "subScheduleName",
       "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    }},
+    },
+    "suppressSizeToFit": false},
     { "headerName": "Schedule Name", "field": "scheduleName",
       "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    }, "width": 80 },
+    }, "width": 80,
+    "suppressSizeToFit": false },
     { "headerName": "Sub-Schedule Index", "field": "subScheduleIndex", "filter": "agNumberColumnFilter", "filterParams": {
       "filterOptions": ["equals", "lessThan", "greaterThan"],
       "newRowsAction": "keep"
-    }, "width": 100 }
+    }, "width": 100,
+    "suppressSizeToFit": false }
   ],
   "StateZone": [
     { "code": "East", "description": "East" },
@@ -48,95 +55,118 @@
       "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    }},
+    },
+    "suppressSizeToFit": false},
     { "headerName": "State Code", "field": "stateCode", "filter": "agNumberColumnFilter", "filterParams": {
       "filterOptions": ["equals", "lessThan", "greaterThan"],
       "newRowsAction": "keep"
-    }, "width": 60 },
-    { "headerName": "Status", "field": "deleteFlag", "cellRenderer": "deltaIndicator", "suppressFilter": true, "width": 50 }
+    }, "width": 60,
+    "suppressSizeToFit": false },
+    { "headerName": "Status", "field": "deleteFlag", "cellRenderer": "deltaIndicator", "suppressFilter": true, "width": 50,
+    "suppressSizeToFit": false }
   ],
   "DistrictsColumns": [
     { "headerName": "District Name", "field": "districtName", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } },
+    } ,
+    "suppressSizeToFit": false},
     { "headerName": "State Name", "field": "statesName", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } }
+    } ,
+    "suppressSizeToFit": false}
   ],
   "BusinessExecutiveColumns": [
     { "headerName": "Name", "field": "name" , "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    }},
+    },
+    "suppressSizeToFit": false},
     { "headerName": "Address", "field": "address" , "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    }},
+    },
+    "suppressSizeToFit": false},
     { "headerName": "Town", "field": "town" ,"filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    }},
+    },
+    "suppressSizeToFit": false},
     { "headerName": "Mobile", "field": "mobile" , "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    }},
+    },
+    "suppressSizeToFit": false},
     { "headerName": "Status", "field": "deleteFlag", "cellRenderer": "deltaIndicator", "suppressFilter": true, "width": 50 }
   ],
   "BankInformationColumns": [
     { "headerName": "Name", "field": "name", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } },
+    },
+    "suppressSizeToFit": false },
     { "headerName": "Address", "field": "address", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } }
+    } ,
+    "suppressSizeToFit": false}
   ],
   "ManfacturerColumns": [
     { "headerName": "Manfacturer Name", "field": "manfacturerName", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } }
+    } ,
+    "suppressSizeToFit": false}
   ],
   "CompanyGroupColumns": [
     { "headerName": "Company Group", "field": "companyGroup", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } },
-    { "headerName": "Status", "field": "deleteFlag", "cellRenderer": "deltaIndicator", "suppressFilter": true, "width": 50 }
+    } ,
+    "suppressSizeToFit": false},
+    { "headerName": "Status", "field": "deleteFlag", "cellRenderer": "deltaIndicator", "suppressFilter": true, "width": 50 ,
+    "suppressSizeToFit": false}
   ],
   "AreaColumns": [
     { "headerName": "Area Name", "field": "areaName", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } },
-    { "headerName": "Executive Name", "field": "name", "filterParams": {
+    } ,
+    "suppressSizeToFit": false},
+    { "headerName": "Executive Name", "field": "businessExecutiveName", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } }
+    } ,
+    "suppressSizeToFit": false}
   ],
   "CompanyColumns": [
     { "headerName": "Company Name", "field": "companyName", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } },
+    } ,
+    "suppressSizeToFit": false},
     { "headerName": "Company Code", "field": "companyCode", "filter": "agNumberColumnFilter", "filterParams": {
       "filterOptions": ["equals", "lessThan", "greaterThan"],
       "newRowsAction": "keep"
-    } },
+    },
+    "suppressSizeToFit": false },
     { "headerName": "Company Group", "field": "companyGroup", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } },
+    } ,
+    "suppressSizeToFit": false},
     { "headerName": "Company Type", "field": "companyType", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } },
-    { "headerName": "Company Status", "field": "companyStatus" },
-    { "headerName": "Inv.Gen.Type", "field": "invGenType" },
-    { "headerName": "Inv.Prefix", "field": "invPrefix" }
+    } ,
+    "suppressSizeToFit": false},
+    { "headerName": "Company Status", "field": "companyStatus" ,
+    "suppressSizeToFit": false},
+    { "headerName": "Inv.Gen.Type", "field": "invGenType",
+    "suppressSizeToFit": false },
+    { "headerName": "Inv.Prefix", "field": "invPrefix",
+    "suppressSizeToFit": false }
   ],
   "CustomerDiscountColumns": [
     { "headerName": "Company Description", "field": "company", "filterParams": {
@@ -146,34 +176,41 @@
     { "headerName": "Discount", "field": "discount", "filter": "agNumberColumnFilter", "filterParams": {
       "filterOptions": ["equals", "lessThan", "greaterThan"],
       "newRowsAction": "keep"
-    } },
-    { "headerName": "C.Discount", "field": "cdisc" }
+    } ,
+    "suppressSizeToFit": false},
+    { "headerName": "C.Discount", "field": "cdisc" ,
+    "suppressSizeToFit": false}
   ],
   "ProductColumns": [
     { "headerName": "Product Name", "field": "name", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } },
+    },
+    "suppressSizeToFit": false },
     { "headerName": "Product Group", "field": "productGroupId", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } },
+    },
+    "suppressSizeToFit": false },
     { "headerName": "Product Category", "field": "id", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } }
+    } ,
+    "suppressSizeToFit": false}
   ],
   "ProductCategoryColumns": [
     { "headerName": "Product Category", "field": "productCategoryName", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } }
+    },
+    "suppressSizeToFit": false }
   ],
   "ProductGroupColumns": [
     { "headerName": "Product Group", "field": "productGroupName", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } }
+    },
+    "suppressSizeToFit": false }
   ]
 
 }

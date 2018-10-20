@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
+import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 
 @Component({
   selector: 'app-areas',
@@ -41,7 +42,17 @@ export class AreasComponent implements OnInit {
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
-
+  private formTitle: string = "Area";
+  private deleteConfirmMsg: string = "areas.deleteConfirmationMessage";
+  private saveConfirmMsg: string = "areas.saveConfirmationMessage";
+  private saveInfoMsg: string = "areas.saveInformationMessage";
+  private deleteInfoMsg: string = "areas.deleteInformationMessage";
+  private childFormTitle: string = "Business Executive";
+  private childDeleteConfirmMsg: string = "businessexecutive.deleteConfirmationMessage";
+  private childSaveConfirmMsg: string = "businessexecutive.saveConfirmationMessage";
+  private childSaveInfoMsg: string = "businessexecutive.saveInformationMessage";
+  private childDeleteInfoMsg: string = "businessexecutive.deleteInformationMessage";
+  @ViewChild(ButtonsComponent) buttonsComponent:ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
@@ -137,7 +148,10 @@ export class AreasComponent implements OnInit {
   }
 
   loadSelectedTypeahead(event) {
+
     this.selectedTypeahead = event.item;
+    console.log(" this11111.selectedTypeahead--",  this.selectedTypeahead, "::event.item--", event.item)
+    console.log(" this11111.selectedTypeahead--",  this.selectedTypeahead.id, "::event.item--", event.item)
   }
 
   openModal(template: TemplateRef<any>) {
@@ -161,42 +175,13 @@ export class AreasComponent implements OnInit {
   }
 
   save() {
-
-    if (this.areaForm.value.id && this.selectedTypeahead && this.selectedTypeahead.id) {
-      this.areaForm.value.businessExecutiveId = this.selectedTypeahead.id;
-      this.masterService.updateRecord(this.areaEndPoint, this.areaForm.value).subscribe(res => {
-        this.showInformationModal("Save");
-      }, (error) => {
-        this.serverErrMsg();
-      });
-    } else {
-      this.areaForm.value.businessExecutiveId = this.selectedTypeahead.id;
-      this.masterService.createRecord(this.areaEndPoint, this.areaForm.value).subscribe(res => {
-        this.showInformationModal("Save");
-      }, (error) => {
-        this.serverErrMsg();
-      });
-    }
-  }
-
-
-  saveForm() {
-    this.formRequiredError = false;
-    if (this.areaForm.valid && this.duplicateMessage == null) {
-      this.showConfirmationModal("Save");
-    } else {
-      this.requiredErrMsg()
-    }
+    console.log(" this.selectedTypeahead--",  this.selectedTypeahead)
+    this.areaForm.value.businessExecutiveId = this.selectedTypeahead.id;
+  	this.buttonsComponent.save();
   }
 
   delete() {
-    this.masterService.deleteRecord(this.areaEndPoint, this.gridSelectedRow.id).subscribe(res => {
-      localStorage.removeItem('ag-activeRow');
-      this.showInformationModal("Delete");
-    }, (error) => {
-      this.serverErrMsg();
-    });
-
+  	this.buttonsComponent.delete();
   }
 
   successMsg() {
@@ -261,52 +246,6 @@ export class AreasComponent implements OnInit {
     this.businessExecutiveForm.reset();
   }
 
-  showInformationModal(eventType) {
-    var msg;
-    var title;
-    if (eventType === "Delete") {
-      msg = 'areas.deleteInformationMessage';
-      title = 'Area';
-    } else if (eventType === "Save") {
-      title = 'Area';
-      msg = 'areas.saveInformationMessage';
-    }
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
-      title,
-      msg,
-      ''
-    );
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
-  }
 
-  showConfirmationModal(eventType): void {
-    var msg;
-    var title;
-    if (eventType === "Delete") {
-      title = 'Area';
-      msg = 'areas.deleteConfirmationMessage';
-    } else if (eventType === "Save") {
-      title = 'Area';
-      msg = 'areas.saveConfirmationMessage';
-    }
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
-      title,
-      msg,
-      'green',
-      ''
-    );
-
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
-      if (result) {
-        if (eventType === "Delete") {
-          this.delete();
-        } else {
-          this.save();
-        }
-      }
-    });
-  }
 
 }

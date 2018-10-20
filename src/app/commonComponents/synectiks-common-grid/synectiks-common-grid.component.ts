@@ -11,8 +11,8 @@ export class SynectiksCommonGridComponent implements OnInit {
   @Input() gridDataList: any = [];
   @Input() endPoint : string;
   @Input() gridColumnList: any = [];
-  @Output() valueChange = new EventEmitter();  
-  @Output() intialLoad = new EventEmitter(); 
+  @Output() valueChange = new EventEmitter();
+  @Output() intialLoad = new EventEmitter();
   private rowModelType;
 
   private gridApi = null;
@@ -22,8 +22,8 @@ export class SynectiksCommonGridComponent implements OnInit {
     deltaIndicator: this.deltaIndicator
   }
 
-  constructor(private masterService: MasterService) { 
-   
+  constructor(private masterService: MasterService) {
+
   }
 
   ngOnInit() {
@@ -32,7 +32,7 @@ export class SynectiksCommonGridComponent implements OnInit {
     this.gridColumnList = null;
     this.gridDataList = null;
   }
-  redrawAllRows() {    
+  redrawAllRows() {
     this.gridApi.RefreshView();
   }
   deltaIndicator(params) {
@@ -49,8 +49,8 @@ export class SynectiksCommonGridComponent implements OnInit {
 
   onSelectionChanged() {
     this.valueChange.emit(this.gridApi.getSelectedRows()[0]);
-  } 
-  
+  }
+
   navigateToNextCell(params) {
     let previousCell = params.previousCellDef;
     const suggestedNextCell = params.nextCellDef;
@@ -129,13 +129,14 @@ loadGridColumns(params){
   });*/
 }
 
-  onGridReady(params) {   
+  onGridReady(params) {
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();
     // if your data is set on the gridOptions,
     //below code for settimeout gridReady get's called before data is bound.
     // so waiting time out for 5 sec
-    setTimeout(this.loadGridColumns(params), 5000);
+    //setTimeout(this.loadGridColumns(params), 5000);
+    this.loadGridColumns(params);
     this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
       this.intialLoad.emit(list);
@@ -145,7 +146,7 @@ loadGridColumns(params){
             console.log('asking for ' + params.startRow + ' to ' + params.endRow);
             // At this point in your code, you would call the server, using $http if in AngularJS 1.x.
             // To make the demo look real, wait for 500ms before returning
-            setTimeout(function () {
+            {
                 // take a slice of the total rows
                 let dataAfterSortingAndFiltering = sortAndFilter(list, params.sortModel, params.filterModel);
                 let rowsThisPage = dataAfterSortingAndFiltering.slice(params.startRow, params.endRow);
@@ -156,20 +157,20 @@ loadGridColumns(params){
                 }
                 // call the success callback
                 params.successCallback(rowsThisPage, lastRow);
-            }, 500);
+            };
         }
       };
       params.api.setDatasource(dataSource);
       localStorage.setItem('rowDataLength', JSON.stringify(list.length));
     });
-    
+
   }
 
-  
+
 
 }
 function sortAndFilter(allOfTheData, sortModel, filterModel) {
-  
+
   return sortData(sortModel, filterData(filterModel, allOfTheData));
 }
 
@@ -206,9 +207,9 @@ function filterData(filterModel, data) {
   }
   var resultOfFilter = data;
   for (var i = 0; i < Object.keys(filterModel).length; i++) {
-    var colName = Object.keys(filterModel)[i];    
-    resultOfFilter = filterSearch(colName, filterModel, resultOfFilter);  
-    
+    var colName = Object.keys(filterModel)[i];
+    resultOfFilter = filterSearch(colName, filterModel, resultOfFilter);
+
   }
   return resultOfFilter;
 }

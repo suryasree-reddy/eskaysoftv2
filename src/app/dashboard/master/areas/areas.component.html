@@ -19,11 +19,14 @@
               <span class="caret"></span>
         </div>
 
-              <div class="input-group">
-                <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
-                <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-                <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete' | translate }}</button>
-              </div>
+        <app-buttons [title]="formTitle" [deleteConfirmMsg]="deleteConfirmMsg"
+                     [saveConfirmMsg]="saveConfirmMsg" [saveInfoMsg]="saveInfoMsg" [endPoint]="areaEndPoint"
+                     [deleteInfoMsg]="deleteInfoMsg" [duplicateMessage]="duplicateMessage"
+                     [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
+                     [hideDeleteBtn]=true [formObj]="areaForm" (saveRecord)="save()"
+                     (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+                     (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+
         </form>
       </div>
 
