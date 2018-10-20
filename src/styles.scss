@@ -1,6 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-@import "~ag-grid-community/dist/styles/ag-grid.css";
-@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
+
 
 body,
 html {
@@ -45,7 +43,8 @@ body {
 }
 
 .ag-theme-balham {
-  background-color: rgba(250, 250, 250, 0.7);
+  //background-color: rgba(250, 250, 250, 0.7);
+  background-color: rgba(216, 215, 223, 0.1);
 
   .ag-row {
     background-color: transparent;
@@ -71,7 +70,7 @@ body {
   }
 
   .ag-cell {
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #BDC3C7;
     // text-align: center;
     img {
       width: 15px;
