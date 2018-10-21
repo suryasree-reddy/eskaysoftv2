@@ -30,12 +30,6 @@ export class BankinformationComponent implements OnInit {
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
-  private formTitle: string = "Bank Information";
-  private deleteConfirmMsg: string = "bankinfo.deleteConfirmationMessage";
-  private saveConfirmMsg: string = "bankinfo.saveConfirmationMessage";
-  private saveInfoMsg: string = "bankinfo.saveInformationMessage";
-  private deleteInfoMsg: string = "bankinfo.deleteInformationMessage";
-
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
@@ -103,7 +97,7 @@ export class BankinformationComponent implements OnInit {
   delete() {
     this.buttonsComponent.delete();
   }
-  
+
   successMsg() {
     this.formSuccess = true;
     this.formRequiredError = this.formServerError = false;

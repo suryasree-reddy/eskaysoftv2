@@ -17,10 +17,10 @@
             <p>Bank Address: *</p>
             <input id="address" class="form-control" [formControl]="bankInformationForm.controls['address']">
         </div>
-        
-        <app-buttons [title]="formTitle" [deleteConfirmMsg]="deleteConfirmMsg"
-               [saveConfirmMsg]="saveConfirmMsg" [saveInfoMsg]="saveInfoMsg" [endPoint]="endPoint"
-               [deleteInfoMsg]="deleteInfoMsg" [duplicateMessage]="duplicateMessage"
+
+        <app-buttons [title]="'Bank Information'" [deleteConfirmMsg]="'bankinfo.deleteConfirmationMessage'"
+               [saveConfirmMsg]="'bankinfo.saveConfirmationMessage'" [saveInfoMsg]="'bankinfo.saveInformationMessage'" [endPoint]="endPoint"
+               [deleteInfoMsg]="'bankinfo.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
                [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
                [hideDeleteBtn]=true [formObj]="bankInformationForm" (saveRecord)="save()"
                (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
