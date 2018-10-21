@@ -123,6 +123,7 @@ export class SubscheduleComponent implements OnInit {
     this.masterService.createRecord("schedules/", this.scheduleForm.value).subscribe(res => {
       this.showInformationModal("SaveSchedule");
       this.modalRef.hide();
+      this.getScheduleTypes();
       this.scheduleForm.reset();
     }, (error) => {
       this.scServerErrMsg();

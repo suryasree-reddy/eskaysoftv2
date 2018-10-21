@@ -148,10 +148,7 @@ export class AreasComponent implements OnInit {
   }
 
   loadSelectedTypeahead(event) {
-
     this.selectedTypeahead = event.item;
-    console.log(" this11111.selectedTypeahead--",  this.selectedTypeahead, "::event.item--", event.item)
-    console.log(" this11111.selectedTypeahead--",  this.selectedTypeahead.id, "::event.item--", event.item)
   }
 
   openModal(template: TemplateRef<any>) {
@@ -164,6 +161,7 @@ export class AreasComponent implements OnInit {
     if (this.businessExecutiveForm.valid) {
       this.masterService.createRecord(this.beEndPoint, this.businessExecutiveForm.value).subscribe(res => {
         this.modalRef.hide();
+        this.loadTypeaheadData();
         this.businessExecutiveForm.reset();
       }, (error) => {
         this.scServerErrMsg();
