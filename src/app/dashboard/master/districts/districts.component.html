@@ -13,7 +13,7 @@
           </div>
             <div class="input-group">
               <p>State Name: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
-              <input id="stateName" formControlName="statesName" [typeahead]="statesList" typeaheadOptionField="stateName"
+              <input id="stateName" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="stateName"
                 [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control">
                 <span class="caret"></span>
           </div>
@@ -29,7 +29,9 @@
       <div class="col-md-7">
         <br /><br />
 
-        <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'  [gridDataList]="districtsList" (valueChange)='valueChange($event)' [gridColumnList]="districtsColumns"></app-synectiks-common-grid>
+        <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
+         [gridDataList]="districtsList" (valueChange)='valueChange($event)'
+         [gridColumnList]="districtsColumns"></app-synectiks-common-grid>
       </div>
 
     </div>

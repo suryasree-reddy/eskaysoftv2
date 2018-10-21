@@ -73,8 +73,8 @@ export class DistrictsComponent implements OnInit {
     this.districtsForm = this.fb.group({
       id: [],
       districtName: ['', Validators.required],
-      statesId: [],
-      statesName: []
+      stateId: [],
+      stateName: []
     });
 
     this.loadStatesData();
@@ -177,7 +177,7 @@ export class DistrictsComponent implements OnInit {
     this.formRequiredError = false;
     if(!this.verifyDistDuplicates()){
       if (this.districtsForm.valid && this.selectedState && this.selectedState.id ) {
-          this.districtsForm.value.statesId = this.selectedState.id;
+          this.districtsForm.value.stateId = this.selectedState.id;
           if (this.districtsForm.value.id) {
             this.masterService.updateRecord(this.endPoint, this.districtsForm.value).subscribe(res => {
               this.showInformationModal("Save");
@@ -280,6 +280,7 @@ export class DistrictsComponent implements OnInit {
   }
 
   editable(s) {
+    console.log("s---", s);
     this.editDistricts = s;
     this.districtsForm.reset(s);
     this.nameFlag = true;

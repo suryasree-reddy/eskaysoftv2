@@ -71,7 +71,7 @@
       "newRowsAction": "keep"
     } ,
     "suppressSizeToFit": false},
-    { "headerName": "State Name", "field": "statesName", "filterParams": {
+    { "headerName": "State Name", "field": "stateName", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
     } ,
@@ -187,12 +187,12 @@
       "newRowsAction": "keep"
     },
     "suppressSizeToFit": false },
-    { "headerName": "Product Group", "field": "productGroupId", "filterParams": {
+    { "headerName": "Product Group", "field": "productGroupName", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
     },
     "suppressSizeToFit": false },
-    { "headerName": "Product Category", "field": "id", "filterParams": {
+    { "headerName": "Product Category", "field": "productCategoryName", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
     } ,
