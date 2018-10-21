@@ -1,5 +1,6 @@
 {
   "schedule": {
+    "endPoint":"schedules/",
     "title": "Schedule",
     "name": "Schedule Name",
     "index": "﻿Schedule Index",
@@ -15,6 +16,8 @@
     "paramexample": "The Schedule Index  {{name}}!"
   },
   "subschedule": {
+    "title": "Sub-Schedule",
+    "endPoint":"subschedules/",
     "saveConfirmationMessage": "Are you sure you want to save Sub-Schedule?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Sub-Schedule?",
     "saveInformationMessage": "Sub-Schedule record has been saved successfully.",
@@ -22,6 +25,8 @@
     "duplicateNameErrorMessage":"The Sub-Schedule Name '{{duplicateMessageParam}}' already exists with this name."
   },
   "states": {
+    "title": "States",
+    "endPoint":"states/",
     "saveConfirmationMessage": "Are you sure you want to save State?",
     "deleteConfirmationMessage" : "Are you sure you want to delete State?",
     "saveInformationMessage": "State record has been saved successfully.",
@@ -31,6 +36,8 @@
 	"duplicateZoneErrorMessage":"The State zone '{{duplicateMessageParam}}' already exists with this zone."
   },
   "districts": {
+    "title": "Districts",
+    "endPoint":"districts/",
     "saveConfirmationMessage": "Are you sure you want to save District?",
     "deleteConfirmationMessage" : "Are you sure you want to delete District?",
     "saveInformationMessage": "District record has been saved successfully.",
@@ -38,6 +45,8 @@
     "duplicateNameErrorMessage":"The District '{{duplicateMessageParam}}' already exists with this name."
   },
   "businessexecutive": {
+    "title": "Business Executive",
+    "endPoint":"businessexecutive/",
     "saveConfirmationMessage": "Are you sure you want to save Business Executive?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Business Executive?",
     "saveInformationMessage": "Business Executive record has been saved successfully.",
@@ -48,6 +57,8 @@
     "paramexample": "The Mobile  {{name}}!"
   },
   "areas": {
+    "title": "Area",
+    "endPoint":"area/",
     "saveConfirmationMessage": "Are you sure you want to save Area?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Area?",
     "saveInformationMessage": "Area record has been saved successfully.",
@@ -58,6 +69,8 @@
     "paramexample": "The Mobile  {{name}}!"
   },
   "bankinfo": {
+    "title": "Bank Information",
+    "endPoint":"bankinformation/",
     "saveConfirmationMessage": "Are you sure you want to save Bank Information?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Bank Information?",
     "saveInformationMessage": "Bank Information record has been saved successfully.",
@@ -65,6 +78,8 @@
     "duplicateNameErrorMessage":"The Bank Name '{{duplicateMessageParam}}' already exists with this name."
   },
   "manufacturer": {
+    "title": "Manfacturer",
+    "endPoint":"manfacturer/",
     "saveConfirmationMessage": "Are you sure you want to save Manufacturer?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Manufacturer?",
     "saveInformationMessage": "Manufacturer record has been saved successfully.",
@@ -72,6 +87,8 @@
     "duplicateNameErrorMessage":"The Manufacturer Name '{{duplicateMessageParam}}' already exists with this name."
   },
   "companygroup": {
+    "title": "Company Group",
+    "endPoint":"companygroup/",
     "saveConfirmationMessage": "Are you sure you want to save Company Group?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Company Group?",
     "saveInformationMessage": "Company Group record has been saved successfully.",
@@ -79,6 +96,8 @@
     "duplicateNameErrorMessage":"The Company Group '{{duplicateMessageParam}}' already exists with this name."
   },
   "companies": {
+    "title": "Companies",
+    "endPoint":"company/",
     "saveConfirmationMessage": "Are you sure you want to save Company?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Company?",
     "saveInformationMessage": "Company record has been saved successfully.",
@@ -88,6 +107,8 @@
     "duplicateErrorMessage":"The Company Name & Company Code already exists."
   },
   "customerdiscount": {
+    "title": "Customerwise Discount",
+    "endPoint":"customerwisediscount/",
     "saveConfirmationMessage": "Are you sure you want to save Customerwise Discount?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Customerwise Discount?",
     "saveInformationMessage": "Customerwise Discount record has been saved successfully.",
@@ -95,6 +116,8 @@
     "duplicateNameErrorMessage":"The Customer '{{duplicateMessageParam}}' already exists with this name."
   },
   "productcategory": {
+    "title": "Product Category",
+    "endPoint":"productcategory/",
     "saveConfirmationMessage": "Are you sure you want to save Product Category?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Product Category?",
     "saveInformationMessage": "Product Category record has been saved successfully.",
@@ -102,6 +125,8 @@
     "duplicateNameErrorMessage":"The Product Category '{{duplicateMessageParam}}' already exists with this name."
   },
   "productgroup": {
+    "title": "Product Group",
+    "endPoint":"productgroup/",
     "saveConfirmationMessage": "Are you sure you want to save Product Group?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Product Group?",
     "saveInformationMessage": "Product Group record has been saved successfully.",
@@ -109,11 +134,17 @@
     "duplicateNameErrorMessage":"The Product Group '{{duplicateMessageParam}}' already exists with this name."
   },
   "product": {
+    "title": "Product",
+    "endPoint":"product/",
     "saveConfirmationMessage": "Are you sure you want to save Product?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Product?",
     "saveInformationMessage": "Product record has been saved successfully.",
     "deleteInformationMessage": "Product record has been deleted successfully.",
     "duplicateNameErrorMessage":"The Product '{{duplicateMessageParam}}' already exists with this name."
+  },
+  "tax": {
+    "title": "Tax",
+      "endPoint":"tax/"
   },
   "button": {
     "save": "Save",

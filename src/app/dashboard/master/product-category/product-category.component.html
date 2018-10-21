@@ -12,13 +12,15 @@
           <input id="productCategoryName" #focus [readonly]="nameFlag" (blur)="checkForDuplicateProdCategory()" class="form-control" [formControl]="productCategoryForm.controls['productCategoryName']">
         </div>
 
-        <app-buttons [title]="formTitle" [deleteConfirmMsg]="deleteConfirmMsg"
-                     [saveConfirmMsg]="saveConfirmMsg" [saveInfoMsg]="saveInfoMsg" [endPoint]="endPoint"
-                     [deleteInfoMsg]="deleteInfoMsg" [duplicateMessage]="duplicateMessage"
-                     [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]="!nameFlag"
-                     [hideDeleteBtn]=true [formObj]="productCategoryForm" (saveRecord)="save()"
-                     (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-                     (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+        <app-buttons [title]="'productcategory.title'" [deleteConfirmMsg]="'productcategory.deleteConfirmationMessage'"
+               [saveConfirmMsg]="'productcategory.saveConfirmationMessage'" [saveInfoMsg]="'productcategory.saveInformationMessage'"
+               [endPoint]="endPoint"
+               [deleteInfoMsg]="'productcategory.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]="!nameFlag"
+               [hideDeleteBtn]=true [formObj]="productCategoryForm" (saveRecord)="save()"
+               (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+               (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+
 
       </form>
     </div>

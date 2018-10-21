@@ -12,13 +12,14 @@
             <input id="manfacturerName" #focus [readonly]="nameFlag" (blur)="checkForDuplicateManufName()"  class="form-control" [formControl]="manufacturerForm.controls['manfacturerName']">
           </div>
 
-          <app-buttons [title]="formTitle" [deleteConfirmMsg]="deleteConfirmMsg"
-                       [saveConfirmMsg]="saveConfirmMsg" [saveInfoMsg]="saveInfoMsg" [endPoint]="endPoint"
-                       [deleteInfoMsg]="deleteInfoMsg" [duplicateMessage]="duplicateMessage"
-                       [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]="!nameFlag"
-                       [hideDeleteBtn]=true [formObj]="manufacturerForm" (saveRecord)="save()"
-                       (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-                       (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+          <app-buttons [title]="'manufacturer.title'" [deleteConfirmMsg]="'manufacturer.deleteConfirmationMessage'"
+                 [saveConfirmMsg]="'manufacturer.saveConfirmationMessage'" [saveInfoMsg]="'manufacturer.saveInformationMessage'"
+                 [endPoint]="endPoint"
+                 [deleteInfoMsg]="'manufacturer.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+                 [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]="!nameFlag"
+                 [hideDeleteBtn]=true [formObj]="manufacturerForm" (saveRecord)="save()"
+                 (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+                 (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
           </form>
       </div>
 

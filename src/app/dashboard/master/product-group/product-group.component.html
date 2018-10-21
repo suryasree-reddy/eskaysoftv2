@@ -12,13 +12,14 @@
           <input id="productGroupName" #focus [readonly]="nameFlag" (blur)="checkForDuplicateProdGroup()" class="form-control" [formControl]="productGroupForm.controls['productGroupName']">
         </div>
 
-        <app-buttons [title]="formTitle" [deleteConfirmMsg]="deleteConfirmMsg"
-                     [saveConfirmMsg]="saveConfirmMsg" [saveInfoMsg]="saveInfoMsg" [endPoint]="endPoint"
-                     [deleteInfoMsg]="deleteInfoMsg" [duplicateMessage]="duplicateMessage"
-                     [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]="!nameFlag"
-                     [hideDeleteBtn]=true [formObj]="productGroupForm" (saveRecord)="save()"
-                     (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-                     (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+        <app-buttons [title]="'productgroup.title'" [deleteConfirmMsg]="'productgroup.deleteConfirmationMessage'"
+               [saveConfirmMsg]="'productgroup.saveConfirmationMessage'" [saveInfoMsg]="'productgroup.saveInformationMessage'"
+               [endPoint]="endPoint"
+               [deleteInfoMsg]="'productgroup.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]="!nameFlag"
+               [hideDeleteBtn]=true [formObj]="productGroupForm" (saveRecord)="save()"
+               (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+               (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
 
       </form>
     </div>

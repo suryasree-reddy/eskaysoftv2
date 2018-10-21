@@ -24,15 +24,17 @@
                 <input id="mobile" class="form-control"  (blur)="validateFormOnBlur()" [formControl]="businessExecutiveForm.controls['mobile']">
             </div>
 
-            <app-buttons [title]="formTitle" [deleteConfirmMsg]="deleteConfirmMsg"
-                         [saveConfirmMsg]="saveConfirmMsg" [saveInfoMsg]="saveInfoMsg" [endPoint]="endPoint"
-                         [deleteInfoMsg]="deleteInfoMsg" [duplicateMessage]="duplicateMessage"
-                         [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
-                         [hideDeleteBtn]=true [formObj]="businessExecutiveForm" (saveRecord)="save()"
-                         (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-                         (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+            <app-buttons [title]="'businessexecutive.title'" [deleteConfirmMsg]="'businessexecutive.deleteConfirmationMessage'"
+                   [saveConfirmMsg]="'businessexecutive.saveConfirmationMessage'" [saveInfoMsg]="'businessexecutive.saveInformationMessage'"
+                   [endPoint]="endPoint"
+                   [deleteInfoMsg]="'businessexecutive.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+                   [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
+                   [hideDeleteBtn]=true [formObj]="businessExecutiveForm" (saveRecord)="save()"
+                   (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+                   (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" >
+            </app-buttons>
 
-          
+
         </form>
       </div>
 

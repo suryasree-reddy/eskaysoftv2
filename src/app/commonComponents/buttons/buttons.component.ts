@@ -53,14 +53,12 @@ export class ButtonsComponent implements OnInit {
   save() {
       console.log("****this.formObj.value.id:", this.formObj.value.id);
     if (this.formObj.value.id) {
-      console.log("****if");
       this.masterService.updateRecord(this.endPoint, this.formObj.value).subscribe(res => {
         this.showInformationModal("Save");
       }, (error) => {
         this.serverErrMsg.emit();
       });
     } else {
-        console.log("****else");
       this.masterService.createRecord(this.endPoint, this.formObj.value).subscribe(res => {
         this.showInformationModal("Save");
       }, (error) => {

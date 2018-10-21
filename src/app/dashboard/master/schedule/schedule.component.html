@@ -22,14 +22,17 @@
               <span class="caret"></span>
         </div>
 
-        <app-buttons [title]="formTitle" [deleteConfirmMsg]="deleteConfirmMsg"
-                     [saveConfirmMsg]="saveConfirmMsg" [saveInfoMsg]="saveInfoMsg" [endPoint]="endPoint"
-                     [deleteInfoMsg]="deleteInfoMsg" [duplicateMessage]="duplicateMessage"
-                     [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
-                     [hideDeleteBtn]=true [formObj]="scheduleForm" (saveRecord)="save()"
-                     (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-                     (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
-      </form>
+        <app-buttons [title]="'schedule.title'" [deleteConfirmMsg]="'schedule.deleteConfirmationMessage'"
+               [saveConfirmMsg]="'schedule.saveConfirmationMessage'" [saveInfoMsg]="'schedule.saveInformationMessage'"
+               [endPoint]="endPoint"
+               [deleteInfoMsg]="'schedule.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
+               [hideDeleteBtn]=true [formObj]="scheduleForm" (saveRecord)="save()"
+               (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+               (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+
+
+        </form>
     </div>
 
     <div class="col-md-7">

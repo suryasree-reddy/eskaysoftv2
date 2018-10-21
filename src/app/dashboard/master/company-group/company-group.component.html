@@ -12,14 +12,15 @@
             <input id="companyGroup" #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyGrp()" class="form-control"  [formControl]="companyGroupForm.controls['companyGroup']">
           </div>
 
-          <app-buttons [title]="formTitle" [deleteConfirmMsg]="deleteConfirmMsg"
-               [saveConfirmMsg]="saveConfirmMsg" [saveInfoMsg]="saveInfoMsg" [endPoint]="endPoint"
-               [deleteInfoMsg]="deleteInfoMsg" [duplicateMessage]="duplicateMessage"
-               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]="!nameFlag"
-               [hideDeleteBtn]=true [formObj]="companyGroupForm" (saveRecord)="save()"
-               (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-               (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
-        </form>
+          <app-buttons [title]="'companygroup.title'" [deleteConfirmMsg]="'companygroup.deleteConfirmationMessage'"
+                 [saveConfirmMsg]="'companygroup.saveConfirmationMessage'" [saveInfoMsg]="'companygroup.saveInformationMessage'"
+                 [endPoint]="endPoint"
+                 [deleteInfoMsg]="'companygroup.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+                 [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]="!nameFlag"
+                 [hideDeleteBtn]=true [formObj]="companyGroupForm" (saveRecord)="save()"
+                 (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+                 (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+</form>
       </div>
 
       <div class="col-md-7">

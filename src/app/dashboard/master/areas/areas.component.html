@@ -18,14 +18,17 @@
               [typeaheadOptionsLimit]="7"   [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control">
               <span class="caret"></span>
         </div>
+        <app-buttons [title]="'areas.title'" [deleteConfirmMsg]="'areas.deleteConfirmationMessage'"
+               [saveConfirmMsg]="'areas.saveConfirmationMessage'" [saveInfoMsg]="'areas.saveInformationMessage'"
+               [endPoint]="areaEndPoint"
+               [deleteInfoMsg]="'areas.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
+               [hideDeleteBtn]=true [formObj]="areaForm" (saveRecord)="save()"
+               (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+               (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" >
+        </app-buttons>
 
-        <app-buttons [title]="formTitle" [deleteConfirmMsg]="deleteConfirmMsg"
-                     [saveConfirmMsg]="saveConfirmMsg" [saveInfoMsg]="saveInfoMsg" [endPoint]="areaEndPoint"
-                     [deleteInfoMsg]="deleteInfoMsg" [duplicateMessage]="duplicateMessage"
-                     [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
-                     [hideDeleteBtn]=true [formObj]="areaForm" (saveRecord)="save()"
-                     (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-                     (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+
 
         </form>
       </div>
