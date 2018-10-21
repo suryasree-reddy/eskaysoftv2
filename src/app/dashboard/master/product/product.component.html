@@ -81,9 +81,6 @@
                     <input id="netRate" class="form-control" [formControl]="productForm.controls['netRate']">
                 </div>
 
-
-
-
                 <div class="col-md-6 col-lt">
                     <p>Is Net Rate Item: *</p>
                     <input id="isNetRateItem" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['isNetRateItem']">
@@ -95,9 +92,12 @@
                     <input id="free" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['free']">
                 </div>
 
-                <div class="col-md-3 col-lt">
+              <div class="col-md-3 col-lt">
                     <p>Tax: *</p>
-                    <input id="tax" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['tax']">
+                    <input id="tax" formControlName="tax" [typeahead]="typeaheadTaxDataList"
+                        typeaheadOptionField="tax" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
+                        (typeaheadOnSelect)="loadSelectedTaxTypeahead($event)" class="form-control"/>
+                    <span class="caret"></span>
                 </div>
 
                 <div class="col-md-6 col-lt">

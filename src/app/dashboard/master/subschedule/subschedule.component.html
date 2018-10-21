@@ -13,11 +13,9 @@
         </div>
           <div class="input-group">
             <p>Schedule Name: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
-
             <input id="scheduleType" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="scheduleName"
             [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control">
             <span class="caret"></span>
-
           </div>
           <div class="input-group">
             <p>Sub-schedule Index: * </p>

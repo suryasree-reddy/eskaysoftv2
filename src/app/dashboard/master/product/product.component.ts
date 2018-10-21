@@ -23,6 +23,7 @@ export class ProductComponent implements OnInit {
   private pgEndPoint: string = "productgroup/";
   private pcEndPoint: string = "productcategory/";
   private cEndPoint: string = "company/";
+  private taxEndPoint: string = "tax/";
   public gridDataList: any = [];
   public gridColumnNamesList;
   public gridSelectedRow;
@@ -43,8 +44,10 @@ export class ProductComponent implements OnInit {
   private duplicateCompany: boolean = false;
   public typeaheadGroupDataList: any = [];
   public typeaheadCompanyDataList: any = [];
+  public typeaheadTaxDataList:any=[];
   public typeaheadCategoryDataList: any = [];
   public selectedCategoryTypeahead: any;
+  public selectedTaxTypeahead: any;
   public selectedGroupTypeahead: any;
   public selectedCompanyTypeahead: any;
 
@@ -63,6 +66,7 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     this.productForm = this.fb.group({
       id: [],
+      taxId:[],
       companyId:[],
       productGroupId: [],
       productCategoryId: [],
@@ -119,6 +123,12 @@ loadCompanyTypeaheadData(){
   });
 }
 
+loadTaxTypeaheadData(){
+  this.masterService.getParentData(this.taxEndPoint).subscribe(list => {
+    this.typeaheadTaxDataList = list;
+  });
+}
+
   loadGroupTypeaheadData() {
     this.masterService.getParentData(this.pgEndPoint).subscribe(list => {
       this.typeaheadGroupDataList = list;
@@ -144,6 +154,12 @@ loadCompanyTypeaheadData(){
   loadSelectedCategoryTypeahead(event) {
     this.selectedCategoryTypeahead = event.item;
     this.productForm.patchValue({ productCategoryId: event.item.id });
+  }
+
+
+  loadSelectedTaxTypeahead(event) {
+    this.selectedTaxTypeahead = event.item;
+    this.productForm.patchValue({ taxId: event.item.id });
   }
 
   valueChange(selectedRow: any[]): void {
