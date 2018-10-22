@@ -51,7 +51,7 @@ export class ButtonsComponent implements OnInit {
   }
 
   save() {
-      console.log("****this.formObj.value.id:", this.formObj.value.id);
+      console.log("****this.formObj.value.id:", this.formObj);
     if (this.formObj.value.id) {
       this.masterService.updateRecord(this.endPoint, this.formObj.value).subscribe(res => {
         this.showInformationModal("Save");
@@ -59,6 +59,7 @@ export class ButtonsComponent implements OnInit {
         this.serverErrMsg.emit();
       });
     } else {
+        console.log("****this.else.value.id:", this.endPoint, "::this.endPoint--", this.formObj.value);
       this.masterService.createRecord(this.endPoint, this.formObj.value).subscribe(res => {
         this.showInformationModal("Save");
       }, (error) => {

@@ -2,7 +2,7 @@
     <div class="row">
       <div class="col-md-5">
         <h3>Districts</h3>
-        <form [formGroup]="districtsForm" (ngSubmit)="saveForm()" autocomplete="off">
+        <form [formGroup]="districtsForm"  autocomplete="off">
           <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
           [formServerError]="formServerError" [duplicateMessage]="duplicateMessage"
            [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
@@ -18,11 +18,15 @@
                 <span class="caret"></span>
           </div>
 
-              <div class="input-group">
-                <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
-                <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-                <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete' | translate }}</button>
-              </div>
+          <app-buttons [title]="'districts.title'" [deleteConfirmMsg]="'districts.deleteConfirmationMessage'"
+                 [saveConfirmMsg]="'districts.saveConfirmationMessage'" [saveInfoMsg]="'districts.saveInformationMessage'"
+                 [endPoint]="endPoint"
+                 [deleteInfoMsg]="'districts.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+                 [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
+                 [hideDeleteBtn]=true [formObj]="districtsForm" (saveRecord)="save()"
+                 (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+                 (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+
         </form>
       </div>
 
@@ -46,7 +50,7 @@
       </button>
     </div>
     <div class="modal-body">
-      <form [formGroup]="statesForm" (ngSubmit)="saveState()" autocomplete="off">
+      <form [formGroup]="statesForm" autocomplete="off">
 
         <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
         [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
@@ -60,15 +64,25 @@
           <p>Code: *</p>
           <input id="stateCode" class="form-control" (blur)="checkForDuplicateStateCode()" [formControl]="statesForm.controls['stateCode']">
         </div>
+
         <div class="input-group">
             <p>Zone: *</p>
-            <input id="zone"  class="form-control" [formControl]="statesForm.controls['zone']">
-          </div>
+           <input id="zone" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
+          [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"   class="form-control">
+            <span class="caret"></span>
+      </div>
 
-            <div class="input-group">
-              <button type="button" (click)="resetStatesForm()" class="btn btn-primary">Reset</button>
-              <button type="submit" class="btn btn-primary mr-l-10">Save</button>
-            </div>
+      <app-buttons [title]="'states.title'" [deleteConfirmMsg]="'states.deleteConfirmationMessage'"
+             [saveConfirmMsg]="'states.saveConfirmationMessage'" [saveInfoMsg]="'states.saveInformationMessage'"
+             [endPoint]="stateEndPoint"
+             [deleteInfoMsg]="'states.deleteInformationMessage'" [duplicateMessage]="childDuplicateMessage"
+             [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
+             [hideDeleteBtn]=false [formObj]="statesForm" (saveRecord)="saveState()"
+             (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+             (afterSuccess)="successMsg()" (resetForm)="resetStatesForm()" (serverErrMsg)="serverErrMsg()"></app-buttons>
+
+
+
 
       </form>
 

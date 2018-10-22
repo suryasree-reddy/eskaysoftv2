@@ -25,7 +25,7 @@
     "duplicateNameErrorMessage":"The Sub-Schedule Name '{{duplicateMessageParam}}' already exists with this name."
   },
   "states": {
-    "title": "States",
+    "title": "State",
     "endPoint":"states/",
     "saveConfirmationMessage": "Are you sure you want to save State?",
     "deleteConfirmationMessage" : "Are you sure you want to delete State?",

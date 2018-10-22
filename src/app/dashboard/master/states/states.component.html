@@ -15,7 +15,7 @@
               <p>Code: *</p>
               <input id="stateCode" [readonly]="duplicateStateName" (blur)="checkForDuplicateStateCode()" class="form-control" [formControl]="statesForm.controls['stateCode']">
             </div>
-            
+
               <div class="input-group">
                   <p>Zone: *</p>
                  <input id="zone" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
@@ -23,11 +23,11 @@
                   <span class="caret"></span>
             </div>
 
-              <app-buttons [title]="formTitle" [deleteConfirmMsg]="deleteConfirmMsg"
-                           [saveConfirmMsg]="saveConfirmMsg" [saveInfoMsg]="saveInfoMsg" [endPoint]="endPoint"
-                           [deleteInfoMsg]="deleteInfoMsg" [duplicateMessage]="duplicateMessage"
-                           [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
-                           [hideDeleteBtn]=true [formObj]="statesForm" (saveRecord)="save()"
+              <app-buttons [title]="states.title" [deleteConfirmMsg]="states.deleteConfirmMsg"
+                           [saveConfirmMsg]="states.saveConfirmMsg" [saveInfoMsg]="states.saveInfoMsg" [endPoint]="endPoint"
+                           [deleteInfoMsg]="states.deleteInfoMsg" [duplicateMessage]="duplicateMessage"
+                           [isBtnDeleteDisable]="states.deleteFlag" [hideSaveBtn]=true
+                           [hideDeleteBtn]=true [formObj]="statesForm" (saveRecord)="saveState()"
                            (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
                            (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
         </form>

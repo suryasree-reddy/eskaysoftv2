@@ -106,6 +106,7 @@ export class ProductComponent implements OnInit {
     this.loadGroupTypeaheadData();
     this.loadCategoryTypeaheadData();
     this.loadCompanyTypeaheadData();
+    this.loadTaxTypeaheadData();
     this.getJsonData();
     // this.focusField.nativeElement.focus();
   }
