@@ -186,8 +186,10 @@ export class DistrictsComponent implements OnInit {
   successMsg() {
     if (this.modalRef != undefined) {
       this.modalRef.hide();
-      this.statesForm.reset();
       this.loadStatesData();
+      this.focusField.nativeElement.focus();
+
+      //this.focusField.nativeElement.focus();
     } else {
       this.formSuccess = true;
       this.formRequiredError = this.formServerError = false;
@@ -244,7 +246,7 @@ export class DistrictsComponent implements OnInit {
       this.stateZone = data["StateZone"];
     });
   }
-  
+
   resetStatesForm() {
     this.childDuplicateMessageParam = null;
     this.childDuplicateMessage = null;

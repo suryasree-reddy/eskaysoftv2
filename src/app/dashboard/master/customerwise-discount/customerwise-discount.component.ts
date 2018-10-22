@@ -46,6 +46,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
       customer: ['', Validators.required],
       company: ['', Validators.required],
       discount: ['', Validators.required],
+      discountType:[]
 
     });
     //this.loadGridData();
@@ -163,6 +164,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
   }
 
   editable(s) {
+    console.log("s---", s);
     this.gridSelectedRow = s;
     this.customerDiscountForm.reset(s);
     this.nameFlag = true;

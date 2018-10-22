@@ -77,7 +77,7 @@ export class StatesComponent implements OnInit {
       this.statesListColumns = data["StateListColumns"]
     });
   }
-  
+
   getDuplicateErrorMessages(): void {
     this.formRequiredError = false;
     this.duplicateMessage = null;

@@ -28,13 +28,19 @@ export class SynectiksCommonGridComponent implements OnInit {
 
   ngOnInit() {
     this.rowModelType = "infinite";
-    this.rowSelection = "single";
+    if(this.rowSelection == undefined || this.rowSelection == "single" ){
+      this.rowSelection = "single";
+    }else{
+      this.rowSelection = "multiple";
+    }
     this.gridColumnList = null;
     this.gridDataList = null;
   }
+
   redrawAllRows() {
     this.gridApi.RefreshView();
   }
+
   deltaIndicator(params) {
     var element = document.createElement("span");
     var imageElement = document.createElement("img");
@@ -48,7 +54,12 @@ export class SynectiksCommonGridComponent implements OnInit {
   }
 
   onSelectionChanged() {
-    this.valueChange.emit(this.gridApi.getSelectedRows()[0]);
+    if(this.rowSelection == "single"){
+      this.valueChange.emit(this.gridApi.getSelectedRows()[0]);
+    }else{
+      this.valueChange.emit(this.gridApi.getSelectedRows());
+    }
+
   }
 
   navigateToNextCell(params) {
