@@ -10,7 +10,6 @@ import { ConfirmationModelDialogComponent } from '../../../commonComponents/conf
 import * as _ from 'lodash';
 // import $ from "jquery";
 
-
 @Component({
   selector: 'app-accounts-info',
   templateUrl: './accounts-info.component.html'
@@ -47,7 +46,6 @@ export class AccountsInfoComponent implements OnInit {
   modalRef: BsModalRef;
   message: string;
 
-  
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
