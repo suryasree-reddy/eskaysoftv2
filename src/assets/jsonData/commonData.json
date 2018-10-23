@@ -177,8 +177,6 @@
       "filterOptions": ["equals", "lessThan", "greaterThan"],
       "newRowsAction": "keep"
     } ,
-    "suppressSizeToFit": false},
-    { "headerName": "C.Discount", "field": "cdisc" ,
     "suppressSizeToFit": false}
   ],
   "ProductColumns": [

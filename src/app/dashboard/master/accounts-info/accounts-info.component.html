@@ -27,9 +27,15 @@
                 <p>Sub-Schedule: *</p>
                 <input id="subScheduleId" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['subScheduleId']">
               </div>
-              <div class="col-md-4 col-lt">
+              <!-- <div class="col-md-4 col-lt">
                 <p>Schedule: *</p>
                 <input id="scheduleId" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['scheduleId']">
+              </div> -->
+              <div class="col-md-4 col-lt">
+                <p>Schedule Name: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
+                <input id="scheduleType" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="scheduleName"
+                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control">
+                <span class="caret"></span>
               </div>
               <div class="col-md-4 col-lt">
                 <p>Address 1: *</p>
@@ -234,8 +240,51 @@
 
       <!-- Panel End -->
 
-
+      <div class="input-group">
+        
+        <button type="submit" class="btn btn-primary mr-l-10">Save</button>
+      </div>
     </div>
   </div>
 </div>
 <!-- Acc Info Ends -->
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Create Schedule</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="scheduleForm" (ngSubmit)="saveSchedule()" autocomplete="off">
+
+      <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
+      [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
+       [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+
+      <div class="input-group">
+        <p>Schedule Name: *</p>
+        <input id="scheduleName" class="form-control" (blur)="checkForDuplicateScheduleName()" [formControl]="scheduleForm.controls['scheduleName']">
+      </div>
+        <div class="input-group">
+          <p>Schedule Index: *</p>
+          <input id="scheduleIndex" class="form-control" (blur)="validateFormOnBlur()" [formControl]="scheduleForm.controls['scheduleIndex']">
+      </div>
+          <div class="input-group">
+            <p>Schedule Type: </p>
+            <input id="scheduleType" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="code"
+          [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" class="form-control">
+            <span class="caret"></span>
+          </div>
+
+          <div class="input-group">
+            <button type="button" (click)="resetScheduleForm()" class="btn btn-primary">Reset</button>
+            <button type="submit" class="btn btn-primary mr-l-10">Save</button>
+          </div>
+
+    </form>
+
+  </div>
+</ng-template>

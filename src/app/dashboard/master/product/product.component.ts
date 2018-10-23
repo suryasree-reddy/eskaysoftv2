@@ -459,7 +459,7 @@ loadTaxTypeaheadData(){
           this.saveChildPCData();
         }
         else if (eventType === "SaveChildCmpForm") {
-          this.saveChildPCData();
+          this.saveChildCmpData();
         }
         else {
           this.save();

@@ -1,4 +1,4 @@
-<div class="col-md-12 mr-b-2"  >
+<div class="col-md-12 mr-b-2">
     <div class="row">
         <div class="col-md-5">
             <h3>Product</h3>
@@ -9,8 +9,9 @@
 
                 <div class="col-md-6 col-lt">
                     <p>Name: *</p>
+                    <div class="input-group">
                     <input id="name" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['name']">
-                </div>
+                </div></div>
 
 
                 <!--<div class="col-md-3 col-lt">
@@ -26,29 +27,49 @@
                   </div> -->
 
                 <div class="col-md-6 col-lt">
-                    <p>Company: * &emsp; (<a style="cursor: pointer"  (click)="openModal(cmpTemplate)">create</a>)</p>
-
-                    <input id="companyCode" formControlName="companyCode" [typeahead]="typeaheadCompanyDataList" typeaheadOptionField="companyCode"
-                    [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control">
-                     <span class="caret"></span>
-
-                  </div>
+                    <p>Company: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
+                    <div class="input-group dropdown">
+                        <input id="companyCode" formControlName="companyCode" [typeahead]="typeaheadCompanyDataList"
+                            typeaheadOptionField="companyCode" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
+                            (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control">
+                        <span class="input-group-addon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <span class="glyphicon glyphicon-chevron-down"></span></span></div>
+                </div>
 
                 <div class="col-md-6 col-lt">
                     <p>Product Group: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
-                    <input id="productGroupName" formControlName="productGroupName" [typeahead]="typeaheadGroupDataList"
-                        typeaheadOptionField="productGroupName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
-                        (typeaheadOnSelect)="loadSelectedGroupTypeahead($event)" class="form-control">
-                    <span class="caret"></span>
+                    <div class="input-group dropdown">
+                        <input id="productGroupName" formControlName="productGroupName" [typeahead]="typeaheadGroupDataList"
+                            typeaheadOptionField="productGroupName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
+                            (typeaheadOnSelect)="loadSelectedGroupTypeahead($event)" class="form-control">
+                        <span class="input-group-addon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <span class="glyphicon glyphicon-chevron-down"></span></span></div>
                 </div>
 
                 <div class="col-md-6 col-lt">
-                    <p>Product Category: * &emsp; (<a style="cursor: pointer" (click)="openModal(pcTemplate)">create </a>)</p>
-                    <input id="productCategoryName" formControlName="productCategoryName" [typeahead]="typeaheadCategoryDataList"
-                        typeaheadOptionField="productCategoryName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
-                        (typeaheadOnSelect)="loadSelectedCategoryTypeahead($event)" class="form-control">
-                    <span class="caret"></span>
+                    <p>Product Category: * &emsp; (<a style="cursor: pointer" (click)="openModal(pcTemplate)">create
+                        </a>)</p>
+                    <div class="input-group">
+                        <input id="productCategoryName" formControlName="productCategoryName" [typeahead]="typeaheadCategoryDataList"
+                            typeaheadOptionField="productCategoryName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
+                            (typeaheadOnSelect)="loadSelectedCategoryTypeahead($event)" class="form-control dropdown-toggle">
+
+                        <span class="input-group-addon" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-chevron-down"></span></span></div>
                 </div>
+                <!-- Trail -->
+                <!-- <div class="row">
+<div class="col-sm-3">
+        <div class="input-group dropdown">
+          <input type="text" class="form-control countrycode dropdown-toggle" value="(+47)">
+       
+          <span role="button" class="input-group-addon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-chevron-down"></span></span>
+        </div>
+      </div></div> -->
+                <!-- Trail -->
+
 
                 <div class="col-md-3 col-lt">
                     <p>Packing: *</p>
@@ -64,7 +85,7 @@
                     <p>Case Qty: *</p>
                     <input id="caseQty" class="form-control" [formControl]="productForm.controls['caseQty']">
                 </div>
- <div class="col-md-3 col-lt">
+                <div class="col-md-3 col-lt">
                     <p>Content: *</p>
                     <input id="contents" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['contents']">
                 </div>
@@ -89,22 +110,27 @@
 
                 <div class="col-md-3 col-lt">
                     <p>Free: *</p>
+                   <div class="input-group">
                     <input id="free" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['free']">
                 </div>
+            </div>
 
-              <div class="col-md-3 col-lt">
+                <div class="col-md-3 col-lt">
                     <p>Tax: *</p>
-                    <input id="tax" formControlName="tax" [typeahead]="typeaheadTaxDataList"
-                        typeaheadOptionField="tax" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
-                        (typeaheadOnSelect)="loadSelectedTaxTypeahead($event)" class="form-control"/>
-                    <span class="caret"></span>
+                    <div class="input-group dropdown">
+                        <input id="tax" formControlName="tax" [typeahead]="typeaheadTaxDataList" typeaheadOptionField="tax"
+                            [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTaxTypeahead($event)"
+                            class="form-control" />
+                        <span class="input-group-addon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <span class="glyphicon glyphicon-chevron-down"></span></span></div>
                 </div>
-
                 <div class="col-md-6 col-lt">
                     <p>Product Code: *</p>
-                    <input id="code"  class="form-control" [formControl]="productForm.controls['code']">
+                    <div class="input-group">
+                    <input id="code" class="form-control" [formControl]="productForm.controls['code']">
                 </div>
-
+            </div>
 
                 <div class="input-group">
                     <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
@@ -118,8 +144,8 @@
         <div class="col-md-7">
             <br /><br />
             <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="scheduleList"
-            (valueChange)='valueChange($event)' [gridColumnList]="gridColumnNamesList"></app-synectiks-common-grid>
-</div>
+                (valueChange)='valueChange($event)' [gridColumnList]="gridColumnNamesList"></app-synectiks-common-grid>
+        </div>
 
     </div>
 
@@ -139,11 +165,13 @@
 
             <div class="input-group">
                 <p>Product Group: *</p>
-                <input id="productGroupName" #focus (blur)="checkForDuplicateProdGroup()" class="form-control" [formControl]="productGroupForm.controls['productGroupName']">
+                <input id="productGroupName" #focus (blur)="checkForDuplicateProdGroup()" class="form-control"
+                    [formControl]="productGroupForm.controls['productGroupName']">
             </div>
 
             <div class="input-group">
-                <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
+                <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate
+                    }}</button>
                 <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
             </div>
         </form>
@@ -164,11 +192,13 @@
 
             <div class="input-group">
                 <p>Product Category: *</p>
-                <input id="productCategoryName" #focus (blur)="checkForDuplicateProdCategory()" class="form-control" [formControl]="productCategoryForm.controls['productCategoryName']">
+                <input id="productCategoryName" #focus (blur)="checkForDuplicateProdCategory()" class="form-control"
+                    [formControl]="productCategoryForm.controls['productCategoryName']">
             </div>
 
             <div class="input-group">
-                <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
+                <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate
+                    }}</button>
                 <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
             </div>
         </form>
@@ -190,11 +220,13 @@
 
             <div class="input-group">
                 <p>Company: *</p>
-                <input id="companyCode" #focus (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['companyCode']">
+                <input id="companyCode" #focus (blur)="checkForDuplicateCompanyCode()" class="form-control"
+                    [formControl]="companyForm.controls['companyCode']">
             </div>
 
             <div class="input-group">
-                <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
+                <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate
+                    }}</button>
                 <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
             </div>
         </form>

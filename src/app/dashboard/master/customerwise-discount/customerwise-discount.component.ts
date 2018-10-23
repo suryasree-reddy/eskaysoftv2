@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit,TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -15,7 +15,9 @@ import * as _ from 'lodash';
 export class CustomerwiseDiscountComponent implements OnInit {
 
   public customerDiscountForm: FormGroup;
+  public companyForm: FormGroup;
   private endPoint: string = "customerwisediscount/";
+  private cEndPoint: string = "company/";
   public gridDataList: any = [];
   public gridColumnNamesList;
   public gridSelectedRow;
@@ -28,6 +30,15 @@ export class CustomerwiseDiscountComponent implements OnInit {
   private duplicateCustomerName: boolean = false;
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
+  public scFormRequiredError: boolean = false;
+  public scFormServerError: boolean = false;
+  public scFormSuccess: boolean = false;
+  public childDuplicateMessage: string = null;
+  public childDuplicateMessageParam: string = null;
+  private duplicateCompany: boolean = false;
+  public typeaheadCompanyDataList: any = [];
+  public selectedCompanyTypeahead: any;
+
   modalRef: BsModalRef;
   message: string;
 
@@ -49,9 +60,36 @@ export class CustomerwiseDiscountComponent implements OnInit {
       discountType:[]
 
     });
+
+    
+    this.companyForm = this.fb.group({
+      companyId: [],
+      companyCode: ['', Validators.required]
+    });
+
     //this.loadGridData();
     this.getGridCloumsList();
-    this.focusField.nativeElement.focus();
+    this.loadCompanyTypeaheadData();
+    this.getJsonData();
+   // this.focusField.nativeElement.focus();
+  }
+
+  getJsonData() {
+    this.masterService.getLocalJsonData().subscribe(data => {
+      data as object[];
+      this.gridColumnNamesList = data["CustomerDiscountColumns"];
+    });
+  }
+
+  loadCompanyTypeaheadData(){
+    this.masterService.getParentData(this.cEndPoint).subscribe(list => {
+      this.typeaheadCompanyDataList = list;
+    });
+  }
+
+  loadSelectedCompanyTypeahead(event) {
+    this.selectedCompanyTypeahead = event.item;
+    this.customerDiscountForm.patchValue({ companyId: event.item.id });
   }
 
   valueChange(selectedRow: any[]): void {
@@ -61,12 +99,28 @@ export class CustomerwiseDiscountComponent implements OnInit {
   onInitialDataLoad(dataList:any[]){
     this.gridDataList = dataList;
   }
+
+  openModal(template: TemplateRef<any>) {
+    this.resetChildForm();
+    this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
+    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+  }
+
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
+    this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
+    this.formRequiredError = false;
+    this.scFormRequiredError = false;
+
     if (this.duplicateCustomerName) {
       this.duplicateMessage = "customerdiscount.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.customerDiscountForm.value.customer;
+    }
+    else if (this.duplicateCompany) {
+      this.childDuplicateMessage = "companies.duplicateNameErrorMessage";
+      this.childDuplicateMessageParam = this.companyForm.value.companyCode;
     }
   }
 
@@ -77,6 +131,11 @@ export class CustomerwiseDiscountComponent implements OnInit {
       }
 
   }
+
+  checkForDuplicateCompanyCode() {
+    this.duplicateCompany = this.masterService.hasDataExist(this.gridDataList, 'companyCode', this.companyForm.value.companyCode);
+    this.getDuplicateErrorMessages();
+}
 
   getGridCloumsList() {
     this.masterService.getLocalJsonData().subscribe(data => {
@@ -123,6 +182,26 @@ export class CustomerwiseDiscountComponent implements OnInit {
       this.serverErrMsg()
     }
   }
+
+  saveChildCmpForm() {
+    this.scFormRequiredError = false;
+    if (this.companyForm.valid && this.childDuplicateMessage == null) {
+      this.showConfirmationModal("SaveChildCmpForm");
+    } else {
+      this.scRequiredErrMsg()
+    }
+  }
+
+  saveChildCmpData() {
+    this.masterService.createRecord(this.cEndPoint, this.companyForm.value).subscribe(res => {
+      this.showInformationModal("SaveChildCmpForm");
+
+    }, (error) => {
+      this.serverErrMsg();
+    });
+
+  }
+
 
   delete() {
 
@@ -171,6 +250,22 @@ export class CustomerwiseDiscountComponent implements OnInit {
     this.deleteFlag = false;
   }
 
+  
+  resetChildForm() {
+    this.scFormRequiredError = false;
+    this.scFormServerError = false;
+    this.duplicateMessage = null;
+    this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
+    this.formRequiredError = false;
+    this.duplicateMessageParam = null;
+    this.companyForm.reset();
+  }
+
+  scRequiredErrMsg() {
+    this.scFormRequiredError = true;
+    this.scFormSuccess = this.scFormServerError = false;
+  }
 
   showInformationModal(eventType) {
     var msg;
@@ -181,6 +276,11 @@ export class CustomerwiseDiscountComponent implements OnInit {
     } else if (eventType === "Save") {
       title = 'Customerwise Discount';
       msg = 'customerdiscount.saveInformationMessage';
+    }
+    else if (eventType === "SaveChildCmpForm") {
+      title = 'Company';
+      msg = 'companies.saveInformationMessage';
+
     }
     const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
@@ -201,6 +301,10 @@ export class CustomerwiseDiscountComponent implements OnInit {
       title = 'Customerwise Discount';
       msg = 'customerdiscount.saveConfirmationMessage';
     }
+    else if (eventType === "SaveChildCmpForm") {
+      title = 'Company';
+      msg = 'companies.saveConfirmationMessage';
+    }
     const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
       title,
@@ -213,7 +317,11 @@ export class CustomerwiseDiscountComponent implements OnInit {
       if (result) {
         if (eventType === "Delete") {
           this.delete();
-        } else {
+        }
+        else if (eventType === "SaveChildCmpForm") {
+          this.saveChildCmpData();
+        }
+        else {
           this.save();
         }
       }
