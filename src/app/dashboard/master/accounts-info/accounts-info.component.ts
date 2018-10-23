@@ -47,6 +47,7 @@ export class AccountsInfoComponent implements OnInit {
   modalRef: BsModalRef;
   message: string;
 
+  
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
