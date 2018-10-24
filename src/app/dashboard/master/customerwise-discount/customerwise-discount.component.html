@@ -11,14 +11,14 @@
           <p>Customer</p>
           <input id="customer" #focus [readonly]="nameFlag" (blur)="checkForDuplicateCustomerName()" class="form-control"  [formControl]="customerDiscountForm.controls['customer']">
         </div>
-        <div class="input-group">
+      <!--  <div class="input-group">
           <p>Company: * &emsp; (<a style="cursor: pointer"  (click)="openModal(cmpTemplate)">create</a>)</p>
 
           <input id="companyCode" formControlName="companyCode" [typeahead]="typeaheadCompanyDataList" typeaheadOptionField="companyCode"
           [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control">
            <span class="caret"></span>
 
-        </div>
+        </div>-->
 
         <div class="radio">
           <label>Do you want to apply same discount for all the companies?</label>
@@ -77,4 +77,3 @@
       </form>
   </div>
 </ng-template>
-
