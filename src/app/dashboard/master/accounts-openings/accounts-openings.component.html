@@ -1,5 +1,16 @@
 <div class="col-md-12">
     <div class="row">
+        <h3>Accounts Openings </h3>
+        <app-synectiks-common-grid [endPoint]="endPoint"  [rowSelection]="'multiple'" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [gridColumnList]="accOpeningColumns"></app-synectiks-common-grid>
+        <app-buttons [title]="'accountopenings.title'" [deleteConfirmMsg]="'accountopenings.deleteConfirmationMessage'"
+                     [saveConfirmMsg]="'accountopenings.saveConfirmationMessage'" [saveInfoMsg]="'accountopenings.saveInformationMessage'" [endPoint]="endPoint"
+                     [deleteInfoMsg]="'accountopenings.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+                     [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
+                     [hideDeleteBtn]=true [formObj]="accOpeningForm" (saveRecord)="save()"
+                     (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+                     (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()">
+                    </app-buttons>
+        <!--
       <div class="col-md-5">
         <h3>Accounts Openings </h3>
         <form [formGroup]="accOpeningForm" autocomplete="off">
@@ -45,9 +56,8 @@
       <div class="col-md-7">
         <br /><br />
 
-        <app-synectiks-common-grid [endPoint]="endPoint"  [rowSelection]="'single'" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [gridColumnList]="accOpeningColumns"></app-synectiks-common-grid>
       </div>
-
+-->
     </div>
 
   </div>

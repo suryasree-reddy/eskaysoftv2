@@ -15,7 +15,7 @@ import * as _ from 'lodash';
 export class AccountsOpeningsComponent implements OnInit {
 
   public accOpeningForm: FormGroup;
-  private endPoint: string = "accountsOpenings/";
+  private endPoint: string = "accountopenings/";
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
@@ -35,7 +35,7 @@ export class AccountsOpeningsComponent implements OnInit {
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
-  
+
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private masterService: MasterService) {
@@ -60,7 +60,7 @@ export class AccountsOpeningsComponent implements OnInit {
       type: ['', Validators.required]
     });
     this.loadGridData();
-    this.focusField.nativeElement.focus();
+  //  this.focusField.nativeElement.focus();
     this.getAccOpenings();
     this.getAccType();
   }

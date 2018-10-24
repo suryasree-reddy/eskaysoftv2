@@ -233,12 +233,20 @@
     "suppressSizeToFit": false },
     { "headerName": "Opening", "field": "opening", "filterParams": {
       "filterOptions": ["contains"],
-      "newRowsAction": "keep"
+      "newRowsAction": "keep",
+      "cellEditor": "numericEditor",
+      "editable": true
     } ,
     "suppressSizeToFit": false},
     { "headerName": "Type", "field": "type", "filterParams": {
       "filterOptions": ["contains"],
-      "newRowsAction": "keep"
+      "newRowsAction": "keep",
+      "cellEditor": "agRichSelectCellEditor",
+      "cellEditorParams": {
+          "values": ["Credit",
+            "Debit"
+          ]},
+       "editable": true
     },
     "suppressSizeToFit": false }
   ]
