@@ -209,6 +209,36 @@
       "newRowsAction": "keep"
     },
     "suppressSizeToFit": false }
+  ],
+  "AccountType":[
+    { "code": "Cr", "description": "Credit" },
+    { "code": "Dbt", "description": "Debit" }
+  ],
+  "AccountsOpeningsColumns": [
+    { "headerName": "Code", "field": "code", "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    },
+    "suppressSizeToFit": false },
+    { "headerName": "Account Name", "field": "accountName", "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    },
+    "suppressSizeToFit": false },
+    { "headerName": "Town", "field": "town", "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    },
+    "suppressSizeToFit": false },
+    { "headerName": "Opening", "field": "opening", "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    } ,
+    "suppressSizeToFit": false},
+    { "headerName": "Type", "field": "type", "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    },
+    "suppressSizeToFit": false }
   ]
-
 }

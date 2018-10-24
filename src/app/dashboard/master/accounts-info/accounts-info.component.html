@@ -21,21 +21,26 @@
             <form class="form">
               <div class="col-md-4 col-lt">
                 <p>Account Name: *</p>
+                <div class="input-group">
                 <input id="accountName" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['accountName']">
-              </div>
+              </div></div>
               <div class="col-md-4 col-lt">
-                <p>Sub-Schedule: *</p>
+                <p>Sub-Schedule Name: *</p>
+                <div class="input-group">
                 <input id="subScheduleId" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['subScheduleId']">
-              </div>
+              </div></div>
               <!-- <div class="col-md-4 col-lt">
                 <p>Schedule: *</p>
                 <input id="scheduleId" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['scheduleId']">
               </div> -->
               <div class="col-md-4 col-lt">
-                <p>Schedule Name: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
-                <input id="scheduleType" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="scheduleName"
-                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control">
-                <span class="caret"></span>
+                <p>Schedule Name: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
+                <div class="input-group">
+                  <input id="scheduleType" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="scheduleName"
+                    [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control">
+                  <span class="input-group-addon" aria-haspopup="true" aria-expanded="false">
+                    <span class="glyphicon glyphicon-chevron-down"></span></span>
+                </div>
               </div>
               <div class="col-md-4 col-lt">
                 <p>Address 1: *</p>
@@ -59,10 +64,16 @@
                 <input id="districtId" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['districtId']">
               </div>
 
+  
               <div class="col-md-4 col-lt">
-                <p>State: *</p>
-                <input id="stateId" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['stateId']">
-              </div>
+                  <p>State Name: * &emsp; (<a style="cursor: pointer" (click)="openModal(stateTemplate)">create new</a>)</p>
+                  <div class="input-group">
+                  <input id="stateName" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="stateName"
+                    [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control">
+                    <span class="input-group-addon" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-chevron-down"></span></span>
+                    </div>
+                  </div>
               <div class="col-md-4 col-lt">
                 <p>Area Name: *</p>
                 <input id="areaId" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['areaId']">
@@ -231,19 +242,15 @@
 
         <div class="tab-content clearfix">
 
-
-
-
-
         </div>
       </div>
 
       <!-- Panel End -->
 
       <div class="input-group">
-        
         <button type="submit" class="btn btn-primary mr-l-10">Save</button>
       </div>
+
     </div>
   </div>
 </div>
@@ -288,3 +295,48 @@
 
   </div>
 </ng-template>
+
+<ng-template #stateTemplate>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Create State</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="statesForm" autocomplete="off">
+
+        <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
+        [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
+         [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+
+      <div class="input-group">
+          <p>State Name: *</p>
+          <input id="stateName" class="form-control" (blur)="checkForDuplicateStateName()" [formControl]="statesForm.controls['stateName']">
+      </div>
+      <div class="input-group">
+          <p>Code: *</p>
+          <input id="stateCode" class="form-control" (blur)="checkForDuplicateStateCode()" [formControl]="statesForm.controls['stateCode']">
+        </div>
+
+        <div class="input-group">
+            <p>Zone: *</p>
+           <input id="zone" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
+          [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"   class="form-control">
+            <span class="caret"></span>
+      </div>
+
+      <app-buttons [title]="'states.title'" [deleteConfirmMsg]="'states.deleteConfirmationMessage'"
+             [saveConfirmMsg]="'states.saveConfirmationMessage'" [saveInfoMsg]="'states.saveInformationMessage'"
+             [endPoint]="stateEndPoint"
+             [deleteInfoMsg]="'states.deleteInformationMessage'" [duplicateMessage]="childDuplicateMessage"
+             [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
+             [hideDeleteBtn]=false [formObj]="statesForm" (saveRecord)="saveState()"
+             (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+             (afterSuccess)="successMsg()" (resetForm)="resetStatesForm()" (serverErrMsg)="serverErrMsg()"></app-buttons>
+
+      </form>
+
+    </div>
+  </ng-template>
+

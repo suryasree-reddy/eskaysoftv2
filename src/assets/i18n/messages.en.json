@@ -142,6 +142,25 @@
     "deleteInformationMessage": "Product record has been deleted successfully.",
     "duplicateNameErrorMessage":"The Product '{{duplicateMessageParam}}' already exists with this name."
   },
+  "accountinfo": {
+    "title": "Account Information",
+    "endPoint":"accountsInformation/",
+    "saveConfirmationMessage": "Are you sure you want to save Account Information?",
+    "deleteConfirmationMessage" : "Are you sure you want to delete Account Information?",
+    "saveInformationMessage": "Account Information record has been saved successfully.",
+    "deleteInformationMessage": "Account Information record has been deleted successfully.",
+    "duplicateNameErrorMessage":"The Account Information '{{duplicateMessageParam}}' already exists with this name."
+  },
+  "accountopenings": {
+    "title": "Account Openings",
+    "endPoint":"accountsOpenings/",
+    "saveConfirmationMessage": "Are you sure you want to save Account?",
+    "deleteConfirmationMessage" : "Are you sure you want to delete Account?",
+    "saveInformationMessage": "Account record has been saved successfully.",
+    "deleteInformationMessage": "Account record has been deleted successfully.",
+    "duplicateNameErrorMessage":"The Account Name '{{duplicateMessageParam}}' already exists with this name.",
+    "duplicateCodeErrorMessage":"The Account code '{{duplicateMessageParam}}' already exists with this code."
+  },
   "tax": {
     "title": "Tax",
       "endPoint":"tax/"

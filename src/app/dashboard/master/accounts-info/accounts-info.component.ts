@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
+import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 // import $ from "jquery";
 
 @Component({
@@ -29,6 +30,8 @@ export class AccountsInfoComponent implements OnInit {
   public subScheduleForm: FormGroup;
   private endPoint: string = "accountsInformation/";
   public scheduleForm: FormGroup;
+  public districtsForm: FormGroup;
+  public statesForm: FormGroup;
   public gridDataList: any = [];
   public typeaheadDataList: any = [];
   public gridColumnNamesList;
@@ -47,14 +50,22 @@ export class AccountsInfoComponent implements OnInit {
   public duplicateMessageParam: string = null;
   public nameFlag;
   scheduleList: any = [];
+  public districtsList: any = [];
+  public statesList: any = [];
   public selectedSchedule: any;
+  public selectedState: any;
+  public distName;
+  public stateZone: any[];
   scheduleTypes: any;
   private duplicateSchName: boolean = false;
   private duplicateSchIndex: boolean = false;
+  private duplicateStateName: boolean = false;
+  private duplicateStateCode: boolean = false;
 
   modalRef: BsModalRef;
   message: string;
 
+  @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
@@ -119,12 +130,29 @@ export class AccountsInfoComponent implements OnInit {
       scheduleType: ['', Validators.required],
     });
 
+    this.statesForm = this.fb.group({
+      id: [],
+      stateName: ['', Validators.required],
+      stateCode: ['', Validators.required],
+      zone: ['', Validators.required],
+    });
+    this.districtsForm = this.fb.group({
+      id: [],
+      districtName: ['', Validators.required],
+      stateId: [],
+      stateName: []
+    });
+
+
+
+
     // this.loadTypeaheadData();
     // //this.loadGridData();
     // this.focusField.nativeElement.focus();
     //this.getGridCloumsList();
     //this.getJsonData();
     this.loadScheduleData();
+    this.loadStatesData();
     this.focusField.nativeElement.focus();
     this.getScheduleTypes();
 
@@ -135,6 +163,13 @@ export class AccountsInfoComponent implements OnInit {
       this.scheduleList = list;
     })
   }
+
+  loadStatesData() {
+    this.masterService.getParentData("states/").subscribe(list => {
+      this.statesList = list;
+    })
+  }
+
 
   // onSelectSchedule(event) {
   //   this.selectedSchedule = event.item;
@@ -176,12 +211,34 @@ export class AccountsInfoComponent implements OnInit {
     });
   }
 
+  saveState() {
+    if (this.statesForm.valid) {
+      this.masterService.createRecord("states/", this.statesForm.value).subscribe(res => {
+       // this.buttonsComponent.showInformationModal("Save");
+      }, (error) => {
+        this.serverErrMsg();
+      });
+
+    } else {
+      this.requiredErrMsg();
+    }
+  }
+
   resetScheduleForm() {
     this.scFormRequiredError = false;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
     this.scheduleForm.reset();
   }
+
+  resetStatesForm() {
+    this.childDuplicateMessageParam = null;
+    this.childDuplicateMessage = null;
+    // this.getZone();
+    this.scFormServerError = this.scFormRequiredError = this.scFormSuccess = false;
+    this.statesForm.reset();
+  }
+
 
   checkForDuplicateScheduleName() {
     this.duplicateSchName = this.masterService.hasDataExist(this.scheduleList, 'scheduleName', this.scheduleForm.value.scheduleName);
@@ -195,6 +252,21 @@ export class AccountsInfoComponent implements OnInit {
     this.getDuplicateErrorMessages();
   }
 
+  checkForDuplicateStateCode() {
+    this.duplicateStateCode = this.masterService.hasDataExist(this.statesList, 'stateCode', parseInt(this.statesForm.value.stateCode));
+    this.getDuplicateErrorMessages();
+  }
+
+  checkForDuplicateStateName() {
+    this.duplicateStateName = this.masterService.hasDataExist(this.statesList, 'stateName', this.statesForm.value.stateName);
+    if (this.duplicateStateName) {
+      const temp = this.statesForm.value.stateName;
+      const stateObj = _.filter(this.statesList, function(o) { return o.stateName.toLowerCase() == temp.toLowerCase() });
+      this.statesForm.patchValue({ stateCode: stateObj[0].stateCode })
+      this.statesForm.patchValue({ zone: stateObj[0].zone })
+    }
+    this.getDuplicateErrorMessages();
+  }
   getDuplicateErrorMessages(): void {
       this.duplicateMessageParam = null;
     this.duplicateMessage = null;

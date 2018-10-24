@@ -27,7 +27,7 @@
                            [saveConfirmMsg]="'states.saveConfirmationMessage'" [saveInfoMsg]="'states.saveInformationMessage'" [endPoint]="endPoint"
                            [deleteInfoMsg]="'states.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
                            [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
-                           [hideDeleteBtn]=true [formObj]="statesForm" (saveRecord)="saveState()"
+                           [hideDeleteBtn]=true [formObj]="statesForm" (saveRecord)="save()"
                            (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
                            (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
         </form>

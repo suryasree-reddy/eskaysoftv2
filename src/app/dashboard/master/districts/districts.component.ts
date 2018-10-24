@@ -168,7 +168,7 @@ export class DistrictsComponent implements OnInit {
   saveState() {
     if (this.statesForm.valid) {
       this.masterService.createRecord("states/", this.statesForm.value).subscribe(res => {
-        this.buttonsComponent.showInformationModal("Save");
+       // this.buttonsComponent.showInformationModal("Save");
       }, (error) => {
         this.serverErrMsg();
       });

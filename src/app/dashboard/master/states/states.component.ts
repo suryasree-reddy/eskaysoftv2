@@ -78,6 +78,13 @@ export class StatesComponent implements OnInit {
     });
   }
 
+  getStatesTypes() {
+    this.masterService.getLocalJsonData().subscribe(data => {
+      data as object[];
+      this.statesListColumns = data["StateListColumns"]
+    });
+  }
+
   getDuplicateErrorMessages(): void {
     this.formRequiredError = false;
     this.duplicateMessage = null;
@@ -120,12 +127,7 @@ export class StatesComponent implements OnInit {
     });
   }
 
-  getStatesTypes() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.statesListColumns = data["StateListColumns"]
-    });
-  }
+
 
   save() {
     this.buttonsComponent.save();

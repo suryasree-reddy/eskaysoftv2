@@ -1,3 +1,53 @@
-<p>
-  accounts-openings works!
-</p>
+<div class="col-md-12">
+    <div class="row">
+      <div class="col-md-5">
+        <h3>Accounts Openings </h3>
+        <form [formGroup]="accOpeningForm" autocomplete="off">
+          <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
+          [formServerError]="formServerError" [duplicateMessage]="duplicateMessage"
+           [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+
+            <div class="input-group">
+              <p>Code: *</p>
+              <input id="code" #focus  (blur)="checkForDuplicateAccountCode()" class="form-control" [formControl]="accOpeningForm.controls['code']">
+          </div>
+          <div class="input-group">
+              <p>Account Name: *</p>
+              <input id="accountName" [readonly]="nameFlag" (blur)="checkForDuplicateAccountName()" class="form-control" [formControl]="accOpeningForm.controls['accountName']">
+            </div>
+            <div class="input-group">
+                <p>Town: *</p>
+                <input id="town" class="form-control" [formControl]="accOpeningForm.controls['town']">
+              </div>
+              <div class="input-group">
+                  <p>Opening: *</p>
+                  <input id="opening" class="form-control" [formControl]="accOpeningForm.controls['opening']">
+                </div>
+
+              <div class="input-group">
+                  <p>Type: *</p>
+                 <input id="type" formControlName="type" [typeahead]="accType" typeaheadOptionField="description"
+                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"   class="form-control">
+                  <span class="caret"></span>
+            </div>
+
+              <app-buttons [title]="'accountopenings.title'" [deleteConfirmMsg]="'accountopenings.deleteConfirmationMessage'"
+                           [saveConfirmMsg]="'accountopenings.saveConfirmationMessage'" [saveInfoMsg]="'accountopenings.saveInformationMessage'" [endPoint]="endPoint"
+                           [deleteInfoMsg]="'accountopenings.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+                           [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
+                           [hideDeleteBtn]=true [formObj]="accOpeningForm" (saveRecord)="save()"
+                           (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+                           (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()">
+                          </app-buttons>
+        </form>
+      </div>
+
+      <div class="col-md-7">
+        <br /><br />
+
+        <app-synectiks-common-grid [endPoint]="endPoint"  [rowSelection]="'single'" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [gridColumnList]="accOpeningColumns"></app-synectiks-common-grid>
+      </div>
+
+    </div>
+
+  </div>
