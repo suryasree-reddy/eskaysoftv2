@@ -33,6 +33,7 @@ import { ContactComponent } from './contact/contact.component';
 import { CustomerwiseDiscountComponent } from './customerwise-discount/customerwise-discount.component';
 import { PurchaseComponent } from './purchase/purchase.component';
 import { BsDropdownModule, TypeaheadModule, TabsModule  } from 'ngx-bootstrap';
+import { GridNumericEditorComponent } from '../../commonComponents/grid-numeric-editor/grid-numeric-editor.component';
 
 
 @NgModule({
@@ -44,7 +45,7 @@ import { BsDropdownModule, TypeaheadModule, TabsModule  } from 'ngx-bootstrap';
     AgGridModule,
     BsDropdownModule.forRoot(),
     TypeaheadModule.forRoot(),
-    TabsModule.forRoot(), 
+    TabsModule.forRoot(),
     FormsModule,
     ModalModule.forRoot(),
     HttpClientModule,
@@ -60,8 +61,8 @@ import { BsDropdownModule, TypeaheadModule, TabsModule  } from 'ngx-bootstrap';
     NgModel,
     FormsModule
   ],
-  declarations: [ScheduleComponent, SubscheduleComponent, ButtonsComponent, ConfirmationModelDialogComponent, ErrormessagesComponent, SynectiksCommonGridComponent, StatesComponent, DistrictsComponent, AreasComponent, BusinessexecutivesComponent, BankinformationComponent, ManufacturerComponent, CompanyGroupComponent, CompaniesComponent, ProductGroupComponent, ProductCategoryComponent, ProductComponent, AccountsInfoComponent, AccountsOpeningsComponent, ContactComponent, CustomerwiseDiscountComponent, PurchaseComponent],
-  entryComponents: [ ConfirmationModelDialogComponent ]
+  declarations: [ScheduleComponent, SubscheduleComponent, GridNumericEditorComponent, ButtonsComponent, ConfirmationModelDialogComponent, ErrormessagesComponent, SynectiksCommonGridComponent, StatesComponent, DistrictsComponent, AreasComponent, BusinessexecutivesComponent, BankinformationComponent, ManufacturerComponent, CompanyGroupComponent, CompaniesComponent, ProductGroupComponent, ProductCategoryComponent, ProductComponent, AccountsInfoComponent, AccountsOpeningsComponent, ContactComponent, CustomerwiseDiscountComponent, PurchaseComponent],
+  entryComponents: [ ConfirmationModelDialogComponent, GridNumericEditorComponent ]
 })
 export class MasterModule { }
 export function HttpLoaderFactory(http: HttpClient) {

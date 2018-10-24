@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
 import { MasterService } from 'src/app/dashboard/master/master.service';
 
+import { GridNumericEditorComponent } from 'src/app/commonComponents/grid-numeric-editor/grid-numeric-editor.component';
+
 @Component({
   selector: 'app-synectiks-common-grid',
   templateUrl: './synectiks-common-grid.component.html'
@@ -14,7 +16,7 @@ export class SynectiksCommonGridComponent implements OnInit {
   @Output() valueChange = new EventEmitter();
   @Output() intialLoad = new EventEmitter();
   private rowModelType;
-
+private frameworkComponents;
   private gridApi = null;
   private gridColumnApi = null;
 
@@ -23,7 +25,9 @@ export class SynectiksCommonGridComponent implements OnInit {
   }
 
   constructor(private masterService: MasterService) {
-
+    this.frameworkComponents = {
+          numericEditor: GridNumericEditorComponent
+        };
   }
 
   ngOnInit() {

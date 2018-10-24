@@ -3,6 +3,6 @@
         [columnDefs]="gridColumnList" [rowSelection]="rowSelection" (gridReady)="onGridReady($event)"
         [navigateToNextCell]="navigateToNextCell"
         [rowModelType]="rowModelType"
-        (selectionChanged)="onSelectionChanged($event)"
+        (selectionChanged)="onSelectionChanged($event)"  [frameworkComponents]="frameworkComponents"
         [paginationAutoPageSize]="true" [pagination]="true" [enableServerSideFilter]="true" [enableServerSideSorting]="true" [components]="componentProvider">
 </ag-grid-angular>

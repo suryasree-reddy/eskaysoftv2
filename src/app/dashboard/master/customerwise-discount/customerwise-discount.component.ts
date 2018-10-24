@@ -55,13 +55,13 @@ export class CustomerwiseDiscountComponent implements OnInit {
     this.customerDiscountForm = this.fb.group({
       id: [],
       customer: ['', Validators.required],
-      company: ['', Validators.required],
+      companyCode: ['', Validators.required],
       discount: ['', Validators.required],
       discountType:[]
 
     });
 
-    
+
     this.companyForm = this.fb.group({
       companyId: [],
       companyCode: ['', Validators.required]
@@ -250,7 +250,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
     this.deleteFlag = false;
   }
 
-  
+
   resetChildForm() {
     this.scFormRequiredError = false;
     this.scFormServerError = false;

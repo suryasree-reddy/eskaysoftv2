@@ -172,7 +172,8 @@
     { "headerName": "Company Description", "field": "company", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
-    } },
+    },        "cellEditor": "numericEditor",
+           "editable": true},
     { "headerName": "Discount", "field": "discount", "filter": "agNumberColumnFilter", "filterParams": {
       "filterOptions": ["equals", "lessThan", "greaterThan"],
       "newRowsAction": "keep"
