@@ -28,48 +28,29 @@
 
                 <div class="col-md-6 col-lt">
                     <p>Company: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
-                    <div class="input-group dropdown">
                         <input id="companyCode" formControlName="companyCode" [typeahead]="typeaheadCompanyDataList"
                             typeaheadOptionField="companyCode" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                             (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control">
-                        <span class="input-group-addon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            <span class="glyphicon glyphicon-chevron-down"></span></span></div>
+                            <span class="caret"></span>
                 </div>
 
                 <div class="col-md-6 col-lt">
                     <p>Product Group: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
-                    <div class="input-group dropdown">
                         <input id="productGroupName" formControlName="productGroupName" [typeahead]="typeaheadGroupDataList"
                             typeaheadOptionField="productGroupName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                             (typeaheadOnSelect)="loadSelectedGroupTypeahead($event)" class="form-control">
-                        <span class="input-group-addon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            <span class="glyphicon glyphicon-chevron-down"></span></span></div>
+                            <span class="caret"></span>
                 </div>
 
                 <div class="col-md-6 col-lt">
                     <p>Product Category: * &emsp; (<a style="cursor: pointer" (click)="openModal(pcTemplate)">create
                         </a>)</p>
-                    <div class="input-group">
                         <input id="productCategoryName" formControlName="productCategoryName" [typeahead]="typeaheadCategoryDataList"
                             typeaheadOptionField="productCategoryName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                             (typeaheadOnSelect)="loadSelectedCategoryTypeahead($event)" class="form-control dropdown-toggle">
-
-                        <span class="input-group-addon" aria-haspopup="true" aria-expanded="false">
-                            <span class="glyphicon glyphicon-chevron-down"></span></span></div>
+                            <span class="caret"></span>
                 </div>
-                <!-- Trail -->
-                <!-- <div class="row">
-<div class="col-sm-3">
-        <div class="input-group dropdown">
-          <input type="text" class="form-control countrycode dropdown-toggle" value="(+47)">
-       
-          <span role="button" class="input-group-addon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-chevron-down"></span></span>
-        </div>
-      </div></div> -->
-                <!-- Trail -->
-
+           
 
                 <div class="col-md-3 col-lt">
                     <p>Packing: *</p>
@@ -117,13 +98,10 @@
 
                 <div class="col-md-3 col-lt">
                     <p>Tax: *</p>
-                    <div class="input-group dropdown">
                         <input id="tax" formControlName="tax" [typeahead]="typeaheadTaxDataList" typeaheadOptionField="tax"
                             [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTaxTypeahead($event)"
                             class="form-control" />
-                        <span class="input-group-addon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            <span class="glyphicon glyphicon-chevron-down"></span></span></div>
+                            <span class="caret"></span>
                 </div>
                 <div class="col-md-6 col-lt">
                     <p>Product Code: *</p>

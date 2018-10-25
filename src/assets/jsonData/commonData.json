@@ -211,6 +211,28 @@
     },
     "suppressSizeToFit": false }
   ],
+  "GstType":[
+    { "code": "RGST", "description": "RGST" },
+    { "code": "UGST", "description": "UGST" },
+    { "code": "IGST", "description": "IGST" },
+    { "code": "IUGST", "description": "IUGST" }
+  ],
+  "NatureOfGst":[
+    { "code": "Reg", "description": "Regular" },
+    { "code": "Comp", "description": "Composite" }
+  ],
+  "CustomerType":[
+    { "code": "Whl Sale", "description": "Whole Sale" },
+    { "code": "Rtl", "description": "Retail " }
+  ],
+  "SaleType":[
+    { "code": "Cash", "description": "Cash" },
+    { "code": "Cr", "description": "Credit" }
+  ],
+  "OpeningType":[
+    { "code": "Cr", "description": "Credit" },
+    { "code": "Dbt", "description": "Debit" }
+  ],
   "AccountType":[
     { "code": "Cr", "description": "Credit" },
     { "code": "Dbt", "description": "Debit" }

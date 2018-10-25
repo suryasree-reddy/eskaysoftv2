@@ -56,6 +56,12 @@ export class AccountsInfoComponent implements OnInit {
   public selectedState: any;
   public distName;
   public stateZone: any[];
+  public accGstType: any[];
+public accNatureOfGst: any[];
+public accCustomerType: any[];
+public accSaleType: any[];
+public accOpeningType: any[];
+
   scheduleTypes: any;
   private duplicateSchName: boolean = false;
   private duplicateSchIndex: boolean = false;
@@ -155,6 +161,11 @@ export class AccountsInfoComponent implements OnInit {
     this.loadStatesData();
     this.focusField.nativeElement.focus();
     this.getScheduleTypes();
+    this.getGstType();
+    this.getNatureOfGst();
+    this.getSaleType();
+    this.getCustomerType();
+    this.getOpeningType();
 
   }
 
@@ -191,6 +202,40 @@ export class AccountsInfoComponent implements OnInit {
       //  this.subScheduleListColumns = data["SubScheduleListColumns"];
     });
   }
+
+  getGstType() {
+    this.masterService.getLocalJsonData().subscribe(data => {
+      data as object[];
+      this.accGstType = data["GstType"];
+    });
+  }
+  getNatureOfGst(){
+    this.masterService.getLocalJsonData().subscribe(data => {
+      data as object[];
+      this.accNatureOfGst = data["NatureOfGst"];
+    });
+  }
+  getCustomerType() {
+    this.masterService.getLocalJsonData().subscribe(data => {
+      data as object[];
+      this.accCustomerType = data["CustomerType"];
+    });
+  }
+
+  getSaleType(){
+    this.masterService.getLocalJsonData().subscribe(data => {
+      data as object[];
+      this.accSaleType = data["SaleType"];
+    });
+  }
+
+  getOpeningType(){
+    this.masterService.getLocalJsonData().subscribe(data =>{
+      data as object[];
+      this.accOpeningType = data["OpeningType"];
+      });
+  }
+
 
   saveSchedule() {
     if (this.scheduleForm.valid && this.childDuplicateMessage == null) {
