@@ -8,12 +8,12 @@
            [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
           <div class="input-group">
-            <p>District Name: *</p>
-            <input id="districtName" #focus [readonly]="nameFlag" (blur)="checkForDuplicateDistName()"  class="form-control" [formControl]="districtsForm.controls['districtName']">
+            <p >District Name: *</p>
+            <input id="districtName" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateDistName()"  class="form-control" [formControl]="districtsForm.controls['districtName']">
           </div>
             <div class="input-group">
-              <p>State Name: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
-              <input id="stateName" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="stateName"
+              <p >State Name: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
+              <input id="stateName" maxlength="20" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="stateName"
                 [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control">
                 <span class="caret"></span>
           </div>
@@ -57,17 +57,18 @@
          [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
       <div class="input-group">
-          <p>State Name: *</p>
-          <input id="stateName" class="form-control" (blur)="checkForDuplicateStateName()" [formControl]="statesForm.controls['stateName']">
+          <p >State Name: *</p>
+          <input id="stateName" maxlength="20" class="form-control" (blur)="checkForDuplicateStateName()" [formControl]="statesForm.controls['stateName']">
       </div>
       <div class="input-group">
-          <p>Code: *</p>
-          <input id="stateCode" class="form-control" (blur)="checkForDuplicateStateCode()" [formControl]="statesForm.controls['stateCode']">
+          <p >Code: *</p>
+          <input id="stateCode" min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          class="form-control" (blur)="checkForDuplicateStateCode()" [formControl]="statesForm.controls['stateCode']">
         </div>
 
         <div class="input-group">
-            <p>Zone: *</p>
-           <input id="zone" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
+            <p >Zone: *</p>
+           <input id="zone" maxlength="7" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
           [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"   class="form-control">
             <span class="caret"></span>
       </div>
@@ -80,9 +81,6 @@
              [hideDeleteBtn]=false [formObj]="statesForm" (saveRecord)="saveState()"
              (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
              (afterSuccess)="successMsg()" (resetForm)="resetStatesForm()" (serverErrMsg)="serverErrMsg()"></app-buttons>
-
-
-
 
       </form>
 

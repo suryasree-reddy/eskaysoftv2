@@ -106,6 +106,14 @@ export class CustomerwiseDiscountComponent implements OnInit {
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
+  show(){
+    document.getElementById('disc').style.display ='block';
+  }
+  
+  hide(){
+    document.getElementById('disc').style.display ='none';
+  }
+
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;

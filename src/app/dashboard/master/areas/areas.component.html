@@ -8,13 +8,13 @@
            [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
           <div class="input-group">
-            <p>Area Name: *</p>
-            <input id="areaName" #focus [readonly]="nameFlag" (blur)="validateFormOnBlur()"  class="form-control" [formControl]="areaForm.controls['areaName']">
+            <p >Area Name: *</p>
+            <input id="areaName" maxlength="40" #focus [readonly]="nameFlag" (blur)="validateFormOnBlur()"  class="form-control" [formControl]="areaForm.controls['areaName']">
           </div>
 
           <div class="input-group">
-            <p>Executive Name: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
-            <input id="businessExecutiveId" formControlName="businessExecutiveName" [typeahead]="typeaheadDataList" typeaheadOptionField="name"
+            <p >Executive Name: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
+            <input id="businessExecutiveId" maxlength="50" formControlName="businessExecutiveName" [typeahead]="typeaheadDataList" typeaheadOptionField="name"
               [typeaheadOptionsLimit]="7"   [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control">
               <span class="caret"></span>
         </div>
@@ -56,22 +56,23 @@
 
         <div class="input-group">
         	<p>Name: *</p>
-        	<input id="name" class="form-control" (blur) = "checkForDuplicateBusiExecName()" [formControl]="businessExecutiveForm.controls['name']">
+        	<input id="name" maxlength="50" class="form-control" (blur) = "checkForDuplicateBusiExecName()" [formControl]="businessExecutiveForm.controls['name']">
         </div>
 
         <div class="input-group">
         	<p>Address: *</p>
-        	<input id="address" class="form-control" [formControl]="businessExecutiveForm.controls['address']">
+        	<input id="address" maxlength="50" class="form-control" [formControl]="businessExecutiveForm.controls['address']">
         </div>
 
         <div class="input-group">
         	<p>Town: *</p>
-        	<input id="town" class="form-control" [formControl]="businessExecutiveForm.controls['town']">
+        	<input id="town" maxlength="20" class="form-control" [formControl]="businessExecutiveForm.controls['town']">
         </div>
 
         <div class="input-group">
         	<p>Mobile: *</p>
-        	<input id="mobile" class="form-control" [formControl]="businessExecutiveForm.controls['mobile']">
+          <input id="mobile" type="number" min="0" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          class="form-control" [formControl]="businessExecutiveForm.controls['mobile']">
         </div>
 
         <div class="input-group">

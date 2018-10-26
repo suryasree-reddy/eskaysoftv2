@@ -8,8 +8,8 @@
            [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
           <div class="input-group">
-            <p>Manufacturer Name: *</p>
-            <input id="manfacturerName" #focus [readonly]="nameFlag" (blur)="checkForDuplicateManufName()"  class="form-control" [formControl]="manufacturerForm.controls['manfacturerName']">
+            <p >Manufacturer Name: *</p>
+            <input id="manfacturerName" maxlength="50" #focus [readonly]="nameFlag" (blur)="checkForDuplicateManufName()"  class="form-control" [formControl]="manufacturerForm.controls['manfacturerName']">
           </div>
 
           <app-buttons [title]="'manufacturer.title'" [deleteConfirmMsg]="'manufacturer.deleteConfirmationMessage'"

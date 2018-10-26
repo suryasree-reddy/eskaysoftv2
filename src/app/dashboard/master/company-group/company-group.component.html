@@ -8,8 +8,8 @@
            [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
           <div class="input-group">
-            <p>Company Group: *</p>
-            <input id="companyGroup" #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyGrp()" class="form-control"  [formControl]="companyGroupForm.controls['companyGroup']">
+            <p >Company Group: *</p>
+            <input id="companyGroup" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyGrp()" class="form-control"  [formControl]="companyGroupForm.controls['companyGroup']">
           </div>
 
           <app-buttons [title]="'companygroup.title'" [deleteConfirmMsg]="'companygroup.deleteConfirmationMessage'"

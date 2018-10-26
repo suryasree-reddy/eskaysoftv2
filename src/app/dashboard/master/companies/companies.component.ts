@@ -7,6 +7,7 @@ import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
+import { subscribeTo } from 'rxjs/internal-compatibility';
 
 @Component({
   selector: 'app-companies',
@@ -28,6 +29,9 @@ export class CompaniesComponent implements OnInit {
   public nameFlag;
   public deleteFlag: boolean = true;
   public companyCode;
+  public companyTypeList: any = [];
+  public companyStatusList: any = [];
+  public invGenList: any = [];
   private duplicateCompanyCode: boolean = false;
   private duplicateCompanyName: boolean = false;
   public duplicateMessage: string = null;
@@ -72,6 +76,10 @@ export class CompaniesComponent implements OnInit {
     //this.loadGridData();
     this.getGridCloumsList();
     this.loadTypeaheadData();
+    this.getCompanyType();
+    this.getCompanyStatus();
+    this.getInvGenType();
+
   }
 
   valueChange(selectedRow: any[]): void {
@@ -96,6 +104,26 @@ export class CompaniesComponent implements OnInit {
       this.typeaheadDataList = list;
     })
   }
+
+  getCompanyType(){
+    this.masterService.getLocalJsonData().subscribe(data =>{
+      data as Object[];
+      this.companyTypeList = data["CompanyType"]
+    })
+  }
+  getCompanyStatus(){
+    this.masterService.getLocalJsonData().subscribe(data =>{
+      data as Object[];
+      this.companyStatusList = data["CompanyStatus"]
+    })
+  }
+  getInvGenType(){
+    this.masterService.getLocalJsonData().subscribe(data =>{
+      data as Object[];
+      this.invGenList = data["InvGenType"]
+    })
+  }
+
 
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;

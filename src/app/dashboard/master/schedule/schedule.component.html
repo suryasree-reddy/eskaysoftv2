@@ -8,16 +8,17 @@
          [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
         <div class="input-group">
-          <p>{{'schedule.name' | translate }}: *</p>
-          <input id="scheduleName" #focus [readonly]="nameFlag" (blur)="checkForDuplicateScheduleName()"class="form-control" [formControl]="scheduleForm.controls['scheduleName']">
+          <p >{{'schedule.name' | translate}}: *</p>
+          <input id="scheduleName" maxlength="40" #focus [readonly]="nameFlag" (blur)="checkForDuplicateScheduleName()"class="form-control" [formControl]="scheduleForm.controls['scheduleName']">
         </div>
         <div class="input-group">
-            <p>{{'schedule.index' | translate }}: *</p>
-            <input id="scheduleIndex" class="form-control" (blur)="validateFormOnBlur()" [formControl]="scheduleForm.controls['scheduleIndex']">
+            <p >{{'schedule.index' | translate }}: *</p>
+            <input id="scheduleIndex" type="number"  min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            class="form-control" (blur)="validateFormOnBlur()" [formControl]="scheduleForm.controls['scheduleIndex']">
         </div>
         <div class="input-group">
-              <p>{{'schedule.type' | translate }}: *</p>
-             <input id="scheduleType" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="description"
+              <p >{{'schedule.type' | translate }}: *</p>
+             <input id="scheduleType" maxlength="15" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="description"
             [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"   class="form-control">
               <span class="caret"></span>
         </div>

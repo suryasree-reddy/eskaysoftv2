@@ -8,18 +8,19 @@
          [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
         <div class="input-group">
-          <p>Sub-schedule Name: *</p>
-          <input #focus id="subScheduleName" [readonly]="nameFlag" class="form-control" (blur)="checkForDuplicateSubScheduleName()" [formControl]="subScheduleForm.controls['subScheduleName']">
+          <p >Sub-schedule Name: *</p>
+          <input #focus id="subScheduleName" maxlength="40" [readonly]="nameFlag" class="form-control" (blur)="checkForDuplicateSubScheduleName()" [formControl]="subScheduleForm.controls['subScheduleName']">
         </div>
           <div class="input-group">
-            <p>Schedule Name: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
-            <input id="scheduleType" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="scheduleName"
+            <p >Schedule Name: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
+            <input id="scheduleType" maxlength="40" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="scheduleName"
             [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control">
             <span class="caret"></span>
           </div>
           <div class="input-group">
-            <p>Sub-schedule Index: * </p>
-            <input id="subScheduleIndex"  [readonly]="true" class="form-control" [formControl]="subScheduleForm.controls['subScheduleIndex']">
+            <p >Sub-schedule Index: * </p>
+            <input id="subScheduleIndex" type="number"  min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+             [readonly]="true" class="form-control" [formControl]="subScheduleForm.controls['subScheduleIndex']">
         </div>
             <div class="input-group">
               <button type="button" (click)="resetForm()" class="btn btn-primary">Reset</button>
@@ -55,16 +56,17 @@
        [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
       <div class="input-group">
-        <p>Schedule Name: *</p>
-        <input id="scheduleName" class="form-control" (blur)="checkForDuplicateScheduleName()" [formControl]="scheduleForm.controls['scheduleName']">
+        <p >Schedule Name: *</p>
+        <input id="scheduleName"  maxlength="40" class="form-control" (blur)="checkForDuplicateScheduleName()" [formControl]="scheduleForm.controls['scheduleName']">
       </div>
         <div class="input-group">
-          <p>Schedule Index: *</p>
-          <input id="scheduleIndex" class="form-control" (blur)="validateFormOnBlur()" [formControl]="scheduleForm.controls['scheduleIndex']">
+          <p >Schedule Index: *</p>
+          <input id="scheduleIndex" type="number"  min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+           class="form-control" (blur)="validateFormOnBlur()" [formControl]="scheduleForm.controls['scheduleIndex']">
       </div>
           <div class="input-group">
-            <p>Schedule Type: </p>
-            <input id="scheduleType" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="code"
+            <p >Schedule Type: </p>
+            <input id="scheduleType" maxlength="15" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="code"
           [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" class="form-control">
             <span class="caret"></span>
           </div>

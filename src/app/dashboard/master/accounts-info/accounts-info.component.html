@@ -22,74 +22,74 @@
             <!-- General Info Start -->
             <form class="form">
               <div class="col-md-4 col-lt">
-                <p>Account Name: *</p>
-                <div class="input-group">
+                <p >Account Name: *</p>
+                
                 <input id="accountName"  maxlength="50" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['accountName']">
-              </div></div>
+              </div>
               <div class="col-md-4 col-lt">
-                <p>Sub-Schedule Name: *</p>
-                <div class="input-group">
+                <p >Sub-Schedule Name: *</p>
+                
                 <input id="subScheduleId" maxlength="40" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['subScheduleId']">
-              </div></div>
+              </div>
               <div class="col-md-4 col-lt">
-                <p>Schedule Name: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
-                <input id="scheduleType" [formControl]="scheduleForm.controls['scheduleName']" [typeahead]="scheduleList"
+                <p >Schedule Name: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
+                <input id="scheduleType"  maxlength="40" [formControl]="scheduleForm.controls['scheduleName']" [typeahead]="scheduleList"
                   typeaheadOptionField="scheduleName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)"
                   class="form-control">
                 <span class="caret"></span>
               </div>
               
               <div class="col-md-4 col-lt">
-                <p>Address 1: *</p>
+                <p >Address 1: *</p>
                 <input id="address1" maxlength="50" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['address1']">
               </div>
               <div class="col-md-4 col-lt">
-                <p>Address 2: *</p>
+                <p >Address 2: *</p>
                 <input id="address2" maxlength="50" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['address2']">
               </div>
               <div class="col-md-4 col-lt">
-                <p>Town: *</p>
+                <p >Town: *</p>
                 <input id="town" maxlength="20" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['town']">
               </div>
               <div class="col-md-4 col-lt">
-                <p>PIN: *</p>
+                <p >PIN: *</p>
                 <input id="pin" type="number"  maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                  #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['pin']">
               </div>
 
               <div class="col-md-4 col-lt">
-                <p>District: *</p>
+                <p >District: *</p>
                 <input id="districtId" maxlength="20" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['districtId']">
               </div>
 
   
               <div class="col-md-4 col-lt">
-                  <p>State Name: * &emsp; (<a style="cursor: pointer" (click)="openModal(stateTemplate)">create new</a>)</p>
+                  <p >State Name: * &emsp; (<a style="cursor: pointer" (click)="openModal(stateTemplate)">create new</a>)</p>
                   <input id="stateName" maxlength="20" [formControl]="statesForm.controls['stateName']" [typeahead]="statesList" typeaheadOptionField="stateName"
                     [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control">
                     <span class="caret"></span>
                   </div>
 
               <div class="col-md-4 col-lt">
-                <p>Area Name: *</p>
+                <p >Area Name: *</p>
                 <input id="areaId" maxlength="40" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['areaId']">
               </div>
               <div class="col-md-4 col-lt">
-                <p>Phone: *</p>
+                <p >Phone: *</p>
                 <input id="phone" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                  #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['phone']">
               </div>
               <div class="col-md-4 col-lt">
-                <p>Mobile: *</p>
+                <p >Mobile: *</p>
                 <input id="mobile" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                 #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['mobile']">
               </div>
               <div class="col-md-4 col-lt">
-                <p>Email: *</p>
+                <p >Email: *</p>
                 <input id="email" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['email']">
               </div>
               <div class="col-md-4 col-lt">
-                <p>Short Name: *</p>
+                <p >Short Name: *</p>
                 <input id="shortName"  maxlength="6" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['shortName']">
               </div>
             </form>
@@ -102,68 +102,68 @@
             <form class="form">
 
               <div class="col-md-4 col-lt">
-                <p>Lic.No1: *</p>
+                <p >Lic.No1: *</p>
                 <input id="licNo1" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['licNo1']">
               </div>
 
               <div class="col-md-4 col-lt">
-                <p>Lic.No2: *</p>
+                <p >Lic.No2: *</p>
                 <input id="licNo2" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['licNo2']">
               </div>
               <div class="col-md-4 col-lt">
-                <p>Lic.Expiry: *</p>
+                <p >Lic.Expiry: *</p>
                 <input id="licExpiry" type="date" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['licExpiry']">
               </div>
               <div class="col-md-4 col-lt">
-                <p>Ret.LicNo1: *</p>
+                <p >Ret.LicNo1: *</p>
                 <input id="retLicNo1" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['retLicNo1']">
               </div>
               <div class="col-md-4 col-lt">
-                <p>Ret.LicNo2: *</p>
+                <p >Ret.LicNo2: *</p>
                 <input id="retLicNo2" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['retLicNo2']">
               </div>
 
               <div class="col-md-4 col-lt">
-                <p>Ret.Expiry: *</p>
+                <p >Ret.Expiry: *</p>
                 <input id="retExpiry" type="date" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['retExpiry']">
               </div>
 
               <div class="col-md-4 col-lt">
-                <p>Food Lic.No: *</p>
+                <p >Food Lic.No: *</p>
                 <input id="foodLicNo" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['foodLicNo']">
               </div>
               <div class="col-md-4 col-lt">
-                <p>Other License: *</p>
+                <p >Other License: *</p>
                 <input id="otherLicense" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['otherLicense']">
               </div>
               <div class="col-md-4 col-lt">
-                <p>Other License Expiry: *</p>
+                <p >Other License Expiry: *</p>
                 <input id="otherLicenseExpiry" type="date" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['otherLicenseExpiry']">
               </div>
               
               <div class="col-md-4 col-lt">
-                <p>GST Type: *</p>
+                <p >GST Type: *</p>
                 <div class="input-group">
-                  <input id="gstType" maxlength="6" class="form-control"  [formControl]="accInfoForm.controls['gstType']" [typeahead]="accGstType"
+                  <input id="gstType" maxlength="5" class="form-control"  [formControl]="accInfoForm.controls['gstType']" [typeahead]="accGstType"
                     typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
                   
                     <span class="caret" style="padding-top:50px;"></span></div>
               </div>
 
               <div class="col-md-4 col-lt">
-                <p>GSTIN: *</p>
-                <input id="gstIN" maxlength="5" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['gstIN']">
+                <p >GSTIN: *</p>
+                <input id="gstIN" maxlength="15" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['gstIN']">
               </div>
 
               <div class="col-md-4 col-lt">
-                <p>Nature of GST: *</p>
+                <p >Nature of GST: *</p>
                   <input id="natureOfGST" maxlength="9"  class="form-control" [formControl]="accInfoForm.controls['natureOfGST']"
                     [typeahead]="accNatureOfGst" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
                     <span class="caret"></span>
               </div>
 
               <div class="col-md-4 col-lt">
-                <p>UIN No: *</p>
+                <p >UIN No: *</p>
                 <input id="uin" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['uin']">
               </div>
 
@@ -179,20 +179,20 @@
             <form class="form">
 
               <div class="col-md-4 col-lt">
-                <p>Credit Limit: *</p>
+                <p >Credit Limit: *</p>
                 <input id="creditLimit" type="number" maxlength="12" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                  #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['creditLimit']">
               </div>
               
               <div class="col-md-4 col-lt">
-                <p>Sale Type: *</p>
+                <p >Sale Type: *</p>
                 <input id="saleType" maxlength="6"  class="form-control" [formControl]="accInfoForm.controls['saleType']"
                 [typeahead]="accSaleType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
                 <span class="caret"></span>
               </div>
           
               <div class="col-md-4 col-lt">
-                <p>Customer Type: *</p>
+                <p >Customer Type: *</p>
                 <input id="customerType"  maxlength="10"  class="form-control" [formControl]="accInfoForm.controls['customerType']"
                 [typeahead]="accCustomerType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
                 <span class="caret"></span>
@@ -200,7 +200,7 @@
             
             
               <div class="col-md-4 col-lt">
-                <p>Due Days: *</p>
+               <p >Due Days: *</p>
                 <input id="dueDays" type="number" maxlength="3"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                 #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['dueDays']">
               </div>
@@ -217,39 +217,39 @@
             <form class="form">
 
               <div class="col-md-4 col-lt">
-                <p>Contact Person: *</p>
+                <p >Contact Person: *</p>
                 <input id="contactPerson" maxlength="30" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['contactPerson']">
               </div>
 
               <div class="col-md-4 col-lt">
-                <p>HSN Code: *</p>
+                <p >HSN Code: *</p>
                 <input id="hsnCode" type="number" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                 #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['hsnCode']">
               </div>
               <div class="col-md-4 col-lt">
-                <p>SAC Code: *</p>
+                <p >SAC Code: *</p>
                 <input id="sacCode" type="number" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                  #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['sacCode']">
               </div>
               <div class="col-md-4 col-lt">
-                <p>Rate of Tax: *</p>
+                <p >Rate of Tax: *</p>
                 <input id="rateOfTax" type="number" maxlength="5" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                  #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['rateOfTax']">
               </div>
 
               <div class="col-md-4 col-lt">
-                <p>Opening Balance: *</p>
+                <p >Opening Balance: *</p>
                 <input id="openingBalance" type="number" maxlength="12" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                  #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['openingBalance']">
               </div>
               <div class="col-md-4 col-lt">
-                <p>Opening Type: *</p>
+                <p >Opening Type: *</p>
                 <input id="openingType" maxlength="6" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['openingType']"
                 [typeahead]="accCustomerType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
                 <span class="caret"></span>
             </div>
               <div class="col-md-4 col-lt">
-                <p>Special Remarks: *</p>
+                <p >Special Remarks: *</p>
                 <input id="specialRemarks" maxlength="60" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['specialRemarks']">
               </div>
 
@@ -299,15 +299,15 @@
        [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
       <div class="input-group">
-        <p>Schedule Name: *</p>
+        <p >Schedule Name: *</p>
         <input id="scheduleName" class="form-control" (blur)="checkForDuplicateScheduleName()" [formControl]="scheduleForm.controls['scheduleName']">
       </div>
         <div class="input-group">
-          <p>Schedule Index: *</p>
+          <p >Schedule Index: *</p>
           <input id="scheduleIndex" class="form-control" (blur)="validateFormOnBlur()" [formControl]="scheduleForm.controls['scheduleIndex']">
       </div>
           <div class="input-group">
-            <p>Schedule Type: </p>
+            <p >Schedule Type: </p>
             <input id="scheduleType" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="code"
           [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" class="form-control">
             <span class="caret"></span>
@@ -338,16 +338,16 @@
          [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
       <div class="input-group">
-          <p>State Name: *</p>
+          <p >State Name: *</p>
           <input id="stateName" class="form-control" (blur)="checkForDuplicateStateName()" [formControl]="statesForm.controls['stateName']">
       </div>
       <div class="input-group">
-          <p>Code: *</p>
+          <p >Code: *</p>
           <input id="stateCode" class="form-control" (blur)="checkForDuplicateStateCode()" [formControl]="statesForm.controls['stateCode']">
         </div>
 
         <div class="input-group">
-            <p>Zone: *</p>
+            <p >Zone: *</p>
            <input id="zone" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
           [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"   class="form-control">
             <span class="caret"></span>

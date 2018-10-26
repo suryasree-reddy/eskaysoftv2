@@ -140,6 +140,22 @@
     } ,
     "suppressSizeToFit": false}
   ],
+
+  "CompanyType":[
+    { "code": "Eth", "description": "Ethical" },
+    { "code": "Generic", "description": "Generics" },
+    { "code": "Surg", "description": "Surgical" },
+    { "code": "General", "description": "General" },
+    { "code": "Oth", "description": "Others" }
+  ],
+  "CompanyStatus":[
+    { "code": "Targ", "description": "Target" },
+    { "code": "NonTarg", "description": "Non Target" }
+  ],
+  "InvGenType":[
+    { "code": "Reg", "description": "Regular" },
+    { "code": "Comp", "description": "Company" }
+  ],
   "CompanyColumns": [
     { "headerName": "Company Name", "field": "companyName", "filterParams": {
       "filterOptions": ["contains"],

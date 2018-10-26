@@ -8,18 +8,19 @@
            [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
             <div class="input-group">
-              <p>State Name: *</p>
-              <input id="stateName" #focus [readonly]="nameFlag" (blur)="checkForDuplicateStateName()" class="form-control" [formControl]="statesForm.controls['stateName']">
+              <p >State Name: *</p>
+              <input id="stateName" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateStateName()" class="form-control" [formControl]="statesForm.controls['stateName']">
           </div>
           <div class="input-group">
-              <p>Code: *</p>
-              <input id="stateCode" [readonly]="duplicateStateName" (blur)="checkForDuplicateStateCode()" class="form-control" [formControl]="statesForm.controls['stateCode']">
+              <p >Code: *</p>
+              <input id="stateCode" type="number" min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+               [readonly]="duplicateStateName" (blur)="checkForDuplicateStateCode()" class="form-control" [formControl]="statesForm.controls['stateCode']">
             </div>
 
               <div class="input-group">
-                  <p>Zone: *</p>
-                 <input id="zone" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
-                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"   class="form-control">
+                  <p >Zone: *</p>
+                 <input id="zone" maxlength="7"  class="form-control" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
+                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
                   <span class="caret"></span>
             </div>
 

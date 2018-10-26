@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
 <div class="col-md-12">
   <div class="row">
     <div class="col-md-5">
@@ -8,33 +14,32 @@
          [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
         <div class="input-group">
-          <p>Customer</p>
+          <p >Customer</p>
           <input id="customer" #focus [readonly]="nameFlag" (blur)="checkForDuplicateCustomerName()" class="form-control"  [formControl]="customerDiscountForm.controls['customer']">
         </div>
-      <!--  <div class="input-group">
-          <p>Company: * &emsp; (<a style="cursor: pointer"  (click)="openModal(cmpTemplate)">create</a>)</p>
+       <div class="input-group">
+          <p >Company: * &emsp; (<a style="cursor: pointer"  (click)="openModal(cmpTemplate)">create</a>)</p>
 
           <input id="companyCode" formControlName="companyCode" [typeahead]="typeaheadCompanyDataList" typeaheadOptionField="companyCode"
           [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control">
            <span class="caret"></span>
 
-        </div>-->
-
-        <div class="radio">
-          <label>Do you want to apply same discount for all the companies?</label>
-          <label class="radio-inline">
-             <input type="radio" name="discountType" formControlName="discountType" value=1 >Yes
-            </label>
-            <label class="radio-inline">
-             <input type="radio" name="discountType" formControlName="discountType" value=0>No
-            </label>
         </div>
-        <div class="input-group">
-          <p>Discount(%)</p>
+
+     
+        <div>
+            Do you want to apply same discount for all the companies? 
+            <input type="radio" name="discountType" formControlName="discountType" value=1 (click)="show()"  />Yes
+            <input type="radio" name="discountType" formControlName="discountType" value=0 checked="checked" (click)="hide()"  />No
+
+        </div>
+    
+
+        <div class="input-group discount" id="disc" >
+          <p >Discount(%)</p>
           <input id="discount" #focus [readonly]="nameFlag"  class="form-control"  [formControl]="customerDiscountForm.controls['discount']">
         </div>
-
-            <div class="input-group">
+            <div class="input-group btn-pad">
               <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
               <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
               <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete' | translate }}</button>
@@ -66,7 +71,7 @@
               [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
           <div class="input-group">
-              <p>Company: *</p>
+              <p >Company: *</p>
               <input id="companyCode" #focus (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['companyCode']">
           </div>
 
@@ -77,3 +82,11 @@
       </form>
   </div>
 </ng-template>
+
+
+<script>
+ 
+    </script>
+
+</body>
+</html>

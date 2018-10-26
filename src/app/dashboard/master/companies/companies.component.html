@@ -8,48 +8,53 @@
            [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
            <div class="input-group">
-             <p>Company Name: *</p>
-             <input id="companyName"  #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyName()"  class="form-control" [formControl]="companyForm.controls['companyName']">
+             <p >Company Name: *</p>
+             <input id="companyName" maxlength="40"  #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyName()"  class="form-control" [formControl]="companyForm.controls['companyName']">
          </div>
 
 
           <div class="input-group">
-            <p>Company Code: *</p>
-            <input id="companyCode" (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['companyCode']">
+            <p >Company Code: *</p>
+            <input id="companyCode" maxlength="40" (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['companyCode']">
           </div>
 
 
           <div>
 
             <div class="col-md-6 col-lt">
-              <p>Company Group: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
-              <input id="companyGroup" formControlName="companyGroup" [typeahead]="typeaheadDataList" typeaheadOptionField="companyGroup"
+              <p >Company Group: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
+              <input id="companyGroup" maxlength="20" formControlName="companyGroup" [typeahead]="typeaheadDataList" typeaheadOptionField="companyGroup"
               [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control">
               <span class="caret"></span>
       </div>
-
-              <div class="col-md-6 col-rt">
-                <p>Company Type: *</p>
-                <div class="input-group">
-                <input id="companyType" class="form-control" [formControl]="companyForm.controls['companyType']">
-              </div>
+   <div class="col-md-6 col-rt">
+                <p >Company Type: *</p>
+               
+                <input id="companyType" maxlength="10" class="form-control" [formControl]="companyForm.controls['companyType']"
+                [typeahead]="companyTypeList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
+                <span class="caret"></span>
+              
               </div>
           
           </div>
 
             <div class="input-group">
-              <p>Company Status: *</p>
-              <input id="companyStatus" class="form-control" [formControl]="companyForm.controls['companyStatus']">
+              <p >Company Status: *</p>
+              <input id="companyStatus" maxlength="10" class="form-control" [formControl]="companyForm.controls['companyStatus']"
+              [typeahead]="companyStatusList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+              <span class="caret"></span>
           </div>
 
           <div >
             <div class="col-md-6 col-lt">
-              <p>Inv.Gen.Type</p>
-              <input id="invGenType" class="form-control" [formControl]="companyForm.controls['invGenType']">
+              <p >Inv.Gen.Type</p>
+              <input id="invGenType" maxlength="8" class="form-control" [formControl]="companyForm.controls['invGenType']"
+              [typeahead]="invGenList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+              <span class="caret"></span>
             </div>
             <div class="col-md-6 col-rt">
-              <p>Inv.Prefix</p>
-              <input id="invPrefix" class="form-control" [formControl]="companyForm.controls['invPrefix']">
+              <p >Inv.Prefix</p>
+              <input id="invPrefix" maxlength="10" class="form-control" [formControl]="companyForm.controls['invPrefix']">
             </div>
           </div>
               <div class="input-group">
@@ -84,8 +89,8 @@
          [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
         <div class="input-group">
-          <p>Company Group: *</p>
-          <input id="companyGroup" #focus (blur)="checkForDuplicateCompanyGrp()" class="form-control"
+          <p >Company Group: *</p>
+          <input id="companyGroup" maxlength="20" #focus (blur)="checkForDuplicateCompanyGrp()" class="form-control"
           [formControl]="companyGroupForm.controls['companyGroup']">
         </div>
 

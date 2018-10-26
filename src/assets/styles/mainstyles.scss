@@ -15,7 +15,9 @@ body {
   margin-bottom: 60px;
   overflow-y: auto;
 }
-
+p{
+  margin:0 0 0;
+}
 .pointer {
   cursor: pointer;
 }
@@ -132,4 +134,12 @@ padding-bottom: 1em;
 .col-rt{
   padding-top: 1em;
   float: right;
-  }
+}
+
+.discount{
+  display:none;
+}
+
+.btn-pad{
+padding-top: 8px  !important ;
+}
