@@ -1,20 +1,20 @@
 <div class="col-md-12">
     <div class="row">
       <div class="col-md-5">
-        <h3>Companies</h3>
+        <h3>{{'companies.title' | translate}}</h3>
         <form [formGroup]="companyForm" (ngSubmit)="saveForm()" autocomplete="off">
           <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
           [formServerError]="formServerError" [duplicateMessage]="duplicateMessage"
            [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
            <div class="input-group">
-             <p >Company Name: *</p>
+             <p>{{'companies.name' | translate}}: *</p>
              <input id="companyName" maxlength="40"  #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyName()"  class="form-control" [formControl]="companyForm.controls['companyName']">
          </div>
 
 
           <div class="input-group">
-            <p >Company Code: *</p>
+            <p>{{'companies.code' | translate}}: *</p>
             <input id="companyCode" maxlength="40" (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['companyCode']">
           </div>
 
@@ -22,13 +22,13 @@
           <div>
 
             <div class="col-md-6 col-lt">
-              <p >Company Group: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
+              <p>{{'companygroup.name' | translate }}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
               <input id="companyGroup" maxlength="20" formControlName="companyGroup" [typeahead]="typeaheadDataList" typeaheadOptionField="companyGroup"
               [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control">
               <span class="caret"></span>
       </div>
    <div class="col-md-6 col-rt">
-                <p >Company Type: *</p>
+                <p>{{'companies.type' | translate}}: *</p>
                
                 <input id="companyType" maxlength="10" class="form-control" [formControl]="companyForm.controls['companyType']"
                 [typeahead]="companyTypeList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
@@ -39,21 +39,21 @@
           </div>
 
             <div class="input-group">
-              <p >Company Status: *</p>
+              <p>{{'companies.status' | translate}}: *</p>
               <input id="companyStatus" maxlength="10" class="form-control" [formControl]="companyForm.controls['companyStatus']"
               [typeahead]="companyStatusList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
               <span class="caret"></span>
           </div>
 
           <div >
-            <div class="col-md-6 col-lt">
-              <p >Inv.Gen.Type</p>
+            <div class="col-md-6 col-lt caret-md6">
+              <p>{{'companies.invGenType' | translate}}: *</p>
               <input id="invGenType" maxlength="8" class="form-control" [formControl]="companyForm.controls['invGenType']"
               [typeahead]="invGenList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-              <span class="caret"></span>
+              <!-- <span class="caret"></span> -->
             </div>
             <div class="col-md-6 col-rt">
-              <p >Inv.Prefix</p>
+              <p>{{'companies.invPrefix' | translate}}: *</p>
               <input id="invPrefix" maxlength="10" class="form-control" [formControl]="companyForm.controls['invPrefix']">
             </div>
           </div>
@@ -77,7 +77,7 @@
 
   <ng-template #template>
     <div class="modal-header">
-      <h4 class="modal-title pull-left">Create Company Group </h4>
+      <h4 class="modal-title pull-left">{{'companygroup.create' | translate }}</h4>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -89,7 +89,7 @@
          [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
         <div class="input-group">
-          <p >Company Group: *</p>
+          <p>{{'companygroup.name' | translate }}: *</p>
           <input id="companyGroup" maxlength="20" #focus (blur)="checkForDuplicateCompanyGrp()" class="form-control"
           [formControl]="companyGroupForm.controls['companyGroup']">
         </div>

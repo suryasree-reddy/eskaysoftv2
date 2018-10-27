@@ -143,3 +143,39 @@ padding-bottom: 1em;
 .btn-pad{
 padding-top: 8px  !important ;
 }
+
+.capitalize{
+  text-transform: uppercase;
+}
+.caret-md6{
+  position: relative;
+      display: inline-block;
+      
+}
+.caret-md6::before{
+  position: absolute;
+  content: "\2bc6";
+  top: 3em;
+  right: 1em;
+  height: 20px;
+  width: 20px;
+}
+// .caret-md12{
+//   position: relative;
+//   display: inline-block;
+//   z-index: 5 !important;    
+// }
+// .caret-md12::before{
+//   position: absolute;
+//   content: "\2bc6";
+//   top: 2em;
+//   right: 0.8em;
+//   height: -10px;
+//   width: 10px; 
+// }
+// .input-group{
+//  z-index: -1 !important;
+// }
+// .form-control{
+//   z-index: -1 !important;
+// }

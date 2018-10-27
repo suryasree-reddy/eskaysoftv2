@@ -1,14 +1,14 @@
 <div class="col-md-12 mr-b-2">
     <div class="row">
         <div class="col-md-5">
-            <h3>Product</h3>
+            <h3>{{'product.title' | translate}}</h3>
             <form [formGroup]="productForm" (ngSubmit)="saveForm()" autocomplete="off">
                 <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
                     [formServerError]="formServerError" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
 
                 <div class="col-md-6 col-lt">
-                    <p >Name: *</p> 
+                    <p>{{'product.name' | translate}}: *</p> 
                     <input id="name" maxlength="30" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['name']">
                 </div>
 
@@ -26,7 +26,7 @@
                   </div> -->
 
                 <div class="col-md-6 col-lt">
-                    <p >Company: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
+                    <p>Company: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
                         <input id="companyCode"  formControlName="companyCode" [typeahead]="typeaheadCompanyDataList"
                             typeaheadOptionField="companyCode" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                             (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control">
@@ -34,15 +34,26 @@
                 </div>
 
                 <div class="col-md-6 col-lt">
-                    <p >Product Group: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
+                    <p>{{'productgroup.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
                         <input id="productGroupName" formControlName="productGroupName" [typeahead]="typeaheadGroupDataList"
                             typeaheadOptionField="productGroupName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                             (typeaheadOnSelect)="loadSelectedGroupTypeahead($event)" class="form-control">
                             <span class="caret"></span>
                 </div>
 
+                <div class="col-md-3 col-lt">
+                        <p>{{'product.packing' | translate}}: *</p>
+                        <input id="packing" maxlength="8" class="form-control" [formControl]="productForm.controls['packing']">
+                    </div>
+    
+                    <div class="col-md-3 col-lt">
+                        <p>{{'product.boxqty' | translate}}: *</p>
+                        <input id="boxQty" type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                        #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['boxQty']">
+                    </div>
+
                 <div class="col-md-6 col-lt">
-                    <p >Product Category: * &emsp; (<a style="cursor: pointer" (click)="openModal(pcTemplate)">create
+                    <p>{{'productcategory.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(pcTemplate)">create
                         </a>)</p>
                         <input id="productCategoryName" formControlName="productCategoryName" [typeahead]="typeaheadCategoryDataList"
                             typeaheadOptionField="productCategoryName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
@@ -51,62 +62,55 @@
                 </div>
            
 
-                <div class="col-md-3 col-lt">
-                    <p >Packing: *</p>
-                    <input id="packing" maxlength="8" class="form-control" [formControl]="productForm.controls['packing']">
-                </div>
+              
 
                 <div class="col-md-3 col-lt">
-                    <p >Box Qty: *</p>
-                    <input id="boxQty" type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                    #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['boxQty']">
-                </div>
-
-                <div class="col-md-3 col-lt">
-                    <p >Case Qty: *</p>
+                    <p>{{'product.caseqty' | translate}}: *</p>
                     <input id="caseQty" type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                     class="form-control" [formControl]="productForm.controls['caseQty']">
                 </div>
-                <div class="col-md-3 col-lt">
-                    <p >Content: *</p>
-                    <input id="contents" maxlength="80" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['contents']">
-                </div>
+              
 
 
 
                 <div class="col-md-3 col-lt">
-                    <p >Scheme Qty: *</p>
+                    <p>{{'product.schemeqty' | translate}}: *</p>
                     <input id="schemeQty" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['schemeQty']">
                 </div>
 
+                <div class="col-md-6 col-lt">
+                        <p>{{'product.content' | translate}}: *</p>
+                        <input id="contents" maxlength="80" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['contents']">
+                    </div>
+
                 <div class="col-md-3 col-lt">
-                    <p >Net Rate: *</p>
+                    <p>{{'product.netrate' | translate}}: *</p>
                     <input id="netRate" class="form-control" [formControl]="productForm.controls['netRate']">
                 </div>
 
-                <div class="col-md-6 col-lt">
-                    <p >Is Net Rate Item: *</p>
+                <div class="col-md-3 col-lt">
+                    <p>{{'product.isNetRateItem' | translate}}: *</p>
                     <input id="isNetRateItem" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['isNetRateItem']">
                 </div>
 
+                <div class="col-md-6 col-lt">
+                        <p>{{'product.tax' | translate}}: *</p>
+                            <input id="tax" formControlName="tax" [typeahead]="typeaheadTaxDataList" typeaheadOptionField="tax"
+                                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTaxTypeahead($event)"
+                                class="form-control" />
+                                <span class="caret"></span>
+                    </div>
 
                 <div class="col-md-3 col-lt">
-                    <p >Free: *</p>
+                    <p>{{'product.free' | translate}}: *</p>
                    
                     <input id="free" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['free']">
                 
             </div>
 
+                
                 <div class="col-md-3 col-lt">
-                    <p >Tax: *</p>
-                        <input id="tax" formControlName="tax" [typeahead]="typeaheadTaxDataList" typeaheadOptionField="tax"
-                            [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTaxTypeahead($event)"
-                            class="form-control" />
-                            <span class="caret"></span>
-                </div>
-                <div class="col-md-6 col-lt">
-                    <p >Product Code: *</p>
-                    
+                    <p>{{'product.prodcode' | translate}}: *</p>  
                     <input id="code" type="number" min="0" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                     class="form-control" [formControl]="productForm.controls['code']">
                
@@ -133,7 +137,7 @@
 <!-- Product Group Modal -->
 <ng-template #template>
     <div class="modal-header">
-        <h4 class="modal-title pull-left">Create Product Group </h4>
+        <h4 class="modal-title pull-left">{{'productgroup.create' | translate}}</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -144,7 +148,7 @@
                 [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
             <div class="input-group">
-                <p >Product Group: *</p>
+                <p>{{'productgroup.name' | translate}}: *</p>
                 <input id="productGroupName" #focus (blur)="checkForDuplicateProdGroup()" class="form-control"
                     [formControl]="productGroupForm.controls['productGroupName']">
             </div>
@@ -160,7 +164,7 @@
 <!-- Product Category Modal -->
 <ng-template #pcTemplate>
     <div class="modal-header">
-        <h4 class="modal-title pull-left">Create Product Category </h4>
+        <h4 class="modal-title pull-left">{{'productcategory.create' | translate}}</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -171,7 +175,7 @@
                 [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
             <div class="input-group">
-                <p >Product Category: *</p>
+                <p>{{'productcategory.name' | translate}}: *</p>
                 <input id="productCategoryName" #focus (blur)="checkForDuplicateProdCategory()" class="form-control"
                     [formControl]="productCategoryForm.controls['productCategoryName']">
             </div>
@@ -199,7 +203,7 @@
                 [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
             <div class="input-group">
-                <p >Company: *</p>
+                <p>Company: *</p>
                 <input id="companyCode" #focus (blur)="checkForDuplicateCompanyCode()" class="form-control"
                     [formControl]="companyForm.controls['companyCode']">
             </div>

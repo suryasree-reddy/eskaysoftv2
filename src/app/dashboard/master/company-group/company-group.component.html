@@ -1,14 +1,14 @@
 <div class="col-md-12">
     <div class="row">
       <div class="col-md-5">
-        <h3>Company Group</h3>
+        <h3>{{'companygroup.title' | translate }}</h3>
         <form [formGroup]="companyGroupForm" autocomplete="off">
           <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
           [formServerError]="formServerError" [duplicateMessage]="duplicateMessage"
            [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
           <div class="input-group">
-            <p >Company Group: *</p>
+            <p>{{'companygroup.name' | translate }}: *</p>
             <input id="companyGroup" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyGrp()" class="form-control"  [formControl]="companyGroupForm.controls['companyGroup']">
           </div>
 

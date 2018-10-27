@@ -1,7 +1,7 @@
 <div class="col-md-12">
   <div class="row">
     <div class="col-md-5">
-      <h3>Bank Information</h3>
+      <h3>{{'bankinfo.title' | translate }}</h3>
       <form [formGroup]="bankInformationForm" autocomplete="off">
 
         <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
@@ -10,11 +10,11 @@
         </app-errormessages>
 
         <div class="input-group">
-          <p>Bank Name: *</p>
+          <p>{{'bankinfo.name' | translate }}: *</p>
           <input id="name" maxlength="50" #focus [readonly]="nameFlag" (blur)="checkForDuplicateBankName()" class="form-control" [formControl]="bankInformationForm.controls['name']">
         </div>
         <div class="input-group">
-            <p>Bank Address: *</p>
+            <p>{{'bankinfo.address' | translate }}: *</p>
             <input id="address" maxlength="50" class="form-control" [formControl]="bankInformationForm.controls['address']">
         </div>
 
