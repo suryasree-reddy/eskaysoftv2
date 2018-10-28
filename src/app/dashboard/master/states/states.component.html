@@ -9,7 +9,7 @@
 
             <div class="input-group">
               <p>{{'states.name' | translate }}: *</p>
-              <input id="stateName" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateStateName()" class="form-control" [formControl]="statesForm.controls['stateName']">
+              <input id="stateName" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateStateName()" class="form-control capitalize" [formControl]="statesForm.controls['stateName']">
           </div>
           <div class="input-group">
               <p>{{'states.code' | translate }}: *</p>
@@ -27,7 +27,7 @@
               <app-buttons [title]="'states.title'" [deleteConfirmMsg]="'states.deleteConfirmationMessage'"
                            [saveConfirmMsg]="'states.saveConfirmationMessage'" [saveInfoMsg]="'states.saveInformationMessage'" [endPoint]="endPoint"
                            [deleteInfoMsg]="'states.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-                           [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
+                           [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
                            [hideDeleteBtn]=true [formObj]="statesForm" (saveRecord)="save()"
                            (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
                            (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>

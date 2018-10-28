@@ -9,12 +9,12 @@
 
           <div class="input-group">
             <p>{{'districts.name' | translate }}: *</p>
-            <input id="districtName" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateDistName()"  class="form-control" [formControl]="districtsForm.controls['districtName']">
+            <input id="districtName" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateDistName()"  class="form-control capitalize" [formControl]="districtsForm.controls['districtName']">
           </div>
             <div class="input-group">
               <p>{{'states.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
               <input id="stateName" maxlength="20" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="stateName"
-                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control">
+                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control capitalize">
                 <span class="caret"></span>
           </div>
 
@@ -22,7 +22,7 @@
                  [saveConfirmMsg]="'districts.saveConfirmationMessage'" [saveInfoMsg]="'districts.saveInformationMessage'"
                  [endPoint]="endPoint"
                  [deleteInfoMsg]="'districts.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-                 [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
+                 [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
                  [hideDeleteBtn]=true [formObj]="districtsForm" (saveRecord)="save()"
                  (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
                  (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
@@ -58,7 +58,7 @@
 
       <div class="input-group">
           <p>{{'states.name' | translate }}: *</p>
-          <input id="stateName" maxlength="20" class="form-control" (blur)="checkForDuplicateStateName()" [formControl]="statesForm.controls['stateName']">
+          <input id="stateName" maxlength="20" class="form-control capitalize" (blur)="checkForDuplicateStateName()" [formControl]="statesForm.controls['stateName']">
       </div>
       <div class="input-group">
           <p>{{'states.code' | translate }}: *</p>
@@ -77,7 +77,7 @@
              [saveConfirmMsg]="'states.saveConfirmationMessage'" [saveInfoMsg]="'states.saveInformationMessage'"
              [endPoint]="stateEndPoint"
              [deleteInfoMsg]="'states.deleteInformationMessage'" [duplicateMessage]="childDuplicateMessage"
-             [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
+             [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
              [hideDeleteBtn]=false [formObj]="statesForm" (saveRecord)="saveState()"
              (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
              (afterSuccess)="successMsg()" (resetForm)="resetStatesForm()" (serverErrMsg)="serverErrMsg()"></app-buttons>

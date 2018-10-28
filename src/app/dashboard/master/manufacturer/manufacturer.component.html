@@ -9,14 +9,14 @@
 
           <div class="input-group">
             <p >{{'manufacturer.name' | translate }}: *</p>
-            <input id="manfacturerName" maxlength="50" #focus [readonly]="nameFlag" (blur)="checkForDuplicateManufName()"  class="form-control" [formControl]="manufacturerForm.controls['manfacturerName']">
+            <input id="manfacturerName" maxlength="50" #focus [readonly]="nameFlag" (blur)="checkForDuplicateManufName()"  class="form-control capitalize" [formControl]="manufacturerForm.controls['manfacturerName']">
           </div>
 
           <app-buttons [title]="'manufacturer.title'" [deleteConfirmMsg]="'manufacturer.deleteConfirmationMessage'"
                  [saveConfirmMsg]="'manufacturer.saveConfirmationMessage'" [saveInfoMsg]="'manufacturer.saveInformationMessage'"
                  [endPoint]="endPoint"
                  [deleteInfoMsg]="'manufacturer.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-                 [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]="!nameFlag"
+                 [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]="!nameFlag" [hideResetBtn]=true
                  [hideDeleteBtn]=true [formObj]="manufacturerForm" (saveRecord)="save()"
                  (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
                  (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>

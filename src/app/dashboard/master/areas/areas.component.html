@@ -9,20 +9,20 @@
 
           <div class="input-group">
             <p>{{'areas.name' | translate }}: *</p>
-            <input id="areaName" maxlength="40" #focus [readonly]="nameFlag" (blur)="validateFormOnBlur()"  class="form-control" [formControl]="areaForm.controls['areaName']">
+            <input id="areaName" maxlength="40" #focus [readonly]="nameFlag" (blur)="validateFormOnBlur()"  class="form-control capitalize" [formControl]="areaForm.controls['areaName']">
           </div>
 
           <div class="input-group">
             <p>{{'businessexecutive.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
             <input id="businessExecutiveId" maxlength="50" formControlName="businessExecutiveName" [typeahead]="typeaheadDataList" typeaheadOptionField="name"
-              [typeaheadOptionsLimit]="7"   [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control">
+              [typeaheadOptionsLimit]="7"   [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control capitalize">
               <span class="caret"></span>
         </div>
         <app-buttons [title]="'areas.title'" [deleteConfirmMsg]="'areas.deleteConfirmationMessage'"
                [saveConfirmMsg]="'areas.saveConfirmationMessage'" [saveInfoMsg]="'areas.saveInformationMessage'"
                [endPoint]="areaEndPoint"
                [deleteInfoMsg]="'areas.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
+               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
                [hideDeleteBtn]=true [formObj]="areaForm" (saveRecord)="save()"
                (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
                (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" >
@@ -56,7 +56,7 @@
 
         <div class="input-group">
         	<p>{{'businessexecutive.name' | translate }}: *</p>
-        	<input id="name" maxlength="50" class="form-control" (blur) = "checkForDuplicateBusiExecName()" [formControl]="businessExecutiveForm.controls['name']">
+        	<input id="name" maxlength="50" class="form-control capitalize" (blur) = "checkForDuplicateBusiExecName()" [formControl]="businessExecutiveForm.controls['name']">
         </div>
 
         <div class="input-group">
@@ -79,6 +79,16 @@
         	<button type="button" (click)="resetBusinessExecutiveForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
         	<button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
         </div>
+
+        <!-- <app-buttons [title]="'businessexecutive.title'" [deleteConfirmMsg]="'businessexecutive.deleteConfirmationMessage'"
+        [saveConfirmMsg]="'businessexecutive.saveConfirmationMessage'" [saveInfoMsg]="'businessexecutive.saveInformationMessage'"
+        [endPoint]="endPoint"
+        [deleteInfoMsg]="'businessexecutive.deleteInformationMessage'" [duplicateMessage]="childDuplicateMessage"
+        [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
+        [hideDeleteBtn]=false [formObj]="businessExecutiveForm" (saveRecord)="saveBusinessExecutive()"
+        (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+        (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" >
+ </app-buttons> -->
       </form>
     </div>
   </ng-template>

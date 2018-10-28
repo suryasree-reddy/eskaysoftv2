@@ -9,14 +9,14 @@
 
         <div class="input-group">
           <p>{{'productcategory.name' | translate}}: *</p>
-          <input id="productCategoryName" maxlength="40" #focus [readonly]="nameFlag" (blur)="checkForDuplicateProdCategory()" class="form-control" [formControl]="productCategoryForm.controls['productCategoryName']">
+          <input id="productCategoryName" maxlength="40" #focus [readonly]="nameFlag" (blur)="checkForDuplicateProdCategory()" class="form-control capitalize" [formControl]="productCategoryForm.controls['productCategoryName']">
         </div>
 
         <app-buttons [title]="'productcategory.title'" [deleteConfirmMsg]="'productcategory.deleteConfirmationMessage'"
                [saveConfirmMsg]="'productcategory.saveConfirmationMessage'" [saveInfoMsg]="'productcategory.saveInformationMessage'"
                [endPoint]="endPoint"
                [deleteInfoMsg]="'productcategory.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]="!nameFlag"
+               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]="!nameFlag" [hideResetBtn]=true
                [hideDeleteBtn]=true [formObj]="productCategoryForm" (saveRecord)="save()"
                (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
                (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>

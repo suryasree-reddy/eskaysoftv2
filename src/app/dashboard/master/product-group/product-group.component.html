@@ -9,14 +9,14 @@
 
         <div class="input-group">
           <p>{{'productgroup.name' | translate}}: *</p>
-          <input id="productGroupName" maxlength="40" #focus [readonly]="nameFlag" (blur)="checkForDuplicateProdGroup()" class="form-control" [formControl]="productGroupForm.controls['productGroupName']">
+          <input id="productGroupName" maxlength="40" #focus [readonly]="nameFlag" (blur)="checkForDuplicateProdGroup()" class="form-control capitalize" [formControl]="productGroupForm.controls['productGroupName']">
         </div>
 
         <app-buttons [title]="'productgroup.title'" [deleteConfirmMsg]="'productgroup.deleteConfirmationMessage'"
                [saveConfirmMsg]="'productgroup.saveConfirmationMessage'" [saveInfoMsg]="'productgroup.saveInformationMessage'"
                [endPoint]="endPoint"
                [deleteInfoMsg]="'productgroup.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]="!nameFlag"
+               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]="!nameFlag" [hideResetBtn]=true
                [hideDeleteBtn]=true [formObj]="productGroupForm" (saveRecord)="save()"
                (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
                (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>

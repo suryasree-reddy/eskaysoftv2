@@ -9,7 +9,7 @@
 
           <div class="input-group">
             <p>{{'businessexecutive.name' | translate }}: *</p>
-            <input id="name" maxlength="50" #focus [readonly]="nameFlag" (blur)="checkForDuplicateBusiExecName()"  class="form-control" [formControl]="businessExecutiveForm.controls['name']">
+            <input id="name" maxlength="50" #focus [readonly]="nameFlag" (blur)="checkForDuplicateBusiExecName()"  class="form-control capitalize" [formControl]="businessExecutiveForm.controls['name']">
           </div>
             <div class="input-group">
               <p>{{'businessexecutive.address' | translate }}: *</p>
@@ -29,7 +29,7 @@
                    [saveConfirmMsg]="'businessexecutive.saveConfirmationMessage'" [saveInfoMsg]="'businessexecutive.saveInformationMessage'"
                    [endPoint]="endPoint"
                    [deleteInfoMsg]="'businessexecutive.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-                   [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
+                   [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
                    [hideDeleteBtn]=true [formObj]="businessExecutiveForm" (saveRecord)="save()"
                    (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
                    (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" >

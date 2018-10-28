@@ -9,7 +9,7 @@
 
            <div class="input-group">
              <p>{{'companies.name' | translate}}: *</p>
-             <input id="companyName" maxlength="40"  #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyName()"  class="form-control" [formControl]="companyForm.controls['companyName']">
+             <input id="companyName" maxlength="40"  #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyName()"  class="form-control capitalize" [formControl]="companyForm.controls['companyName']">
          </div>
 
 
@@ -24,7 +24,7 @@
             <div class="col-md-6 col-lt">
               <p>{{'companygroup.name' | translate }}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
               <input id="companyGroup" maxlength="20" formControlName="companyGroup" [typeahead]="typeaheadDataList" typeaheadOptionField="companyGroup"
-              [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control">
+              [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control capitalize">
               <span class="caret"></span>
       </div>
    <div class="col-md-6 col-rt">
@@ -57,11 +57,21 @@
               <input id="invPrefix" maxlength="10" class="form-control" [formControl]="companyForm.controls['invPrefix']">
             </div>
           </div>
-              <div class="input-group">
+              <!-- <div class="input-group">
                 <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
                 <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
                 <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete' | translate }}</button>
-              </div>
+              </div> -->
+              <app-buttons [title]="'companies.title'" [deleteConfirmMsg]="'companies.deleteConfirmationMessage'"
+              [saveConfirmMsg]="'companies.saveConfirmationMessage'" [saveInfoMsg]="'companies.saveInformationMessage'"
+              [endPoint]="endPoint"
+              [deleteInfoMsg]="'companies.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+              [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+              [hideDeleteBtn]=true [formObj]="companyForm" (saveRecord)="save()"
+              (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+              (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+
+
         </form>
       </div>
 
@@ -90,7 +100,7 @@
 
         <div class="input-group">
           <p>{{'companygroup.name' | translate }}: *</p>
-          <input id="companyGroup" maxlength="20" #focus (blur)="checkForDuplicateCompanyGrp()" class="form-control"
+          <input id="companyGroup" maxlength="20" #focus (blur)="checkForDuplicateCompanyGrp()" class="form-control capitalize"
           [formControl]="companyGroupForm.controls['companyGroup']">
         </div>
 

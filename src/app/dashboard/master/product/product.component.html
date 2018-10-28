@@ -9,7 +9,7 @@
 
                 <div class="col-md-6 col-lt">
                     <p>{{'product.name' | translate}}: *</p> 
-                    <input id="name" maxlength="30" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['name']">
+                    <input id="name" maxlength="30" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="productForm.controls['name']">
                 </div>
 
 
@@ -29,7 +29,7 @@
                     <p>Company: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
                         <input id="companyCode"  formControlName="companyCode" [typeahead]="typeaheadCompanyDataList"
                             typeaheadOptionField="companyCode" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
-                            (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control">
+                            (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control capitalize">
                             <span class="caret"></span>
                 </div>
 
@@ -37,8 +37,8 @@
                     <p>{{'productgroup.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
                         <input id="productGroupName" formControlName="productGroupName" [typeahead]="typeaheadGroupDataList"
                             typeaheadOptionField="productGroupName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
-                            (typeaheadOnSelect)="loadSelectedGroupTypeahead($event)" class="form-control">
-                            <span class="caret"></span>
+                            (typeaheadOnSelect)="loadSelectedGroupTypeahead($event)" class="form-control capitalize">
+                            <!-- <span class="caret"></span> -->
                 </div>
 
                 <div class="col-md-3 col-lt">
@@ -57,8 +57,8 @@
                         </a>)</p>
                         <input id="productCategoryName" formControlName="productCategoryName" [typeahead]="typeaheadCategoryDataList"
                             typeaheadOptionField="productCategoryName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
-                            (typeaheadOnSelect)="loadSelectedCategoryTypeahead($event)" class="form-control dropdown-toggle">
-                            <span class="caret"></span>
+                            (typeaheadOnSelect)="loadSelectedCategoryTypeahead($event)" class="form-control capitalize">
+                            <!-- <span class="caret"></span> -->
                 </div>
            
 
@@ -116,12 +116,21 @@
                
             </div>
 
-                <div class="input-group">
+                <!-- <div class="input-group">
                     <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
                     <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
                     <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete'
                         | translate }}</button>
-                </div>
+                </div> -->
+                <app-buttons [title]="'product.title'" [deleteConfirmMsg]="'product.deleteConfirmationMessage'"
+                [saveConfirmMsg]="'product.saveConfirmationMessage'" [saveInfoMsg]="'product.saveInformationMessage'"
+                [endPoint]="endPoint"
+                [deleteInfoMsg]="'product.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+                [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+                [hideDeleteBtn]=true [formObj]="productForm" (saveRecord)="save()"
+                (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+                (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+ 
             </form>
         </div>
 
@@ -149,7 +158,7 @@
 
             <div class="input-group">
                 <p>{{'productgroup.name' | translate}}: *</p>
-                <input id="productGroupName" #focus (blur)="checkForDuplicateProdGroup()" class="form-control"
+                <input id="productGroupName" #focus (blur)="checkForDuplicateProdGroup()" class="form-control capitalize"
                     [formControl]="productGroupForm.controls['productGroupName']">
             </div>
 
@@ -176,7 +185,7 @@
 
             <div class="input-group">
                 <p>{{'productcategory.name' | translate}}: *</p>
-                <input id="productCategoryName" #focus (blur)="checkForDuplicateProdCategory()" class="form-control"
+                <input id="productCategoryName" #focus (blur)="checkForDuplicateProdCategory()" class="form-control capitalize"
                     [formControl]="productCategoryForm.controls['productCategoryName']">
             </div>
 
@@ -204,7 +213,7 @@
 
             <div class="input-group">
                 <p>Company: *</p>
-                <input id="companyCode" #focus (blur)="checkForDuplicateCompanyCode()" class="form-control"
+                <input id="companyCode" #focus (blur)="checkForDuplicateCompanyCode()" class="form-control capitalize"
                     [formControl]="companyForm.controls['companyCode']">
             </div>
 

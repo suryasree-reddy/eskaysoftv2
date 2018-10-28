@@ -27,7 +27,7 @@
                [saveConfirmMsg]="'schedule.saveConfirmationMessage'" [saveInfoMsg]="'schedule.saveInformationMessage'"
                [endPoint]="endPoint"
                [deleteInfoMsg]="'schedule.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
+               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
                [hideDeleteBtn]=true [formObj]="scheduleForm" (saveRecord)="save()"
                (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
                (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>

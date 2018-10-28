@@ -8,7 +8,7 @@
 
                 <div class="input-group">
                     <p>{{'customerdiscount.name' | translate}}</p>
-                    <input id="customer" #focus [readonly]="nameFlag" (blur)="checkForDuplicateCustomerName()" class="form-control"
+                    <input id="customer" #focus [readonly]="nameFlag" (blur)="checkForDuplicateCustomerName()" class="form-control capitalize"
                         [formControl]="customerDiscountForm.controls['customer']">
                 </div>
                 <div class="input-group">
@@ -16,7 +16,7 @@
 
                     <input id="companyCode" formControlName="companyCode" [typeahead]="typeaheadCompanyDataList"
                         typeaheadOptionField="companyCode" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
-                        (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control">
+                        (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control capitalize">
                     <span class="caret"></span>
 
                 </div>
@@ -35,12 +35,22 @@
                     <p>{{'customerdiscount.disc' | translate}}: *</p>
                     <input id="discount" #focus [readonly]="nameFlag" class="form-control" [formControl]="customerDiscountForm.controls['discount']">
                 </div>
-                <div class="input-group btn-pad">
+                <!-- <div class="input-group btn-pad">
                     <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
                     <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
                     <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" 
                     class="btn btn-danger float-right">{{'button.delete' | translate }}</button>
-                </div>
+                </div> -->
+
+                <app-buttons [title]="'customerdiscount.title'" [deleteConfirmMsg]="'customerdiscount.deleteConfirmationMessage'"
+                [saveConfirmMsg]="'customerdiscount.saveConfirmationMessage'" [saveInfoMsg]="'customerdiscount.saveInformationMessage'"
+                [endPoint]="endPoint"
+                [deleteInfoMsg]="'customerdiscount.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+                [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+                [hideDeleteBtn]=true [formObj]="subScheduleForm" (saveRecord)="save()"
+                (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+                (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+ 
             </form>
         </div>
 

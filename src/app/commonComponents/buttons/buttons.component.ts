@@ -14,6 +14,7 @@ export class ButtonsComponent implements OnInit {
   @Input() isBtnDeleteDisable: boolean = false;
   @Input() hideSaveBtn: boolean = false;
   @Input() hideDeleteBtn: boolean = false;
+  @Input() hideResetBtn: boolean = false;
   @Input() deleteConfirmMsg: string = null;
   @Input() saveConfirmMsg: string = null;
   @Input() deleteInfoMsg: string = null;
