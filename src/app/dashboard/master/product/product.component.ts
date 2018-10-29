@@ -359,6 +359,7 @@ loadTaxTypeaheadData(){
   editable(s) {
     this.gridSelectedRow = s;
     this.productForm.reset(s);
+    this.companyForm.reset(s);
     this.nameFlag = true;
     this.formRequiredError = false;
     this.duplicateMessage = null;

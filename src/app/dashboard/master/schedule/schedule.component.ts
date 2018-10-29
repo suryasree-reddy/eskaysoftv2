@@ -30,6 +30,7 @@ export class ScheduleComponent implements OnInit {
   public nameFlag;
   public gridDataList: Observable<any[]>;
   public lastSchIndex;
+  public cap;
   modalRef: BsModalRef;
   private duplicateSchName: boolean = false;
   private duplicateSchIndex: boolean = false;
@@ -125,7 +126,10 @@ export class ScheduleComponent implements OnInit {
   delete() {
     this.buttonsComponent.delete();
   }
-
+// capitalize(){
+//   const cap = this.scheduleForm.value.scheduleName;
+//  this.cap = cap.toUpperCase();
+// }
   successMsg() {
     this.formSuccess = true;
     this.formRequiredError = this.formServerError = false;

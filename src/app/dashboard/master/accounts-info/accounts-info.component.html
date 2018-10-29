@@ -26,17 +26,17 @@
                 
                 <input id="accountName"  maxlength="50" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="accInfoForm.controls['accountName']">
               </div>
+              <!-- <div class="col-md-4 col-lt">
+                <p>{{'subschedule.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>        
+                <input id="id" maxlength="40" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="subScheduleForm.controls['subScheduleId']"
+               [typehead]="subScheduleList" typeaheadOptionField="subScheduleName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)"
+                class="form-control capitalize">
+              <span class="caret"></span>
+              </div> -->
               <div class="col-md-4 col-lt">
-                <p>{{'subschedule.name' | translate}}: *</p>
-                
-                <input id="subScheduleId" maxlength="40" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="accInfoForm.controls['subScheduleId']">
-              </div>
-              <div class="col-md-4 col-lt caret-md6">
-                <p>{{'schedule.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
-                <input id="scheduleType"  maxlength="40" [formControl]="scheduleForm.controls['scheduleName']" [typeahead]="scheduleList"
-                  typeaheadOptionField="scheduleName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)"
-                  class="form-control capitalize">
-                <!-- <span class="caret"></span> -->
+                <p>{{'schedule.name' | translate}}: * &emsp; </p>
+                <input id="scheduleType"  maxlength="40" [formControl]="scheduleForm.controls['scheduleName']" class="form-control capitalize">
+                <span class="caret"></span>
               </div>
               
               <div class="col-md-4 col-lt">
@@ -58,15 +58,16 @@
               </div>
 
               <div class="col-md-4 col-lt">
-                <p>{{'districts.name' | translate }}: *</p>
-                <input id="districtId" maxlength="20" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="accInfoForm.controls['districtId']">
+                <p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate)">create new</a>)</p>
+                <input id="id" maxlength="20" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="districtsForm.controls['id']"
+                [typeahead]="districtsList" typeaheadOptionField="districtName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" >
+                <span class="caret"></span>
               </div>
 
   
               <div class="col-md-4 col-lt">
                   <p>{{'states.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(stateTemplate)">create new</a>)</p>
-                  <input id="stateName" maxlength="20" [formControl]="statesForm.controls['stateName']" [typeahead]="statesList" typeaheadOptionField="stateName"
-                    [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control capitalize">
+                  <input id="stateName" maxlength="20" [formControl]="statesForm.controls['stateName']" class="form-control capitalize">
                     <span class="caret"></span>
                   </div>
 
@@ -143,12 +144,12 @@
               
               <div class="col-md-4 col-lt">
                 <p>{{'accountinfo.gsttype' | translate}}: *</p>
-                <div class="input-group">
+                
                   <input id="gstType" maxlength="5" class="form-control"  [formControl]="accInfoForm.controls['gstType']" [typeahead]="accGstType"
                     typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
                   
-                    <!-- <span class="caret" ></span> -->
-                  </div>
+                    <span class="caret" ></span>
+                
               </div>
 
               <div class="col-md-4 col-lt">
@@ -297,35 +298,36 @@
 
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">{{'schedule.create' | translate}}</h4>
+    <h4 class="modal-title pull-left">{{'subSchedule.create' | translate}}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="scheduleForm" (ngSubmit)="saveSchedule()" autocomplete="off">
+    <form [formGroup]="subScheduleForm" (ngSubmit)="save()" autocomplete="off">
 
       <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
       [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
        [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
-      <div class="input-group">
-        <p>{{'schedule.name' | translate}}: *</p>
-        <input id="scheduleName" class="form-control capitalize" (blur)="checkForDuplicateScheduleName()" [formControl]="scheduleForm.controls['scheduleName']">
+       <div class="input-group">
+        <p>{{'subschedule.name' | translate}}: *</p>
+        <input #focus id="subScheduleName" maxlength="40" [readonly]="nameFlag" class="form-control capitalize" (blur)="checkForDuplicateSubScheduleName()" [formControl]="subScheduleForm.controls['subScheduleName']">
       </div>
         <div class="input-group">
-          <p>{{'schedule.index' | translate }}: *</p>
-          <input id="scheduleIndex" class="form-control" (blur)="validateFormOnBlur()" [formControl]="scheduleForm.controls['scheduleIndex']">
+          <p>{{'schedule.name' | translate}}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
+          <input id="scheduleType" maxlength="40" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="scheduleName"
+          [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control capitalize">
+        </div><span class="caret"></span>
+
+        <div class="input-group">
+          <p>{{'subschedule.index' | translate}}: *</p>
+          <input id="subScheduleIndex" type="number"  min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+           [readonly]="true" class="form-control" [formControl]="subScheduleForm.controls['subScheduleIndex']">
       </div>
-          <div class="input-group">
-            <p>{{'schedule.type' | translate }}: *</p>
-            <input id="scheduleType" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="code"
-          [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" class="form-control">
-            <span class="caret"></span>
-          </div>
 
           <div class="input-group">
-            <button type="button" (click)="resetScheduleForm()" class="btn btn-primary">Reset</button>
+            <button type="button" (click)="resetSubScheduleForm()" class="btn btn-primary">Reset</button>
             <button type="submit" class="btn btn-primary mr-l-10">Save</button>
           </div>
 
@@ -334,44 +336,39 @@
   </div>
 </ng-template>
 
-<ng-template #stateTemplate>
+<ng-template #districtTemplate>
     <div class="modal-header">
-      <h4 class="modal-title pull-left">{{'states.create' | translate }}</h4>
+      <h4 class="modal-title pull-left">{{'districts.create' | translate }}</h4>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <form [formGroup]="statesForm" autocomplete="off">
+      <form [formGroup]="districtsForm" autocomplete="off">
 
         <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
         [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
          [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
-      <div class="input-group">
-          <p>{{'states.name' | translate }}: *</p>
-          <input id="stateName" class="form-control capitalize" (blur)="checkForDuplicateStateName()" [formControl]="statesForm.controls['stateName']">
-      </div>
-      <div class="input-group">
-          <p>{{'states.code' | translate }}: *</p>
-          <input id="stateCode" class="form-control" (blur)="checkForDuplicateStateCode()" [formControl]="statesForm.controls['stateCode']">
+         <div class="input-group">
+          <p>{{'districts.name' | translate }}: *</p>
+          <input id="districtName" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateDistName()"  class="form-control capitalize" [formControl]="districtsForm.controls['districtName']">
+        </div>
+          <div class="input-group">
+            <p>{{'states.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
+            <input id="stateName" maxlength="20" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="stateName"
+              [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control capitalize">
+              <span class="caret"></span>
         </div>
 
-        <div class="input-group">
-            <p>{{'states.zone' | translate }}: *</p>
-           <input id="zone" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
-          [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"   class="form-control">
-            <span class="caret"></span>
-      </div>
-
-      <app-buttons [title]="'states.title'" [deleteConfirmMsg]="'states.deleteConfirmationMessage'"
-             [saveConfirmMsg]="'states.saveConfirmationMessage'" [saveInfoMsg]="'states.saveInformationMessage'"
-             [endPoint]="stateEndPoint"
-             [deleteInfoMsg]="'states.deleteInformationMessage'" [duplicateMessage]="childDuplicateMessage"
-             [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
-             [hideDeleteBtn]=false [formObj]="statesForm" (saveRecord)="saveState()"
-             (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-             (afterSuccess)="successMsg()" (resetForm)="resetStatesForm()" (serverErrMsg)="serverErrMsg()"></app-buttons>
+        <app-buttons [title]="'districts.title'" [deleteConfirmMsg]="'districts.deleteConfirmationMessage'"
+               [saveConfirmMsg]="'districts.saveConfirmationMessage'" [saveInfoMsg]="'districts.saveInformationMessage'"
+               [endPoint]="endPoint"
+               [deleteInfoMsg]="'districts.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+               [hideDeleteBtn]=true [formObj]="districtsForm" (saveRecord)="save()"
+               (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+               (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
 
       </form>
 

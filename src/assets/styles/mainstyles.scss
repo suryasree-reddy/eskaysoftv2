@@ -40,10 +40,18 @@ p{
 .input-group {
   .caret {
     position: absolute;
-    top: 45px;
+    top: 36px;
     right: 10px;
     z-index: 10;
   }
+}
+
+.caret {
+  float: right;
+  position: relative;
+  top: -17px;
+  right: 10px;
+  z-index: 10;
 }
 
 .ag-theme-balham {
@@ -141,7 +149,7 @@ padding-bottom: 1em;
 }
 
 .btn-pad{
-padding-top: 8px  !important ;
+ padding: 1px !important ;
 }
 
 .capitalize{

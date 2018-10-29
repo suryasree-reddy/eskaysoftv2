@@ -50,6 +50,7 @@ export class AccountsInfoComponent implements OnInit {
   public duplicateMessageParam: string = null;
   public nameFlag;
   scheduleList: any = [];
+  public subScheduleList: any = [];
   public districtsList: any = [];
   public statesList: any = [];
   public selectedSchedule: any;
@@ -67,6 +68,8 @@ public accOpeningType: any[];
   private duplicateSchIndex: boolean = false;
   private duplicateStateName: boolean = false;
   private duplicateStateCode: boolean = false;
+  private duplicateDistrictName: boolean = false;
+  private duplicateDistrictCode: boolean = false;
 
   modalRef: BsModalRef;
   message: string;
@@ -159,7 +162,8 @@ public accOpeningType: any[];
     //this.getJsonData();
     this.loadScheduleData();
     this.loadStatesData();
-    this.focusField.nativeElement.focus();
+    this.loadDistrictData() 
+    // this.focusField.nativeElement.focus();
     this.getScheduleTypes();
     this.getGstType();
     this.getNatureOfGst();
@@ -175,9 +179,21 @@ public accOpeningType: any[];
     })
   }
 
+  loadsubScheduleData() {
+    this.masterService.getParentData("subschedules/").subscribe(list => {
+      this.subScheduleList = list;
+    })
+  }
+
   loadStatesData() {
     this.masterService.getParentData("states/").subscribe(list => {
       this.statesList = list;
+    })
+  }
+
+  loadDistrictData() {
+    this.masterService.getParentData("districts/").subscribe(list => {
+      this.districtsList = list;
     })
   }
 
@@ -190,7 +206,7 @@ public accOpeningType: any[];
   // }
 
   openModal(template: TemplateRef<any>) {
-    this.resetScheduleForm();
+    // this.resetsubScheduleForm();
     this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
@@ -269,11 +285,11 @@ public accOpeningType: any[];
     }
   }
 
-  resetScheduleForm() {
+  resetsubScheduleForm() {
     this.scFormRequiredError = false;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
-    this.scheduleForm.reset();
+    this.subScheduleForm.reset();
   }
 
   resetStatesForm() {
@@ -309,6 +325,22 @@ public accOpeningType: any[];
       const stateObj = _.filter(this.statesList, function(o) { return o.stateName.toLowerCase() == temp.toLowerCase() });
       this.statesForm.patchValue({ stateCode: stateObj[0].stateCode })
       this.statesForm.patchValue({ zone: stateObj[0].zone })
+    }
+    this.getDuplicateErrorMessages();
+  }
+
+  // checkForDuplicateDistrictCode() {
+  //   this.duplicateStateCode = this.masterService.hasDataExist(this.districtsList, 'id', parseInt(this.districtsForm.value.id));
+  //   this.getDuplicateErrorMessages();
+  // }
+
+  checkForDuplicateDistrictName() {
+    this.duplicateDistrictName = this.masterService.hasDataExist(this.districtsList, 'districtName', this.districtsForm.value.districtName);
+    if (this.duplicateDistrictName) {
+      const temp = this.districtsForm.value.districtName;
+      const districtObj = _.filter(this.districtsList, function(o) { return o.districtName.toLowerCase() == temp.toLowerCase() });
+      this.districtsForm.patchValue({ id: districtObj[0].id })
+      
     }
     this.getDuplicateErrorMessages();
   }
@@ -410,7 +442,7 @@ public accOpeningType: any[];
 	this.duplicateSchIndex = false;
 	this.duplicateSchName = false;
 	// this.duplicateSubSchName = false;
-    this.focusField.nativeElement.focus();
+    // this.focusField.nativeElement.focus();
   }
 
   // editable(s) {

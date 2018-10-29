@@ -27,6 +27,10 @@ export class CustomerwiseDiscountComponent implements OnInit {
   public nameFlag;
   public deleteFlag: boolean = true;
   public customerName;
+  public companyCode;
+  public companyTypeList: any = [];
+  public companyStatusList: any = [];
+  public invGenList: any = [];
   private duplicateCustomerName: boolean = false;
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
@@ -36,6 +40,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
   public childDuplicateMessage: string = null;
   public childDuplicateMessageParam: string = null;
   private duplicateCompany: boolean = false;
+  private duplicateCompanyName: boolean = false;
   public typeaheadCompanyDataList: any = [];
   public selectedCompanyTypeahead: any;
 
@@ -64,7 +69,12 @@ export class CustomerwiseDiscountComponent implements OnInit {
 
     this.companyForm = this.fb.group({
       companyId: [],
-      companyCode: ['', Validators.required]
+      companyCode: ['', Validators.required],
+      companyName: ['', Validators.required],
+      companyType: ['', Validators.required],
+      companyStatus: ['', Validators.required],
+      invGenType: ['', Validators.required],
+      invPrefix: ['', Validators.required]
     });
 
     //this.loadGridData();
@@ -72,6 +82,10 @@ export class CustomerwiseDiscountComponent implements OnInit {
     this.loadCompanyTypeaheadData();
     this.getJsonData();
    // this.focusField.nativeElement.focus();
+   this.getCompanyType();
+   this.getCompanyStatus();
+   this.getInvGenType();
+
   }
 
   getJsonData() {
@@ -114,6 +128,26 @@ export class CustomerwiseDiscountComponent implements OnInit {
     document.getElementById('disc').style.display ='none';
   }
 
+  getCompanyType(){
+    this.masterService.getLocalJsonData().subscribe(data =>{
+      data as Object[];
+      this.companyTypeList = data["CompanyType"]
+    })
+  }
+  getCompanyStatus(){
+    this.masterService.getLocalJsonData().subscribe(data =>{
+      data as Object[];
+      this.companyStatusList = data["CompanyStatus"]
+    })
+  }
+  getInvGenType(){
+    this.masterService.getLocalJsonData().subscribe(data =>{
+      data as Object[];
+      this.invGenList = data["InvGenType"]
+    })
+  }
+
+
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
@@ -127,8 +161,12 @@ export class CustomerwiseDiscountComponent implements OnInit {
       this.duplicateMessageParam = this.customerDiscountForm.value.customer;
     }
     else if (this.duplicateCompany) {
-      this.childDuplicateMessage = "companies.duplicateNameErrorMessage";
+      this.childDuplicateMessage = "companies.duplicateCodeErrorMessage";
       this.childDuplicateMessageParam = this.companyForm.value.companyCode;
+    }
+    else if(this.duplicateCompanyName){
+      this.childDuplicateMessage = "companies.duplicateNameErrorMessage";
+      this.childDuplicateMessageParam = this.companyForm.value.companyName;
     }
   }
 
@@ -143,6 +181,13 @@ export class CustomerwiseDiscountComponent implements OnInit {
   checkForDuplicateCompanyCode() {
     this.duplicateCompany = this.masterService.hasDataExist(this.gridDataList, 'companyCode', this.companyForm.value.companyCode);
     this.getDuplicateErrorMessages();
+}
+
+checkForDuplicateCompanyName(){
+if (!this.nameFlag)  {
+  this.duplicateCompanyName = this.masterService.hasDataExist(this.gridDataList, 'companyName', this.companyForm.value.companyName);
+  this.getDuplicateErrorMessages();
+}
 }
 
   getGridCloumsList() {

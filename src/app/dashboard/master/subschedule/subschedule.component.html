@@ -15,27 +15,26 @@
             <p>{{'schedule.name' | translate}}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
             <input id="scheduleType" maxlength="40" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="scheduleName"
             [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control capitalize">
-            <span class="caret"></span>
-          </div>
+          </div><span class="caret"></span>
           <div class="input-group">
             <p>{{'subschedule.index' | translate}}: *</p>
             <input id="subScheduleIndex" type="number"  min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
              [readonly]="true" class="form-control" [formControl]="subScheduleForm.controls['subScheduleIndex']">
         </div>
-            <!-- <div class="input-group">
+            <div class="input-group">
               <button type="button" (click)="resetForm()" class="btn btn-primary">Reset</button>
               <button type="submit" class="btn btn-primary mr-l-10">Save</button>
               <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">Delete</button>
-            </div> -->
+            </div>
 
-            <app-buttons [title]="'subschedule.title'" [deleteConfirmMsg]="'subschedule.deleteConfirmationMessage'"
+            <!-- <app-buttons [title]="'subschedule.title'" [deleteConfirmMsg]="'subschedule.deleteConfirmationMessage'"
                [saveConfirmMsg]="'subschedule.saveConfirmationMessage'" [saveInfoMsg]="'subschedule.saveInformationMessage'"
                [endPoint]="endPoint"
                [deleteInfoMsg]="'subschedule.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
                [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
                [hideDeleteBtn]=true [formObj]="subScheduleForm" (saveRecord)="save()"
                (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-               (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+               (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons> -->
 
 
       </form>
@@ -76,7 +75,7 @@
       </div>
           <div class="input-group">
             <p>{{'schedule.type' | translate }}: *</p>
-            <input id="scheduleType" maxlength="15" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="code"
+            <input id="scheduleType" maxlength="15" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="description"
           [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" class="form-control">
             <span class="caret"></span>
           </div>
