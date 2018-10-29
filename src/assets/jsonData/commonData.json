@@ -279,11 +279,10 @@
     { "headerName": "Type", "field": "type", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep",
-      "cellEditor": "agRichSelectCellEditor",
+      "cellEditor": "gridSelectEditorComponent",
       "cellEditorParams": {
-          "values": ["Credit",
-            "Debit"
-          ]},
+          "values": [{"key":"Credit"},{"key":"Debit"}]
+        },
        "editable": true
     },
     "suppressSizeToFit": false }

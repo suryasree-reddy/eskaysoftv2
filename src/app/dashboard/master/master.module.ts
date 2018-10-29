@@ -34,6 +34,7 @@ import { CustomerwiseDiscountComponent } from './customerwise-discount/customerw
 import { PurchaseComponent } from './purchase/purchase.component';
 import { BsDropdownModule, TypeaheadModule, TabsModule  } from 'ngx-bootstrap';
 import { GridNumericEditorComponent } from '../../commonComponents/grid-numeric-editor/grid-numeric-editor.component';
+import { GridSelectEditorComponent } from '../../commonComponents/grid-select-editor/grid-select-editor.component';
 
 
 @NgModule({
@@ -61,8 +62,8 @@ import { GridNumericEditorComponent } from '../../commonComponents/grid-numeric-
     NgModel,
     FormsModule
   ],
-  declarations: [ScheduleComponent, SubscheduleComponent, GridNumericEditorComponent, ButtonsComponent, ConfirmationModelDialogComponent, ErrormessagesComponent, SynectiksCommonGridComponent, StatesComponent, DistrictsComponent, AreasComponent, BusinessexecutivesComponent, BankinformationComponent, ManufacturerComponent, CompanyGroupComponent, CompaniesComponent, ProductGroupComponent, ProductCategoryComponent, ProductComponent, AccountsInfoComponent, AccountsOpeningsComponent, ContactComponent, CustomerwiseDiscountComponent, PurchaseComponent],
-  entryComponents: [ ConfirmationModelDialogComponent, GridNumericEditorComponent ]
+  declarations: [ScheduleComponent, SubscheduleComponent, GridSelectEditorComponent, GridNumericEditorComponent, ButtonsComponent, ConfirmationModelDialogComponent, ErrormessagesComponent, SynectiksCommonGridComponent, StatesComponent, DistrictsComponent, AreasComponent, BusinessexecutivesComponent, BankinformationComponent, ManufacturerComponent, CompanyGroupComponent, CompaniesComponent, ProductGroupComponent, ProductCategoryComponent, ProductComponent, AccountsInfoComponent, AccountsOpeningsComponent, ContactComponent, CustomerwiseDiscountComponent, PurchaseComponent],
+  entryComponents: [ ConfirmationModelDialogComponent, GridNumericEditorComponent, GridSelectEditorComponent ]
 })
 export class MasterModule { }
 export function HttpLoaderFactory(http: HttpClient) {

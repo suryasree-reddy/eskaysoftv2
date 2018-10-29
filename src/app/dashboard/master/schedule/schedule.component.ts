@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
-import "ag-grid-enterprise";
+
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html'

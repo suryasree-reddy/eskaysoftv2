@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angu
 import { MasterService } from 'src/app/dashboard/master/master.service';
 
 import { GridNumericEditorComponent } from 'src/app/commonComponents/grid-numeric-editor/grid-numeric-editor.component';
-
+import { GridSelectEditorComponent } from 'src/app/commonComponents/grid-select-editor/grid-select-editor.component';
 @Component({
   selector: 'app-synectiks-common-grid',
   templateUrl: './synectiks-common-grid.component.html'
@@ -26,7 +26,8 @@ private frameworkComponents;
 
   constructor(private masterService: MasterService) {
     this.frameworkComponents = {
-          numericEditor: GridNumericEditorComponent
+          numericEditor: GridNumericEditorComponent,
+          gridSelectEditorComponent:GridSelectEditorComponent
         };
   }
 
