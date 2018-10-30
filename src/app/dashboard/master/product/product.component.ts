@@ -23,10 +23,12 @@ export class ProductComponent implements OnInit {
   private pgEndPoint: string = "productgroup/";
   private pcEndPoint: string = "productcategory/";
   private cEndPoint: string = "company/";
+  private cgEndPoint: string = "companygroup/";
   private taxEndPoint: string = "tax/";
   public gridDataList: any = [];
   public companyTypeList: any = [];
   public companyStatusList: any = [];
+  public typeaheadDataList: any = [];
   public invGenList: any = [];
   public gridColumnNamesList;
   public gridSelectedRow;
@@ -48,6 +50,7 @@ export class ProductComponent implements OnInit {
   private duplicateCompanyName: boolean = false;
   public typeaheadGroupDataList: any = [];
   public typeaheadCompanyDataList: any = [];
+  public typeaheadCompanyGroupDataList: any = [];
   public typeaheadTaxDataList: any = [];
   public typeaheadCategoryDataList: any = [];
   public selectedCategoryTypeahead: any;
@@ -104,6 +107,7 @@ export class ProductComponent implements OnInit {
       companyId: [],
       companyCode: ['', Validators.required],
       companyName: ['', Validators.required],
+      companyGroupName: ['', Validators.required],
       companyType: ['', Validators.required],
       companyStatus: ['', Validators.required],
       invGenType: ['', Validators.required],
@@ -115,6 +119,7 @@ export class ProductComponent implements OnInit {
     this.loadGroupTypeaheadData();
     this.loadCategoryTypeaheadData();
     this.loadCompanyTypeaheadData();
+    this.loadCompanyGroupTypeaheadData();
     this.loadTaxTypeaheadData();
     this.getJsonData();
     this.getCompanyType();
@@ -149,6 +154,12 @@ export class ProductComponent implements OnInit {
     this.masterService.getLocalJsonData().subscribe(data => {
       data as object[];
       this.gridColumnNamesList = data["ProductColumns"];
+    });
+  }
+
+  loadCompanyGroupTypeaheadData() {
+    this.masterService.getParentData(this.cgEndPoint).subscribe(list => {
+      this.typeaheadCompanyGroupDataList = list;
     });
   }
 

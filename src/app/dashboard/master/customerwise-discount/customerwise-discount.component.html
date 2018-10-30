@@ -88,6 +88,13 @@
             <span class="caret"></span>
     </div> -->
 
+    <div class="input-group">
+      <p>{{'companygroup.name' | translate }}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
+      <input id="companyGroup" maxlength="20" formControlName="companyGroup" [typeahead]="typeaheadDataList" typeaheadOptionField="companyGroup"
+      [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control capitalize"/>
+      <span class="caret"></span>
+    </div>
+    
           <div class="input-group">
             <p>{{'companies.type' | translate}}: *</p>
             <input id="companyType" maxlength="10" class="form-control" [formControl]="companyForm.controls['companyType']"
