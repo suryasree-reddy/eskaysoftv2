@@ -13,7 +13,6 @@
                 </div>
                 <div class="input-group">
                     <p>Company: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
-
                     <input id="companyCode" formControlName="companyCode" [typeahead]="typeaheadCompanyDataList"
                         typeaheadOptionField="companyCode" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                         (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control capitalize">
@@ -90,11 +89,11 @@
 
     <div class="input-group">
       <p>{{'companygroup.name' | translate }}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
-      <input id="companyGroup" maxlength="20" formControlName="companyGroup" [typeahead]="typeaheadDataList" typeaheadOptionField="companyGroup"
+      <input id="companyGroup" maxlength="20" formControlName="companyGroupName" [typeahead]="typeaheadCompanyGroupDataList" typeaheadOptionField="companyGroupName"
       [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control capitalize"/>
       <span class="caret"></span>
     </div>
-    
+
           <div class="input-group">
             <p>{{'companies.type' | translate}}: *</p>
             <input id="companyType" maxlength="10" class="form-control" [formControl]="companyForm.controls['companyType']"

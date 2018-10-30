@@ -19,7 +19,7 @@
 
           <div class="col-xs-6 col-lt">
             <p>{{'companygroup.name' | translate }}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
-            <input id="companyGroup" maxlength="20" formControlName="companyGroup" [typeahead]="typeaheadDataList" typeaheadOptionField="companyGroup"
+            <input id="companyGroupName" maxlength="20" formControlName="companyGroupName" [typeahead]="typeaheadDataList" typeaheadOptionField="companyGroupName"
             [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control capitalize"/>
             <span class="caret"></span>
           </div>

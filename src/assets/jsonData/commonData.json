@@ -157,27 +157,27 @@
     { "code": "Comp", "description": "Company" }
   ],
   "CompanyColumns": [
-    { "headerName": "Company Name", "field": "companyName", "filterParams": {
+    { "headerName": "Name", "field": "companyName", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
     } ,
     "suppressSizeToFit": false},
-    { "headerName": "Company Code", "field": "companyCode", "filter": "agNumberColumnFilter", "filterParams": {
+    { "headerName": "Code", "field": "companyCode", "filter": "agNumberColumnFilter", "filterParams": {
       "filterOptions": ["equals", "lessThan", "greaterThan"],
       "newRowsAction": "keep"
     },
     "suppressSizeToFit": false },
-    { "headerName": "Company Group", "field": "companyGroup", "filterParams": {
+    { "headerName": "Group", "field": "companyGroupName", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
     } ,
     "suppressSizeToFit": false},
-    { "headerName": "Company Type", "field": "companyType", "filterParams": {
+    { "headerName": "Type", "field": "companyType", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
     } ,
     "suppressSizeToFit": false},
-    { "headerName": "Company Status", "field": "companyStatus" ,
+    { "headerName": "Status", "field": "companyStatus" ,
     "suppressSizeToFit": false},
     { "headerName": "Inv.Gen.Type", "field": "invGenType",
     "suppressSizeToFit": false },

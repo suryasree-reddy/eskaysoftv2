@@ -18,6 +18,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
   public companyForm: FormGroup;
   private endPoint: string = "customerwisediscount/";
   private cEndPoint: string = "company/";
+  private cgEndPoint: string = "companygroup/";
   public gridDataList: any = [];
   public gridColumnNamesList;
   public gridSelectedRow;
@@ -30,6 +31,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
   public companyCode;
   public companyTypeList: any = [];
   public companyStatusList: any = [];
+  public typeaheadCompanyGroupDataList: any = [];
   public invGenList: any = [];
   private duplicateCustomerName: boolean = false;
   public duplicateMessage: string = null;
@@ -72,6 +74,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
       companyCode: ['', Validators.required],
       companyName: ['', Validators.required],
       companyType: ['', Validators.required],
+      companyGroupName: ['', Validators.required],
       companyStatus: ['', Validators.required],
       invGenType: ['', Validators.required],
       invPrefix: ['', Validators.required]
@@ -101,6 +104,12 @@ export class CustomerwiseDiscountComponent implements OnInit {
     });
   }
 
+  loadCompanyGroupTypeaheadData() {
+    this.masterService.getParentData(this.cgEndPoint).subscribe(list => {
+      this.typeaheadCompanyGroupDataList = list;
+    });
+  }
+
   loadSelectedCompanyTypeahead(event) {
     this.selectedCompanyTypeahead = event.item;
     this.customerDiscountForm.patchValue({ companyId: event.item.id });
@@ -116,6 +125,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.resetChildForm();
+    this.loadCompanyGroupTypeaheadData();
     this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
