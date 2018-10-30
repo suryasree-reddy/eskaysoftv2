@@ -120,7 +120,7 @@
     "suppressSizeToFit": false}
   ],
   "CompanyGroupColumns": [
-    { "headerName": "Company Group", "field": "companyGroup", "filterParams": {
+    { "headerName": "Company Group", "field": "companyGroupName", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
     } ,

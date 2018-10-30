@@ -15,7 +15,7 @@ import * as _ from 'lodash';
 export class ProductComponent implements OnInit {
 
   public productForm: FormGroup;
- // public productGroupName: FormGroup;
+  // public productGroupName: FormGroup;
   public productGroupForm: FormGroup;
   public productCategoryForm: FormGroup;
   public companyForm: FormGroup;
@@ -25,6 +25,9 @@ export class ProductComponent implements OnInit {
   private cEndPoint: string = "company/";
   private taxEndPoint: string = "tax/";
   public gridDataList: any = [];
+  public companyTypeList: any = [];
+  public companyStatusList: any = [];
+  public invGenList: any = [];
   public gridColumnNamesList;
   public gridSelectedRow;
   public formSuccess: boolean = false;
@@ -42,9 +45,10 @@ export class ProductComponent implements OnInit {
   private duplicateProdGroup: boolean = false;
   private duplicateProdCategory: boolean = false;
   private duplicateCompany: boolean = false;
+  private duplicateCompanyName: boolean = false;
   public typeaheadGroupDataList: any = [];
   public typeaheadCompanyDataList: any = [];
-  public typeaheadTaxDataList:any=[];
+  public typeaheadTaxDataList: any = [];
   public typeaheadCategoryDataList: any = [];
   public selectedCategoryTypeahead: any;
   public selectedTaxTypeahead: any;
@@ -66,8 +70,8 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     this.productForm = this.fb.group({
       id: [],
-      taxId:[],
-      companyId:[],
+      taxId: [],
+      companyId: [],
       productGroupId: [],
       productCategoryId: [],
       name: ['', Validators.required],
@@ -98,7 +102,12 @@ export class ProductComponent implements OnInit {
 
     this.companyForm = this.fb.group({
       companyId: [],
-      companyCode: ['', Validators.required]
+      companyCode: ['', Validators.required],
+      companyName: ['', Validators.required],
+      companyType: ['', Validators.required],
+      companyStatus: ['', Validators.required],
+      invGenType: ['', Validators.required],
+      invPrefix: ['', Validators.required]
     });
 
     //this.loadGridData();
@@ -108,8 +117,33 @@ export class ProductComponent implements OnInit {
     this.loadCompanyTypeaheadData();
     this.loadTaxTypeaheadData();
     this.getJsonData();
+    this.getCompanyType();
+    this.getCompanyStatus();
+    this.getInvGenType();
     // this.focusField.nativeElement.focus();
   }
+
+  getCompanyType() {
+    this.masterService.getLocalJsonData().subscribe(data => {
+      data as Object[];
+      this.companyTypeList = data["CompanyType"]
+    })
+  }
+
+  getCompanyStatus() {
+    this.masterService.getLocalJsonData().subscribe(data => {
+      data as Object[];
+      this.companyStatusList = data["CompanyStatus"]
+    })
+  }
+
+  getInvGenType() {
+    this.masterService.getLocalJsonData().subscribe(data => {
+      data as Object[];
+      this.invGenList = data["InvGenType"]
+    })
+  }
+
 
   getJsonData() {
     this.masterService.getLocalJsonData().subscribe(data => {
@@ -118,17 +152,17 @@ export class ProductComponent implements OnInit {
     });
   }
 
-loadCompanyTypeaheadData(){
-  this.masterService.getParentData(this.cEndPoint).subscribe(list => {
-    this.typeaheadCompanyDataList = list;
-  });
-}
+  loadCompanyTypeaheadData() {
+    this.masterService.getParentData(this.cEndPoint).subscribe(list => {
+      this.typeaheadCompanyDataList = list;
+    });
+  }
 
-loadTaxTypeaheadData(){
-  this.masterService.getParentData(this.taxEndPoint).subscribe(list => {
-    this.typeaheadTaxDataList = list;
-  });
-}
+  loadTaxTypeaheadData() {
+    this.masterService.getParentData(this.taxEndPoint).subscribe(list => {
+      this.typeaheadTaxDataList = list;
+    });
+  }
 
   loadGroupTypeaheadData() {
     this.masterService.getParentData(this.pgEndPoint).subscribe(list => {
@@ -185,7 +219,7 @@ loadTaxTypeaheadData(){
     this.duplicateMessageParam = null;
     this.scFormRequiredError = false;
 
-      if (this.duplicateProdGroup) {
+    if (this.duplicateProdGroup) {
       this.childDuplicateMessage = "productgroup.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.productGroupForm.value.productGroupName;
     }
@@ -213,10 +247,18 @@ loadTaxTypeaheadData(){
     }
   }
 
+
   checkForDuplicateCompanyCode() {
     this.duplicateCompany = this.masterService.hasDataExist(this.gridDataList, 'companyCode', this.companyForm.value.companyCode);
     this.getDuplicateErrorMessages();
-}
+  }
+
+  checkForDuplicateCompanyName() {
+    if (!this.nameFlag) {
+      this.duplicateCompanyName = this.masterService.hasDataExist(this.gridDataList, 'companyName', this.companyForm.value.companyName);
+      this.getDuplicateErrorMessages();
+    }
+  }
 
   getGridCloumsList() {
     this.masterService.getLocalJsonData().subscribe(data => {

@@ -8,7 +8,7 @@
                         [duplicateMessage]="duplicateMessage"
                         [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
-                <div class="col-xs-6 col-lt">
+                <div class="col-xs-6 col-3-lt">
                     <p>{{'product.name' | translate}}: *</p>
                     <input id="name" maxlength="30" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="productForm.controls['name']">
                 </div>
@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="margin-top-0px">
-                    <div class="col-xs-6 col-lt">
+                    <div class="col-xs-6 col-3-lt">
                     <p>{{'productgroup.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
                       <input id="productGroupName" formControlName="productGroupName" [typeahead]="typeaheadGroupDataList"
                       typeaheadOptionField="productGroupName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="margin-top-0px">
-                  <div class="col-xs-6 col-lt">
+                  <div class="col-xs-6 col-3-lt">
                       <p>{{'productcategory.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(pcTemplate)">create
                       </a>)</p>
                       <input id="productCategoryName" formControlName="productCategoryName" [typeahead]="typeaheadCategoryDataList"
@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="margin-top-0px">
-                  <div class="col-xs-6 col-lt">
+                  <div class="col-xs-6 col-3-lt">
                     <p>{{'product.content' | translate}}: *</p>
                     <input id="contents" maxlength="80" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['contents']">
                   </div>
@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="margin-top-0px">
-                  <div class="col-xs-6 col-lt">
+                  <div class="col-xs-6 col-3-lt">
                     <p>{{'product.tax' | translate}}: *</p>
                     <input id="tax" formControlName="tax" [typeahead]="typeaheadTaxDataList" typeaheadOptionField="tax"
                     [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTaxTypeahead($event)"
@@ -182,17 +182,47 @@
             <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess" [formServerError]="scFormServerError"
                 [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
-            <div class="input-group">
-                <p>Company: *</p>
-                <input id="companyCode" #focus (blur)="checkForDuplicateCompanyCode()" class="form-control capitalize"
-                    [formControl]="companyForm.controls['companyCode']">
-            </div>
+                <div class="input-group">
+                	<p>{{'companies.name' | translate}}: *</p>
+                	<input id="companyName" maxlength="40"  #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyName()"  class="form-control capitalize" [formControl]="companyForm.controls['companyName']">
+                </div>
 
-            <div class="input-group">
-                <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate
-                    }}</button>
-                <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-            </div>
+                <div class="input-group">
+                	<p>{{'companies.code' | translate}}: *</p>
+                	<input id="companyCode"  maxlength="40" #focus (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['companyCode']">
+                </div>
+
+                <div class="input-group">
+                	<p>{{'companies.type' | translate}}: *</p>
+                	<input id="companyType" maxlength="10" class="form-control" [formControl]="companyForm.controls['companyType']"
+                	[typeahead]="companyTypeList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
+                	<span class="caret"></span>
+                </div>
+
+                <div class="input-group">
+                	<p>{{'companies.status' | translate}}: *</p>
+                	<input id="companyStatus" maxlength="10" class="form-control" [formControl]="companyForm.controls['companyStatus']"
+                	[typeahead]="companyStatusList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+                	<span class="caret"></span>
+                </div>
+
+                <div class="input-group">
+                	<p>{{'companies.invGenType' | translate}}: *</p>
+                	<input id="invGenType" maxlength="8" class="form-control" [formControl]="companyForm.controls['invGenType']"
+                	[typeahead]="invGenList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+                	<span class="caret"></span>
+                </div>
+
+                <div class="input-group">
+                	<p>{{'companies.invPrefix' | translate}}: *</p>
+                	<input id="invPrefix" maxlength="10" class="form-control" [formControl]="companyForm.controls['invPrefix']">
+                </div>
+
+                <div class="input-group">
+                    <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate
+                        }}</button>
+                    <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
+                </div>
         </form>
     </div>
 </ng-template>

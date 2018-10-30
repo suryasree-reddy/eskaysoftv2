@@ -1,4 +1,4 @@
-import { Component, OnInit,TemplateRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -53,7 +53,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
     private translate: TranslateService,
     private modalService: BsModalService,
     private masterService: MasterService) {
-      translate.setDefaultLang('messages.en');
+    translate.setDefaultLang('messages.en');
   }
 
   ngOnInit() {
@@ -62,7 +62,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
       customer: ['', Validators.required],
       companyCode: ['', Validators.required],
       discount: ['', Validators.required],
-      discountType:[]
+      discountType: []
 
     });
 
@@ -81,10 +81,10 @@ export class CustomerwiseDiscountComponent implements OnInit {
     this.getGridCloumsList();
     this.loadCompanyTypeaheadData();
     this.getJsonData();
-   // this.focusField.nativeElement.focus();
-   this.getCompanyType();
-   this.getCompanyStatus();
-   this.getInvGenType();
+    // this.focusField.nativeElement.focus();
+    this.getCompanyType();
+    this.getCompanyStatus();
+    this.getInvGenType();
 
   }
 
@@ -95,7 +95,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
     });
   }
 
-  loadCompanyTypeaheadData(){
+  loadCompanyTypeaheadData() {
     this.masterService.getParentData(this.cEndPoint).subscribe(list => {
       this.typeaheadCompanyDataList = list;
     });
@@ -110,7 +110,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
     this.editable(selectedRow);
   }
 
-  onInitialDataLoad(dataList:any[]){
+  onInitialDataLoad(dataList: any[]) {
     this.gridDataList = dataList;
   }
 
@@ -120,28 +120,28 @@ export class CustomerwiseDiscountComponent implements OnInit {
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
-  show(){
-    document.getElementById('disc').style.display ='block';
-  }
-  
-  hide(){
-    document.getElementById('disc').style.display ='none';
+  show() {
+    document.getElementById('disc').style.display = 'block';
   }
 
-  getCompanyType(){
-    this.masterService.getLocalJsonData().subscribe(data =>{
+  hide() {
+    document.getElementById('disc').style.display = 'none';
+  }
+
+  getCompanyType() {
+    this.masterService.getLocalJsonData().subscribe(data => {
       data as Object[];
       this.companyTypeList = data["CompanyType"]
     })
   }
-  getCompanyStatus(){
-    this.masterService.getLocalJsonData().subscribe(data =>{
+  getCompanyStatus() {
+    this.masterService.getLocalJsonData().subscribe(data => {
       data as Object[];
       this.companyStatusList = data["CompanyStatus"]
     })
   }
-  getInvGenType(){
-    this.masterService.getLocalJsonData().subscribe(data =>{
+  getInvGenType() {
+    this.masterService.getLocalJsonData().subscribe(data => {
       data as Object[];
       this.invGenList = data["InvGenType"]
     })
@@ -164,31 +164,31 @@ export class CustomerwiseDiscountComponent implements OnInit {
       this.childDuplicateMessage = "companies.duplicateCodeErrorMessage";
       this.childDuplicateMessageParam = this.companyForm.value.companyCode;
     }
-    else if(this.duplicateCompanyName){
+    else if (this.duplicateCompanyName) {
       this.childDuplicateMessage = "companies.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.companyForm.value.companyName;
     }
   }
 
   checkForDuplicateCustomerName() {
-        if(!this.nameFlag){
-        this.duplicateCustomerName = this.masterService.hasDataExist(this.gridDataList, 'customer', this.customerDiscountForm.value.customer);
-        this.getDuplicateErrorMessages();
-      }
+    if (!this.nameFlag) {
+      this.duplicateCustomerName = this.masterService.hasDataExist(this.gridDataList, 'customer', this.customerDiscountForm.value.customer);
+      this.getDuplicateErrorMessages();
+    }
 
   }
 
   checkForDuplicateCompanyCode() {
     this.duplicateCompany = this.masterService.hasDataExist(this.gridDataList, 'companyCode', this.companyForm.value.companyCode);
     this.getDuplicateErrorMessages();
-}
+  }
 
-checkForDuplicateCompanyName(){
-if (!this.nameFlag)  {
-  this.duplicateCompanyName = this.masterService.hasDataExist(this.gridDataList, 'companyName', this.companyForm.value.companyName);
-  this.getDuplicateErrorMessages();
-}
-}
+  checkForDuplicateCompanyName() {
+    if (!this.nameFlag) {
+      this.duplicateCompanyName = this.masterService.hasDataExist(this.gridDataList, 'companyName', this.companyForm.value.companyName);
+      this.getDuplicateErrorMessages();
+    }
+  }
 
   getGridCloumsList() {
     this.masterService.getLocalJsonData().subscribe(data => {
@@ -274,7 +274,7 @@ if (!this.nameFlag)  {
   }
 
   requiredErrMsg() {
-    if( this.duplicateMessage == null){
+    if (this.duplicateMessage == null) {
       this.formRequiredError = true;
       this.formSuccess = this.formServerError = false;
     }

@@ -18,20 +18,15 @@
                         typeaheadOptionField="companyCode" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                         (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control capitalize">
                     <span class="caret"></span>
-
                 </div>
 
-
-                <div>
+                <div class="input-group">
                     Do you want to apply same discount for all the companies?
-                    <input type="radio" name="discountType" formControlName="discountType" value=1 (click)="show()" />Yes
-                    <input type="radio" name="discountType" formControlName="discountType" value=0 checked="checked"
-                        (click)="hide()" />No
-
+                    <input name="discountType"  formControlName="discountType" type="radio" [value]="true" [checked]="discountType"/> Yes
+                   <input name="discountType" formControlName="discountType" type="radio" [value]="false" [checked]="!discountType"/> No
                 </div>
 
-
-                <div class="input-group discount" id="disc">
+                <div *ngIf="customerDiscountForm.controls['discountType'].value" class="input-group" >
                     <p>{{'customerdiscount.disc' | translate}}: *</p>
                     <input id="discount" type="number" min="0" maxlength="5" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                      #focus [readonly]="nameFlag" class="form-control" [formControl]="customerDiscountForm.controls['discount']">
@@ -39,7 +34,7 @@
                 <!-- <div class="input-group btn-pad">
                     <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
                     <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-                    <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" 
+                    <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')"
                     class="btn btn-danger float-right">{{'button.delete' | translate }}</button>
                 </div> -->
 
@@ -51,7 +46,6 @@
                 [hideDeleteBtn]=true [formObj]="customerDiscountForm" (saveRecord)="save()"
                 (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
                 (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
- 
             </form>
         </div>
 
@@ -81,7 +75,7 @@
                 <p>{{'companies.name' | translate}}: *</p>
                 <input id="companyName" maxlength="40"  #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyName()"  class="form-control capitalize" [formControl]="companyForm.controls['companyName']">
             </div>
-   
+
           <div class="input-group">
               <p>{{'companies.code' | translate}}: *</p>
               <input id="companyCode"  maxlength="40" #focus (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['companyCode']">
@@ -95,11 +89,11 @@
     </div> -->
 
           <div class="input-group">
-            <p>{{'companies.type' | translate}}: *</p>             
+            <p>{{'companies.type' | translate}}: *</p>
             <input id="companyType" maxlength="10" class="form-control" [formControl]="companyForm.controls['companyType']"
             [typeahead]="companyTypeList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
-            <span class="caret"></span>              
-          </div>  
+            <span class="caret"></span>
+          </div>
 
           <div class="input-group">
             <p>{{'companies.status' | translate}}: *</p>
@@ -112,7 +106,7 @@
             <p>{{'companies.invGenType' | translate}}: *</p>
             <input id="invGenType" maxlength="8" class="form-control" [formControl]="companyForm.controls['invGenType']"
             [typeahead]="invGenList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-            <!-- <span class="caret"></span> -->
+          <span class="caret"></span>
           </div>
           <div class="input-group">
             <p>{{'companies.invPrefix' | translate}}: *</p>
@@ -126,5 +120,3 @@
       </form>
   </div>
 </ng-template>
-
-

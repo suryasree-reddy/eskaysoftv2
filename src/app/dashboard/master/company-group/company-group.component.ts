@@ -47,7 +47,7 @@ export class CompanyGroupComponent implements OnInit {
   ngOnInit() {
     this.companyGroupForm = this.fb.group({
       id: [],
-      companyGroup: ['', Validators.required]
+      companyGroupName: ['', Validators.required]
     });
     //this.loadGridData();
     this.getGridCloumsList();
@@ -67,13 +67,13 @@ export class CompanyGroupComponent implements OnInit {
     this.duplicateMessageParam = null;
     if (this.duplicateCompanyGrp) {
       this.duplicateMessage = "companygroup.duplicateNameErrorMessage";
-      this.duplicateMessageParam = this.companyGroupForm.value.companyGroup;
+      this.duplicateMessageParam = this.companyGroupForm.value.companyGroupName;
     }
   }
 
   checkForDuplicateCompanyGrp() {
     if (!this.nameFlag) {
-      this.duplicateCompanyGrp = this.masterService.hasDataExist(this.gridDataList, 'companyGroup', this.companyGroupForm.value.companyGroup);
+      this.duplicateCompanyGrp = this.masterService.hasDataExist(this.gridDataList, 'companyGroupName', this.companyGroupForm.value.companyGroupName);
       this.getDuplicateErrorMessages();
     }
   }
