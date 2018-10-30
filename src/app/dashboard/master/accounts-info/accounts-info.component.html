@@ -1,11 +1,12 @@
 
-<div class="container-fluid ml10 mt-25">
+ <!--<div class="container-fluid ml10 mt-25" style="margin-bottom:2em;">
     <div class='text-left ml10'>
-          <h2>{{'accountinfo.title' | translate}}</h2>
-    </div>
-    <div class="row mt10">
-        <div class="col-md-12">
-            <div class="input-group" id="adv-search">
+          <h3>{{'accountinfo.title' | translate}}</h3>
+    </div> -->
+
+    <!-- <div class="row mt10">
+        <div class="col-md-8">
+            <div class="input-group ml10" id="adv-search">
                 <input type="text" class="form-control" placeholder="Search for Account name" />
                 <div class="input-group-btn">
                     <div class="btn-group" role="group">
@@ -51,382 +52,530 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </div> -->
+<!-- </div> -->
 
-
-
-<div class="col-xs-12">
-    <div class="row">
-        <div class="col-xs-12">
-  <h3>{{'accountinfo.title' | translate}}</h3>
-  <form [formGroup]="accInfoForm" (ngSubmit)="saveForm()" autocomplete="off">
-  <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="formServerError"
-    [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
-
-
-
-<div class="col-xs-12">
-  <div class="row">
-
-    <!-- Panel Start -->
-    <div >
-
-      <div id="tab" class='col-xs-12'>
-        <tabset type="pills">
-          <tab heading="{{'accountinfo.geninfo' | translate}}">
-            <!-- General Info Start -->
-            <form class="form">
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.name' | translate}}: *</p>
-
-                <input id="accountName"  maxlength="50" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="accInfoForm.controls['accountName']">
-              </div>
-              <!-- <div class="col-md-4 col-lt">
-                <p>{{'subschedule.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
-                <input id="id" maxlength="40" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="subScheduleForm.controls['subScheduleId']"
-               [typehead]="subScheduleList" typeaheadOptionField="subScheduleName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)"
-                class="form-control capitalize">
-              <span class="caret"></span>
-              </div> -->
-              <div class="col-md-4 col-lt">
-                <p>{{'schedule.name' | translate}}: * &emsp; </p>
-                <input id="scheduleType"  maxlength="40" [formControl]="scheduleForm.controls['scheduleName']" class="form-control capitalize">
-                <span class="caret"></span>
-              </div>
-
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.address1' | translate}}: *</p>
-                <input id="address1" maxlength="50" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['address1']">
-              </div>
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.address2' | translate}}: *</p>
-                <input id="address2" maxlength="50" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['address2']">
-              </div>
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.town' | translate}}: *</p>
-                <input id="town" maxlength="20" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['town']">
-              </div>
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.pin' | translate}}: *</p>
-                <input id="pin" type="number"  maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                 #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['pin']">
-              </div>
-
-              <div class="col-md-4 col-lt">
-                <p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate)">create new</a>)</p>
-                <input id="id" maxlength="20" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="districtsForm.controls['id']"
-                [typeahead]="districtsList" typeaheadOptionField="districtName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" >
-                <span class="caret"></span>
-              </div>
-
-
-              <div class="col-md-4 col-lt">
-                  <p>{{'states.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(stateTemplate)">create new</a>)</p>
-                  <input id="stateName" maxlength="20" [formControl]="statesForm.controls['stateName']" class="form-control capitalize">
-                    <span class="caret"></span>
-                  </div>
-
-              <div class="col-md-4 col-lt">
-                <p>{{'areas.name' | translate }}: *</p>
-                <input id="areaId" maxlength="40" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="accInfoForm.controls['areaId']">
-              </div>
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.phone' | translate}}: *</p>
-                <input id="phone" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                 #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['phone']">
-              </div>
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.mobile' | translate}}: *</p>
-                <input id="mobile" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['mobile']">
-              </div>
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.email' | translate}}: *</p>
-                <input id="email" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['email']">
-              </div>
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.shortname' | translate}}: *</p>
-                <input id="shortName"  maxlength="6" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['shortName']">
-              </div>
-            </form>
-            <!-- General Info Ends -->
-          </tab>
-          <tab heading="{{'accountinfo.reginfo' | translate}}">
-
-            <!-- Regs Info Starts -->
-
-            <form class="form">
-
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.licno1' | translate}}: *</p>
-                <input id="licNo1" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['licNo1']">
-              </div>
-
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.licno2' | translate}}: *</p>
-                <input id="licNo2" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['licNo2']">
-              </div>
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.licexpiry' | translate}}: *</p>
-                <input id="licExpiry" type="date" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['licExpiry']">
-              </div>
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.retlicno1' | translate}}: *</p>
-                <input id="retLicNo1" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['retLicNo1']">
-              </div>
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.retlicno2' | translate}}: *</p>
-                <input id="retLicNo2" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['retLicNo2']">
-              </div>
-
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.retexpiry' | translate}}: *</p>
-                <input id="retExpiry" type="date" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['retExpiry']">
-              </div>
-
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.foodlicno1' | translate}}: *</p>
-                <input id="foodLicNo" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['foodLicNo']">
-              </div>
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.otherlic' | translate}}: *</p>
-                <input id="otherLicense" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['otherLicense']">
-              </div>
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.otherlicexp' | translate}}: *</p>
-                <input id="otherLicenseExpiry" type="date" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['otherLicenseExpiry']">
-              </div>
-
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.gsttype' | translate}}: *</p>
-
-                  <input id="gstType" maxlength="5" class="form-control"  [formControl]="accInfoForm.controls['gstType']" [typeahead]="accGstType"
-                    typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-
-                    <span class="caret" ></span>
-
-              </div>
-
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.gstin' | translate}}: *</p>
-                <input id="gstIN" maxlength="15" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['gstIN']">
-              </div>
-
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.naturegst' | translate}}: *</p>
-                  <input id="natureOfGST" maxlength="9"  class="form-control" [formControl]="accInfoForm.controls['natureOfGST']"
-                    [typeahead]="accNatureOfGst" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-                    <span class="caret"></span>
-              </div>
-
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.uinNo' | translate}}: *</p>
-                <input id="uin" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['uin']">
-              </div>
-
-            </form>
-
-            <!-- Regs Info Ends -->
-
-          </tab>
-          <tab heading="{{'accountinfo.cred' | translate}}">
-
-            <!-- Credentials Starts -->
-
-            <form class="form">
-
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.crlimit' | translate}}: *</p>
-                <input id="creditLimit" type="number" maxlength="12" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                 #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['creditLimit']">
-              </div>
-
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.saletype' | translate}}: *</p>
-                <input id="saleType" maxlength="6"  class="form-control" [formControl]="accInfoForm.controls['saleType']"
-                [typeahead]="accSaleType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-                <span class="caret"></span>
-              </div>
-
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.custType' | translate}}: *</p>
-                <input id="customerType"  maxlength="10"  class="form-control" [formControl]="accInfoForm.controls['customerType']"
-                [typeahead]="accCustomerType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-                <span class="caret"></span>
-              </div>
-
-
-              <div class="col-md-4 col-lt">
-               <p>{{'accountinfo.duedays' | translate}}: *</p>
-                <input id="dueDays" type="number" maxlength="3"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['dueDays']">
-              </div>
-
-            </form>
-
-            <!-- Credentials Ends -->
-
-          </tab>
-          <tab heading="{{'accountinfo.othr' | translate}}">
-
-            <!-- Others Starts -->
-
-            <form class="form">
-
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.contperson' | translate}}: *</p>
-                <input id="contactPerson" maxlength="30" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['contactPerson']">
-              </div>
-
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.hsncode' | translate}}: *</p>
-                <input id="hsnCode" type="number" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['hsnCode']">
-              </div>
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.saccode' | translate}}: *</p>
-                <input id="sacCode" type="number" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                 #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['sacCode']">
-              </div>
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.rateoftax' | translate}}: *</p>
-                <input id="rateOfTax" type="number" maxlength="5" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                 #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['rateOfTax']">
-              </div>
-
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.openbalnc' | translate}}: *</p>
-                <input id="openingBalance" type="number" maxlength="12" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                 #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['openingBalance']">
-              </div>
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.opentype' | translate}}: *</p>
-                <input id="openingType" maxlength="6" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['openingType']"
-                [typeahead]="accCustomerType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-                <span class="caret"></span>
-            </div>
-              <div class="col-md-4 col-lt">
-                <p>{{'accountinfo.spclremark' | translate}}: *</p>
-                <input id="specialRemarks" maxlength="60" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['specialRemarks']">
-              </div>
-
-
-            </form>
-
-            <!-- Others Ends -->
-
-          </tab>
-        </tabset>
-
-        <div class="tab-content clearfix">
-
-        </div>
-      </div>
-
-      <!-- Panel End -->
-
-      <!-- <div class="input-group">
-        <button type="submit" class="btn btn-primary mr-l-10">Save</button>
-      </div> -->
-
-      <app-buttons [title]="'accountinfo.title'" [deleteConfirmMsg]="'accountinfo.deleteConfirmationMessage'"
-      [saveConfirmMsg]="'accountinfo.saveConfirmationMessage'" [saveInfoMsg]="'accountinfo.saveInformationMessage'"
-      [endPoint]="endPoint"
-      [deleteInfoMsg]="'accountinfo.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-      [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=false
-      [hideDeleteBtn]=false [formObj]="accInfoForm" (saveRecord)="save()"
-      (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-      (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
-
-
-    </div>
+<!-- <div class="input-group">
+   
+    <input id="email" type="text" class="form-control" [formControl]="userProfileForm.controls['email']"
+      placeholder="Search for Account name">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
   </div>
-</div>
-
-</form>
-</div>
-
-</div>
-</div>
-<!-- Acc Info Ends -->
+ -->
 
 
-<ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">{{'subSchedule.create' | translate}}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form [formGroup]="subScheduleForm" (ngSubmit)="save()" autocomplete="off">
-
-      <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
-      [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
-       [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
-
-       <div class="input-group">
-        <p>{{'subschedule.name' | translate}}: *</p>
-        <input #focus id="subScheduleName" maxlength="40" [readonly]="nameFlag" class="form-control capitalize" (blur)="checkForDuplicateSubScheduleName()" [formControl]="subScheduleForm.controls['subScheduleName']">
-      </div>
-        <div class="input-group">
-          <p>{{'schedule.name' | translate}}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
-          <input id="scheduleType" maxlength="40" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="scheduleName"
-          [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control capitalize">
-        </div><span class="caret"></span>
-
-        <div class="input-group">
-          <p>{{'subschedule.index' | translate}}: *</p>
-          <input id="subScheduleIndex" type="number"  min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-           [readonly]="true" class="form-control" [formControl]="subScheduleForm.controls['subScheduleIndex']">
-      </div>
-
-          <div class="input-group">
-            <button type="button" (click)="resetSubScheduleForm()" class="btn btn-primary">Reset</button>
-            <button type="submit" class="btn btn-primary mr-l-10">Save</button>
-          </div>
-
-    </form>
-
-  </div>
-</ng-template>
-
-<ng-template #districtTemplate>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">{{'districts.create' | translate }}</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form [formGroup]="districtsForm" autocomplete="off">
-
-        <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
-        [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
-         [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
-
-         <div class="input-group">
-          <p>{{'districts.name' | translate }}: *</p>
-          <input id="districtName" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateDistName()"  class="form-control capitalize" [formControl]="districtsForm.controls['districtName']">
-        </div>
-          <div class="input-group">
-            <p>{{'states.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
-            <input id="stateName" maxlength="20" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="stateName"
-              [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control capitalize">
-              <span class="caret"></span>
-        </div>
-
-        <app-buttons [title]="'districts.title'" [deleteConfirmMsg]="'districts.deleteConfirmationMessage'"
-               [saveConfirmMsg]="'districts.saveConfirmationMessage'" [saveInfoMsg]="'districts.saveInformationMessage'"
-               [endPoint]="endPoint"
-               [deleteInfoMsg]="'districts.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-               [hideDeleteBtn]=true [formObj]="districtsForm" (saveRecord)="save()"
-               (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-               (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
-
+      <div class="col-xs-12">
+          <div class="row">
+              <div class="col-xs-12">
+                  <h3>{{'accountinfo.title' | translate }}</h3>
+        <form [formGroup]="accInfoForm" (ngSubmit)="saveForm()" autocomplete="off">
+        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="formServerError"
+          [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+      <!-- Start -->
+      <div class="row mt10">
+          <div class="col-md-8">
+              <div class="input-group ml10" id="adv-search">
+                  <input type="text" class="form-control" placeholder="Search for Account name">
+                 <!-- OK -->
+                
+                    <form class="form-horizontal" role="form" class="form">
+                    <div class="form-group col-md-4">
+                                  <!-- <label for="filter">Filter by</label> -->
+                                  <select class="form-control">
+                                  <option value="0" selected>Town</option>
+                                  <option value="1">Featured</option>
+                                  <option value="2">Most popular</option>
+                                  <option value="3">Top rated</option>
+                                  <option value="4">Most commented</option>
+                              </select>
+                              </div>
+                              <div class="form-group col-md-4">
+                                  <select class="form-control">
+                                  <option value="0" selected>Account Code</option>
+                                  <option value="1">Featured</option>
+                                  <option value="2">Most popular</option>
+                                  <option value="3">Top rated</option>
+                                  <option value="4">Most commented</option>
+                              </select>
+                              </div>
+                              <div class="form-group col-md-4">
+                                  <select class="form-control">
+                                  <option value="0" selected>GST No</option>
+                                  <option value="1">Featured</option>
+                                  <option value="2">Most popular</option>
+                                  <option value="3">Top rated</option>
+                                  <option value="4">Most commented</option>
+                              </select>
+                              </div>
+      
       </form>
-
-    </div>
-  </ng-template>
+        
+      <!-- ok -->
+      </div>
+      </div>
+      </div>
+      <!-- ENDS -->
+      <div class="col-xs-12" style="padding-left:5px; margin-left: 0em;">
+        <div class="row">
+      
+          <!-- Panel Start -->
+          <div >
+      
+            <div id="tab" class='col-xs-12'>
+              <tabset type="pills">
+                <tab heading="{{'accountinfo.geninfo' | translate}}">
+                  <!-- General Info Start -->
+                  <form class="form">
+                   
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.name' | translate}}: *</p>
+      
+                      <input id="accountName"  maxlength="50" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="accInfoForm.controls['accountName']">
+                    </div>
+      
+                    
+      
+                    <div class="col-md-4 col-lt"  >
+                      <p>{{'schedule.name' | translate}}: * &emsp; </p>
+                      <input id="scheduleType" [readonly]="true" maxlength="40" [formControl]="scheduleForm.controls['scheduleName']" class="form-control capitalize">   
+                    </div>
+      
+                    <div class="col-md-4 col-lt">
+                        <p>{{'subschedule.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
+                        <input id="id" maxlength="40" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="subScheduleForm.controls['id']"
+                       [typeahead]="subScheduleList" typeaheadOptionField="subScheduleName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" >
+                       <span class="caret"></span>
+                      </div>
+                  
+                    <div class="col-md-4 col-lt"  >
+                      <p>{{'accountinfo.address1' | translate}}: *</p>
+                      <input id="address1" maxlength="50" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['address1']">
+                    </div>
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.address2' | translate}}: *</p>
+                      <input id="address2" maxlength="50" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['address2']">
+                    </div>
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.town' | translate}}: *</p>
+                      <input id="town" maxlength="20" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['town']">
+                    </div>
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.pin' | translate}}: *</p>
+                      <input id="pin" type="number"  maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                       #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['pin']">
+                    </div>
+      
+                    <div class="col-md-4 col-lt">
+                      <p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate)">create new</a>)</p>
+                      <input id="id" maxlength="20" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="districtsForm.controls['id']"
+                      [typeahead]="districtsList" typeaheadOptionField="districtName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" >
+                      <span class="caret"></span>
+                    </div>
+      
+      
+                    <div class="col-md-4 col-lt">
+                        <p>{{'states.name' | translate }}: *</p>
+                        <input id="stateName" maxlength="20" [readonly]="true" [formControl]="statesForm.controls['stateName']" class="form-control capitalize">
+                        <span class="caret"></span>  
+                      </div>
+      
+                    <div class="col-md-4 col-lt">
+                      <p>{{'areas.name' | translate }}: *</p>
+                      <input id="areaId" maxlength="40" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="accInfoForm.controls['areaId']">
+                    </div>
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.phone' | translate}}: *</p>
+                      <input id="phone" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                       #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['phone']">
+                    </div>
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.mobile' | translate}}: *</p>
+                      <input id="mobile" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                      #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['mobile']">
+                    </div>
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.email' | translate}}: *</p>
+                      <input id="email" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['email']">
+                    </div>
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.shortname' | translate}}: *</p>
+                      <input id="shortName"  maxlength="6" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['shortName']">
+                    </div>
+                  </form>
+                  <!-- General Info Ends -->
+                </tab>
+                <tab heading="{{'accountinfo.reginfo' | translate}}">
+      
+                  <!-- Regs Info Starts -->
+      
+                  <form class="form">
+      
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.licno1' | translate}}: *</p>
+                      <input id="licNo1" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['licNo1']">
+                    </div>
+      
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.licno2' | translate}}: *</p>
+                      <input id="licNo2" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['licNo2']">
+                    </div>
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.licexpiry' | translate}}: *</p>
+                      <input id="licExpiry" type="date" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['licExpiry']">
+                    </div>
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.retlicno1' | translate}}: *</p>
+                      <input id="retLicNo1" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['retLicNo1']">
+                    </div>
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.retlicno2' | translate}}: *</p>
+                      <input id="retLicNo2" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['retLicNo2']">
+                    </div>
+      
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.retexpiry' | translate}}: *</p>
+                      <input id="retExpiry" type="date" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['retExpiry']">
+                    </div>
+      
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.foodlicno1' | translate}}: *</p>
+                      <input id="foodLicNo" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['foodLicNo']">
+                    </div>
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.otherlic' | translate}}: *</p>
+                      <input id="otherLicense" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['otherLicense']">
+                    </div>
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.otherlicexp' | translate}}: *</p>
+                      <input id="otherLicenseExpiry" type="date" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['otherLicenseExpiry']">
+                    </div>
+      
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.gsttype' | translate}}: *</p>
+      
+                        <input id="gstType" maxlength="5" class="form-control"  [formControl]="accInfoForm.controls['gstType']" [typeahead]="accGstType"
+                          typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+      
+                          <span class="caret" ></span>
+      
+                    </div>
+      
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.gstin' | translate}}: *</p>
+                      <input id="gstIN" maxlength="15" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['gstIN']">
+                    </div>
+      
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.naturegst' | translate}}: *</p>
+                        <input id="natureOfGST" maxlength="9"  class="form-control" [formControl]="accInfoForm.controls['natureOfGST']"
+                          [typeahead]="accNatureOfGst" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+                          <span class="caret"></span>
+                    </div>
+      
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.uinNo' | translate}}: *</p>
+                      <input id="uin" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['uin']">
+                    </div>
+      
+                  </form>
+      
+                  <!-- Regs Info Ends -->
+      
+                </tab>
+                <tab heading="{{'accountinfo.cred' | translate}}">
+      
+                  <!-- Credentials Starts -->
+      
+                  <form class="form">
+      
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.crlimit' | translate}}: *</p>
+                      <input id="creditLimit" type="number" maxlength="12" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                       #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['creditLimit']">
+                    </div>
+      
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.saletype' | translate}}: *</p>
+                      <input id="saleType" maxlength="6"  class="form-control" [formControl]="accInfoForm.controls['saleType']"
+                      [typeahead]="accSaleType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+                      <span class="caret"></span>
+                    </div>
+      
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.custType' | translate}}: *</p>
+                      <input id="customerType"  maxlength="10"  class="form-control" [formControl]="accInfoForm.controls['customerType']"
+                      [typeahead]="accCustomerType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+                      <span class="caret"></span>
+                    </div>
+      
+      
+                    <div class="col-md-4 col-lt">
+                     <p>{{'accountinfo.duedays' | translate}}: *</p>
+                      <input id="dueDays" type="number" maxlength="3"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                      #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['dueDays']">
+                    </div>
+      
+                  </form>
+      
+                  <!-- Credentials Ends -->
+      
+                </tab>
+                <tab heading="{{'accountinfo.othr' | translate}}">
+      
+                  <!-- Others Starts -->
+      
+                  <form class="form">
+      
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.contperson' | translate}}: *</p>
+                      <input id="contactPerson" maxlength="30" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['contactPerson']">
+                    </div>
+      
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.hsncode' | translate}}: *</p>
+                      <input id="hsnCode" type="number" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                      #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['hsnCode']">
+                    </div>
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.saccode' | translate}}: *</p>
+                      <input id="sacCode" type="number" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                       #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['sacCode']">
+                    </div>
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.rateoftax' | translate}}: *</p>
+                      <input id="rateOfTax" type="number" maxlength="5" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                       #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['rateOfTax']">
+                    </div>
+      
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.openbalnc' | translate}}: *</p>
+                      <input id="openingBalance" type="number" maxlength="12" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                       #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['openingBalance']">
+                    </div>
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.opentype' | translate}}: *</p>
+                      <input id="openingType" maxlength="6" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['openingType']"
+                      [typeahead]="accCustomerType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+                      <span class="caret"></span>
+                  </div>
+                    <div class="col-md-4 col-lt">
+                      <p>{{'accountinfo.spclremark' | translate}}: *</p>
+                      <input id="specialRemarks" maxlength="60" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['specialRemarks']">
+                    </div>
+      
+      
+                  </form>
+      
+                  <!-- Others Ends -->
+      
+                </tab>
+              </tabset>
+      
+              <div class="tab-content clearfix">
+      
+              </div>
+            </div>
+      
+            <!-- Panel End -->
+      
+            <!-- <div class="input-group">
+              <button type="submit" class="btn btn-primary mr-l-10">Save</button>
+            </div> -->
+      
+            <app-buttons [title]="'accountinfo.title'" [deleteConfirmMsg]="'accountinfo.deleteConfirmationMessage'"
+            [saveConfirmMsg]="'accountinfo.saveConfirmationMessage'" [saveInfoMsg]="'accountinfo.saveInformationMessage'"
+            [endPoint]="endPoint"
+            [deleteInfoMsg]="'accountinfo.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+            [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=false
+            [hideDeleteBtn]=false [formObj]="accInfoForm" (saveRecord)="save()"
+            (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+            (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+      
+      
+          </div>
+        </div>
+      </div>
+      
+      </form>
+      </div>
+      
+      </div>
+      </div>
+      <!-- Acc Info Ends -->
+      
+      
+      <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{'subschedule.create' | translate}}</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="subScheduleForm" (ngSubmit)="save()" autocomplete="off">
+      
+            <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
+            [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
+             [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+      
+             <div class="input-group">
+              <p>{{'subschedule.name' | translate}}: *</p>
+              <input #focus id="subScheduleName" maxlength="40" [readonly]="nameFlag" class="form-control capitalize" (blur)="checkForDuplicateSubScheduleName()" [formControl]="subScheduleForm.controls['subScheduleName']">
+            </div>
+              <div class="input-group">
+                <p>{{'schedule.name' | translate}}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(scheduleTemplate)">create new</a>)</p>
+                <input id="scheduleType" maxlength="40" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="scheduleName"
+                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control capitalize">
+              </div><span class="caret"></span>
+      
+              <div class="input-group">
+                <p>{{'subschedule.index' | translate}}: *</p>
+                <input id="subScheduleIndex" type="number"  min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                 [readonly]="true" class="form-control" [formControl]="subScheduleForm.controls['subScheduleIndex']">
+            </div>
+      
+                <div class="input-group">
+                  <button type="button" (click)="resetSubScheduleForm()" class="btn btn-primary">Reset</button>
+                  <button type="submit" class="btn btn-primary mr-l-10">Save</button>
+                </div>
+      
+          </form>
+      
+        </div>
+      </ng-template>
+      
+      <ng-template #scheduleTemplate>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{'schedule.create' | translate}}</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="scheduleForm" (ngSubmit)="save()" autocomplete="off">
+      
+            <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
+            [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
+             [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+      
+             <div class="input-group">
+              <p>{{'schedule.name' | translate}}: *</p>
+              <input id="scheduleName"  maxlength="40" class="form-control capitalize" (blur)="checkForDuplicateScheduleName()" [formControl]="scheduleForm.controls['scheduleName']">
+            </div>
+              <div class="input-group">
+                <p>{{'schedule.index' | translate }}: *</p>
+                <input id="scheduleIndex" type="number"  min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                 class="form-control" (blur)="validateFormOnBlur()" [formControl]="scheduleForm.controls['scheduleIndex']">
+            </div>
+                <div class="input-group">
+                  <p>{{'schedule.type' | translate }}: *</p>
+                  <input id="scheduleType" maxlength="15" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="description"
+                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" class="form-control">
+                  <span class="caret"></span>
+                </div>
+      
+                <div class="input-group">
+                  <button type="button" (click)="resetScheduleForm()" class="btn btn-primary">Reset</button>
+                  <button type="submit" class="btn btn-primary mr-l-10">Save</button>
+                </div>
+      
+          </form>
+      
+        </div>
+      </ng-template>
+      
+      
+      <ng-template #districtTemplate>
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">{{'districts.create' | translate }}</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="districtsForm" autocomplete="off">
+      
+              <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
+              [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
+               [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+      
+               <div class="input-group">
+                <p>{{'districts.name' | translate }}: *</p>
+                <input id="districtName" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateDistrictName()"  class="form-control capitalize" [formControl]="districtsForm.controls['districtName']">
+              </div>
+                <div class="input-group">
+                  <p>{{'states.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(stateTemplate)">create new</a>)</p>
+                  <input id="stateName" maxlength="20" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="stateName"
+                    [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control capitalize">
+                    <span class="caret"></span>
+              </div>
+      
+              <!-- <app-buttons [title]="'districts.title'" [deleteConfirmMsg]="'districts.deleteConfirmationMessage'"
+                     [saveConfirmMsg]="'districts.saveConfirmationMessage'" [saveInfoMsg]="'districts.saveInformationMessage'"
+                     [endPoint]="endPoint"
+                     [deleteInfoMsg]="'districts.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+                     [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+                     [hideDeleteBtn]=true [formObj]="districtsForm" (saveRecord)="save()"
+                     (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+                     (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons> -->
+      
+                     <div class="input-group">
+                      <button type="button" (click)="resetDistrictsForm()" class="btn btn-primary">Reset</button>
+                      <button type="submit" class="btn btn-primary mr-l-10">Save</button>
+                    </div>
+            </form>
+      
+          </div>
+        </ng-template>
+      
+        
+      <ng-template #stateTemplate>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{'states.create' | translate }}</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="statesForm" autocomplete="off">
+      
+            <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
+            [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
+             [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+           
+             <div class="input-group">
+              <p>{{'states.name' | translate }}: *</p>
+              <input id="stateName" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateStateName()" class="form-control capitalize" [formControl]="statesForm.controls['stateName']">
+          </div>
+          <div class="input-group">
+              <p>{{'states.code' | translate }}: *</p>
+              <input id="stateCode" type="number" min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+               [readonly]="duplicateStateName" (blur)="checkForDuplicateStateCode()" class="form-control" [formControl]="statesForm.controls['stateCode']">
+            </div>
+      
+              <div class="input-group">
+                  <p>{{'states.zone' | translate }}: *</p>
+                 <input id="zone" maxlength="7"  class="form-control" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
+                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
+                  <span class="caret"></span>
+            </div>
+            <!-- <app-buttons [title]="'districts.title'" [deleteConfirmMsg]="'districts.deleteConfirmationMessage'"
+                   [saveConfirmMsg]="'districts.saveConfirmationMessage'" [saveInfoMsg]="'districts.saveInformationMessage'"
+                   [endPoint]="endPoint"
+                   [deleteInfoMsg]="'districts.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+                   [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+                   [hideDeleteBtn]=true [formObj]="districtsForm" (saveRecord)="save()"
+                   (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+                   (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons> -->
+      
+                   <div class="input-group">
+                    <button type="button" (click)="resetStatesForm()" class="btn btn-primary">Reset</button>
+                    <button type="submit" class="btn btn-primary mr-l-10">Save</button>
+                  </div>
+          </form>
+      
+      
+        </div>
+      </ng-template>
+      
+      

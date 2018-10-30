@@ -49,12 +49,15 @@ export class AccountsInfoComponent implements OnInit {
   public childDuplicateMessageParam: string = null;
   public duplicateMessageParam: string = null;
   public nameFlag;
-  scheduleList: any = [];
+  public statesListColumns;
+  public scheduleList: any = [];
   public subScheduleList: any = [];
   public districtsList: any = [];
   public statesList: any = [];
   public selectedSchedule: any;
+  public selectedSubSchedule: any;
   public selectedState: any;
+  public selectedDistrict: any;
   public distName;
   public stateZone: any[];
   public accGstType: any[];
@@ -66,6 +69,7 @@ public accOpeningType: any[];
   scheduleTypes: any;
   private duplicateSchName: boolean = false;
   private duplicateSchIndex: boolean = false;
+  private duplicateSubSchName: boolean = false;
   private duplicateStateName: boolean = false;
   private duplicateStateCode: boolean = false;
   private duplicateDistrictName: boolean = false;
@@ -138,6 +142,13 @@ public accOpeningType: any[];
       scheduleIndex: ['', Validators.required],
       scheduleType: ['', Validators.required],
     });
+    this.subScheduleForm = this.fb.group({
+      id: [],
+      subScheduleName: ['', Validators.required],
+      subScheduleIndex: ['', Validators.required],
+      scheduleId: [],
+      scheduleName: []
+    });
 
     this.statesForm = this.fb.group({
       id: [],
@@ -151,9 +162,7 @@ public accOpeningType: any[];
       stateId: [],
       stateName: []
     });
-
-
-
+    
 
     // this.loadTypeaheadData();
     // //this.loadGridData();
@@ -161,8 +170,9 @@ public accOpeningType: any[];
     //this.getGridCloumsList();
     //this.getJsonData();
     this.loadScheduleData();
+    this.loadSubScheduleData();
     this.loadStatesData();
-    this.loadDistrictData() 
+    this.loadDistrictData(); 
     // this.focusField.nativeElement.focus();
     this.getScheduleTypes();
     this.getGstType();
@@ -170,6 +180,7 @@ public accOpeningType: any[];
     this.getSaleType();
     this.getCustomerType();
     this.getOpeningType();
+    this.getZone();
 
   }
 
@@ -179,7 +190,7 @@ public accOpeningType: any[];
     })
   }
 
-  loadsubScheduleData() {
+  loadSubScheduleData() {
     this.masterService.getParentData("subschedules/").subscribe(list => {
       this.subScheduleList = list;
     })
@@ -197,13 +208,16 @@ public accOpeningType: any[];
     })
   }
 
+  onSelectState(event) {
+    this.selectedState = event.item;
+  }
 
-  // onSelectSchedule(event) {
-  //   this.selectedSchedule = event.item;
-  //   const temp = this.selectedSchedule.id;
-  //   const selectedScheduleNameList = _.filter(this.subScheduleList, function(o) { return o.scheduleId == temp });
-  //   this.subScheduleForm.patchValue({ subScheduleIndex: selectedScheduleNameList.length + 1 })
-  // }
+  onSelectSchedule(event) {
+    this.selectedSchedule = event.item;
+    const temp = this.selectedSchedule.id;
+    const selectedScheduleNameList = _.filter(this.subScheduleList, function(o) { return o.scheduleId == temp });
+    this.subScheduleForm.patchValue({ subScheduleIndex: selectedScheduleNameList.length + 1 })
+  }
 
   openModal(template: TemplateRef<any>) {
     // this.resetsubScheduleForm();
@@ -252,10 +266,26 @@ public accOpeningType: any[];
       });
   }
 
+  getZone() {
+    this.masterService.getLocalJsonData().subscribe(data => {
+      data as object[];
+      this.stateZone = data["StateZone"];
+      this.statesListColumns = data["StateListColumns"]
+    });
+  }
+
 
   saveSchedule() {
     if (this.scheduleForm.valid && this.childDuplicateMessage == null) {
       this.showConfirmationModal("SaveSchedule");
+    } else {
+      this.scRequiredErrMsg();
+    }
+  }
+
+  saveSubSchedule() {
+    if (this.subScheduleForm.valid && this.childDuplicateMessage == null) {
+      this.showConfirmationModal("SaveSubSchedule");
     } else {
       this.scRequiredErrMsg();
     }
@@ -267,6 +297,17 @@ public accOpeningType: any[];
       this.modalRef.hide();
       this.getScheduleTypes();
       this.scheduleForm.reset();
+    }, (error) => {
+      this.scServerErrMsg();
+    });
+  }
+
+  saveSubScheduleForm() {
+    this.masterService.createRecord("subschedules/", this.subScheduleForm.value).subscribe(res => {
+      this.showInformationModal("SaveSubSchedule");
+      this.modalRef.hide();
+      // this.getScheduleTypes();
+      this.subScheduleForm.reset();
     }, (error) => {
       this.scServerErrMsg();
     });
@@ -284,28 +325,49 @@ public accOpeningType: any[];
       this.requiredErrMsg();
     }
   }
-
-  resetsubScheduleForm() {
+  resetSubScheduleForm() {
     this.scFormRequiredError = false;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
     this.subScheduleForm.reset();
   }
 
+  resetScheduleForm() {
+    this.scFormRequiredError = false;
+    this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
+    this.scheduleForm.reset();
+  }
+
   resetStatesForm() {
     this.childDuplicateMessageParam = null;
     this.childDuplicateMessage = null;
-    // this.getZone();
+    this.getZone();
     this.scFormServerError = this.scFormRequiredError = this.scFormSuccess = false;
     this.statesForm.reset();
   }
 
+  resetDistrictsForm() {
+    this.childDuplicateMessageParam = null;
+    this.childDuplicateMessage = null;
+    this.scFormServerError = this.scFormRequiredError = this.scFormSuccess = false;
+    this.districtsForm.reset();
+  }
 
   checkForDuplicateScheduleName() {
     this.duplicateSchName = this.masterService.hasDataExist(this.scheduleList, 'scheduleName', this.scheduleForm.value.scheduleName);
     this.getDuplicateErrorMessages();
   }
 
+  checkForDuplicateSubScheduleName() {
+    this.duplicateSubSchName = this.masterService.hasDataExist(this.subScheduleList, 'subScheduleName', this.subScheduleForm.value.subScheduleName);
+    if (this.duplicateSubSchName) {
+      const temp = this.subScheduleForm.value.subScheduleName;
+      const subScheduleObj = _.filter(this.subScheduleList, function(o) { return o.subScheduleName.toLowerCase() == temp.toLowerCase() });
+      this.subScheduleForm.patchValue({ id: subScheduleObj[0].id })  
+    }
+    this.getDuplicateErrorMessages();
+  }
 
   validateFormOnBlur() {
     this.formRequiredError = false;
@@ -339,11 +401,13 @@ public accOpeningType: any[];
     if (this.duplicateDistrictName) {
       const temp = this.districtsForm.value.districtName;
       const districtObj = _.filter(this.districtsList, function(o) { return o.districtName.toLowerCase() == temp.toLowerCase() });
-      this.districtsForm.patchValue({ id: districtObj[0].id })
-      
+      this.districtsForm.patchValue({ id: districtObj[0].id })    
     }
     this.getDuplicateErrorMessages();
   }
+
+
+
   getDuplicateErrorMessages(): void {
       this.duplicateMessageParam = null;
     this.duplicateMessage = null;
@@ -441,7 +505,7 @@ public accOpeningType: any[];
     this.childDuplicateMessageParam = null;
 	this.duplicateSchIndex = false;
 	this.duplicateSchName = false;
-	// this.duplicateSubSchName = false;
+	this.duplicateSubSchName = false;
     // this.focusField.nativeElement.focus();
   }
 
