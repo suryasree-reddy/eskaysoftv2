@@ -151,12 +151,12 @@ export class SynectiksCommonGridComponent implements OnInit {
 
   onGridReady(params) {
     this.gridApi = params.api;
-    //  this.gridApi.sizeColumnsToFit();
+      this.gridApi.sizeColumnsToFit();
     // if your data is set on the gridOptions,
     //below code for settimeout gridReady get's called before data is bound.
     // so waiting time out for 5 sec
-    setTimeout(this.loadGridColumns(params), 500);
-    this.loadGridColumns(params);
+    //setTimeout(this.loadGridColumns(params), 500);
+  //  this.loadGridColumns(params);
     this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
 
