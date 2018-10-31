@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
+import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-schedule',
@@ -22,7 +23,6 @@ export class ScheduleComponent implements OnInit {
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public scheduleList: any = [];
-  public scheduleListColumns;
   public editSchedule;
   public deleteFlag: boolean = true;
   public duplicateMessage: string = null;
@@ -45,6 +45,7 @@ export class ScheduleComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
+    private sharedDataService:SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
@@ -66,7 +67,7 @@ export class ScheduleComponent implements OnInit {
     });
     //this.loadGridData();
     this.focusField.nativeElement.focus();
-    this.getScheduleTypes();
+    this.scheduleTypes = this.sharedDataService.getSharedCommonJsonData().ScheduleTypes;
   }
 
   validateFormOnBlur() {
@@ -111,13 +112,7 @@ export class ScheduleComponent implements OnInit {
     });
   }
 
-  getScheduleTypes() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.scheduleTypes = data["ScheduleTypes"];
-      this.scheduleListColumns = data["ScheduleListColumns"]
-    });
-  }
+
 
   save() {
     this.buttonsComponent.save();

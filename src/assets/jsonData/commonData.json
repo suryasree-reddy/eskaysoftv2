@@ -140,7 +140,6 @@
     } ,
     "suppressSizeToFit": false}
   ],
-
   "CompanyType":[
     { "code": "Eth", "description": "Ethical" },
     { "code": "Generic", "description": "Generics" },

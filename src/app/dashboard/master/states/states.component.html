@@ -37,7 +37,8 @@
       <div class="col-md-7">
         <br /><br />
 
-        <app-synectiks-common-grid [endPoint]="endPoint"  [rowSelection]="'single'" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="statesList" (valueChange)='valueChange($event)' [gridColumnList]="statesListColumns"></app-synectiks-common-grid>
+        <app-synectiks-common-grid [endPoint]="endPoint"  [rowSelection]="'single'" (intialLoad)='onInitialDataLoad($event)'
+         [gridDataList]="statesList" (valueChange)='valueChange($event)' [screenColums]="'StateListColumns'"></app-synectiks-common-grid>
       </div>
 
     </div>

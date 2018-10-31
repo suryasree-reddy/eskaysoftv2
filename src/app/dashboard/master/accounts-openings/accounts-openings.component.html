@@ -1,7 +1,8 @@
 <div class="col-md-12">
     <div class="row">
         <h3>Accounts Openings </h3>
-        <app-synectiks-common-grid [endPoint]="endPoint"  [rowSelection]="'multiple'" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [gridColumnList]="accOpeningColumns"></app-synectiks-common-grid>
+        <app-synectiks-common-grid [endPoint]="endPoint"  [rowSelection]="'multiple'" (intialLoad)='onInitialDataLoad($event)'
+        [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'AccountsOpeningsColumns'"></app-synectiks-common-grid>
         <app-buttons [title]="'accountopenings.title'" [deleteConfirmMsg]="'accountopenings.deleteConfirmationMessage'"
                      [saveConfirmMsg]="'accountopenings.saveConfirmationMessage'" [saveInfoMsg]="'accountopenings.saveInformationMessage'" [endPoint]="endPoint"
                      [deleteInfoMsg]="'accountopenings.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"

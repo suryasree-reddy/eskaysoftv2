@@ -27,7 +27,8 @@
 
     <div class="col-md-7">
       <br /><br />
-      <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'  [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [gridColumnList]="gridColumnNamesList"></app-synectiks-common-grid>
+      <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
+       [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'ProductCategoryColumns'"></app-synectiks-common-grid>
     </div>
 
   </div>

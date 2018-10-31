@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
 import { MasterService } from 'src/app/dashboard/master/master.service';
+import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 import { GridNumericEditorComponent } from 'src/app/commonComponents/grid-numeric-editor/grid-numeric-editor.component';
 import { GridSelectEditorComponent } from 'src/app/commonComponents/grid-select-editor/grid-select-editor.component';
@@ -11,12 +12,14 @@ export class SynectiksCommonGridComponent implements OnInit {
 
   @Input() rowSelection;
   @Input() gridDataList: any = [];
-  @Input() endPoint : string;
-  @Input() gridColumnList: any = [];
+  @Input() endPoint: string;
+  @Input() screenColums: string = "";
   @Output() valueChange = new EventEmitter();
   @Output() intialLoad = new EventEmitter();
+
+  private gridColumnList: any = [];
   private rowModelType;
-private frameworkComponents;
+  private frameworkComponents;
   private gridApi = null;
   private gridColumnApi = null;
 
@@ -24,21 +27,21 @@ private frameworkComponents;
     deltaIndicator: this.deltaIndicator
   }
 
-  constructor(private masterService: MasterService) {
+  constructor(private masterService: MasterService, private sharedDataService: SharedDataService) {
     this.frameworkComponents = {
-          numericEditor: GridNumericEditorComponent,
-          gridSelectEditorComponent:GridSelectEditorComponent
-        };
+      numericEditor: GridNumericEditorComponent,
+      gridSelectEditorComponent: GridSelectEditorComponent
+    };
   }
 
   ngOnInit() {
     this.rowModelType = "infinite";
-    if(this.rowSelection == undefined || this.rowSelection == "single" ){
+    if (this.rowSelection == undefined || this.rowSelection == "single") {
       this.rowSelection = "single";
-    }else{
+    } else {
       this.rowSelection = "multiple";
     }
-    this.gridColumnList = null;
+    this.gridColumnList = this.sharedDataService.getSharedCommonJsonData()[this.screenColums];
     this.gridDataList = null;
   }
 
@@ -59,9 +62,9 @@ private frameworkComponents;
   }
 
   onSelectionChanged() {
-    if(this.rowSelection == "single"){
+    if (this.rowSelection == "single") {
       this.valueChange.emit(this.gridApi.getSelectedRows()[0]);
-    }else{
+    } else {
       this.valueChange.emit(this.gridApi.getSelectedRows());
     }
 
@@ -130,25 +133,25 @@ private frameworkComponents;
     }
   }
 
-loadGridColumns(params){
-  params.api.sizeColumnsToFit();
-//  const columns = params.columnApi.getAllDisplayedVirtualColumns();
-  /*columns.forEach((column) => {
-    const ele = document.querySelector('div.ag-body-container');
+  loadGridColumns(params) {
+    params.api.sizeColumnsToFit();
+    //  const columns = params.columnApi.getAllDisplayedVirtualColumns();
+    /*columns.forEach((column) => {
+      const ele = document.querySelector('div.ag-body-container');
 
-    ele.addEventListener('keydown', (e) => {
-      if (e['key'] === 'Tab') {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-      }
-    });
-  });*/
-}
+      ele.addEventListener('keydown', (e) => {
+        if (e['key'] === 'Tab') {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+      });
+    });*/
+  }
 
   onGridReady(params) {
     this.gridApi = params.api;
-//  this.gridApi.sizeColumnsToFit();
+    //  this.gridApi.sizeColumnsToFit();
     // if your data is set on the gridOptions,
     //below code for settimeout gridReady get's called before data is bound.
     // so waiting time out for 5 sec
@@ -160,22 +163,22 @@ loadGridColumns(params){
       this.intialLoad.emit(list);
       let dataSource = {
         rowCount: null, // behave as infinite scroll
-        getRows: function (params) {
-            console.log('asking for ' + params.startRow + ' to ' + params.endRow);
-            // At this point in your code, you would call the server, using $http if in AngularJS 1.x.
-            // To make the demo look real, wait for 500ms before returning
-            {
-                // take a slice of the total rows
-                let dataAfterSortingAndFiltering = sortAndFilter(list, params.sortModel, params.filterModel);
-                let rowsThisPage = dataAfterSortingAndFiltering.slice(params.startRow, params.endRow);
-                // if on or after the last page, work out the last row.
-                let lastRow = -1;
-                if (dataAfterSortingAndFiltering.length <= params.endRow) {
-                    lastRow = dataAfterSortingAndFiltering.length;
-                }
-                // call the success callback
-                params.successCallback(rowsThisPage, lastRow);
-            };
+        getRows: function(params) {
+          console.log('asking for ' + params.startRow + ' to ' + params.endRow);
+          // At this point in your code, you would call the server, using $http if in AngularJS 1.x.
+          // To make the demo look real, wait for 500ms before returning
+          {
+            // take a slice of the total rows
+            let dataAfterSortingAndFiltering = sortAndFilter(list, params.sortModel, params.filterModel);
+            let rowsThisPage = dataAfterSortingAndFiltering.slice(params.startRow, params.endRow);
+            // if on or after the last page, work out the last row.
+            let lastRow = -1;
+            if (dataAfterSortingAndFiltering.length <= params.endRow) {
+              lastRow = dataAfterSortingAndFiltering.length;
+            }
+            // call the success callback
+            params.successCallback(rowsThisPage, lastRow);
+          };
         }
       };
 
