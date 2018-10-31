@@ -16,7 +16,6 @@ export class ProductGroupComponent implements OnInit {
   public productGroupForm: FormGroup;
   private endPoint: string = "productgroup/";
   public gridDataList: any = [];
-  public gridColumnNamesList;
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
@@ -49,7 +48,6 @@ export class ProductGroupComponent implements OnInit {
       id: [],
       productGroupName: ['', Validators.required]
     });
-    this.getGridCloumsList();
     this.focusField.nativeElement.focus();
   }
 
@@ -76,13 +74,6 @@ export class ProductGroupComponent implements OnInit {
       this.duplicateProdGroup = this.masterService.hasDataExist(this.gridDataList, 'productGroupName', this.productGroupForm.value.productGroupName);
       this.getDuplicateErrorMessages();
     }
-  }
-
-  getGridCloumsList() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.gridColumnNamesList = data["ProductGroupColumns"];
-    });
   }
 
   loadGridData() {

@@ -17,7 +17,6 @@ export class BusinessexecutivesComponent implements OnInit {
   public businessExecutiveForm: FormGroup;
   private endPoint: string = "businessexecutive/";
   public gridDataList: any = [];
-  public gridColumnNamesList;
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
@@ -55,7 +54,6 @@ export class BusinessexecutivesComponent implements OnInit {
       mobile: ['', Validators.required]
     });
     //this.loadGridData();
-    this.getGridCloumsList();
     this.focusField.nativeElement.focus();
   }
 
@@ -97,13 +95,6 @@ export class BusinessexecutivesComponent implements OnInit {
       this.duplicateBusExecName = this.masterService.hasDataExist(this.gridDataList, 'name', this.businessExecutiveForm.value.name);
       this.getDuplicateErrorMessages();
     }
-  }
-
-  getGridCloumsList() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.gridColumnNamesList = data["BusinessExecutiveColumns"];
-    });
   }
 
   loadGridData() {

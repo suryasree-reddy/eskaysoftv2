@@ -16,7 +16,6 @@ export class ManufacturerComponent implements OnInit {
   public manufacturerForm: FormGroup;
   private endPoint: string = "manfacturer/";
   public gridDataList: any = [];
-  public gridColumnNamesList;
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
@@ -50,7 +49,6 @@ export class ManufacturerComponent implements OnInit {
       manfacturerName: ['', Validators.required]
     });
     //this.loadGridData();
-    this.getGridCloumsList();
     this.focusField.nativeElement.focus();
   }
 
@@ -77,13 +75,6 @@ export class ManufacturerComponent implements OnInit {
       this.duplicateManufName = this.masterService.hasDataExist(this.gridDataList, 'manfacturerName', this.manufacturerForm.value.manfacturerName);
       this.getDuplicateErrorMessages();
     }
-  }
-
-  getGridCloumsList() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.gridColumnNamesList = data["ManfacturerColumns"];
-    });
   }
 
   loadGridData() {

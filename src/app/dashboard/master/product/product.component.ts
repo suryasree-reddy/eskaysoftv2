@@ -7,6 +7,7 @@ import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
+import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-product',
@@ -66,6 +67,7 @@ export class ProductComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private modalService: BsModalService,
+      private sharedDataService:SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
@@ -115,46 +117,15 @@ export class ProductComponent implements OnInit {
     });
 
     //this.loadGridData();
-    this.getGridCloumsList();
     this.loadGroupTypeaheadData();
     this.loadCategoryTypeaheadData();
     this.loadCompanyTypeaheadData();
     this.loadCompanyGroupTypeaheadData();
     this.loadTaxTypeaheadData();
-    this.getJsonData();
-    this.getCompanyType();
-    this.getCompanyStatus();
-    this.getInvGenType();
+    this.companyTypeList =  this.sharedDataService.getSharedCommonJsonData().CompanyType;
+    this.companyStatusList =  this.sharedDataService.getSharedCommonJsonData().CompanyStatus;
+    this.invGenList =  this.sharedDataService.getSharedCommonJsonData().InvGenType;
     // this.focusField.nativeElement.focus();
-  }
-
-  getCompanyType() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as Object[];
-      this.companyTypeList = data["CompanyType"]
-    })
-  }
-
-  getCompanyStatus() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as Object[];
-      this.companyStatusList = data["CompanyStatus"]
-    })
-  }
-
-  getInvGenType() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as Object[];
-      this.invGenList = data["InvGenType"]
-    })
-  }
-
-
-  getJsonData() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.gridColumnNamesList = data["ProductColumns"];
-    });
   }
 
   loadCompanyGroupTypeaheadData() {
@@ -269,13 +240,6 @@ export class ProductComponent implements OnInit {
       this.duplicateCompanyName = this.masterService.hasDataExist(this.gridDataList, 'companyName', this.companyForm.value.companyName);
       this.getDuplicateErrorMessages();
     }
-  }
-
-  getGridCloumsList() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.gridColumnNamesList = data["ProductColumns"];
-    });
   }
 
   loadGridData() {

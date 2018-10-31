@@ -8,6 +8,7 @@ import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
 import { subscribeTo } from 'rxjs/internal-compatibility';
+import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-companies',
@@ -20,7 +21,6 @@ export class CompaniesComponent implements OnInit {
   private endPoint: string = "company/";
   private cgEndPoint: string = "companygroup/";
   public gridDataList: any = [];
-  public gridColumnNamesList;
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
@@ -50,6 +50,7 @@ export class CompaniesComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private modalService: BsModalService,
+    private sharedDataService:SharedDataService,
     private masterService: MasterService) {
       translate.setDefaultLang('messages.en');
   }
@@ -73,12 +74,10 @@ export class CompaniesComponent implements OnInit {
     });
 
     //this.loadGridData();
-    this.getGridCloumsList();
+    this.companyTypeList =  this.sharedDataService.getSharedCommonJsonData().CompanyType;
+    this.companyStatusList =  this.sharedDataService.getSharedCommonJsonData().CompanyStatus;
+      this.invGenList =  this.sharedDataService.getSharedCommonJsonData().InvGenType;
     this.loadTypeaheadData();
-    this.getCompanyType();
-    this.getCompanyStatus();
-    this.getInvGenType();
-
   }
 
   valueChange(selectedRow: any[]): void {
@@ -102,30 +101,9 @@ export class CompaniesComponent implements OnInit {
 
   loadTypeaheadData() {
     this.masterService.getParentData(this.cgEndPoint).subscribe(list => {
-      console.log("list--", list)
       this.typeaheadDataList = list;
     })
   }
-
-  getCompanyType(){
-    this.masterService.getLocalJsonData().subscribe(data =>{
-      data as Object[];
-      this.companyTypeList = data["CompanyType"]
-    })
-  }
-  getCompanyStatus(){
-    this.masterService.getLocalJsonData().subscribe(data =>{
-      data as Object[];
-      this.companyStatusList = data["CompanyStatus"]
-    })
-  }
-  getInvGenType(){
-    this.masterService.getLocalJsonData().subscribe(data =>{
-      data as Object[];
-      this.invGenList = data["InvGenType"]
-    })
-  }
-
 
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
@@ -162,14 +140,6 @@ export class CompaniesComponent implements OnInit {
       this.duplicateCompanyName = this.masterService.hasDataExist(this.gridDataList, 'companyName', this.companyForm.value.companyName);
       this.getDuplicateErrorMessages();
     }
-  }
-
-
-  getGridCloumsList() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.gridColumnNamesList = data["CompanyColumns"];
-    });
   }
 
   loadGridData() {

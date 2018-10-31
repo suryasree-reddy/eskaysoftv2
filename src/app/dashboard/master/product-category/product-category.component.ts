@@ -16,7 +16,6 @@ export class ProductCategoryComponent implements OnInit {
   public productCategoryForm: FormGroup;
   private endPoint: string = "productcategory/";
   public gridDataList: any = [];
-  public gridColumnNamesList;
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
@@ -50,7 +49,6 @@ export class ProductCategoryComponent implements OnInit {
       productCategoryName: ['', Validators.required]
     });
     //  this.loadGridData();
-    this.getGridCloumsList();
     this.focusField.nativeElement.focus();
   }
 
@@ -77,13 +75,6 @@ export class ProductCategoryComponent implements OnInit {
       this.getDuplicateErrorMessages();
     }
 
-  }
-
-  getGridCloumsList() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.gridColumnNamesList = data["ProductCategoryColumns"];
-    });
   }
 
   loadGridData() {

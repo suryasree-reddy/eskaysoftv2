@@ -7,6 +7,7 @@ import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 import * as _ from 'lodash';
+import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-states',
@@ -44,6 +45,7 @@ export class StatesComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
+      private sharedDataService:SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
@@ -65,25 +67,9 @@ export class StatesComponent implements OnInit {
     });
     //this.loadGridData();
     this.focusField.nativeElement.focus();
-    this.getStatesTypes();
-    this.getZone();
+  this.stateZone =  this.sharedDataService.getSharedCommonJsonData().StateZone;
   }
 
-
-  getZone() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.stateZone = data["StateZone"];
-      this.statesListColumns = data["StateListColumns"]
-    });
-  }
-
-  getStatesTypes() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.statesListColumns = data["StateListColumns"]
-    });
-  }
 
   getDuplicateErrorMessages(): void {
     this.formRequiredError = false;

@@ -7,7 +7,6 @@ import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 
-
 @Component({
   selector: 'app-bankinformation',
   templateUrl: './bankinformation.component.html'
@@ -17,7 +16,6 @@ export class BankinformationComponent implements OnInit {
   public bankInformationForm: FormGroup;
   private endPoint: string = "bankinformation/";
   public gridDataList: any = [];
-  public gridColumnNamesList;
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
@@ -46,7 +44,6 @@ export class BankinformationComponent implements OnInit {
       address: ['', Validators.required]
     });
     //this.loadGridData();
-    this.getGridCloumsList();
     this.focusField.nativeElement.focus();
   }
 
@@ -73,13 +70,6 @@ export class BankinformationComponent implements OnInit {
       this.duplicateBankName = this.masterService.hasDataExist(this.gridDataList, 'name', this.bankInformationForm.value.name);
       this.getDuplicateErrorMessages();
     }
-  }
-
-  getGridCloumsList() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.gridColumnNamesList = data["BankInformationColumns"];
-    });
   }
 
   loadGridData() {

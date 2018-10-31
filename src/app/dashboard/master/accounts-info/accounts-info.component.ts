@@ -14,7 +14,6 @@ import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 @Component({
   selector: 'app-accounts-info',
   templateUrl: './accounts-info.component.html'
-
 })
 
 @NgModule({
@@ -28,10 +27,10 @@ import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 export class AccountsInfoComponent implements OnInit {
   public accInfoForm: FormGroup;
   public subScheduleForm: FormGroup;
-  private endPoint: string = "accountsInformation/";
   public scheduleForm: FormGroup;
   public districtsForm: FormGroup;
   public statesForm: FormGroup;
+  private endPoint: string = "accountsInformation/";
   public gridDataList: any = [];
   public typeaheadDataList: any = [];
   public gridColumnNamesList;
@@ -84,7 +83,7 @@ export class AccountsInfoComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private modalService: BsModalService,
-    private sharedDataService:SharedDataService,
+    private sharedDataService: SharedDataService,
     private masterService: MasterService) { translate.setDefaultLang('messages.en'); }
 
   // valueChange(selectedRow: any[]): void {
@@ -168,12 +167,6 @@ export class AccountsInfoComponent implements OnInit {
       stateName: []
     });
 
-
-    // this.loadTypeaheadData();
-    // //this.loadGridData();
-    // this.focusField.nativeElement.focus();
-    //this.getGridCloumsList();
-    //this.getJsonData();
     this.loadScheduleData();
     this.loadSubScheduleData();
     this.loadStatesData();
@@ -186,7 +179,6 @@ export class AccountsInfoComponent implements OnInit {
     this.accCustomerType = this.sharedDataService.getSharedCommonJsonData().CustomerType;
     this.accOpeningType = this.sharedDataService.getSharedCommonJsonData().OpeningType;
     this.stateZone = this.sharedDataService.getSharedCommonJsonData().StateZone;
-    this.statesListColumns = this.sharedDataService.getSharedCommonJsonData().StateListColumns;
 
   }
 
@@ -215,16 +207,16 @@ export class AccountsInfoComponent implements OnInit {
   }
 
   onSelectState(event) {
-      this.accInfoForm.patchValue({ stateName: event.item.stateName })
+    this.accInfoForm.patchValue({ stateName: event.item.stateName })
     this.selectedState = event.item;
   }
 
   onSelectSchedule(event) {
     this.selectedSchedule = event.item;
-      this.accInfoForm.patchValue({ scheduleName: event.item.scheduleName })
+    this.accInfoForm.patchValue({ scheduleName: event.item.scheduleName })
     //const temp = this.selectedSchedule.id;
-  //  const selectedScheduleNameList = _.filter(this.subScheduleList, function(o) { return o.scheduleId == temp });
-  //  this.subScheduleForm.patchValue({ subScheduleIndex: selectedScheduleNameList.length + 1 })
+    //  const selectedScheduleNameList = _.filter(this.subScheduleList, function(o) { return o.scheduleId == temp });
+    //  this.subScheduleForm.patchValue({ subScheduleIndex: selectedScheduleNameList.length + 1 })
   }
 
   openModal(template: TemplateRef<any>) {

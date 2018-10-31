@@ -22,7 +22,6 @@ export class AreasComponent implements OnInit {
   private beEndPoint: string = "businessexecutive/";
   public gridDataList: any = [];
   public typeaheadDataList: any = [];
-  public gridColumnNamesList;
   public gridSelectedRow;
   public selectedTypeahead: any;
   public deleteFlag: boolean = true;
@@ -86,7 +85,6 @@ export class AreasComponent implements OnInit {
     this.loadTypeaheadData();
     //this.loadGridData();
     this.focusField.nativeElement.focus();
-    this.getJsonData();
   }
 
   loadTypeaheadData() {
@@ -124,13 +122,6 @@ export class AreasComponent implements OnInit {
     this.getDuplicateErrorMessages();
   }
 
-  getGridCloumsList() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.gridColumnNamesList = data["AreaName"];
-    });
-  }
-
   loadGridData() {
     this.masterService.getData(this.areaEndPoint);
     this.masterService.dataObject.subscribe(list => {
@@ -138,13 +129,6 @@ export class AreasComponent implements OnInit {
       this.gridDataList = this.masterService.mergeObjects(list, this.typeaheadDataList, 'businessExecutiveId', 'id');
       localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
     })
-  }
-
-  getJsonData() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.gridColumnNamesList = data["AreaColumns"];
-    });
   }
 
   loadSelectedTypeahead(event) {

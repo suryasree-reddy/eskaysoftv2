@@ -7,6 +7,7 @@ import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
+import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-customerwise-discount',
@@ -20,7 +21,6 @@ export class CustomerwiseDiscountComponent implements OnInit {
   private cEndPoint: string = "company/";
   private cgEndPoint: string = "companygroup/";
   public gridDataList: any = [];
-  public gridColumnNamesList;
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
@@ -54,6 +54,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private modalService: BsModalService,
+    private sharedDataService:SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
@@ -81,21 +82,12 @@ export class CustomerwiseDiscountComponent implements OnInit {
     });
 
     //this.loadGridData();
-    this.getGridCloumsList();
     this.loadCompanyTypeaheadData();
-    this.getJsonData();
     // this.focusField.nativeElement.focus();
-    this.getCompanyType();
-    this.getCompanyStatus();
-    this.getInvGenType();
+    this.companyTypeList =  this.sharedDataService.getSharedCommonJsonData().CompanyType;
+    this.companyStatusList =  this.sharedDataService.getSharedCommonJsonData().CompanyStatus;
+      this.invGenList =  this.sharedDataService.getSharedCommonJsonData().InvGenType;
 
-  }
-
-  getJsonData() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.gridColumnNamesList = data["CustomerDiscountColumns"];
-    });
   }
 
   loadCompanyTypeaheadData() {
@@ -136,25 +128,6 @@ export class CustomerwiseDiscountComponent implements OnInit {
 
   hide() {
     document.getElementById('disc').style.display = 'none';
-  }
-
-  getCompanyType() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as Object[];
-      this.companyTypeList = data["CompanyType"]
-    })
-  }
-  getCompanyStatus() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as Object[];
-      this.companyStatusList = data["CompanyStatus"]
-    })
-  }
-  getInvGenType() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as Object[];
-      this.invGenList = data["InvGenType"]
-    })
   }
 
 
@@ -198,13 +171,6 @@ export class CustomerwiseDiscountComponent implements OnInit {
       this.duplicateCompanyName = this.masterService.hasDataExist(this.gridDataList, 'companyName', this.companyForm.value.companyName);
       this.getDuplicateErrorMessages();
     }
-  }
-
-  getGridCloumsList() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.gridColumnNamesList = data["CustomerDiscountColumns"];
-    });
   }
 
   loadGridData() {

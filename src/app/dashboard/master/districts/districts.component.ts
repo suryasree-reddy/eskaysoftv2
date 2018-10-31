@@ -8,6 +8,7 @@ import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
+import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-districts',
@@ -29,7 +30,6 @@ export class DistrictsComponent implements OnInit {
   public scFormSuccess: boolean = false;
   public districtsList: any = [];
   public statesList: any = [];
-  public districtsColumns;
   public editDistricts;
   public nameFlag;
   public deleteFlag: boolean = true;
@@ -49,6 +49,7 @@ export class DistrictsComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private modalService: BsModalService,
+    private sharedDataService:SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
@@ -84,7 +85,7 @@ export class DistrictsComponent implements OnInit {
     this.loadStatesData();
     //this.loadGridData();
     this.focusField.nativeElement.focus();
-    this.getDistrictsTypes();
+    this.stateZone =  this.sharedDataService.getSharedCommonJsonData().StateZone;
   }
 
 
@@ -128,13 +129,6 @@ export class DistrictsComponent implements OnInit {
     this.masterService.dataObject.subscribe(list => {
       this.districtsList = list;
       localStorage.setItem('rowDataLength', JSON.stringify(this.districtsList.length));
-    });
-  }
-
-  getDistrictsTypes() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.districtsColumns = data["DistrictsColumns"]
     });
   }
 
@@ -240,17 +234,11 @@ export class DistrictsComponent implements OnInit {
     this.focusField.nativeElement.focus();
   }
 
-  getZone() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.stateZone = data["StateZone"];
-    });
-  }
+
 
   resetStatesForm() {
     this.childDuplicateMessageParam = null;
     this.childDuplicateMessage = null;
-    this.getZone();
     this.scFormServerError = this.scFormRequiredError = this.scFormSuccess = false;
     this.statesForm.reset();
   }

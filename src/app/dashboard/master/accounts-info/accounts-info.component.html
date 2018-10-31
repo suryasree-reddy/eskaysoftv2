@@ -83,7 +83,8 @@
                     <div class="col-md-4 col-lt">
                         <p>{{'subschedule.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
                         <input id="subScheduleName" maxlength="40" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="accInfoForm.controls['subScheduleName']"
-                       [typeahead]="subScheduleList" typeaheadOptionField="subScheduleName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" >
+                       [typeahead]="subScheduleList" typeaheadOptionField="subScheduleName" [typeaheadOptionsLimit]="7"
+                        [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" >
                        <span class="caret" ></span>
                       </div>
 

@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
+import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-subschedule',
@@ -35,7 +36,6 @@ export class SubscheduleComponent implements OnInit {
   modalRef: BsModalRef;
   message: string;
   public deleteFlag: boolean = true;
-  public subScheduleListColumns;
   private duplicateSchName: boolean = false;
   private duplicateSubSchName: boolean = false;
   private duplicateSchIndex: boolean = false;
@@ -46,6 +46,7 @@ export class SubscheduleComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
+      private sharedDataService:SharedDataService,
     private modalService: BsModalService,
     private masterService: MasterService) { translate.setDefaultLang('messages.en'); }
 
@@ -73,7 +74,7 @@ export class SubscheduleComponent implements OnInit {
     //this.loadGriddata();
     this.loadScheduleData();
     this.focusField.nativeElement.focus();
-    this.getScheduleTypes();
+    this.scheduleTypes =  this.sharedDataService.getSharedCommonJsonData().ScheduleTypes;
   }
 
   loadScheduleData() {
@@ -103,13 +104,6 @@ export class SubscheduleComponent implements OnInit {
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
-  getScheduleTypes() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.scheduleTypes = data["ScheduleTypes"];
-      this.subScheduleListColumns = data["SubScheduleListColumns"];
-    });
-  }
 
   saveSchedule() {
     if (this.scheduleForm.valid && this.childDuplicateMessage == null) {
@@ -123,7 +117,6 @@ export class SubscheduleComponent implements OnInit {
     this.masterService.createRecord("schedules/", this.scheduleForm.value).subscribe(res => {
       this.showInformationModal("SaveSchedule");
       this.modalRef.hide();
-      this.getScheduleTypes();
       this.scheduleForm.reset();
     }, (error) => {
       this.scServerErrMsg();

@@ -7,6 +7,7 @@ import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 import * as _ from 'lodash';
+import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-accounts-openings',
@@ -21,7 +22,6 @@ export class AccountsOpeningsComponent implements OnInit {
   public formServerError: boolean = false;
   public gridDataList: any = [];
   public accType: any[];
-  public accOpeningColumns;
   public editAccount;
   public deleteFlag: boolean = true;
   public nameFlag;
@@ -38,6 +38,7 @@ export class AccountsOpeningsComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
+    private sharedDataService:SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
@@ -61,23 +62,7 @@ export class AccountsOpeningsComponent implements OnInit {
     });
     this.loadGridData();
   //  this.focusField.nativeElement.focus();
-    this.getAccOpenings();
-    this.getAccType();
-  }
-
-  getAccType() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.accType = data["AccountType"];
-      // this.accOpeningColumns = data["AccountsOpeningsColumns"]
-    });
-  }
-
-  getAccOpenings() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.accOpeningColumns = data["AccountsOpeningsColumns"]
-    });
+      this.accType =  this.sharedDataService.getSharedCommonJsonData().AccountType;
   }
 
   loadGridData() {

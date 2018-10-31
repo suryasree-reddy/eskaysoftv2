@@ -16,7 +16,6 @@ export class CompanyGroupComponent implements OnInit {
   public companyGroupForm: FormGroup;
   private endPoint: string = "companygroup/";
   public gridDataList: any = [];
-  public gridColumnNamesList;
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
@@ -50,7 +49,6 @@ export class CompanyGroupComponent implements OnInit {
       companyGroupName: ['', Validators.required]
     });
     //this.loadGridData();
-    this.getGridCloumsList();
     this.focusField.nativeElement.focus();
   }
 
@@ -76,13 +74,6 @@ export class CompanyGroupComponent implements OnInit {
       this.duplicateCompanyGrp = this.masterService.hasDataExist(this.gridDataList, 'companyGroupName', this.companyGroupForm.value.companyGroupName);
       this.getDuplicateErrorMessages();
     }
-  }
-
-  getGridCloumsList() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.gridColumnNamesList = data["CompanyGroupColumns"];
-    });
   }
 
   loadGridData() {
