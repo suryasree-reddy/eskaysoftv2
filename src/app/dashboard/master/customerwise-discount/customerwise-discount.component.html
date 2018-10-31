@@ -12,7 +12,7 @@
                         [formControl]="customerDiscountForm.controls['customer']">
                 </div>
                 <div class="input-group">
-                    <p>Company: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
+                    <p>{{'companies.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
                     <input id="companyCode" formControlName="companyCode" [typeahead]="typeaheadCompanyDataList"
                         typeaheadOptionField="companyCode" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                         (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control capitalize">
@@ -60,7 +60,7 @@
 <!-- Company Modal -->
 <ng-template #cmpTemplate>
   <div class="modal-header">
-      <h4 class="modal-title pull-left">Create Company </h4>
+      <h4 class="modal-title pull-left">{{'companies.create' | translate}}</h4>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
           <span aria-hidden="true">&times;</span>
       </button>
@@ -88,7 +88,7 @@
     </div> -->
 
     <div class="input-group">
-      <p>{{'companygroup.name' | translate }}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
+      <p>{{'companygroup.name' | translate }}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(cgTemplate)">create new</a>)</p>
       <input id="companyGroup" maxlength="20" formControlName="companyGroupName" [typeahead]="typeaheadCompanyGroupDataList" typeaheadOptionField="companyGroupName"
       [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control capitalize"/>
       <span class="caret"></span>
@@ -126,3 +126,33 @@
       </form>
   </div>
 </ng-template>
+
+
+<!-- Company Group Modal -->
+<ng-template #cgTemplate>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{'companygroup.create' | translate }}</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="companyGroupForm" (ngSubmit)="saveChildForm()" autocomplete="off">
+            <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
+            [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
+             [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+    
+            <div class="input-group">
+              <p>{{'companygroup.name' | translate }}: *</p>
+              <input id="companyGroupName" maxlength="20" #focus (blur)="checkForDuplicateCompanyGroup()" class="form-control capitalize"
+              [formControl]="companyGroupForm.controls['companyGroupName']">
+            </div>
+    
+                <div class="input-group">
+                  <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
+                  <button type="submit"  class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
+                </div>
+          </form>
+        </div>
+      </ng-template>
+    

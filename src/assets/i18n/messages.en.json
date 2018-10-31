@@ -125,6 +125,7 @@
     "status": "Company Status",
     "invGenType": "Inv.Gen.Type",
     "invPrefix": "Inv.Prefix",
+    "create": "Create Company",
     "saveConfirmationMessage": "Are you sure you want to save Company?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Company?",
     "saveInformationMessage": "Company record has been saved successfully.",
