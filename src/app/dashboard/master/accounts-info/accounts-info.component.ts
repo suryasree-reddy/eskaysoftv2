@@ -1,6 +1,6 @@
-import { Component, OnInit, NgModule,  TemplateRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, NgModule, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BsDropdownModule, TypeaheadModule, TabsModule  } from 'ngx-bootstrap';
+import { BsDropdownModule, TypeaheadModule, TabsModule } from 'ngx-bootstrap';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { MasterService } from '../master.service';
@@ -9,7 +9,7 @@ import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
-// import $ from "jquery";
+import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-accounts-info',
@@ -19,9 +19,9 @@ import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.comp
 
 @NgModule({
   imports: [
- BsDropdownModule.forRoot(),
+    BsDropdownModule.forRoot(),
     TypeaheadModule.forRoot(),
-    TabsModule.forRoot(), 
+    TabsModule.forRoot(),
   ],
 })
 
@@ -61,10 +61,10 @@ export class AccountsInfoComponent implements OnInit {
   public distName;
   public stateZone: any[];
   public accGstType: any[];
-public accNatureOfGst: any[];
-public accCustomerType: any[];
-public accSaleType: any[];
-public accOpeningType: any[];
+  public accNatureOfGst: any[];
+  public accCustomerType: any[];
+  public accSaleType: any[];
+  public accOpeningType: any[];
 
   scheduleTypes: any;
   private duplicateSchName: boolean = false;
@@ -84,28 +84,33 @@ public accOpeningType: any[];
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private modalService: BsModalService,
+    private sharedDataService:SharedDataService,
     private masterService: MasterService) { translate.setDefaultLang('messages.en'); }
 
-    // valueChange(selectedRow: any[]): void {
-    //   this.editable(selectedRow);
-    // }
-    // onInitialDataLoad(dataList:any[]){
-    //   this.subScheduleList = dataList;
-    // }
+  // valueChange(selectedRow: any[]): void {
+  //   this.editable(selectedRow);
+  // }
+  // onInitialDataLoad(dataList:any[]){
+  //   this.subScheduleList = dataList;
+  // }
 
   ngOnInit() {
 
     this.accInfoForm = this.fb.group({
       accountName: ['', Validators.required],
-      subScheduleId: ['', Validators.required],
-      scheduleId: ['', Validators.required],
+      subScheduleId: [],
+      subScheduleName: ['', Validators.required],
+      scheduleId: [],
+      scheduleName: ['', Validators.required],
       address1: ['', Validators.required],
       address2: ['', Validators.required],
       town: ['', Validators.required],
       pin: ['', Validators.required],
-      stateId: ['', Validators.required],
+      stateId: [],
+      stateName: ['', Validators.required],
       areaId: ['', Validators.required],
-      districtId: ['', Validators.required],
+      districtId: [],
+      districtName: ['', Validators.required],
       phone: ['', Validators.required],
       mobile: ['', Validators.required],
       email: ['', Validators.required],
@@ -162,7 +167,7 @@ public accOpeningType: any[];
       stateId: [],
       stateName: []
     });
-    
+
 
     // this.loadTypeaheadData();
     // //this.loadGridData();
@@ -172,15 +177,16 @@ public accOpeningType: any[];
     this.loadScheduleData();
     this.loadSubScheduleData();
     this.loadStatesData();
-    this.loadDistrictData(); 
+    this.loadDistrictData();
     // this.focusField.nativeElement.focus();
-    this.getScheduleTypes();
-    this.getGstType();
-    this.getNatureOfGst();
-    this.getSaleType();
-    this.getCustomerType();
-    this.getOpeningType();
-    this.getZone();
+    this.scheduleTypes = this.sharedDataService.getSharedCommonJsonData().ScheduleTypes;
+    this.accGstType = this.sharedDataService.getSharedCommonJsonData().GstType;
+    this.accNatureOfGst = this.sharedDataService.getSharedCommonJsonData().NatureOfGst;
+    this.accSaleType = this.sharedDataService.getSharedCommonJsonData().SaleType;
+    this.accCustomerType = this.sharedDataService.getSharedCommonJsonData().CustomerType;
+    this.accOpeningType = this.sharedDataService.getSharedCommonJsonData().OpeningType;
+    this.stateZone = this.sharedDataService.getSharedCommonJsonData().StateZone;
+    this.statesListColumns = this.sharedDataService.getSharedCommonJsonData().StateListColumns;
 
   }
 
@@ -209,14 +215,16 @@ public accOpeningType: any[];
   }
 
   onSelectState(event) {
+      this.accInfoForm.patchValue({ stateName: event.item.stateName })
     this.selectedState = event.item;
   }
 
   onSelectSchedule(event) {
     this.selectedSchedule = event.item;
-    const temp = this.selectedSchedule.id;
-    const selectedScheduleNameList = _.filter(this.subScheduleList, function(o) { return o.scheduleId == temp });
-    this.subScheduleForm.patchValue({ subScheduleIndex: selectedScheduleNameList.length + 1 })
+      this.accInfoForm.patchValue({ scheduleName: event.item.scheduleName })
+    //const temp = this.selectedSchedule.id;
+  //  const selectedScheduleNameList = _.filter(this.subScheduleList, function(o) { return o.scheduleId == temp });
+  //  this.subScheduleForm.patchValue({ subScheduleIndex: selectedScheduleNameList.length + 1 })
   }
 
   openModal(template: TemplateRef<any>) {
@@ -224,56 +232,6 @@ public accOpeningType: any[];
     this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
-
-  getScheduleTypes() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.scheduleTypes = data["ScheduleTypes"];
-      //  this.subScheduleListColumns = data["SubScheduleListColumns"];
-    });
-  }
-
-  getGstType() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.accGstType = data["GstType"];
-    });
-  }
-  getNatureOfGst(){
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.accNatureOfGst = data["NatureOfGst"];
-    });
-  }
-  getCustomerType() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.accCustomerType = data["CustomerType"];
-    });
-  }
-
-  getSaleType(){
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.accSaleType = data["SaleType"];
-    });
-  }
-
-  getOpeningType(){
-    this.masterService.getLocalJsonData().subscribe(data =>{
-      data as object[];
-      this.accOpeningType = data["OpeningType"];
-      });
-  }
-
-  getZone() {
-    this.masterService.getLocalJsonData().subscribe(data => {
-      data as object[];
-      this.stateZone = data["StateZone"];
-      this.statesListColumns = data["StateListColumns"]
-    });
-  }
-
 
   saveSchedule() {
     if (this.scheduleForm.valid && this.childDuplicateMessage == null) {
@@ -295,7 +253,6 @@ public accOpeningType: any[];
     this.masterService.createRecord("schedules/", this.scheduleForm.value).subscribe(res => {
       this.showInformationModal("SaveSchedule");
       this.modalRef.hide();
-      this.getScheduleTypes();
       this.scheduleForm.reset();
     }, (error) => {
       this.scServerErrMsg();
@@ -316,7 +273,7 @@ public accOpeningType: any[];
   saveState() {
     if (this.statesForm.valid) {
       this.masterService.createRecord("states/", this.statesForm.value).subscribe(res => {
-       // this.buttonsComponent.showInformationModal("Save");
+        // this.buttonsComponent.showInformationModal("Save");
       }, (error) => {
         this.serverErrMsg();
       });
@@ -342,7 +299,6 @@ public accOpeningType: any[];
   resetStatesForm() {
     this.childDuplicateMessageParam = null;
     this.childDuplicateMessage = null;
-    this.getZone();
     this.scFormServerError = this.scFormRequiredError = this.scFormSuccess = false;
     this.statesForm.reset();
   }
@@ -364,7 +320,7 @@ public accOpeningType: any[];
     if (this.duplicateSubSchName) {
       const temp = this.subScheduleForm.value.subScheduleName;
       const subScheduleObj = _.filter(this.subScheduleList, function(o) { return o.subScheduleName.toLowerCase() == temp.toLowerCase() });
-      this.subScheduleForm.patchValue({ id: subScheduleObj[0].id })  
+      this.subScheduleForm.patchValue({ id: subScheduleObj[0].id })
     }
     this.getDuplicateErrorMessages();
   }
@@ -401,7 +357,7 @@ public accOpeningType: any[];
     if (this.duplicateDistrictName) {
       const temp = this.districtsForm.value.districtName;
       const districtObj = _.filter(this.districtsList, function(o) { return o.districtName.toLowerCase() == temp.toLowerCase() });
-      this.districtsForm.patchValue({ id: districtObj[0].id })    
+      this.districtsForm.patchValue({ id: districtObj[0].id })
     }
     this.getDuplicateErrorMessages();
   }
@@ -409,21 +365,21 @@ public accOpeningType: any[];
 
 
   getDuplicateErrorMessages(): void {
-      this.duplicateMessageParam = null;
+    this.duplicateMessageParam = null;
     this.duplicateMessage = null;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
-	this.formRequiredError = false;
-  this.scFormRequiredError= false;
+    this.formRequiredError = false;
+    this.scFormRequiredError = false;
 
-  //   if (this.duplicateSubSchName) {
-  //    this.duplicateMessage = "subschedule.duplicateNameErrorMessage";
-  //    this.duplicateMessageParam = this.subScheduleForm.value.subScheduleName;
-  //  }
+    //   if (this.duplicateSubSchName) {
+    //    this.duplicateMessage = "subschedule.duplicateNameErrorMessage";
+    //    this.duplicateMessageParam = this.subScheduleForm.value.subScheduleName;
+    //  }
     if (this.duplicateSchName && this.duplicateSchIndex) {
       this.childDuplicateMessage = "schedule.duplicateErrorMessage";
 
-    }  else if (this.duplicateSchIndex) {
+    } else if (this.duplicateSchIndex) {
       this.childDuplicateMessage = "schedule.duplicateIndexErrorMessage";
       this.childDuplicateMessageParam = this.scheduleForm.value.scheduleIndex;
 
@@ -432,7 +388,7 @@ public accOpeningType: any[];
       this.childDuplicateMessageParam = this.scheduleForm.value.scheduleName;
     }
   }
-  
+
   saveForm() {
     this.formRequiredError = false;
     if (this.accInfoForm.valid) {
@@ -452,15 +408,6 @@ public accOpeningType: any[];
     }
   }
 
-  // delete() {
-  //   this.masterService.deleteRecord(this.endPoint, this.editSubSchedule.id).subscribe(res => {
-  //     this.showInformationModal("Delete");
-  //   }, (error) => {
-  //     this.serverErrMsg();
-  //   });
-  //   localStorage.removeItem('ag-activeRow');
-  // }
-
   successMsg() {
     this.formSuccess = true;
     this.formRequiredError = this.formServerError = false;
@@ -468,10 +415,10 @@ public accOpeningType: any[];
   }
 
   requiredErrMsg() {
-	  if (this.duplicateMessage == null) {
-		this.formRequiredError = true;
-		this.formSuccess = this.formServerError = false;
-	  }
+    if (this.duplicateMessage == null) {
+      this.formRequiredError = true;
+      this.formSuccess = this.formServerError = false;
+    }
   }
 
   serverErrMsg() {
@@ -492,10 +439,9 @@ public accOpeningType: any[];
   }
 
   resetForm() {
-    //this.loadGriddata();
     this.loadScheduleData();
     this.formRequiredError = this.formServerError = this.formSuccess = false;
-    this.scFormRequiredError= false;
+    this.scFormRequiredError = false;
     this.nameFlag = false;
     this.deleteFlag = true;
     this.duplicateMessage = null;
@@ -503,9 +449,9 @@ public accOpeningType: any[];
     this.duplicateMessageParam = null;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
-	this.duplicateSchIndex = false;
-	this.duplicateSchName = false;
-	this.duplicateSubSchName = false;
+    this.duplicateSchIndex = false;
+    this.duplicateSchName = false;
+    this.duplicateSubSchName = false;
     // this.focusField.nativeElement.focus();
   }
 
@@ -529,7 +475,7 @@ public accOpeningType: any[];
     // if (eventType === "Delete") {
     //   msg = 'subschedule.deleteInformationMessage';
     //   title = 'Sub-Schedule';
-    // } else 
+    // } else
     if (eventType === "SaveSchedule") {
       title = 'Schedule';
       msg = 'schedule.saveInformationMessage';
@@ -553,12 +499,12 @@ public accOpeningType: any[];
     // if (eventType === "Delete") {
     //   title = 'Sub-Schedule';
     //   msg = 'subschedule.deleteConfirmationMessage';
-    // } else 
+    // } else
     if (eventType === "SaveSchedule") {
       title = 'Schedule';
       msg = 'schedule.saveConfirmationMessage';
-     }
-   // else {
+    }
+    // else {
     //   title = 'Sub-Schedule';
     //   msg = 'subschedule.saveConfirmationMessage';
     // }
