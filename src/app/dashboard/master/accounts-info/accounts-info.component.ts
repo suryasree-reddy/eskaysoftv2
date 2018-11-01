@@ -53,6 +53,7 @@ export class AccountsInfoComponent implements OnInit {
   public subScheduleList: any = [];
   public districtsList: any = [];
   public statesList: any = [];
+  public areasList: any = [];
   public selectedSchedule: any;
   public selectedSubSchedule: any;
   public selectedState: any;
@@ -107,7 +108,8 @@ export class AccountsInfoComponent implements OnInit {
       pin: ['', Validators.required],
       stateId: [],
       stateName: ['', Validators.required],
-      areaId: ['', Validators.required],
+      areaId: [],
+      areaName:  ['', Validators.required],
       districtId: [],
       districtName: ['', Validators.required],
       phone: ['', Validators.required],
@@ -171,6 +173,7 @@ export class AccountsInfoComponent implements OnInit {
     this.loadSubScheduleData();
     this.loadStatesData();
     this.loadDistrictData();
+    this.loadAreaData();
     // this.focusField.nativeElement.focus();
     this.scheduleTypes = this.sharedDataService.getSharedCommonJsonData().ScheduleTypes;
     this.accGstType = this.sharedDataService.getSharedCommonJsonData().GstType;
@@ -205,6 +208,11 @@ export class AccountsInfoComponent implements OnInit {
       this.districtsList = list;
     })
   }
+  loadAreaData() {
+    this.masterService.getParentData("area/").subscribe(list => {
+      this.areasList = list;
+    })
+  }
 
   onSelectState(event) {
     this.accInfoForm.patchValue({ stateName: event.item.stateName })
@@ -225,13 +233,13 @@ export class AccountsInfoComponent implements OnInit {
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
-  saveSchedule() {
-    if (this.scheduleForm.valid && this.childDuplicateMessage == null) {
-      this.showConfirmationModal("SaveSchedule");
-    } else {
-      this.scRequiredErrMsg();
-    }
-  }
+  // saveSchedule() {
+  //   if (this.scheduleForm.valid && this.childDuplicateMessage == null) {
+  //     this.showConfirmationModal("SaveSchedule");
+  //   } else {
+  //     this.scRequiredErrMsg();
+  //   }
+  // }
 
   saveSubSchedule() {
     if (this.subScheduleForm.valid && this.childDuplicateMessage == null) {
@@ -400,11 +408,19 @@ export class AccountsInfoComponent implements OnInit {
   }
 
   saveForm() {
-    this.formRequiredError = false;
-    if (this.accInfoForm.valid) {
-      this.showConfirmationModal("Save");
+    // this.subScheduleForm.value.scheduleId = this.selectedSchedule.id;
+    if (this.accInfoForm.value.accountName) {
+      this.masterService.updateRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
+        this.showInformationModal("Save");
+      }, (error) => {
+        this.serverErrMsg();
+      });
     } else {
-      this.serverErrMsg()
+      this.masterService.createRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
+        this.showInformationModal("Save");
+      }, (error) => {
+        this.serverErrMsg();
+      });
     }
   }
 

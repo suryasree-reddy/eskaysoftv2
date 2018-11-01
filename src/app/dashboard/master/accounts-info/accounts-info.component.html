@@ -129,7 +129,9 @@
 
                     <div class="col-md-4 col-lt">
                       <p>{{'areas.name' | translate }}: *</p>
-                      <input id="areaId" maxlength="40" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="accInfoForm.controls['areaId']">
+                      <input id="areaName" maxlength="40" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="accInfoForm.controls['areaName']"
+                      [typeahead]="areasList" typeaheadOptionField="areaName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" >
+                      <span class="caret"></span>
                     </div>
                     <div class="col-md-4 col-lt">
                       <p>{{'accountinfo.phone' | translate}}: *</p>
@@ -140,6 +142,7 @@
                       <p>{{'accountinfo.mobile' | translate}}: *</p>
                       <input id="mobile" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                       #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['mobile']">
+                      <span class="caret hide-caret"></span>
                     </div>
                     <div class="col-md-4 col-lt">
                       <p>{{'accountinfo.email' | translate}}: *</p>
@@ -329,6 +332,7 @@
             <!-- <div class="input-group">
               <button type="submit" class="btn btn-primary mr-l-10">Save</button>
             </div> -->
+
           </div>
             <app-buttons  [title]="'accountinfo.title'" [deleteConfirmMsg]="'accountinfo.deleteConfirmationMessage'"
             [saveConfirmMsg]="'accountinfo.saveConfirmationMessage'" [saveInfoMsg]="'accountinfo.saveInformationMessage'"
@@ -337,7 +341,7 @@
             [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=false
             [hideDeleteBtn]=false [formObj]="accInfoForm" (saveRecord)="save()"
             (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-            (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+            (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()"></app-buttons>
 
 
           </div>

@@ -14,9 +14,9 @@
                 </div>
 
                 <div class="col-xs-6 col-rt">
-                    <p>{{'companies.code' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
-                    <input id="companyCode"  formControlName="companyCode" [typeahead]="typeaheadCompanyDataList"
-                    typeaheadOptionField="companyCode" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
+                    <p>{{'companies.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
+                    <input id="companyName"  formControlName="companyName" [typeahead]="typeaheadCompanyDataList"
+                    typeaheadOptionField="companyName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                     (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control capitalize">
                     <span class="caret"></span>
                 </div>
@@ -134,8 +134,7 @@
             </div>
 
             <div class="input-group">
-                <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate
-                    }}</button>
+                <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate}}</button>
                 <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
             </div>
         </form>
@@ -161,8 +160,7 @@
             </div>
 
             <div class="input-group">
-                <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate
-                    }}</button>
+                <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate}}</button>
                 <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
             </div>
         </form>
@@ -193,8 +191,8 @@
                 </div>
 
                 <div class="input-group">
-                  <p>{{'companygroup.name' | translate }}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
-                  <input id="companyGroup" maxlength="20" formControlName="companyGroupName" [typeahead]="typeaheadCompanyGroupDataList" typeaheadOptionField="companyGroup"
+                  <p>{{'companygroup.name' | translate }}: * &emsp;</p>
+                  <input id="companyGroupName" maxlength="20" formControlName="companyGroupName" [typeahead]="typeaheadCompanyGroupDataList" typeaheadOptionField="companyGroupName"
                   [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control capitalize"/>
                   <span class="caret"></span>
                 </div>
@@ -226,8 +224,7 @@
                 </div>
 
                 <div class="input-group">
-                    <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate
-                        }}</button>
+                    <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate}}</button>
                     <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
                 </div>
         </form>

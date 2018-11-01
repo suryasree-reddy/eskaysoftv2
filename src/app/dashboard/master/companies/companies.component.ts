@@ -161,9 +161,9 @@ export class CompaniesComponent implements OnInit {
         });
       } else {
         // console.log("this.companyForm.value.companyGroupId--", this.companyForm.value.companyGroupId);
-       // this.companyForm.value.companyGroupId = this.selectedTypeahead.companyGroupName;
+        this.companyForm.value.companyGroupId = this.selectedTypeahead.id;
         this.masterService.createRecord(this.endPoint, this.companyForm.value).subscribe(res => {
-          this.showInformationModal("Save");
+           this.showInformationModal("Save");
         }, (error) => {
           this.serverErrMsg();
         });

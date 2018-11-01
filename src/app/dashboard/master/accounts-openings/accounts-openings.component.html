@@ -21,15 +21,15 @@
 
             <div class="input-group">
               <p>Code: *</p>
-              <input id="code" #focus  (blur)="checkForDuplicateAccountCode()" class="form-control" [formControl]="accOpeningForm.controls['code']">
+              <input id="code" #focus [readonly]=true  (blur)="checkForDuplicateAccountCode()" class="form-control" [formControl]="accOpeningForm.controls['code']">
           </div>
           <div class="input-group">
               <p>Account Name: *</p>
-              <input id="accountName" [readonly]="nameFlag" (blur)="checkForDuplicateAccountName()" class="form-control" [formControl]="accOpeningForm.controls['accountName']">
+              <input id="accountName" [readonly]=true (blur)="checkForDuplicateAccountName()" class="form-control" [formControl]="accOpeningForm.controls['accountName']">
             </div>
             <div class="input-group">
                 <p>Town: *</p>
-                <input id="town" class="form-control" [formControl]="accOpeningForm.controls['town']">
+                <input id="town" [readonly]=true class="form-control" [formControl]="accOpeningForm.controls['town']">
               </div>
               <div class="input-group">
                   <p>Opening: *</p>

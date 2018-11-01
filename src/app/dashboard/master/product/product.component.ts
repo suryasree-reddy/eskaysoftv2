@@ -84,6 +84,7 @@ export class ProductComponent implements OnInit {
       boxQty: ['', Validators.required],
       productGroupName: ['', Validators.required],
       companyCode: ['', Validators.required],
+      companyName: ['', Validators.required],
       caseQty: ['', Validators.required],
       productCategoryName: ['', Validators.required],
       netRate: ['', Validators.required],
@@ -262,13 +263,13 @@ export class ProductComponent implements OnInit {
   save() {
     if (this.productForm.value.id) {
       this.masterService.updateRecord(this.endPoint, this.productForm.value).subscribe(res => {
-        this.successMsg();
+        this.showInformationModal("Save");
       }, (error) => {
         this.serverErrMsg();
       });
     } else {
       this.masterService.createRecord(this.endPoint, this.productForm.value).subscribe(res => {
-        this.successMsg();
+        this.showInformationModal("Save");
       }, (error) => {
         this.serverErrMsg();
       });
