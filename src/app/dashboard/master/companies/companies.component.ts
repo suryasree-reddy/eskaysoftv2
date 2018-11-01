@@ -70,7 +70,7 @@ export class CompaniesComponent implements OnInit {
 
     this.companyGroupForm = this.fb.group({
       id: [],
-      companyGroup: ['', Validators.required]
+      companyGroupName: ['', Validators.required]
     });
 
     //this.loadGridData();
@@ -89,7 +89,7 @@ export class CompaniesComponent implements OnInit {
   }
 
   checkForDuplicateCompanyGrp() {
-    this.duplicateCompanyGrp = this.masterService.hasDataExist(this.typeaheadDataList, 'companyGroup', this.companyGroupForm.value.companyGroup);
+    this.duplicateCompanyGrp = this.masterService.hasDataExist(this.typeaheadDataList, 'companyGroupName', this.companyGroupForm.value.companyGroupName);
     this.getDuplicateErrorMessages();
   }
 
@@ -125,7 +125,7 @@ export class CompaniesComponent implements OnInit {
 
     if (this.duplicateCompanyGrp) {
       this.childDuplicateMessage = "companygroup.duplicateNameErrorMessage";
-      this.childDuplicateMessageParam = this.companyGroupForm.value.companyGroup;
+      this.childDuplicateMessageParam = this.companyGroupForm.value.companyGroupName;
     }
   }
 
@@ -160,8 +160,8 @@ export class CompaniesComponent implements OnInit {
           this.serverErrMsg();
         });
       } else {
-        console.log("this.companyForm.value.companyGroupId--", this.companyForm.value.companyGroupId);
-        //this.companyForm.value.companyGroupId = this.selectedTypeahead.id;
+        // console.log("this.companyForm.value.companyGroupId--", this.companyForm.value.companyGroupId);
+       // this.companyForm.value.companyGroupId = this.selectedTypeahead.companyGroupName;
         this.masterService.createRecord(this.endPoint, this.companyForm.value).subscribe(res => {
           this.showInformationModal("Save");
         }, (error) => {

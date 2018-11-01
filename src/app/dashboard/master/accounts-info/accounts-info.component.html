@@ -360,7 +360,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form [formGroup]="subScheduleForm" (ngSubmit)="save()" autocomplete="off">
+          <form [formGroup]="subScheduleForm" (ngSubmit)="saveSubSchedule()" autocomplete="off">
 
             <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
             [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
@@ -371,7 +371,7 @@
               <input #focus id="subScheduleName" maxlength="40" [readonly]="nameFlag" class="form-control capitalize" (blur)="checkForDuplicateSubScheduleName()" [formControl]="subScheduleForm.controls['subScheduleName']">
             </div>
               <div class="input-group">
-                <p>{{'schedule.name' | translate}}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(scheduleTemplate)">create new</a>)</p>
+                <p>{{'schedule.name' | translate}}: * &emsp; </p>
                 <input id="scheduleType" maxlength="40" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="scheduleName"
                 [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control capitalize">
               </div><span class="caret"></span>
@@ -392,7 +392,7 @@
         </div>
       </ng-template>
 
-      <ng-template #scheduleTemplate>
+      <!-- <ng-template #scheduleTemplate>
         <div class="modal-header">
           <h4 class="modal-title pull-left">{{'schedule.create' | translate}}</h4>
           <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -430,7 +430,7 @@
           </form>
 
         </div>
-      </ng-template>
+      </ng-template> -->
 
 
       <ng-template #districtTemplate>
@@ -441,7 +441,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form [formGroup]="districtsForm" autocomplete="off">
+            <form [formGroup]="districtsForm" (ngSubmit)="saveDistrict()" autocomplete="off">
 
               <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
               [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
@@ -449,10 +449,10 @@
 
                <div class="input-group">
                 <p>{{'districts.name' | translate }}: *</p>
-                <input id="districtName" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateDistrictName()"  class="form-control capitalize" [formControl]="districtsForm.controls['districtName']">
+                <input id="districtName" maxlength="20" #focus [readonly]="nameFlag" class="form-control capitalize" (blur)="checkForDuplicateDistrictName()"  [formControl]="districtsForm.controls['districtName']">
               </div>
                 <div class="input-group">
-                  <p>{{'states.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(stateTemplate)">create new</a>)</p>
+                  <p>{{'states.name' | translate }}: * &emsp;</p>
                   <input id="stateName" maxlength="20" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="stateName"
                     [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control capitalize">
                     <span class="caret"></span>
@@ -476,7 +476,7 @@
           </div>
         </ng-template>
 
-
+<!-- 
       <ng-template #stateTemplate>
         <div class="modal-header">
           <h4 class="modal-title pull-left">{{'states.create' | translate }}</h4>
@@ -507,14 +507,14 @@
                 [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
                   <span class="caret"></span>
             </div>
-            <!-- <app-buttons [title]="'districts.title'" [deleteConfirmMsg]="'districts.deleteConfirmationMessage'"
+            <app-buttons [title]="'districts.title'" [deleteConfirmMsg]="'districts.deleteConfirmationMessage'"
                    [saveConfirmMsg]="'districts.saveConfirmationMessage'" [saveInfoMsg]="'districts.saveInformationMessage'"
                    [endPoint]="endPoint"
                    [deleteInfoMsg]="'districts.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
                    [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
                    [hideDeleteBtn]=true [formObj]="districtsForm" (saveRecord)="save()"
                    (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-                   (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons> -->
+                   (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
 
                    <div class="input-group">
                     <button type="button" (click)="resetStatesForm()" class="btn btn-primary">Reset</button>
@@ -524,4 +524,4 @@
 
 
         </div>
-      </ng-template>
+      </ng-template> -->

@@ -87,7 +87,7 @@
                   </div>
                   <div class="col-xs-3 col-rt">
                     <p>{{'product.prodcode' | translate}}: *</p>
-                    <input id="code" type="number" min="0" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                    <input id="code" type="text" min="0" maxlength="5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                     class="form-control" [formControl]="productForm.controls['code']">
                   </div>
                 </div>

@@ -94,8 +94,8 @@
 
         <div class="input-group">
           <p>{{'companygroup.name' | translate }}: *</p>
-          <input id="companyGroup" maxlength="20" #focus (blur)="checkForDuplicateCompanyGrp()" class="form-control capitalize"
-          [formControl]="companyGroupForm.controls['companyGroup']">
+          <input id="companyGroupName" maxlength="20" #focus (blur)="checkForDuplicateCompanyGrp()" class="form-control capitalize"
+          [formControl]="companyGroupForm.controls['companyGroupName']">
         </div>
 
             <div class="input-group">
