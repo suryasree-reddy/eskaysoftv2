@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-xs-5">
             <h3>{{'product.title' | translate}}</h3>
-            <form [formGroup]="productForm" (ngSubmit)="saveForm()" autocomplete="off">
+            <form [formGroup]="productForm"  autocomplete="off">
                 <app-errormessages [formRequiredError]="formRequiredError"
                         [formSuccess]="formSuccess" [formServerError]="formServerError"
                         [duplicateMessage]="duplicateMessage"
@@ -78,7 +78,7 @@
                     <p>{{'product.tax' | translate}}: *</p>
                     <input id="tax" formControlName="tax" [typeahead]="typeaheadTaxDataList" typeaheadOptionField="tax"
                     [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTaxTypeahead($event)"
-                    class="form-control" />
+                    class="form-control">
                     <span class="caret"></span>
                   </div>
                   <div class="col-xs-3 col-rt">
@@ -87,8 +87,8 @@
                   </div>
                   <div class="col-xs-3 col-rt">
                     <p>{{'product.prodcode' | translate}}: *</p>
-                    <input id="code" type="text" min="0" maxlength="5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                    class="form-control" [formControl]="productForm.controls['code']">
+                    <input id="productcode" type="text" min="0" maxlength="5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                    class="form-control" [formControl]="productForm.controls['productcode']">
                   </div>
                 </div>
 

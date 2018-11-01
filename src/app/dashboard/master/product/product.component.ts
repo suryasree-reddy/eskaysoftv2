@@ -77,13 +77,12 @@ export class ProductComponent implements OnInit {
       id: [],
       taxId: [],
       companyId: [],
-      productGroupId: [],
-      productCategoryId: [],
+      productgroupId: [],
+      productcategoryId: [],
       name: ['', Validators.required],
       packing: ['', Validators.required],
       boxQty: ['', Validators.required],
       productGroupName: ['', Validators.required],
-      companyCode: ['', Validators.required],
       companyName: ['', Validators.required],
       caseQty: ['', Validators.required],
       productCategoryName: ['', Validators.required],
@@ -93,7 +92,7 @@ export class ProductComponent implements OnInit {
       free: ['', Validators.required],
       contents: ['', Validators.required],
       tax: ['', Validators.required],
-      code: ['', Validators.required]
+      productcode: ['', Validators.required]
     });
 
     this.productGroupForm = this.fb.group({
@@ -161,7 +160,7 @@ export class ProductComponent implements OnInit {
 
   loadSelectedGroupTypeahead(event) {
     this.selectedGroupTypeahead = event.item;
-    this.productForm.patchValue({ productGroupId: event.item.id });
+    this.productForm.patchValue({ productgroupId: event.item.id });
   }
 
   loadSelectedCompanyTypeahead(event) {
@@ -171,11 +170,12 @@ export class ProductComponent implements OnInit {
 
   loadSelectedCategoryTypeahead(event) {
     this.selectedCategoryTypeahead = event.item;
-    this.productForm.patchValue({ productCategoryId: event.item.id });
+    this.productForm.patchValue({ productcategoryId: event.item.id });
   }
 
 
   loadSelectedTaxTypeahead(event) {
+    console.log("event--", event)
     this.selectedTaxTypeahead = event.item;
     this.productForm.patchValue({ taxId: event.item.id });
   }
@@ -251,14 +251,6 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  saveForm() {
-    this.formRequiredError = false;
-    if (this.productForm.valid && this.duplicateMessage == null) {
-      this.showConfirmationModal("Save");
-    } else {
-      this.requiredErrMsg()
-    }
-  }
 
   save() {
     if (this.productForm.value.id) {
@@ -377,7 +369,7 @@ export class ProductComponent implements OnInit {
   editable(s) {
     this.gridSelectedRow = s;
     this.productForm.reset(s);
-    this.companyForm.reset(s);
+  //  this.companyForm.reset(s);
     this.nameFlag = true;
     this.formRequiredError = false;
     this.duplicateMessage = null;
