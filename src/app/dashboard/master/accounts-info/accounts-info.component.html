@@ -54,7 +54,7 @@
   <div class="row">
     <div class="col-xs-12">
       <h3>{{'accountinfo.title' | translate }}</h3>
-      <form [formGroup]="accInfoForm" autocomplete="off">
+      <form [formGroup]="accInfoForm" (ngSubmit)="saveForm()" autocomplete="off">
 
       <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="formServerError"
       [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
@@ -74,85 +74,85 @@
                   	<!-- General Info Start -->
                   	<form class="form">
 
-                  	<div class="col-md-4 col-lt">
+                  	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.name' | translate}}: *</p>
                   		<input id="accountName"  maxlength="50" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="accInfoForm.controls['accountName']">
                   	</div>
 
-                  	<div class="col-md-4 col-lt">
+                  	<div class="col-md-4 col-3-lt">
                   		<p>{{'subschedule.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
-                  		<input id="subScheduleName" maxlength="40" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="accInfoForm.controls['subScheduleName']"
+                  		<input id="subScheduleName" maxlength="40" class="form-control capitalize" [formControl]="accInfoForm.controls['subScheduleName']"
                   		[typeahead]="subScheduleList" typeaheadOptionField="subScheduleName" [typeaheadOptionsLimit]="7"
                   		[typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSubSchedule($event)" >
                   		<span class="caret" ></span>
                   	</div>
 
-                  	<div class="col-md-4 col-lt"  >
+                  	<div class="col-md-4 col-3-lt"  >
                   		<p>{{'schedule.name' | translate}}: * &emsp; </p>
                   		<input id="scheduleName" [readonly]="true" maxlength="40" [formControl]="accInfoForm.controls['scheduleName']" class="form-control capitalize">
                   		<span class="caret hide-caret"></span>
                   	</div>
 
-                  	<div class="col-md-4 col-lt"  >
+                  	<div class="col-md-4 col-3-lt"  >
                   		<p>{{'accountinfo.address1' | translate}}: *</p>
                   		<input id="address1" maxlength="50" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['address1']">
                   	</div>
 
-                  	<div class="col-md-4 col-lt">
+                  	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.address2' | translate}}: *</p>
                   		<input id="address2" maxlength="50" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['address2']">
                   	</div>
 
-                  	<div class="col-md-4 col-lt">
+                  	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.town' | translate}}: *</p>
                   		<input id="town" maxlength="20" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['town']">
                   	</div>
 
-                  	<div class="col-md-4 col-lt">
+                  	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.pin' | translate}}: *</p>
                   		<input id="pin" type="number"  maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                   		#focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['pin']">
                   	</div>
 
-                  	<div class="col-md-4 col-lt">
+                  	<div class="col-md-4 col-3-lt">
                   		<p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate)">create new</a>)</p>
-                  		<input id="districtName" maxlength="20" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="accInfoForm.controls['districtName']"
+                  		<input id="districtName" maxlength="20" class="form-control capitalize" [formControl]="accInfoForm.controls['districtName']"
                   		[typeahead]="districtsList" typeaheadOptionField="districtName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)" >
                   		<span class="caret"></span>
                   	</div>
 
-                  	<div class="col-md-4 col-lt">
+                  	<div class="col-md-4 col-3-lt">
                   		<p>{{'states.name' | translate }}: *</p>
                   		<input id="stateName" maxlength="20" [readonly]="true" [formControl]="accInfoForm.controls['stateName']" class="form-control capitalize">
                   		<span class="caret hide-caret"></span>
                   	</div>
 
-                  	<div class="col-md-4 col-lt">
+                  	<div class="col-md-4 col-3-lt">
                   		<p>{{'areas.name' | translate }}: *</p>
-                  		<input id="areaName" maxlength="40" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="accInfoForm.controls['areaName']"
+                  		<input id="areaName" maxlength="40"  class="form-control capitalize" [formControl]="accInfoForm.controls['areaName']"
                   		[typeahead]="areasList" (typeaheadOnSelect)="onSelectArea($event)" typeaheadOptionField="areaName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
                   		<span class="caret"></span>
                   	</div>
 
-                  	<div class="col-md-4 col-lt">
+                  	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.phone' | translate}}: *</p>
                   		<input id="phone" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                   		#focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['phone']">
                   	</div>
 
-                  	<div class="col-md-4 col-lt">
+                  	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.mobile' | translate}}: *</p>
                   		<input id="mobile" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                   		#focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['mobile']">
                   		<span class="caret hide-caret"></span>
                   	</div>
 
-                  	<div class="col-md-4 col-lt">
+                  	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.email' | translate}}: *</p>
                   		<input id="email" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['email']">
                   	</div>
 
-                  	<div class="col-md-4 col-lt">
+                  	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.shortname' | translate}}: *</p>
                   		<input id="shortName"  maxlength="6" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['shortName']">
                   	</div>
@@ -166,47 +166,47 @@
 
                   <form class="form">
 
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.licno1' | translate}}: *</p>
                       <input id="licNo1" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['licNo1']">
                     </div>
 
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.licno2' | translate}}: *</p>
                       <input id="licNo2" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['licNo2']">
                     </div>
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.licexpiry' | translate}}: *</p>
                       <input id="licExpiry" type="date" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['licExpiry']">
                     </div>
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.retlicno1' | translate}}: *</p>
                       <input id="retLicNo1" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['retLicNo1']">
                     </div>
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.retlicno2' | translate}}: *</p>
                       <input id="retLicNo2" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['retLicNo2']">
                     </div>
 
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.retexpiry' | translate}}: *</p>
                       <input id="retExpiry" type="date" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['retExpiry']">
                     </div>
 
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.foodlicno1' | translate}}: *</p>
                       <input id="foodLicNo" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['foodLicNo']">
                     </div>
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.otherlic' | translate}}: *</p>
                       <input id="otherLicense" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['otherLicense']">
                     </div>
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.otherlicexp' | translate}}: *</p>
                       <input id="otherLicenseExpiry" type="date" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['otherLicenseExpiry']">
                     </div>
 
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.gsttype' | translate}}: *</p>
 
                         <input id="gstType" maxlength="5" class="form-control"  [formControl]="accInfoForm.controls['gstType']" [typeahead]="accGstType"
@@ -216,19 +216,19 @@
 
                     </div>
 
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.gstin' | translate}}: *</p>
                       <input id="gstIN" maxlength="15" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['gstIN']">
                     </div>
 
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.naturegst' | translate}}: *</p>
                         <input id="natureOfGST" maxlength="9"  class="form-control" [formControl]="accInfoForm.controls['natureOfGST']"
                           [typeahead]="accNatureOfGst" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
                           <span class="caret"></span>
                     </div>
 
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.uinNo' | translate}}: *</p>
                       <input id="uin" maxlength="25" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['uin']">
                     </div>
@@ -244,20 +244,20 @@
 
                   <form class="form">
 
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.crlimit' | translate}}: *</p>
                       <input id="creditLimit" type="number" maxlength="12" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                        #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['creditLimit']">
                     </div>
 
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.saletype' | translate}}: *</p>
                       <input id="saleType" maxlength="6"  class="form-control" [formControl]="accInfoForm.controls['saleType']"
                       [typeahead]="accSaleType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
                       <span class="caret"></span>
                     </div>
 
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.custType' | translate}}: *</p>
                       <input id="customerType"  maxlength="10"  class="form-control" [formControl]="accInfoForm.controls['customerType']"
                       [typeahead]="accCustomerType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
@@ -265,7 +265,7 @@
                     </div>
 
 
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                      <p>{{'accountinfo.duedays' | translate}}: *</p>
                       <input id="dueDays" type="number" maxlength="3"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                       #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['dueDays']">
@@ -282,39 +282,39 @@
 
          <form class="form">
 
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.contperson' | translate}}: *</p>
                       <input id="contactPerson" maxlength="30" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['contactPerson']">
                     </div>
 
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.hsncode' | translate}}: *</p>
                       <input id="hsnCode" type="number" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                       #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['hsnCode']">
                     </div>
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.saccode' | translate}}: *</p>
                       <input id="sacCode" type="number" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                        #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['sacCode']">
                     </div>
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.rateoftax' | translate}}: *</p>
                       <input id="rateOfTax" type="number" maxlength="5" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                        #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['rateOfTax']">
                     </div>
 
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.openbalnc' | translate}}: *</p>
                       <input id="openingBalance" type="number" maxlength="12" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                        #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['openingBalance']">
                     </div>
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.opentype' | translate}}: *</p>
                       <input id="openingType" maxlength="6" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['openingType']"
                       [typeahead]="accOpeningType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
                       <span class="caret"></span>
                   </div>
-                    <div class="col-md-4 col-lt">
+                    <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.spclremark' | translate}}: *</p>
                       <input id="specialRemarks" maxlength="60" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['specialRemarks']">
                     </div>
@@ -334,9 +334,9 @@
 
             <!-- Panel End -->
 
-            <!-- <div class="input-group">
+          <!--   <div class="input-group">
               <button type="submit" class="btn btn-primary mr-l-10">Save</button>
-            </div> -->
+            </div>-->
 
           </div>
             <app-buttons  [title]="'accountinfo.title'" [deleteConfirmMsg]="'accountinfo.deleteConfirmationMessage'"

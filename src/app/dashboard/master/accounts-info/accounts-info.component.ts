@@ -27,15 +27,8 @@ import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 export class AccountsInfoComponent implements OnInit {
   public accInfoForm: FormGroup;
   public subScheduleForm: FormGroup;
-  public scheduleForm: FormGroup;
   public districtsForm: FormGroup;
-  public statesForm: FormGroup;
   private endPoint: string = "accountinformation/";
-  public gridDataList: any = [];
-  public typeaheadDataList: any = [];
-  public gridColumnNamesList;
-  public gridSelectedRow;
-  public selectedTypeahead: any;
   public deleteFlag: boolean = true;
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
@@ -48,7 +41,6 @@ export class AccountsInfoComponent implements OnInit {
   public childDuplicateMessageParam: string = null;
   public duplicateMessageParam: string = null;
   public nameFlag;
-  public statesListColumns;
   public scheduleList: any = [];
   public subScheduleList: any = [];
   public districtsList: any = [];
@@ -56,25 +48,16 @@ export class AccountsInfoComponent implements OnInit {
   public areasList: any = [];
   public selectedSchedule: any;
   public selectedSubSchedule: any;
-  public selectedState: any;
   public selectedDistrict: any;
   public selectedArea:any;
-  public distName;
-  public stateZone: any[];
   public accGstType: any[];
   public accNatureOfGst: any[];
   public accCustomerType: any[];
   public accSaleType: any[];
   public accOpeningType: any[];
 
-  scheduleTypes: any;
-  private duplicateSchName: boolean = false;
-  private duplicateSchIndex: boolean = false;
   private duplicateSubSchName: boolean = false;
-  private duplicateStateName: boolean = false;
-  private duplicateStateCode: boolean = false;
   private duplicateDistrictName: boolean = false;
-  private duplicateDistrictCode: boolean = false;
 
   modalRef: BsModalRef;
   message: string;
@@ -88,22 +71,15 @@ export class AccountsInfoComponent implements OnInit {
     private sharedDataService: SharedDataService,
     private masterService: MasterService) { translate.setDefaultLang('messages.en'); }
 
-  // valueChange(selectedRow: any[]): void {
-  //   this.editable(selectedRow);
-  // }
-  // onInitialDataLoad(dataList:any[]){
-  //   this.subScheduleList = dataList;
-  // }
-
   ngOnInit() {
 
     this.accInfoForm = this.fb.group({
       id:[],
-      subScheduleId: [],
-      scheduleId: [],
-      stateId: [],
-      areaId: [],
-      districtId: [],
+      subScheduleId:[],
+      scheduleId:[],
+      stateId:[],
+      areaId:[],
+      districtId:[],
       accountName: ['', Validators.required],
       subScheduleName: ['', Validators.required],
       scheduleName: ['', Validators.required],
@@ -163,13 +139,11 @@ export class AccountsInfoComponent implements OnInit {
     this.loadDistrictData();
     this.loadAreaData();
     // this.focusField.nativeElement.focus();
-    this.scheduleTypes = this.sharedDataService.getSharedCommonJsonData().ScheduleTypes;
     this.accGstType = this.sharedDataService.getSharedCommonJsonData().GstType;
     this.accNatureOfGst = this.sharedDataService.getSharedCommonJsonData().NatureOfGst;
     this.accSaleType = this.sharedDataService.getSharedCommonJsonData().SaleType;
     this.accCustomerType = this.sharedDataService.getSharedCommonJsonData().CustomerType;
     this.accOpeningType = this.sharedDataService.getSharedCommonJsonData().OpeningType;
-    this.stateZone = this.sharedDataService.getSharedCommonJsonData().StateZone;
 
   }
 
@@ -191,18 +165,11 @@ export class AccountsInfoComponent implements OnInit {
     })
   }
 
-  onSelectState(event) {
-    this.accInfoForm.patchValue({ stateName: event.item.stateName })
-    this.selectedState = event.item;
-  }
-
   onSelectDistrict(event) {
     this.selectedDistrict = event.item;
     this.accInfoForm.patchValue({ stateName: this.selectedDistrict.stateName });
-      this.accInfoForm.patchValue({ districtId: this.selectedDistrict.id });
-        this.accInfoForm.patchValue({ stateId: this.selectedDistrict.stateId });
-  //  this.accInfoForm.value.districtId = this.selectedDistrict.id;
-  //  this.accInfoForm.value.stateId = this.selectedDistrict.stateId;
+    this.accInfoForm.patchValue({ districtId: this.selectedDistrict.id });
+    this.accInfoForm.patchValue({ stateId: this.selectedDistrict.stateId });
   }
 
   onSelectArea(event) {
@@ -213,8 +180,8 @@ export class AccountsInfoComponent implements OnInit {
 
   onSelectSubSchedule(event) {
     this.selectedSubSchedule = event.item;
-    this.accInfoForm.value.subScheduleId = this.selectedSubSchedule.id;
-    this.accInfoForm.value.scheduleId = this.selectedSubSchedule.scheduleId;
+    this.accInfoForm.patchValue({ subScheduleId: this.selectedSubSchedule.id });
+    this.accInfoForm.patchValue({ scheduleId: this.selectedSubSchedule.scheduleId });
     this.accInfoForm.patchValue({ scheduleName: this.selectedSubSchedule.scheduleName });
     const temp = this.selectedSubSchedule.id;
     const selectedSubScheduleNameList = _.filter(this.subScheduleList, function(o) { return o.subScheduleId == temp });
@@ -279,20 +246,6 @@ export class AccountsInfoComponent implements OnInit {
     this.subScheduleForm.reset();
   }
 
-  resetScheduleForm() {
-    this.scFormRequiredError = false;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
-    this.scheduleForm.reset();
-  }
-
-  resetStatesForm() {
-    this.childDuplicateMessageParam = null;
-    this.childDuplicateMessage = null;
-    this.scFormServerError = this.scFormRequiredError = this.scFormSuccess = false;
-    this.statesForm.reset();
-  }
-
   resetDistrictsForm() {
     this.childDuplicateMessageParam = null;
     this.childDuplicateMessage = null;
@@ -302,28 +255,6 @@ export class AccountsInfoComponent implements OnInit {
 
   checkForDuplicateSubScheduleName() {
     this.duplicateSubSchName = this.masterService.hasDataExist(this.subScheduleList, 'subScheduleName', this.subScheduleForm.value.subScheduleName);
-    this.getDuplicateErrorMessages();
-  }
-
-  validateFormOnBlur() {
-    this.formRequiredError = false;
-    this.duplicateSchIndex = this.masterService.hasDataExist(this.scheduleList, 'scheduleIndex', parseInt(this.scheduleForm.value.scheduleIndex));
-    this.getDuplicateErrorMessages();
-  }
-
-  checkForDuplicateStateCode() {
-    this.duplicateStateCode = this.masterService.hasDataExist(this.statesList, 'stateCode', parseInt(this.statesForm.value.stateCode));
-    this.getDuplicateErrorMessages();
-  }
-
-  checkForDuplicateStateName() {
-    this.duplicateStateName = this.masterService.hasDataExist(this.statesList, 'stateName', this.statesForm.value.stateName);
-    if (this.duplicateStateName) {
-      const temp = this.statesForm.value.stateName;
-      const stateObj = _.filter(this.statesList, function(o) { return o.stateName.toLowerCase() == temp.toLowerCase() });
-      this.statesForm.patchValue({ stateCode: stateObj[0].stateCode })
-      this.statesForm.patchValue({ zone: stateObj[0].zone })
-    }
     this.getDuplicateErrorMessages();
   }
 
@@ -352,7 +283,24 @@ export class AccountsInfoComponent implements OnInit {
 
   }
 
+saveForm(){
+  this.accInfoForm.value.subScheduleId = this.selectedSubSchedule.id;
+   this.accInfoForm.value.scheduleId = this.selectedSubSchedule.scheduleId;
+   this.accInfoForm.value.areaId = this.selectedArea.id;
+   this.accInfoForm.value.districtId = this.selectedDistrict.id;
+   this.accInfoForm.value.stateId = this.selectedDistrict.stateId;
+     console.log("this.selectedSubSchedule ", this.selectedSubSchedule, "::this.selectedArea--", this.selectedArea, ":::this.selectedDistrict--", this.selectedDistrict);
+console.log("this.this.accInfoForm.value ", this.accInfoForm.value);
+this.buttonsComponent.test()
+this.buttonsComponent.showConfirmModal("Save", "'accountinfo.saveConfirmationMessage'", "'accountinfo.saveInformationMessage'",
+  "'accountinfo.title'", this.accInfoForm, this.endPoint, "save()", "successMsg()" );
 
+  /*if (this.accInfoForm.value.id) {
+    console.log("got it");
+  }else{
+    this.requiredErrMsg();
+  }*/
+}
 
   save() {
     if (this.accInfoForm.value.id) {
@@ -410,8 +358,6 @@ export class AccountsInfoComponent implements OnInit {
     this.duplicateMessageParam = null;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
-    this.duplicateSchIndex = false;
-    this.duplicateSchName = false;
     this.duplicateSubSchName = false;
     this.duplicateDistrictName = false;
     // this.focusField.nativeElement.focus();
