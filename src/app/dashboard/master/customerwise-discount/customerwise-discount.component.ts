@@ -117,6 +117,15 @@ export class CustomerwiseDiscountComponent implements OnInit {
 loadSelectedCustomerTypeahead(event) {
   this.selectedCustomerTypeahead = event.item;
   this.customerDiscountForm.patchValue({ accountInformationId: this.selectedCustomerTypeahead.id });
+  this.loadGridDataById();
+}
+
+loadGridDataById() {
+  this.masterService.getData("customerwisediscount/accountinfo/"+this.selectedCustomerTypeahead.id);
+  this.masterService.dataObject.subscribe(list => {
+    this.gridDataList = list;
+    localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
+  });
 }
 
   loadSelectedCompanyTypeahead(event) {
@@ -188,6 +197,8 @@ loadSelectedCustomerTypeahead(event) {
       this.getDuplicateErrorMessages();
     }
   }
+
+
 
   loadGridData() {
     this.masterService.getData(this.endPoint);
