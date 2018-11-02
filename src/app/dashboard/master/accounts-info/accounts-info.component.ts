@@ -29,6 +29,7 @@ export class AccountsInfoComponent implements OnInit {
   public subScheduleForm: FormGroup;
   public districtsForm: FormGroup;
   private endPoint: string = "accountinformation/";
+  private taxEndPoint: string = "tax/";
   public deleteFlag: boolean = true;
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
@@ -55,7 +56,8 @@ export class AccountsInfoComponent implements OnInit {
   public accCustomerType: any[];
   public accSaleType: any[];
   public accOpeningType: any[];
-
+  public selectedTaxTypeahead: any;
+  public typeaheadTaxDataList: any = [];
   private duplicateSubSchName: boolean = false;
   private duplicateDistrictName: boolean = false;
 
@@ -138,6 +140,7 @@ export class AccountsInfoComponent implements OnInit {
     this.loadSubScheduleData();
     this.loadDistrictData();
     this.loadAreaData();
+    this.loadTaxTypeaheadData();
     // this.focusField.nativeElement.focus();
     this.accGstType = this.sharedDataService.getSharedCommonJsonData().GstType;
     this.accNatureOfGst = this.sharedDataService.getSharedCommonJsonData().NatureOfGst;
@@ -145,6 +148,12 @@ export class AccountsInfoComponent implements OnInit {
     this.accCustomerType = this.sharedDataService.getSharedCommonJsonData().CustomerType;
     this.accOpeningType = this.sharedDataService.getSharedCommonJsonData().OpeningType;
 
+  }
+
+  loadTaxTypeaheadData() {
+    this.masterService.getParentData(this.taxEndPoint).subscribe(list => {
+      this.typeaheadTaxDataList = list;
+    });
   }
 
   loadSubScheduleData() {
@@ -165,6 +174,10 @@ export class AccountsInfoComponent implements OnInit {
     })
   }
 
+  loadSelectedTaxTypeahead(event) {
+    this.selectedTaxTypeahead = event.item;
+    this.accInfoForm.patchValue({ taxId: event.item.id });
+  }
   onSelectDistrict(event) {
     this.selectedDistrict = event.item;
     this.accInfoForm.patchValue({ stateName: this.selectedDistrict.stateName });

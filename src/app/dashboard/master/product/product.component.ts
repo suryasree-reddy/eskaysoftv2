@@ -175,7 +175,6 @@ export class ProductComponent implements OnInit {
 
 
   loadSelectedTaxTypeahead(event) {
-    console.log("event--", event)
     this.selectedTaxTypeahead = event.item;
     this.productForm.patchValue({ taxId: event.item.id });
   }
@@ -237,9 +236,9 @@ export class ProductComponent implements OnInit {
       const temp = this.companyForm.value.companyCode;
       const companyObj = _.filter(this.gridDataList, function(o) { return o.companyCode.toLowerCase() == temp.toLowerCase() });
       this.companyForm.patchValue({ companyCode: companyObj[0].companyCode })
-      
+
     }
-   
+
     this.getDuplicateErrorMessages();
   }
 

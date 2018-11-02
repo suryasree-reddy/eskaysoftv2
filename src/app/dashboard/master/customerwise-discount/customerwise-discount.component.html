@@ -7,13 +7,16 @@
                     [formServerError]="formServerError" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
                 <div class="input-group">
-                    <p>{{'customerdiscount.name' | translate}}</p>
-                    <input id="customer" #focus [readonly]="nameFlag" (blur)="checkForDuplicateCustomerName()" class="form-control capitalize"
-                        [formControl]="customerDiscountForm.controls['customer']">
+                    <p>{{'customerdiscount.name' | translate}}: </p>
+                    <input id="accountName" formControlName="accountName" [typeahead]="typeaheadCustomerDataList"
+                        typeaheadOptionField="accountName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
+                        (typeaheadOnSelect)="loadSelectedCustomerTypeahead($event)" class="form-control capitalize">
+                    <span class="caret"></span>
                 </div>
+
                 <div class="input-group">
                     <p>{{'companies.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
-                    <input id="companyCode" formControlName="companyCode" [typeahead]="typeaheadCompanyDataList"
+                    <input id="companyName" formControlName="companyName" [typeahead]="typeaheadCompanyDataList"
                         typeaheadOptionField="companyName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                         (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control capitalize">
                     <span class="caret"></span>
@@ -25,10 +28,10 @@
                    <input name="discountType" formControlName="discountType" type="radio" [value]="false" [checked]="!discountType"/> No
                 </div>
 
-                <div *ngIf="customerDiscountForm.controls['discountType'].value" class="input-group" >
+                <div class="input-group" >
                     <p>{{'customerdiscount.disc' | translate}}: *</p>
-                    <input id="discount" type="number" min="0" maxlength="5" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                     #focus [readonly]="nameFlag" class="form-control" [formControl]="customerDiscountForm.controls['discount']">
+                    <input id="disc" type="number" min="0" maxlength="5" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                     #focus [readonly]="nameFlag" class="form-control" [formControl]="customerDiscountForm.controls['disc']">
                 </div>
                 <!-- <div class="input-group btn-pad">
                     <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
@@ -50,7 +53,7 @@
 
         <div class="col-md-7">
             <br /><br />
-            <app-synectiks-common-grid [endPoint]="endPoint" [rowSelection]="'multiple'" (intialLoad)='onInitialDataLoad($event)'
+            <app-synectiks-common-grid [endPoint]="endPoint" [rowSelection]="'single'" (intialLoad)='onInitialDataLoad($event)'
                 [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'CustomerDiscountColumns'"></app-synectiks-common-grid>
         </div>
     </div>

@@ -4,42 +4,34 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
-import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
-import * as _ from 'lodash';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-accounts-openings',
   templateUrl: './accounts-openings.component.html'
 })
+
 export class AccountsOpeningsComponent implements OnInit {
 
   public accOpeningForm: FormGroup;
   private endPoint: string = "accountinformation/";
-  // private accEndPoint: string = "accountinformation/";
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public gridDataList: any = [];
-  public accType: any[];
+  public openingType: any[];
   public editAccount;
   public deleteFlag: boolean = true;
   public nameFlag;
-  private prevAccCode: string = null;
-  private duplicateAccountName: boolean = false;
-  private duplicateAccountCode: boolean = false;
-  public duplicateMessage: string = null;
-  public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
-
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
-    private sharedDataService:SharedDataService,
+    private sharedDataService: SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
@@ -55,15 +47,13 @@ export class AccountsOpeningsComponent implements OnInit {
   ngOnInit() {
     this.accOpeningForm = this.fb.group({
       id: [],
-      code: ['', Validators.required],
+      shortName: ['', Validators.required],
       accountName: ['', Validators.required],
       town: ['', Validators.required],
-      opening: ['', Validators.required],
-      type: ['', Validators.required]
+      openingBalance: ['', Validators.required],
+      openingType: ['', Validators.required]
     });
-    this.loadGridData();
-  //  this.focusField.nativeElement.focus();
-      this.accType =  this.sharedDataService.getSharedCommonJsonData().AccountType;
+    this.openingType = this.sharedDataService.getSharedCommonJsonData().AccountType;
   }
 
   loadGridData() {
@@ -72,40 +62,6 @@ export class AccountsOpeningsComponent implements OnInit {
       this.gridDataList = list;
       localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
     });
-  }
-
-  getDuplicateErrorMessages(): void {
-    this.formRequiredError = false;
-    this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
-    if (this.duplicateAccountName) {
-      this.duplicateMessage = "accountopenings.duplicateNameErrorMessage";
-      this.duplicateMessageParam = this.accOpeningForm.value.accountName;
-    } else if (this.duplicateAccountCode) {
-      this.duplicateMessage = "accountopenings.duplicateCodeErrorMessage";
-      this.duplicateMessageParam = this.accOpeningForm.value.code;
-    }
-  }
-
-  checkForDuplicateAccountName() {
-    if (!this.nameFlag) {
-      this.duplicateAccountName = this.masterService.hasDataExist(this.gridDataList, 'accountName', this.accOpeningForm.value.accountName);
-      if (this.duplicateAccountName) {
-        const temp = this.accOpeningForm.value.accountName;
-        const accObj = _.filter(this.gridDataList, function(o) { return o.accountName.toLowerCase() == temp.toLowerCase() });
-        this.accOpeningForm.patchValue({ code: accObj[0].code })
-        // this.accOpeningForm.patchValue({ type: accObj[0].type })
-      }
-      this.getDuplicateErrorMessages();
-    }
-  }
-
-  checkForDuplicateAccountCode() {
-    this.duplicateAccountCode = false;
-    if (this.prevAccCode != this.accOpeningForm.value.code) {
-      this.duplicateAccountCode = this.masterService.hasDataExist(this.gridDataList, 'code', this.accOpeningForm.value.code);
-    }
-    this.getDuplicateErrorMessages();
   }
 
   save() {
@@ -123,10 +79,8 @@ export class AccountsOpeningsComponent implements OnInit {
   }
 
   requiredErrMsg() {
-    if (this.duplicateMessage == null) {
-      this.formRequiredError = true;
-      this.formSuccess = this.formServerError = false;
-    }
+    this.formRequiredError = true;
+    this.formSuccess = this.formServerError = false;
   }
 
   serverErrMsg() {
@@ -136,10 +90,7 @@ export class AccountsOpeningsComponent implements OnInit {
 
   resetForm() {
     this.accOpeningForm.reset();
-    this.duplicateAccountName = false;
-    this.duplicateAccountCode = false;
     this.editAccount = null;
-    this.prevAccCode = null;
     this.deleteFlag = true;
     this.nameFlag = false;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
@@ -149,14 +100,10 @@ export class AccountsOpeningsComponent implements OnInit {
 
   editable(s) {
     this.editAccount = s;
-    this.prevAccCode = s.code
     this.accOpeningForm.reset(s);
     this.deleteFlag = !this.editAccount.deleteFlag;
     this.formRequiredError = false;
-    this.duplicateMessage = null;
     this.nameFlag = true;
   }
-
-
 
 }

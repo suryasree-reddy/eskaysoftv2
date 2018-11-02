@@ -118,4 +118,23 @@ export class ButtonsComponent implements OnInit {
     });
   }
 
+
+  showConfirmModal(eventType, displayConfMsg, displayInMsg, title, formObject, endPoint, callBack1, callBac2 ): void {
+    if (eventType === "Delete") {
+      this.deleteInfoMsg = displayInMsg;
+      this.deleteConfirmMsg = displayConfMsg;
+        this.deleteRecord = callBack1;
+    }else{
+      this.saveInfoMsg = displayInMsg;
+      this.saveConfirmMsg = displayConfMsg;
+      this.saveRecord = callBack1;
+    }
+    this.afterSuccess = callBac2;
+    this.formObj = formObject;
+    this.title= title;
+    this.duplicateMessage = null;
+    this.endPoint = endPoint;
+    this.showConfirmationModal(eventType);
+  }
+
 }

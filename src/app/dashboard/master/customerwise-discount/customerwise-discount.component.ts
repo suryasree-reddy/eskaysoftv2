@@ -20,6 +20,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
   private endPoint: string = "customerwisediscount/";
   private cEndPoint: string = "company/";
   private cgEndPoint: string = "companygroup/";
+  private aiEndPoint: string = "accountinformation/";
   public gridDataList: any = [];
   public gridSelectedRow;
   public formSuccess: boolean = false;
@@ -44,7 +45,9 @@ export class CustomerwiseDiscountComponent implements OnInit {
   private duplicateCompany: boolean = false;
   private duplicateCompanyName: boolean = false;
   public typeaheadCompanyDataList: any = [];
+  public typeaheadCustomerDataList:any=[];
   public selectedCompanyTypeahead: any;
+  public selectedCustomerTypeahead:any;
 
   modalRef: BsModalRef;
   message: string;
@@ -62,9 +65,11 @@ export class CustomerwiseDiscountComponent implements OnInit {
   ngOnInit() {
     this.customerDiscountForm = this.fb.group({
       id: [],
-      customer: ['', Validators.required],
-      companyCode: ['', Validators.required],
-      discount: ['', Validators.required],
+      accountInformationId:[],
+      companyId:[],
+      companyName:['', Validators.required],
+      accountName: ['', Validators.required],
+      disc: ['', Validators.required],
       discountType: []
 
     });
@@ -83,11 +88,18 @@ export class CustomerwiseDiscountComponent implements OnInit {
 
     //this.loadGridData();
     this.loadCompanyTypeaheadData();
+    this.loadCustomerTypeaheadData();
     // this.focusField.nativeElement.focus();
     this.companyTypeList =  this.sharedDataService.getSharedCommonJsonData().CompanyType;
     this.companyStatusList =  this.sharedDataService.getSharedCommonJsonData().CompanyStatus;
       this.invGenList =  this.sharedDataService.getSharedCommonJsonData().InvGenType;
 
+  }
+
+  loadCustomerTypeaheadData() {
+    this.masterService.getParentData(this.aiEndPoint).subscribe(list => {
+      this.typeaheadCustomerDataList = list;
+    });
   }
 
   loadCompanyTypeaheadData() {
@@ -101,6 +113,11 @@ export class CustomerwiseDiscountComponent implements OnInit {
       this.typeaheadCompanyGroupDataList = list;
     });
   }
+
+loadSelectedCustomerTypeahead(event) {
+  this.selectedCustomerTypeahead = event.item;
+  this.customerDiscountForm.patchValue({ accountInformationId: this.selectedCustomerTypeahead.id });
+}
 
   loadSelectedCompanyTypeahead(event) {
     this.selectedCompanyTypeahead = event.item;
@@ -158,7 +175,6 @@ export class CustomerwiseDiscountComponent implements OnInit {
       this.duplicateCustomerName = this.masterService.hasDataExist(this.gridDataList, 'customer', this.customerDiscountForm.value.customer);
       this.getDuplicateErrorMessages();
     }
-
   }
 
   checkForDuplicateCompanyCode() {
