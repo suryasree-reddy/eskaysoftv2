@@ -16,7 +16,7 @@ import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 export class AccountsOpeningsComponent implements OnInit {
 
   public accOpeningForm: FormGroup;
-  private endPoint: string = "accountopenings/";
+  private endPoint: string = "accountinformation/";
   // private accEndPoint: string = "accountinformation/";
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;

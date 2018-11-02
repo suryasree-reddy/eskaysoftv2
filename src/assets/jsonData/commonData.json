@@ -253,7 +253,7 @@
     { "code": "Dbt", "description": "Debit" }
   ],
   "AccountsOpeningsColumns": [
-    { "headerName": "Code", "field": "code", "filterParams": {
+    { "headerName": "Code", "field": "shortName", "filterParams": {
       "filterOptions": ["contains"],
       "newRowsAction": "keep"
     },
@@ -268,21 +268,14 @@
       "newRowsAction": "keep"
     },
     "suppressSizeToFit": false },
-    { "headerName": "Opening", "field": "opening", "filterParams": {
+    { "headerName": "Opening Balance", "field": "openingBalance", "filterParams": {
       "filterOptions": ["contains"],
-      "newRowsAction": "keep",
-      "cellEditor": "numericEditor",
-      "editable": true
+      "newRowsAction": "keep"
     } ,
     "suppressSizeToFit": false},
-    { "headerName": "Type", "field": "type", "filterParams": {
+    { "headerName": "Opening Type", "field": "openingType", "filterParams": {
       "filterOptions": ["contains"],
-      "newRowsAction": "keep",
-      "cellEditor": "gridSelectEditorComponent",
-      "cellEditorParams": {
-          "values": [{"key":"Credit"},{"key":"Debit"}]
-        },
-       "editable": true
+      "newRowsAction": "keep"
     },
     "suppressSizeToFit": false }
   ]

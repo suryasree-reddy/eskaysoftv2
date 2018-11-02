@@ -283,25 +283,6 @@ export class AccountsInfoComponent implements OnInit {
 
   }
 
-saveForm(){
-  this.accInfoForm.value.subScheduleId = this.selectedSubSchedule.id;
-   this.accInfoForm.value.scheduleId = this.selectedSubSchedule.scheduleId;
-   this.accInfoForm.value.areaId = this.selectedArea.id;
-   this.accInfoForm.value.districtId = this.selectedDistrict.id;
-   this.accInfoForm.value.stateId = this.selectedDistrict.stateId;
-     console.log("this.selectedSubSchedule ", this.selectedSubSchedule, "::this.selectedArea--", this.selectedArea, ":::this.selectedDistrict--", this.selectedDistrict);
-console.log("this.this.accInfoForm.value ", this.accInfoForm.value);
-this.buttonsComponent.test()
-this.buttonsComponent.showConfirmModal("Save", "'accountinfo.saveConfirmationMessage'", "'accountinfo.saveInformationMessage'",
-  "'accountinfo.title'", this.accInfoForm, this.endPoint, "save()", "successMsg()" );
-
-  /*if (this.accInfoForm.value.id) {
-    console.log("got it");
-  }else{
-    this.requiredErrMsg();
-  }*/
-}
-
   save() {
     if (this.accInfoForm.value.id) {
       this.masterService.updateRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
