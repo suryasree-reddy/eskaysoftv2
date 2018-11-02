@@ -14,7 +14,7 @@
                 <div class="input-group">
                     <p>{{'companies.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
                     <input id="companyCode" formControlName="companyCode" [typeahead]="typeaheadCompanyDataList"
-                        typeaheadOptionField="companyCode" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
+                        typeaheadOptionField="companyName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                         (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control capitalize">
                     <span class="caret"></span>
                 </div>
@@ -88,9 +88,9 @@
     </div> -->
 
     <div class="input-group">
-      <p>{{'companygroup.name' | translate }}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(cgTemplate)">create new</a>)</p>
-      <input id="companyGroup" maxlength="20" formControlName="companyGroupName" [typeahead]="typeaheadCompanyGroupDataList" typeaheadOptionField="companyGroupName"
-      [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control capitalize"/>
+      <p>{{'companygroup.name' | translate }}: * &emsp; </p>
+      <input id="companyGroupName" maxlength="20" formControlName="companyGroupName" [typeahead]="typeaheadCompanyGroupDataList" typeaheadOptionField="companyGroupName"
+      [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadCompanyGroupTypeaheadData($event)" class="form-control capitalize"/>
       <span class="caret"></span>
     </div>
 
@@ -129,7 +129,7 @@
 
 
 <!-- Company Group Modal -->
-<ng-template #cgTemplate>
+<!-- <ng-template #cgTemplate>
         <div class="modal-header">
           <h4 class="modal-title pull-left">{{'companygroup.create' | translate }}</h4>
           <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -154,4 +154,4 @@
                 </div>
           </form>
         </div>
-      </ng-template>
+      </ng-template> -->

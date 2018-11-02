@@ -233,6 +233,13 @@ export class ProductComponent implements OnInit {
 
   checkForDuplicateCompanyCode() {
     this.duplicateCompany = this.masterService.hasDataExist(this.gridDataList, 'companyCode', this.companyForm.value.companyCode);
+    if (this.duplicateCompany) {
+      const temp = this.companyForm.value.companyCode;
+      const companyObj = _.filter(this.gridDataList, function(o) { return o.companyCode.toLowerCase() == temp.toLowerCase() });
+      this.companyForm.patchValue({ companyCode: companyObj[0].companyCode })
+      
+    }
+   
     this.getDuplicateErrorMessages();
   }
 
@@ -327,7 +334,7 @@ export class ProductComponent implements OnInit {
   }
 
   delete() {
-    if (confirm('Are you sure!!')) {
+     {
       this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
         localStorage.removeItem('ag-activeRow');
         this.successMsg()

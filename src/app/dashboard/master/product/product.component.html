@@ -187,13 +187,13 @@
 
                 <div class="input-group">
                 	<p>{{'companies.code' | translate}}: *</p>
-                	<input id="companyCode"  maxlength="40" #focus (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['companyCode']">
+                	<input id="companyCode"  maxlength="40" #focus (blur)="(checkForDuplicateCompanyCode())" class="form-control" [formControl]="companyForm.controls['companyCode']">
                 </div>
 
                 <div class="input-group">
                   <p>{{'companygroup.name' | translate }}: * &emsp;</p>
                   <input id="companyGroupName" maxlength="20" formControlName="companyGroupName" [typeahead]="typeaheadCompanyGroupDataList" typeaheadOptionField="companyGroupName"
-                  [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control capitalize"/>
+                  [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedGroupTypeahead($event)" class="form-control capitalize"/>
                   <span class="caret"></span>
                 </div>
 

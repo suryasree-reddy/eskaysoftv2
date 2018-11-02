@@ -311,7 +311,7 @@
                     <div class="col-md-4 col-lt">
                       <p>{{'accountinfo.opentype' | translate}}: *</p>
                       <input id="openingType" maxlength="6" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['openingType']"
-                      [typeahead]="accCustomerType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+                      [typeahead]="accOpeningType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
                       <span class="caret"></span>
                   </div>
                     <div class="col-md-4 col-lt">

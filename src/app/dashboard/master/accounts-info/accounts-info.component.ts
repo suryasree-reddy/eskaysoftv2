@@ -199,7 +199,6 @@ export class AccountsInfoComponent implements OnInit {
   onSelectDistrict(event) {
     this.selectedDistrict = event.item;
     this.accInfoForm.patchValue({ stateName: this.selectedDistrict.stateName });
-
       this.accInfoForm.patchValue({ districtId: this.selectedDistrict.id });
         this.accInfoForm.patchValue({ stateId: this.selectedDistrict.stateId });
   //  this.accInfoForm.value.districtId = this.selectedDistrict.id;
@@ -209,6 +208,7 @@ export class AccountsInfoComponent implements OnInit {
   onSelectArea(event) {
     this.selectedArea = event.item;
     this.accInfoForm.value.areaId = this.selectedArea.id;
+    this.accInfoForm.patchValue({ areaId: this.selectedArea.id });
   }
 
   onSelectSubSchedule(event) {
@@ -216,6 +216,9 @@ export class AccountsInfoComponent implements OnInit {
     this.accInfoForm.value.subScheduleId = this.selectedSubSchedule.id;
     this.accInfoForm.value.scheduleId = this.selectedSubSchedule.scheduleId;
     this.accInfoForm.patchValue({ scheduleName: this.selectedSubSchedule.scheduleName });
+    const temp = this.selectedSubSchedule.id;
+    const selectedSubScheduleNameList = _.filter(this.subScheduleList, function(o) { return o.subScheduleId == temp });
+    this.accInfoForm.patchValue({ subScheduleIndex: selectedSubScheduleNameList });
   }
 
   onSelectSchedule(event) {
@@ -386,7 +389,6 @@ export class AccountsInfoComponent implements OnInit {
   }
 
   resetForm() {
-  //  this.loadScheduleData();
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.scFormRequiredError = false;
     this.nameFlag = false;
