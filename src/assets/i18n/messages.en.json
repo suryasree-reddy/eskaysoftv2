@@ -189,7 +189,7 @@
   },
   "accountinfo": {
     "title": "Account Information",
-    "endPoint":"accountsInformation/",
+    "endPoint":"accountinformation/",
     "geninfo":"General Information",
     "reginfo":"Registration Information",
     "cred":"Credentials",
@@ -235,7 +235,7 @@
   },
   "accountopenings": {
     "title": "Account Openings",
-    "endPoint":"accountsOpenings/",
+    "endPoint":"accountsopenings/",
     "saveConfirmationMessage": "Are you sure you want to save Account?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Account?",
     "saveInformationMessage": "Account record has been saved successfully.",

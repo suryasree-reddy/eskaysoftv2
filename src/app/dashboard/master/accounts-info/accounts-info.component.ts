@@ -30,7 +30,7 @@ export class AccountsInfoComponent implements OnInit {
   public scheduleForm: FormGroup;
   public districtsForm: FormGroup;
   public statesForm: FormGroup;
-  private endPoint: string = "accountsInformation/";
+  private endPoint: string = "accountinformation/";
   public gridDataList: any = [];
   public typeaheadDataList: any = [];
   public gridColumnNamesList;
@@ -355,7 +355,19 @@ export class AccountsInfoComponent implements OnInit {
 
 
   save() {
-    this.buttonsComponent.save();
+    if (this.accInfoForm.value.id) {
+      this.masterService.updateRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
+        this.showInformationModal("Save");
+      }, (error) => {
+        this.serverErrMsg();
+      });
+    } else {
+      this.masterService.createRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
+        this.showInformationModal("Save");
+      }, (error) => {
+        this.serverErrMsg();
+      });
+    }
   }
 
   successMsg() {
@@ -434,7 +446,12 @@ export class AccountsInfoComponent implements OnInit {
   showConfirmationModal(eventType): void {
     var msg;
     var title;
-    if(eventType === "SaveSubSchedule") {
+    if (eventType === "Save") {
+      title = 'Account Information';
+      msg = 'accountinfo.saveConfirmationMessage';
+    }
+
+    else if(eventType === "SaveSubSchedule") {
       title = 'Sub-Schedule';
       msg = 'subSchedule.saveConfirmationMessage';
     }

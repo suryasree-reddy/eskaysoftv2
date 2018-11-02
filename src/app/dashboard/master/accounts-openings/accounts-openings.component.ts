@@ -17,7 +17,7 @@ export class AccountsOpeningsComponent implements OnInit {
 
   public accOpeningForm: FormGroup;
   private endPoint: string = "accountopenings/";
-  // private accEndPoint: string = "accountsInformation/";
+  // private accEndPoint: string = "accountinformation/";
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
