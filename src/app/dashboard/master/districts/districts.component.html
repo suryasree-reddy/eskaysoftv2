@@ -50,7 +50,7 @@
       </button>
     </div>
     <div class="modal-body">
-      <form [formGroup]="statesForm" autocomplete="off">
+      <form [formGroup]="statesForm" (ngSubmit)="saveState()" autocomplete="off">
 
         <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
         [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
@@ -73,14 +73,12 @@
             <span class="caret"></span>
       </div>
 
-      <app-buttons [title]="'states.title'" [deleteConfirmMsg]="'states.deleteConfirmationMessage'"
-             [saveConfirmMsg]="'states.saveConfirmationMessage'" [saveInfoMsg]="'states.saveInformationMessage'"
-             [endPoint]="stateEndPoint"
-             [deleteInfoMsg]="'states.deleteInformationMessage'" [duplicateMessage]="childDuplicateMessage"
-             [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-             [hideDeleteBtn]=false [formObj]="statesForm" (saveRecord)="saveState()"
-             (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-             (afterSuccess)="successMsg()" (resetForm)="resetStatesForm()" (serverErrMsg)="serverErrMsg()"></app-buttons>
+      <div class="input-group">
+        <button type="button" (click)="resetStatesForm()" class="btn btn-primary"  [translate]="'button.reset'"></button>
+        <button type="submit" class="btn btn-primary mr-l-10" [translate]="'button.save'"></button>
+      </div>
+
+
 
       </form>
 

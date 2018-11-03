@@ -51,7 +51,7 @@ export class AreasComponent implements OnInit {
   private childSaveConfirmMsg: string = "businessexecutive.saveConfirmationMessage";
   private childSaveInfoMsg: string = "businessexecutive.saveInformationMessage";
   private childDeleteInfoMsg: string = "businessexecutive.deleteInformationMessage";
-  @ViewChild(ButtonsComponent) buttonsComponent:ButtonsComponent;
+  @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
@@ -63,7 +63,7 @@ export class AreasComponent implements OnInit {
     this.editable(selectedRow);
   }
 
-  onInitialDataLoad(dataList:any[]){
+  onInitialDataLoad(dataList: any[]) {
     this.gridDataList = dataList;
   }
   ngOnInit() {
@@ -95,10 +95,10 @@ export class AreasComponent implements OnInit {
 
   validateFormOnBlur() {
     this.formRequiredError = false;
-      if(!this.nameFlag){
-        this.duplicateAreaName = this.masterService.hasDataExist(this.gridDataList, 'areaName', this.areaForm.value.areaName);
-        this.getDuplicateErrorMessages();
-      }
+    if (!this.nameFlag) {
+      this.duplicateAreaName = this.masterService.hasDataExist(this.gridDataList, 'areaName', this.areaForm.value.areaName);
+      this.getDuplicateErrorMessages();
+    }
   }
 
   getDuplicateErrorMessages(): void {
@@ -151,33 +151,41 @@ export class AreasComponent implements OnInit {
 
   saveBusinessExecutive() {
     if (this.businessExecutiveForm.valid) {
-      this.masterService.createRecord(this.beEndPoint, this.businessExecutiveForm.value).subscribe(res => {
-        this.modalRef.hide();
-        this.loadTypeaheadData();
-        this.businessExecutiveForm.reset();
-      }, (error) => {
-        this.scServerErrMsg();
-      });
-
+      this.showConfirmationModal();
     } else {
       this.scRequiredErrMsg();
     }
   }
 
+  save_BusinessExecutive() {
+
+    this.masterService.createRecord(this.beEndPoint, this.businessExecutiveForm.value).subscribe(res => {
+      this.showInformationModal();
+
+    }, (error) => {
+      this.scServerErrMsg();
+    });
+  }
+
   save() {
-    console.log(" this.selectedTypeahead--",  this.selectedTypeahead)
     this.areaForm.value.businessExecutiveId = this.selectedTypeahead.id;
-  	this.buttonsComponent.save();
+    this.buttonsComponent.save();
   }
 
   delete() {
-  	this.buttonsComponent.delete();
+    this.buttonsComponent.delete();
   }
 
   successMsg() {
-    this.formSuccess = true;
-    this.formRequiredError = this.formServerError = false;
-    this.resetForm();
+    if (this.modalRef != undefined) {
+      this.modalRef.hide();
+      this.loadTypeaheadData();
+      this.businessExecutiveForm.reset();
+    } else {
+      this.formSuccess = true;
+      this.formRequiredError = this.formServerError = false;
+      this.resetForm();
+    }
   }
 
   requiredErrMsg() {
@@ -236,6 +244,22 @@ export class AreasComponent implements OnInit {
     this.businessExecutiveForm.reset();
   }
 
+  showInformationModal() {
+    const modal = this.modalService.show(ConfirmationModelDialogComponent);
+    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
+      "Business Executive", "businessexecutive.saveInformationMessage", '');
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
+  }
 
+  showConfirmationModal(): void {
+    const modal = this.modalService.show(ConfirmationModelDialogComponent);
+    (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
+      "Business Executive", "businessexecutive.saveConfirmationMessage", 'green', '');
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
+      if (result) {
+        this.save_BusinessExecutive();
+      }
+    });
+  }
 
 }

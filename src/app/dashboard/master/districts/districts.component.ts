@@ -74,11 +74,12 @@ export class DistrictsComponent implements OnInit {
       stateCode: ['', Validators.required],
       zone: ['', Validators.required],
     });
+
     this.districtsForm = this.fb.group({
       id: [],
       districtName: ['', Validators.required],
-      stateId: [],
-      stateName: []
+      stateId: ['', Validators.required],
+      stateName: ['', Validators.required]
     });
 
     this.loadStatesData();
@@ -112,7 +113,6 @@ export class DistrictsComponent implements OnInit {
       this.duplicateMessageParam = null;
       this.duplicateMessage = null;
     }
-
   }
 
   checkForDuplicateDistName() {
@@ -130,6 +130,7 @@ export class DistrictsComponent implements OnInit {
 
   onSelectState(event) {
     this.selectedState = event.item;
+    this.districtsForm.patchValue({ stateId: this.selectedState.id });
   }
 
   loadGridData() {
@@ -147,15 +148,14 @@ export class DistrictsComponent implements OnInit {
 
   checkForDuplicateStateName() {
     this.duplicateStateName = this.masterService.hasDataExist(this.statesList, 'stateName', this.statesForm.value.stateName);
-    if (this.duplicateStateName) {
-      const temp = this.statesForm.value.stateName;
-      const stateObj = _.filter(this.statesList, function(o) { return o.stateName.toLowerCase() == temp.toLowerCase() });
-      this.statesForm.patchValue({ stateCode: stateObj[0].stateCode })
-      this.statesForm.patchValue({ zone: stateObj[0].zone })
-    }
+    /*  if (this.duplicateStateName) {
+        const temp = this.statesForm.value.stateName;
+        const stateObj = _.filter(this.statesList, function(o) { return o.stateName.toLowerCase() == temp.toLowerCase() });
+        this.statesForm.patchValue({ stateCode: stateObj[0].stateCode })
+        this.statesForm.patchValue({ zone: stateObj[0].zone })
+      }*/
     this.getDuplicateErrorMessages();
   }
-
 
   verifyDistDuplicates() {
     let distNameList = this.districtsList.map((item) => { return item.districtName });
@@ -163,21 +163,23 @@ export class DistrictsComponent implements OnInit {
   }
 
   save() {
-    this.districtsForm.value.stateId = this.selectedState.id;
     this.buttonsComponent.save();
   }
 
   saveState() {
     if (this.statesForm.valid) {
-      this.masterService.createRecord("states/", this.statesForm.value).subscribe(res => {
-        // this.buttonsComponent.showInformationModal("Save");
-      }, (error) => {
-        this.serverErrMsg();
-      });
-
+      this.showConfirmationModal();
     } else {
       this.requiredErrMsg();
     }
+  }
+
+  save_State() {
+    this.masterService.createRecord("states/", this.statesForm.value).subscribe(res => {
+      this.showInformationModal();
+    }, (error) => {
+      this.serverErrMsg();
+    });
   }
 
   delete() {
@@ -189,7 +191,7 @@ export class DistrictsComponent implements OnInit {
     if (this.modalRef != undefined) {
       this.modalRef.hide();
       this.loadStatesData();
-      this.focusField.nativeElement.focus();
+    //  this.focusField.nativeElement.focus();
     } else {
       this.formSuccess = true;
       this.formRequiredError = this.formServerError = false;
@@ -253,6 +255,24 @@ export class DistrictsComponent implements OnInit {
     this.selectedState.id = s.stateId;
     this.deleteFlag = false;
     this.districtsForm.reset(s);
+  }
+
+  showInformationModal() {
+    const modal = this.modalService.show(ConfirmationModelDialogComponent);
+    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
+      "State", "states.saveInformationMessage", '');
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
+  }
+
+  showConfirmationModal(): void {
+    const modal = this.modalService.show(ConfirmationModelDialogComponent);
+    (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
+      "State", "states.saveConfirmationMessage", 'green', '');
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
+      if (result) {
+        this.save_State();
+      }
+    });
   }
 
 }
