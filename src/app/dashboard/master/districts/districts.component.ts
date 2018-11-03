@@ -22,7 +22,6 @@ export class DistrictsComponent implements OnInit {
   public formSuccess: boolean = false;
   private duplicateStateName: boolean = false;
   private duplicateStateCode: boolean = false;
-
   public formRequiredError: boolean = false;
   public formServerError: boolean = false;
   public scFormRequiredError: boolean = false;
@@ -49,7 +48,7 @@ export class DistrictsComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private modalService: BsModalService,
-    private sharedDataService:SharedDataService,
+    private sharedDataService: SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
@@ -83,28 +82,37 @@ export class DistrictsComponent implements OnInit {
     });
 
     this.loadStatesData();
-    //this.loadGridData();
     this.focusField.nativeElement.focus();
-    this.stateZone =  this.sharedDataService.getSharedCommonJsonData().StateZone;
+    this.stateZone = this.sharedDataService.getSharedCommonJsonData().StateZone;
   }
 
-
   getDuplicateErrorMessages(): void {
-    this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
 
     if (this.duplicateDistName) {
       this.duplicateMessage = "districts.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.districtsForm.value.districtName;
-    } if (this.duplicateStateName) {
+      this.formRequiredError = false;
+    }
+    if (this.duplicateStateName) {
       this.childDuplicateMessage = "states.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.statesForm.value.stateName;
+      this.scFormRequiredError = false;
+
     } else if (this.duplicateStateCode) {
       this.childDuplicateMessage = "states.duplicateCodeErrorMessage";
       this.childDuplicateMessageParam = this.statesForm.value.stateCode;
+      this.scFormRequiredError = false;
     }
+
+    if (!this.duplicateStateName && !this.duplicateStateCode) {
+      this.childDuplicateMessage = null;
+      this.childDuplicateMessageParam = null;
+
+    } else if (!this.duplicateDistName) {
+      this.duplicateMessageParam = null;
+      this.duplicateMessage = null;
+    }
+
   }
 
   checkForDuplicateDistName() {
@@ -162,7 +170,7 @@ export class DistrictsComponent implements OnInit {
   saveState() {
     if (this.statesForm.valid) {
       this.masterService.createRecord("states/", this.statesForm.value).subscribe(res => {
-       // this.buttonsComponent.showInformationModal("Save");
+        // this.buttonsComponent.showInformationModal("Save");
       }, (error) => {
         this.serverErrMsg();
       });
@@ -182,8 +190,6 @@ export class DistrictsComponent implements OnInit {
       this.modalRef.hide();
       this.loadStatesData();
       this.focusField.nativeElement.focus();
-
-      //this.focusField.nativeElement.focus();
     } else {
       this.formSuccess = true;
       this.formRequiredError = this.formServerError = false;
@@ -203,24 +209,22 @@ export class DistrictsComponent implements OnInit {
         this.formSuccess = this.formServerError = false;
       }
     }
-
   }
 
   serverErrMsg() {
     if (this.modalRef != undefined) {
       this.scFormServerError = true;
-      this.scFormRequiredError = this.scFormSuccess =false;
+      this.scFormRequiredError = this.scFormSuccess = false;
     } else {
       this.formServerError = true;
       this.formRequiredError = this.formSuccess = false;
     }
-
   }
 
   resetForm() {
     this.loadGridData();
     this.loadStatesData();
-    this.formRequiredError = this.formServerError = this.formSuccess =  false;
+    this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.districtsForm.reset();
     this.childDuplicateMessage = null;
     this.editDistricts = null;
@@ -230,11 +234,8 @@ export class DistrictsComponent implements OnInit {
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
     this.childDuplicateMessageParam = null;
-
     this.focusField.nativeElement.focus();
   }
-
-
 
   resetStatesForm() {
     this.childDuplicateMessageParam = null;
@@ -253,7 +254,5 @@ export class DistrictsComponent implements OnInit {
     this.deleteFlag = false;
     this.districtsForm.reset(s);
   }
-
-
 
 }

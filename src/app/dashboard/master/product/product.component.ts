@@ -67,7 +67,7 @@ export class ProductComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private modalService: BsModalService,
-      private sharedDataService:SharedDataService,
+    private sharedDataService: SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
@@ -116,16 +116,14 @@ export class ProductComponent implements OnInit {
       invPrefix: ['', Validators.required]
     });
 
-    //this.loadGridData();
     this.loadGroupTypeaheadData();
     this.loadCategoryTypeaheadData();
     this.loadCompanyTypeaheadData();
     this.loadCompanyGroupTypeaheadData();
     this.loadTaxTypeaheadData();
-    this.companyTypeList =  this.sharedDataService.getSharedCommonJsonData().CompanyType;
-    this.companyStatusList =  this.sharedDataService.getSharedCommonJsonData().CompanyStatus;
-    this.invGenList =  this.sharedDataService.getSharedCommonJsonData().InvGenType;
-    // this.focusField.nativeElement.focus();
+    this.companyTypeList = this.sharedDataService.getSharedCommonJsonData().CompanyType;
+    this.companyStatusList = this.sharedDataService.getSharedCommonJsonData().CompanyStatus;
+    this.invGenList = this.sharedDataService.getSharedCommonJsonData().InvGenType;
   }
 
   loadCompanyGroupTypeaheadData() {
@@ -194,25 +192,30 @@ export class ProductComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
-    this.duplicateMessage = null;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
-    this.formRequiredError = false;
-    this.duplicateMessageParam = null;
-    this.scFormRequiredError = false;
 
     if (this.duplicateProdGroup) {
       this.childDuplicateMessage = "productgroup.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.productGroupForm.value.productGroupName;
+      this.scFormRequiredError = false;
     }
-    else if (this.duplicateProdCategory) {
+
+    if (this.duplicateProdCategory) {
       this.childDuplicateMessage = "productcategory.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.productCategoryForm.value.productCategoryName;
+      this.scFormRequiredError = false;
     }
-    else if (this.duplicateCompany) {
+
+    if (this.duplicateCompany) {
       this.childDuplicateMessage = "companies.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.companyForm.value.companyCode;
+      this.scFormRequiredError = false;
     }
+
+    if (!this.duplicateProdGroup || !this.duplicateProdCategory || !this.duplicateCompany) {
+      this.childDuplicateMessage = null;
+      this.childDuplicateMessageParam = null;
+    }
+
   }
 
   checkForDuplicateProdGroup() {
@@ -333,7 +336,7 @@ export class ProductComponent implements OnInit {
   }
 
   delete() {
-     {
+    {
       this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
         localStorage.removeItem('ag-activeRow');
         this.successMsg()
@@ -375,7 +378,7 @@ export class ProductComponent implements OnInit {
   editable(s) {
     this.gridSelectedRow = s;
     this.productForm.reset(s);
-  //  this.companyForm.reset(s);
+    //  this.companyForm.reset(s);
     this.nameFlag = true;
     this.formRequiredError = false;
     this.duplicateMessage = null;

@@ -102,19 +102,27 @@ export class AreasComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
-    this.duplicateMessage = null;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
-    this.formRequiredError = false;
-    this.duplicateMessageParam = null;
+
     if (this.duplicateAreaName) {
       this.duplicateMessage = "areas.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.areaForm.value.areaName;
-
-    }  if (this.duplicateBusExecName) {
+      this.formRequiredError = false;
+    }
+    if (this.duplicateBusExecName) {
       this.childDuplicateMessage = "businessexecutive.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.businessExecutiveForm.value.name;
+      this.scFormRequiredError = false;
     }
+
+    if (!this.duplicateBusExecName) {
+      this.childDuplicateMessage = null;
+      this.childDuplicateMessageParam = null;
+
+    } else if (!this.duplicateAreaName) {
+      this.duplicateMessageParam = null;
+      this.duplicateMessage = null;
+    }
+
   }
 
   checkForDuplicateBusiExecName() {

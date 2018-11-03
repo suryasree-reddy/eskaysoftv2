@@ -9,6 +9,8 @@ import { MasterService } from 'src/app/dashboard/master/master.service';
   selector: 'app-buttons',
   templateUrl: './buttons.component.html'
 })
+
+
 export class ButtonsComponent implements OnInit {
 
   @Input() isBtnDeleteDisable: boolean = false;
@@ -33,11 +35,10 @@ export class ButtonsComponent implements OnInit {
   private displayMsg: string = null;
 
   constructor(
-    private translate: TranslateService, private masterService:MasterService,
+    private translate: TranslateService, private masterService: MasterService,
     private modalService: BsModalService) { translate.setDefaultLang('messages.en'); }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   reset() {
     this.resetForm.emit();
@@ -52,7 +53,6 @@ export class ButtonsComponent implements OnInit {
   }
 
   save() {
-      console.log("****this.formObj.value.id:", this.formObj);
     if (this.formObj.value.id) {
       this.masterService.updateRecord(this.endPoint, this.formObj.value).subscribe(res => {
         this.showInformationModal("Save");
@@ -60,11 +60,10 @@ export class ButtonsComponent implements OnInit {
         this.serverErrMsg.emit();
       });
     } else {
-        console.log("****this.else.value.id:", this.endPoint, "::this.endPoint--", this.formObj.value);
       this.masterService.createRecord(this.endPoint, this.formObj.value).subscribe(res => {
         this.showInformationModal("Save");
       }, (error) => {
-      this.serverErrMsg.emit();
+        this.serverErrMsg.emit();
       });
     }
   }
@@ -96,45 +95,44 @@ export class ButtonsComponent implements OnInit {
   showConfirmationModal(eventType): void {
     if (eventType === "Delete") {
       this.displayMsg = this.deleteConfirmMsg;
+      this.openConfirmDialog(eventType, this.displayMsg, this.title, 'green');
     } else {
       this.displayMsg = this.saveConfirmMsg;
+      this.openConfirmDialog(eventType, this.displayMsg, this.title, 'green');
     }
+  }
+
+  openConfirmDialog(eventType, title, message, headerColor){
+
     const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
-      this.title,
-      this.displayMsg,
-      'green',
-      ''
-    );
+      title, message, headerColor, '');
 
     (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
-      if (result) {
-        if (eventType === "Delete") {
-          this.deleteRecord.emit();
-        } else {
-          this.saveRecord.emit();
-        }
+      if (eventType === "Delete") {
+        this.deleteRecord.emit();
+      } else {
+        this.saveRecord.emit();
       }
     });
   }
 
-
-  showConfirmModal(eventType, displayConfMsg, displayInMsg, title, formObject, endPoint, callBack1, callBac2 ): void {
-    if (eventType === "Delete") {
-      this.deleteInfoMsg = displayInMsg;
-      this.deleteConfirmMsg = displayConfMsg;
-        this.deleteRecord = callBack1;
-    }else{
-      this.saveInfoMsg = displayInMsg;
-      this.saveConfirmMsg = displayConfMsg;
-      this.saveRecord = callBack1;
-    }
-    this.afterSuccess = callBac2;
-    this.formObj = formObject;
-    this.title= title;
-    this.duplicateMessage = null;
-    this.endPoint = endPoint;
-    this.showConfirmationModal(eventType);
-  }
+  /*  showConfirmModal(eventType, displayConfMsg, displayInMsg, title, formObject, endPoint, callBack1, callBac2 ): void {
+      if (eventType === "Delete") {
+        this.deleteInfoMsg = displayInMsg;
+        this.deleteConfirmMsg = displayConfMsg;
+          this.deleteRecord = callBack1;
+      }else{
+        this.saveInfoMsg = displayInMsg;
+        this.saveConfirmMsg = displayConfMsg;
+        this.saveRecord = callBack1;
+      }
+      this.afterSuccess = callBac2;
+      this.formObj = formObject;
+      this.title= title;
+      this.duplicateMessage = null;
+      this.endPoint = endPoint;
+      this.showConfirmationModal(eventType);
+    }*/
 
 }
