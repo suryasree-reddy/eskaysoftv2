@@ -161,6 +161,7 @@ export class CompaniesComponent implements OnInit {
       this.companyForm.value.companyGroupId = this.selectedTypeahead.id;
       this.masterService.updateRecord(this.endPoint, this.companyForm.value).subscribe(res => {
         this.showInformationModal("Save");
+        this.successMsg();
       }, (error) => {
         this.serverErrMsg();
       });
@@ -168,6 +169,7 @@ export class CompaniesComponent implements OnInit {
       this.companyForm.value.companyGroupId = this.selectedTypeahead.id;
       this.masterService.createRecord(this.endPoint, this.companyForm.value).subscribe(res => {
         this.showInformationModal("Save");
+        this.successMsg();
       }, (error) => {
         this.serverErrMsg();
       });
@@ -186,6 +188,9 @@ export class CompaniesComponent implements OnInit {
   saveChildData() {
     this.masterService.createRecord(this.cgEndPoint, this.companyGroupForm.value).subscribe(res => {
       this.showInformationModal("SaveChildForm");
+      this.loadTypeaheadData();
+      this.modalRef.hide();
+      this.companyGroupForm.reset();
     }, (error) => {
       this.serverErrMsg();
     });
@@ -286,7 +291,7 @@ export class CompaniesComponent implements OnInit {
       msg,
       ''
     );
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe();
   }
 
   showConfirmationModal(eventType): void {

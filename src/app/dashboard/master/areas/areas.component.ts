@@ -161,7 +161,9 @@ export class AreasComponent implements OnInit {
 
     this.masterService.createRecord(this.beEndPoint, this.businessExecutiveForm.value).subscribe(res => {
       this.showInformationModal();
-
+      this.loadTypeaheadData();
+      this.modalRef.hide();
+      this.businessExecutiveForm.reset();
     }, (error) => {
       this.scServerErrMsg();
     });
@@ -248,7 +250,7 @@ export class AreasComponent implements OnInit {
     const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
       "Business Executive", "businessexecutive.saveInformationMessage", '');
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe();
   }
 
   showConfirmationModal(): void {

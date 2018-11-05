@@ -177,6 +177,10 @@ export class DistrictsComponent implements OnInit {
   save_State() {
     this.masterService.createRecord("states/", this.statesForm.value).subscribe(res => {
       this.showInformationModal();
+      this.loadStatesData();
+      this.modalRef.hide();
+      this.statesForm.reset();
+
     }, (error) => {
       this.serverErrMsg();
     });
@@ -261,7 +265,7 @@ export class DistrictsComponent implements OnInit {
     const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
       "State", "states.saveInformationMessage", '');
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe();
   }
 
   showConfirmationModal(): void {
