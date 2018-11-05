@@ -171,7 +171,6 @@ export class ProductComponent implements OnInit {
     this.productForm.patchValue({ productcategoryId: event.item.id });
   }
 
-
   loadSelectedTaxTypeahead(event) {
     this.selectedTaxTypeahead = event.item;
     this.productForm.patchValue({ taxId: event.item.id });
@@ -215,7 +214,6 @@ export class ProductComponent implements OnInit {
       this.childDuplicateMessage = null;
       this.childDuplicateMessageParam = null;
     }
-
   }
 
   checkForDuplicateProdGroup() {
@@ -232,16 +230,13 @@ export class ProductComponent implements OnInit {
     }
   }
 
-
   checkForDuplicateCompanyCode() {
     this.duplicateCompany = this.masterService.hasDataExist(this.gridDataList, 'companyCode', this.companyForm.value.companyCode);
     if (this.duplicateCompany) {
       const temp = this.companyForm.value.companyCode;
       const companyObj = _.filter(this.gridDataList, function(o) { return o.companyCode.toLowerCase() == temp.toLowerCase() });
       this.companyForm.patchValue({ companyCode: companyObj[0].companyCode })
-
     }
-
     this.getDuplicateErrorMessages();
   }
 
@@ -260,90 +255,58 @@ export class ProductComponent implements OnInit {
     });
   }
 
-
   save() {
     if (this.productForm.value.id) {
       this.masterService.updateRecord(this.endPoint, this.productForm.value).subscribe(res => {
         this.showInformationModal("Save");
+        this.successMsg();
       }, (error) => {
         this.serverErrMsg();
       });
     } else {
       this.masterService.createRecord(this.endPoint, this.productForm.value).subscribe(res => {
         this.showInformationModal("Save");
+        this.successMsg();
       }, (error) => {
         this.serverErrMsg();
       });
     }
   }
 
-
-  saveChildForm() {
+  saveChildForm(screenName, formObj) {
     this.scFormRequiredError = false;
-    if (this.productGroupForm.valid && this.childDuplicateMessage == null) {
-      this.showConfirmationModal("SaveChildForm");
+    if (formObj.valid && this.childDuplicateMessage == null) {
+      this.showConfirmationModal(screenName);
     } else {
       this.scRequiredErrMsg()
     }
   }
 
-  saveChildData() {
-    this.masterService.createRecord(this.pgEndPoint, this.productGroupForm.value).subscribe(res => {
-      this.showInformationModal("SaveChildForm");
-
+  saveChild(screenName, formObj, targetUrl) {
+    this.masterService.createRecord(targetUrl, formObj.value).subscribe(res => {
+      this.showInformationModal(screenName);
+      if (screenName == "PC") {
+        this.loadCategoryTypeaheadData();
+      } else if (screenName == "PG") {
+        this.loadGroupTypeaheadData();
+      } else if (screenName == "Company") {
+        this.loadCompanyTypeaheadData();
+      }
+      this.modalRef.hide();
+      formObj.reset();
     }, (error) => {
       this.serverErrMsg();
     });
-
   }
 
-  saveChildPCForm() {
-    this.scFormRequiredError = false;
-    if (this.productCategoryForm.valid && this.childDuplicateMessage == null) {
-      this.showConfirmationModal("SaveChildPCForm");
-    } else {
-      this.scRequiredErrMsg()
-    }
-  }
-
-  saveChildPCData() {
-    this.masterService.createRecord(this.pcEndPoint, this.productCategoryForm.value).subscribe(res => {
-      this.showInformationModal("SaveChildPCForm");
-
-    }, (error) => {
-      this.serverErrMsg();
-    });
-
-  }
-
-  saveChildCmpForm() {
-    this.scFormRequiredError = false;
-    if (this.companyForm.valid && this.childDuplicateMessage == null) {
-      this.showConfirmationModal("SaveChildCmpForm");
-    } else {
-      this.scRequiredErrMsg()
-    }
-  }
-
-  saveChildCmpData() {
-    this.masterService.createRecord(this.cEndPoint, this.companyForm.value).subscribe(res => {
-      this.showInformationModal("SaveChildCmpForm");
-
-    }, (error) => {
-      this.serverErrMsg();
-    });
-
-  }
 
   delete() {
-    {
-      this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
-        localStorage.removeItem('ag-activeRow');
-        this.successMsg()
-      }, (error) => {
-        this.serverErrMsg();
-      });
-    }
+    this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
+      localStorage.removeItem('ag-activeRow');
+      this.successMsg()
+    }, (error) => {
+      this.serverErrMsg();
+    });
   }
 
   successMsg() {
@@ -366,6 +329,8 @@ export class ProductComponent implements OnInit {
   }
 
   resetForm() {
+    this.formRequiredError = false;
+    this.duplicateMessageParam = null;
     this.productForm.reset();
     this.gridSelectedRow = null;
     this.nameFlag = false;
@@ -388,14 +353,10 @@ export class ProductComponent implements OnInit {
   resetChildForm() {
     this.scFormRequiredError = false;
     this.scFormServerError = false;
-    this.duplicateMessage = null;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
-    this.formRequiredError = false;
-    this.duplicateMessageParam = null;
     this.productGroupForm.reset();
     this.productCategoryForm.reset();
-    this.companyForm.reset();
   }
 
   scRequiredErrMsg() {
@@ -404,82 +365,34 @@ export class ProductComponent implements OnInit {
   }
 
   showInformationModal(eventType) {
-    var msg;
-    var title;
-    if (eventType === "Delete") {
-      msg = 'product.deleteInformationMessage';
-      title = 'Product';
-    } else if (eventType === "Save") {
-      title = 'Product';
-      msg = 'product.saveInformationMessage';
-    }
-    else if (eventType === "SaveChildForm") {
-      title = 'Product Group';
-      msg = 'productgroup.saveInformationMessage';
-    }
-    else if (eventType === "SaveChildPCForm") {
-      title = 'Product Category';
-      msg = 'productcategory.saveInformationMessage';
-
-    }
-    else if (eventType === "SaveChildCmpForm") {
-      title = 'Company';
-      msg = 'companies.saveInformationMessage';
-
-    }
-
-
     const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
-      title,
-      msg,
-      ''
+      this.getFormDetails(eventType).title,
+      this.getFormDetails(eventType).infoMessage, ''
     );
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe();
   }
 
   showConfirmationModal(eventType): void {
-    var msg;
-    var title;
-    if (eventType === "Delete") {
-      title = 'Product';
-      msg = 'product.deleteConfirmationMessage';
-    } else if (eventType === "Save") {
-      title = 'Product';
-      msg = 'product.saveConfirmationMessage';
-    }
-    else if (eventType === "SaveChildForm") {
-      title = 'Product Group';
-      msg = 'productgroup.saveConfirmationMessage';
-    }
-    else if (eventType === "SaveChildPCForm") {
-      title = 'Product Category';
-      msg = 'productcategory.saveConfirmationMessage';
-    }
-    else if (eventType === "SaveChildCmpForm") {
-      title = 'Company';
-      msg = 'companies.saveConfirmationMessage';
-    }
     const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
-      title,
-      msg,
-      'green',
-      ''
+      this.getFormDetails(eventType).title,
+      this.getFormDetails(eventType).confirmMessage,
+      'green', ''
     );
 
     (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
       if (result) {
-        if (eventType === "Delete") {
+        if (eventType == "Delete") {
           this.delete();
-        } else if (eventType === "SaveChildForm") {
-          this.saveChildData();
+        } else if (eventType == "PG") {
+          this.saveChild("PG", this.productGroupForm, this.pgEndPoint);
         }
-        else if (eventType === "SaveChildPCForm") {
-          this.saveChildPCData();
+        else if (eventType == "PC") {
+          this.saveChild("PC", this.productCategoryForm, this.pcEndPoint);
         }
-        else if (eventType === "SaveChildCmpForm") {
-          this.saveChildCmpData();
+        else if (eventType == "Company") {
+          this.saveChild("Company", this.companyForm, this.cEndPoint);
         }
         else {
           this.save();
@@ -487,5 +400,26 @@ export class ProductComponent implements OnInit {
       }
     });
   }
+
+  getFormDetails(screenName) {
+
+    if (screenName == "Delete") {
+      return { "title": "Product", "confirmMessage": "product.deleteConfirmationMessage", "infoMessage": "product.deleteInformationMessage" };
+    } else if (screenName == "Save") {
+      return { "title": "Product", "confirmMessage": "product.saveConfirmationMessage", "infoMessage": "product.saveInformationMessage" };
+    }
+    else if (screenName == "PG") {
+      return { "title": "Product Group", "confirmMessage": "productgroup.saveConfirmationMessage", "infoMessage": "productgroup.saveInformationMessage" };
+    }
+    else if (screenName == "PC") {
+      return { "title": "Product Category", "confirmMessage": "productcategory.saveConfirmationMessage", "infoMessage": "productcategory.saveInformationMessage" };
+    }
+    else if (screenName == "Company") {
+      return { "title": "Company", "confirmMessage": "companies.saveConfirmationMessage", "infoMessage": "companies.saveInformationMessage" };
+    }
+
+  }
+
+
 
 }

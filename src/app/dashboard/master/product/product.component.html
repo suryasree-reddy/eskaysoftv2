@@ -54,8 +54,11 @@
                   </div>
                   <div class="col-xs-3 col-rt">
                       <p>{{'product.schemeqty' | translate}}: *</p>
-                      <input id="schemeQty" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['schemeQty']">
+                        <input id="schemeQty" #focus [readonly]="nameFlag" class="form-control"
+type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                         [formControl]="productForm.controls['schemeQty']">
                   </div>
+
                 </div>
 
                 <div class="margin-top-0px">
@@ -65,7 +68,8 @@
                   </div>
                   <div class="col-xs-3 col-rt">
                     <p>{{'product.netrate' | translate}}: *</p>
-                    <input id="netRate" class="form-control" [formControl]="productForm.controls['netRate']">
+                    <input id="netRate" class="form-control" [formControl]="productForm.controls['netRate']"
+                    type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                   </div>
                   <div class="col-xs-3 col-rt">
                     <p>{{'product.isNetRateItem' | translate}}: *</p>
@@ -83,7 +87,8 @@
                   </div>
                   <div class="col-xs-3 col-rt">
                     <p>{{'product.free' | translate}}: *</p>
-                    <input id="free" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['free']">
+                    <input id="free" #focus [readonly]="nameFlag" type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                    class="form-control" [formControl]="productForm.controls['free']">
                   </div>
                   <div class="col-xs-3 col-rt">
                     <p>{{'product.prodcode' | translate}}: *</p>
@@ -123,7 +128,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <form [formGroup]="productGroupForm" (ngSubmit)="saveChildForm()" autocomplete="off">
+        <form [formGroup]="productGroupForm" (ngSubmit)="saveChildForm('PG', productGroupForm)" autocomplete="off">
             <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess" [formServerError]="scFormServerError"
                 [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
@@ -149,7 +154,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <form [formGroup]="productCategoryForm" (ngSubmit)="saveChildPCForm()" autocomplete="off">
+        <form [formGroup]="productCategoryForm" (ngSubmit)="saveChildForm('PC', productCategoryForm)" autocomplete="off">
             <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess" [formServerError]="scFormServerError"
                 [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
@@ -176,7 +181,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <form [formGroup]="companyForm" (ngSubmit)="saveChildCmpForm()" autocomplete="off">
+        <form [formGroup]="companyForm" (ngSubmit)="saveChildForm('Company', companyForm)" autocomplete="off">
             <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess" [formServerError]="scFormServerError"
                 [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 

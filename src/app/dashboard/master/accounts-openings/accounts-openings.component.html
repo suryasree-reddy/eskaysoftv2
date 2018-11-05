@@ -8,15 +8,15 @@
 
               <div class="input-group">
                 <p>Code: *</p>
-                <input id="shortName" #focus [readonly]=true  class="form-control" [formControl]="accOpeningForm.controls['shortName']">
+                <input id="shortName" #focus [readonly]=true  class="form-control">
             </div>
             <div class="input-group">
                 <p>Account Name: *</p>
-                <input id="accountName" [readonly]=true class="form-control" [formControl]="accOpeningForm.controls['accountName']">
+                <input id="accountName" [readonly]=true class="form-control">
               </div>
               <div class="input-group">
                   <p>Town: *</p>
-                  <input id="town" [readonly]=true class="form-control" [formControl]="accOpeningForm.controls['town']">
+                  <input name="town" id="town" [readonly]=true  [(ngModel)]="town">
                 </div>
                 <div class="input-group">
                     <p>Opening: *</p>

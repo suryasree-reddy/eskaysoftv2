@@ -166,7 +166,7 @@ export class CompaniesComponent implements OnInit {
         this.serverErrMsg();
       });
     } else {
-      this.companyForm.value.companyGroupId = this.selectedTypeahead.id;
+    //  this.companyForm.value.companyGroupId = this.selectedTypeahead.id;
       this.masterService.createRecord(this.endPoint, this.companyForm.value).subscribe(res => {
         this.showInformationModal("Save");
         this.successMsg();
@@ -209,6 +209,7 @@ export class CompaniesComponent implements OnInit {
     this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
       localStorage.removeItem('ag-activeRow');
       this.showInformationModal("Delete");
+      this.successMsg();
     }, (error) => {
       this.serverErrMsg();
     });
@@ -242,6 +243,9 @@ export class CompaniesComponent implements OnInit {
     this.gridSelectedRow = null;
     this.nameFlag = false;
     this.deleteFlag = true;
+    this.duplicateMessage = null;
+    this.formRequiredError = false;
+    this.duplicateMessageParam = null;
     this.formRequiredError = this.formServerError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
@@ -259,11 +263,8 @@ export class CompaniesComponent implements OnInit {
   resetChildForm() {
     this.scFormRequiredError = false;
     this.scFormServerError = false;
-    this.duplicateMessage = null;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
-    this.formRequiredError = false;
-    this.duplicateMessageParam = null;
     this.companyGroupForm.reset();
   }
 
