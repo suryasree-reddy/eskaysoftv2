@@ -3,7 +3,7 @@ import { AuthGuard } from './security/auth-guard.service';
 import { BsDropdownModule, TypeaheadModule } from 'ngx-bootstrap';
 import { AppRouter } from './app.router';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler  } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -12,7 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CustomHttpInterceptor } from 'src/app/security/custom-http.interceptor';
 import { AgGridModule } from 'ag-grid-angular';
 import { AuthenticationService } from './auth/authentication.service';
-
+import { GlobalErrorHandlerService } from 'src/app/shared/model/global-error-handler.service';
 
 @NgModule({
   declarations: [
@@ -35,6 +35,8 @@ import { AuthenticationService } from './auth/authentication.service';
       useClass: CustomHttpInterceptor,
       multi: true
     },
+    GlobalErrorHandlerService,
+    { provide: ErrorHandler, useClass: GlobalErrorHandlerService },
     AuthenticationService,
     AuthGuard
   ],

@@ -3,9 +3,9 @@
         <div class="col-md-5">
         <h3>Accounts Openings </h3>
         <form [formGroup]="accOpeningForm" autocomplete="off">
-            <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-            [formServerError]="formServerError" [errorMessage]="errorMessage"
-              [errorStatusCode]="errorStatusCode" [errorStatusMsg]="errorStatusMsg"></app-errormessages>
+          <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
+            [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+              [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"></app-errormessages>
 
               <div class="input-group">
                 <p>Code: *</p>
@@ -37,7 +37,7 @@
                              [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true  [hideResetBtn]=false
                              [hideDeleteBtn]=true [formObj]="accOpeningForm" (saveRecord)="save()"
                              (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-                             (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()">
+                             (afterSuccess)="successMsg()" (resetForm)="resetForm()">
                             </app-buttons>
           </form>
 

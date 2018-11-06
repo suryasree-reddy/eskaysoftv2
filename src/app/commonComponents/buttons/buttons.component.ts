@@ -28,16 +28,13 @@ export class ButtonsComponent implements OnInit {
   @Output() displayErrorMessages: EventEmitter<null> = new EventEmitter();
   @Output() afterSuccess: EventEmitter<null> = new EventEmitter();
   @Output() resetForm: EventEmitter<null> = new EventEmitter();
-  @Output() serverErrMsg: EventEmitter<null> = new EventEmitter();
-  @Output() errorValue: EventEmitter<null> = new EventEmitter();
-
   private displayMsg: string = null;
 
   constructor(
-    private translate: TranslateService, private masterService:MasterService,
+    private translate: TranslateService, private masterService: MasterService,
     private modalService: BsModalService) { translate.setDefaultLang('messages.en'); }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   reset() {
     this.resetForm.emit();
@@ -56,17 +53,13 @@ export class ButtonsComponent implements OnInit {
       this.masterService.updateRecord(this.endPoint, this.formObj.value).subscribe(res => {
         this.showInformationModal("Save");
       }, error => {
-        this.errorValue = error;
-        this.errorValue.emit;
-        this.serverErrMsg.emit();
+        throw error;
       });
     } else {
       this.masterService.createRecord(this.endPoint, this.formObj.value).subscribe(res => {
         this.showInformationModal("Save");
-      }, (error) => {
-         this.errorValue = error;
-        this.errorValue.emit;
-      this.serverErrMsg.emit();
+      }, error => {
+        throw error;
       });
     }
   }
@@ -75,10 +68,8 @@ export class ButtonsComponent implements OnInit {
     this.masterService.deleteRecord(this.endPoint, this.formObj.value.id).subscribe(res => {
       localStorage.removeItem('ag-activeRow');
       this.showInformationModal("Delete");
-    }, (error) => {
- this.errorValue = error;
-        this.errorValue.emit;
-      this.serverErrMsg.emit();
+    }, error => {
+      throw error;
     });
   }
 
@@ -122,20 +113,19 @@ export class ButtonsComponent implements OnInit {
     });
   }
 
-
-  showConfirmModal(eventType, displayConfMsg, displayInMsg, title, formObject, endPoint, callBack1, callBac2 ): void {
+  showConfirmModal(eventType, displayConfMsg, displayInMsg, title, formObject, endPoint, callBack1, callBac2): void {
     if (eventType === "Delete") {
       this.deleteInfoMsg = displayInMsg;
       this.deleteConfirmMsg = displayConfMsg;
-        this.deleteRecord = callBack1;
-    }else{
+      this.deleteRecord = callBack1;
+    } else {
       this.saveInfoMsg = displayInMsg;
       this.saveConfirmMsg = displayConfMsg;
       this.saveRecord = callBack1;
     }
     this.afterSuccess = callBac2;
     this.formObj = formObject;
-    this.title= title;
+    this.title = title;
     this.duplicateMessage = null;
     this.endPoint = endPoint;
     this.showConfirmationModal(eventType);

@@ -5,15 +5,35 @@ import { Injectable } from '@angular/core';
 })
 export class SharedDataService {
 
+  errorCode: number = null;
+  errorMesage: string = null;
+
   sharedCommonJsonData: any = [];
 
-  constructor() {}
+  constructor() { }
 
-  setSharedCommonJsonData(val: any[]){
-      this.sharedCommonJsonData= val;
-    }
+  setSharedCommonJsonData(val: any[]) {
+    this.sharedCommonJsonData = val;
+  }
 
-  getSharedCommonJsonData(){
-      return this.sharedCommonJsonData;
-    }
+  getSharedCommonJsonData() {
+    return this.sharedCommonJsonData;
+  }
+
+  setErrorCode(val: number) {
+    this.errorCode = val;
+  }
+
+  getErrorCode() {
+    return this.errorCode;
+  }
+
+  setErrorMesage(val: string) {
+    this.errorMesage = val;
+  }
+
+  getErrorMesage() {
+    return this.errorMesage;
+  }
+
 }

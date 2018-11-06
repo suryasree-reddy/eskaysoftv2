@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
@@ -18,17 +17,11 @@ export class AccountsOpeningsComponent implements OnInit {
   private endPoint: string = "accountinformation/";
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
-  public formServerError: boolean = false;
   public gridDataList: any = [];
   public openingType: any[];
   public editAccount;
   public deleteFlag: boolean = true;
   public nameFlag;
-  modalRef: BsModalRef;
-  message: string;
-  private errorMessage: string = null;
-  private errorStatusCode: string = null;
-  private errorStatusMsg: string = null;
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
@@ -78,22 +71,13 @@ export class AccountsOpeningsComponent implements OnInit {
 
   successMsg() {
     this.formSuccess = true;
-    this.formRequiredError = this.formServerError = false;
+    this.formRequiredError = false;
     this.resetForm();
   }
 
   requiredErrMsg() {
     this.formRequiredError = true;
-    this.formSuccess = this.formServerError = false;
-  }
-
-  serverErrMsg(error) {
-   // let temp = this.buttonsComponent.errorValue.message;
-   // this.errorStatusMsg = temp.substring(temp.lastIndexOf( ":" ));
-    //this.errorStatusCode = this.buttonsComponent.errorValue.status;
-    this.errorMessage = "serverError.errorMessage";
-    this.formServerError = true;
-    this.formRequiredError = this.formSuccess = false;
+    this.formSuccess = false;
   }
 
   resetForm() {
@@ -101,7 +85,7 @@ export class AccountsOpeningsComponent implements OnInit {
     this.editAccount = null;
     this.deleteFlag = true;
     this.nameFlag = false;
-    this.formRequiredError = this.formServerError = this.formSuccess = false;
+    this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
   }
