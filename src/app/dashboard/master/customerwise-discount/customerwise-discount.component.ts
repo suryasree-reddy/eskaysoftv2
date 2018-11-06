@@ -121,7 +121,7 @@ loadSelectedCustomerTypeahead(event) {
 }
 
 loadGridDataById() {
-  this.masterService.getData("customerwisediscount/accountinfo/"+this.selectedCustomerTypeahead.id);
+  this.masterService.getData("customerwisediscount/accountinfo/"+parseInt(this.selectedCustomerTypeahead.id));
   this.masterService.dataObject.subscribe(list => {
     this.gridDataList = list;
     localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));

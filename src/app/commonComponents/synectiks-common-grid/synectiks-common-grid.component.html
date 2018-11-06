@@ -2,7 +2,7 @@
         [rowData]="gridDataList"
         [columnDefs]="gridColumnList" [rowSelection]="rowSelection" (gridReady)="onGridReady($event)"
         [navigateToNextCell]="navigateToNextCell"
-        [rowModelType]="rowModelType"
+        [rowModelType]="rowModelType" [overlayNoRowsTemplate] = "overlayNoRowsTemplate"
         (selectionChanged)="onSelectionChanged($event)"  [frameworkComponents]="frameworkComponents"
         [paginationAutoPageSize]="true" [pagination]="true" [enableServerSideFilter]="true" [enableServerSideSorting]="true" [components]="componentProvider">
 </ag-grid-angular>

@@ -269,8 +269,10 @@ export class CompaniesComponent implements OnInit {
   }
 
   scRequiredErrMsg() {
+    if(this.childDuplicateMessage == null){
     this.scFormRequiredError = true;
     this.scFormSuccess = this.scFormServerError = false;
+  }
   }
 
   showInformationModal(eventType) {

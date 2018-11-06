@@ -47,9 +47,9 @@ export class AccountsOpeningsComponent implements OnInit {
   ngOnInit() {
     this.accOpeningForm = this.fb.group({
       id: [],
-    //  shortName: ['', Validators.required],
-    //  accountName: ['', Validators.required],
-    //  town: ['', Validators.required],
+      shortName: ['', Validators.required],
+      accountName: ['', Validators.required],
+      town: ['', Validators.required],
       openingBalance: ['', Validators.required],
       openingType: ['', Validators.required]
     });

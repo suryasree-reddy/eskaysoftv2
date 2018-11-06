@@ -18,6 +18,7 @@ export class SynectiksCommonGridComponent implements OnInit {
   @Output() intialLoad = new EventEmitter();
 
   private gridColumnList: any = [];
+  private overlayNoRowsTemplate;
   private rowModelType;
   private frameworkComponents;
   private gridApi = null;
@@ -28,6 +29,8 @@ export class SynectiksCommonGridComponent implements OnInit {
   }
 
   constructor(private masterService: MasterService, private sharedDataService: SharedDataService) {
+    this.overlayNoRowsTemplate = "<span> No Rows To Show.</span>";
+
     this.frameworkComponents = {
       numericEditor: GridNumericEditorComponent,
       gridSelectEditorComponent: GridSelectEditorComponent
@@ -151,39 +154,53 @@ export class SynectiksCommonGridComponent implements OnInit {
 
   onGridReady(params) {
     this.gridApi = params.api;
-      this.gridApi.sizeColumnsToFit();
+    this.gridApi.sizeColumnsToFit();
     // if your data is set on the gridOptions,
     //below code for settimeout gridReady get's called before data is bound.
     // so waiting time out for 5 sec
     //setTimeout(this.loadGridColumns(params), 500);
-  //  this.loadGridColumns(params);
+    //  this.loadGridColumns(params);
     this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
+      if (list.length != undefined && list.length >0) {
 
-      this.intialLoad.emit(list);
-      let dataSource = {
-        rowCount: null, // behave as infinite scroll
-        getRows: function(params) {
-          console.log('asking for ' + params.startRow + ' to ' + params.endRow);
-          // At this point in your code, you would call the server, using $http if in AngularJS 1.x.
-          // To make the demo look real, wait for 500ms before returning
-          {
-            // take a slice of the total rows
-            let dataAfterSortingAndFiltering = sortAndFilter(list, params.sortModel, params.filterModel);
-            let rowsThisPage = dataAfterSortingAndFiltering.slice(params.startRow, params.endRow);
-            // if on or after the last page, work out the last row.
-            let lastRow = -1;
-            if (dataAfterSortingAndFiltering.length <= params.endRow) {
-              lastRow = dataAfterSortingAndFiltering.length;
-            }
-            // call the success callback
-            params.successCallback(rowsThisPage, lastRow);
-          };
-        }
-      };
+        this.intialLoad.emit(list);
+        let dataSource = {
+          rowCount: null, // behave as infinite scroll
+          getRows: function(params) {
+            console.log('asking for ' + params.startRow + ' to ' + params.endRow);
+            // At this point in your code, you would call the server, using $http if in AngularJS 1.x.
+            // To make the demo look real, wait for 500ms before returning
+            {
+              // take a slice of the total rows
+              let dataAfterSortingAndFiltering = sortAndFilter(list, params.sortModel, params.filterModel);
+              let rowsThisPage = dataAfterSortingAndFiltering.slice(params.startRow, params.endRow);
+              // if on or after the last page, work out the last row.
+              let lastRow = -1;
+              if (dataAfterSortingAndFiltering.length <= params.endRow) {
+                lastRow = dataAfterSortingAndFiltering.length;
+              }
+              // call the success callback
+              params.successCallback(rowsThisPage, lastRow);
+            };
+          }
+        };
+        params.api.setDatasource(dataSource);
+        localStorage.setItem('rowDataLength', JSON.stringify(list.length));
+      } else {
 
-      params.api.setDatasource(dataSource);
-      localStorage.setItem('rowDataLength', JSON.stringify(list.length));
+        let dataSource = {
+          getRows(params: any) {
+            params.successCallback([], 0);
+          }
+        };
+        params.api.setDatasource(dataSource);
+        params.api.showNoRowsOverlay();
+      }
+
+
+
+
     });
 
   }

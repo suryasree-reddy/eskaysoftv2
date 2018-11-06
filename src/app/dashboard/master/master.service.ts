@@ -25,7 +25,10 @@ export class MasterService {
     return this.httpClient.get(this.END_POINt + tragetServiceName).subscribe(res => {
       this.resposeArray = res;
       this.dataObject.next(this.resposeArray);
-    })
+    },error =>     {
+      this.resposeArray = error;
+      this.dataObject.next({"error_status":this.resposeArray.status, "error_message":this.resposeArray.message});
+    } );
   }
 
   getDataNew(tragetServiceName): Observable<any> { // for future reference
