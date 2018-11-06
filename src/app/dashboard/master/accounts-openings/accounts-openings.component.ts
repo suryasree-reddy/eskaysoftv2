@@ -88,7 +88,7 @@ export class AccountsOpeningsComponent implements OnInit {
   }
 
   serverErrMsg(error) {
-    let temp = this.buttonsComponent.errorValue.error.message;
+    let temp = this.buttonsComponent.errorValue.message;
     this.errorStatusMsg = temp.substring(temp.lastIndexOf( ":" ));
     this.errorStatusCode = this.buttonsComponent.errorValue.status;
     this.errorMessage = "serverError.errorMessage";
