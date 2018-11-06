@@ -26,6 +26,10 @@ export class AccountsOpeningsComponent implements OnInit {
   public nameFlag;
   modalRef: BsModalRef;
   message: string;
+  private errorMessage: string = null;
+  private errorStatusCode: string = null;
+  private errorStatusMsg: string = null;
+
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
 
@@ -83,7 +87,11 @@ export class AccountsOpeningsComponent implements OnInit {
     this.formSuccess = this.formServerError = false;
   }
 
-  serverErrMsg() {
+  serverErrMsg(error) {
+    let temp = this.buttonsComponent.errorValue.error.message;
+    this.errorStatusMsg = temp.substring(temp.lastIndexOf( ":" ));
+    this.errorStatusCode = this.buttonsComponent.errorValue.status;
+    this.errorMessage = "serverError.errorMessage";
     this.formServerError = true;
     this.formRequiredError = this.formSuccess = false;
   }

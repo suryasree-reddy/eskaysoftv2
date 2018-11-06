@@ -12,6 +12,10 @@ export class ErrormessagesComponent implements OnInit {
   @Input() formSuccess: boolean = false;
   @Input() duplicateMessage: string = null;
   @Input() duplicateMessageParam: string = null;
+  @Input() errorMessage: boolean = false;
+  @Input() errorStatusCode: string = null;
+  @Input() errorStatusMsg: string = null;
+
 
   constructor(private translate: TranslateService) { translate.setDefaultLang('messages.en');}
 

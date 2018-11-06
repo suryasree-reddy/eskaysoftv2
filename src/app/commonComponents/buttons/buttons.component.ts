@@ -29,6 +29,7 @@ export class ButtonsComponent implements OnInit {
   @Output() afterSuccess: EventEmitter<null> = new EventEmitter();
   @Output() resetForm: EventEmitter<null> = new EventEmitter();
   @Output() serverErrMsg: EventEmitter<null> = new EventEmitter();
+  @Output() errorValue: EventEmitter<null> = new EventEmitter();
 
   private displayMsg: string = null;
 
@@ -54,13 +55,17 @@ export class ButtonsComponent implements OnInit {
     if (this.formObj.value.id) {
       this.masterService.updateRecord(this.endPoint, this.formObj.value).subscribe(res => {
         this.showInformationModal("Save");
-      }, (error) => {
+      }, error => {
+        this.errorValue = error;
+        this.errorValue.emit;
         this.serverErrMsg.emit();
       });
     } else {
       this.masterService.createRecord(this.endPoint, this.formObj.value).subscribe(res => {
         this.showInformationModal("Save");
       }, (error) => {
+         this.errorValue = error;
+        this.errorValue.emit;
       this.serverErrMsg.emit();
       });
     }
@@ -71,6 +76,8 @@ export class ButtonsComponent implements OnInit {
       localStorage.removeItem('ag-activeRow');
       this.showInformationModal("Delete");
     }, (error) => {
+ this.errorValue = error;
+        this.errorValue.emit;
       this.serverErrMsg.emit();
     });
   }

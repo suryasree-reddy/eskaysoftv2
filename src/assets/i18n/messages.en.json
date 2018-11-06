@@ -256,5 +256,8 @@
     "save": "Saved successfully!",
     "mandatory": "All fields are mandatory!!",
     "error": "Could not save. Try again later!!"
+  },
+  "serverError": {
+    "errorMessage": " !Error. code: {{errorStatusCode}}, Reason: {{errorStatusMsg}}."
   }
 }

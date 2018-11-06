@@ -10,6 +10,7 @@
     [translateParams]="{duplicateMessageParam: duplicateMessageParam}"></p>
   </div>
   <div class="error-text col-xs-12" *ngIf="formServerError">
-    <p class="text-danger" [translate]="'message.error'"></p>
+    <p class="text-danger" [textContent]="errorMessage" [translate]="errorMessage"
+    [translateParams]="{errorStatusCode: errorStatusCode, errorStatusMsg: errorStatusMsg}"></p>
   </div>
 </div>
