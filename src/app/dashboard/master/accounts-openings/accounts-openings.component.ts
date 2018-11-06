@@ -88,9 +88,9 @@ export class AccountsOpeningsComponent implements OnInit {
   }
 
   serverErrMsg(error) {
-    let temp = this.buttonsComponent.errorValue.message;
-    this.errorStatusMsg = temp.substring(temp.lastIndexOf( ":" ));
-    this.errorStatusCode = this.buttonsComponent.errorValue.status;
+   // let temp = this.buttonsComponent.errorValue.message;
+   // this.errorStatusMsg = temp.substring(temp.lastIndexOf( ":" ));
+    //this.errorStatusCode = this.buttonsComponent.errorValue.status;
     this.errorMessage = "serverError.errorMessage";
     this.formServerError = true;
     this.formRequiredError = this.formSuccess = false;
