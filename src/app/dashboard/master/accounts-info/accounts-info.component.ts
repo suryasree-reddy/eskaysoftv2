@@ -31,10 +31,8 @@ export class AccountsInfoComponent implements OnInit {
   private taxEndPoint: string = "tax/";
   public deleteFlag: boolean = true;
   public formRequiredError: boolean = false;
-  public formServerError: boolean = false;
   public formSuccess: boolean = false;
   public scFormRequiredError: boolean = false;
-  public scFormServerError: boolean = false;
   public scFormSuccess: boolean = false;
   public duplicateMessage: string = null;
   public childDuplicateMessage: string = null;
@@ -230,7 +228,7 @@ export class AccountsInfoComponent implements OnInit {
       this.loadStatesData();
     }
     //template, 'SubSchedule'
-    this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
+    this.scFormRequiredError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
@@ -262,7 +260,7 @@ export class AccountsInfoComponent implements OnInit {
     this.scFormRequiredError = false;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
-    this.scFormServerError = this.scFormRequiredError = this.scFormSuccess = false;
+    this.scFormRequiredError = this.scFormSuccess = false;
     formObj.reset();
   }
 
@@ -314,7 +312,7 @@ export class AccountsInfoComponent implements OnInit {
 
   successMsg() {
     this.formSuccess = true;
-    this.formRequiredError = this.formServerError = false;
+    this.formRequiredError = false;
     this.accInfoForm.reset();
     this.resetForm();
   }
@@ -322,19 +320,19 @@ export class AccountsInfoComponent implements OnInit {
   requiredErrMsg() {
     if (this.duplicateMessage == null) {
       this.formRequiredError = true;
-      this.formSuccess = this.formServerError = false;
+      this.formSuccess = false;
     }
   }
 
   scRequiredErrMsg() {
     if (this.childDuplicateMessage == null) {
       this.scFormRequiredError = true;
-      this.scFormSuccess = this.scFormServerError = false;
+      this.scFormSuccess = false;
     }
   }
 
   resetForm() {
-    this.formRequiredError = this.formServerError = this.formSuccess = false;
+    this.formRequiredError =  this.formSuccess = false;
     this.scFormRequiredError = false;
     this.nameFlag = false;
     this.deleteFlag = true;

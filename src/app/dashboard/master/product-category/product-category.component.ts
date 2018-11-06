@@ -20,7 +20,6 @@ export class ProductCategoryComponent implements OnInit {
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
-  public formServerError: boolean = false;
   public nameFlag;
   public deleteFlag: boolean = true;
   public prodCategory;
@@ -96,26 +95,21 @@ export class ProductCategoryComponent implements OnInit {
       localStorage.removeItem('ag-activeRow');
       this.buttonsComponent.showInformationModal("Delete");
     }, (error) => {
-      this.serverErrMsg();
+    throw error;
     });
   }
 
   successMsg() {
     this.formSuccess = true;
-    this.formRequiredError = this.formServerError = false;
+    this.formRequiredError = false;
     this.resetForm();
   }
 
   requiredErrMsg() {
     if (this.duplicateMessage == null) {
       this.formRequiredError = true;
-      this.formSuccess = this.formServerError = false;
+      this.formSuccess = false;
     }
-  }
-
-  serverErrMsg() {
-    this.formServerError = true;
-    this.formRequiredError = this.formSuccess = false;
   }
 
   resetForm() {
@@ -123,7 +117,7 @@ export class ProductCategoryComponent implements OnInit {
     this.gridSelectedRow = null;
     this.nameFlag = false;
     this.deleteFlag = true;
-    this.formRequiredError = this.formServerError = this.formSuccess = false;
+    this.formRequiredError = this.formSuccess = false;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
     this.loadGridData();

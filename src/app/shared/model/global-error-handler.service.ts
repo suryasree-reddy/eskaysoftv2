@@ -6,7 +6,10 @@ import { SharedDataService } from './shared-data.service';
 export class GlobalErrorHandlerService implements ErrorHandler {
 
   constructor(
-     private sharedDataService:SharedDataService) {  }
+     private sharedDataService:SharedDataService) {
+
+
+        }
 
   handleError(error: any) {
     if (error instanceof HttpErrorResponse) {

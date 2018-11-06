@@ -19,7 +19,6 @@ export class BankinformationComponent implements OnInit {
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
-  public formServerError: boolean = false;
   public nameFlag;
   public deleteFlag: boolean = true;
   public bankName;
@@ -91,20 +90,15 @@ export class BankinformationComponent implements OnInit {
 
   successMsg() {
     this.formSuccess = true;
-    this.formRequiredError = this.formServerError = false;
+    this.formRequiredError = false;
     this.resetForm();
   }
 
   requiredErrMsg() {
     if (this.duplicateMessage == null) {
       this.formRequiredError = true;
-      this.formSuccess = this.formServerError = false;
+      this.formSuccess = false;
     }
-  }
-
-  serverErrMsg() {
-    this.formServerError = true;
-    this.formRequiredError = this.formSuccess = false;
   }
 
   resetForm() {
@@ -112,7 +106,7 @@ export class BankinformationComponent implements OnInit {
     this.gridSelectedRow = null;
     this.duplicateMessage = null;
     this.nameFlag = false;
-    this.formRequiredError = this.formServerError = this.formSuccess = false;
+    this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
     this.deleteFlag = true;
     this.focusField.nativeElement.focus();

@@ -24,7 +24,6 @@ export class CompaniesComponent implements OnInit {
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
-  public formServerError: boolean = false;
   public selectedTypeahead: any;
   public nameFlag;
   public deleteFlag: boolean = true;
@@ -38,7 +37,6 @@ export class CompaniesComponent implements OnInit {
   public duplicateMessageParam: string = null;
   public typeaheadDataList: any = [];
   public scFormRequiredError: boolean = false;
-  public scFormServerError: boolean = false;
   public scFormSuccess: boolean = false;
   public childDuplicateMessage: string = null;
   public childDuplicateMessageParam: string = null;
@@ -93,7 +91,7 @@ export class CompaniesComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.resetChildForm();
-    this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
+    this.scFormRequiredError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
@@ -163,7 +161,7 @@ export class CompaniesComponent implements OnInit {
         this.showInformationModal("Save");
         this.successMsg();
       }, (error) => {
-        this.serverErrMsg();
+        throw error;
       });
     } else {
     //  this.companyForm.value.companyGroupId = this.selectedTypeahead.id;
@@ -171,7 +169,7 @@ export class CompaniesComponent implements OnInit {
         this.showInformationModal("Save");
         this.successMsg();
       }, (error) => {
-        this.serverErrMsg();
+        throw error;
       });
     }
   }
@@ -192,7 +190,7 @@ export class CompaniesComponent implements OnInit {
       this.modalRef.hide();
       this.companyGroupForm.reset();
     }, (error) => {
-      this.serverErrMsg();
+      throw error;
     });
   }
 
@@ -211,13 +209,13 @@ export class CompaniesComponent implements OnInit {
       this.showInformationModal("Delete");
       this.successMsg();
     }, (error) => {
-      this.serverErrMsg();
+      throw error;
     });
   }
 
   successMsg() {
     this.formSuccess = true;
-    this.formRequiredError = this.formServerError = false;
+    this.formRequiredError = false;
     this.resetForm();
     this.resetChildForm();
   }
@@ -225,17 +223,12 @@ export class CompaniesComponent implements OnInit {
   requiredErrMsg() {
     if (this.duplicateMessage == null) {
       this.formRequiredError = true;
-      this.formSuccess = this.formServerError = false;
+      this.formSuccess = false;
     }
   }
 
   loadSelectedTypeahead(event) {
     this.selectedTypeahead = event.item;
-  }
-
-  serverErrMsg() {
-    this.formServerError = true;
-    this.formRequiredError = this.formSuccess = false;
   }
 
   resetForm() {
@@ -246,7 +239,7 @@ export class CompaniesComponent implements OnInit {
     this.duplicateMessage = null;
     this.formRequiredError = false;
     this.duplicateMessageParam = null;
-    this.formRequiredError = this.formServerError = this.formSuccess = false;
+    this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
   }
@@ -262,7 +255,6 @@ export class CompaniesComponent implements OnInit {
 
   resetChildForm() {
     this.scFormRequiredError = false;
-    this.scFormServerError = false;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
     this.companyGroupForm.reset();
@@ -271,7 +263,7 @@ export class CompaniesComponent implements OnInit {
   scRequiredErrMsg() {
     if(this.childDuplicateMessage == null){
     this.scFormRequiredError = true;
-    this.scFormSuccess = this.scFormServerError = false;
+    this.scFormSuccess = false;
   }
   }
 

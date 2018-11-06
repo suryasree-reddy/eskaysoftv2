@@ -21,7 +21,6 @@ export class PurchaseComponent implements OnInit {
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
-  public formServerError: boolean = false;
   public nameFlag;
   public deleteFlag: boolean =true;
   public duplicateMessage: string = null;
@@ -91,5 +90,3 @@ export class PurchaseComponent implements OnInit {
     // this.focusField.nativeElement.focus();
   }
   }
-
-

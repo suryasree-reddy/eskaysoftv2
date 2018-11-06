@@ -27,10 +27,8 @@ export class AreasComponent implements OnInit {
   public selectedTypeahead: any;
   public deleteFlag: boolean = true;
   public formRequiredError: boolean = false;
-  public formServerError: boolean = false;
   public formSuccess: boolean = false;
   public scFormRequiredError: boolean = false;
-  public scFormServerError: boolean = false;
   public scFormSuccess: boolean = false;
   public nameFlag;
   public areaName;
@@ -147,7 +145,7 @@ export class AreasComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.resetBusinessExecutiveForm();
-    this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
+    this.scFormRequiredError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
@@ -167,7 +165,7 @@ export class AreasComponent implements OnInit {
       this.modalRef.hide();
       this.businessExecutiveForm.reset();
     }, (error) => {
-      this.scServerErrMsg();
+      throw error;
     });
   }
 
@@ -187,7 +185,7 @@ export class AreasComponent implements OnInit {
       this.businessExecutiveForm.reset();
     } else {
       this.formSuccess = true;
-      this.formRequiredError = this.formServerError = false;
+      this.formRequiredError = false;
       this.resetForm();
     }
   }
@@ -195,23 +193,13 @@ export class AreasComponent implements OnInit {
   requiredErrMsg() {
     if (this.duplicateMessage == null) {
       this.formRequiredError = true;
-      this.formSuccess = this.formServerError = false;
+      this.formSuccess = false;
     }
-  }
-
-  serverErrMsg() {
-    this.formServerError = true;
-    this.formRequiredError = this.formSuccess = false;
   }
 
   scRequiredErrMsg() {
     this.scFormRequiredError = true;
-    this.scFormSuccess = this.scFormServerError = false;
-  }
-
-  scServerErrMsg() {
-    this.scFormServerError = true;
-    this.scFormRequiredError = this.scFormSuccess = false;
+    this.scFormSuccess = false;
   }
 
   resetForm() {
@@ -220,7 +208,7 @@ export class AreasComponent implements OnInit {
     this.gridSelectedRow = null;
     this.nameFlag = false;
     this.deleteFlag = true;
-    this.formRequiredError = this.formServerError = this.formSuccess = false;
+    this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
     this.formRequiredError = false;
     this.duplicateMessage = null;
@@ -242,7 +230,6 @@ export class AreasComponent implements OnInit {
 
   resetBusinessExecutiveForm() {
     this.scFormRequiredError = false;
-    this.scFormServerError = false;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
     this.businessExecutiveForm.reset();

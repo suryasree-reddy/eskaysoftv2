@@ -419,7 +419,8 @@
             <form [formGroup]="districtsForm" (ngSubmit)="saveChildForm('District', districtsForm)" (ngSubmit)="saveDistrict()" autocomplete="off">
 
               <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
-              [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
+              [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+                [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="childDuplicateMessage"
                [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
                <div class="input-group">

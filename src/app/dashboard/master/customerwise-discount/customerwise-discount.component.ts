@@ -25,7 +25,6 @@ export class CustomerwiseDiscountComponent implements OnInit {
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
-  public formServerError: boolean = false;
   public nameFlag;
   public deleteFlag: boolean = true;
   public customerName;
@@ -38,7 +37,6 @@ export class CustomerwiseDiscountComponent implements OnInit {
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   public scFormRequiredError: boolean = false;
-  public scFormServerError: boolean = false;
   public scFormSuccess: boolean = false;
   public childDuplicateMessage: string = null;
   public childDuplicateMessageParam: string = null;
@@ -144,7 +142,7 @@ loadGridDataById() {
   openModal(template: TemplateRef<any>) {
     this.resetChildForm();
     this.loadCompanyGroupTypeaheadData();
-    this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
+    this.scFormRequiredError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
@@ -198,8 +196,6 @@ loadGridDataById() {
     }
   }
 
-
-
   loadGridData() {
     this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
@@ -215,13 +211,13 @@ loadGridDataById() {
         this.masterService.updateRecord(this.endPoint, this.customerDiscountForm.value).subscribe(res => {
           this.showInformationModal("Save");
         }, (error) => {
-          this.serverErrMsg();
+          throw error;
         });
       } else {
         this.masterService.createRecord(this.endPoint, this.customerDiscountForm.value).subscribe(res => {
           this.showInformationModal("Save");
         }, (error) => {
-          this.serverErrMsg();
+        throw error;
         });
       }
 
@@ -235,7 +231,7 @@ loadGridDataById() {
     if (this.customerDiscountForm.valid) {
       this.showConfirmationModal("Save");
     } else {
-      this.serverErrMsg()
+      this.requiredErrMsg();
     }
   }
 
@@ -253,7 +249,7 @@ loadGridDataById() {
       this.showInformationModal("SaveChildCmpForm");
 
     }, (error) => {
-      this.serverErrMsg();
+      throw error;
     });
 
   }
@@ -265,27 +261,22 @@ loadGridDataById() {
       localStorage.removeItem('ag-activeRow');
       this.showInformationModal("Delete");
     }, (error) => {
-      this.serverErrMsg();
+      throw error;
     });
 
   }
 
   successMsg() {
     this.formSuccess = true;
-    this.formRequiredError = this.formServerError = false;
+    this.formRequiredError = false;
     this.resetForm();
   }
 
   requiredErrMsg() {
     if (this.duplicateMessage == null) {
       this.formRequiredError = true;
-      this.formSuccess = this.formServerError = false;
+      this.formSuccess = false;
     }
-  }
-
-  serverErrMsg() {
-    this.formServerError = true;
-    this.formRequiredError = this.formSuccess = false;
   }
 
   resetForm() {
@@ -293,7 +284,7 @@ loadGridDataById() {
     this.gridSelectedRow = null;
     this.nameFlag = false;
     this.deleteFlag = true;
-    this.formRequiredError = this.formServerError = this.formSuccess = false;
+    this.formRequiredError =this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
   }
@@ -309,7 +300,6 @@ loadGridDataById() {
 
   resetChildForm() {
     this.scFormRequiredError = false;
-    this.scFormServerError = false;
     this.duplicateMessage = null;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
@@ -320,7 +310,7 @@ loadGridDataById() {
 
   scRequiredErrMsg() {
     this.scFormRequiredError = true;
-    this.scFormSuccess = this.scFormServerError = false;
+    this.scFormSuccess = false;
   }
 
   showInformationModal(eventType) {

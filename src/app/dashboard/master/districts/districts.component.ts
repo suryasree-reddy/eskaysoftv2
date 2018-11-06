@@ -23,9 +23,7 @@ export class DistrictsComponent implements OnInit {
   private duplicateStateName: boolean = false;
   private duplicateStateCode: boolean = false;
   public formRequiredError: boolean = false;
-  public formServerError: boolean = false;
   public scFormRequiredError: boolean = false;
-  public scFormServerError: boolean = false;
   public scFormSuccess: boolean = false;
   public districtsList: any = [];
   public statesList: any = [];
@@ -63,7 +61,7 @@ export class DistrictsComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.resetStatesForm();
-    this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
+    this.scFormRequiredError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
@@ -182,7 +180,7 @@ export class DistrictsComponent implements OnInit {
       this.statesForm.reset();
 
     }, (error) => {
-      this.serverErrMsg();
+    throw error;
     });
   }
 
@@ -198,7 +196,7 @@ export class DistrictsComponent implements OnInit {
     //  this.focusField.nativeElement.focus();
     } else {
       this.formSuccess = true;
-      this.formRequiredError = this.formServerError = false;
+      this.formRequiredError = false;
       this.resetForm();
     }
   }
@@ -207,30 +205,20 @@ export class DistrictsComponent implements OnInit {
     if (this.modalRef != undefined) {
       if (this.duplicateMessage == null) {
         this.scFormRequiredError = true;
-        this.scFormSuccess = this.scFormServerError = false;
+        this.scFormSuccess = false;
       }
     } else {
       if (this.duplicateMessage == null) {
         this.formRequiredError = true;
-        this.formSuccess = this.formServerError = false;
+        this.formSuccess = false;
       }
-    }
-  }
-
-  serverErrMsg() {
-    if (this.modalRef != undefined) {
-      this.scFormServerError = true;
-      this.scFormRequiredError = this.scFormSuccess = false;
-    } else {
-      this.formServerError = true;
-      this.formRequiredError = this.formSuccess = false;
     }
   }
 
   resetForm() {
     this.loadGridData();
     this.loadStatesData();
-    this.formRequiredError = this.formServerError = this.formSuccess = false;
+    this.formRequiredError = this.formSuccess = false;
     this.districtsForm.reset();
     this.childDuplicateMessage = null;
     this.editDistricts = null;
@@ -246,7 +234,7 @@ export class DistrictsComponent implements OnInit {
   resetStatesForm() {
     this.childDuplicateMessageParam = null;
     this.childDuplicateMessage = null;
-    this.scFormServerError = this.scFormRequiredError = this.scFormSuccess = false;
+    this.scFormRequiredError = this.scFormSuccess = false;
     this.statesForm.reset();
   }
 

@@ -20,10 +20,8 @@ export class SubscheduleComponent implements OnInit {
   private endPoint: string = "subschedules/";
   public subScheduleForm: FormGroup;
   public formRequiredError: boolean = false;
-  public formServerError: boolean = false;
   public formSuccess: boolean = false;
   public scFormRequiredError: boolean = false;
-  public scFormServerError: boolean = false;
   public scFormSuccess: boolean = false;
   public nameFlag;
   subScheduleList: any = [];
@@ -100,7 +98,7 @@ export class SubscheduleComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.resetScheduleForm();
-    this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
+    this.scFormRequiredError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
@@ -118,7 +116,7 @@ export class SubscheduleComponent implements OnInit {
       this.modalRef.hide();
       this.scheduleForm.reset();
     }, (error) => {
-      this.scServerErrMsg();
+      throw error;
     });
   }
 
@@ -171,7 +169,7 @@ export class SubscheduleComponent implements OnInit {
     if (!this.duplicateSchIndex && !this.duplicateSchName) {
       this.childDuplicateMessage = null;
       this.childDuplicateMessageParam = null;
-      
+
     } else if (!this.duplicateSubSchName) {
       this.duplicateMessageParam = null;
       this.duplicateMessage = null;
@@ -184,13 +182,13 @@ export class SubscheduleComponent implements OnInit {
       this.masterService.updateRecord(this.endPoint, this.subScheduleForm.value).subscribe(res => {
         this.showInformationModal("Save");
       }, (error) => {
-        this.serverErrMsg();
+        throw error;
       });
     } else {
       this.masterService.createRecord(this.endPoint, this.subScheduleForm.value).subscribe(res => {
         this.showInformationModal("Save");
       }, (error) => {
-        this.serverErrMsg();
+      throw error;
       });
     }
   }
@@ -208,45 +206,35 @@ export class SubscheduleComponent implements OnInit {
     this.masterService.deleteRecord(this.endPoint, this.editSubSchedule.id).subscribe(res => {
       this.showInformationModal("Delete");
     }, (error) => {
-      this.serverErrMsg();
+      throw error;
     });
     localStorage.removeItem('ag-activeRow');
   }
 
   successMsg() {
     this.formSuccess = true;
-    this.formRequiredError = this.formServerError = false;
+    this.formRequiredError =false;
     this.resetForm();
   }
 
   requiredErrMsg() {
     if (this.duplicateMessage == null) {
       this.formRequiredError = true;
-      this.formSuccess = this.formServerError = false;
+      this.formSuccess = false;
     }
-  }
-
-  serverErrMsg() {
-    this.formServerError = true;
-    this.formRequiredError = this.formSuccess = false;
   }
 
   scRequiredErrMsg() {
     if (this.childDuplicateMessage == null) {
       this.scFormRequiredError = true;
-      this.scFormSuccess = this.scFormServerError = false;
+      this.scFormSuccess = false;
     }
-  }
-
-  scServerErrMsg() {
-    this.scFormServerError = true;
-    this.scFormRequiredError = this.scFormSuccess = false;
   }
 
   resetForm() {
     this.loadGriddata();
     this.loadScheduleData();
-    this.formRequiredError = this.formServerError = this.formSuccess = false;
+    this.formRequiredError = this.formSuccess = false;
     this.subScheduleForm.reset();
     this.scFormRequiredError = false;
     this.editSubSchedule = null;

@@ -21,7 +21,6 @@ export class ProductGroupComponent implements OnInit {
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
-  public formServerError: boolean = false;
   public nameFlag;
   public deleteFlag: boolean = true;
   public prodGroup;
@@ -97,20 +96,15 @@ export class ProductGroupComponent implements OnInit {
 
   successMsg() {
     this.formSuccess = true;
-    this.formRequiredError = this.formServerError = false;
+    this.formRequiredError = false;
     this.resetForm();
   }
 
   requiredErrMsg() {
     if (this.duplicateMessage == null) {
       this.formRequiredError = true;
-      this.formSuccess = this.formServerError = false;
+      this.formSuccess = false;
     }
-  }
-
-  serverErrMsg() {
-    this.formServerError = true;
-    this.formRequiredError = this.formSuccess = false;
   }
 
   resetForm() {
@@ -119,7 +113,7 @@ export class ProductGroupComponent implements OnInit {
     this.nameFlag = false;
     this.deleteFlag = true;
     this.duplicateMessage = null
-    this.formRequiredError = this.formServerError = this.formSuccess = false;
+    this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
   }

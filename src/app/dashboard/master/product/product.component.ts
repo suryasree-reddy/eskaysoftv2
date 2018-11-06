@@ -35,13 +35,11 @@ export class ProductComponent implements OnInit {
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
-  public formServerError: boolean = false;
   public nameFlag;
   public deleteFlag: boolean = true;
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   public scFormRequiredError: boolean = false;
-  public scFormServerError: boolean = false;
   public scFormSuccess: boolean = false;
   public childDuplicateMessage: string = null;
   public childDuplicateMessageParam: string = null;
@@ -186,7 +184,7 @@ export class ProductComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.resetChildForm();
-    this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
+    this.scFormRequiredError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
@@ -261,14 +259,14 @@ export class ProductComponent implements OnInit {
         this.showInformationModal("Save");
         this.successMsg();
       }, (error) => {
-        this.serverErrMsg();
+        throw error;
       });
     } else {
       this.masterService.createRecord(this.endPoint, this.productForm.value).subscribe(res => {
         this.showInformationModal("Save");
         this.successMsg();
       }, (error) => {
-        this.serverErrMsg();
+        throw error;
       });
     }
   }
@@ -295,7 +293,7 @@ export class ProductComponent implements OnInit {
       this.modalRef.hide();
       formObj.reset();
     }, (error) => {
-      this.serverErrMsg();
+      throw error;
     });
   }
 
@@ -305,13 +303,13 @@ export class ProductComponent implements OnInit {
       localStorage.removeItem('ag-activeRow');
       this.successMsg()
     }, (error) => {
-      this.serverErrMsg();
+      throw error;
     });
   }
 
   successMsg() {
     this.formSuccess = true;
-    this.formRequiredError = this.formServerError = false;
+    this.formRequiredError = false;
     this.resetForm();
     this.resetChildForm();
   }
@@ -319,13 +317,8 @@ export class ProductComponent implements OnInit {
   requiredErrMsg() {
     if (this.duplicateMessage == null) {
       this.formRequiredError = true;
-      this.formSuccess = this.formServerError = false;
+      this.formSuccess = false;
     }
-  }
-
-  serverErrMsg() {
-    this.formServerError = true;
-    this.formRequiredError = this.formSuccess = false;
   }
 
   resetForm() {
@@ -335,7 +328,7 @@ export class ProductComponent implements OnInit {
     this.gridSelectedRow = null;
     this.nameFlag = false;
     this.deleteFlag = true;
-    this.formRequiredError = this.formServerError = this.formSuccess = false;
+    this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
   }
@@ -352,7 +345,6 @@ export class ProductComponent implements OnInit {
 
   resetChildForm() {
     this.scFormRequiredError = false;
-    this.scFormServerError = false;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
     this.productGroupForm.reset();
@@ -361,7 +353,7 @@ export class ProductComponent implements OnInit {
 
   scRequiredErrMsg() {
     this.scFormRequiredError = true;
-    this.scFormSuccess = this.scFormServerError = false;
+    this.scFormSuccess = false;
   }
 
   showInformationModal(eventType) {
