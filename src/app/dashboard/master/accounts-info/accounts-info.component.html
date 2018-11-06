@@ -54,10 +54,12 @@
   <div class="row">
     <div class="col-xs-12">
       <h3>{{'accountinfo.title' | translate }}</h3>
-      <form [formGroup]="accInfoForm" autocomplete="off">
+      <form [formGroup]="accInfoForm"  autocomplete="off">
 
-      <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="formServerError"
-      [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+      <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
+      [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+        [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
+        [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
       <div  style="margin-left:-10px;">
 
@@ -80,7 +82,7 @@
                   	</div>
 
                   	<div class="col-md-4 col-3-lt">
-                  		<p>{{'subschedule.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
+                  		<p>{{'subschedule.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template, 'SubSchedule')">create new</a>)</p>
                   		<input id="subScheduleName" maxlength="40" class="form-control capitalize" [formControl]="accInfoForm.controls['subScheduleName']"
                   		[typeahead]="subScheduleList" typeaheadOptionField="subScheduleName" [typeaheadOptionsLimit]="7"
                   		[typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSubSchedule($event)" >
@@ -115,7 +117,7 @@
                   	</div>
 
                   	<div class="col-md-4 col-3-lt">
-                  		<p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate)">create new</a>)</p>
+                  		<p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate, 'Districts')">create new</a>)</p>
                   		<input id="districtName" maxlength="20" class="form-control capitalize" [formControl]="accInfoForm.controls['districtName']"
                   		[typeahead]="districtsList" typeaheadOptionField="districtName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)" >
                   		<span class="caret"></span>
@@ -350,7 +352,7 @@
             [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=false
             [hideDeleteBtn]=false [formObj]="accInfoForm" (saveRecord)="save()"
             (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-            (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()"></app-buttons>
+            (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
 
 
           </div>
@@ -373,10 +375,11 @@
           </button>
         </div>
         <div class="modal-body">
-          <form [formGroup]="subScheduleForm" (ngSubmit)="saveSubSchedule()" autocomplete="off">
+          <form [formGroup]="subScheduleForm"  (ngSubmit)="saveChildForm('SubSchedule', subScheduleForm)" autocomplete="off">
 
             <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
-            [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
+            [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+              [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"  [duplicateMessage]="childDuplicateMessage"
              [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
              <div class="input-group">
@@ -413,7 +416,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form [formGroup]="districtsForm" (ngSubmit)="saveDistrict()" autocomplete="off">
+            <form [formGroup]="districtsForm" (ngSubmit)="saveChildForm('District', districtsForm)" (ngSubmit)="saveDistrict()" autocomplete="off">
 
               <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
               [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"

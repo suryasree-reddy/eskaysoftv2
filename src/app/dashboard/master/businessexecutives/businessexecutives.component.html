@@ -4,7 +4,8 @@
         <h3>{{'businessexecutive.title' | translate }}</h3>
         <form [formGroup]="businessExecutiveForm" autocomplete="off">
           <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-          [formServerError]="formServerError" [duplicateMessage]="duplicateMessage"
+          [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+            [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"  [duplicateMessage]="duplicateMessage"
            [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
           <div class="input-group">
@@ -32,7 +33,7 @@
                    [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
                    [hideDeleteBtn]=true [formObj]="businessExecutiveForm" (saveRecord)="save()"
                    (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-                   (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" >
+                   (afterSuccess)="successMsg()" (resetForm)="resetForm()" >
             </app-buttons>
 
 

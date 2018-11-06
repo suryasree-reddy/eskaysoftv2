@@ -4,7 +4,8 @@
             <h3>{{'product.title' | translate}}</h3>
             <form [formGroup]="productForm"  autocomplete="off">
                 <app-errormessages [formRequiredError]="formRequiredError"
-                        [formSuccess]="formSuccess" [formServerError]="formServerError"
+                        [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+                          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
                         [duplicateMessage]="duplicateMessage"
                         [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
@@ -105,7 +106,7 @@ type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length 
                 [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
                 [hideDeleteBtn]=true [formObj]="productForm" (saveRecord)="save()"
                 (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-                (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+                (afterSuccess)="successMsg()" (resetForm)="resetForm()" ></app-buttons>
 
             </form>
         </div>
@@ -129,8 +130,8 @@ type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length 
     </div>
     <div class="modal-body">
         <form [formGroup]="productGroupForm" (ngSubmit)="saveChildForm('PG', productGroupForm)" autocomplete="off">
-            <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess" [formServerError]="scFormServerError"
-                [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+            <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"[formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+              [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
             <div class="input-group">
                 <p>{{'productgroup.name' | translate}}: *</p>
@@ -155,7 +156,8 @@ type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length 
     </div>
     <div class="modal-body">
         <form [formGroup]="productCategoryForm" (ngSubmit)="saveChildForm('PC', productCategoryForm)" autocomplete="off">
-            <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess" [formServerError]="scFormServerError"
+            <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+              [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
                 [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
             <div class="input-group">
@@ -182,8 +184,8 @@ type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length 
     </div>
     <div class="modal-body">
         <form [formGroup]="companyForm" (ngSubmit)="saveChildForm('Company', companyForm)" autocomplete="off">
-            <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess" [formServerError]="scFormServerError"
-                [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+            <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+              [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
                 <div class="input-group">
                 	<p>{{'companies.name' | translate}}: *</p>

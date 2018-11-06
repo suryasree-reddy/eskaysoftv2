@@ -21,7 +21,6 @@ export class ScheduleComponent implements OnInit {
   public scheduleTypes: any = [];
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
-  public formServerError: boolean = false;
   public scheduleList: any = [];
   public editSchedule;
   public deleteFlag: boolean = true;
@@ -34,18 +33,13 @@ export class ScheduleComponent implements OnInit {
   modalRef: BsModalRef;
   private duplicateSchName: boolean = false;
   private duplicateSchIndex: boolean = false;
-  private formTitle: string = "Schedule";
-  private deleteConfirmMsg: string = "schedule.deleteConfirmationMessage";
-  private saveConfirmMsg: string = "schedule.saveConfirmationMessage";
-  private saveInfoMsg: string = "schedule.saveInformationMessage";
-  private deleteInfoMsg: string = "schedule.deleteInformationMessage";
 
   @ViewChild('focus') focusField: ElementRef;
-  @ViewChild(ButtonsComponent) buttonsComponent:ButtonsComponent;
+  @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
-    private sharedDataService:SharedDataService,
+    private sharedDataService: SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
@@ -65,7 +59,6 @@ export class ScheduleComponent implements OnInit {
       scheduleIndex: ['', Validators.required],
       scheduleType: ['', Validators.required],
     });
-    //this.loadGridData();
     this.focusField.nativeElement.focus();
     this.scheduleTypes = this.sharedDataService.getSharedCommonJsonData().ScheduleTypes;
   }
@@ -101,7 +94,6 @@ export class ScheduleComponent implements OnInit {
       this.duplicateSchName = this.masterService.hasDataExist(this.scheduleList, 'scheduleName', this.scheduleForm.value.scheduleName);
       this.getDuplicateErrorMessages();
     }
-
   }
 
   loadGridData() {
@@ -112,8 +104,6 @@ export class ScheduleComponent implements OnInit {
     });
   }
 
-
-
   save() {
     this.buttonsComponent.save();
   }
@@ -121,26 +111,18 @@ export class ScheduleComponent implements OnInit {
   delete() {
     this.buttonsComponent.delete();
   }
-// capitalize(){
-//   const cap = this.scheduleForm.value.scheduleName;
-//  this.cap = cap.toUpperCase();
-// }
+
   successMsg() {
     this.formSuccess = true;
-    this.formRequiredError = this.formServerError = false;
+    this.formRequiredError = false;
     this.resetForm();
   }
 
   requiredErrMsg() {
     if (this.duplicateMessage == null) {
       this.formRequiredError = true;
-      this.formSuccess = this.formServerError = false;
+      this.formSuccess = false;
     }
-  }
-
-  serverErrMsg() {
-    this.formServerError = true;
-    this.formRequiredError = this.formSuccess = false;
   }
 
   resetForm() {
@@ -153,7 +135,7 @@ export class ScheduleComponent implements OnInit {
     this.duplicateMessageParam = null;
     this.nameFlag = false;
     this.lastSchIndex;
-    this.formRequiredError = this.formServerError = this.formSuccess = false;
+    this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
   }

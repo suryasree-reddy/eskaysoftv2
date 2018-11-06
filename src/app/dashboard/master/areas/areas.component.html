@@ -4,7 +4,8 @@
         <h3>{{'areas.title' | translate }}</h3>
         <form [formGroup]="areaForm" (ngSubmit)="saveForm()" autocomplete="off">
           <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-          [formServerError]="formServerError" [duplicateMessage]="duplicateMessage"
+          [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+            [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
            [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
           <div class="input-group">
@@ -25,7 +26,7 @@
                [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
                [hideDeleteBtn]=true [formObj]="areaForm" (saveRecord)="save()"
                (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-               (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" >
+               (afterSuccess)="successMsg()" (resetForm)="resetForm()" >
         </app-buttons>
         </form>
       </div>
@@ -49,7 +50,8 @@
       <form [formGroup]="businessExecutiveForm" (ngSubmit)="saveBusinessExecutive()" autocomplete="off">
 
         <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
-        [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
+        [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"  [duplicateMessage]="childDuplicateMessage"
          [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
         <div class="input-group">
@@ -78,15 +80,7 @@
         	<button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
         </div>
 
-        <!-- <app-buttons [title]="'businessexecutive.title'" [deleteConfirmMsg]="'businessexecutive.deleteConfirmationMessage'"
-        [saveConfirmMsg]="'businessexecutive.saveConfirmationMessage'" [saveInfoMsg]="'businessexecutive.saveInformationMessage'"
-        [endPoint]="endPoint"
-        [deleteInfoMsg]="'businessexecutive.deleteInformationMessage'" [duplicateMessage]="childDuplicateMessage"
-        [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true
-        [hideDeleteBtn]=false [formObj]="businessExecutiveForm" (saveRecord)="saveBusinessExecutive()"
-        (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-        (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" >
- </app-buttons> -->
+      
       </form>
     </div>
   </ng-template>

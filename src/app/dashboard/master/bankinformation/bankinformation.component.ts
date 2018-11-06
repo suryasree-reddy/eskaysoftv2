@@ -6,7 +6,7 @@ import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
-
+import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 @Component({
   selector: 'app-bankinformation',
   templateUrl: './bankinformation.component.html'
@@ -33,6 +33,7 @@ export class BankinformationComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
+    private sharedDataService: SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }

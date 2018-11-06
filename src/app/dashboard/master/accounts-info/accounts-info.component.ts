@@ -8,7 +8,6 @@ import { TranslateService } from '@ngx-translate/core';
 import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
-import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
@@ -64,7 +63,6 @@ export class AccountsInfoComponent implements OnInit {
   modalRef: BsModalRef;
   message: string;
 
-  @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
@@ -147,7 +145,6 @@ export class AccountsInfoComponent implements OnInit {
     this.accSaleType = this.sharedDataService.getSharedCommonJsonData().SaleType;
     this.accCustomerType = this.sharedDataService.getSharedCommonJsonData().CustomerType;
     this.accOpeningType = this.sharedDataService.getSharedCommonJsonData().OpeningType;
-
   }
 
   loadTaxTypeaheadData() {
@@ -159,6 +156,18 @@ export class AccountsInfoComponent implements OnInit {
   loadSubScheduleData() {
     this.masterService.getParentData("subschedules/").subscribe(list => {
       this.subScheduleList = list;
+    })
+  }
+
+  loadScheduleData() {
+    this.masterService.getParentData("schedules/").subscribe(list => {
+      this.scheduleList = list;
+    })
+  }
+
+  loadStatesData() {
+    this.masterService.getParentData("states/").subscribe(list => {
+      this.statesList = list;
     })
   }
 
@@ -178,6 +187,7 @@ export class AccountsInfoComponent implements OnInit {
     this.selectedTaxTypeahead = event.item;
     this.accInfoForm.patchValue({ taxId: event.item.id });
   }
+
   onSelectDistrict(event) {
     this.selectedDistrict = event.item;
     this.accInfoForm.patchValue({ stateName: this.selectedDistrict.stateName });
@@ -204,66 +214,56 @@ export class AccountsInfoComponent implements OnInit {
   onSelectSchedule(event) {
     this.selectedSchedule = event.item;
     const temp = this.selectedSchedule.id;
+
+    this.subScheduleForm.patchValue({ scheduleId: this.selectedSchedule.id });
+    this.subScheduleForm.patchValue({ scheduleName: this.selectedSchedule.scheduleName });
     const selectedScheduleNameList = _.filter(this.subScheduleList, function(o) { return o.scheduleId == temp });
     this.subScheduleForm.patchValue({ subScheduleIndex: selectedScheduleNameList.length + 1 });
   }
 
-  openModal(template: TemplateRef<any>) {
-    // this.resetsubScheduleForm();
+  openModal(template: TemplateRef<any>, templateName) {
+    if(templateName == "SubSchedule"){
+      this.resetChildForm(this.subScheduleForm);
+      this.loadScheduleData();
+    }else if(templateName == "Districts"){
+      this.resetChildForm(this.districtsForm);
+      this.loadStatesData();
+    }
+    //template, 'SubSchedule'
     this.scFormRequiredError = this.scFormServerError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
-  saveSubSchedule() {
-    if (this.subScheduleForm.valid && this.childDuplicateMessage == null) {
-      this.showConfirmationModal("SaveSubSchedule");
+  saveChildForm(screenName, formObj) {
+    this.scFormRequiredError = false;
+    if (formObj.valid && this.childDuplicateMessage == null) {
+      this.showConfirmationModal(screenName);
     } else {
-      this.scRequiredErrMsg();
+      this.scRequiredErrMsg()
     }
   }
 
-  saveDistrict() {
-    if (this.districtsForm.valid && this.childDuplicateMessage == null) {
-      this.showConfirmationModal("SaveDistrict");
-    } else {
-      this.scRequiredErrMsg();
-    }
-  }
-
-  saveSubScheduleForm() {
-    this.masterService.createRecord("subschedules/", this.subScheduleForm.value).subscribe(res => {
-      this.showInformationModal("SaveSubSchedule");
+  saveChild(screenName, formObj, targetUrl) {
+    this.masterService.createRecord(targetUrl, formObj.value).subscribe(res => {
+      this.showInformationModal(screenName);
+      if (screenName == "SubSchedule") {
+        this.loadSubScheduleData();
+      } else if (screenName == "District") {
+        this.loadDistrictData();
+      }
       this.modalRef.hide();
-      // this.getScheduleTypes();
-      this.subScheduleForm.reset();
+      formObj.reset();
     }, (error) => {
-      this.scServerErrMsg();
+    throw error;
     });
   }
 
-  saveDistrictForm() {
-    this.masterService.createRecord("districts/", this.districtsForm.value).subscribe(res => {
-      this.showInformationModal("SaveDistrict");
-      this.modalRef.hide();
-      this.districtsForm.reset();
-    }, (error) => {
-      this.scServerErrMsg();
-    });
-  }
-
-
-  resetSubScheduleForm() {
+  resetChildForm(formObj) {
     this.scFormRequiredError = false;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
-    this.subScheduleForm.reset();
-  }
-
-  resetDistrictsForm() {
-    this.childDuplicateMessageParam = null;
-    this.childDuplicateMessage = null;
     this.scFormServerError = this.scFormRequiredError = this.scFormSuccess = false;
-    this.districtsForm.reset();
+    formObj.reset();
   }
 
   checkForDuplicateSubScheduleName() {
@@ -301,13 +301,13 @@ export class AccountsInfoComponent implements OnInit {
       this.masterService.updateRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
         this.showInformationModal("Save");
       }, (error) => {
-        this.serverErrMsg();
+      throw error;
       });
     } else {
       this.masterService.createRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
         this.showInformationModal("Save");
       }, (error) => {
-        this.serverErrMsg();
+        throw error;
       });
     }
   }
@@ -315,6 +315,7 @@ export class AccountsInfoComponent implements OnInit {
   successMsg() {
     this.formSuccess = true;
     this.formRequiredError = this.formServerError = false;
+    this.accInfoForm.reset();
     this.resetForm();
   }
 
@@ -325,21 +326,11 @@ export class AccountsInfoComponent implements OnInit {
     }
   }
 
-  serverErrMsg() {
-    this.formServerError = true;
-    this.formRequiredError = this.formSuccess = false;
-  }
-
   scRequiredErrMsg() {
     if (this.childDuplicateMessage == null) {
       this.scFormRequiredError = true;
       this.scFormSuccess = this.scFormServerError = false;
     }
-  }
-
-  scServerErrMsg() {
-    this.scFormServerError = true;
-    this.scFormRequiredError = this.scFormSuccess = false;
   }
 
   resetForm() {
@@ -354,77 +345,55 @@ export class AccountsInfoComponent implements OnInit {
     this.childDuplicateMessageParam = null;
     this.duplicateSubSchName = false;
     this.duplicateDistrictName = false;
+    this.accInfoForm.reset();
     // this.focusField.nativeElement.focus();
   }
 
 
   showInformationModal(eventType) {
-    var msg;
-    var title;
 
-   if (eventType === "SaveSubSchedule") {
-      title = 'Sub-Schedule';
-      msg = 'subSchedule.saveInformationMessage';
-    }
-    else if (eventType === "SaveDistrict") {
-      title = 'Districts';
-      msg = 'districts.saveInformationMessage';
-    }
-    else {
-      title = 'Account Information';
-      msg = 'accountinfo.saveInformationMessage';
-    }
     const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
-      title,
-      msg,
+      this.getFormDetails(eventType).title,
+      this.getFormDetails(eventType).infoMessage,
       ''
     );
     (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
   }
 
   showConfirmationModal(eventType): void {
-    var msg;
-    var title;
-    if (eventType === "Save") {
-      title = 'Account Information';
-      msg = 'accountinfo.saveConfirmationMessage';
-    }
-
-    else if(eventType === "SaveSubSchedule") {
-      title = 'Sub-Schedule';
-      msg = 'subSchedule.saveConfirmationMessage';
-    }
-    else if(eventType === "SaveDistrict") {
-      title = 'Districts';
-      msg = 'districts.saveConfirmationMessage';
-    }
-
     const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
-      title,
-      msg,
+      this.getFormDetails(eventType).title,
+      this.getFormDetails(eventType).confirmMessage,
       'green',
       ''
     );
 
     (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
       if (result) {
-        // if (eventType === "Delete") {
-        //   this.delete();
-        // }
-          if (eventType === "SaveSubSchedule") {
-          this.saveSubScheduleForm();
+        if (eventType == "SubSchedule") {
+          this.saveChild(eventType, this.subScheduleForm, "subschedules/");
         }
-       else if (eventType === "SaveDistrict") {
-          this.saveDistrictForm();
-        } else {
-        //  this.saveForm();
+        else if (eventType == "District") {
+          this.saveChild(eventType, this.districtsForm, "districts/");
         }
       }
     });
   }
 
+  getFormDetails(screenName) {
+
+    if (screenName == "Save") {
+      return { "title": "Account Information", "confirmMessage": "accountinfo.saveConfirmationMessage", "infoMessage": "accountinfo.saveInformationMessage" };
+    }
+    else if (screenName == "SubSchedule") {
+      return { "title": "Sub-Schedule", "confirmMessage": "subSchedule.saveConfirmationMessage", "infoMessage": "subSchedule.saveInformationMessage" };
+    }
+    else if (screenName == "District") {
+      return { "title": "Districts", "confirmMessage": "districts.saveConfirmationMessage", "infoMessage": "districts.saveInformationMessage" };
+    }
+  }
 
 
 }

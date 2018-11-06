@@ -8,6 +8,7 @@ import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
+import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-areas',
@@ -57,6 +58,7 @@ export class AreasComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private modalService: BsModalService,
+    private sharedDataService:SharedDataService,
     private masterService: MasterService) { translate.setDefaultLang('messages.en'); }
 
   valueChange(selectedRow: any[]): void {

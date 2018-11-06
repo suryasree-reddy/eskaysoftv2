@@ -4,7 +4,8 @@
         <h3>{{'companies.title' | translate}}</h3>
         <form [formGroup]="companyForm" (ngSubmit)="saveForm()" autocomplete="off">
           <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-          [formServerError]="formServerError" [duplicateMessage]="duplicateMessage"
+          [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+            [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"  [duplicateMessage]="duplicateMessage"
            [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
            <div class="input-group">
@@ -62,7 +63,7 @@
               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
               [hideDeleteBtn]=true [formObj]="companyForm" (saveRecord)="save()"
               (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-              (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons>
+              (afterSuccess)="successMsg()" (resetForm)="resetForm()" ></app-buttons>
 
 
         </form>
@@ -89,7 +90,8 @@
     <div class="modal-body">
       <form [formGroup]="companyGroupForm" (ngSubmit)="saveChildForm()" autocomplete="off">
         <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
-        [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
+        [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"  [duplicateMessage]="childDuplicateMessage"
          [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
         <div class="input-group">

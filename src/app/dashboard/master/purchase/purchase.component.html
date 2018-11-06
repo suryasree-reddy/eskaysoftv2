@@ -1,8 +1,8 @@
 <div class="col-md-5">
     <h3>Purchase</h3>
     <form [formGroup]="purchaseForm" (ngSubmit)="saveForm()" autocomplete="off">
-        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="formServerError"
-            [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
     </form>
 </div>
@@ -278,7 +278,7 @@
                 </div>
 
             </div>
-        
+
         <!-- As Per Software Table End -->
 
         <!-- As Per Invoice Table Start -->
@@ -367,7 +367,7 @@
                             <p>Invoice Value: *</p>
                             <input id="invoiceValue" class="form-control" [formControl]="purchaseForm.controls['invoiceValue']">
                         </div>
-                        
+
                     </form>
                 </div>
 

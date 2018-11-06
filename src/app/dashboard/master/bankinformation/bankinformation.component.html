@@ -5,7 +5,8 @@
       <form [formGroup]="bankInformationForm" autocomplete="off">
 
         <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-              [formServerError]="formServerError" [duplicateMessage]="duplicateMessage"
+        [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"  [duplicateMessage]="duplicateMessage"
                 [duplicateMessageParam]="duplicateMessageParam">
         </app-errormessages>
 
@@ -25,7 +26,7 @@
                [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
                [hideDeleteBtn]=true [formObj]="bankInformationForm" (saveRecord)="save()"
                (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-               (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" >
+               (afterSuccess)="successMsg()" (resetForm)="resetForm()" >
         </app-buttons>
       </form>
     </div>

@@ -4,7 +4,8 @@
       <h3>{{'subschedule.title' | translate}}</h3>
       <form [formGroup]="subScheduleForm" (ngSubmit)="save()" autocomplete="off">
         <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-        [formServerError]="formServerError" [duplicateMessage]="duplicateMessage"
+        [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
          [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
         <div class="input-group">
@@ -27,16 +28,7 @@
               <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">Delete</button>
             </div>
 
-            <!-- <app-buttons [title]="'subschedule.title'" [deleteConfirmMsg]="'subschedule.deleteConfirmationMessage'"
-               [saveConfirmMsg]="'subschedule.saveConfirmationMessage'" [saveInfoMsg]="'subschedule.saveInformationMessage'"
-               [endPoint]="endPoint"
-               [deleteInfoMsg]="'subschedule.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-               [hideDeleteBtn]=true [formObj]="subScheduleForm" (saveRecord)="save()"
-               (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-               (afterSuccess)="successMsg()" (resetForm)="resetForm()" (serverErrMsg)="serverErrMsg()" ></app-buttons> -->
-
-
+    
       </form>
     </div>
     <div class="col-md-7">
@@ -61,7 +53,8 @@
     <form [formGroup]="scheduleForm" (ngSubmit)="saveSchedule()" autocomplete="off">
 
       <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
-      [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
+      [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+        [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="childDuplicateMessage"
        [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
       <div class="input-group">
