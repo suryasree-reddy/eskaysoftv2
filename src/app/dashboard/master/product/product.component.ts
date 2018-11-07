@@ -104,7 +104,8 @@ export class ProductComponent implements OnInit {
     });
 
     this.companyForm = this.fb.group({
-      companyId: [],
+      id: [],
+        companyGroupId:[],
       companyCode: ['', Validators.required],
       companyName: ['', Validators.required],
       companyGroupName: ['', Validators.required],
@@ -157,6 +158,11 @@ export class ProductComponent implements OnInit {
   loadSelectedGroupTypeahead(event) {
     this.selectedGroupTypeahead = event.item;
     this.productForm.patchValue({ productgroupId: event.item.id });
+  }
+
+  loadSelectedCompanyGroupTypeahead(event) {
+    this.companyForm.patchValue({ companyGroupId: event.item.id });
+
   }
 
   loadSelectedCompanyTypeahead(event) {

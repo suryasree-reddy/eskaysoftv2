@@ -69,12 +69,11 @@ export class CustomerwiseDiscountComponent implements OnInit {
       accountName: ['', Validators.required],
       disc: ['', Validators.required],
       discountType: []
-
     });
 
-
     this.companyForm = this.fb.group({
-      companyId: [],
+      id: [],
+      companyGroupId:[],
       companyCode: ['', Validators.required],
       companyName: ['', Validators.required],
       companyType: ['', Validators.required],
@@ -83,15 +82,11 @@ export class CustomerwiseDiscountComponent implements OnInit {
       invGenType: ['', Validators.required],
       invPrefix: ['', Validators.required]
     });
-
-    //this.loadGridData();
     this.loadCompanyTypeaheadData();
     this.loadCustomerTypeaheadData();
-    // this.focusField.nativeElement.focus();
     this.companyTypeList =  this.sharedDataService.getSharedCommonJsonData().CompanyType;
     this.companyStatusList =  this.sharedDataService.getSharedCommonJsonData().CompanyStatus;
-      this.invGenList =  this.sharedDataService.getSharedCommonJsonData().InvGenType;
-
+    this.invGenList =  this.sharedDataService.getSharedCommonJsonData().InvGenType;
   }
 
   loadCustomerTypeaheadData() {
@@ -112,6 +107,9 @@ export class CustomerwiseDiscountComponent implements OnInit {
     });
   }
 
+loadSelectedCompanyGroupData(event){
+    this.companyForm.patchValue({ companyGroupId: event.item.id });
+}
 loadSelectedCustomerTypeahead(event) {
   this.selectedCustomerTypeahead = event.item;
   this.customerDiscountForm.patchValue({ accountInformationId: this.selectedCustomerTypeahead.id });
@@ -153,7 +151,6 @@ loadGridDataById() {
   hide() {
     document.getElementById('disc').style.display = 'none';
   }
-
 
   getDuplicateErrorMessages(): void {
     this.duplicateMessage = null;
@@ -247,7 +244,10 @@ loadGridDataById() {
   saveChildCmpData() {
     this.masterService.createRecord(this.cEndPoint, this.companyForm.value).subscribe(res => {
       this.showInformationModal("SaveChildCmpForm");
+      this.modalRef.hide();
 
+      this.loadCompanyTypeaheadData();
+      this.companyForm.reset();
     }, (error) => {
       throw error;
     });

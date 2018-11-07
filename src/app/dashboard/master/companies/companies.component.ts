@@ -229,6 +229,7 @@ export class CompaniesComponent implements OnInit {
 
   loadSelectedTypeahead(event) {
     this.selectedTypeahead = event.item;
+        this.companyForm.patchValue({ companyGroupId: this.selectedTypeahead.id })
   }
 
   resetForm() {
