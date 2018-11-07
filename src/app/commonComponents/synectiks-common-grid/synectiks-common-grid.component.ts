@@ -185,6 +185,7 @@ export class SynectiksCommonGridComponent implements OnInit {
             };
           }
         };
+          params.api.hideOverlay();
         params.api.setDatasource(dataSource);
         localStorage.setItem('rowDataLength', JSON.stringify(list.length));
       } else {
