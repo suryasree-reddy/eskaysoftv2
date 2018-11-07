@@ -28,20 +28,11 @@
                         (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control capitalize">
                     <span class="caret"></span>
                 </div>
-
-
-
                 <div class="input-group" >
                     <p>{{'customerdiscount.disc' | translate}}: *</p>
                     <input id="disc" type="number" min="0" maxlength="5" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                      #focus class="form-control" [formControl]="customerDiscountForm.controls['disc']">
                 </div>
-                <!-- <div class="input-group btn-pad">
-                    <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
-                    <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-                    <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')"
-                    class="btn btn-danger float-right">{{'button.delete' | translate }}</button>
-                </div> -->
 
                 <app-buttons class="btn-pad" [title]="'customerdiscount.title'" [deleteConfirmMsg]="'customerdiscount.deleteConfirmationMessage'"
                 [saveConfirmMsg]="'customerdiscount.saveConfirmationMessage'" [saveInfoMsg]="'customerdiscount.saveInformationMessage'"
@@ -86,13 +77,6 @@
               <input id="companyCode"  maxlength="40" #focus (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['companyCode']">
           </div>
 
-          <!-- <div class="input-group">
-            <p>{{'companygroup.name' | translate }}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
-            <input id="companyGroup" maxlength="20" formControlName="companyGroup" [typeahead]="typeaheadDataList" typeaheadOptionField="companyGroup"
-            [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control capitalize">
-            <span class="caret"></span>
-    </div> -->
-
     <div class="input-group">
       <p>{{'companygroup.name' | translate }}: * &emsp; </p>
       <input id="companyGroupName" maxlength="20" formControlName="companyGroupName" [typeahead]="typeaheadCompanyGroupDataList" typeaheadOptionField="companyGroupName"
@@ -132,32 +116,3 @@
       </form>
   </div>
 </ng-template>
-
-
-<!-- Company Group Modal -->
-<!-- <ng-template #cgTemplate>
-        <div class="modal-header">
-          <h4 class="modal-title pull-left">{{'companygroup.create' | translate }}</h4>
-          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form [formGroup]="companyGroupForm" (ngSubmit)="saveChildForm()" autocomplete="off">
-            <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
-            [formServerError]="scFormServerError" [duplicateMessage]="childDuplicateMessage"
-             [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
-
-            <div class="input-group">
-              <p>{{'companygroup.name' | translate }}: *</p>
-              <input id="companyGroupName" maxlength="20" #focus (blur)="checkForDuplicateCompanyGroup()" class="form-control capitalize"
-              [formControl]="companyGroupForm.controls['companyGroupName']">
-            </div>
-
-                <div class="input-group">
-                  <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
-                  <button type="submit"  class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-                </div>
-          </form>
-        </div>
-      </ng-template> -->

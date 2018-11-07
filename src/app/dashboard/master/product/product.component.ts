@@ -47,6 +47,8 @@ export class ProductComponent implements OnInit {
   private duplicateProdCategory: boolean = false;
   private duplicateCompany: boolean = false;
   private duplicateCompanyName: boolean = false;
+  private duplicateProductCode: boolean = false;
+  private duplicateProductName: boolean = false;
   public typeaheadGroupDataList: any = [];
   public typeaheadCompanyDataList: any = [];
   public typeaheadCompanyGroupDataList: any = [];
@@ -105,7 +107,7 @@ export class ProductComponent implements OnInit {
 
     this.companyForm = this.fb.group({
       id: [],
-        companyGroupId:[],
+      companyGroupId: [],
       companyCode: ['', Validators.required],
       companyName: ['', Validators.required],
       companyGroupName: ['', Validators.required],
@@ -162,7 +164,6 @@ export class ProductComponent implements OnInit {
 
   loadSelectedCompanyGroupTypeahead(event) {
     this.companyForm.patchValue({ companyGroupId: event.item.id });
-
   }
 
   loadSelectedCompanyTypeahead(event) {
@@ -196,6 +197,29 @@ export class ProductComponent implements OnInit {
 
   getDuplicateErrorMessages(): void {
 
+    if (!this.duplicateProdGroup || !this.duplicateProdCategory || !this.duplicateCompany || !this.duplicateCompanyName) {
+      this.childDuplicateMessage = null;
+      this.childDuplicateMessageParam = null;
+    }
+
+    if (!this.duplicateProductCode || !this.duplicateProductName) {
+      this.duplicateMessage = null;
+      this.duplicateMessageParam = null;
+      this.formRequiredError = false;
+    }
+
+    if (this.duplicateProductCode) {
+      this.duplicateMessage = "product.duplicateCodeErrorMessage";
+      this.duplicateMessageParam = this.productForm.value.productcode;
+    }
+    else if (this.duplicateProductName) {
+      this.duplicateMessage = "product.duplicateNameErrorMessage";
+      this.duplicateMessageParam = this.productForm.value.name;
+    }
+    if (this.duplicateProductCode && this.duplicateProductName) {
+      this.duplicateMessage = "product.duplicateErrorMessage";
+    }
+
     if (this.duplicateProdGroup) {
       this.childDuplicateMessage = "productgroup.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.productGroupForm.value.productGroupName;
@@ -214,39 +238,48 @@ export class ProductComponent implements OnInit {
       this.scFormRequiredError = false;
     }
 
-    if (!this.duplicateProdGroup || !this.duplicateProdCategory || !this.duplicateCompany) {
-      this.childDuplicateMessage = null;
-      this.childDuplicateMessageParam = null;
+    if (this.duplicateCompanyName) {
+      this.childDuplicateMessage = "companies.duplicateNameErrorMessage";
+      this.childDuplicateMessageParam = this.companyForm.value.companyName;
+      this.scFormRequiredError = false;
     }
   }
 
   checkForDuplicateProdGroup() {
-    if (!this.nameFlag) {
-      this.duplicateProdGroup = this.masterService.hasDataExist(this.typeaheadGroupDataList, 'productGroupName', this.productGroupForm.value.productGroupName);
-      this.getDuplicateErrorMessages();
-    }
+    this.duplicateProdGroup = this.masterService.hasDataExist(this.typeaheadGroupDataList, 'productGroupName', this.productGroupForm.value.productGroupName);
+    this.getDuplicateErrorMessages();
   }
 
   checkForDuplicateProdCategory() {
-    if (!this.nameFlag) {
-      this.duplicateProdCategory = this.masterService.hasDataExist(this.typeaheadCategoryDataList, 'productCategoryName', this.productCategoryForm.value.productCategoryName);
-      this.getDuplicateErrorMessages();
-    }
+    this.duplicateProdCategory = this.masterService.hasDataExist(this.typeaheadCategoryDataList, 'productCategoryName', this.productCategoryForm.value.productCategoryName);
+    this.getDuplicateErrorMessages();
   }
 
   checkForDuplicateCompanyCode() {
-    this.duplicateCompany = this.masterService.hasDataExist(this.gridDataList, 'companyCode', this.companyForm.value.companyCode);
+    this.duplicateCompany = this.masterService.hasDataExist(this.typeaheadCompanyDataList, 'companyCode', this.companyForm.value.companyCode);
     if (this.duplicateCompany) {
       const temp = this.companyForm.value.companyCode;
-      const companyObj = _.filter(this.gridDataList, function(o) { return o.companyCode.toLowerCase() == temp.toLowerCase() });
+      const companyObj = _.filter(this.typeaheadCompanyDataList, function(o) { return o.companyCode.toLowerCase() == temp.toLowerCase() });
       this.companyForm.patchValue({ companyCode: companyObj[0].companyCode })
     }
     this.getDuplicateErrorMessages();
   }
 
   checkForDuplicateCompanyName() {
+    this.duplicateCompanyName = this.masterService.hasDataExist(this.typeaheadCompanyDataList, 'companyName', this.companyForm.value.companyName);
+    this.getDuplicateErrorMessages();
+  }
+
+  checkForDuplicateProductName() {
     if (!this.nameFlag) {
-      this.duplicateCompanyName = this.masterService.hasDataExist(this.gridDataList, 'companyName', this.companyForm.value.companyName);
+      this.duplicateProductName = this.masterService.hasDataExist(this.gridDataList, 'name', this.productForm.value.name);
+      this.getDuplicateErrorMessages();
+    }
+  }
+
+  checkForDuplicateProductCode() {
+    if (!this.nameFlag) {
+      this.duplicateProductCode = this.masterService.hasDataExist(this.gridDataList, 'productcode', this.productForm.value.productcode);
       this.getDuplicateErrorMessages();
     }
   }

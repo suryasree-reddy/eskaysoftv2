@@ -34,29 +34,20 @@ export class AreasComponent implements OnInit {
   public areaName;
   private duplicateAreaName: boolean = false;
   private duplicateBusExecName: boolean = false;
+  private duplicateBusExecNum: boolean = false;
   public duplicateMessage: string = null;
   public childDuplicateMessage: string = null;
   public childDuplicateMessageParam: string = null;
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
-  private formTitle: string = "Area";
-  private deleteConfirmMsg: string = "areas.deleteConfirmationMessage";
-  private saveConfirmMsg: string = "areas.saveConfirmationMessage";
-  private saveInfoMsg: string = "areas.saveInformationMessage";
-  private deleteInfoMsg: string = "areas.deleteInformationMessage";
-  private childFormTitle: string = "Business Executive";
-  private childDeleteConfirmMsg: string = "businessexecutive.deleteConfirmationMessage";
-  private childSaveConfirmMsg: string = "businessexecutive.saveConfirmationMessage";
-  private childSaveInfoMsg: string = "businessexecutive.saveInformationMessage";
-  private childDeleteInfoMsg: string = "businessexecutive.deleteInformationMessage";
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private modalService: BsModalService,
-    private sharedDataService:SharedDataService,
+    private sharedDataService: SharedDataService,
     private masterService: MasterService) { translate.setDefaultLang('messages.en'); }
 
   valueChange(selectedRow: any[]): void {
@@ -102,26 +93,39 @@ export class AreasComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
+    if (!this.duplicateBusExecName || !this.duplicateBusExecNum) {
+      this.childDuplicateMessage = null;
+      this.childDuplicateMessageParam = null;
+      this.scFormRequiredError = false;
+    }
+    if (!this.duplicateAreaName) {
+      this.duplicateMessageParam = null;
+      this.duplicateMessage = null;
+      this.formRequiredError = false;
+    }
 
     if (this.duplicateAreaName) {
       this.duplicateMessage = "areas.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.areaForm.value.areaName;
       this.formRequiredError = false;
     }
-    if (this.duplicateBusExecName) {
+    console.log(this.duplicateBusExecName, this.duplicateBusExecNum);
+    if (this.duplicateBusExecName && this.duplicateBusExecNum) {
+      this.childDuplicateMessage = "businessexecutive.duplicateErrorMessage";
+    }
+    else if (this.duplicateBusExecName) {
       this.childDuplicateMessage = "businessexecutive.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.businessExecutiveForm.value.name;
-      this.scFormRequiredError = false;
     }
-
-    if (!this.duplicateBusExecName) {
-      this.childDuplicateMessage = null;
-      this.childDuplicateMessageParam = null;
-
-    } else if (!this.duplicateAreaName) {
-      this.duplicateMessageParam = null;
-      this.duplicateMessage = null;
+    else if (this.duplicateBusExecNum) {
+      this.childDuplicateMessage = "businessexecutive.duplicateIndexErrorMessage";
+      this.childDuplicateMessageParam = this.businessExecutiveForm.value.mobile;
     }
+  }
+
+  checkForDuplicatePhone() {
+    this.duplicateBusExecNum = this.masterService.hasDataExist(this.typeaheadDataList, 'mobile', parseInt(this.businessExecutiveForm.value.mobile));
+    this.getDuplicateErrorMessages();
 
   }
 

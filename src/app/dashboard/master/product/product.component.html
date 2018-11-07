@@ -11,7 +11,8 @@
 
                 <div class="col-xs-6 col-3-lt">
                     <p>{{'product.name' | translate}}: *</p>
-                    <input id="name" maxlength="30" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="productForm.controls['name']">
+                    <input id="name" maxlength="30" #focus [readonly]="nameFlag" class="form-control capitalize"
+                     [formControl]="productForm.controls['name']" (blur)="checkForDuplicateProductName()">
                 </div>
 
                 <div class="col-xs-6 col-rt">
@@ -94,7 +95,7 @@ type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length 
                   <div class="col-xs-3 col-rt">
                     <p>{{'product.prodcode' | translate}}: *</p>
                     <input id="productcode" type="text" min="0" maxlength="5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                    class="form-control" [formControl]="productForm.controls['productcode']">
+                    class="form-control" [formControl]="productForm.controls['productcode']" (blur)="checkForDuplicateProductCode()">
                   </div>
                 </div>
 
@@ -189,12 +190,13 @@ type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length 
 
                 <div class="input-group">
                 	<p>{{'companies.name' | translate}}: *</p>
-                	<input id="companyName" maxlength="40"  #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyName()"  class="form-control capitalize" [formControl]="companyForm.controls['companyName']">
+                	<input id="companyName" maxlength="40"  #focus (blur)="checkForDuplicateCompanyName()"  class="form-control capitalize" [formControl]="companyForm.controls['companyName']">
                 </div>
 
                 <div class="input-group">
                 	<p>{{'companies.code' | translate}}: *</p>
-                	<input id="companyCode"  maxlength="40" #focus (blur)="(checkForDuplicateCompanyCode())" class="form-control" [formControl]="companyForm.controls['companyCode']">
+                	<input id="companyCode"  maxlength="40" #focus (blur)="checkForDuplicateCompanyCode()"
+                   class="form-control" [formControl]="companyForm.controls['companyCode']">
                 </div>
 
                 <div class="input-group">

@@ -7,6 +7,7 @@ import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
+import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
@@ -33,7 +34,6 @@ export class CustomerwiseDiscountComponent implements OnInit {
   public companyStatusList: any = [];
   public typeaheadCompanyGroupDataList: any = [];
   public invGenList: any = [];
-  private duplicateCustomerName: boolean = false;
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   public scFormRequiredError: boolean = false;
@@ -43,19 +43,19 @@ export class CustomerwiseDiscountComponent implements OnInit {
   private duplicateCompany: boolean = false;
   private duplicateCompanyName: boolean = false;
   public typeaheadCompanyDataList: any = [];
-  public typeaheadCustomerDataList:any=[];
+  public typeaheadCustomerDataList: any = [];
   public selectedCompanyTypeahead: any;
-  public selectedCustomerTypeahead:any;
+  public selectedCustomerTypeahead: any;
 
   modalRef: BsModalRef;
   message: string;
-
+  @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private modalService: BsModalService,
-    private sharedDataService:SharedDataService,
+    private sharedDataService: SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
@@ -63,9 +63,9 @@ export class CustomerwiseDiscountComponent implements OnInit {
   ngOnInit() {
     this.customerDiscountForm = this.fb.group({
       id: [],
-      accountInformationId:[],
-      companyId:[],
-      companyName:['', Validators.required],
+      accountInformationId: [],
+      companyId: [],
+      companyName: ['', Validators.required],
       accountName: ['', Validators.required],
       disc: ['', Validators.required],
       discountType: []
@@ -73,7 +73,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
 
     this.companyForm = this.fb.group({
       id: [],
-      companyGroupId:[],
+      companyGroupId: [],
       companyCode: ['', Validators.required],
       companyName: ['', Validators.required],
       companyType: ['', Validators.required],
@@ -84,9 +84,9 @@ export class CustomerwiseDiscountComponent implements OnInit {
     });
     this.loadCompanyTypeaheadData();
     this.loadCustomerTypeaheadData();
-    this.companyTypeList =  this.sharedDataService.getSharedCommonJsonData().CompanyType;
-    this.companyStatusList =  this.sharedDataService.getSharedCommonJsonData().CompanyStatus;
-    this.invGenList =  this.sharedDataService.getSharedCommonJsonData().InvGenType;
+    this.companyTypeList = this.sharedDataService.getSharedCommonJsonData().CompanyType;
+    this.companyStatusList = this.sharedDataService.getSharedCommonJsonData().CompanyStatus;
+    this.invGenList = this.sharedDataService.getSharedCommonJsonData().InvGenType;
   }
 
   loadCustomerTypeaheadData() {
@@ -107,22 +107,23 @@ export class CustomerwiseDiscountComponent implements OnInit {
     });
   }
 
-loadSelectedCompanyGroupData(event){
+  loadSelectedCompanyGroupData(event) {
     this.companyForm.patchValue({ companyGroupId: event.item.id });
-}
-loadSelectedCustomerTypeahead(event) {
-  this.selectedCustomerTypeahead = event.item;
-  this.customerDiscountForm.patchValue({ accountInformationId: this.selectedCustomerTypeahead.id });
-  this.loadGridDataById();
-}
+  }
 
-loadGridDataById() {
-  this.masterService.getData("customerwisediscount/accountinfo/"+parseInt(this.selectedCustomerTypeahead.id));
-  this.masterService.dataObject.subscribe(list => {
-    this.gridDataList = list;
-    localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
-  });
-}
+  loadSelectedCustomerTypeahead(event) {
+    this.selectedCustomerTypeahead = event.item;
+    this.customerDiscountForm.patchValue({ accountInformationId: this.selectedCustomerTypeahead.id });
+    this.loadGridDataById();
+  }
+
+  loadGridDataById() {
+    this.masterService.getData("customerwisediscount/accountinfo/" + parseInt(this.selectedCustomerTypeahead.id));
+    this.masterService.dataObject.subscribe(list => {
+      this.gridDataList = list;
+      localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
+    });
+  }
 
   loadSelectedCompanyTypeahead(event) {
     this.selectedCompanyTypeahead = event.item;
@@ -144,25 +145,16 @@ loadGridDataById() {
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
-  show() {
-    document.getElementById('disc').style.display = 'block';
-  }
-
-  hide() {
-    document.getElementById('disc').style.display = 'none';
-  }
-
   getDuplicateErrorMessages(): void {
-    this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
-    this.formRequiredError = false;
-    this.scFormRequiredError = false;
 
-    if (this.duplicateCustomerName) {
-      this.duplicateMessage = "customerdiscount.duplicateNameErrorMessage";
-      this.duplicateMessageParam = this.customerDiscountForm.value.customer;
+    if (!this.duplicateCompany || !this.duplicateCompanyName) {
+      this.childDuplicateMessage = null;
+      this.childDuplicateMessageParam = null;
+      this.scFormRequiredError = false;
+    }
+
+    if (this.duplicateCompany && this.duplicateCompanyName) {
+      this.childDuplicateMessage = "companies.duplicateErrorMessage";
     }
     else if (this.duplicateCompany) {
       this.childDuplicateMessage = "companies.duplicateCodeErrorMessage";
@@ -174,23 +166,14 @@ loadGridDataById() {
     }
   }
 
-  checkForDuplicateCustomerName() {
-    if (!this.nameFlag) {
-      this.duplicateCustomerName = this.masterService.hasDataExist(this.gridDataList, 'customer', this.customerDiscountForm.value.customer);
-      this.getDuplicateErrorMessages();
-    }
-  }
-
   checkForDuplicateCompanyCode() {
-    this.duplicateCompany = this.masterService.hasDataExist(this.gridDataList, 'companyCode', this.companyForm.value.companyCode);
+    this.duplicateCompany = this.masterService.hasDataExist(this.typeaheadCompanyDataList, 'companyCode', this.companyForm.value.companyCode);
     this.getDuplicateErrorMessages();
   }
 
   checkForDuplicateCompanyName() {
-    if (!this.nameFlag) {
-      this.duplicateCompanyName = this.masterService.hasDataExist(this.gridDataList, 'companyName', this.companyForm.value.companyName);
-      this.getDuplicateErrorMessages();
-    }
+    this.duplicateCompanyName = this.masterService.hasDataExist(this.gridDataList, 'companyName', this.companyForm.value.companyName);
+    this.getDuplicateErrorMessages();
   }
 
   loadGridData() {
@@ -200,36 +183,9 @@ loadGridDataById() {
       localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
     });
   }
-
-  save() {
-    if (this.customerDiscountForm.valid) {
-
-      if (this.customerDiscountForm.value.id) {
-        this.masterService.updateRecord(this.endPoint, this.customerDiscountForm.value).subscribe(res => {
-          this.showInformationModal("Save");
-        }, (error) => {
-          throw error;
-        });
-      } else {
-        this.masterService.createRecord(this.endPoint, this.customerDiscountForm.value).subscribe(res => {
-          this.showInformationModal("Save");
-        }, (error) => {
-        throw error;
-        });
-      }
-
-    } else {
-      this.requiredErrMsg()
-    }
-  }
-
-  saveForm() {
-    this.formRequiredError = false;
-    if (this.customerDiscountForm.valid) {
-      this.showConfirmationModal("Save");
-    } else {
-      this.requiredErrMsg();
-    }
+  
+  save(){
+    this.buttonsComponent.save();
   }
 
   saveChildCmpForm() {
@@ -244,26 +200,16 @@ loadGridDataById() {
   saveChildCmpData() {
     this.masterService.createRecord(this.cEndPoint, this.companyForm.value).subscribe(res => {
       this.showInformationModal("SaveChildCmpForm");
-      this.modalRef.hide();
-
       this.loadCompanyTypeaheadData();
+      this.modalRef.hide();
       this.companyForm.reset();
     }, (error) => {
       throw error;
     });
-
   }
 
-
   delete() {
-
-    this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
-      localStorage.removeItem('ag-activeRow');
-      this.showInformationModal("Delete");
-    }, (error) => {
-      throw error;
-    });
-
+    this.buttonsComponent.delete();
   }
 
   successMsg() {
@@ -284,19 +230,17 @@ loadGridDataById() {
     this.gridSelectedRow = null;
     this.nameFlag = false;
     this.deleteFlag = true;
-    this.formRequiredError =this.formSuccess = false;
+    this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
   }
 
   editable(s) {
-    console.log("s---", s);
     this.gridSelectedRow = s;
     this.customerDiscountForm.reset(s);
     this.nameFlag = true;
     this.deleteFlag = false;
   }
-
 
   resetChildForm() {
     this.scFormRequiredError = false;
@@ -314,62 +258,27 @@ loadGridDataById() {
   }
 
   showInformationModal(eventType) {
-    var msg;
-    var title;
-    if (eventType === "Delete") {
-      msg = 'customerdiscount.deleteInformationMessage';
-      title = 'Customerwise Discount';
-    } else if (eventType === "Save") {
-      title = 'Customerwise Discount';
-      msg = 'customerdiscount.saveInformationMessage';
-    }
-    else if (eventType === "SaveChildCmpForm") {
-      title = 'Company';
-      msg = 'companies.saveInformationMessage';
-
-    }
     const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
-      title,
-      msg,
+      'Company',
+      'companies.saveInformationMessage',
       ''
     );
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe();
   }
 
   showConfirmationModal(eventType): void {
-    var msg;
-    var title;
-    if (eventType === "Delete") {
-      title = 'Customerwise Discount';
-      msg = 'customerdiscount.deleteConfirmationMessage';
-    } else if (eventType === "Save") {
-      title = 'Customerwise Discount';
-      msg = 'customerdiscount.saveConfirmationMessage';
-    }
-    else if (eventType === "SaveChildCmpForm") {
-      title = 'Company';
-      msg = 'companies.saveConfirmationMessage';
-    }
     const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
-      title,
-      msg,
+      'Company',
+      'companies.saveConfirmationMessage',
       'green',
       ''
     );
 
     (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
       if (result) {
-        if (eventType === "Delete") {
-          this.delete();
-        }
-        else if (eventType === "SaveChildCmpForm") {
-          this.saveChildCmpData();
-        }
-        else {
-          this.save();
-        }
+        this.saveChildCmpData();
       }
     });
   }

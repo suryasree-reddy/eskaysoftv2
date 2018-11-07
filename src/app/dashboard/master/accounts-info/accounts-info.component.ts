@@ -47,16 +47,19 @@ export class AccountsInfoComponent implements OnInit {
   public selectedSchedule: any;
   public selectedSubSchedule: any;
   public selectedDistrict: any;
-  public selectedArea:any;
+  public selectedArea: any;
   public accGstType: any[];
   public accNatureOfGst: any[];
   public accCustomerType: any[];
   public accSaleType: any[];
   public accOpeningType: any[];
+  private accountsList:any[];
   public selectedTaxTypeahead: any;
   public typeaheadTaxDataList: any = [];
   private duplicateSubSchName: boolean = false;
   private duplicateDistrictName: boolean = false;
+  private duplicateAcctShortName: boolean = false;
+  private duplicateAcctName: boolean = false;
 
   modalRef: BsModalRef;
   message: string;
@@ -72,12 +75,12 @@ export class AccountsInfoComponent implements OnInit {
   ngOnInit() {
 
     this.accInfoForm = this.fb.group({
-      id:[],
-      subScheduleId:[],
-      scheduleId:[],
-      stateId:[],
-      areaId:[],
-      districtId:[],
+      id: [],
+      subScheduleId: [],
+      scheduleId: [],
+      stateId: [],
+      areaId: [],
+      districtId: [],
       accountName: ['', Validators.required],
       subScheduleName: ['', Validators.required],
       scheduleName: ['', Validators.required],
@@ -86,7 +89,7 @@ export class AccountsInfoComponent implements OnInit {
       town: ['', Validators.required],
       pin: ['', Validators.required],
       stateName: ['', Validators.required],
-      areaName:  ['', Validators.required],
+      areaName: ['', Validators.required],
       districtName: ['', Validators.required],
       phone: ['', Validators.required],
       mobile: ['', Validators.required],
@@ -118,7 +121,7 @@ export class AccountsInfoComponent implements OnInit {
       specialRemarks: ['', Validators.required]
     });
 
-      this.subScheduleForm = this.fb.group({
+    this.subScheduleForm = this.fb.group({
       id: [],
       subScheduleName: ['', Validators.required],
       subScheduleIndex: ['', Validators.required],
@@ -132,7 +135,7 @@ export class AccountsInfoComponent implements OnInit {
       stateId: [],
       stateName: []
     });
-
+    this.loadGridData();
     this.loadSubScheduleData();
     this.loadDistrictData();
     this.loadAreaData();
@@ -219,11 +222,18 @@ export class AccountsInfoComponent implements OnInit {
     this.subScheduleForm.patchValue({ subScheduleIndex: selectedScheduleNameList.length + 1 });
   }
 
+  loadGridData() {
+    this.masterService.getData(this.endPoint);
+    this.masterService.dataObject.subscribe(list => {
+      this.accountsList = list;
+    });
+  }
+
   openModal(template: TemplateRef<any>, templateName) {
-    if(templateName == "SubSchedule"){
+    if (templateName == "SubSchedule") {
       this.resetChildForm(this.subScheduleForm);
       this.loadScheduleData();
-    }else if(templateName == "Districts"){
+    } else if (templateName == "Districts") {
       this.resetChildForm(this.districtsForm);
       this.loadStatesData();
     }
@@ -252,7 +262,7 @@ export class AccountsInfoComponent implements OnInit {
       this.modalRef.hide();
       formObj.reset();
     }, (error) => {
-    throw error;
+      throw error;
     });
   }
 
@@ -274,99 +284,123 @@ export class AccountsInfoComponent implements OnInit {
     this.getDuplicateErrorMessages();
   }
 
+  checkForDuplicateAcctName() {
+    this.duplicateAcctName = this.masterService.hasDataExist(this.accountsList, 'accountName', this.accInfoForm.value.accountName);
+    this.getDuplicateErrorMessages();
+  }
+
+  checkForDuplicateAcctShortName() {
+    this.duplicateAcctShortName = this.masterService.hasDataExist(this.accountsList, 'shortName', this.accInfoForm.value.shortName);
+    this.getDuplicateErrorMessages();
+  }
+
   getDuplicateErrorMessages(): void {
-    this.duplicateMessageParam = null;
-    this.duplicateMessage = null;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
-    this.formRequiredError = false;
-    this.scFormRequiredError = false;
 
-      if (this.duplicateSubSchName) {
-       this.childDuplicateMessage = "subschedule.duplicateNameErrorMessage";
-       this.childDuplicateMessageParam = this.subScheduleForm.value.subScheduleName;
-     }
+    if (!this.duplicateSubSchName || !this.duplicateDistrictName) {
+      this.childDuplicateMessage = null;
+      this.childDuplicateMessageParam = null;
+      this.scFormRequiredError = false;
+    }
 
-     if (this.duplicateDistrictName) {
+    if (!this.duplicateAcctShortName || !this.duplicateAcctShortName) {
+      this.duplicateMessageParam = null;
+      this.duplicateMessage = null;
+      this.formRequiredError = false;
+    }
+    if (this.duplicateSubSchName) {
+      this.childDuplicateMessage = "subschedule.duplicateNameErrorMessage";
+      this.childDuplicateMessageParam = this.subScheduleForm.value.subScheduleName;
+    }
+    else if (this.duplicateDistrictName) {
       this.childDuplicateMessage = "districts.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.districtsForm.value.districtName;
     }
 
-  }
+    if (this.duplicateAcctShortName && this.duplicateAcctName) {
+        this.duplicateMessage = "accountinfo.duplicateErrorMessage";
 
-  save() {
-    if (this.accInfoForm.value.id) {
-      this.masterService.updateRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
-        this.showInformationModal("Save");
-      }, (error) => {
-      throw error;
-      });
-    } else {
-      this.masterService.createRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
-        this.showInformationModal("Save");
-      }, (error) => {
-        throw error;
-      });
+    }else if (this.duplicateAcctName) {
+      this.duplicateMessage = "accountinfo.duplicateNameErrorMessage";
+        this.duplicateMessageParam = this.accInfoForm.value.accountName;
+
+    }else if (this.duplicateAcctShortName) {
+      this.duplicateMessage = "accountinfo.duplicateShortNameErrorMessage";
+        this.duplicateMessageParam = this.accInfoForm.value.shortName;
     }
-  }
-
-  successMsg() {
-    this.formSuccess = true;
-    this.formRequiredError = false;
-    this.accInfoForm.reset();
-    this.resetForm();
-  }
-
-  requiredErrMsg() {
-    if (this.duplicateMessage == null) {
-      this.formRequiredError = true;
-      this.formSuccess = false;
+}
+    save() {
+      if (this.accInfoForm.value.id) {
+        this.masterService.updateRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
+          this.showInformationModal("Save");
+        }, (error) => {
+          throw error;
+        });
+      } else {
+        this.masterService.createRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
+          this.showInformationModal("Save");
+        }, (error) => {
+          throw error;
+        });
+      }
     }
-  }
 
-  scRequiredErrMsg() {
-    if (this.childDuplicateMessage == null) {
-      this.scFormRequiredError = true;
-      this.scFormSuccess = false;
+    successMsg() {
+      this.formSuccess = true;
+      this.formRequiredError = false;
+      this.accInfoForm.reset();
+      this.resetForm();
     }
-  }
 
-  resetForm() {
-    this.formRequiredError =  this.formSuccess = false;
-    this.scFormRequiredError = false;
-    this.nameFlag = false;
-    this.deleteFlag = true;
-    this.duplicateMessage = null;
-    this.childDuplicateMessage = null;
-    this.duplicateMessageParam = null;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
-    this.duplicateSubSchName = false;
-    this.duplicateDistrictName = false;
-    this.accInfoForm.reset();
-    // this.focusField.nativeElement.focus();
-  }
+    requiredErrMsg() {
+      if (this.duplicateMessage == null) {
+        this.formRequiredError = true;
+        this.formSuccess = false;
+      }
+    }
+
+    scRequiredErrMsg() {
+      if (this.childDuplicateMessage == null) {
+        this.scFormRequiredError = true;
+        this.scFormSuccess = false;
+      }
+    }
+
+    resetForm() {
+      this.formRequiredError = this.formSuccess = false;
+      this.scFormRequiredError = false;
+      this.nameFlag = false;
+      this.deleteFlag = true;
+      this.duplicateMessage = null;
+      this.childDuplicateMessage = null;
+      this.duplicateMessageParam = null;
+      this.childDuplicateMessage = null;
+      this.childDuplicateMessageParam = null;
+      this.duplicateSubSchName = false;
+      this.duplicateDistrictName = false;
+      this.accInfoForm.reset();
+      // this.focusField.nativeElement.focus();
+    }
 
 
-  showInformationModal(eventType) {
+    showInformationModal(eventType) {
 
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
-      this.getFormDetails(eventType).title,
-      this.getFormDetails(eventType).infoMessage,
-      ''
-    );
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
-  }
+      const modal = this.modalService.show(ConfirmationModelDialogComponent);
+      (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
+        this.getFormDetails(eventType).title,
+        this.getFormDetails(eventType).infoMessage,
+        ''
+      );
+      (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
+    }
 
-  showConfirmationModal(eventType): void {
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
+    showConfirmationModal(eventType): void {
+      const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
       this.getFormDetails(eventType).title,
       this.getFormDetails(eventType).confirmMessage,
       'green',
       ''
-    );
+      );
 
     (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
       if (result) {

@@ -78,7 +78,8 @@
 
                   	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.name' | translate}}: *</p>
-                  		<input id="accountName"  maxlength="50" #focus [readonly]="nameFlag" class="form-control capitalize" [formControl]="accInfoForm.controls['accountName']">
+                  		<input id="accountName"  (blur)="checkForDuplicateAcctName()" maxlength="50" #focus [readonly]="nameFlag"
+                       class="form-control capitalize" [formControl]="accInfoForm.controls['accountName']">
                   	</div>
 
                   	<div class="col-md-4 col-3-lt">
@@ -156,7 +157,9 @@
 
                   	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.shortname' | translate}}: *</p>
-                  		<input id="shortName"  maxlength="6" #focus [readonly]="nameFlag" class="form-control" [formControl]="accInfoForm.controls['shortName']">
+                  		<input id="shortName"  maxlength="6" #focus [readonly]="nameFlag"
+                      class="form-control" (blur)="checkForDuplicateAcctShortName()"
+                      [formControl]="accInfoForm.controls['shortName']">
                   	</div>
 
                   	</form>
