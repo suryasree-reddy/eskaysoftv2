@@ -57,6 +57,7 @@ export class AccountsInfoComponent implements OnInit {
   public accOpeningType: any[];
   private accountsList:any[];
   public selectedTaxTypeahead: any;
+  private duplicateAreaName: boolean = false;
   public typeaheadTaxDataList: any = [];
   private duplicateSubSchName: boolean = false;
   private duplicateDistrictName: boolean = false;
@@ -216,9 +217,18 @@ export class AccountsInfoComponent implements OnInit {
     this.selectedArea = event.item;
     this.accInfoForm.value.areaId = this.selectedArea.id;
     this.accInfoForm.patchValue({ areaId: this.selectedArea.id });
-    this.accInfoForm.patchValue({ name: this.selectedArea.businessExecutiveName });
+    this.accInfoForm.patchValue({ businessExecutiveName: this.selectedArea.businessExecutiveName });
     this.accInfoForm.patchValue({ businessExecutiveId: this.selectedArea.businessExecutiveId });
   }
+
+onSelectBusinessExecutive(event){
+  this.areaForm.patchValue({ businessExecutiveId: event.item.id });
+}
+
+checkForDuplicateArea() {
+    this.duplicateAreaName = this.masterService.hasDataExist(this.areasList, 'areaName', this.areaForm.value.areaName);
+    this.getDuplicateErrorMessages();
+}
 
   onSelectSubSchedule(event) {
     this.selectedSubSchedule = event.item;
@@ -245,6 +255,11 @@ export class AccountsInfoComponent implements OnInit {
     this.masterService.dataObject.subscribe(list => {
       this.accountsList = list;
     });
+  }
+
+  loadSelectedTypeahead(event) {
+    this.accInfoForm.reset(event.item);
+    this.nameFlag = true;
   }
 
   openModal(template: TemplateRef<any>, templateName) {
@@ -322,7 +337,7 @@ export class AccountsInfoComponent implements OnInit {
 
   getDuplicateErrorMessages(): void {
 
-    if (!this.duplicateSubSchName || !this.duplicateDistrictName) {
+    if (!this.duplicateSubSchName || !this.duplicateDistrictName || !this.duplicateAreaName) {
       this.childDuplicateMessage = null;
       this.childDuplicateMessageParam = null;
       this.scFormRequiredError = false;
@@ -333,6 +348,7 @@ export class AccountsInfoComponent implements OnInit {
       this.duplicateMessage = null;
       this.formRequiredError = false;
     }
+
     if (this.duplicateSubSchName) {
       this.childDuplicateMessage = "subschedule.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.subScheduleForm.value.subScheduleName;
@@ -340,6 +356,10 @@ export class AccountsInfoComponent implements OnInit {
     else if (this.duplicateDistrictName) {
       this.childDuplicateMessage = "districts.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.districtsForm.value.districtName;
+
+    }else if(this.duplicateAreaName){
+      this.childDuplicateMessage = "areas.duplicateNameErrorMessage";
+      this.childDuplicateMessageParam = this.areaForm.value.areaName;
     }
 
     if (this.duplicateAcctShortName && this.duplicateAcctName) {
@@ -373,6 +393,7 @@ export class AccountsInfoComponent implements OnInit {
     successMsg() {
       this.formSuccess = true;
       this.formRequiredError = false;
+      this.loadGridData();
       this.accInfoForm.reset();
       this.resetForm();
     }

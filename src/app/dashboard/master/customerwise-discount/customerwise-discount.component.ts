@@ -65,7 +65,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
       id: [],
       accountInformationId: [],
       companyId: [],
-      companyName: ['', Validators.required],
+      companyName: [],
       accountName: ['', Validators.required],
       disc: ['', Validators.required],
       discountType: []
@@ -183,7 +183,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
       localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
     });
   }
-  
+
   save(){
     this.buttonsComponent.save();
   }
@@ -232,6 +232,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
     this.deleteFlag = true;
     this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
+    this.customerDiscountForm.patchValue({ discountType: false });
     this.focusField.nativeElement.focus();
   }
 
