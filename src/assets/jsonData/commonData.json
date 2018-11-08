@@ -353,7 +353,7 @@
     }
   ],
   "CustomerDiscountColumns": [{
-    "headerName": "Code",
+    "headerName": "Short Name",
     "field": "shortName",
     "filterParams": {
       "filterOptions": ["contains"],

@@ -75,6 +75,7 @@
     "title": "Area",
     "endPoint":"area/",
     "name": "Area Name",
+    "create": "Create Area",
     "saveConfirmationMessage": "Are you sure you want to save Area?",
     "deleteConfirmationMessage" : "Are you sure you want to delete Area?",
     "saveInformationMessage": "Area record has been saved successfully.",

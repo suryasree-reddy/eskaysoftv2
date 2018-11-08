@@ -131,7 +131,7 @@
                   	</div>
 
                   	<div class="col-md-4 col-3-lt">
-                  		<p>{{'areas.name' | translate }}: *</p>
+                  		<p>{{'areas.name' | translate }}: *  &emsp; (<a style="cursor: pointer" (click)="openModal(areaTemplate, 'Area')">create new</a>)</p>
                   		<input id="areaName" maxlength="40"  class="form-control capitalize" [formControl]="accInfoForm.controls['areaName']"
                   		[typeahead]="areasList" (typeaheadOnSelect)="onSelectArea($event)" typeaheadOptionField="areaName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
                   		<span class="caret"></span>
@@ -446,3 +446,40 @@
 
           </div>
         </ng-template>
+
+        <ng-template #areaTemplate>
+            <div class="modal-header">
+              <h4 class="modal-title pull-left">{{'areas.create' | translate }}</h4>
+              <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="areaForm" (ngSubmit)="saveChildForm('District', areaForm)" (ngSubmit)="saveDistrict()" autocomplete="off">
+  
+                <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
+                [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+                  [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="childDuplicateMessage"
+                 [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+  
+                 <div class="input-group">
+                    <p>{{'areas.name' | translate }}: *</p>
+                    <input id="areaName" maxlength="40" #focus [readonly]="nameFlag" (blur)="validateFormOnBlur()"  class="form-control capitalize" [formControl]="areaForm.controls['areaName']">
+                  </div>
+        
+                  <div class="input-group">
+                    <p>{{'businessexecutive.name' | translate }}: * &emsp;</p>
+                    <input id="businessExecutiveId" maxlength="50" formControlName="businessExecutiveName" [typeahead]="businessExecList" typeaheadOptionField="name"
+                      [typeaheadOptionsLimit]="7"   [typeaheadMinLength]="0"  class="form-control capitalize">
+                      <span class="caret"></span>
+                </div>
+
+                       <div class="input-group">
+                        <button type="button" (click)="resetDistrictsForm()" class="btn btn-primary">Reset</button>
+                        <button type="submit" class="btn btn-primary mr-l-10">Save</button>
+                      </div>
+              </form>
+  
+            </div>
+          </ng-template>
+  

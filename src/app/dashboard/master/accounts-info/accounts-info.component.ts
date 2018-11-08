@@ -27,6 +27,7 @@ export class AccountsInfoComponent implements OnInit {
   public accInfoForm: FormGroup;
   public subScheduleForm: FormGroup;
   public districtsForm: FormGroup;
+  public areaForm: FormGroup;
   private endPoint: string = "accountinformation/";
   private taxEndPoint: string = "tax/";
   public deleteFlag: boolean = true;
@@ -44,6 +45,7 @@ export class AccountsInfoComponent implements OnInit {
   public districtsList: any = [];
   public statesList: any = [];
   public areasList: any = [];
+  public businessExecList: any = [];
   public selectedSchedule: any;
   public selectedSubSchedule: any;
   public selectedDistrict: any;
@@ -90,6 +92,7 @@ export class AccountsInfoComponent implements OnInit {
       pin: ['', Validators.required],
       stateName: ['', Validators.required],
       areaName: ['', Validators.required],
+      businessExecutiveName: ['', Validators.required],
       districtName: ['', Validators.required],
       phone: ['', Validators.required],
       mobile: ['', Validators.required],
@@ -134,6 +137,12 @@ export class AccountsInfoComponent implements OnInit {
       districtName: ['', Validators.required],
       stateId: [],
       stateName: []
+    });
+    this.areaForm = this.fb.group({
+      id: [],
+      areaName: ['', Validators.required],
+      businessExecutiveId: [],
+      businessExecutiveName: []
     });
     this.loadGridData();
     this.loadSubScheduleData();
@@ -184,6 +193,12 @@ export class AccountsInfoComponent implements OnInit {
     })
   }
 
+  loadBusinessExecutiveData() {
+    this.masterService.getParentData("businessexecutive/").subscribe(list => {
+      this.businessExecList = list;
+    })
+  }
+
   loadSelectedTaxTypeahead(event) {
     this.selectedTaxTypeahead = event.item;
     this.accInfoForm.patchValue({ taxId: event.item.id });
@@ -200,6 +215,8 @@ export class AccountsInfoComponent implements OnInit {
     this.selectedArea = event.item;
     this.accInfoForm.value.areaId = this.selectedArea.id;
     this.accInfoForm.patchValue({ areaId: this.selectedArea.id });
+    this.accInfoForm.patchValue({ name: this.selectedArea.businessExecutiveName });
+    this.accInfoForm.patchValue({ businessExecutiveId: this.selectedArea.businessExecutiveId });
   }
 
   onSelectSubSchedule(event) {
@@ -236,6 +253,9 @@ export class AccountsInfoComponent implements OnInit {
     } else if (templateName == "Districts") {
       this.resetChildForm(this.districtsForm);
       this.loadStatesData();
+    } else if (templateName == "Area") {
+      this.resetChildForm(this.areaForm);
+      this.loadBusinessExecutiveData();
     }
     //template, 'SubSchedule'
     this.scFormRequiredError = this.scFormSuccess = false;
@@ -258,6 +278,8 @@ export class AccountsInfoComponent implements OnInit {
         this.loadSubScheduleData();
       } else if (screenName == "District") {
         this.loadDistrictData();
+      }  else if (screenName == "Area") {
+        this.loadAreaData();
       }
       this.modalRef.hide();
       formObj.reset();
@@ -410,6 +432,9 @@ export class AccountsInfoComponent implements OnInit {
         else if (eventType == "District") {
           this.saveChild(eventType, this.districtsForm, "districts/");
         }
+        else if (eventType == "Area") {
+          this.saveChild(eventType, this.areaForm, "area/");
+        }
       }
     });
   }
@@ -424,6 +449,9 @@ export class AccountsInfoComponent implements OnInit {
     }
     else if (screenName == "District") {
       return { "title": "Districts", "confirmMessage": "districts.saveConfirmationMessage", "infoMessage": "districts.saveInformationMessage" };
+    }
+    else if (screenName == "Area") {
+      return { "title": "Area", "confirmMessage": "areas.saveConfirmationMessage", "infoMessage": "areas.saveInformationMessage" };
     }
   }
 
