@@ -402,7 +402,7 @@
             </div>
 
                 <div class="input-group">
-                  <button type="button" (click)="resetSubScheduleForm()" class="btn btn-primary">Reset</button>
+                  <button type="button" (click)="resetChildForm()" class="btn btn-primary">Reset</button>
                   <button type="submit" class="btn btn-primary mr-l-10">Save</button>
                 </div>
 
@@ -419,7 +419,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form [formGroup]="districtsForm" (ngSubmit)="saveChildForm('District', districtsForm)" (ngSubmit)="saveDistrict()" autocomplete="off">
+            <form [formGroup]="districtsForm" (ngSubmit)="saveChildForm('District', districtsForm)"  autocomplete="off">
 
               <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
               [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
@@ -439,7 +439,7 @@
 
 
                      <div class="input-group">
-                      <button type="button" (click)="resetDistrictsForm()" class="btn btn-primary">Reset</button>
+                      <button type="button" (click)="resetChildForm()" class="btn btn-primary">Reset</button>
                       <button type="submit" class="btn btn-primary mr-l-10">Save</button>
                     </div>
             </form>
@@ -455,7 +455,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form [formGroup]="areaForm" (ngSubmit)="saveChildForm('District', areaForm)" (ngSubmit)="saveDistrict()" autocomplete="off">
+              <form [formGroup]="areaForm" (ngSubmit)="saveChildForm('Area', areaForm)"  autocomplete="off">
   
                 <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
                 [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
@@ -473,9 +473,8 @@
                       [typeaheadOptionsLimit]="7"   [typeaheadMinLength]="0"  class="form-control capitalize">
                       <span class="caret"></span>
                 </div>
-
                        <div class="input-group">
-                        <button type="button" (click)="resetDistrictsForm()" class="btn btn-primary">Reset</button>
+                        <button type="button" (click)="resetChildForm()" class="btn btn-primary">Reset</button>
                         <button type="submit" class="btn btn-primary mr-l-10">Save</button>
                       </div>
               </form>

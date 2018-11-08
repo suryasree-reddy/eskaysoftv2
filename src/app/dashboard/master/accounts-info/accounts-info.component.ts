@@ -83,6 +83,7 @@ export class AccountsInfoComponent implements OnInit {
       stateId: [],
       areaId: [],
       districtId: [],
+      businessExecutiveId: [],
       accountName: ['', Validators.required],
       subScheduleName: ['', Validators.required],
       scheduleName: ['', Validators.required],
@@ -293,7 +294,10 @@ export class AccountsInfoComponent implements OnInit {
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
     this.scFormRequiredError = this.scFormSuccess = false;
-    formObj.reset();
+    // formObj.reset();
+    this.subScheduleForm.reset();
+    this.districtsForm.reset();
+    this.areaForm.reset();
   }
 
   checkForDuplicateSubScheduleName() {
@@ -445,7 +449,7 @@ export class AccountsInfoComponent implements OnInit {
       return { "title": "Account Information", "confirmMessage": "accountinfo.saveConfirmationMessage", "infoMessage": "accountinfo.saveInformationMessage" };
     }
     else if (screenName == "SubSchedule") {
-      return { "title": "Sub-Schedule", "confirmMessage": "subSchedule.saveConfirmationMessage", "infoMessage": "subSchedule.saveInformationMessage" };
+      return { "title": "Sub-Schedule", "confirmMessage": "subschedule.saveConfirmationMessage", "infoMessage": "subschedule.saveInformationMessage" };
     }
     else if (screenName == "District") {
       return { "title": "Districts", "confirmMessage": "districts.saveConfirmationMessage", "infoMessage": "districts.saveInformationMessage" };

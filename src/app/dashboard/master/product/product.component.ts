@@ -388,6 +388,7 @@ export class ProductComponent implements OnInit {
     this.childDuplicateMessageParam = null;
     this.productGroupForm.reset();
     this.productCategoryForm.reset();
+    this.companyForm.reset();
   }
 
   scRequiredErrMsg() {
