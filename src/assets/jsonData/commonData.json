@@ -353,6 +353,22 @@
     }
   ],
   "CustomerDiscountColumns": [{
+    "headerName": "Code",
+    "field": "shortName",
+    "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+      }
+    },
+  {
+    "headerName": "Account Name",
+    "field": "accountName",
+    "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+      }
+    },
+    {
       "headerName": "Company Description",
       "field": "companyName",
       "filterParams": {
