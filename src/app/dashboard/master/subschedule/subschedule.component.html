@@ -14,7 +14,7 @@
         </div>
           <div class="input-group">
             <p>{{'schedule.name' | translate}}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
-            <input id="scheduleType" maxlength="40" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="scheduleName"
+            <input id="scheduleType" maxlength="40" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="typeheadDisplay"
             [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control capitalize">
           </div><span class="caret"></span>
           <div class="input-group">
