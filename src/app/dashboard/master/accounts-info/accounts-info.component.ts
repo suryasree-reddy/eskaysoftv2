@@ -49,6 +49,7 @@ export class AccountsInfoComponent implements OnInit {
   public selectedSchedule: any;
   public selectedSubSchedule: any;
   public selectedDistrict: any;
+  public selectedState: any;
   public selectedArea: any;
   public accGstType: any[];
   public accNatureOfGst: any[];
@@ -211,6 +212,12 @@ export class AccountsInfoComponent implements OnInit {
     this.accInfoForm.patchValue({ stateName: this.selectedDistrict.stateName });
     this.accInfoForm.patchValue({ districtId: this.selectedDistrict.id });
     this.accInfoForm.patchValue({ stateId: this.selectedDistrict.stateId });
+  }
+
+  onSelectState(event) {
+     this.selectedState = event.item;
+    this.districtsForm.patchValue({ stateId: this.selectedState.id });
+    this.districtsForm.patchValue({ stateName: this.selectedState.stateName });
   }
 
   onSelectArea(event) {

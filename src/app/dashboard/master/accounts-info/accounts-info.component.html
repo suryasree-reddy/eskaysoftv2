@@ -6,7 +6,7 @@
       <form [formGroup]="accInfoForm"  autocomplete="off">
 
 
-        <div  class="col-md-4 ">
+        <div  class="col-md-4 col-3-lt mr-l-20">
           <p> Search By {{'accountinfo.name' | translate}}:</p>
           <input id="searchByAccountName" maxlength="50" formControlName="accountName"
             [typeahead]="accountsList" typeaheadOptionField="accountName"
