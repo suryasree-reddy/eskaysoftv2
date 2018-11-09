@@ -45,7 +45,7 @@
                   	<div class="col-md-4 col-3-lt">
                   		<p>{{'subschedule.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template, 'SubSchedule')">create new</a>)</p>
                   		<input id="subScheduleName" maxlength="40" class="form-control capitalize" [formControl]="accInfoForm.controls['subScheduleName']"
-                  		[typeahead]="subScheduleList" typeaheadOptionField="subScheduleName" [typeaheadOptionsLimit]="7"
+                  		[typeahead]="subScheduleList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7"
                   		[typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSubSchedule($event)" >
                   		<span class="caret" ></span>
                   	</div>
@@ -80,7 +80,7 @@
                   	<div class="col-md-4 col-3-lt">
                   		<p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate, 'Districts')">create new</a>)</p>
                   		<input id="districtName" maxlength="20" class="form-control capitalize" [formControl]="accInfoForm.controls['districtName']"
-                  		[typeahead]="districtsList" typeaheadOptionField="districtName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)" >
+                  		[typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)" >
                   		<span class="caret"></span>
                   	</div>
 
@@ -93,7 +93,7 @@
                   	<div class="col-md-4 col-3-lt">
                   		<p>{{'areas.name' | translate }}: *  &emsp; (<a style="cursor: pointer" (click)="openModal(areaTemplate, 'Area')">create new</a>)</p>
                   		<input id="areaName" maxlength="40"  class="form-control capitalize" [formControl]="accInfoForm.controls['areaName']"
-                  		[typeahead]="areasList" (typeaheadOnSelect)="onSelectArea($event)" typeaheadOptionField="areaName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
+                  		[typeahead]="areasList" (typeaheadOnSelect)="onSelectArea($event)" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
                   		<span class="caret"></span>
                   	</div>
 

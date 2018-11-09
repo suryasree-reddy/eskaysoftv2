@@ -10,7 +10,7 @@
                 <div *ngIf="!nameFlag" class="input-group">
                     <p>{{'customerdiscount.name' | translate}}: </p>
                     <input id="accountName" [readonly]="nameFlag"  formControlName="accountName" [typeahead]="typeaheadCustomerDataList"
-                        typeaheadOptionField="accountName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
+                        typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                         (typeaheadOnSelect)="loadSelectedCustomerTypeahead($event)" class="form-control capitalize">
                     <span class="caret"></span>
                 </div>
@@ -28,7 +28,7 @@
                 <div *ngIf="!customerDiscountForm.controls['discountType'].value"  class="input-group">
                     <p>{{'companies.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
                     <input id="companyName" formControlName="companyName" [typeahead]="typeaheadCompanyDataList"
-                        typeaheadOptionField="companyName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
+                        typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
                         (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control capitalize">
                     <span class="caret"></span>
                 </div>

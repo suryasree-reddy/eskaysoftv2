@@ -14,7 +14,7 @@
           </div>
             <div class="input-group">
               <p>{{'states.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
-              <input id="stateName" maxlength="20" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="stateName"
+              <input id="stateName" maxlength="20" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="typeheadDisplay"
                 [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control capitalize">
                 <span class="caret"></span>
           </div>
