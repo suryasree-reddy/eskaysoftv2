@@ -32,12 +32,12 @@
                     </div>
                     <div class="col-xs-3 col-rt">
                       <p>{{'product.packing' | translate}}: *</p>
-                      <input id="packing" maxlength="8" class="form-control" [formControl]="productForm.controls['packing']">
+                      <input id="packing" maxlength="4" class="form-control" [formControl]="productForm.controls['packing']">
                     </div>
                     <div class="col-xs-3 col-rt">
                       <p>{{'product.boxqty' | translate}}: *</p>
                       <input id="boxQty" type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                      #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['boxQty']">
+                      #focus class="form-control" [formControl]="productForm.controls['boxQty']">
                     </div>
                 </div>
 
@@ -56,7 +56,7 @@
                   </div>
                   <div class="col-xs-3 col-rt">
                       <p>{{'product.schemeqty' | translate}}: *</p>
-                        <input id="schemeQty" #focus [readonly]="nameFlag" class="form-control"
+                        <input id="schemeQty" #focus class="form-control"
 type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                          [formControl]="productForm.controls['schemeQty']">
                   </div>
@@ -66,7 +66,7 @@ type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length 
                 <div class="margin-top-0px">
                   <div class="col-xs-6 col-3-lt">
                     <p>{{'product.content' | translate}}: *</p>
-                    <input id="contents" maxlength="80" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['contents']">
+                    <input id="contents" maxlength="80" #focus class="form-control" [formControl]="productForm.controls['contents']">
                   </div>
                   <div class="col-xs-3 col-rt">
                     <p>{{'product.netrate' | translate}}: *</p>
@@ -75,7 +75,7 @@ type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length 
                   </div>
                   <div class="col-xs-3 col-rt">
                     <p>{{'product.isNetRateItem' | translate}}: *</p>
-                    <input id="isNetRateItem" #focus [readonly]="nameFlag" class="form-control" [formControl]="productForm.controls['isNetRateItem']">
+                    <input id="isNetRateItem" maxlength="20" #focus class="form-control" [formControl]="productForm.controls['isNetRateItem']">
                   </div>
                 </div>
 
@@ -89,12 +89,12 @@ type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length 
                   </div>
                   <div class="col-xs-3 col-rt">
                     <p>{{'product.free' | translate}}: *</p>
-                    <input id="free" #focus [readonly]="nameFlag" type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                    <input id="free" #focus type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                     class="form-control" [formControl]="productForm.controls['free']">
                   </div>
                   <div class="col-xs-3 col-rt">
                     <p>{{'product.prodcode' | translate}}: *</p>
-                    <input id="productcode" type="text" min="0" maxlength="5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                    <input id="productcode" [readonly]="nameFlag" type="text" min="0" maxlength="5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                     class="form-control" [formControl]="productForm.controls['productcode']" (blur)="checkForDuplicateProductCode()">
                   </div>
                 </div>
