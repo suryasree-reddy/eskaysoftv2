@@ -389,6 +389,7 @@
   "CustomerDiscountColumns": [{
       "headerName": "Short Name",
       "field": "shortName",
+      "tooltipField": "shortName",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -397,6 +398,7 @@
     {
       "headerName": "Account Name",
       "field": "accountName",
+        "tooltipField": "accountName",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -405,6 +407,7 @@
     {
       "headerName": "Company Description",
       "field": "companyName",
+        "tooltipField": "companyName",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -423,6 +426,7 @@
   "ProductColumns": [{
       "headerName": "Product Name",
       "field": "name",
+      "tooltipField": "name",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -432,6 +436,7 @@
     {
       "headerName": "Product Group",
       "field": "productGroupName",
+      "tooltipField": "productGroupName",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -441,6 +446,7 @@
     {
       "headerName": "Product Category",
       "field": "productCategoryName",
+      "tooltipField": "productCategoryName",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
