@@ -13,6 +13,7 @@
             [typeaheadOptionsLimit]="7"
              [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)"
              class="form-control capitalize">
+               <span class="caret"></span>
         </div>
 
       <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
@@ -111,7 +112,7 @@
 
                   	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.email' | translate}}: *</p>
-                  		<input id="email" #focus class="form-control" [formControl]="accInfoForm.controls['email']">
+                  		<input id="email"maxlength="50" #focus class="form-control" [formControl]="accInfoForm.controls['email']">
                   	</div>
 
                   	<div class="col-md-4 col-3-lt">

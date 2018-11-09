@@ -10,7 +10,7 @@
 
           <div class="input-group">
             <p >{{'manufacturer.name' | translate }}: *</p>
-            <input id="manfacturerName" maxlength="50" #focus [readonly]="nameFlag" (blur)="checkForDuplicateManufName()"  class="form-control capitalize" [formControl]="manufacturerForm.controls['manfacturerName']">
+            <input id="manfacturerName" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateManufName()"  class="form-control capitalize" [formControl]="manufacturerForm.controls['manfacturerName']">
           </div>
 
           <app-buttons [title]="'manufacturer.title'" [deleteConfirmMsg]="'manufacturer.deleteConfirmationMessage'"

@@ -10,12 +10,12 @@
 
           <div class="input-group">
             <p>{{'areas.name' | translate }}: *</p>
-            <input id="areaName" maxlength="40" #focus [readonly]="nameFlag" (blur)="validateFormOnBlur()"  class="form-control capitalize" [formControl]="areaForm.controls['areaName']">
+            <input id="areaName" maxlength="20" #focus [readonly]="nameFlag" (blur)="validateFormOnBlur()"  class="form-control capitalize" [formControl]="areaForm.controls['areaName']">
           </div>
 
           <div class="input-group">
             <p>{{'businessexecutive.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
-            <input id="businessExecutiveId" maxlength="50" formControlName="businessExecutiveName" [typeahead]="typeaheadDataList" typeaheadOptionField="name"
+            <input id="businessExecutiveId" maxlength="20" formControlName="businessExecutiveName" [typeahead]="typeaheadDataList" typeaheadOptionField="name"
               [typeaheadOptionsLimit]="7"   [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control capitalize">
               <span class="caret"></span>
         </div>

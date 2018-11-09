@@ -203,6 +203,7 @@ export class SubscheduleComponent implements OnInit {
   }
 
   delete() {
+    console.log("this.editSubSchedule--", this.editSubSchedule);
     this.masterService.deleteRecord(this.endPoint, this.editSubSchedule.id).subscribe(res => {
       this.showInformationModal("Delete");
     }, (error) => {

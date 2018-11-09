@@ -17,7 +17,7 @@
     }
   ],
   "ScheduleListColumns": [{
-      "headerName": "Schedule Name",
+      "headerName": "Name",
       "field": "scheduleName",
       "filterParams": {
         "filterOptions": ["contains"],
@@ -26,20 +26,20 @@
       "suppressSizeToFit": false
     },
     {
-      "headerName": "Schedule Index",
+      "headerName": "Index",
       "field": "scheduleIndex",
       "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": ["equals", "lessThan", "greaterThan"],
         "newRowsAction": "keep"
       },
-      "width": 100,
+      "width": 50,
       "suppressSizeToFit": false
     },
     {
-      "headerName": "Schedule Type",
+      "headerName": "Type",
       "field": "scheduleType",
-      "width": 100,
+      "width": 50,
       "suppressSizeToFit": false
     },
     {
@@ -47,13 +47,14 @@
       "field": "deleteFlag",
       "cellRenderer": "deltaIndicator",
       "suppressFilter": true,
-      "width": 50,
+      "width": 35,
       "suppressSizeToFit": false
     }
   ],
   "SubScheduleListColumns": [{
       "headerName": "Sub-Schedule Name",
       "field": "subScheduleName",
+      "tooltipField": "subScheduleName",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -63,11 +64,12 @@
     {
       "headerName": "Schedule Name",
       "field": "scheduleName",
+      "tooltipField": "scheduleName",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
       },
-      "width": 80,
+      "width": 120,
       "suppressSizeToFit": false
     },
     {
@@ -78,7 +80,14 @@
         "filterOptions": ["equals", "lessThan", "greaterThan"],
         "newRowsAction": "keep"
       },
-      "width": 100,
+      "width": 80,
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "Status",
+      "field": "deleteFlag",
+      "cellRenderer": "deltaIndicator",
+      "suppressFilter": true,
+      "width": 35,
       "suppressSizeToFit": false
     }
   ],
@@ -149,11 +158,19 @@
         "newRowsAction": "keep"
       },
       "suppressSizeToFit": false
+    }, {
+      "headerName": "Status",
+      "field": "deleteFlag",
+      "cellRenderer": "deltaIndicator",
+      "suppressFilter": true,
+      "width": 50,
+      "suppressSizeToFit": false
     }
   ],
   "BusinessExecutiveColumns": [{
       "headerName": "Name",
       "field": "name",
+      "tooltipField": "name",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -163,6 +180,7 @@
     {
       "headerName": "Address",
       "field": "address",
+      "tooltipField": "address",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -172,6 +190,7 @@
     {
       "headerName": "Town",
       "field": "town",
+      "tooltipField": "address",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -181,6 +200,8 @@
     {
       "headerName": "Mobile",
       "field": "mobile",
+      "tooltipField": "mobile",
+      "width": 80,
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -192,7 +213,7 @@
       "field": "deleteFlag",
       "cellRenderer": "deltaIndicator",
       "suppressFilter": true,
-      "width": 50
+      "width": 80
     }
   ],
   "BankInformationColumns": [{
@@ -258,6 +279,13 @@
         "newRowsAction": "keep"
       },
       "suppressSizeToFit": false
+    }, {
+      "headerName": "Status",
+      "field": "deleteFlag",
+      "cellRenderer": "deltaIndicator",
+      "suppressFilter": true,
+      "width": 50,
+      "suppressSizeToFit": false
     }
   ],
   "CompanyType": [{
@@ -302,6 +330,7 @@
   "CompanyColumns": [{
       "headerName": "Name",
       "field": "companyName",
+      "tooltipField": "companyName",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -311,6 +340,7 @@
     {
       "headerName": "Code",
       "field": "companyCode",
+      "tooltipField": "companyName",
       "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": ["equals", "lessThan", "greaterThan"],
@@ -321,6 +351,7 @@
     {
       "headerName": "Group",
       "field": "companyGroupName",
+      "tooltipField": "companyGroupName",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -330,6 +361,7 @@
     {
       "headerName": "Type",
       "field": "companyType",
+      "tooltipField": "companyType",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -339,6 +371,7 @@
     {
       "headerName": "Status",
       "field": "companyStatus",
+      "tooltipField": "companyStatus",
       "suppressSizeToFit": false
     },
     {
@@ -349,23 +382,24 @@
     {
       "headerName": "Inv.Prefix",
       "field": "invPrefix",
+      "tooltipField": "invPrefix",
       "suppressSizeToFit": false
     }
   ],
   "CustomerDiscountColumns": [{
-    "headerName": "Short Name",
-    "field": "shortName",
-    "filterParams": {
-      "filterOptions": ["contains"],
-      "newRowsAction": "keep"
+      "headerName": "Short Name",
+      "field": "shortName",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
       }
     },
-  {
-    "headerName": "Account Name",
-    "field": "accountName",
-    "filterParams": {
-      "filterOptions": ["contains"],
-      "newRowsAction": "keep"
+    {
+      "headerName": "Account Name",
+      "field": "accountName",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
       }
     },
     {
@@ -506,6 +540,7 @@
     {
       "headerName": "Account Name",
       "field": "accountName",
+      "tooltipField": "accountName",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -515,6 +550,7 @@
     {
       "headerName": "Town",
       "field": "town",
+      "tooltipField": "town",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"

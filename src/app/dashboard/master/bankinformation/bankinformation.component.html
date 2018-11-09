@@ -12,11 +12,11 @@
 
         <div class="input-group">
           <p>{{'bankinfo.name' | translate }}: *</p>
-          <input id="name" maxlength="50" #focus [readonly]="nameFlag" (blur)="checkForDuplicateBankName()" class="form-control capitalize" [formControl]="bankInformationForm.controls['name']">
+          <input id="name" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateBankName()" class="form-control capitalize" [formControl]="bankInformationForm.controls['name']">
         </div>
         <div class="input-group">
             <p>{{'bankinfo.address' | translate }}: *</p>
-            <input id="address" maxlength="50" class="form-control" [formControl]="bankInformationForm.controls['address']">
+            <input id="address" maxlength="20" class="form-control" [formControl]="bankInformationForm.controls['address']">
         </div>
 
         <app-buttons [title]="'Bank Information'" [deleteConfirmMsg]="'bankinfo.deleteConfirmationMessage'"
