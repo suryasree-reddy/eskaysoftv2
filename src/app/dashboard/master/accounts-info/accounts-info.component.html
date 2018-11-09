@@ -46,7 +46,7 @@
 
           <!-- Panel Start -->
           <div >
-              <p style="padding-left:5px; margin: 1em ;"><b>Acc Name: {{accountName}} &emsp; Town: {{town}} &emsp;Short Name: {{shortName}}</b></p>
+              <p *ngIf="accInfoForm.controls['accountName'].value" style="padding-left:5px; margin: 1em ;"><b>Account Name: {{accInfoForm.controls['accountName'].value}} &emsp;||  Town: {{accInfoForm.controls['town'].value}}  &emsp; || Short Name: {{accInfoForm.controls['shortName'].value}}</b></p>
 
             <div id="tab" class='col-xs-12'>
               <tabset type="pills">
@@ -57,7 +57,7 @@
 
                   	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.name' | translate}}: *</p>
-                  		<input id="accountName"  [(ngModel)]="accountName"  (blur)="checkForDuplicateAcctName()" maxlength="50" #focus [readonly]="nameFlag"
+                  		<input id="accountName"  (blur)="checkForDuplicateAcctName()" maxlength="50" #focus [readonly]="nameFlag"
                        class="form-control capitalize" [formControl]="accInfoForm.controls['accountName']">
                   	</div>
 
@@ -87,7 +87,7 @@
 
                   	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.town' | translate}}: *</p>
-                  		<input id="town" [(ngModel)]="town" maxlength="20" #focus class="form-control" [formControl]="accInfoForm.controls['town']">
+                  		<input id="town" maxlength="20" #focus class="form-control" [formControl]="accInfoForm.controls['town']">
                   	</div>
 
                   	<div class="col-md-4 col-3-lt">
@@ -136,7 +136,7 @@
 
                   	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.shortname' | translate}}: *</p>
-                  		<input id="shortName" [(ngModel)]="shortName"  maxlength="6" #focus [readonly]="nameFlag"
+                  		<input id="shortName" maxlength="6" #focus [readonly]="nameFlag"
                       class="form-control" (blur)="checkForDuplicateAcctShortName()"
                       [formControl]="accInfoForm.controls['shortName']">
                   	</div>

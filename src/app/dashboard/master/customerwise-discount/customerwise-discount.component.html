@@ -21,11 +21,11 @@
                 </div>
                 <div *ngIf="!nameFlag" class="input-group">
                     Do you want to apply same discount for all the companies?
-                    <input name="discountType"  formControlName="discountType" type="radio" [value]="true" [checked]="discountType"/> Yes
-                   <input name="discountType" formControlName="discountType" type="radio" [value]="false" [checked]="!discountType"/> No
+                    <input name="discountType"  [formControl]="customerDiscountForm.controls['discountType']" type="radio" [value]="true" [checked]="discountType"/> Yes
+                   <input name="discountType" [formControl]="customerDiscountForm.controls['discountType']" type="radio" [value]="false" [checked]="!discountType"/> No
                 </div>
 
-                <div *ngIf="!customerDiscountForm.controls['discountType'].value"  class="input-group">
+                <div *ngIf="!customerDiscountForm.controls['discountType'].value" class="input-group">
                     <p>{{'companies.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
                     <input id="companyName" formControlName="companyName" [typeahead]="typeaheadCompanyDataList"
                         typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"

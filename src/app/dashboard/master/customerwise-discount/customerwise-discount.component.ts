@@ -46,7 +46,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
   public typeaheadCustomerDataList: any = [];
   public selectedCompanyTypeahead: any;
   public selectedCustomerTypeahead: any;
-private discountType:boolean = false;
+  private discountType: boolean = false;
   modalRef: BsModalRef;
   message: string;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
@@ -98,6 +98,7 @@ private discountType:boolean = false;
   loadCompanyTypeaheadData() {
     this.masterService.getParentData(this.cEndPoint).subscribe(list => {
       this.typeaheadCompanyDataList = list;
+      this.retrieveCompaniesByAccount(this.gridDataList);
     });
   }
 
@@ -113,6 +114,7 @@ private discountType:boolean = false;
 
   loadSelectedCustomerTypeahead(event) {
     this.selectedCustomerTypeahead = event.item;
+    this.customerDiscountForm.patchValue({ discountType: false });
     this.customerDiscountForm.patchValue({ accountInformationId: this.selectedCustomerTypeahead.id });
     this.loadGridDataById();
   }
@@ -121,6 +123,7 @@ private discountType:boolean = false;
     this.masterService.getData("customerwisediscount/accountinfo/" + parseInt(this.selectedCustomerTypeahead.id));
     this.masterService.dataObject.subscribe(list => {
       this.gridDataList = list;
+      this.retrieveCompaniesByAccount(this.gridDataList);
       localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
     });
   }
@@ -143,6 +146,20 @@ private discountType:boolean = false;
     this.loadCompanyGroupTypeaheadData();
     this.scFormRequiredError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+  }
+
+  retrieveCompaniesByAccount(eventList) {
+
+    if (this.selectedCustomerTypeahead != null && this.selectedCustomerTypeahead != undefined) {
+      _.remove(this.typeaheadCompanyDataList, function(e) {
+        return _.find(eventList, function(o) { return o.companyId == e.id });
+      }
+      if(this.customerDiscountForm.controls['companyId'].value != null){
+        this.customerDiscountForm.patchValue({ companyId:null});
+        this.customerDiscountForm.patchValue({ companyName:null});
+      }
+
+    }
   }
 
   getDuplicateErrorMessages(): void {
@@ -184,7 +201,7 @@ private discountType:boolean = false;
     });
   }
 
-  save(){
+  save() {
     this.buttonsComponent.save();
   }
 
@@ -228,9 +245,12 @@ private discountType:boolean = false;
   resetForm() {
     this.customerDiscountForm.reset();
     this.gridSelectedRow = null;
+    this.selectedCustomerTypeahead = null;
+    this.gridDataList = null;
     this.nameFlag = false;
     this.deleteFlag = true;
     this.formRequiredError = this.formSuccess = false;
+    this.loadCompanyTypeaheadData();
     this.loadGridData();
     this.customerDiscountForm.patchValue({ discountType: false });
     this.focusField.nativeElement.focus();
