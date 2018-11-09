@@ -6,15 +6,33 @@
       <form [formGroup]="accInfoForm"  autocomplete="off">
 
 
-        <div  class="col-md-4 col-3-lt mr-l-20">
-          <p> Search By {{'accountinfo.name' | translate}}:</p>
-          <input id="searchByAccountName" maxlength="50" formControlName="accountName"
-            [typeahead]="accountsList" typeaheadOptionField="accountName"
-            [typeaheadOptionsLimit]="7"
-             [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)"
-             class="form-control capitalize">
-               <span class="caret"></span>
+        <div  class="col-md-2 col-3-lt">
+          <p > Search By {{'accountinfo.name' | translate}}:</p>
         </div>
+        <div  class="col-md-4" style="margin-left: -2em;">
+            <input id="searchByAccountName" maxlength="50" formControlName="accountName"
+              [typeahead]="accountsList" typeaheadOptionField="accountName"
+              [typeaheadOptionsLimit]="7"
+               [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)"
+               class="form-control capitalize">
+                 <span class="caret"></span>
+          </div>
+
+         <!-- <form class="form-horizontal">
+            <div class="form-group col-md-12 col-3-lt mr-l-20">
+              <p class="control-label col-sm-2" >Search By {{'accountinfo.name' | translate}}:</p>
+              <div class="col-sm-4">
+                  <input class="form-control" id="searchByAccountName" maxlength="50" formControlName="accountName"
+                  [typeahead]="accountsList" typeaheadOptionField="accountName"
+                  [typeaheadOptionsLimit]="7"
+                   [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)"
+                   class="form-control capitalize">
+                   <span class="caret"></span>
+              </div>
+            </div>
+        </form> -->
+
+
 
       <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
       [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
@@ -24,10 +42,11 @@
       <div  style="margin-left:-10px;">
 
       <div class="col-xs-12 panels">
-        <div class="row">
+        <div class="row"  style="margin-right:-5em;">
 
           <!-- Panel Start -->
           <div >
+              <p style="padding-left:5px; margin: 1em ;"><b>Acc Name: {{accountName}} &emsp; Town: {{town}} &emsp;Short Name: {{shortName}}</b></p>
 
             <div id="tab" class='col-xs-12'>
               <tabset type="pills">
@@ -38,7 +57,7 @@
 
                   	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.name' | translate}}: *</p>
-                  		<input id="accountName"  (blur)="checkForDuplicateAcctName()" maxlength="50" #focus [readonly]="nameFlag"
+                  		<input id="accountName"  [(ngModel)]="accountName"  (blur)="checkForDuplicateAcctName()" maxlength="50" #focus [readonly]="nameFlag"
                        class="form-control capitalize" [formControl]="accInfoForm.controls['accountName']">
                   	</div>
 
@@ -68,7 +87,7 @@
 
                   	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.town' | translate}}: *</p>
-                  		<input id="town" maxlength="20" #focus class="form-control" [formControl]="accInfoForm.controls['town']">
+                  		<input id="town" [(ngModel)]="town" maxlength="20" #focus class="form-control" [formControl]="accInfoForm.controls['town']">
                   	</div>
 
                   	<div class="col-md-4 col-3-lt">
@@ -117,7 +136,7 @@
 
                   	<div class="col-md-4 col-3-lt">
                   		<p>{{'accountinfo.shortname' | translate}}: *</p>
-                  		<input id="shortName"  maxlength="6" #focus [readonly]="nameFlag"
+                  		<input id="shortName" [(ngModel)]="shortName"  maxlength="6" #focus [readonly]="nameFlag"
                       class="form-control" (blur)="checkForDuplicateAcctShortName()"
                       [formControl]="accInfoForm.controls['shortName']">
                   	</div>
