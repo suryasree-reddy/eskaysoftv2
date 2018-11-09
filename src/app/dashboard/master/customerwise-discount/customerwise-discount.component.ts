@@ -46,7 +46,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
   public typeaheadCustomerDataList: any = [];
   public selectedCompanyTypeahead: any;
   public selectedCustomerTypeahead: any;
-
+private discountType:boolean = false;
   modalRef: BsModalRef;
   message: string;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
