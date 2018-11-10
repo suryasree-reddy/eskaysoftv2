@@ -9,6 +9,7 @@ import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
+import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 
 @Component({
   selector: 'app-accounts-info',
@@ -69,6 +70,7 @@ export class AccountsInfoComponent implements OnInit {
   message: string;
 
   @ViewChild('focus') focusField: ElementRef;
+  @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
@@ -397,6 +399,18 @@ checkForDuplicateArea() {
       }
     }
 
+    
+  delete() {
+    this.buttonsComponent.delete();
+    // this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
+    // localStorage.removeItem('ag-activeRow');
+    // this.showInformationModal("Delete");
+    // this.successMsg()
+    // }, (error) => {
+    //   throw error;
+    // });
+  }
+
     successMsg() {
       this.formSuccess = true;
       this.formRequiredError = false;
@@ -457,8 +471,11 @@ checkForDuplicateArea() {
       );
 
     (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
-      if (result) {
-        if (eventType == "SubSchedule") {
+      if (result) { 
+        if (eventType == "Delete") {
+        this.delete();
+      } 
+        else if (eventType == "SubSchedule") {
           this.saveChild(eventType, this.subScheduleForm, "subschedules/");
         }
         else if (eventType == "District") {
@@ -475,6 +492,9 @@ checkForDuplicateArea() {
 
     if (screenName == "Save") {
       return { "title": "Account Information", "confirmMessage": "accountinfo.saveConfirmationMessage", "infoMessage": "accountinfo.saveInformationMessage" };
+    }
+    else if (screenName == "Delete") {
+      return { "title": "Account Information", "confirmMessage": "accountinfo.deleteConfirmationMessage", "infoMessage": "accountinfo.deleteInformationMessage" };
     }
     else if (screenName == "SubSchedule") {
       return { "title": "Sub-Schedule", "confirmMessage": "subschedule.saveConfirmationMessage", "infoMessage": "subschedule.saveInformationMessage" };
