@@ -15,7 +15,7 @@
                     <span class="caret"></span>
                 </div>
                 <div *ngIf="nameFlag" class="input-group" >
-                    <p>{{'customerdiscount.disc' | translate}}: *</p>
+                    <p>{{'customerdiscount.name' | translate}}: *</p>
                     <input id="accountName" type="text" [readonly]="nameFlag"
                      #focus class="form-control" [formControl]="customerDiscountForm.controls['accountName']">
                 </div>
