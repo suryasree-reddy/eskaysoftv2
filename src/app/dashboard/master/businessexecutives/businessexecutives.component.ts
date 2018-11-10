@@ -141,9 +141,9 @@ export class BusinessexecutivesComponent implements OnInit {
   editable(s) {
     this.gridSelectedRow = s;
     this.businessExecutiveForm.reset(s);
+    this.deleteFlag = !this.gridSelectedRow.deleteFlag;
     this.formRequiredError = false;
     this.duplicateMessage = null;
-    this.deleteFlag = false;
     this.nameFlag = true;
   }
 

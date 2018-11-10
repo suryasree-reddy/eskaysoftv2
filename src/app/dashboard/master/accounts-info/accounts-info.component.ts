@@ -269,6 +269,7 @@ checkForDuplicateArea() {
   loadSelectedTypeahead(event) {
     this.accInfoForm.reset(event.item);
     this.nameFlag = true;
+    this.deleteFlag = !event.item.deleteFlag;
   }
 
   openModal(template: TemplateRef<any>, templateName) {
@@ -399,7 +400,7 @@ checkForDuplicateArea() {
       }
     }
 
-    
+
   delete() {
     this.buttonsComponent.delete();
     // this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
@@ -471,10 +472,10 @@ checkForDuplicateArea() {
       );
 
     (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
-      if (result) { 
+      if (result) {
         if (eventType == "Delete") {
         this.delete();
-      } 
+      }
         else if (eventType == "SubSchedule") {
           this.saveChild(eventType, this.subScheduleForm, "subschedules/");
         }

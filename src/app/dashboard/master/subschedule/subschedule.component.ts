@@ -253,6 +253,7 @@ export class SubscheduleComponent implements OnInit {
   }
 
   editable(s) {
+
     this.nameFlag = true;
     this.editSubSchedule = s;
     this.formRequiredError = false;
@@ -260,7 +261,7 @@ export class SubscheduleComponent implements OnInit {
     this.childDuplicateMessage = null;
     this.selectedSchedule = {};
     this.selectedSchedule.id = s.scheduleId;
-    this.deleteFlag = false;
+    this.deleteFlag = !this.editSubSchedule.deleteFlag;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
     this.subScheduleForm.reset(s);

@@ -379,7 +379,7 @@ export class ProductComponent implements OnInit {
     this.nameFlag = true;
     this.formRequiredError = false;
     this.duplicateMessage = null;
-    this.deleteFlag = false;
+    this.deleteFlag = !this.gridSelectedRow.deleteFlag;
   }
 
   resetChildForm() {

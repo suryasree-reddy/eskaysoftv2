@@ -229,7 +229,7 @@ export class AreasComponent implements OnInit {
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
     this.nameFlag = true;
-    this.deleteFlag = false;
+    this.deleteFlag = !this.gridSelectedRow.deleteFlag;
   }
 
   resetBusinessExecutiveForm() {

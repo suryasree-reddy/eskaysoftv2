@@ -34,6 +34,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
   public companyStatusList: any = [];
   public typeaheadCompanyGroupDataList: any = [];
   public invGenList: any = [];
+  private validCompanyName: boolean = false;
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   public scFormRequiredError: boolean = false;
@@ -98,7 +99,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
   loadCompanyTypeaheadData() {
     this.masterService.getParentData(this.cEndPoint).subscribe(list => {
       this.typeaheadCompanyDataList = list;
-      this.retrieveCompaniesByAccount(this.gridDataList);
+      //  this.retrieveCompaniesByAccount(this.gridDataList);
     });
   }
 
@@ -123,14 +124,17 @@ export class CustomerwiseDiscountComponent implements OnInit {
     this.masterService.getData("customerwisediscount/accountinfo/" + parseInt(this.selectedCustomerTypeahead.id));
     this.masterService.dataObject.subscribe(list => {
       this.gridDataList = list;
-      this.retrieveCompaniesByAccount(this.gridDataList);
       localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
     });
   }
 
   loadSelectedCompanyTypeahead(event) {
-    this.selectedCompanyTypeahead = event.item;
-    this.customerDiscountForm.patchValue({ companyId: event.item.id });
+    this.validCompanyName = this.masterService.hasDataExist(this.gridDataList, 'companyId', parseInt(event.item.id));
+    if (!this.validCompanyName) {
+      this.selectedCompanyTypeahead = event.item;
+      this.customerDiscountForm.patchValue({ companyId: event.item.id });
+    }
+    this.getDuplicateErrorMessages();
   }
 
   valueChange(selectedRow: any[]): void {
@@ -148,19 +152,6 @@ export class CustomerwiseDiscountComponent implements OnInit {
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
-  retrieveCompaniesByAccount(eventList) {
-
-    if (this.selectedCustomerTypeahead != null && this.selectedCustomerTypeahead != undefined) {
-      _.remove(this.typeaheadCompanyDataList, function(e) {
-        return _.find(eventList, function(o) { return o.companyId == e.id });
-      });
-      if(this.customerDiscountForm.controls['companyId'].value != null){
-        this.customerDiscountForm.patchValue({ companyId:null});
-        this.customerDiscountForm.patchValue({ companyName:null});
-      }
-
-    }
-  }
 
   getDuplicateErrorMessages(): void {
 
@@ -170,6 +161,11 @@ export class CustomerwiseDiscountComponent implements OnInit {
       this.scFormRequiredError = false;
     }
 
+    if (!this.validCompanyName) {
+      this.duplicateMessage = null;
+      this.duplicateMessageParam = null;
+      this.formRequiredError = false;
+    }
     if (this.duplicateCompany && this.duplicateCompanyName) {
       this.childDuplicateMessage = "companies.duplicateErrorMessage";
     }
@@ -180,6 +176,11 @@ export class CustomerwiseDiscountComponent implements OnInit {
     else if (this.duplicateCompanyName) {
       this.childDuplicateMessage = "companies.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.companyForm.value.companyName;
+    }
+
+    if (this.validCompanyName) {
+      this.duplicateMessage = "companies.duplicateNameErrorMessage";
+      this.duplicateMessageParam = this.customerDiscountForm.value.companyName;
     }
   }
 
@@ -249,6 +250,9 @@ export class CustomerwiseDiscountComponent implements OnInit {
     this.gridDataList = null;
     this.nameFlag = false;
     this.deleteFlag = true;
+    this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
+    this.formRequiredError = false;
     this.formRequiredError = this.formSuccess = false;
     this.loadCompanyTypeaheadData();
     this.loadGridData();
@@ -261,15 +265,16 @@ export class CustomerwiseDiscountComponent implements OnInit {
     this.customerDiscountForm.reset(s);
     this.nameFlag = true;
     this.deleteFlag = false;
+    //this.deleteFlag = !this.gridSelectedRow.deleteFlag;
   }
 
   resetChildForm() {
     this.scFormRequiredError = false;
-    this.duplicateMessage = null;
+    //this.duplicateMessage = null;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
-    this.formRequiredError = false;
-    this.duplicateMessageParam = null;
+    //  this.formRequiredError = false;
+    //  this.duplicateMessageParam = null;
     this.companyForm.reset();
   }
 

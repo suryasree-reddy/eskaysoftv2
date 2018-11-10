@@ -251,7 +251,7 @@ export class CompaniesComponent implements OnInit {
     this.formRequiredError = false;
     this.duplicateMessage = null;
     this.nameFlag = true;
-    this.deleteFlag = false;
+    this.deleteFlag = !this.gridSelectedRow.deleteFlag;
   }
 
   resetChildForm() {

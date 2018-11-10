@@ -245,7 +245,7 @@ export class DistrictsComponent implements OnInit {
     this.selectedState = {};
     this.childDuplicateMessage = null;
     this.selectedState.id = s.stateId;
-    this.deleteFlag = false;
+    this.deleteFlag = !this.editDistricts.deleteFlag;
     this.districtsForm.reset(s);
   }
 
