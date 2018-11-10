@@ -369,7 +369,7 @@
       "suppressSizeToFit": false
     },
     {
-      "headerName": "Status",
+      "headerName": "Comp Status",
       "field": "companyStatus",
       "tooltipField": "companyStatus",
       "suppressSizeToFit": false
@@ -383,6 +383,14 @@
       "headerName": "Inv.Prefix",
       "field": "invPrefix",
       "tooltipField": "invPrefix",
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Status",
+      "field": "deleteFlag",
+      "cellRenderer": "deltaIndicator",
+      "suppressFilter": true,
+      "width": 150,
       "suppressSizeToFit": false
     }
   ],
@@ -452,6 +460,16 @@
         "newRowsAction": "keep"
       },
       "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Company Name",
+      "field": "companyName",
+      "tooltipField": "companyName",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
     }
   ],
   "ProductCategoryColumns": [{
@@ -462,7 +480,16 @@
       "newRowsAction": "keep"
     },
     "suppressSizeToFit": false
-  }],
+  },
+  {
+    "headerName": "Status",
+    "field": "deleteFlag",
+    "cellRenderer": "deltaIndicator",
+    "suppressFilter": true,
+    "width": 35,
+    "suppressSizeToFit": false
+  }
+],
   "ProductGroupColumns": [{
     "headerName": "Product Group",
     "field": "productGroupName",
@@ -471,7 +498,16 @@
       "newRowsAction": "keep"
     },
     "suppressSizeToFit": false
-  }],
+  },
+  {
+    "headerName": "Status",
+    "field": "deleteFlag",
+    "cellRenderer": "deltaIndicator",
+    "suppressFilter": true,
+    "width": 35,
+    "suppressSizeToFit": false
+  }
+],
   "GstType": [{
       "code": "RGST",
       "description": "RGST"
@@ -579,6 +615,14 @@
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
       },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Status",
+      "field": "deleteFlag",
+      "cellRenderer": "deltaIndicator",
+      "suppressFilter": true,
+      "width": 120,
       "suppressSizeToFit": false
     }
   ]

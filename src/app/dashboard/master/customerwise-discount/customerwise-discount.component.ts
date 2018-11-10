@@ -153,7 +153,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
     if (this.selectedCustomerTypeahead != null && this.selectedCustomerTypeahead != undefined) {
       _.remove(this.typeaheadCompanyDataList, function(e) {
         return _.find(eventList, function(o) { return o.companyId == e.id });
-      }
+      });
       if(this.customerDiscountForm.controls['companyId'].value != null){
         this.customerDiscountForm.patchValue({ companyId:null});
         this.customerDiscountForm.patchValue({ companyName:null});

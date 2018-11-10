@@ -34,7 +34,7 @@
                 <app-buttons [title]="'accountopenings.title'" [deleteConfirmMsg]="'accountopenings.deleteConfirmationMessage'"
                              [saveConfirmMsg]="'accountopenings.saveConfirmationMessage'" [saveInfoMsg]="'accountopenings.saveInformationMessage'" [endPoint]="endPoint"
                              [deleteInfoMsg]="'accountopenings.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-                             [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true  [hideResetBtn]=false
+                             [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true  [hideResetBtn]=true
                              [hideDeleteBtn]=true [formObj]="accOpeningForm" (saveRecord)="save()"
                              (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
                              (afterSuccess)="successMsg()" (resetForm)="resetForm()">
