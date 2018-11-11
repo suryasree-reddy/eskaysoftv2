@@ -8,6 +8,7 @@ import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
+import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 
 @Component({
   selector: 'app-product',
@@ -58,7 +59,7 @@ export class ProductComponent implements OnInit {
   public selectedTaxTypeahead: any;
   public selectedGroupTypeahead: any;
   public selectedCompanyTypeahead: any;
-
+  @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   modalRef: BsModalRef;
   message: string;
 
@@ -337,12 +338,8 @@ export class ProductComponent implements OnInit {
 
 
   delete() {
-    this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
-      localStorage.removeItem('ag-activeRow');
-      this.successMsg()
-    }, (error) => {
-      throw error;
-    });
+    this.buttonsComponent.delete();
+
   }
 
   successMsg() {
