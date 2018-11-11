@@ -114,6 +114,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
   }
 
   loadSelectedCustomerTypeahead(event) {
+    this.formRequiredError = false;
     this.selectedCustomerTypeahead = event.item;
     this.customerDiscountForm.patchValue({ discountType: false });
     this.customerDiscountForm.patchValue({ accountInformationId: this.selectedCustomerTypeahead.id });
