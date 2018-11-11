@@ -85,7 +85,7 @@ type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length 
                  <div class="col-xs-6 col-3-lt">
                     <p>{{'product.tax' | translate}}: *</p>
                     <input id="tax" formControlName="tax" [typeahead]="typeaheadTaxDataList" typeaheadOptionField="tax"
-                    [typeaheadOptionsLimit]="7" 
+                    [typeaheadOptionsLimit]="7"
                      [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTaxTypeahead($event)"
                     class="form-control">
                     <span class="caret"></span>
@@ -107,7 +107,7 @@ type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length 
                 [saveConfirmMsg]="'product.saveConfirmationMessage'" [saveInfoMsg]="'product.saveInformationMessage'"
                 [endPoint]="endPoint"
                 [deleteInfoMsg]="'product.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-                [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+                [isBtnDeleteDisable]="false" [hideSaveBtn]=true [hideResetBtn]=true
                 [hideDeleteBtn]=true [formObj]="productForm" (saveRecord)="save()"
                 (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
                 (afterSuccess)="successMsg()" (resetForm)="resetForm()" ></app-buttons>

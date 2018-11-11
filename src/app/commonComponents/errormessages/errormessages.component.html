@@ -13,4 +13,8 @@
     <p class="text-danger" [textContent]="errorMessage" [translate]="errorMessage"
     [translateParams]="{errorStatusCode: errorStatusCode, errorStatusMsg: errorStatusMsg}"></p>
   </div>
+  <div class="error-text col-xs-12" *ngIf="invalidTypeahead != null">
+    <p class="text-danger" [textContent]="invalidTypeahead" [translate]="invalidTypeahead"
+    [translateParams]="{invalidTypeaheadParam: invalidTypeaheadParam}"></p>
+  </div>
 </div>

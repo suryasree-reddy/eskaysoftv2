@@ -15,11 +15,10 @@ export class ErrormessagesComponent implements OnInit {
   @Input() errorMessage: boolean = false;
   @Input() errorStatusCode: string = null;
   @Input() errorStatusMsg: string = null;
-
+  @Input() invalidTypeahead: string = null;
 
   constructor(private translate: TranslateService) { translate.setDefaultLang('messages.en');}
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }
