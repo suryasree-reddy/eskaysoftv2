@@ -109,7 +109,6 @@ export class AreasComponent implements OnInit {
       this.duplicateMessageParam = this.areaForm.value.areaName;
       this.formRequiredError = false;
     }
-    console.log(this.duplicateBusExecName, this.duplicateBusExecNum);
     if (this.duplicateBusExecName && this.duplicateBusExecNum) {
       this.childDuplicateMessage = "businessexecutive.duplicateErrorMessage";
     }
@@ -162,7 +161,6 @@ export class AreasComponent implements OnInit {
   }
 
   save_BusinessExecutive() {
-
     this.masterService.createRecord(this.beEndPoint, this.businessExecutiveForm.value).subscribe(res => {
       this.showInformationModal();
       this.loadTypeaheadData();
@@ -202,8 +200,10 @@ export class AreasComponent implements OnInit {
   }
 
   scRequiredErrMsg() {
-    this.scFormRequiredError = true;
-    this.scFormSuccess = false;
+    if (this.childDuplicateMessage == null) {
+      this.scFormRequiredError = true;
+      this.scFormSuccess = false;
+    }
   }
 
   resetForm() {
@@ -215,6 +215,7 @@ export class AreasComponent implements OnInit {
     this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
     this.formRequiredError = false;
+    this.duplicateAreaName = false;
     this.duplicateMessage = null;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
@@ -234,6 +235,8 @@ export class AreasComponent implements OnInit {
 
   resetBusinessExecutiveForm() {
     this.scFormRequiredError = false;
+    this.duplicateBusExecName = false;
+    this.duplicateBusExecNum = false;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
     this.businessExecutiveForm.reset();

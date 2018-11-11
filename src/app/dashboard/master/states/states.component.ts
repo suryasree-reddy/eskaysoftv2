@@ -69,12 +69,16 @@ export class StatesComponent implements OnInit {
   this.stateZone =  this.sharedDataService.getSharedCommonJsonData().StateZone;
   }
 
-
   getDuplicateErrorMessages(): void {
-    this.formRequiredError = false;
-    this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
-    if (this.duplicateStateName) {
+    if(!this.duplicateStateName || !this.duplicateStateCode){
+      this.formRequiredError = false;
+      this.duplicateMessage = null;
+      this.duplicateMessageParam = null;
+    }
+    if (this.duplicateStateName && this.duplicateStateCode) {
+      this.duplicateMessage = "states.duplicateErrorMessage";
+    }
+    else if (this.duplicateStateName) {
       this.duplicateMessage = "states.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.statesForm.value.stateName;
     } else if (this.duplicateStateCode) {
@@ -112,8 +116,6 @@ export class StatesComponent implements OnInit {
     });
   }
 
-
-
   save() {
     this.buttonsComponent.save();
   }
@@ -143,6 +145,8 @@ export class StatesComponent implements OnInit {
     this.prevStateCode = null;
     this.deleteFlag = true;
     this.nameFlag = false;
+    this.duplicateStateName = false;
+    this.duplicateStateCode = false;
     this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();

@@ -41,7 +41,7 @@ export class CompanyGroupComponent implements OnInit {
     private translate: TranslateService,
     private sharedDataService: SharedDataService,
     private masterService: MasterService) {
-      translate.setDefaultLang('messages.en');
+    translate.setDefaultLang('messages.en');
   }
 
   ngOnInit() {
@@ -61,9 +61,12 @@ export class CompanyGroupComponent implements OnInit {
     this.gridDataList = dataList;
   }
   getDuplicateErrorMessages(): void {
-    this.duplicateMessage = null;
-    this.formRequiredError = false;
-    this.duplicateMessageParam = null;
+    if (!this.duplicateCompanyGrp) {
+      this.duplicateMessage = null;
+      this.formRequiredError = false;
+      this.duplicateMessageParam = null;
+    }
+
     if (this.duplicateCompanyGrp) {
       this.duplicateMessage = "companygroup.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.companyGroupForm.value.companyGroupName;
@@ -111,7 +114,8 @@ export class CompanyGroupComponent implements OnInit {
     this.gridSelectedRow = null;
     this.nameFlag = false;
     this.deleteFlag = true;
-    this.formRequiredError =this.formSuccess = false;
+    this.duplicateCompanyGrp = false;
+    this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
   }

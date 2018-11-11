@@ -73,17 +73,21 @@ export class ScheduleComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
-    this.formRequiredError = false;
-    this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
+    if (!this.duplicateSchName || !this.duplicateSchIndex) {
+      this.formRequiredError = false;
+      this.duplicateMessage = null;
+      this.duplicateMessageParam = null;
+    }
+
     if (this.duplicateSchName && this.duplicateSchIndex) {
       this.duplicateMessage = "schedule.duplicateErrorMessage";
-
-    } else if (this.duplicateSchIndex) {
+    }
+    else if (this.duplicateSchIndex) {
       this.duplicateMessage = "schedule.duplicateIndexErrorMessage";
       this.duplicateMessageParam = this.scheduleForm.value.scheduleIndex;
 
-    } else if (this.duplicateSchName) {
+    }
+    else if (this.duplicateSchName) {
       this.duplicateMessage = "schedule.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.scheduleForm.value.scheduleName;
     }
@@ -133,6 +137,8 @@ export class ScheduleComponent implements OnInit {
     this.duplicateSchName = false;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
+    this.duplicateSchName = false;
+    this.duplicateSchIndex = false;
     this.nameFlag = false;
     this.lastSchIndex;
     this.formRequiredError = this.formSuccess = false;

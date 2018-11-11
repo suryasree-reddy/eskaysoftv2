@@ -103,35 +103,35 @@ export class CompaniesComponent implements OnInit {
 
   getDuplicateErrorMessages(): void {
 
+    if (!this.duplicateCompanyName || !this.duplicateCompanyCode) {
+      this.duplicateMessageParam = null;
+      this.duplicateMessage = null;
+      this.formRequiredError = false;
+    }
+    if (!this.duplicateCompanyGrp) {
+      this.childDuplicateMessage = null;
+      this.childDuplicateMessageParam = null;
+      this.scFormRequiredError = false;
+    }
+
     if (this.duplicateCompanyName && this.duplicateCompanyCode) {
       this.duplicateMessage = "companies.duplicateErrorMessage";
-      this.formRequiredError = false;
-
-    } else if (this.duplicateCompanyCode) {
+    }
+    else if (this.duplicateCompanyCode) {
       this.duplicateMessage = "companies.duplicateCodeErrorMessage";
       this.duplicateMessageParam = this.companyForm.value.companyCode;
-      this.formRequiredError = false;
-
-    } else if (this.duplicateCompanyName) {
+    }
+    else if (this.duplicateCompanyName) {
       this.duplicateMessage = "companies.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.companyForm.value.companyName;
-      this.formRequiredError = false;
     }
 
     if (this.duplicateCompanyGrp) {
       this.childDuplicateMessage = "companygroup.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.companyGroupForm.value.companyGroupName;
-      this.scFormRequiredError = false;
     }
 
-    if (!this.duplicateCompanyName && !this.duplicateCompanyCode) {
-      this.duplicateMessageParam = null;
-      this.duplicateMessage = null;
 
-    } else if (!this.duplicateCompanyGrp) {
-      this.childDuplicateMessage = null;
-      this.childDuplicateMessageParam = null;
-    }
   }
 
   checkForDuplicateCompanyCode() {
@@ -164,7 +164,7 @@ export class CompaniesComponent implements OnInit {
         throw error;
       });
     } else {
-    //  this.companyForm.value.companyGroupId = this.selectedTypeahead.id;
+      //  this.companyForm.value.companyGroupId = this.selectedTypeahead.id;
       this.masterService.createRecord(this.endPoint, this.companyForm.value).subscribe(res => {
         this.showInformationModal("Save");
         this.successMsg();
@@ -229,7 +229,7 @@ export class CompaniesComponent implements OnInit {
 
   loadSelectedTypeahead(event) {
     this.selectedTypeahead = event.item;
-        this.companyForm.patchValue({ companyGroupId: this.selectedTypeahead.id })
+    this.companyForm.patchValue({ companyGroupId: this.selectedTypeahead.id })
   }
 
   resetForm() {
@@ -241,6 +241,8 @@ export class CompaniesComponent implements OnInit {
     this.formRequiredError = false;
     this.duplicateMessageParam = null;
     this.formRequiredError = this.formSuccess = false;
+    this.duplicateCompanyName = false;
+    this.duplicateCompanyCode = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
   }
@@ -258,14 +260,15 @@ export class CompaniesComponent implements OnInit {
     this.scFormRequiredError = false;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
+    this.duplicateCompanyGrp = false;
     this.companyGroupForm.reset();
   }
 
   scRequiredErrMsg() {
-    if(this.childDuplicateMessage == null){
-    this.scFormRequiredError = true;
-    this.scFormSuccess = false;
-  }
+    if (this.childDuplicateMessage == null) {
+      this.scFormRequiredError = true;
+      this.scFormSuccess = false;
+    }
   }
 
   showInformationModal(eventType) {

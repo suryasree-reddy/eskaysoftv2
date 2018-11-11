@@ -10,7 +10,8 @@
 
         <div class="input-group">
           <p>{{'schedule.name' | translate}}: *</p>
-          <input   id="scheduleName"   maxlength="40" #focus [readonly]="nameFlag" (blur)="checkForDuplicateScheduleName()" class="form-control" [formControl]="scheduleForm.controls['scheduleName']">
+          <input   id="scheduleName"   maxlength="40" #focus [readonly]="nameFlag" (blur)="checkForDuplicateScheduleName()"
+          class="form-control capitalize" [formControl]="scheduleForm.controls['scheduleName']">
         </div>
         <div class="input-group">
             <p>{{'schedule.index' | translate }}: *</p>

@@ -87,7 +87,7 @@
       "field": "deleteFlag",
       "cellRenderer": "deltaIndicator",
       "suppressFilter": true,
-      "width": 35,
+      "width": 50,
       "suppressSizeToFit": false
     }
   ],

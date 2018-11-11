@@ -152,7 +152,6 @@ export class CustomerwiseDiscountComponent implements OnInit {
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
-
   getDuplicateErrorMessages(): void {
 
     if (!this.duplicateCompany || !this.duplicateCompanyName) {
@@ -254,6 +253,7 @@ export class CustomerwiseDiscountComponent implements OnInit {
     this.duplicateMessageParam = null;
     this.formRequiredError = false;
     this.formRequiredError = this.formSuccess = false;
+    this.validCompanyName= false;
     this.loadCompanyTypeaheadData();
     this.loadGridData();
     this.customerDiscountForm.patchValue({ discountType: false });
@@ -270,17 +270,18 @@ export class CustomerwiseDiscountComponent implements OnInit {
 
   resetChildForm() {
     this.scFormRequiredError = false;
-    //this.duplicateMessage = null;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
-    //  this.formRequiredError = false;
-    //  this.duplicateMessageParam = null;
+    this.duplicateCompany = false;
+    this.duplicateCompanyName = false;
     this.companyForm.reset();
   }
 
   scRequiredErrMsg() {
-    this.scFormRequiredError = true;
-    this.scFormSuccess = false;
+    if (this.childDuplicateMessage == null) {
+      this.scFormRequiredError = true;
+      this.scFormSuccess = false;
+    }
   }
 
   showInformationModal(eventType) {

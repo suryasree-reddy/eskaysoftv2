@@ -75,9 +75,12 @@ export class BusinessexecutivesComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
-    this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
-    this.formRequiredError = false;
+    if(!this.duplicateBusExecName || !this.duplicateBusExecNum){
+      this.duplicateMessage = null;
+      this.duplicateMessageParam = null;
+      this.formRequiredError = false;
+    }
+
     if (this.duplicateBusExecName && this.duplicateBusExecNum) {
       this.duplicateMessage = "businessexecutive.duplicateErrorMessage";
 
@@ -133,6 +136,8 @@ export class BusinessexecutivesComponent implements OnInit {
     this.duplicateMessage = null
     this.nameFlag = false;
     this.deleteFlag = true;
+    this.duplicateBusExecName = false;
+    this.duplicateBusExecNum = false;
     this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();

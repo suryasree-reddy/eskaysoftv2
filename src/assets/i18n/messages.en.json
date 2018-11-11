@@ -41,7 +41,8 @@
     "deleteInformationMessage": "State record has been deleted successfully.",
     "duplicateNameErrorMessage":"The State '{{duplicateMessageParam}}' already exists with this name.",
 	"duplicateCodeErrorMessage":"The State code '{{duplicateMessageParam}}' already exists with this code.",
-	"duplicateZoneErrorMessage":"The State zone '{{duplicateMessageParam}}' already exists with this zone."
+	"duplicateZoneErrorMessage":"The State zone '{{duplicateMessageParam}}' already exists with this zone.",
+  "duplicateErrorMessage":"The State Name & Code already exists."
   },
   "districts": {
     "title": "Districts",

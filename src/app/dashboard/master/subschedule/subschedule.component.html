@@ -28,13 +28,14 @@
               <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">Delete</button>
             </div>
 
-    
+
       </form>
     </div>
     <div class="col-md-7">
       <br /><br />
 
-      <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'  [gridDataList]="subScheduleList" (valueChange)='valueChange($event)'
+      <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
+      [gridDataList]="subScheduleList" (valueChange)='valueChange($event)'
        [screenColums]="'SubScheduleListColumns'"></app-synectiks-common-grid>
 
     </div>

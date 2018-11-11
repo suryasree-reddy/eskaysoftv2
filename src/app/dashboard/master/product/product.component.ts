@@ -200,6 +200,7 @@ export class ProductComponent implements OnInit {
     if (!this.duplicateProdGroup || !this.duplicateProdCategory || !this.duplicateCompany || !this.duplicateCompanyName) {
       this.childDuplicateMessage = null;
       this.childDuplicateMessageParam = null;
+      this.scFormRequiredError = false;
     }
 
     if (!this.duplicateProductCode || !this.duplicateProductName) {
@@ -208,7 +209,10 @@ export class ProductComponent implements OnInit {
       this.formRequiredError = false;
     }
 
-    if (this.duplicateProductCode) {
+    if (this.duplicateProductCode && this.duplicateProductName) {
+      this.duplicateMessage = "product.duplicateErrorMessage";
+    }
+    else if (this.duplicateProductCode) {
       this.duplicateMessage = "product.duplicateCodeErrorMessage";
       this.duplicateMessageParam = this.productForm.value.productcode;
     }
@@ -216,32 +220,27 @@ export class ProductComponent implements OnInit {
       this.duplicateMessage = "product.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.productForm.value.name;
     }
-    if (this.duplicateProductCode && this.duplicateProductName) {
-      this.duplicateMessage = "product.duplicateErrorMessage";
-    }
 
     if (this.duplicateProdGroup) {
       this.childDuplicateMessage = "productgroup.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.productGroupForm.value.productGroupName;
-      this.scFormRequiredError = false;
     }
 
     if (this.duplicateProdCategory) {
       this.childDuplicateMessage = "productcategory.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.productCategoryForm.value.productCategoryName;
-      this.scFormRequiredError = false;
     }
 
-    if (this.duplicateCompany) {
+    if (this.duplicateCompany && this.duplicateCompanyName) {
+      this.childDuplicateMessage = "companies.duplicateErrorMessage";
+    }
+    else if (this.duplicateCompany) {
       this.childDuplicateMessage = "companies.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.companyForm.value.companyCode;
-      this.scFormRequiredError = false;
     }
-
-    if (this.duplicateCompanyName) {
+    else if (this.duplicateCompanyName) {
       this.childDuplicateMessage = "companies.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.companyForm.value.companyName;
-      this.scFormRequiredError = false;
     }
   }
 
@@ -363,12 +362,16 @@ export class ProductComponent implements OnInit {
   resetForm() {
     this.formRequiredError = false;
     this.duplicateMessageParam = null;
+    this.duplicateMessage = null;
     this.productForm.reset();
     this.gridSelectedRow = null;
     this.nameFlag = false;
     this.deleteFlag = true;
     this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
+    this.loadTaxTypeaheadData();
+    this.duplicateProductCode = false;
+    this.duplicateProductName = false;
     this.focusField.nativeElement.focus();
   }
 
@@ -379,6 +382,7 @@ export class ProductComponent implements OnInit {
     this.nameFlag = true;
     this.formRequiredError = false;
     this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
     this.deleteFlag = !this.gridSelectedRow.deleteFlag;
   }
 
@@ -386,14 +390,24 @@ export class ProductComponent implements OnInit {
     this.scFormRequiredError = false;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
+    this.duplicateProdGroup = false;
+    this.duplicateProdCategory = false;
+    this.duplicateCompany = false;
+    this.duplicateCompanyName = false;
     this.productGroupForm.reset();
     this.productCategoryForm.reset();
+    this.duplicateProdGroup= false;
+    this.duplicateProdCategory= false;
+    this.duplicateCompany = false;
+    this.duplicateCompanyName = false;
     this.companyForm.reset();
   }
 
   scRequiredErrMsg() {
-    this.scFormRequiredError = true;
-    this.scFormSuccess = false;
+    if (this.childDuplicateMessage == null) {
+      this.scFormRequiredError = true;
+      this.scFormSuccess = false;
+    }
   }
 
   showInformationModal(eventType) {

@@ -56,9 +56,11 @@ export class BankinformationComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
-    this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
-    this.formRequiredError = false;
+    if(!this.duplicateBankName){
+      this.duplicateMessage = null;
+      this.duplicateMessageParam = null;
+      this.formRequiredError = false;
+    }
     if (this.duplicateBankName) {
       this.duplicateMessage = "bankinfo.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.bankInformationForm.value.name;
@@ -109,6 +111,7 @@ export class BankinformationComponent implements OnInit {
     this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
     this.deleteFlag = true;
+    this.duplicateBankName = false;
     this.focusField.nativeElement.focus();
   }
 

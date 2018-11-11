@@ -39,9 +39,9 @@ export class ProductCategoryComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
-    private sharedDataService:SharedDataService,
+    private sharedDataService: SharedDataService,
     private masterService: MasterService) {
-      translate.setDefaultLang('messages.en');
+    translate.setDefaultLang('messages.en');
   }
 
   ngOnInit() {
@@ -62,8 +62,12 @@ export class ProductCategoryComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
-    this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
+    if (!this.duplicateProdCategory) {
+      this.duplicateMessage = null;
+      this.duplicateMessageParam = null;
+      this.formRequiredError = false;
+    }
+
     if (this.duplicateProdCategory) {
       this.duplicateMessage = "productcategory.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.productCategoryForm.value.productCategoryName;
@@ -87,7 +91,7 @@ export class ProductCategoryComponent implements OnInit {
   }
 
   save() {
-  	this.buttonsComponent.save();
+    this.buttonsComponent.save();
   }
 
   delete() {
@@ -95,7 +99,7 @@ export class ProductCategoryComponent implements OnInit {
       localStorage.removeItem('ag-activeRow');
       this.buttonsComponent.showInformationModal("Delete");
     }, (error) => {
-    throw error;
+      throw error;
     });
   }
 
@@ -120,6 +124,7 @@ export class ProductCategoryComponent implements OnInit {
     this.formRequiredError = this.formSuccess = false;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
+    this.duplicateProdCategory = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
   }

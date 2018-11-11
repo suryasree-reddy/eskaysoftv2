@@ -87,30 +87,35 @@ export class DistrictsComponent implements OnInit {
 
   getDuplicateErrorMessages(): void {
 
+    if (!this.duplicateDistName) {
+      this.duplicateMessage = null;
+      this.duplicateMessageParam = null;
+      this.formRequiredError = false;
+    }
+
+    if (!this.duplicateStateName || !this.duplicateStateCode) {
+      this.childDuplicateMessage = null;
+      this.childDuplicateMessageParam = null;
+      this.scFormRequiredError = false;
+    }
+
     if (this.duplicateDistName) {
       this.duplicateMessage = "districts.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.districtsForm.value.districtName;
-      this.formRequiredError = false;
     }
-    if (this.duplicateStateName) {
+    if (this.duplicateStateName && this.duplicateStateCode) {
+      this.childDuplicateMessage = "states.duplicateErrorMessage";
+
+    }
+    else if (this.duplicateStateName) {
       this.childDuplicateMessage = "states.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.statesForm.value.stateName;
-      this.scFormRequiredError = false;
 
     } else if (this.duplicateStateCode) {
       this.childDuplicateMessage = "states.duplicateCodeErrorMessage";
       this.childDuplicateMessageParam = this.statesForm.value.stateCode;
-      this.scFormRequiredError = false;
     }
 
-    if (!this.duplicateStateName && !this.duplicateStateCode) {
-      this.childDuplicateMessage = null;
-      this.childDuplicateMessageParam = null;
-
-    } else if (!this.duplicateDistName) {
-      this.duplicateMessageParam = null;
-      this.duplicateMessage = null;
-    }
   }
 
   checkForDuplicateDistName() {
@@ -146,12 +151,6 @@ export class DistrictsComponent implements OnInit {
 
   checkForDuplicateStateName() {
     this.duplicateStateName = this.masterService.hasDataExist(this.statesList, 'stateName', this.statesForm.value.stateName);
-    /*  if (this.duplicateStateName) {
-        const temp = this.statesForm.value.stateName;
-        const stateObj = _.filter(this.statesList, function(o) { return o.stateName.toLowerCase() == temp.toLowerCase() });
-        this.statesForm.patchValue({ stateCode: stateObj[0].stateCode })
-        this.statesForm.patchValue({ zone: stateObj[0].zone })
-      }*/
     this.getDuplicateErrorMessages();
   }
 
@@ -165,7 +164,7 @@ export class DistrictsComponent implements OnInit {
   }
 
   saveState() {
-    if (this.statesForm.valid) {
+    if (this.statesForm.valid && this.childDuplicateMessage == null) {
       this.showConfirmationModal();
     } else {
       this.requiredErrMsg();
@@ -203,7 +202,7 @@ export class DistrictsComponent implements OnInit {
 
   requiredErrMsg() {
     if (this.modalRef != undefined) {
-      if (this.duplicateMessage == null) {
+      if (this.childDuplicateMessage == null) {
         this.scFormRequiredError = true;
         this.scFormSuccess = false;
       }
@@ -228,6 +227,7 @@ export class DistrictsComponent implements OnInit {
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
     this.childDuplicateMessageParam = null;
+    this.duplicateDistName = false;
     this.focusField.nativeElement.focus();
   }
 
@@ -235,6 +235,8 @@ export class DistrictsComponent implements OnInit {
     this.childDuplicateMessageParam = null;
     this.childDuplicateMessage = null;
     this.scFormRequiredError = this.scFormSuccess = false;
+    this.duplicateStateName = false;
+    this.duplicateStateCode = false;
     this.statesForm.reset();
   }
 

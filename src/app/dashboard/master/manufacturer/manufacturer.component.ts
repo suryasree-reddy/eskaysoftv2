@@ -39,7 +39,7 @@ export class ManufacturerComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
-    private sharedDataService:SharedDataService,
+    private sharedDataService: SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
@@ -62,9 +62,12 @@ export class ManufacturerComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
-    this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
-    this.formRequiredError = false;
+    if (!this.duplicateManufName) {
+      this.duplicateMessage = null;
+      this.duplicateMessageParam = null;
+      this.formRequiredError = false;
+    }
+
     if (this.duplicateManufName) {
       this.duplicateMessage = "manufacturer.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.manufacturerForm.value.manfacturerName;
@@ -112,6 +115,7 @@ export class ManufacturerComponent implements OnInit {
     this.gridSelectedRow = null;
     this.nameFlag = false;
     this.deleteFlag = true;
+    this.duplicateManufName = false;
     this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();

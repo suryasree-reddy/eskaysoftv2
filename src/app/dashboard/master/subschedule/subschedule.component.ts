@@ -124,6 +124,8 @@ export class SubscheduleComponent implements OnInit {
     this.scFormRequiredError = false;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
+    this.duplicateSchIndex = false;
+    this.duplicateSchName = false;
     this.scheduleForm.reset();
   }
 
@@ -146,33 +148,31 @@ export class SubscheduleComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
-    if (this.duplicateSubSchName) {
-      this.duplicateMessage = "subschedule.duplicateNameErrorMessage";
-      this.duplicateMessageParam = this.subScheduleForm.value.subScheduleName;
-      this.formRequiredError = false;
-    }
-    if (this.duplicateSchName && this.duplicateSchIndex) {
-      this.childDuplicateMessage = "schedule.duplicateErrorMessage";
-      this.scFormRequiredError = false;
-
-    } else if (this.duplicateSchIndex) {
-      this.childDuplicateMessage = "schedule.duplicateIndexErrorMessage";
-      this.childDuplicateMessageParam = this.scheduleForm.value.scheduleIndex;
-      this.scFormRequiredError = false;
-
-    } else if (this.duplicateSchName) {
-      this.childDuplicateMessage = "schedule.duplicateNameErrorMessage";
-      this.childDuplicateMessageParam = this.scheduleForm.value.scheduleName;
-      this.scFormRequiredError = false;
-    }
-
     if (!this.duplicateSchIndex && !this.duplicateSchName) {
       this.childDuplicateMessage = null;
       this.childDuplicateMessageParam = null;
-
-    } else if (!this.duplicateSubSchName) {
+      this.scFormRequiredError = false;
+    }
+    if (!this.duplicateSubSchName) {
       this.duplicateMessageParam = null;
       this.duplicateMessage = null;
+      this.formRequiredError = false;
+    }
+
+    if (this.duplicateSubSchName) {
+      this.duplicateMessage = "subschedule.duplicateNameErrorMessage";
+      this.duplicateMessageParam = this.subScheduleForm.value.subScheduleName;
+    }
+    if (this.duplicateSchName && this.duplicateSchIndex) {
+      this.childDuplicateMessage = "schedule.duplicateErrorMessage";
+    }
+    else if (this.duplicateSchIndex) {
+      this.childDuplicateMessage = "schedule.duplicateIndexErrorMessage";
+      this.childDuplicateMessageParam = this.scheduleForm.value.scheduleIndex;
+    }
+    else if (this.duplicateSchName) {
+      this.childDuplicateMessage = "schedule.duplicateNameErrorMessage";
+      this.childDuplicateMessageParam = this.scheduleForm.value.scheduleName;
     }
   }
 
@@ -246,14 +246,11 @@ export class SubscheduleComponent implements OnInit {
     this.duplicateMessageParam = null;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
-    this.duplicateSchIndex = false;
-    this.duplicateSchName = false;
     this.duplicateSubSchName = false;
     this.focusField.nativeElement.focus();
   }
 
   editable(s) {
-
     this.nameFlag = true;
     this.editSubSchedule = s;
     this.formRequiredError = false;

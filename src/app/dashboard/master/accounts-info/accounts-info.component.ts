@@ -57,7 +57,7 @@ export class AccountsInfoComponent implements OnInit {
   public accCustomerType: any[];
   public accSaleType: any[];
   public accOpeningType: any[];
-  private accountsList:any[];
+  private accountsList: any[];
   public selectedTaxTypeahead: any;
   private duplicateAreaName: boolean = false;
   public typeaheadTaxDataList: any = [];
@@ -217,7 +217,7 @@ export class AccountsInfoComponent implements OnInit {
   }
 
   onSelectState(event) {
-     this.selectedState = event.item;
+    this.selectedState = event.item;
     this.districtsForm.patchValue({ stateId: this.selectedState.id });
     this.districtsForm.patchValue({ stateName: this.selectedState.stateName });
   }
@@ -230,14 +230,14 @@ export class AccountsInfoComponent implements OnInit {
     this.accInfoForm.patchValue({ businessExecutiveId: this.selectedArea.businessExecutiveId });
   }
 
-onSelectBusinessExecutive(event){
-  this.areaForm.patchValue({ businessExecutiveId: event.item.id });
-}
+  onSelectBusinessExecutive(event) {
+    this.areaForm.patchValue({ businessExecutiveId: event.item.id });
+  }
 
-checkForDuplicateArea() {
+  checkForDuplicateArea() {
     this.duplicateAreaName = this.masterService.hasDataExist(this.areasList, 'areaName', this.areaForm.value.areaName);
     this.getDuplicateErrorMessages();
-}
+  }
 
   onSelectSubSchedule(event) {
     this.selectedSubSchedule = event.item;
@@ -304,7 +304,7 @@ checkForDuplicateArea() {
         this.loadSubScheduleData();
       } else if (screenName == "District") {
         this.loadDistrictData();
-      }  else if (screenName == "Area") {
+      } else if (screenName == "Area") {
         this.loadAreaData();
       }
       this.modalRef.hide();
@@ -312,17 +312,6 @@ checkForDuplicateArea() {
     }, (error) => {
       throw error;
     });
-  }
-
-  resetChildForm(formObj) {
-    this.scFormRequiredError = false;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
-    this.scFormRequiredError = this.scFormSuccess = false;
-    // formObj.reset();
-    this.subScheduleForm.reset();
-    this.districtsForm.reset();
-    this.areaForm.reset();
   }
 
   checkForDuplicateSubScheduleName() {
@@ -367,115 +356,122 @@ checkForDuplicateArea() {
       this.childDuplicateMessage = "districts.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.districtsForm.value.districtName;
 
-    }else if(this.duplicateAreaName){
+    } else if (this.duplicateAreaName) {
       this.childDuplicateMessage = "areas.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.areaForm.value.areaName;
     }
 
     if (this.duplicateAcctShortName && this.duplicateAcctName) {
-        this.duplicateMessage = "accountinfo.duplicateErrorMessage";
+      this.duplicateMessage = "accountinfo.duplicateErrorMessage";
 
-    }else if (this.duplicateAcctName) {
+    } else if (this.duplicateAcctName) {
       this.duplicateMessage = "accountinfo.duplicateNameErrorMessage";
-        this.duplicateMessageParam = this.accInfoForm.value.accountName;
+      this.duplicateMessageParam = this.accInfoForm.value.accountName;
 
-    }else if (this.duplicateAcctShortName) {
+    } else if (this.duplicateAcctShortName) {
       this.duplicateMessage = "accountinfo.duplicateShortNameErrorMessage";
-        this.duplicateMessageParam = this.accInfoForm.value.shortName;
+      this.duplicateMessageParam = this.accInfoForm.value.shortName;
     }
-}
-    save() {
-      if (this.accInfoForm.value.id) {
-        this.masterService.updateRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
-          this.showInformationModal("Save");
-        }, (error) => {
-          throw error;
-        });
-      } else {
-        this.masterService.createRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
-          this.showInformationModal("Save");
-        }, (error) => {
-          throw error;
-        });
-      }
-    }
+  }
 
+  save() {
+    if (this.accInfoForm.value.id) {
+      this.masterService.updateRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
+        this.showInformationModal("Save");
+      }, (error) => {
+        throw error;
+      });
+    } else {
+      this.masterService.createRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
+        this.showInformationModal("Save");
+      }, (error) => {
+        throw error;
+      });
+    }
+  }
 
   delete() {
     this.buttonsComponent.delete();
-    // this.masterService.deleteRecord(this.endPoint, this.gridSelectedRow.id).subscribe(res => {
-    // localStorage.removeItem('ag-activeRow');
-    // this.showInformationModal("Delete");
-    // this.successMsg()
-    // }, (error) => {
-    //   throw error;
-    // });
   }
 
-    successMsg() {
-      this.formSuccess = true;
-      this.formRequiredError = false;
-      this.loadGridData();
-      this.accInfoForm.reset();
-      this.resetForm();
+  successMsg() {
+    this.formSuccess = true;
+    this.formRequiredError = false;
+    this.loadGridData();
+    this.accInfoForm.reset();
+    this.resetForm();
+  }
+
+  requiredErrMsg() {
+    if (this.duplicateMessage == null) {
+      this.formRequiredError = true;
+      this.formSuccess = false;
     }
+  }
 
-    requiredErrMsg() {
-      if (this.duplicateMessage == null) {
-        this.formRequiredError = true;
-        this.formSuccess = false;
-      }
+  scRequiredErrMsg() {
+    if (this.childDuplicateMessage == null) {
+      this.scFormRequiredError = true;
+      this.scFormSuccess = false;
     }
+  }
 
-    scRequiredErrMsg() {
-      if (this.childDuplicateMessage == null) {
-        this.scFormRequiredError = true;
-        this.scFormSuccess = false;
-      }
-    }
+  resetChildForm(formObj) {
+    this.scFormRequiredError = false;
+    this.duplicateSubSchName = false
+    this.duplicateAreaName = false;
+    this.duplicateDistrictName = false;
+    this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
+    this.scFormRequiredError = this.scFormSuccess = false;
+    // formObj.reset();
+    this.subScheduleForm.reset();
+    this.districtsForm.reset();
+    this.areaForm.reset();
+  }
 
-    resetForm() {
-      this.formRequiredError = this.formSuccess = false;
-      this.scFormRequiredError = false;
-      this.nameFlag = false;
-      this.deleteFlag = true;
-      this.duplicateMessage = null;
-      this.childDuplicateMessage = null;
-      this.duplicateMessageParam = null;
-      this.childDuplicateMessage = null;
-      this.childDuplicateMessageParam = null;
-      this.duplicateSubSchName = false;
-      this.duplicateDistrictName = false;
-      this.accInfoForm.reset();
-      // this.focusField.nativeElement.focus();
-    }
+  resetForm() {
+    this.formRequiredError = this.formSuccess = false;
+    this.scFormRequiredError = false;
+    this.nameFlag = false;
+    this.deleteFlag = true;
+    this.duplicateMessage = null;
+    this.childDuplicateMessage = null;
+    this.duplicateMessageParam = null;
+    this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
+    this.duplicateSubSchName = false;
+    this.duplicateDistrictName = false;
+    this.duplicateAcctShortName = false;
+    this.duplicateAcctShortName = false;
+    this.accInfoForm.reset();
+    // this.focusField.nativeElement.focus();
+  }
 
+  showInformationModal(eventType) {
+    const modal = this.modalService.show(ConfirmationModelDialogComponent);
+    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
+      this.getFormDetails(eventType).title,
+      this.getFormDetails(eventType).infoMessage,
+      ''
+    );
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
+  }
 
-    showInformationModal(eventType) {
-
-      const modal = this.modalService.show(ConfirmationModelDialogComponent);
-      (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
-        this.getFormDetails(eventType).title,
-        this.getFormDetails(eventType).infoMessage,
-        ''
-      );
-      (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
-    }
-
-    showConfirmationModal(eventType): void {
-      const modal = this.modalService.show(ConfirmationModelDialogComponent);
+  showConfirmationModal(eventType): void {
+    const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
       this.getFormDetails(eventType).title,
       this.getFormDetails(eventType).confirmMessage,
       'green',
       ''
-      );
+    );
 
     (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
       if (result) {
         if (eventType == "Delete") {
-        this.delete();
-      }
+          this.delete();
+        }
         else if (eventType == "SubSchedule") {
           this.saveChild(eventType, this.subScheduleForm, "subschedules/");
         }
@@ -490,7 +486,6 @@ checkForDuplicateArea() {
   }
 
   getFormDetails(screenName) {
-
     if (screenName == "Save") {
       return { "title": "Account Information", "confirmMessage": "accountinfo.saveConfirmationMessage", "infoMessage": "accountinfo.saveInformationMessage" };
     }
@@ -507,6 +502,5 @@ checkForDuplicateArea() {
       return { "title": "Area", "confirmMessage": "areas.saveConfirmationMessage", "infoMessage": "areas.saveInformationMessage" };
     }
   }
-
 
 }

@@ -40,9 +40,9 @@ export class ProductGroupComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
-    private sharedDataService:SharedDataService,
+    private sharedDataService: SharedDataService,
     private masterService: MasterService) {
-      translate.setDefaultLang('messages.en');
+    translate.setDefaultLang('messages.en');
   }
 
   ngOnInit() {
@@ -62,9 +62,12 @@ export class ProductGroupComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
-    this.formRequiredError = false;
-    this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
+    if (!this.duplicateProdGroup) {
+      this.formRequiredError = false;
+      this.duplicateMessage = null;
+      this.duplicateMessageParam = null;
+    }
+
     if (this.duplicateProdGroup) {
       this.duplicateMessage = "productgroup.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.productGroupForm.value.productGroupName;
@@ -112,7 +115,9 @@ export class ProductGroupComponent implements OnInit {
     this.gridSelectedRow = null;
     this.nameFlag = false;
     this.deleteFlag = true;
-    this.duplicateMessage = null
+    this.duplicateMessage = null;
+    this.duplicateProdGroup = false;
+    this.duplicateMessageParam = null;
     this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
     this.focusField.nativeElement.focus();
