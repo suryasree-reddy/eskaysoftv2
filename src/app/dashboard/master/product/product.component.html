@@ -82,10 +82,10 @@ type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length 
                 </div>
 
                 <div class="margin-top-0px">
-                  <div class="col-xs-6 col-3-lt">
+                 <div class="col-xs-6 col-3-lt">
                     <p>{{'product.tax' | translate}}: *</p>
                     <input id="tax" formControlName="tax" [typeahead]="typeaheadTaxDataList" typeaheadOptionField="tax"
-                    [typeaheadOptionsLimit]="7" [typeaheadLatinize]="false"
+                    [typeaheadOptionsLimit]="7" 
                      [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTaxTypeahead($event)"
                     class="form-control">
                     <span class="caret"></span>
