@@ -36,7 +36,7 @@ export class ProductComponent implements OnInit {
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
   public nameFlag;
-  public deleteFlag: boolean = true;
+  // public deleteFlag: boolean = true;
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   public scFormRequiredError: boolean = false;
@@ -366,7 +366,7 @@ export class ProductComponent implements OnInit {
     this.productForm.reset();
     this.gridSelectedRow = null;
     this.nameFlag = false;
-    this.deleteFlag = true;
+    // this.deleteFlag = true;
     this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
     this.loadTaxTypeaheadData();
@@ -383,7 +383,7 @@ export class ProductComponent implements OnInit {
     this.formRequiredError = false;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
-    this.deleteFlag = !this.gridSelectedRow.deleteFlag;
+    // this.deleteFlag = !this.gridSelectedRow.deleteFlag;
   }
 
   resetChildForm() {
