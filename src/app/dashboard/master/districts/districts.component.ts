@@ -167,7 +167,7 @@ export class DistrictsComponent implements OnInit {
     if (this.statesForm.valid && this.childDuplicateMessage == null) {
       this.showConfirmationModal();
     } else {
-      this.requiredErrMsg();
+      this.scRequiredErrMsg();
     }
   }
 
@@ -179,7 +179,7 @@ export class DistrictsComponent implements OnInit {
       this.statesForm.reset();
 
     }, (error) => {
-    throw error;
+      throw error;
     });
   }
 
@@ -192,7 +192,7 @@ export class DistrictsComponent implements OnInit {
     if (this.modalRef != undefined) {
       this.modalRef.hide();
       this.loadStatesData();
-    //  this.focusField.nativeElement.focus();
+      //  this.focusField.nativeElement.focus();
     } else {
       this.formSuccess = true;
       this.formRequiredError = false;
@@ -201,17 +201,18 @@ export class DistrictsComponent implements OnInit {
   }
 
   requiredErrMsg() {
-    if (this.modalRef != undefined) {
-      if (this.childDuplicateMessage == null) {
-        this.scFormRequiredError = true;
-        this.scFormSuccess = false;
-      }
-    } else {
-      if (this.duplicateMessage == null) {
-        this.formRequiredError = true;
-        this.formSuccess = false;
-      }
+    if (this.duplicateMessage == null) {
+      this.formRequiredError = true;
+      this.formSuccess = false;
     }
+  }
+
+  scRequiredErrMsg() {
+    if (this.childDuplicateMessage == null) {
+      this.scFormRequiredError = true;
+      this.scFormSuccess = false;
+    }
+
   }
 
   resetForm() {
