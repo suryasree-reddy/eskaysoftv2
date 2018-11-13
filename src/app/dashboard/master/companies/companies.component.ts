@@ -74,6 +74,7 @@ export class CompaniesComponent implements OnInit {
     this.companyStatusList = this.sharedDataService.getSharedCommonJsonData().CompanyStatus;
     this.invGenList = this.sharedDataService.getSharedCommonJsonData().InvGenType;
     this.loadTypeaheadData();
+    this.focusField.nativeElement.focus();
   }
 
   valueChange(selectedRow: any[]): void {

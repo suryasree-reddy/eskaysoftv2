@@ -60,7 +60,7 @@
 
       <div class="input-group">
           <p>{{'states.name' | translate }}: *</p>
-          <input id="stateName" maxlength="20" class="form-control capitalize" (blur)="checkForDuplicateStateName()" [formControl]="statesForm.controls['stateName']">
+          <input autofocus id="stateName" maxlength="20" class="form-control capitalize" (blur)="checkForDuplicateStateName()" [formControl]="statesForm.controls['stateName']">
       </div>
       <div class="input-group">
           <p>{{'states.code' | translate }}: *</p>

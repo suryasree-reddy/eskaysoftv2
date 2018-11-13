@@ -160,6 +160,7 @@ export class AccountsInfoComponent implements OnInit {
     this.accSaleType = this.sharedDataService.getSharedCommonJsonData().SaleType;
     this.accCustomerType = this.sharedDataService.getSharedCommonJsonData().CustomerType;
     this.accOpeningType = this.sharedDataService.getSharedCommonJsonData().OpeningType;
+    this.focusField.nativeElement.focus();
   }
 
   loadTaxTypeaheadData() {

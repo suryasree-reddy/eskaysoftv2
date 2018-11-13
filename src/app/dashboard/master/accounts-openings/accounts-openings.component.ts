@@ -89,6 +89,7 @@ export class AccountsOpeningsComponent implements OnInit {
       openingType: ['', Validators.required]
     });
     this.openingType = this.sharedDataService.getSharedCommonJsonData().AccountType;
+    this.focusField.nativeElement.focus();
   }
 
   loadGridData() {

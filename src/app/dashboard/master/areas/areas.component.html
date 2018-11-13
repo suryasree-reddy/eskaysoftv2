@@ -56,7 +56,7 @@
 
         <div class="input-group">
         	<p>{{'businessexecutive.name' | translate }}: *</p>
-        	<input id="name" maxlength="50" class="form-control capitalize" (blur) = "checkForDuplicateBusiExecName()" [formControl]="businessExecutiveForm.controls['name']">
+        	<input autofocus id="name" maxlength="50" class="form-control capitalize" (blur) = "checkForDuplicateBusiExecName()" [formControl]="businessExecutiveForm.controls['name']">
         </div>
 
         <div class="input-group">

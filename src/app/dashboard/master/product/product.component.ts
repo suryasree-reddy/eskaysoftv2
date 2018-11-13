@@ -126,6 +126,7 @@ export class ProductComponent implements OnInit {
     this.companyTypeList = this.sharedDataService.getSharedCommonJsonData().CompanyType;
     this.companyStatusList = this.sharedDataService.getSharedCommonJsonData().CompanyStatus;
     this.invGenList = this.sharedDataService.getSharedCommonJsonData().InvGenType;
+    this.focusField.nativeElement.focus();
   }
 
   loadCompanyGroupTypeaheadData() {

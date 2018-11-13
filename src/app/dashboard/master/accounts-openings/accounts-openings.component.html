@@ -9,7 +9,7 @@
 
               <div class="input-group">
                 <p>Code: *</p>
-                <input id="shortName" #focus [readonly]=true  class="form-control" [formControl]="accOpeningForm.controls['shortName']">
+                <input id="shortName"  [readonly]=true  class="form-control" [formControl]="accOpeningForm.controls['shortName']">
             </div>
             <div class="input-group">
                 <p>Account Name: *</p>
@@ -21,7 +21,7 @@
                 </div>
                 <div class="input-group">
                     <p>Opening: *</p>
-                    <input id="openingBalance" class="form-control" [formControl]="accOpeningForm.controls['openingBalance']">
+                    <input id="openingBalance" #focus class="form-control" [formControl]="accOpeningForm.controls['openingBalance']">
                   </div>
 
                 <div class="input-group">

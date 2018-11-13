@@ -60,7 +60,7 @@
 
       <div class="input-group">
         <p>{{'schedule.name' | translate}}: *</p>
-        <input id="scheduleName"  maxlength="40" class="form-control capitalize" (blur)="checkForDuplicateScheduleName()" [formControl]="scheduleForm.controls['scheduleName']">
+        <input autofocus id="scheduleName"  maxlength="40" class="form-control capitalize" (blur)="checkForDuplicateScheduleName()" [formControl]="scheduleForm.controls['scheduleName']">
       </div>
         <div class="input-group">
           <p>{{'schedule.index' | translate }}: *</p>
