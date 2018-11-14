@@ -3,12 +3,13 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { tokenNotExpired } from 'angular2-jwt';
+import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class AuthenticationService {
 
   public badCredentials: Subject<boolean> = new Subject<boolean>();
+  private jwtHelper: JwtHelper = new JwtHelper();
   
   constructor(private http: HttpClient,
     private router: Router) {
@@ -31,12 +32,21 @@ export class AuthenticationService {
     return localStorage.getItem('id_token');
   }
 
-  loggedIn() {
+  loggedIn() {    
     return tokenNotExpired('id_token');
   }
 
-  logout() {
+  logout() {       
     localStorage.clear();
+  }
+  getCurrentUserName(){
+    let token = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));    
+    return token.userName;
+  }
+
+  getCurrentUserRoles(){
+    let token = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));    
+    return token.roles;
   }
 
 }
