@@ -19,12 +19,12 @@ export class UserProfileComponent implements OnInit {
     // private authService: AuthenticationService
   ) { }
 
-  ngOnInit()  {
-  
+  ngOnInit() {
+
     this.userProfileForm = this.fb.group({
-      clientId:['', Validators.required],
-      id:['', Validators.required],
-      name:['', Validators.required],
+      clientId: ['', Validators.required],
+      id: ['', Validators.required],
+      name: ['', Validators.required],
       username: ['', Validators.required],
       address1: [],
       address2: [],

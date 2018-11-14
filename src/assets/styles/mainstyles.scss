@@ -177,23 +177,22 @@ padding-bottom: 0em;
 .capitalize{
   text-transform: uppercase;
 }
-.caret-md6{
-  position: relative;
-      display: inline-block;
-
-}
-.caret-md6::before{
-  position: absolute;
-  content: "\2bc6";
-  top: 3em;
-  right: 1em;
-  height: 20px;
-  width: 20px;
-}
 
 .mr-l-20{
   margin-left: -20px;
 }
+
+// Admin 
+.btn-admin{
+  padding-bottom: 1em;
+  padding-left: 2em;
+  margin-top: 10px;
+}
+
+
+
+
+
 // .caret-md12{
 //   position: relative;
 //   display: inline-block;
