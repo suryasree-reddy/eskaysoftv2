@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/auth/authentication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import '../../../assets/styles/mainstyles.scss';
 
 
 @Component({
@@ -21,17 +22,39 @@ export class UserProfileComponent implements OnInit {
   ngOnInit()  {
   
     this.userProfileForm = this.fb.group({
+      clientId:['', Validators.required],
+      id:['', Validators.required],
       name:['', Validators.required],
       username: ['', Validators.required],
-      password: ['', Validators.required],
-      email: ['', Validators.required],
-      roles: ['', Validators.required],
+      address1: [],
+      address2: [],
+      town: [],
+      pin: [],
+      district: [],
+      state: [],
+      statecode: [],
+      phoneLand1: [],
+      mobile1: [],
+      mobile2: [],
+      contactPerson: [],
+      cPersonMobile: [],
+      natureofbusiness: [],
+      bank1: [],
+      bankacno1: [],
+      bankifsc1: [],
+      bank2: [],
+      bankacno2: [],
+      bankifsc2: [],
 
-      confPassword: ['', Validators.required], 
-      address: ['', Validators.required],     
-      town: ['', Validators.required],
-      designation: ['', Validators.required],
-      mobile: ['', Validators.required]
+
+      // password: ['', Validators.required],
+      // email: ['', Validators.required],
+      // roles: ['', Validators.required],
+      // confPassword: ['', Validators.required], 
+      // address: ['', Validators.required],     
+      // town: ['', Validators.required],
+      // designation: ['', Validators.required],
+      // mobile: ['', Validators.required]
     });
 
     // this.authService.badCredentials.subscribe(res => {

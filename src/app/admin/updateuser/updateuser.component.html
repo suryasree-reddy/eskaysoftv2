@@ -1,0 +1,232 @@
+<header></header>
+<div class="  col-xs-12 card">
+  <!-- col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6  -->
+  <div class="row">
+    <div class="col-xs-12 header">
+
+      <div class="row">
+        <h4>Update User</h4>
+        <p>User Id:
+          <input type="text" style="border:hidden; margin: 5px;">
+          <button type="submit" (click)="show = !show" class="btn btn-xs btn-success">Submit</button>
+        </p>
+      </div>
+    </div> <!-- header -->
+    <div *ngIf="show" class="col-xs-12 card-body">
+      <div class="col-xs-12">
+
+          <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input id="name" maxlength="50" class="form-control" [formControl]="updateUserForm.controls['name']" placeholder="Name">
+              </div>
+            </div>
+    
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input id="username" maxlength="50" class="form-control" [formControl]="updateUserForm.controls['username']" placeholder="Username">
+              </div>
+            </div>
+    
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                <input id="address1" maxlength="50" class="form-control" [formControl]="updateUserForm.controls['address1']"
+                  placeholder="Address 1">
+              </div>
+            </div>
+    
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                <input id="address2" maxlength="50" class="form-control" [formControl]="updateUserForm.controls['address2']"
+                  placeholder="Address 2">
+              </div>
+            </div>
+    
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                <input id="town" maxlength="20"  class="form-control" [formControl]="updateUserForm.controls['town']"
+                  placeholder="Town">
+              </div>
+            </div>
+    
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                <input id="pin" type="number"    maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                 class="form-control" [formControl]="updateUserForm.controls['pin']" placeholder="PIN">
+              </div>
+            </div>
+    
+            <div class="col-xs-4">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                  <input id="district" maxlength="25"   class="form-control" [formControl]="updateUserForm.controls['district']"
+                    placeholder="District">
+                </div>
+              </div>
+    
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                <input id="state" maxlength="25"  class="form-control" [formControl]="updateUserForm.controls['state']"
+                  placeholder="State">
+              </div>
+            </div>
+    
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                <input id="statecode" type="number"    maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                 class="form-control" [formControl]="updateUserForm.controls['statecode']" placeholder="State Code">
+              </div>
+            </div>
+    
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                <input id="phoneLand1" maxlength="15"   class="form-control" [formControl]="updateUserForm.controls['phoneLand1']" placeholder="Phone">
+              </div>
+            </div>
+    
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                <input id="mobile1" type="number"    maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                 class="form-control" [formControl]="updateUserForm.controls['mobile1']" placeholder="Mobile 1">
+              </div>
+            </div>
+    
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                <input id="mobile2" type="number"    maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                   class="form-control" [formControl]="updateUserForm.controls['mobile2']"  placeholder="Mobile 2">
+              </div>
+            </div>
+    
+             <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input id="contactPerson" maxlength="50"   class="form-control" [formControl]="updateUserForm.controls['contactPerson']"
+                  placeholder="Contact Person">
+              </div>
+            </div>
+    
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                <input id="cPersonMobile" type="number"    maxlength="10"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                 class="form-control" [formControl]="updateUserForm.controls['cPersonMobile']"
+                  placeholder="Contact Person Mobile">
+              </div>
+            </div>
+    
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                <input id="natureofbusiness" maxlength="20"  class="form-control" [formControl]="updateUserForm.controls['natureofbusiness']"
+                  placeholder="Nature of Business">
+              </div>
+            </div>
+    
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+                <input id="bank1" maxlength="30"   class="form-control" [formControl]="updateUserForm.controls['bank1']"
+                  placeholder="Bank Name 1">
+              </div>
+            </div>
+    
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                <input id="bankacno1" maxlength="20"  class="form-control" [formControl]="updateUserForm.controls['bankacno1']"
+                  placeholder="Bank Acc No.1">
+              </div>
+            </div>
+    
+             <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+                <input id="bankifsc1" maxlength="15"  class="form-control" [formControl]="updateUserForm.controls['bankifsc1']"
+                  placeholder="Bank IFSC No.1">
+              </div>
+            </div>
+    
+             <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+                <input id="bank2" maxlength="30"   class="form-control" [formControl]="updateUserForm.controls['bank2']"
+                  placeholder="Bank Name 2">
+              </div>
+            </div>
+    
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                <input id="bankacno2" maxlength="20"   class="form-control" [formControl]="updateUserForm.controls['bankacno2']"
+                  placeholder="Bank Acc No.2">
+              </div>
+            </div>
+    
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+                <input id="bankifsc2" maxlength="15"   class="form-control" [formControl]="updateUserForm.controls['bankifsc2']"
+                  placeholder="Bank IFSC No.2">
+              </div>
+        </div>
+<!--
+        <div class="col-xs-4">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+            <input id="district"   class="form-control" [formControl]="updateUserForm.controls['district']"
+              placeholder="District">
+          </div>
+        </div>
+
+
+        <div class="col-xs-4">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+            <input id="address"   class="form-control" [formControl]="updateUserForm.controls['address']"
+              placeholder="Address">
+          </div>
+        </div> -->
+
+
+
+      </div>
+
+
+
+      <div class="col-xs-4" style="padding-bottom: 1em;padding-left: 2em; margin-top: 10px;">
+        <br> <button type="submit" class="btn btn-success">Reset</button>&nbsp;
+        <button type="submit" class="btn btn-success">Submit</button>
+        <!-- </form> -->
+        <!-- </div> -->
+
+        <!-- <div class="row line" style="width:100%;"></div> -->
+        <div class="row">
+          <!-- <div class="col-xs-12 card-footer">
+            <div class="col-xs-4">
+              <div class="row">
+                <p class="pointer">Have an Account! <span><a [routerLink]="['signup']">Sign In Here</a></span></p>
+              </div>
+            </div>
+            <div class="col-xs-4 text-right">
+              <div class="row">
+                <p class="pointer">Forgot Password?</p>
+              </div>
+            </div>
+          </div> -->
+        </div>
+
+        <!-- </div> -->
+      </div> <!-- card-body -->
+    </div>
+  </div>
