@@ -8,8 +8,7 @@ export const dashboardRouter: Routes = [
     path: '', component: DashboardComponent,
     children: [
       { path: '', redirectTo: 'master' },
-      { path: 'master', loadChildren: './master/master.module#MasterModule', canActivate: [AuthGuard] },
-      { path: 'purchase-dashboard', loadChildren: './purchase/purchase.module#PurchaseModule', canActivate: [AuthGuard] }
+      { path: 'master', loadChildren: './master/master.module#MasterModule', canActivate: [AuthGuard] }
     ]
   },
 ];
