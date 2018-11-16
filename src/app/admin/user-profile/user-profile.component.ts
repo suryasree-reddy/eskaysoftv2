@@ -1,23 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'src/app/auth/authentication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import '../../../assets/styles/mainstyles.scss';
-
+import { MasterService } from 'src/app/dashboard/master/master.service';
+import { TranslateService } from '@ngx-translate/core';
+import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.component';
+import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
-export class UserProfileComponent implements OnInit {
-  public userProfileForm: FormGroup;
-  public badCredentials: boolean;
-  public formError: boolean;
 
-  constructor(
-    private fb: FormBuilder,
-    // private authService: AuthenticationService
-  ) { }
+export class UserProfileComponent implements OnInit {
+
+  private userProfileForm: FormGroup;
+
+  constructor(private fb: FormBuilder,
+    private translate: TranslateService,
+    private sharedDataService: SharedDataService,
+    private masterService: MasterService) { translate.setDefaultLang('messages.en'); }
 
   ngOnInit() {
 
@@ -46,31 +47,12 @@ export class UserProfileComponent implements OnInit {
       bankacno2: [],
       bankifsc2: [],
 
-
-      // password: ['', Validators.required],
-      // email: ['', Validators.required],
-      // roles: ['', Validators.required],
-      // confPassword: ['', Validators.required], 
-      // address: ['', Validators.required],     
-      // town: ['', Validators.required],
-      // designation: ['', Validators.required],
-      // mobile: ['', Validators.required]
     });
 
-    // this.authService.badCredentials.subscribe(res => {
-    //   this.badCredentials = res;
-    // })
+
   }
 
-  // signup() {
-  //   //this.isUnauthorized = false;
-  //   // console.log(this.loginForm.value);
-  //   if(this.userProfileForm.valid){
-  //     this.authService.authenticateUser(this.userProfileForm.value);
-  //   }else{
-  //     this.formError = true;
-  //   }
-  // }
+
 
 
 }

@@ -15,7 +15,6 @@ import { AccountsOpeningsComponent } from './accounts-openings/accounts-openings
 import { AccountsInfoComponent } from './accounts-info/accounts-info.component';
 import { ContactComponent } from './contact/contact.component';
 import { CustomerwiseDiscountComponent } from './customerwise-discount/customerwise-discount.component';
-import { PurchaseComponent } from './purchase/purchase.component';
 import { ProductComponent } from './product/product.component';
 import { ProductCategoryComponent } from './product-category/product-category.component';
 import { ProductGroupComponent } from './product-group/product-group.component';
@@ -39,8 +38,7 @@ export const masterRouter: Routes = [
     { path: 'customerDiscount', component: CustomerwiseDiscountComponent, canActivate: [AuthGuard]  },
     { path: 'product', component: ProductComponent, canActivate: [AuthGuard]  },
     { path: 'productCategory', component: ProductCategoryComponent, canActivate: [AuthGuard]  },
-    { path: 'productGroup', component: ProductGroupComponent, canActivate: [AuthGuard]  },
-
+    { path: 'productGroup', component: ProductGroupComponent, canActivate: [AuthGuard]  }
 ];
 
 export const MasterRouter: ModuleWithProviders = RouterModule.forChild(masterRouter);

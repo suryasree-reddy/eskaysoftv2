@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'src/app/auth/authentication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import '../../../assets/styles/mainstyles.scss';
+import { MasterService } from 'src/app/dashboard/master/master.service';
+import { TranslateService } from '@ngx-translate/core';
+import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.component';
+import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-createuser',
   templateUrl: './createuser.component.html',
   styleUrls: ['./createuser.component.scss']
 })
+
 export class CreateuserComponent implements OnInit {
 
-  public createUserForm: FormGroup;
-  public badCredentials: boolean;
-  public formError: boolean;
-  
-  constructor(
-    private fb: FormBuilder,
-  ) { }
+  private createUserForm: FormGroup;
+
+  constructor(private fb: FormBuilder,
+    private translate: TranslateService,
+    private sharedDataService: SharedDataService,
+    private masterService: MasterService) { translate.setDefaultLang('messages.en'); }
 
   ngOnInit() {
     this.createUserForm = this.fb.group({
@@ -25,7 +27,7 @@ export class CreateuserComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
       confPassword: ['', Validators.required],
-      address: [],     
+      address: [],
       town: [],
       pin: [],
       district: [],
@@ -35,8 +37,6 @@ export class CreateuserComponent implements OnInit {
       email: ['', Validators.required],
       roles: ['', Validators.required],
       designation: [],
-
-
     });
 
   }

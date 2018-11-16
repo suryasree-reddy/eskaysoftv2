@@ -45,6 +45,7 @@ import { PurchaseDashboardComponent } from './purchase-dashboard/purchase-dashbo
   declarations: [ButtonsComponent, ConfirmationModelDialogComponent, ErrormessagesComponent, SynectiksCommonGridComponent, PurchaseDashboardComponent],
   entryComponents: [ ConfirmationModelDialogComponent ]
 })
+
 export class PurchaseModule { }
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);

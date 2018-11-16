@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'src/app/auth/authentication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import '../../../assets/styles/mainstyles.scss';
+import { MasterService } from 'src/app/dashboard/master/master.service';
+import { TranslateService } from '@ngx-translate/core';
+import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.component';
+import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-updateuser',
@@ -10,20 +12,19 @@ import '../../../assets/styles/mainstyles.scss';
 })
 export class UpdateuserComponent implements OnInit {
 
-  public updateUserForm: FormGroup;
-  public badCredentials: boolean;
-  public formError: boolean;
-  
-  constructor(
-    private fb: FormBuilder,
-  ) { }
+  private updateUserForm: FormGroup;
+
+  constructor(private fb: FormBuilder,
+    private translate: TranslateService,
+    private sharedDataService: SharedDataService,
+    private masterService: MasterService) { translate.setDefaultLang('messages.en'); }
 
   ngOnInit() {
     this.updateUserForm = this.fb.group({
       userId:['', Validators.required],
       name:['', Validators.required],
       username: ['', Validators.required],
- 
+
     });
 
   }
