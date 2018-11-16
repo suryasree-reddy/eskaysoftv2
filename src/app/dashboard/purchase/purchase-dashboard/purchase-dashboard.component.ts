@@ -5,7 +5,8 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from 'src/app/dashboard/master/master.service';
 import 'src/assets/styles/mainstyles.scss';
-import { ConfirmationModelDialogComponent } from 'src/app/commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
+import { SharedDataService } from 'src/app/shared/model/shared-data.service';
+// import { ConfirmationModelDialogComponent } from 'src/app/commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
 
 @Component({
@@ -15,7 +16,7 @@ import * as _ from 'lodash';
 export class PurchaseDashboardComponent implements OnInit {
 
   public purchaseForm: FormGroup;
-  private endPoint: string = "purchase/";
+  private endPoint: string = "purchase-dashboard/";
   public gridDataList: any = [];
   public gridColumnNamesList;
   public gridSelectedRow;
@@ -27,7 +28,9 @@ export class PurchaseDashboardComponent implements OnInit {
 
   @ViewChild('focus') focusField: ElementRef;
 
-  constructor(private fb: FormBuilder, private translate: TranslateService, private masterService: MasterService) {
+  constructor(private fb: FormBuilder, private translate: TranslateService, 
+    private sharedDataService:SharedDataService,
+    private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
 
@@ -87,7 +90,7 @@ export class PurchaseDashboardComponent implements OnInit {
     });
     // this.loadGridData();
     // this.getGridCloumsList();
-    // this.focusField.nativeElement.focus();
+     this.focusField.nativeElement.focus();
   }
 
 }

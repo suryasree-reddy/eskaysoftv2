@@ -1,4 +1,4 @@
-import { AuthGuard } from 'src/app/security/auth-guard.service';
+import { AuthGuard } from './../../security/auth-guard.service';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { PurchaseDashboardComponent } from './purchase-dashboard/purchase-dashboard.component';

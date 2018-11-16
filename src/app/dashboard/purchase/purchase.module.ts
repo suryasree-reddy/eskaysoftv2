@@ -9,10 +9,10 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 
-import { SynectiksCommonGridComponent } from 'src/app/commonComponents/synectiks-common-grid/synectiks-common-grid.component';
-import { ConfirmationModelDialogComponent } from 'src/app/commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
-import { ErrormessagesComponent } from 'src/app/commonComponents/errormessages/errormessages.component';
-import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.component';
+import { SynectiksCommonGridComponent } from '../../commonComponents/synectiks-common-grid/synectiks-common-grid.component';
+import { ConfirmationModelDialogComponent } from '../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
+import { ErrormessagesComponent } from '../../commonComponents/errormessages/errormessages.component';
+import { ButtonsComponent } from '../../commonComponents/buttons/buttons.component';
 import { PurchaseDashboardComponent } from './purchase-dashboard/purchase-dashboard.component';
 
 //import { StatesComponent } from './states/states.component';

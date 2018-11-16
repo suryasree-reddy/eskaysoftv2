@@ -7,7 +7,7 @@ export const appRouter: Routes = [
     { path: 'auth', loadChildren: './auth/auth.module#AuthModule' },
     { path: 'dashboard', loadChildren:  './dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard] },
     { path: 'admin', loadChildren:  './admin/admin.module#AdminModule', canActivate: [AuthGuard] },
-    { path: 'purchase-dashboard', loadChildren: './purchase/purchase.module#PurchaseModule', canActivate: [AuthGuard] }
+    { path: 'purchase', loadChildren: './purchase/purchase.module#PurchaseModule', canActivate: [AuthGuard] }
 ];
 
 export const AppRouter: ModuleWithProviders = RouterModule.forRoot(appRouter);
