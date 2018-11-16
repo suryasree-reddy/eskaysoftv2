@@ -37,11 +37,10 @@ export const masterRouter: Routes = [
     { path: 'accountinformation', component: AccountsInfoComponent, canActivate: [AuthGuard]  },
     { path: 'contact', component: ContactComponent, canActivate: [AuthGuard]  },
     { path: 'customerDiscount', component: CustomerwiseDiscountComponent, canActivate: [AuthGuard]  },
-    { path: 'purchase', component: PurchaseComponent, canActivate: [AuthGuard]  },
     { path: 'product', component: ProductComponent, canActivate: [AuthGuard]  },
     { path: 'productCategory', component: ProductCategoryComponent, canActivate: [AuthGuard]  },
     { path: 'productGroup', component: ProductGroupComponent, canActivate: [AuthGuard]  },
-    
+
 ];
 
 export const MasterRouter: ModuleWithProviders = RouterModule.forChild(masterRouter);

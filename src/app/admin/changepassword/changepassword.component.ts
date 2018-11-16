@@ -24,9 +24,8 @@ export class ChangepasswordComponent implements OnInit {
       password: ['', Validators.required],
       email: ['', Validators.required],
       roles: ['', Validators.required],
-
       confPassword: ['', Validators.required], 
-      address: ['', Validators.required],     
+      address: ['', Validators.required],
       town: ['', Validators.required],
       designation: ['', Validators.required],
       mobile: ['', Validators.required]
