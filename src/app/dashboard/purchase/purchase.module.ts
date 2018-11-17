@@ -8,11 +8,6 @@ import { BsDropdownModule, TypeaheadModule, TabsModule  } from 'ngx-bootstrap';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
-
-import { SynectiksCommonGridComponent } from '../../commonComponents/synectiks-common-grid/synectiks-common-grid.component';
-import { ConfirmationModelDialogComponent } from '../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
-import { ErrormessagesComponent } from '../../commonComponents/errormessages/errormessages.component';
-import { ButtonsComponent } from '../../commonComponents/buttons/buttons.component';
 import { PurchaseDashboardComponent } from './purchase-dashboard/purchase-dashboard.component';
 
 //import { StatesComponent } from './states/states.component';
@@ -42,8 +37,7 @@ import { PurchaseDashboardComponent } from './purchase-dashboard/purchase-dashbo
     NgModel,
     FormsModule
   ],
-  declarations: [ButtonsComponent, ConfirmationModelDialogComponent, ErrormessagesComponent, SynectiksCommonGridComponent, PurchaseDashboardComponent],
-  entryComponents: [ ConfirmationModelDialogComponent ]
+  declarations: [ PurchaseDashboardComponent]
 })
 
 export class PurchaseModule { }
