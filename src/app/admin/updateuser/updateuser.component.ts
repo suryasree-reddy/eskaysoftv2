@@ -15,9 +15,8 @@ export class UpdateuserComponent implements OnInit {
   private updateUserForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-    private translate: TranslateService,
     private sharedDataService: SharedDataService,
-    private masterService: MasterService) { translate.setDefaultLang('messages.en'); }
+    private masterService: MasterService) { }
 
   ngOnInit() {
     this.updateUserForm = this.fb.group({

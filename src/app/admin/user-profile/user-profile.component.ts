@@ -16,9 +16,9 @@ export class UserProfileComponent implements OnInit {
   private userProfileForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-    private translate: TranslateService,
+  
     private sharedDataService: SharedDataService,
-    private masterService: MasterService) { translate.setDefaultLang('messages.en'); }
+    private masterService: MasterService) {  }
 
   ngOnInit() {
 

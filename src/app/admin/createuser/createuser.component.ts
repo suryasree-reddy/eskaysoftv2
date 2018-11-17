@@ -16,9 +16,9 @@ export class CreateuserComponent implements OnInit {
   private createUserForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-    private translate: TranslateService,
+
     private sharedDataService: SharedDataService,
-    private masterService: MasterService) { translate.setDefaultLang('messages.en'); }
+    private masterService: MasterService) {  }
 
   ngOnInit() {
     this.createUserForm = this.fb.group({
