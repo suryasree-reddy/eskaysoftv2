@@ -1,21 +1,16 @@
 import { MasterRouter } from './master.router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ScheduleComponent } from './schedule/schedule.component';
 import { NgForm, NgModel, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SubscheduleComponent } from './subschedule/subschedule.component';
-import { AgGridModule } from 'ag-grid-angular';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDropdownModule, TypeaheadModule, TabsModule  } from 'ngx-bootstrap';
 
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 
-import { SynectiksCommonGridComponent } from '../../commonComponents/synectiks-common-grid/synectiks-common-grid.component';
-import { ConfirmationModelDialogComponent } from '../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
-import { ErrormessagesComponent } from '../../commonComponents/errormessages/errormessages.component';
-import { ButtonsComponent } from '../../commonComponents/buttons/buttons.component';
-
+import { ScheduleComponent } from './schedule/schedule.component';
+import { SubscheduleComponent } from './subschedule/subschedule.component';
 import { StatesComponent } from './states/states.component';
 import { DistrictsComponent } from './districts/districts.component';
 import { AreasComponent } from './areas/areas.component';
@@ -31,18 +26,15 @@ import { AccountsInfoComponent } from './accounts-info/accounts-info.component';
 import { AccountsOpeningsComponent } from './accounts-openings/accounts-openings.component';
 import { ContactComponent } from './contact/contact.component';
 import { CustomerwiseDiscountComponent } from './customerwise-discount/customerwise-discount.component';
-import { BsDropdownModule, TypeaheadModule, TabsModule  } from 'ngx-bootstrap';
-import { GridNumericEditorComponent } from '../../commonComponents/grid-numeric-editor/grid-numeric-editor.component';
-import { GridSelectEditorComponent } from '../../commonComponents/grid-select-editor/grid-select-editor.component';
-
+import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    SharedmoduleModule,
     MasterRouter,
     ReactiveFormsModule,
     TypeaheadModule,
-    AgGridModule,
     BsDropdownModule.forRoot(),
     TypeaheadModule.forRoot(),
     TabsModule.forRoot(),
@@ -61,8 +53,8 @@ import { GridSelectEditorComponent } from '../../commonComponents/grid-select-ed
     NgModel,
     FormsModule
   ],
-  declarations: [ScheduleComponent, SubscheduleComponent, GridSelectEditorComponent, GridNumericEditorComponent, ButtonsComponent, ConfirmationModelDialogComponent, ErrormessagesComponent, SynectiksCommonGridComponent, StatesComponent, DistrictsComponent, AreasComponent, BusinessexecutivesComponent, BankinformationComponent, ManufacturerComponent, CompanyGroupComponent, CompaniesComponent, ProductGroupComponent, ProductCategoryComponent, ProductComponent, AccountsInfoComponent, AccountsOpeningsComponent, ContactComponent, CustomerwiseDiscountComponent],
-  entryComponents: [ ConfirmationModelDialogComponent ]
+  declarations: [ScheduleComponent, SubscheduleComponent, StatesComponent, DistrictsComponent, AreasComponent, BusinessexecutivesComponent, BankinformationComponent, ManufacturerComponent, CompanyGroupComponent, CompaniesComponent, ProductGroupComponent, ProductCategoryComponent, ProductComponent, AccountsInfoComponent, AccountsOpeningsComponent, ContactComponent, CustomerwiseDiscountComponent],
+
 })
 export class MasterModule { }
 export function HttpLoaderFactory(http: HttpClient) {
