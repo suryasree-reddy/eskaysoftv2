@@ -9,4 +9,4 @@ export const appRouter: Routes = [
     { path: 'admin', loadChildren:  './admin/admin.module#AdminModule', canActivate: [AuthGuard] }
   ];
 
-export const AppRouter: ModuleWithProviders = RouterModule.forRoot(appRouter);
+export const AppRouter: ModuleWithProviders = RouterModule.forRoot(appRouter, { enableTracing: false });
