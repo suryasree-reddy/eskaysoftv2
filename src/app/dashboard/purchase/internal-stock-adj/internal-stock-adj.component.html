@@ -1,0 +1,176 @@
+<div class="col-md-5">
+    <h3>Purchase</h3>
+    <form [formGroup]="purchaseForm" (ngSubmit)="saveForm()" autocomplete="off">
+        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+
+    </form>
+</div>
+
+
+<div class="col-md-12 mr-b-2">
+    <div class="row">
+        <div class="col-sm-6">
+            <form class="form">
+                <div class="col-md-12 col-lt">
+                    <p>Number: *</p>
+                    <input id="purchaseNumber" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['purchaseNumber']">
+                </div>
+
+                <div class="col-md-12 col-lt">
+                    <p>Remarks: *</p>
+                    <input id="invoiceNumber" class="form-control" [formControl]="purchaseForm.controls['invoiceNumber']">
+                </div>
+
+
+            </form>
+        </div>
+
+        <div class="col-sm-6">
+            <form class="form">
+                <div class="col-md-6 col-lt">
+                    <p>Date: *</p>
+                    <input id="date" class="form-control" [formControl]="purchaseForm.controls['date']">
+                </div>
+
+            </form>
+        </div>
+        <!-- Table Start -->
+        <div class="row pane">
+            <div class="col-sm-12">
+                <div class="table-responsive">
+                    <table id="purchaseDetailTable1" class="table table-header table-lg table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Sno</th>
+                                <th>Code</th>
+                                <th>Product Name</th>
+                                <th>Pack</th>
+                                <th>Type</th>
+                                <th>Batch</th>
+                                <th>Quantity</th>
+                                <th>Free</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="input-group">
+                                        <input id="sno" #focus [readonly]="nameFlag" class="form-control"
+                                            [formControl]="purchaseForm.controls['sno']">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input id="productName" #focus [readonly]="nameFlag" class="form-control"
+                                            [formControl]="purchaseForm.controls['productName']">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input id="batch" #focus [readonly]="nameFlag" class="form-control"
+                                            [formControl]="purchaseForm.controls['batch']">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input id="expiry" #focus [readonly]="nameFlag" class="form-control"
+                                            [formControl]="purchaseForm.controls['expiry']">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input id="qty" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['qty']">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input id="free" #focus [readonly]="nameFlag" class="form-control"
+                                            [formControl]="purchaseForm.controls['free']">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input id="purRate" #focus [readonly]="nameFlag" class="form-control"
+                                            [formControl]="purchaseForm.controls['purRate']">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input id="othCharges" #focus [readonly]="nameFlag" class="form-control"
+                                            [formControl]="purchaseForm.controls['othCharges']">
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Table End -->
+
+        <!-- Common Grid Start -->
+
+        <!-- Common Grid End -->
+
+
+
+
+<!-- As Per Software Table Start -->
+
+
+        <div class="col-sm-6 col-lt">
+                <form class="form">
+                    <div class="col-md-12 col-lt">
+                        <p>Debit Adjustment Ledger: *</p>
+                        <input id="debitAdjustmentLedger" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['debitAdjustmentLedger']">
+                    </div>
+                    <div class="col-md-12 col-lt">
+                        <p>Credit Adjustment Ledger: *</p>
+                        <input id="CreditAdjustmentLedger" class="form-control" [formControl]="purchaseForm.controls['CreditAdjustmentLedger']">
+                    </div>
+                    <div class="col-md-6 col-lt">
+                        <p>Net Value: *</p>
+                        <input id="netValue" class="form-control" [formControl]="purchaseForm.controls['netValue']">
+                    </div>
+                    <div class="col-md-6 col-lt">
+                        <p>Remarks: *</p>
+                        <input id="remarks" class="form-control" [formControl]="purchaseForm.controls['remarks']">
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm-6 col-rt">
+                    <form class="form">
+                        <div class="col-md-12 col-lt">
+                            <p>Debit Adjustment Value: *</p>
+                            <input id="DebitAdjustmentValue" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['DebitAdjustmentValue']">
+                        </div>
+                        <div class="col-md-12 col-lt">
+                            <p>Credit Adjustment Value: *</p>
+                            <input id="creditAdjustmentValue" class="form-control" [formControl]="purchaseForm.controls['creditAdjustmentValue']">
+                        </div>
+                        <div class="col-md-12 col-lt">
+                            <p>Invoice Value: *</p>
+                            <input id="invoiceValue" class="form-control" [formControl]="purchaseForm.controls['invoiceValue']">
+                        </div>
+
+                    </form>
+                </div>
+
+        <div class="input-group">
+            <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
+            <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
+            <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete'
+                | translate }}</button>
+        </div>
+
+
+    </div>
+
+</div>
