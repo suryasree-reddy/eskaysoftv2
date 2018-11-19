@@ -21,6 +21,8 @@ export class UpdateuserComponent implements OnInit {
   private duplicateUserName: boolean = false;
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
+  public updtUsrList: any = [];
+
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
   constructor(private fb: FormBuilder,
@@ -37,11 +39,18 @@ export class UpdateuserComponent implements OnInit {
   }
 
   checkForDuplicateName() {
+    if (!this.nameFlag) {
+      this.duplicateName = this.masterService.hasDataExist(this.updtUsrList, 'name', this.updateUserForm.value.name);
+      this.getDuplicateErrorMessages();
+    }
 
   }
 
   checkForDuplicateUserName() {
-
+    if (!this.nameFlag) {
+      this.duplicateUserName = this.masterService.hasDataExist(this.updtUsrList, 'username', this.updateUserForm.value.username);
+      this.getDuplicateErrorMessages();
+    }
   }
 
   getDuplicateErrorMessages(): void {

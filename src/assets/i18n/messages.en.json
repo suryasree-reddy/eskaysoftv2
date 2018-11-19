@@ -250,6 +250,25 @@
     "duplicateNameErrorMessage":"The Account Name '{{duplicateMessageParam}}' already exists with this name.",
     "duplicateCodeErrorMessage":"The Account code '{{duplicateMessageParam}}' already exists with this code."
   },
+  "updateuser": {
+    "title": "Update User",
+    "endPoint": "updateUser/",
+    "userId": "User Id",
+    "submit": "Submit",
+    "saveConfirmationMessage": "Are you sure you want to Update User?",
+    "saveInformationMessage": "User has been updated successfully.",
+    "duplicateNameErrorMessage":"The User Name '{{duplicateMessageParam}}' already exists with this name."
+  },
+  "changepassword": {
+    "title": "Change Password",
+    "endPoint": "changePassword/",
+    "usernameOrEmail": "Username or Email",
+    "changePassword": "Change Password",
+    "confirmPassword": "Confirm Password",
+    "saveConfirmationMessage": "Are you sure you want to Change Password?",
+    "saveInformationMessage": "Password has been changed successfully.",
+    "duplicateNameErrorMessage":"The User Name '{{duplicateMessageParam}}' already exists with this name."
+    },
   "tax": {
     "title": "Tax",
       "endPoint":"tax/"

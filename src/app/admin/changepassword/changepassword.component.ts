@@ -21,6 +21,7 @@ export class ChangepasswordComponent implements OnInit {
   private duplicateUserName: boolean = false;
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
+  public chgPswdList: any = [];
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
@@ -47,6 +48,10 @@ export class ChangepasswordComponent implements OnInit {
 
 
   checkForDuplicateUserName() {
+    if (!this.nameFlag) {
+      this.duplicateUserName = this.masterService.hasDataExist(this.chgPswdList, 'username', this.changePasswordForm.value.username);
+      this.getDuplicateErrorMessages();
+    }
 
   }
 
