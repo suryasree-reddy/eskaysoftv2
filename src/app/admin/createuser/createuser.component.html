@@ -9,6 +9,10 @@
       </div>
     </div> <!-- header -->
     <form [formGroup]="createUserForm" autocomplete="off">
+      <div class="col-xs-12 card-body">
+    <div class="col-xs-12">
+
+
       <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
       [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
         [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
@@ -136,11 +140,11 @@
          [endPoint]="endPoint"
          [deleteInfoMsg]="'createuser.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
          [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-         [hideDeleteBtn]=false [formObj]="createuserForm" (saveRecord)="save()"
+         [hideDeleteBtn]=false [formObj]="createUserForm" (saveRecord)="save()"
          (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
          (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
 
-
+</div></div>
     </form>
   </div>
 </div>
