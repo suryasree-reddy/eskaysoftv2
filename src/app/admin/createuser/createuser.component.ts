@@ -4,6 +4,7 @@ import { MasterService } from 'src/app/dashboard/master/master.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-createuser',
@@ -17,20 +18,28 @@ export class CreateuserComponent implements OnInit {
   private deleteFlag: boolean = true;
   private endPoint: string = "createUser/";
   private formSuccess: boolean = false;
-  public userList: any = [];
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
   private duplicateName: boolean = false;
   private duplicateUserName: boolean = false;
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
+  private paramUserId: string = null;
+  private rolesList: any = [];
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
   constructor(private fb: FormBuilder,
-  private translate: TranslateService,
+    private translate: TranslateService,
+    private _routeParams: ActivatedRoute,
     private sharedDataService: SharedDataService,
-    private masterService: MasterService) { translate.setDefaultLang('messages.en');}
+    private masterService: MasterService) {
+    translate.setDefaultLang('messages.en');
+    this._routeParams.queryParams.subscribe(params => {
+      this.nameFlag = params['editMode'];
+      this.paramUserId = params['userId'];
+    });
+  }
 
   ngOnInit() {
     this.createUserForm = this.fb.group({
@@ -51,6 +60,7 @@ export class CreateuserComponent implements OnInit {
       designation: [],
     });
 
+    this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
   }
 
   checkForDuplicateName() {

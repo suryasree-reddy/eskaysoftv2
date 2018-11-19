@@ -45,19 +45,19 @@ export class ChangepasswordComponent implements OnInit {
     });
   }
 
-
-
   checkForDuplicateUserName() {
-    if (!this.nameFlag) {
       this.duplicateUserName = this.masterService.hasDataExist(this.chgPswdList, 'username', this.changePasswordForm.value.username);
       this.getDuplicateErrorMessages();
-    }
-
   }
 
   getDuplicateErrorMessages(): void {
     if (!this.duplicateUserName) {
       this.formRequiredError = false;
+      this.duplicateMessage = null;
+      this.duplicateMessageParam = null;
+    }
+
+    if (this.duplicateUserName) {
       this.duplicateMessage = null;
       this.duplicateMessageParam = null;
     }

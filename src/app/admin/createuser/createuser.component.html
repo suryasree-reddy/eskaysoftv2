@@ -124,20 +124,12 @@
         <div class="col-xs-6">
           <div for="roles" class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-flag"></i></span>
-            <select multiple id="roles" type="text" class="form-control" [formControl]="createUserForm.controls['roles']"
-              >
-              <option>{{'createuser.roles' | translate }}</option>
-              <option>{{'createuser.allowMasters' | translate }}</option>
-              <option>{{'createuser.allowPurchase' | translate }}</option>
-              <option>{{'createuser.allowSales' | translate }}</option>
-              <option>{{'createuser.allowInventory' | translate }}</option>
-              <option>{{'createuser.allowFinance' | translate }}</option>
-              <option>{{'createuser.allowFinanceReports' | translate }}</option>
-              <option>{{'createuser.allowGST' | translate }}</option>
-              <option>{{'createuser.allowMiscellaneous' | translate }}</option>
-              <option>{{'createuser.allowInvoice' | translate }}</option>
-              <option>{{'createuser.allowModification' | translate }}</option>
-            </select>
+            <select multiple name="roles" id="roles" type="text" class="form-control"
+            [formControl]="createUserForm.controls['roles']">
+              <option *ngFor="let role of rolesList" [ngValue]="role">{{role}}</option>
+          </select>
+
+
           </div>
         </div>
 
@@ -147,9 +139,9 @@
       [endPoint]="endPoint"
       [deleteInfoMsg]="'createuser.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
       [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-      [hideDeleteBtn]=true [formObj]="createuserForm" (saveRecord)="save()"
+      [hideDeleteBtn]=false [formObj]="createuserForm" (saveRecord)="save()"
       (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-      (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons> 
+      (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
 
 
       <!-- <div class="col-xs-6 btn-admin">

@@ -625,5 +625,18 @@
       "width": 120,
       "suppressSizeToFit": false
     }
-  ]
+  ],
+  "UserRoles":[
+        "Roles",
+        "Allow Masters",
+        "Allow Purchase",
+        "Allow Sales",
+        "Allow Inventory Reports",
+        "Allow Finance",
+        "Allow Finance Reports",
+        "Allow GST Report",
+      "Allow Miscellaneous",
+        "Allow Invoice Date Change",
+      "Allow Modification or Deletion"
+    ]
 }
