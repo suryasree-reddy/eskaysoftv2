@@ -26,6 +26,7 @@ export class CreateuserComponent implements OnInit {
   private duplicateMessageParam: string = null;
   private paramUserId: string = null;
   private rolesList: any = [];
+  private userList: any = [];
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 

@@ -14,8 +14,7 @@
         [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
        [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
-         <div class="col-xs-12 card-body">
-      <div class="col-xs-12">
+
 
         <div class="col-xs-6">
           <div class="input-group">
@@ -128,26 +127,20 @@
             [formControl]="createUserForm.controls['roles']">
               <option *ngFor="let role of rolesList" [ngValue]="role">{{role}}</option>
           </select>
-
-
           </div>
         </div>
 
-      </div>
-       <app-buttons [title]="'createuser.title'" [deleteConfirmMsg]="'createuser.deleteConfirmationMessage'"
-      [saveConfirmMsg]="'createuser.saveConfirmationMessage'" [saveInfoMsg]="'createuser.saveInformationMessage'"
-      [endPoint]="endPoint"
-      [deleteInfoMsg]="'createuser.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-      [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-      [hideDeleteBtn]=false [formObj]="createuserForm" (saveRecord)="save()"
-      (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-      (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
+
+        <app-buttons [title]="'createuser.title'" [deleteConfirmMsg]="'createuser.deleteConfirmationMessage'"
+         [saveConfirmMsg]="'createuser.saveConfirmationMessage'" [saveInfoMsg]="'createuser.saveInformationMessage'"
+         [endPoint]="endPoint"
+         [deleteInfoMsg]="'createuser.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+         [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+         [hideDeleteBtn]=false [formObj]="createuserForm" (saveRecord)="save()"
+         (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+         (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
 
 
-      <!-- <div class="col-xs-6 btn-admin">
-        <br> <button type="submit" class="btn btn-success">Reset</button>&nbsp;
-        <button type="submit" class="btn btn-success">Submit</button>
-      </div> card-body -->
-    </div>
     </form>
   </div>
+</div>
