@@ -22,6 +22,7 @@ export class UserProfileComponent implements OnInit {
   private duplicateUserName: boolean = false;
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
+  public usprList: any = [];
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
@@ -59,11 +60,17 @@ export class UserProfileComponent implements OnInit {
   }
 
   checkForDuplicateName() {
-
+    if (!this.nameFlag) {
+      this.duplicateUserName = this.masterService.hasDataExist(this.usprList, 'Email', this.userProfileForm.value.Email);
+      this.getDuplicateErrorMessages();
+    }
   }
 
   checkForDuplicateUserName() {
-
+    if (!this.nameFlag) {
+      this.duplicateUserName = this.masterService.hasDataExist(this.usprList, 'UserName', this.userProfileForm.value.username);
+      this.getDuplicateErrorMessages();
+    }
   }
 
   getDuplicateErrorMessages(): void {

@@ -1,5 +1,5 @@
 <div class="col-md-5">
-    <h3>Purchase</h3>
+    <h3>{{'purchase.title' | translate }}</h3>
     <form [formGroup]="purchaseForm" (ngSubmit)="saveForm()" autocomplete="off">
         <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
           [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
@@ -13,32 +13,33 @@
         <div class="col-sm-6">
             <form class="form">
                 <div class="col-md-6 col-lt">
-                    <p>Purchase Number: *</p>
-                    <input id="purchaseNumber" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['purchaseNumber']">
+                    <p>{{'purchase.purchaseNumber' | translate}}: *</p>
+                    <input id="purchaseNumber" #focus [readonly]="nameFlag" (blur)="checkForDuplicateScheduleName()" 
+                    class="form-control" [formControl]="purchaseForm.controls['purchaseNumber']">
                 </div>
                 <div class="col-md-6 col-lt">
-                    <p>Invoice Number: *</p>
+                    <p>{{'purchase.invoiceNumber' | translate}}: *</p>
                     <input id="invoiceNumber" class="form-control" [formControl]="purchaseForm.controls['invoiceNumber']">
                 </div>
                 <div class="col-md-12 col-lt">
-                    <p>Supplier: *</p>
-                    <input id="id" class="form-control" [formControl]="purchaseForm.controls['id']">
+                    <p>{{'purchase.supplier' | translate}}: *</p>
+                    <input id="supplier" class="form-control" [formControl]="purchaseForm.controls['supplier']">
                 </div>
                 <div class="col-md-12 col-lt">
-                    <p>GSTIN: *</p>
+                    <p>{{'purchase.gstin' | translate}}: *</p>
                     <input id="gstin" class="form-control" [formControl]="purchaseForm.controls['gstin']">
                 </div>
                 <div class="col-md-4 col-lt">
-                    <p>Way-Bill Number: *</p>
+                    <p>{{'purchase.wayBill' | translate}}: *</p>
                     <input id="wayBill" class="form-control" [formControl]="purchaseForm.controls['wayBill']">
                 </div>
                 <div class="col-md-4 col-lt">
-                    <p>Transport: *</p>
+                    <p>{{'purchase.transport' | translate}}: *</p>
                     <input id="transport" class="form-control" [formControl]="purchaseForm.controls['transport']">
                 </div>
                 <div class="col-md-4 col-lt">
-                    <p>CS: *</p>
-                    <input id="id" class="form-control" [formControl]="purchaseForm.controls['id']">
+                    <p>{{'purchase.cs' | translate}}: *</p>
+                    <input id="cs" class="form-control" [formControl]="purchaseForm.controls['cs']">
                 </div>
             </form>
         </div>
@@ -46,29 +47,29 @@
         <div class="col-sm-6">
             <form class="form">
                 <div class="col-md-6 col-lt">
-                    <p>Date: *</p>
+                    <p>{{'purchase.date' | translate}}: *</p>
                     <input id="date" class="form-control" [formControl]="purchaseForm.controls['date']">
                 </div>
                 <div class="col-md-6 col-lt">
-                    <p>Invoice Date: *</p>
+                    <p>{{'purchase.invoiceDate' | translate}}: *</p>
                     <input id="invoiceDate" class="form-control" [formControl]="purchaseForm.controls['invoiceDate']">
                 </div>
                 <div class="col-md-6 col-lt">
-                    <p>Mode: *</p>
-                    <input id="mode" class="form-control" [formControl]="purchaseForm.controls['mode']">
+                    <p>{{'purchase.mode' | translate}}: *</p>
+                    <input id="mode" maxlength="6" class="form-control" [formControl]="purchaseForm.controls['mode']">
                 </div>
                 <div class="col-md-6 col-lt">
-                    <p>LR Number: *</p>
-                    <input id="lrNumber" class="form-control" [formControl]="purchaseForm.controls['lrNumber']">
+                    <p>{{'purchase.lrNumber' | translate}}: *</p>
+                    <input id="lrNumber" maxlength="15" class="form-control" [formControl]="purchaseForm.controls['lrNumber']">
                 </div>
 
                 <div class="col-md-6 col-lt">
-                    <p>LR Date: *</p>
+                    <p>{{'purchase.lrDate' | translate}}: *</p>
                     <input id="lrDate" class="form-control" [formControl]="purchaseForm.controls['lrDate']">
                 </div>
                 <div class="col-md-6 col-lt">
-                    <p>Delivered From: *</p>
-                    <input id="delvFrom" class="form-control" [formControl]="purchaseForm.controls['delvFrom']">
+                    <p>{{'purchase.deliveredFrom' | translate}}: *</p>
+                    <input id="delvFrom" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['delvFrom']">
                 </div>
             </form>
         </div>
@@ -79,22 +80,22 @@
                     <table id="purchaseDetailTable1" class="table table-header table-lg table-bordered">
                         <thead>
                             <tr>
-                                <th>Code</th>
-                                <th>Product Name</th>
-                                <th>Batch</th>
-                                <th>Expiry</th>
-                                <th>Quantity</th>
-                                <th>Free</th>
-                                <th>Purchase Rate</th>
-                                <th>Other Charges</th>
-                                <th>GRS Value</th>
-                                <th>Discount</th>
-                                <th>PTD</th>
-                                <th>Sale Rate</th>
-                                <th>Tax</th>
-                                <th>HSN</th>
-                                <th>MRP</th>
-                                <th>Mfg Name</th>
+                                <th><p>{{'purchase.code' | translate}}</p></th>
+                                <th><p>{{'purchase.productname' | translate}}</p></th>
+                                <th><p>{{'purchase.batch' | translate}}</p></th>
+                                <th><p>{{'purchase.expiry' | translate}}</p></th>
+                                <th><p>{{'purchase.quantity' | translate}}</p></th>
+                                <th><p>{{'purchase.free' | translate}}</p></th>
+                                <th><p>{{'purchase.purchaserate' | translate}}</p></th>
+                                <th><p>{{'purchase.othCharges' | translate}}</p></th>
+                                <th><p>{{'purchase.grsValue' | translate}}</p></th>
+                                <th><p>{{'purchase.discount' | translate}}</p></th>
+                                <th><p>{{'purchase.ptd' | translate}}</p></th>
+                                <th><p>{{'purchase.saleRate' | translate}}</p></th>
+                                <th><p>{{'purchase.tax' | translate}}</p></th>
+                                <th><p>{{'purchase.hsn' | translate}}</p></th>
+                                <th><p>{{'purchase.mrp' | translate}}</p></th>
+                                <th><p>{{'purchase.mfgName' | translate}}</p></th>
                             </tr>
                         </thead>
 
@@ -211,20 +212,20 @@
             <div class="col-sm-12">
                 <form class='form'>
                     <div class="col-md-3 ">
-                        <p>Gross Value: *</p>
+                        <p>{{'purchase.grsValue' | translate}}: *</p>
                         <input id="grsValue" class="form-control" [formControl]="purchaseForm.controls['grsValue']">
                     </div>
                     <div class="col-md-3 ">
-                        <p>Discount Value: *</p>
-                        <input id="discountValue" class="form-control" [formControl]="purchaseForm.controls['discountValue']">
+                            <p>{{'purchase.discountValue' | translate}}: *</p>
+                            <input id="discountValue" class="form-control" [formControl]="purchaseForm.controls['discountValue']">
                     </div>
                     <div class="col-md-3 ">
-                        <p>Tax Value: *</p>
+                        <p>{{'purchase.taxValue' | translate}}: *</p>
                         <input id="taxValue" class="form-control" [formControl]="purchaseForm.controls['taxValue']">
                     </div>
                     <div class="col-md-3 ">
-                        <p>Net Value: *</p>
-                        <input id="netValue" class="form-control" [formControl]="purchaseForm.controls['netValue']">
+                            <p>{{'purchase.netValue1' | translate}}: *</p>
+                            <input id="netValue" class="form-control" [formControl]="purchaseForm.controls['netValue']">
                     </div>
                 </form>
             </div>
@@ -238,10 +239,10 @@
                     <table id="purchaseDetailTable1" class="table table-header table-lg table-bordered">
                         <thead>
                             <tr>
-                                <th>GST%</th>
-                                <th>Taxable</th>
-                                <th>CGST Amount</th>
-                                <th>SGST Amount</th>
+                                <th><p>{{'purchase.gst1' | translate}}</p></th>
+                                <th><p>{{'purchase.taxable1' | translate}}</p></th>
+                                <th><p>{{'purchase.cgstamount1' | translate}}</p></th>
+                                <th><p>{{'purchase.sgstamount1' | translate}}</p></th>
                             </tr>
                         </thead>
 
@@ -288,10 +289,10 @@
                     <table id="purchaseDetailTable1" class="table table-header table-lg table-bordered">
                         <thead>
                             <tr>
-                                <th>GST%</th>
-                                <th>Taxable</th>
-                                <th>CGST Amount</th>
-                                <th>SGST Amount</th>
+                                <th><p>{{'purchase.gst2' | translate}}</p></th>
+                                <th><p>{{'purchase.taxable2' | translate}}</p></th>
+                                <th><p>{{'purchase.cgstamount2' | translate}}</p></th>
+                                <th><p>{{'purchase.sgstamount2' | translate}}</p></th>
                             </tr>
                         </thead>
 
@@ -335,19 +336,19 @@
         <div class="col-sm-6 col-lt">
                 <form class="form">
                     <div class="col-md-12 col-lt">
-                        <p>Debit Adjustment Ledger: *</p>
+                        <p>{{'purchase.debitAdjustmentLedger' | translate}}: *</p>
                         <input id="debitAdjustmentLedger" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['debitAdjustmentLedger']">
                     </div>
                     <div class="col-md-12 col-lt">
-                        <p>Credit Adjustment Ledger: *</p>
+                        <p>{{'purchase.creditAdjustmentLedger' | translate}}: *</p>
                         <input id="CreditAdjustmentLedger" class="form-control" [formControl]="purchaseForm.controls['CreditAdjustmentLedger']">
                     </div>
                     <div class="col-md-6 col-lt">
-                        <p>Net Value: *</p>
+                        <p>{{'purchase.netValue2' | translate}}: *</p>
                         <input id="netValue" class="form-control" [formControl]="purchaseForm.controls['netValue']">
                     </div>
                     <div class="col-md-6 col-lt">
-                        <p>Remarks: *</p>
+                        <p>{{'purchase.remarks' | translate}}: *</p>
                         <input id="remarks" class="form-control" [formControl]="purchaseForm.controls['remarks']">
                     </div>
                 </form>
@@ -356,15 +357,15 @@
             <div class="col-sm-6 col-rt">
                     <form class="form">
                         <div class="col-md-12 col-lt">
-                            <p>Debit Adjustment Value: *</p>
+                            <p>{{'purchase.debitAdjustmentValue' | translate}}: *</p>
                             <input id="DebitAdjustmentValue" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['DebitAdjustmentValue']">
                         </div>
                         <div class="col-md-12 col-lt">
-                            <p>Credit Adjustment Value: *</p>
+                            <p>{{'purchase.creditAdjustmentValue' | translate}}: *</p>
                             <input id="creditAdjustmentValue" class="form-control" [formControl]="purchaseForm.controls['creditAdjustmentValue']">
                         </div>
                         <div class="col-md-12 col-lt">
-                            <p>Invoice Value: *</p>
+                            <p>{{'purchase.invoiceValue' | translate}}: *</p>
                             <input id="invoiceValue" class="form-control" [formControl]="purchaseForm.controls['invoiceValue']">
                         </div>
 

@@ -15,7 +15,9 @@ export class CreateuserComponent implements OnInit {
 
   private createUserForm: FormGroup;
   private deleteFlag: boolean = true;
+  private endPoint: string = "createUser/";
   private formSuccess: boolean = false;
+  public userList: any = [];
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
   private duplicateName: boolean = false;
@@ -52,11 +54,17 @@ export class CreateuserComponent implements OnInit {
   }
 
   checkForDuplicateName() {
-
+    if (!this.nameFlag) {
+      this.duplicateName = this.masterService.hasDataExist(this.userList, 'name', this.createUserForm.value.name);
+      this.getDuplicateErrorMessages();
+    }
   }
 
   checkForDuplicateUserName() {
-
+    if (!this.nameFlag) {
+      this.duplicateUserName = this.masterService.hasDataExist(this.userList, 'UserName', this.createUserForm.value.username);
+      this.getDuplicateErrorMessages();
+    }
   }
 
   getDuplicateErrorMessages(): void {
