@@ -7,6 +7,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
+import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
 
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
@@ -17,6 +18,7 @@ import { UpdateuserComponent } from './updateuser/updateuser.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
+      SharedmoduleModule,
     ReactiveFormsModule,
     HttpClientModule,
         TranslateModule.forRoot({

@@ -9,7 +9,11 @@
       </div>
     </div> <!-- header -->
     <form [formGroup]="createUserForm" autocomplete="off">
-     
+      <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
+      [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+        [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
+       [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+
          <div class="col-xs-12 card-body">
       <div class="col-xs-12">
 
@@ -138,14 +142,14 @@
         </div>
 
       </div>
-      <!-- <app-buttons [title]="'createuser.title'" [deleteConfirmMsg]="'createuser.deleteConfirmationMessage'"
+       <app-buttons [title]="'createuser.title'" [deleteConfirmMsg]="'createuser.deleteConfirmationMessage'"
       [saveConfirmMsg]="'createuser.saveConfirmationMessage'" [saveInfoMsg]="'createuser.saveInformationMessage'"
       [endPoint]="endPoint"
       [deleteInfoMsg]="'createuser.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
       [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
       [hideDeleteBtn]=true [formObj]="createuserForm" (saveRecord)="save()"
       (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-      (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons> -->
+      (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons> 
 
 
       <!-- <div class="col-xs-6 btn-admin">
