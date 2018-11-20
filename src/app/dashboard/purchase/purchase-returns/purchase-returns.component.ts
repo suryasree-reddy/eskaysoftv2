@@ -14,7 +14,7 @@ export class PurchaseReturnsComponent implements OnInit {
 
   private purchaseReturnsForm: FormGroup;
   private deleteFlag: boolean = true;
-  private endPoint: string = "createUser/";
+  private endPoint: string = "purchase-returns/";
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
@@ -36,7 +36,20 @@ export class PurchaseReturnsComponent implements OnInit {
 
   ngOnInit() {
     this.purchaseReturnsForm = this.fb.group({
-      id: ['', Validators.required]
+      id: ['', Validators.required],
+      purchRetNumber: [],
+      supplier: [],
+      remarks: [],
+      date: [],
+      sNo:[],
+      prodDesc:[],
+      status:[],
+      batch:[],
+      qty:[],
+      free:[],
+      purchRate:[],
+      amount:[]
+
     });
 
   //  this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;

@@ -351,7 +351,7 @@
   },
   "common":{
     "orderNumber":"Order Number",
-    "suplier":"Suplier",
+    "supplier":"Supplier",
     "remarks":"Remarks",
     "date":"Date",
     "transport":"Transport",
@@ -362,7 +362,7 @@
     "qty":"Qty",
     "free":"Free",
     "batch":"Batch",
-    "purchaseRate":"Puechase Rate",
+    "purchaseRate":"Purchase Rate",
     "fromDate":"From Date",
     "toDate":"To Date"
   },
@@ -417,7 +417,14 @@
     "duplicateNameErrorMessage":"The User Name '{{duplicateMessageParam}}' already exists with this Name.",
     "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
   },
+  "purchaseReturn": {
+    "title": "Purchase Returns",
+    "purchRetNumber": "Purchase Return Number",
+    "productDesc": "Product Description",
+    "status": "Status",
+    "amount": "Amount"
   
+  },
   "button": {
     "save": "Save",
     "reset": "Reset",

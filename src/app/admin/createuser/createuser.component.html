@@ -134,7 +134,7 @@
           </div>
         </div>
 
-
+        <div class="btn-admin" >
         <app-buttons [title]="'createuser.title'" [deleteConfirmMsg]="'createuser.deleteConfirmationMessage'"
          [saveConfirmMsg]="'createuser.saveConfirmationMessage'" [saveInfoMsg]="'createuser.saveInformationMessage'"
          [endPoint]="endPoint"
@@ -143,6 +143,7 @@
          [hideDeleteBtn]=false [formObj]="createUserForm" (saveRecord)="save()"
          (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
          (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
+        </div>
 
 </div></div>
     </form>

@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MasterService } from 'src/app/dashboard/master/master.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
+import 'src/assets/styles/mainstyles.scss';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-order-purchase-register',
@@ -12,9 +14,9 @@ import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 })
 export class OrderPurchaseRegisterComponent implements OnInit {
 
-  private orederRegisterForm: FormGroup;
+  private orderRegisterForm: FormGroup;
   private deleteFlag: boolean = true;
-  private endPoint: string = "createUser/";
+  private endPoint: string = "order-purchase-register/";
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
@@ -24,6 +26,7 @@ export class OrderPurchaseRegisterComponent implements OnInit {
   private duplicateMessageParam: string = null;
   private internalStockList: any = [];
 
+  @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
   constructor(private fb: FormBuilder,
@@ -35,7 +38,7 @@ export class OrderPurchaseRegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.orederRegisterForm = this.fb.group({
+    this.orderRegisterForm = this.fb.group({
       id: ['', Validators.required]
     });
 
@@ -80,7 +83,7 @@ export class OrderPurchaseRegisterComponent implements OnInit {
   }
 
   resetForm() {
-    this.orederRegisterForm.reset();
+    this.orderRegisterForm.reset();
     this.deleteFlag = true;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;

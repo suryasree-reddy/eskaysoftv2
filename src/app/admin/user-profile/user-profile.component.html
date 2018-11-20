@@ -13,7 +13,7 @@
     <form [formGroup]="userProfileForm" autocomplete="off">
     <div class="col-xs-12 card-body">
       <div class="col-xs-12">
-
+<div class="row">
       <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
       [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
         [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
@@ -163,7 +163,7 @@
           </div>
         </div>
 
-        <div class="col-xs-4">
+        <div class="col-xs-4" >
           <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
             <input id="bank2" maxlength="30" class="form-control" [formControl]="userProfileForm.controls['bank2']"
@@ -186,8 +186,9 @@
               placeholder="{{'userprofile.bankifscno2' | translate }}">
           </div>
         </div>
-      
-        <div class="btn-admin">
+      </div>
+
+      <div class="pd-btm-1">
         <app-buttons [title]="'userprofile.title'" [deleteConfirmMsg]="'userprofile.deleteConfirmationMessage'"
         [saveConfirmMsg]="'userprofile.saveConfirmationMessage'" [saveInfoMsg]="'userprofile.saveInformationMessage'"
         [endPoint]="endPoint"
@@ -196,10 +197,9 @@
         [hideDeleteBtn]=false [formObj]="userProfileForm" (saveRecord)="save()"
         (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
         (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
-
-      
+      </div>
       <!-- card-body -->
-    </div>
+
     </div></div>
     </form>
   </div>

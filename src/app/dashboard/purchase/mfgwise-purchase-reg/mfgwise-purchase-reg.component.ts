@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MasterService } from 'src/app/dashboard/master/master.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
+import 'src/assets/styles/mainstyles.scss';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-mfgwise-purchase-reg',
@@ -14,7 +16,7 @@ export class MfgwisePurchaseRegComponent implements OnInit {
 
   private mfgwiseRegristerForm: FormGroup;
   private deleteFlag: boolean = true;
-  private endPoint: string = "createUser/";
+  private endPoint: string = "mfgwise-purchase-reg/";
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
@@ -24,6 +26,7 @@ export class MfgwisePurchaseRegComponent implements OnInit {
   private duplicateMessageParam: string = null;
   private internalStockList: any = [];
 
+  @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
   constructor(private fb: FormBuilder,
@@ -36,7 +39,10 @@ export class MfgwisePurchaseRegComponent implements OnInit {
 
   ngOnInit() {
     this.mfgwiseRegristerForm = this.fb.group({
-      id: ['', Validators.required]
+      id: ['', Validators.required],
+      fromDate: [],
+      toDate: []
+
     });
 
   //  this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
