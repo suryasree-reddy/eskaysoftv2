@@ -331,7 +331,7 @@
     "duplicateNameErrorMessage":"The Account Name '{{duplicateMessageParam}}' already exists with this name.",
     "duplicateCodeErrorMessage":"The Account code '{{duplicateMessageParam}}' already exists with this code."
   },
-  "internalStockAdjustments":{
+  "isa":{
     "title": "Internal Stock Adjustments",
     "endPoint":"internalStockAdjustments/",
     "number":"Number",
@@ -348,6 +348,23 @@
     "saveInformationMessage": "number record has been saved successfully.",
     "duplicateNameErrorMessage":"The Number '{{duplicateMessageParam}}' already exists with this Number.",
     "duplicateCodeErrorMessage":"The Number '{{duplicateMessageParam}}' already exists with this Number."
+  },
+  "common":{
+    "orderNumber":"Order Number",
+    "suplier":"Suplier",
+    "remarks":"Remarks",
+    "date":"Date",
+    "transport":"Transport",
+    "sNo":"S No",
+    "code":"Code",
+    "productName":"Product Name",
+    "pack":"Pack",
+    "qty":"Qty",
+    "free":"Free",
+    "batch":"Batch",
+    "purchaseRate":"Puechase Rate",
+    "fromDate":"From Date",
+    "toDate":"To Date"
   },
   "createuser":{
     "title": "Create User",
