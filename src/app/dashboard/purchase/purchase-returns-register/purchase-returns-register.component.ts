@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MasterService } from 'src/app/dashboard/master/master.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,6 +18,7 @@ export class PurchaseReturnsRegisterComponent implements OnInit {
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
+  public reportType: any[];
   private duplicateName: boolean = false;
   private duplicateUserName: boolean = false;
   private duplicateMessage: string = null;
@@ -25,6 +26,7 @@ export class PurchaseReturnsRegisterComponent implements OnInit {
   private internalStockList: any = [];
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
+  @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
@@ -36,9 +38,15 @@ export class PurchaseReturnsRegisterComponent implements OnInit {
 
   ngOnInit() {
     this.purchaseReturnRegisterForm = this.fb.group({
-      id: ['', Validators.required]
+      id: ['', Validators.required],
+      fromDate:[],
+      toDate:[],
+      repType:['', Validators.required],
+      custOption:[]
     });
 
+    this.focusField.nativeElement.focus();
+    this.reportType =  this.sharedDataService.getSharedCommonJsonData().ReportType;
   //  this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
   }
 
@@ -88,6 +96,7 @@ export class PurchaseReturnsRegisterComponent implements OnInit {
     this.duplicateName = false;
     this.duplicateUserName = false;
     this.formRequiredError = this.formSuccess = false;
+    this.focusField.nativeElement.focus();
   }
 
 }

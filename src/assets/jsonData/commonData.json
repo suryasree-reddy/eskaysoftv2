@@ -638,5 +638,24 @@
       "Allow Miscellaneous",
         "Allow Invoice Date Change",
       "Allow Modification or Deletion"
-    ]
+    ],
+    "ReportType": [{
+      "code": "Bill",
+      "description": "Billwise"
+    },
+    {
+      "code": "GST",
+      "description": "GST In Wise"
+    },
+    {
+      "code": "Day",
+      "description": "Daywise"
+    },
+    {
+      "code": "Sum",
+      "description": "Summary"
+    }
+  ]
+
+
 }

@@ -423,7 +423,11 @@
     "productDesc": "Product Description",
     "status": "Status",
     "amount": "Amount"
-  
+  },
+  "purchaseRetReg": {
+    "title": "Purchase Returns Register",
+    "repType": "Report Type",
+    "custOption": "Customer Option"
   },
   "button": {
     "save": "Save",

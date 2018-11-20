@@ -1,5 +1,5 @@
 <div class="col-md-5">
-    <h3>Purchase Returns Register</h3>
+    <h3>{{'purchaseRetReg.title'| translate}}</h3>
     <form [formGroup]="purchaseReturnRegisterForm" (ngSubmit)="saveForm()" autocomplete="off">
         <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
           [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
@@ -14,22 +14,22 @@
             <form class="form">
 
                 <div class="col-md-12 col-lt">
-                    <p>From Date: *</p>
-                    <input id="date" class="form-control" [formControl]="purchaseReturnRegisterForm.controls['date']">
+                    <p>{{'common.fromDate'| translate}}: *</p>
+                    <input id="fromDate" type="date" class="form-control" [formControl]="purchaseReturnRegisterForm.controls['fromDate']">
                 </div>
               <div class="col-md-12 col-lt">
-                    <p>To Date: *</p>
-                    <input id="date" class="form-control" [formControl]="purchaseReturnRegisterForm.controls['date']">
+                    <p>{{'common.toDate'| translate}}: *</p>
+                    <input id="toDate" type="date" class="form-control" [formControl]="purchaseReturnRegisterForm.controls['toDate']">
                 </div>
                        <div class="input-group">
-                  <p>Report Type: *</p>
-                 <input id="zone" maxlength="7"  class="form-control" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
+                  <p>{{'purchaseRetReg.repType'| translate}}: *</p>
+                 <input id="repType" maxlength="7"  class="form-control" formControlName="repType" [typeahead]="reportType" typeaheadOptionField="description"
                 [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
                   <span class="caret"></span>
             </div>
                      <div class="input-group">
-                  <p>Customer Option: *</p>
-                 <input id="zone" maxlength="7"  class="form-control" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
+                  <p>{{'purchaseRetReg.custOption'| translate}}: *</p>
+                 <input id="custOption" maxlength="7"  class="form-control" formControlName="custOption" [typeahead]="custOption" typeaheadOptionField="description"
                 [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
                   <span class="caret"></span>
             </div>
@@ -38,19 +38,19 @@
         </div>
 
 
-
-
-
-<!-- As Per Software Table Start -->
-
-
-
-
         <div class="input-group">
-            <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
+            <!-- <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
             <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
             <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete'
-                | translate }}</button>
+                | translate }}</button> -->
+
+                <app-buttons [title]="'purchaseRetReg.title'" [deleteConfirmMsg]="'purchaseRetReg.deleteConfirmationMessage'"
+                [saveConfirmMsg]="'purchaseRetReg.saveConfirmationMessage'" [saveInfoMsg]="'purchaseRetReg.saveInformationMessage'" [endPoint]="endPoint"
+                [deleteInfoMsg]="'purchaseRetReg.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+                [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+                [hideDeleteBtn]=true [formObj]="purchaseReturnRegisterForm" (saveRecord)="save()"
+                (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+                (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
         </div>
 
 

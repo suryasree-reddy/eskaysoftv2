@@ -47,7 +47,7 @@ export class PurchaseReturnsComponent implements OnInit {
       batch:[],
       qty:[],
       free:[],
-      purchRate:[],
+      purRate:[],
       amount:[]
 
     });

@@ -1,8 +1,10 @@
 <div class="col-md-5">
     <h3>{{'purchaseReturn.title' | translate}}</h3>
     <form [formGroup]="purchaseReturnsForm" (ngSubmit)="saveForm()" autocomplete="off">
-        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()"
+            [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
+            [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
+            [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
     </form>
 </div>
@@ -14,16 +16,16 @@
             <form class="form">
                 <div class="col-md-12 col-lt">
                     <p>{{'purchaseReturn.purchRetNumber' | translate}}: *</p>
-                    <input id="purchaseNumber" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseReturnsForm.controls['purchaseNumber']">
+                    <input id="purchRetNumber" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseReturnsForm.controls['purchRetNumber']">
                 </div>
-                  <div class="col-md-12 col-lt">
+                <div class="col-md-12 col-lt">
                     <p>{{'common.supplier' | translate}}: *</p>
-                    <input id="id" class="form-control" [formControl]="purchaseReturnsForm.controls['id']">
+                    <input id="supplier" class="form-control" [formControl]="purchaseReturnsForm.controls['supplier']">
                 </div>
 
                 <div class="col-md-12 col-lt">
                     <p>{{'common.remarks' | translate}}: *</p>
-                    <input id="invoiceNumber" class="form-control" [formControl]="purchaseReturnsForm.controls['invoiceNumber']">
+                    <input id="remarks" class="form-control" [formControl]="purchaseReturnsForm.controls['remarks']">
                 </div>
 
 
@@ -62,26 +64,25 @@
                             <tr>
                                 <td>
                                     <div class="input-group">
-                                        <input id="sno" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseReturnsForm.controls['sno']">
+                                        <input id="sNo" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseReturnsForm.controls['sNo']">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input id="productName" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseReturnsForm.controls['productName']">
+                                        <input id="prodDesc" #focus [readonly]="nameFlag" class="form-control"
+                                            [formControl]="purchaseReturnsForm.controls['prodDesc']">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input id="status" #focus [readonly]="nameFlag" class="form-control"
+                                            [formControl]="purchaseReturnsForm.controls['status']">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group">
                                         <input id="batch" #focus [readonly]="nameFlag" class="form-control"
                                             [formControl]="purchaseReturnsForm.controls['batch']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="expiry" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseReturnsForm.controls['expiry']">
                                     </div>
                                 </td>
                                 <td>
@@ -103,8 +104,8 @@
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input id="othCharges" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseReturnsForm.controls['othCharges']">
+                                        <input id="amount" #focus [readonly]="nameFlag" class="form-control"
+                                            [formControl]="purchaseReturnsForm.controls['amount']">
                                     </div>
                                 </td>
 
@@ -118,33 +119,17 @@
 
         <!-- Table End -->
 
-        <!-- Common Grid Start -->
-
-        <!-- Common Grid End -->
-
-
-
-
-<!-- As Per Software Table Start -->
-
-
-   
-
-       
-
         <div class="input-group">
             <!-- <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
             <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
             <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete'
                 | translate }}</button> -->
 
-                <app-buttons [title]="'purchaseReturn.title'" [deleteConfirmMsg]="'purchaseReturn.deleteConfirmationMessage'"
+            <app-buttons [title]="'purchaseReturn.title'" [deleteConfirmMsg]="'purchaseReturn.deleteConfirmationMessage'"
                 [saveConfirmMsg]="'purchaseReturn.saveConfirmationMessage'" [saveInfoMsg]="'purchaseReturn.saveInformationMessage'"
-                [endPoint]="endPoint"
-                [deleteInfoMsg]="'purchaseReturn.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-                [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-                [hideDeleteBtn]=true [formObj]="purchaseReturnsForm" (saveRecord)="save()"
-                (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+                [endPoint]="endPoint" [deleteInfoMsg]="'purchaseReturn.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+                [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=true [formObj]="purchaseReturnsForm"
+                (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
                 (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
         </div>
 
