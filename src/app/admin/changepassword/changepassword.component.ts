@@ -16,6 +16,7 @@ export class ChangepasswordComponent implements OnInit {
   private changePasswordForm: FormGroup;
   private deleteFlag: boolean = true;
   private formSuccess: boolean = false;
+  private endPoint: string = "changePassword/";
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
   private duplicateUserName: boolean = false;

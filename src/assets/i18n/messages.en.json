@@ -331,6 +331,24 @@
     "duplicateNameErrorMessage":"The Account Name '{{duplicateMessageParam}}' already exists with this name.",
     "duplicateCodeErrorMessage":"The Account code '{{duplicateMessageParam}}' already exists with this code."
   },
+  "internalStockAdjustments":{
+    "title": "Internal Stock Adjustments",
+    "endPoint":"internalStockAdjustments/",
+    "number":"Number",
+    "remarks":"Remarks",
+    "date":"Date",
+    "code":"Code",
+    "productName":"Product Name",
+    "pack":"Pack",
+    "type":"Type",
+    "batch":"Batch",
+    "qty":"Qty",
+    "free":"Free",
+    "saveConfirmationMessage": "Are you sure you want to save Internal Stock Adjustment?",
+    "saveInformationMessage": "number record has been saved successfully.",
+    "duplicateNameErrorMessage":"The Number '{{duplicateMessageParam}}' already exists with this Number.",
+    "duplicateCodeErrorMessage":"The Number '{{duplicateMessageParam}}' already exists with this Number."
+  },
   "createuser":{
     "title": "Create User",
     "endPoint":"createUser/",
@@ -382,6 +400,7 @@
     "duplicateNameErrorMessage":"The User Name '{{duplicateMessageParam}}' already exists with this Name.",
     "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
   },
+  
   "button": {
     "save": "Save",
     "reset": "Reset",

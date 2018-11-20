@@ -10,8 +10,14 @@
         </p>
       </div>
     </div> <!-- header -->
+    <form [formGroup]="userProfileForm" autocomplete="off">
     <div class="col-xs-12 card-body">
       <div class="col-xs-12">
+
+      <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
+      [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+        [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
+       [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
         <div class="col-xs-4">
           <div class="input-group">
@@ -180,14 +186,21 @@
               placeholder="{{'userprofile.bankifscno2' | translate }}">
           </div>
         </div>
-      </div>
+      
+        <div class="btn-admin">
+        <app-buttons [title]="'userprofile.title'" [deleteConfirmMsg]="'userprofile.deleteConfirmationMessage'"
+        [saveConfirmMsg]="'userprofile.saveConfirmationMessage'" [saveInfoMsg]="'userprofile.saveInformationMessage'"
+        [endPoint]="endPoint"
+        [deleteInfoMsg]="'userprofile.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+        [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+        [hideDeleteBtn]=false [formObj]="userProfileForm" (saveRecord)="save()"
+        (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+        (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
 
       
-      <div class="col-xs-4 btn-admin">
-        <br> <button type="submit" class="btn btn-success">Reset</button>&nbsp;
-        <button type="submit" class="btn btn-success">Submit</button>
-
-      </div> 
       <!-- card-body -->
     </div>
+    </div></div>
+    </form>
+  </div>
   </div>

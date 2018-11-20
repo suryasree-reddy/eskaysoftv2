@@ -15,6 +15,7 @@ export class UserProfileComponent implements OnInit {
 
   private userProfileForm: FormGroup;
   private deleteFlag: boolean = true;
+  private endPoint: string = "userProfile/";
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
@@ -22,14 +23,15 @@ export class UserProfileComponent implements OnInit {
   private duplicateUserName: boolean = false;
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
-  public usprList: any = [];
+  public userprofileList: any = [];
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private sharedDataService: SharedDataService,
-    private masterService: MasterService) { translate.setDefaultLang('messages.en'); }
+    private masterService: MasterService) { 
+      translate.setDefaultLang('messages.en'); }
 
   ngOnInit() {
     this.userProfileForm = this.fb.group({
@@ -61,14 +63,14 @@ export class UserProfileComponent implements OnInit {
 
   checkForDuplicateName() {
     if (!this.nameFlag) {
-      this.duplicateUserName = this.masterService.hasDataExist(this.usprList, 'Email', this.userProfileForm.value.Email);
+      this.duplicateUserName = this.masterService.hasDataExist(this.userprofileList, 'Email', this.userProfileForm.value.Email);
       this.getDuplicateErrorMessages();
     }
   }
 
   checkForDuplicateUserName() {
     if (!this.nameFlag) {
-      this.duplicateUserName = this.masterService.hasDataExist(this.usprList, 'UserName', this.userProfileForm.value.username);
+      this.duplicateUserName = this.masterService.hasDataExist(this.userprofileList, 'UserName', this.userProfileForm.value.username);
       this.getDuplicateErrorMessages();
     }
   }
