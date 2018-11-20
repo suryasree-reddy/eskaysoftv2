@@ -1,6 +1,6 @@
 <div class="col-md-5">
-    <h3>Purchase</h3>
-    <form [formGroup]="purchaseForm" (ngSubmit)="saveForm()" autocomplete="off">
+    <h3>Internal Stock Adjustment</h3>
+    <form [formGroup]="internalStockForm" (ngSubmit)="saveForm()" autocomplete="off">
         <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
           [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
@@ -21,8 +21,6 @@
                     <p>Remarks: *</p>
                     <input id="invoiceNumber" class="form-control" [formControl]="purchaseForm.controls['invoiceNumber']">
                 </div>
-
-
             </form>
         </div>
 

@@ -1,6 +1,6 @@
 <div class="col-md-5">
-    <h3>Purchase</h3>
-    <form [formGroup]="purchaseForm" (ngSubmit)="saveForm()" autocomplete="off">
+    <h3>Purchase Returns</h3>
+    <form [formGroup]="purchaseReturnsForm" (ngSubmit)="saveForm()" autocomplete="off">
         <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
           [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
