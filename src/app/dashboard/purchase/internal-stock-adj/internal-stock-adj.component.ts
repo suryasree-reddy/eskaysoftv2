@@ -14,12 +14,11 @@ export class InternalStockAdjComponent implements OnInit {
 
   private internalStockForm: FormGroup;
   private deleteFlag: boolean = true;
-  private endPoint: string = "createUser/";
+  private endPoint: string = "internalStockAdjustments/";
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
   private duplicateName: boolean = false;
-  private duplicateUserName: boolean = false;
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
   private internalStockList: any = [];
@@ -33,25 +32,35 @@ export class InternalStockAdjComponent implements OnInit {
     translate.setDefaultLang('messages.en');
 
   }
-
+  
   ngOnInit() {
     this.internalStockForm = this.fb.group({
-      id: ['', Validators.required]
-    });
-
-  //  this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
+      id: ['', Validators.required],
+      number: ['', Validators.required],
+      remarks: [],
+      date: [],
+      sNo: [],
+      code: [],
+      productName: [],
+      pack: [],
+      type: [],
+      batch: [],
+      qty: [],
+      free: []
+       });
   }
 
   checkForDuplicateName() {
-
+    if (!this.nameFlag) {
+      this.duplicateName = this.masterService.hasDataExist(this.internalStockList, 'name', this.internalStockForm.value.number);
+      this.getDuplicateErrorMessages();
+    }
   }
 
-  checkForDuplicateUserName() {
-
-  }
+ 
 
   getDuplicateErrorMessages(): void {
-    if (!this.duplicateName || !this.duplicateUserName) {
+    if (!this.checkForDuplicateName || !this.checkForDuplicateName) {
       this.formRequiredError = false;
       this.duplicateMessage = null;
       this.duplicateMessageParam = null;
@@ -78,7 +87,7 @@ export class InternalStockAdjComponent implements OnInit {
       this.formSuccess = false;
     }
   }
-
+ 
   resetForm() {
     this.internalStockForm.reset();
     this.deleteFlag = true;
@@ -86,7 +95,6 @@ export class InternalStockAdjComponent implements OnInit {
     this.duplicateMessageParam = null;
     this.nameFlag = false;
     this.duplicateName = false;
-    this.duplicateUserName = false;
     this.formRequiredError = this.formSuccess = false;
   }
 

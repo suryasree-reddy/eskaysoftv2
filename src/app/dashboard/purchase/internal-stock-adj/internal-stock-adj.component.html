@@ -1,9 +1,10 @@
 <div class="col-md-5">
-    <h3>Internal Stock Adjustment</h3>
+    <h3>{{'isa.title' | translate}}</h3>
     <form [formGroup]="internalStockForm" (ngSubmit)="saveForm()" autocomplete="off">
-        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
-
+          <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
+          [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+            [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
+           [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
     </form>
 </div>
 
@@ -13,13 +14,13 @@
         <div class="col-sm-6">
             <form class="form">
                 <div class="col-md-12 col-lt">
-                    <p>Number: *</p>
-                    <input id="purchaseNumber" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['purchaseNumber']">
+                    <p>{{'isa.number' | translate}}: *</p>
+                    <input id="number" #focus [readonly]="nameFlag" class="form-control" [formControl]="internalStockForm.controls['number']">
                 </div>
 
                 <div class="col-md-12 col-lt">
-                    <p>Remarks: *</p>
-                    <input id="invoiceNumber" class="form-control" [formControl]="purchaseForm.controls['invoiceNumber']">
+                    <p>{{'isa.remarks' | translate}}: *</p>
+                    <input id="remarks" class="form-control" [formControl]="internalStockForm.controls['remarks']">
                 </div>
             </form>
         </div>
@@ -27,8 +28,8 @@
         <div class="col-sm-6">
             <form class="form">
                 <div class="col-md-6 col-lt">
-                    <p>Date: *</p>
-                    <input id="date" class="form-control" [formControl]="purchaseForm.controls['date']">
+                    <p>{{'isa.date' | translate}}: *</p>
+                    <input id="date" class="form-control" [formControl]="internalStockForm.controls['date']">
                 </div>
 
             </form>
@@ -39,16 +40,15 @@
                 <div class="table-responsive">
                     <table id="purchaseDetailTable1" class="table table-header table-lg table-bordered">
                         <thead>
-                            <tr>
-                                <th>Sno</th>
-                                <th>Code</th>
-                                <th>Product Name</th>
-                                <th>Pack</th>
-                                <th>Type</th>
-                                <th>Batch</th>
-                                <th>Quantity</th>
-                                <th>Free</th>
-
+                            <tr>                                
+                                <th>{{'isa.code' | translate}}</th>
+                                <th>{{'isa.productName' | translate}}</th>
+                                <th>{{'isa.pack' | translate}}</th>
+                                <th>{{'isa.type' | translate}}</th>
+                                <th>{{'isa.batch' | translate}}</th>
+                                <th>{{'isa.qty' | translate}}</th>
+                                <th>{{'isa.free' | translate}}</th>
+                               
                             </tr>
                         </thead>
 
@@ -56,51 +56,46 @@
                             <tr>
                                 <td>
                                     <div class="input-group">
-                                        <input id="sno" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['sno']">
+                                        <input id="code" #focus [readonly]="nameFlag" class="form-control"
+                                            [formControl]="internalStockForm.controls['code']">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group">
                                         <input id="productName" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['productName']">
+                                            [formControl]="internalStockForm.controls['productName']">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input id="batch" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['batch']">
+                                        <input id="pack" #focus [readonly]="nameFlag" class="form-control"
+                                            [formControl]="internalStockForm.controls['pack']">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input id="expiry" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['expiry']">
+                                        <input id="type" #focus [readonly]="nameFlag" class="form-control"
+                                            [formControl]="internalStockForm.controls['type']">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input id="qty" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['qty']">
+                                        <input id="batch" #focus [readonly]="nameFlag" class="form-control" [formControl]="internalStockForm.controls['batch']">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input id="qty" #focus [readonly]="nameFlag" class="form-control"
+                                            [formControl]="internalStockForm.controls['qty']">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group">
                                         <input id="free" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['free']">
+                                            [formControl]="internalStockForm.controls['free']">
                                     </div>
                                 </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="purRate" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['purRate']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="othCharges" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['othCharges']">
-                                    </div>
-                                </td>
+                               
 
                             </tr>
                         </tbody>
@@ -110,35 +105,28 @@
             </div>
         </div>
 
-        <!-- Table End -->
-
-        <!-- Common Grid Start -->
-
-        <!-- Common Grid End -->
-
-
-
+       
 
 <!-- As Per Software Table Start -->
 
 
-        <div class="col-sm-6 col-lt">
+        <!-- <div class="col-sm-6 col-lt">
                 <form class="form">
                     <div class="col-md-12 col-lt">
                         <p>Debit Adjustment Ledger: *</p>
-                        <input id="debitAdjustmentLedger" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['debitAdjustmentLedger']">
+                        <input id="debitAdjustmentLedger" #focus [readonly]="nameFlag" class="form-control" [formControl]="internalStockForm.controls['debitAdjustmentLedger']">
                     </div>
                     <div class="col-md-12 col-lt">
                         <p>Credit Adjustment Ledger: *</p>
-                        <input id="CreditAdjustmentLedger" class="form-control" [formControl]="purchaseForm.controls['CreditAdjustmentLedger']">
+                        <input id="CreditAdjustmentLedger" class="form-control" [formControl]="internalStockForm.controls['CreditAdjustmentLedger']">
                     </div>
                     <div class="col-md-6 col-lt">
                         <p>Net Value: *</p>
-                        <input id="netValue" class="form-control" [formControl]="purchaseForm.controls['netValue']">
+                        <input id="netValue" class="form-control" [formControl]="internalStockForm.controls['netValue']">
                     </div>
                     <div class="col-md-6 col-lt">
                         <p>Remarks: *</p>
-                        <input id="remarks" class="form-control" [formControl]="purchaseForm.controls['remarks']">
+                        <input id="remarks" class="form-control" [formControl]="internalStockForm.controls['remarks']">
                     </div>
                 </form>
             </div>
@@ -147,27 +135,34 @@
                     <form class="form">
                         <div class="col-md-12 col-lt">
                             <p>Debit Adjustment Value: *</p>
-                            <input id="DebitAdjustmentValue" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['DebitAdjustmentValue']">
+                            <input id="DebitAdjustmentValue" #focus [readonly]="nameFlag" class="form-control" [formControl]="internalStockForm.controls['DebitAdjustmentValue']">
                         </div>
                         <div class="col-md-12 col-lt">
                             <p>Credit Adjustment Value: *</p>
-                            <input id="creditAdjustmentValue" class="form-control" [formControl]="purchaseForm.controls['creditAdjustmentValue']">
+                            <input id="creditAdjustmentValue" class="form-control" [formControl]="internalStockForm.controls['creditAdjustmentValue']">
                         </div>
                         <div class="col-md-12 col-lt">
                             <p>Invoice Value: *</p>
-                            <input id="invoiceValue" class="form-control" [formControl]="purchaseForm.controls['invoiceValue']">
+                            <input id="invoiceValue" class="form-control" [formControl]="internalStockForm.controls['invoiceValue']">
                         </div>
 
                     </form>
-                </div>
+                </div> -->
 
-        <div class="input-group">
+        <!-- <div class="input-group">
             <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
             <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
             <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete'
                 | translate }}</button>
-        </div>
-
+        </div> -->
+        <app-buttons [title]="'internal-stock-adj.title'" [deleteConfirmMsg]="'internal-stock-adj.deleteConfirmationMessage'"
+        [saveConfirmMsg]="'internal-stock-adj.saveConfirmationMessage'" [saveInfoMsg]="'internal-stock-adj.saveInformationMessage'"
+        [endPoint]="endPoint"
+        [deleteInfoMsg]="'internal-stock-adj.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+        [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+        [hideDeleteBtn]=false [formObj]="internalStockForm" (saveRecord)="save()"
+        (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+        (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
 
     </div>
 
