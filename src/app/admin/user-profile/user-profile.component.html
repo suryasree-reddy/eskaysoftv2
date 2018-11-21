@@ -5,202 +5,323 @@
 
       <div class="row">
         <h4>{{'userprofile.title' | translate }}</h4>
-        <p>{{'userprofile.clientid' | translate }}:
-          <input type="text" style="border:hidden; margin: 5px;">
+      </div>
+      <div class="col-md-12">
+        <p class="col-sm-4">{{'userprofile.clientid' | translate }}:
+          <input type="text" class="brdr-hide" [readonly]="true">
+        </p>
+        <p class="col-sm-4">{{'userprofile.name' | translate }}:
+          <input type="text" class="brdr-hide" [readonly]="true">
+        </p>
+        <p class="col-sm-4">{{'userprofile.town' | translate }}:
+          <input type="text" class="brdr-hide" [readonly]="true">
         </p>
       </div>
     </div> <!-- header -->
     <form [formGroup]="userProfileForm" autocomplete="off">
-    <div class="col-xs-12 card-body">
-      <div class="col-xs-12">
-<div class="row">
-      <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-      [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-        [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
-       [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+      <div class="col-xs-12 card-body">
+        <div class="col-xs-12">
+          <div class="row">
+            <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()"
+              [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
+              [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
+              [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input autofocus id="name" maxlength="50" class="form-control" [formControl]="userProfileForm.controls['name']"
-              placeholder="{{'userprofile.name' | translate }}">
-          </div>
-        </div>
+            <div>
+              <div id="tab" class='col-xs-12'>
+                <tabset type="pills">
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input id="username" maxlength="50" class="form-control" [formControl]="userProfileForm.controls['username']"
-              placeholder="{{'userprofile.username' | translate }}">
-          </div>
-        </div>
+                  <tab heading="Profile Info">
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input autofocus id="name" maxlength="50" class="form-control" [formControl]="userProfileForm.controls['name']"
+                          placeholder="{{'userprofile.name' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-            <input id="address1" maxlength="50" class="form-control" [formControl]="userProfileForm.controls['address1']"
-              placeholder="{{'userprofile.address1' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="username" maxlength="50" class="form-control" [formControl]="userProfileForm.controls['username']"
+                          placeholder="{{'userprofile.username' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-            <input id="address2" maxlength="50" class="form-control" [formControl]="userProfileForm.controls['address2']"
-              placeholder="{{'userprofile.address2' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <input id="address1" maxlength="50" class="form-control" [formControl]="userProfileForm.controls['address1']"
+                          placeholder="{{'userprofile.address1' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-            <input id="town" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['town']"
-              placeholder="{{'userprofile.town' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <input id="address2" maxlength="50" class="form-control" [formControl]="userProfileForm.controls['address2']"
+                          placeholder="{{'userprofile.address2' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-            <input id="pin" type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              class="form-control" [formControl]="userProfileForm.controls['pin']" placeholder="{{'userprofile.pin' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <input id="town" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['town']"
+                          placeholder="{{'userprofile.town' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-            <input id="district" maxlength="25" class="form-control" [formControl]="userProfileForm.controls['district']"
-              placeholder="{{'userprofile.district' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <input id="pin" type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                          class="form-control" [formControl]="userProfileForm.controls['pin']" placeholder="{{'userprofile.pin' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-            <input id="state" maxlength="25" class="form-control" [formControl]="userProfileForm.controls['state']"
-              placeholder="{{'userprofile.state' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <input id="district" maxlength="25" class="form-control" [formControl]="userProfileForm.controls['district']"
+                          placeholder="{{'userprofile.district' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-            <input id="statecode" type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              class="form-control" [formControl]="userProfileForm.controls['statecode']" placeholder="{{'userprofile.statecode' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <input id="state" maxlength="25" class="form-control" [formControl]="userProfileForm.controls['state']"
+                          placeholder="{{'userprofile.state' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-            <input id="phoneLand1" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['phoneLand1']"
-              placeholder="{{'userprofile.phone' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <input id="statecode" type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                          class="form-control" [formControl]="userProfileForm.controls['statecode']" placeholder="{{'userprofile.statecode' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-            <input id="mobile1" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              class="form-control" [formControl]="userProfileForm.controls['mobile1']" placeholder="{{'userprofile.mobile1' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                        <input id="phoneLand1" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['phoneLand1']"
+                          placeholder="{{'userprofile.phone' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-            <input id="mobile2" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              class="form-control" [formControl]="userProfileForm.controls['mobile2']" placeholder="{{'userprofile.mobile2' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                        <input id="mobile1" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                          class="form-control" [formControl]="userProfileForm.controls['mobile1']" placeholder="{{'userprofile.mobile1' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input id="contactPerson" maxlength="50" class="form-control" [formControl]="userProfileForm.controls['contactPerson']"
-              placeholder="{{'userprofile.contactperson' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                        <input id="mobile2" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                          class="form-control" [formControl]="userProfileForm.controls['mobile2']" placeholder="{{'userprofile.mobile2' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-            <input id="cPersonMobile" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              class="form-control" [formControl]="userProfileForm.controls['cPersonMobile']" placeholder="{{'userprofile.contactpersonmobile' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="contactPerson" maxlength="50" class="form-control" [formControl]="userProfileForm.controls['contactPerson']"
+                          placeholder="{{'userprofile.contactperson' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-            <input id="natureofbusiness" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['natureofbusiness']"
-              placeholder="{{'userprofile.natureofbusiness' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                        <input id="cPersonMobile" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                          class="form-control" [formControl]="userProfileForm.controls['cPersonMobile']" placeholder="{{'userprofile.contactpersonmobile' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
-            <input id="bank1" maxlength="30" class="form-control" [formControl]="userProfileForm.controls['bank1']"
-              placeholder="{{'userprofile.bankname1' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <input id="natureofbusiness" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['natureofbusiness']"
+                          placeholder="{{'userprofile.natureofbusiness' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
-            <input id="bankacno1" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['bankacno1']"
-              placeholder="{{'userprofile.bankacno1' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+                        <input id="bank1" maxlength="30" class="form-control" [formControl]="userProfileForm.controls['bank1']"
+                          placeholder="{{'userprofile.bankname1' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
-            <input id="bankifsc1" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['bankifsc1']"
-              placeholder="{{'userprofile.bankifscno1' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                        <input id="bankacno1" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['bankacno1']"
+                          placeholder="{{'userprofile.bankacno1' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4" >
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
-            <input id="bank2" maxlength="30" class="form-control" [formControl]="userProfileForm.controls['bank2']"
-              placeholder="{{'userprofile.bankname2' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+                        <input id="bankifsc1" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['bankifsc1']"
+                          placeholder="{{'userprofile.bankifscno1' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
-            <input id="bankacno2" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['bankacno2']"
-              placeholder="{{'userprofile.bankacno2' | translate }}">
-          </div>
-        </div>
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+                        <input id="bank2" maxlength="30" class="form-control" [formControl]="userProfileForm.controls['bank2']"
+                          placeholder="{{'userprofile.bankname2' | translate }}">
+                      </div>
+                    </div>
 
-        <div class="col-xs-4">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
-            <input id="bankifsc2" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['bankifsc2']"
-              placeholder="{{'userprofile.bankifscno2' | translate }}">
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                        <input id="bankacno2" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['bankacno2']"
+                          placeholder="{{'userprofile.bankacno2' | translate }}">
+                      </div>
+                    </div>
+
+                    <div class="col-xs-4">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+                        <input id="bankifsc2" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['bankifsc2']"
+                          placeholder="{{'userprofile.bankifscno2' | translate }}">
+                      </div>
+                    </div>
+                  </tab>
+
+                  <tab heading="{{'accountinfo.reginfo' | translate}}">
+                      <!-- Regs Info Starts -->
+                        <div class="col-md-4 col-3-lt">
+                          <p>{{'accountinfo.licno1' | translate}}: *</p>
+                          <input id="licNo1" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['licNo1']">
+                        </div>
+    
+                        <div class="col-md-4 col-3-lt">
+                          <p>{{'accountinfo.licno2' | translate}}: *</p>
+                          <input id="licNo2" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['licNo2']">
+                        </div>
+                        <div class="col-md-4 col-3-lt">
+                          <p>{{'accountinfo.licexpiry' | translate}}: *</p>
+                          <input id="licExpiry" type="date"  class="form-control" [formControl]="userProfileForm.controls['licExpiry']">
+                        </div>
+                        <div class="col-md-4 col-3-lt">
+                          <p>{{'accountinfo.retlicno1' | translate}}: *</p>
+                          <input id="retLicNo1" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['retLicNo1']">
+                        </div>
+                        <div class="col-md-4 col-3-lt">
+                          <p>{{'accountinfo.retlicno2' | translate}}: *</p>
+                          <input id="retLicNo2" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['retLicNo2']">
+                        </div>
+    
+                        <div class="col-md-4 col-3-lt">
+                          <p>{{'accountinfo.retexpiry' | translate}}: *</p>
+                          <input id="retExpiry" type="date"  class="form-control" [formControl]="userProfileForm.controls['retExpiry']">
+                        </div>
+    
+                        <div class="col-md-4 col-3-lt">
+                          <p>{{'accountinfo.foodlicno1' | translate}}: *</p>
+                          <input id="foodLicNo" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['foodLicNo']">
+                        </div>
+                        <div class="col-md-4 col-3-lt">
+                          <p>{{'accountinfo.otherlic' | translate}}: *</p>
+                          <input id="otherLicense" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['otherLicense']">
+                        </div>
+                        <div class="col-md-4 col-3-lt">
+                          <p>{{'accountinfo.otherlicexp' | translate}}: *</p>
+                          <input id="otherLicenseExpiry" type="date"  class="form-control" [formControl]="userProfileForm.controls['otherLicenseExpiry']">
+                        </div>
+    
+                        <div class="col-md-4 col-3-lt">
+                          <p>{{'accountinfo.gsttype' | translate}}: *</p>
+                            <input id="gstType" maxlength="5" class="form-control"  [formControl]="userProfileForm.controls['gstType']" [typeahead]="accGstType"
+                              typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+                              <span class="caret" ></span>
+                        </div>
+    
+                        <div class="col-md-4 col-3-lt">
+                          <p>{{'accountinfo.gstin' | translate}}: *</p>
+                          <input id="gstIN" maxlength="15"  class="form-control" [formControl]="userProfileForm.controls['gstIN']">
+                        </div>
+    
+                        <div class="col-md-4 col-3-lt">
+                          <p>{{'accountinfo.naturegst' | translate}}: *</p>
+                            <input id="natureOfGST" maxlength="9"  class="form-control" [formControl]="userProfileForm.controls['natureOfGST']"
+                              [typeahead]="accNatureOfGst" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+                              <span class="caret"></span>
+                        </div>
+    
+                        <div class="col-md-4 col-3-lt">
+                          <p>{{'accountinfo.uinNo' | translate}}: *</p>
+                          <input id="uin" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['uin']">
+                        </div>
+                             <!-- Regs Info Ends -->
+                    </tab>
+
+                    <tab heading="{{'accountinfo.cred' | translate}}">
+                        <!-- Credentials Starts -->
+                        <div style="height:335px;">
+                          <div class="col-md-4 col-3-lt">
+                            <p>{{'accountinfo.crlimit' | translate}}: *</p>
+                            <input id="creditLimit" type="number" maxlength="12" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                              class="form-control" [formControl]="userProfileForm.controls['creditLimit']">
+                          </div>
+      
+                          <div class="col-md-4 col-3-lt">
+                            <p>{{'accountinfo.saletype' | translate}}: *</p>
+                            <input id="saleType" maxlength="6"  class="form-control" [formControl]="userProfileForm.controls['saleType']"
+                            [typeahead]="accSaleType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+                            <span class="caret"></span>
+                          </div>
+      
+                          <div class="col-md-4 col-3-lt">
+                            <p>{{'accountinfo.custType' | translate}}: *</p>
+                            <input id="customerType"  maxlength="10"  class="form-control" [formControl]="userProfileForm.controls['customerType']"
+                            [typeahead]="accCustomerType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+                            <span class="caret"></span>
+                          </div>
+      
+      
+                          <div class="col-md-4 col-3-lt">
+                           <p>{{'accountinfo.duedays' | translate}}: *</p>
+                            <input id="dueDays" type="number" maxlength="3"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                             class="form-control" [formControl]="userProfileForm.controls['dueDays']">
+                          </div>  
+                        </div>         
+                        <!-- Credentials Ends -->
+                      </tab>
+
+                </tabset>
+              </div>
+            </div>
+
           </div>
+
+
+
+          <div class="pd-btm-1">
+            <app-buttons [title]="'userprofile.title'" [deleteConfirmMsg]="'userprofile.deleteConfirmationMessage'"
+              [saveConfirmMsg]="'userprofile.saveConfirmationMessage'" [saveInfoMsg]="'userprofile.saveInformationMessage'"
+              [endPoint]="endPoint" [deleteInfoMsg]="'userprofile.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+              [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=false [formObj]="userProfileForm"
+              (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (afterSuccess)="successMsg()"
+              (resetForm)="resetForm()"></app-buttons>
+          </div>
+          <!-- card-body -->
+
         </div>
       </div>
-
-      <div class="pd-btm-1">
-        <app-buttons [title]="'userprofile.title'" [deleteConfirmMsg]="'userprofile.deleteConfirmationMessage'"
-        [saveConfirmMsg]="'userprofile.saveConfirmationMessage'" [saveInfoMsg]="'userprofile.saveInformationMessage'"
-        [endPoint]="endPoint"
-        [deleteInfoMsg]="'userprofile.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-        [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-        [hideDeleteBtn]=false [formObj]="userProfileForm" (saveRecord)="save()"
-        (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-        (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
-      </div>
-      <!-- card-body -->
-
-    </div></div>
     </form>
   </div>
-  </div>
+</div>

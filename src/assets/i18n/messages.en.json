@@ -331,7 +331,7 @@
     "duplicateNameErrorMessage":"The Account Name '{{duplicateMessageParam}}' already exists with this name.",
     "duplicateCodeErrorMessage":"The Account code '{{duplicateMessageParam}}' already exists with this code."
   },
-  "isa":{
+  "internalStockAdj":{
     "title": "Internal Stock Adjustments",
     "endPoint":"internalStockAdjustments/",
     "number":"Number",
@@ -428,6 +428,14 @@
     "title": "Purchase Returns Register",
     "repType": "Report Type",
     "custOption": "Customer Option"
+  },
+  "purchaseOrder": {
+    "title": "Purchase Order",
+    "bank": "Bank",
+    "rate": "Rate",
+    "bqty": "B.Qty",
+    "bfree": "B.Free",
+    "brate": "B.Rate"
   },
   "button": {
     "save": "Save",

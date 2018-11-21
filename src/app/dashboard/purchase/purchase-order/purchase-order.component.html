@@ -1,0 +1,116 @@
+<!-- <div class="col-md-12">
+  <div class="row">
+
+<div class="col-md-5">
+  <h3>{{'purchaseOrder.title' | translate}}</h3>
+  <form [formGroup]="purchaseOrderForm" (ngSubmit)="saveForm()" autocomplete="off">
+      <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()"
+          [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
+          [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
+          [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+
+  </form>
+</div>
+
+
+<div class="col-md-12 mr-b-2">
+  <div class="row">
+      <div class="col-sm-6">
+          <form class="form">
+              <div class="col-md-6 col-lt">
+                  <p>{{'common.orderNumber' | translate}}: *</p>
+                  <input id="orderNumber" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseOrderForm.controls['orderNumber']">
+              </div>
+              <div class="col-md-6 col-lt">
+                <p>{{'common.date' | translate}}: *</p>
+                <input id="date" class="form-control" [formControl]="purchaseOrderForm.controls['date']">
+            </div>
+
+              <div class="col-md-6 col-lt">
+                  <p>{{'common.supplier' | translate}}: *</p>
+                  <input id="supplier" class="form-control" [formControl]="purchaseOrderForm.controls['supplier']">
+              </div>
+              <div class="col-md-6 col-lt">
+                <p>{{'purchaseOrder.bank' | translate}}: *</p>
+                <input id="bank" class="form-control" [formControl]="purchaseOrderForm.controls['bank']">
+            </div>
+
+              <div class="col-md-6 col-lt">
+                  <p>{{'common.remarks' | translate}}: *</p>
+                  <input id="remarks" class="form-control" [formControl]="purchaseOrderForm.controls['remarks']">
+              </div>
+              <div class="col-md-6 col-lt">
+                <p>{{'common.transport' | translate}}: *</p>
+                <input id="transport" class="form-control" [formControl]="purchaseOrderForm.controls['transport']">
+            </div>
+         
+          <div class="col-md-6 col-lt">
+            <p>{{'common.code' | translate}}: *</p>
+            <input id="productcode" class="form-control" [formControl]="purchaseOrderForm.controls['productcode']">
+        </div>
+        <div class="col-md-6 col-lt">
+          <p>{{'common.productName' | translate}}: *</p>
+          <input id="productName" class="form-control" [formControl]="purchaseOrderForm.controls['productName']">
+      </div>
+      <div class="col-md-6 col-lt">
+        <p>{{'common.pack' | translate}}: *</p>
+        <input id="pack" class="form-control" [formControl]="purchaseOrderForm.controls['pack']">
+    </div>
+    <div class="col-md-6 col-lt">
+      <p>{{'common.qty' | translate}}: *</p>
+      <input id="qty" class="form-control" [formControl]="purchaseOrderForm.controls['qty']">
+  </div>
+  <div class="col-md-6 col-lt">
+    <p>{{'common.free' | translate}}: *</p>
+    <input id="free" class="form-control" [formControl]="purchaseOrderForm.controls['free']">
+</div>
+<div class="col-md-6 col-lt">
+  <p>{{'purchaseOrder.rate' | translate}}: *</p>
+  <input id="rate" class="form-control" [formControl]="purchaseOrderForm.controls['rate']">
+</div>
+<div class="col-md-6 col-lt">
+  <p>{{'purchaseOrder.bqty' | translate}}: *</p>
+  <input id="bQty" class="form-control" [formControl]="purchaseOrderForm.controls['bQty']">
+</div>
+<div class="col-md-6 col-lt">
+  <p>{{'purchaseOrder.bfree' | translate}}: *</p>
+  <input id="bFree" class="form-control" [formControl]="purchaseOrderForm.controls['bFree']">
+</div>
+<div class="col-md-6 col-lt">
+  <p>{{'purchaseOrder.brate' | translate}}: *</p>
+  <input id="bRate" class="form-control" [formControl]="purchaseOrderForm.controls['bRate']">
+</div>
+
+
+
+
+          </form>
+      </div>
+
+ 
+    
+
+      <div class="input-group">
+        
+
+          <app-buttons [title]="'purchaseReturn.title'" [deleteConfirmMsg]="'purchaseReturn.deleteConfirmationMessage'"
+              [saveConfirmMsg]="'purchaseReturn.saveConfirmationMessage'" [saveInfoMsg]="'purchaseReturn.saveInformationMessage'"
+              [endPoint]="endPoint" [deleteInfoMsg]="'purchaseReturn.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+              [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=true [formObj]="purchaseOrderForm"
+              (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+              (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
+      </div>
+
+
+  </div>
+
+</div>
+
+<div class="col-md-7">
+  <br /><br />
+  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
+  [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'PurchaseOrderColumns'"></app-synectiks-common-grid>
+</div>
+
+</div>
+</div> -->

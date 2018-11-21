@@ -1,5 +1,5 @@
 <div class="col-md-5">
-    <h3>{{'isa.title' | translate}}</h3>
+    <h3>{{'internalStockAdj.title' | translate}}</h3>
     <form [formGroup]="internalStockForm" (ngSubmit)="saveForm()" autocomplete="off">
           <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
           [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
@@ -14,12 +14,12 @@
         <div class="col-sm-6">
             <form class="form">
                 <div class="col-md-12 col-lt">
-                    <p>{{'isa.number' | translate}}: *</p>
+                    <p>{{'internalStockAdj.number' | translate}}: *</p>
                     <input id="number" #focus [readonly]="nameFlag" class="form-control" [formControl]="internalStockForm.controls['number']">
                 </div>
 
                 <div class="col-md-12 col-lt">
-                    <p>{{'isa.remarks' | translate}}: *</p>
+                    <p>{{'internalStockAdj.remarks' | translate}}: *</p>
                     <input id="remarks" class="form-control" [formControl]="internalStockForm.controls['remarks']">
                 </div>
             </form>
@@ -28,7 +28,7 @@
         <div class="col-sm-6">
             <form class="form">
                 <div class="col-md-6 col-lt">
-                    <p>{{'isa.date' | translate}}: *</p>
+                    <p>{{'internalStockAdj.date' | translate}}: *</p>
                     <input id="date" class="form-control" [formControl]="internalStockForm.controls['date']">
                 </div>
 
@@ -41,13 +41,13 @@
                     <table id="purchaseDetailTable1" class="table table-header table-lg table-bordered">
                         <thead>
                             <tr>                                
-                                <th>{{'isa.code' | translate}}</th>
-                                <th>{{'isa.productName' | translate}}</th>
-                                <th>{{'isa.pack' | translate}}</th>
-                                <th>{{'isa.type' | translate}}</th>
-                                <th>{{'isa.batch' | translate}}</th>
-                                <th>{{'isa.qty' | translate}}</th>
-                                <th>{{'isa.free' | translate}}</th>
+                                <th>{{'internalStockAdj.code' | translate}}</th>
+                                <th>{{'internalStockAdj.productName' | translate}}</th>
+                                <th>{{'internalStockAdj.pack' | translate}}</th>
+                                <th>{{'internalStockAdj.type' | translate}}</th>
+                                <th>{{'internalStockAdj.batch' | translate}}</th>
+                                <th>{{'internalStockAdj.qty' | translate}}</th>
+                                <th>{{'internalStockAdj.free' | translate}}</th>
                                
                             </tr>
                         </thead>
@@ -152,14 +152,14 @@
         <!-- <div class="input-group">
             <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
             <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-            <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete'
+            <button type="button" [dinternalStockAdjbled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete'
                 | translate }}</button>
         </div> -->
         <app-buttons [title]="'internal-stock-adj.title'" [deleteConfirmMsg]="'internal-stock-adj.deleteConfirmationMessage'"
         [saveConfirmMsg]="'internal-stock-adj.saveConfirmationMessage'" [saveInfoMsg]="'internal-stock-adj.saveInformationMessage'"
         [endPoint]="endPoint"
         [deleteInfoMsg]="'internal-stock-adj.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-        [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+        [isBtnDeleteDinternalStockAdjble]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
         [hideDeleteBtn]=false [formObj]="internalStockForm" (saveRecord)="save()"
         (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
         (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>

@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit,  NgModule, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BsDropdownModule, TypeaheadModule, TabsModule } from 'ngx-bootstrap';
 import { MasterService } from 'src/app/dashboard/master/master.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.component';
@@ -11,6 +12,13 @@ import { SharedDataService } from 'src/app/shared/model/shared-data.service';
   styleUrls: ['./user-profile.component.scss']
 })
 
+@NgModule({
+  imports: [
+    BsDropdownModule.forRoot(),
+    TypeaheadModule.forRoot(),
+    TabsModule.forRoot()
+  ],
+})
 export class UserProfileComponent implements OnInit {
 
   private userProfileForm: FormGroup;

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BsDropdownModule, TypeaheadModule, TabsModule  } from 'ngx-bootstrap';
 
 import { NgForm, NgModel, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin-routing.module';
@@ -18,6 +19,9 @@ import { UpdateuserComponent } from './updateuser/updateuser.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
+    BsDropdownModule.forRoot(),
+    TypeaheadModule.forRoot(),
+    TabsModule.forRoot(),
       SharedmoduleModule,
     ReactiveFormsModule,
     HttpClientModule,
