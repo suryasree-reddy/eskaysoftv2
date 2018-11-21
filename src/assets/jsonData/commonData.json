@@ -996,7 +996,8 @@
       "width": 120,
       "suppressSizeToFit": false
     }
-  ],"mfgwisePurchaseColumns": [{
+  ],
+  "mfgwisePurchaseColumns": [{
       "headerName": "Mfg. Option",
       "field": "mfgoption",
       "filterParams": {
@@ -1025,7 +1026,7 @@
       },
       "suppressSizeToFit": false
     },
-    
+
     {
       "headerName": "Status",
       "field": "deleteFlag",
@@ -1053,7 +1054,7 @@
       },
       "suppressSizeToFit": false
     },
-	{
+    {
       "headerName": "Report Option",
       "field": "reportOption",
       "filterParams": {
@@ -1062,7 +1063,7 @@
       },
       "suppressSizeToFit": false
     },
-	{
+    {
       "headerName": "From Date",
       "field": "fromDate",
       "filterParams": {
@@ -1080,7 +1081,7 @@
       },
       "suppressSizeToFit": false
     },
-    
+
     {
       "headerName": "Status",
       "field": "deleteFlag",
@@ -1089,7 +1090,8 @@
       "width": 120,
       "suppressSizeToFit": false
     }
-  ], "purchaseRegisterColumns": [{
+  ],
+  "purchaseRegisterColumns": [{
       "headerName": "GST Type",
       "field": "gstType",
       "filterParams": {
@@ -1107,7 +1109,7 @@
       },
       "suppressSizeToFit": false
     },
-	{
+    {
       "headerName": "To Date",
       "field": "toDate",
       "filterParams": {
@@ -1116,7 +1118,7 @@
       },
       "suppressSizeToFit": false
     },
-	{
+    {
       "headerName": "Report Type",
       "field": "reportType",
       "filterParams": {
@@ -1125,7 +1127,141 @@
       },
       "suppressSizeToFit": false
     },
-       
+
+    {
+      "headerName": "Status",
+      "field": "deleteFlag",
+      "cellRenderer": "deltaIndicator",
+      "suppressFilter": true,
+      "width": 120,
+      "suppressSizeToFit": false
+    }
+  ],
+  "PurchaseOrderColumns": [{
+      "headerName": "Order Number",
+      "field": "orderNumber",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Date",
+      "field": "date",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Supplier",
+      "field": "supplier",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Bank",
+      "field": "bank",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Remarks",
+      "field": "remarks",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "Code",
+      "field": "code",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "Transport",
+      "field": "transport",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "Product Name",
+      "field": "productName",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "Pack",
+      "field": "pack",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "Qty",
+      "field": "qty",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "Free",
+      "field": "free",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "Rate",
+      "field": "rate",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "B.Qty",
+      "field": "bQty",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "B.Free",
+      "field": "bFree",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "B.Rate",
+      "field": "bRate",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
     {
       "headerName": "Status",
       "field": "deleteFlag",

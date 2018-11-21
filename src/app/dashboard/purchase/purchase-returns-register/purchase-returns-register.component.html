@@ -1,59 +1,45 @@
-<div class="col-md-5">
-    <h3>{{'purchaseRetReg.title'| translate}}</h3>
-    <form [formGroup]="purchaseReturnRegisterForm" (ngSubmit)="saveForm()" autocomplete="off">
-        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
-
-    </form>
-</div>
-
-
-<div class="col-md-12 mr-b-2">
-    <div class="row">
-        <div class="col-sm-6">
-            <form class="form">
-
-                <div class="col-md-12 col-lt">
-                    <p>{{'common.fromDate'| translate}}: *</p>
-                    <input id="fromDate" type="date" class="form-control" [formControl]="purchaseReturnRegisterForm.controls['fromDate']">
-                </div>
-              <div class="col-md-12 col-lt">
-                    <p>{{'common.toDate'| translate}}: *</p>
-                    <input id="toDate" type="date" class="form-control" [formControl]="purchaseReturnRegisterForm.controls['toDate']">
-                </div>
-                       <div class="input-group">
-                  <p>{{'purchaseRetReg.repType'| translate}}: *</p>
-                 <input id="repType" maxlength="7"  class="form-control" formControlName="repType" [typeahead]="reportType" typeaheadOptionField="description"
-                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
-                  <span class="caret"></span>
-            </div>
-                     <div class="input-group">
-                  <p>{{'purchaseRetReg.custOption'| translate}}: *</p>
-                 <input id="custOption" maxlength="7"  class="form-control" formControlName="custOption" [typeahead]="custOption" typeaheadOptionField="description"
-                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
-                  <span class="caret"></span>
-            </div>
-
-            </form>
-        </div>
-
+<div class="col-xs-5">
+  <h3>{{'purchaseRetReg.title' | translate}}</h3>
+  <form [formGroup]="purchaseReturnRegisterForm" autocomplete="off">
+        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
+        [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+        [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
+        [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
         <div class="input-group">
-            <!-- <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
-            <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-            <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete'
-                | translate }}</button> -->
-
-                <app-buttons [title]="'purchaseRetReg.title'" [deleteConfirmMsg]="'purchaseRetReg.deleteConfirmationMessage'"
-                [saveConfirmMsg]="'purchaseRetReg.saveConfirmationMessage'" [saveInfoMsg]="'purchaseRetReg.saveInformationMessage'" [endPoint]="endPoint"
-                [deleteInfoMsg]="'purchaseRetReg.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-                [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-                [hideDeleteBtn]=true [formObj]="purchaseReturnRegisterForm" (saveRecord)="save()"
-                (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-                (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
+            <p>{{'common.fromDate'| translate}}: *</p>
+            <input id="fromDate" type="date" class="form-control" [formControl]="purchaseReturnRegisterForm.controls['fromDate']">
         </div>
+      <div class="input-group">
+            <p>{{'common.toDate'| translate}}: *</p>
+            <input id="toDate" type="date" class="form-control" [formControl]="purchaseReturnRegisterForm.controls['toDate']">
+        </div>
+               <div class="input-group">
+          <p>{{'purchaseRetReg.repType'| translate}}: *</p>
+         <input id="repType" maxlength="7"  class="form-control" formControlName="repType" [typeahead]="reportType" typeaheadOptionField="description"
+        [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
+          <span class="caret"></span>
+      </div>
+             <div class="input-group">
+          <p>{{'purchaseRetReg.custOption'| translate}}: *</p>
+         <input id="custOption" maxlength="7"  class="form-control" formControlName="custOption" [typeahead]="custOption" typeaheadOptionField="description"
+        [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
+          <span class="caret"></span>
+      </div>
 
+      <app-buttons [title]="'purchaseRetReg.title'" [deleteConfirmMsg]="'purchaseRetReg.deleteConfirmationMessage'"
+      [saveConfirmMsg]="'purchaseRetReg.saveConfirmationMessage'" [saveInfoMsg]="'purchaseRetReg.saveInformationMessage'" [endPoint]="endPoint"
+      [deleteInfoMsg]="'purchaseRetReg.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+      [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+      [hideDeleteBtn]=true [formObj]="purchaseReturnRegisterForm" (saveRecord)="save()"
+      (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+      (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
 
-    </div>
+    </form>
+ </div>
 
-</div>
+ <div class="col-xs-7">
+   <br /><br />
+   <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
+   [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'InternalStockAdj'"></app-synectiks-common-grid>
+ </div>
