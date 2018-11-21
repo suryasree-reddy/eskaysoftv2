@@ -406,7 +406,7 @@
     {
       "headerName": "Account Name",
       "field": "accountName",
-        "tooltipField": "accountName",
+      "tooltipField": "accountName",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -415,7 +415,7 @@
     {
       "headerName": "Company Description",
       "field": "companyName",
-        "tooltipField": "companyName",
+      "tooltipField": "companyName",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -473,41 +473,41 @@
     }
   ],
   "ProductCategoryColumns": [{
-    "headerName": "Product Category",
-    "field": "productCategoryName",
-    "filterParams": {
-      "filterOptions": ["contains"],
-      "newRowsAction": "keep"
+      "headerName": "Product Category",
+      "field": "productCategoryName",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
     },
-    "suppressSizeToFit": false
-  },
-  {
-    "headerName": "Status",
-    "field": "deleteFlag",
-    "cellRenderer": "deltaIndicator",
-    "suppressFilter": true,
-    "width": 35,
-    "suppressSizeToFit": false
-  }
-],
+    {
+      "headerName": "Status",
+      "field": "deleteFlag",
+      "cellRenderer": "deltaIndicator",
+      "suppressFilter": true,
+      "width": 35,
+      "suppressSizeToFit": false
+    }
+  ],
   "ProductGroupColumns": [{
-    "headerName": "Product Group",
-    "field": "productGroupName",
-    "filterParams": {
-      "filterOptions": ["contains"],
-      "newRowsAction": "keep"
+      "headerName": "Product Group",
+      "field": "productGroupName",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
     },
-    "suppressSizeToFit": false
-  },
-  {
-    "headerName": "Status",
-    "field": "deleteFlag",
-    "cellRenderer": "deltaIndicator",
-    "suppressFilter": true,
-    "width": 35,
-    "suppressSizeToFit": false
-  }
-],
+    {
+      "headerName": "Status",
+      "field": "deleteFlag",
+      "cellRenderer": "deltaIndicator",
+      "suppressFilter": true,
+      "width": 35,
+      "suppressSizeToFit": false
+    }
+  ],
   "GstType": [{
       "code": "RGST",
       "description": "RGST"
@@ -626,20 +626,20 @@
       "suppressSizeToFit": false
     }
   ],
-  "UserRoles":[
-        "Roles",
-        "Allow Masters",
-        "Allow Purchase",
-        "Allow Sales",
-        "Allow Inventory Reports",
-        "Allow Finance",
-        "Allow Finance Reports",
-        "Allow GST Report",
-      "Allow Miscellaneous",
-        "Allow Invoice Date Change",
-      "Allow Modification or Deletion"
-    ],
-    "ReportType": [{
+  "UserRoles": [
+    "Roles",
+    "Allow Masters",
+    "Allow Purchase",
+    "Allow Sales",
+    "Allow Inventory Reports",
+    "Allow Finance",
+    "Allow Finance Reports",
+    "Allow GST Report",
+    "Allow Miscellaneous",
+    "Allow Invoice Date Change",
+    "Allow Modification or Deletion"
+  ],
+  "ReportType": [{
       "code": "Bill",
       "description": "Billwise"
     },
@@ -655,7 +655,485 @@
       "code": "Sum",
       "description": "Summary"
     }
+  ],
+  "InternalStockAdj": [{
+      "headerName": "Code",
+      "field": "code",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Product Name",
+      "field": "productName",
+      "tooltipField": "productName",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Pack",
+      "field": "pack",
+      "tooltipField": "pack",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Type",
+      "field": "type",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Batch",
+      "field": "batch",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Qty",
+      "field": "qty",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Free",
+      "field": "free",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Status",
+      "field": "deleteFlag",
+      "cellRenderer": "deltaIndicator",
+      "suppressFilter": true,
+      "width": 120,
+      "suppressSizeToFit": false
+    }
+  ],
+  "PurchaseDashBoard": [{
+      "headerName": "Code",
+      "field": "code",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Product Name",
+      "field": "productName",
+      "tooltipField": "productName",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Batch",
+      "field": "batch",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Expiry",
+      "field": "expiry",
+      "tooltipField": "expiry",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Quantity",
+      "field": "quantity",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Free",
+      "field": "free",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Purchase Rate",
+      "field": "purchaserate",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Other Charges",
+      "field": "othCharges",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "GRS Value",
+      "field": "grsValue",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "Discount",
+      "field": "discount",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "PTD",
+      "field": "ptd",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "Sale Rate",
+      "field": "saleRate",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "Tax",
+      "field": "tax",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "HSN",
+      "field": "hsn",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "MRP",
+      "field": "mrp",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "Manfacturer Name",
+      "field": "mfgName",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Status",
+      "field": "deleteFlag",
+      "cellRenderer": "deltaIndicator",
+      "suppressFilter": true,
+      "width": 120,
+      "suppressSizeToFit": false
+    }
+  ],
+  "PurchaseDashBoardSft": [{
+      "headerName": "GST%",
+      "field": "gst",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "Taxable",
+      "field": "taxable",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "CGST Amount",
+      "field": "cgstamount",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "SGST Amount",
+      "field": "sgstamount",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Status",
+      "field": "deleteFlag",
+      "cellRenderer": "deltaIndicator",
+      "suppressFilter": true,
+      "width": 120,
+      "suppressSizeToFit": false
+    }
+  ],
+  "PurchaseReturns": [{
+      "headerName": "Purchase Return Number",
+      "field": "purchRetNumber",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "Product Description",
+      "field": "productDesc",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "Status",
+      "field": "status",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    }, {
+      "headerName": "Batch",
+      "field": "batch",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Quantity",
+      "field": "quantity",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Free",
+      "field": "free",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Purchase Rate",
+      "field": "purchaserate",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Amount",
+      "field": "amount",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Status",
+      "field": "deleteFlag",
+      "cellRenderer": "deltaIndicator",
+      "suppressFilter": true,
+      "width": 120,
+      "suppressSizeToFit": false
+    }
+  ],"mfgwisePurchaseColumns": [{
+      "headerName": "Mfg. Option",
+      "field": "mfgoption",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Fronm date",
+      "field": "fromDate",
+      "tooltipField": "fromDate",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "To Date",
+      "field": "toDate",
+      "tooltipField": "toDate",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    
+    {
+      "headerName": "Status",
+      "field": "deleteFlag",
+      "cellRenderer": "deltaIndicator",
+      "suppressFilter": true,
+      "width": 120,
+      "suppressSizeToFit": false
+    }
+  ],
+  "orderPurchaseRegisterColumns": [{
+      "headerName": "Company",
+      "field": "company",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Supplier Option",
+      "field": "supplierOption",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+	{
+      "headerName": "Report Option",
+      "field": "reportOption",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+	{
+      "headerName": "From Date",
+      "field": "fromDate",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "To Date",
+      "field": "toDate",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    
+    {
+      "headerName": "Status",
+      "field": "deleteFlag",
+      "cellRenderer": "deltaIndicator",
+      "suppressFilter": true,
+      "width": 120,
+      "suppressSizeToFit": false
+    }
+  ], "purchaseRegisterColumns": [{
+      "headerName": "GST Type",
+      "field": "gstType",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "From Date",
+      "field": "fromDate",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+	{
+      "headerName": "To Date",
+      "field": "toDate",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+	{
+      "headerName": "Report Type",
+      "field": "reportType",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+       
+    {
+      "headerName": "Status",
+      "field": "deleteFlag",
+      "cellRenderer": "deltaIndicator",
+      "suppressFilter": true,
+      "width": 120,
+      "suppressSizeToFit": false
+    }
   ]
-
 
 }

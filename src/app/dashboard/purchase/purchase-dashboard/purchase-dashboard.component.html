@@ -1,385 +1,110 @@
-<div class="col-md-5">
-    <h3>{{'purchase.title' | translate }}</h3>
-    <form [formGroup]="purchaseForm" (ngSubmit)="saveForm()" autocomplete="off">
-        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+<div class="col-xs-5">
+  <h3>{{'purchase.title' | translate}}</h3>
+  <form [formGroup]="purchaseForm" autocomplete="off">
+        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
+        [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+        [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
+        [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
-    </form>
+        <div class="col-xs-6 col-3-lt">
+            <p>{{'purchase.date' | translate}}: *</p>
+            <input id="date" class="form-control" [formControl]="purchaseForm.controls['date']">
+        </div>
+        <div class="col-xs-6 col-rt">
+            <p>{{'purchase.invoiceDate' | translate}}: *</p>
+            <input id="invoiceDate" class="form-control" [formControl]="purchaseForm.controls['invoiceDate']">
+        </div>
+        <div class="col-xs-6 col-3-lt">
+            <p>{{'purchase.mode' | translate}}: *</p>
+            <input id="mode" maxlength="6" class="form-control" [formControl]="purchaseForm.controls['mode']">
+        </div>
+        <div class="col-xs-6 col-rt">
+            <p>{{'purchase.lrNumber' | translate}}: *</p>
+            <input id="lrNumber" maxlength="15" class="form-control" [formControl]="purchaseForm.controls['lrNumber']">
+        </div>
+
+        <div class="col-xs-6 col-3-lt">
+            <p>{{'purchase.lrDate' | translate}}: *</p>
+            <input id="lrDate" class="form-control" [formControl]="purchaseForm.controls['lrDate']">
+        </div>
+        <div class="col-xs-6 col-rt">
+            <p>{{'purchase.deliveredFrom' | translate}}: *</p>
+            <input id="delvFrom" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['delvFrom']">
+        </div>
+        <div class="col-xs-6 col-3-lt">
+            <p>{{'purchase.grsValue' | translate}}: *</p>
+            <input id="grsValue" class="form-control" [formControl]="purchaseForm.controls['grsValue']">
+        </div>
+        <div class="col-xs-6 col-rt">
+                <p>{{'purchase.discountValue' | translate}}: *</p>
+                <input id="discountValue" class="form-control" [formControl]="purchaseForm.controls['discountValue']">
+        </div>
+        <div class="col-xs-6 col-3-lt">
+            <p>{{'purchase.taxValue' | translate}}: *</p>
+            <input id="taxValue" class="form-control" [formControl]="purchaseForm.controls['taxValue']">
+        </div>
+        <div class="col-xs-6 col-rt">
+                <p>{{'purchase.netValue1' | translate}}: *</p>
+                <input id="netValue" class="form-control" [formControl]="purchaseForm.controls['netValue']">
+        </div>
+
+          <div class="col-xs-6 col-3-lt">
+              <p>{{'purchase.debitAdjustmentLedger' | translate}}: *</p>
+              <input id="debitAdjustmentLedger" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['debitAdjustmentLedger']">
+          </div>
+          <div class="col-xs-6 col-rt">
+              <p>{{'purchase.creditAdjustmentLedger' | translate}}: *</p>
+              <input id="CreditAdjustmentLedger" class="form-control" [formControl]="purchaseForm.controls['CreditAdjustmentLedger']">
+          </div>
+          <div class="col-xs-6 col-3-lt">
+              <p>{{'purchase.netValue2' | translate}}: *</p>
+              <input id="netValue" class="form-control" [formControl]="purchaseForm.controls['netValue']">
+          </div>
+          <div class="col-xs-6 col-rt">
+              <p>{{'purchase.remarks' | translate}}: *</p>
+              <input id="remarks" class="form-control" [formControl]="purchaseForm.controls['remarks']">
+          </div>
+          <div class="col-xs-6 col-3-lt">
+              <p>{{'purchase.debitAdjustmentValue' | translate}}: *</p>
+              <input id="DebitAdjustmentValue" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['DebitAdjustmentValue']">
+          </div>
+          <div class="col-xs-6 col-rt">
+              <p>{{'purchase.creditAdjustmentValue' | translate}}: *</p>
+              <input id="creditAdjustmentValue" class="form-control" [formControl]="purchaseForm.controls['creditAdjustmentValue']">
+          </div>
+          <div class="col-xs-6 col-3-lt">
+              <p>{{'purchase.invoiceValue' | translate}}: *</p>
+              <input id="invoiceValue" class="form-control" [formControl]="purchaseForm.controls['invoiceValue']">
+          </div>
+<div class="col-xs-6">
+        <app-buttons [title]="'internal-stock-adj.title'" [deleteConfirmMsg]="'internal-stock-adj.deleteConfirmationMessage'"
+        [saveConfirmMsg]="'internal-stock-adj.saveConfirmationMessage'" [saveInfoMsg]="'internal-stock-adj.saveInformationMessage'"
+        [endPoint]="endPoint"
+        [deleteInfoMsg]="'internal-stock-adj.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+        [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+        [hideDeleteBtn]=false [formObj]="purchaseForm" (saveRecord)="save()"
+        (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+        (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
 </div>
+  </form>
+ </div>
 
+ <div class="col-xs-7">
+ <br /><br />
+ <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
+ [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'PurchaseDashBoard'"></app-synectiks-common-grid>
+ </div>
 
-<div class="col-md-12 mr-b-2">
-    <div class="row">
-        <div class="col-sm-6">
-            <form class="form">
-                <div class="col-md-6 col-lt">
-                    <p>{{'purchase.purchaseNumber' | translate}}: *</p>
-                    <input id="purchaseNumber" #focus [readonly]="nameFlag" (blur)="checkForDuplicateScheduleName()" 
-                    class="form-control" [formControl]="purchaseForm.controls['purchaseNumber']">
-                </div>
-                <div class="col-md-6 col-lt">
-                    <p>{{'purchase.invoiceNumber' | translate}}: *</p>
-                    <input id="invoiceNumber" class="form-control" [formControl]="purchaseForm.controls['invoiceNumber']">
-                </div>
-                <div class="col-md-12 col-lt">
-                    <p>{{'purchase.supplier' | translate}}: *</p>
-                    <input id="supplier" class="form-control" [formControl]="purchaseForm.controls['supplier']">
-                </div>
-                <div class="col-md-12 col-lt">
-                    <p>{{'purchase.gstin' | translate}}: *</p>
-                    <input id="gstin" class="form-control" [formControl]="purchaseForm.controls['gstin']">
-                </div>
-                <div class="col-md-4 col-lt">
-                    <p>{{'purchase.wayBill' | translate}}: *</p>
-                    <input id="wayBill" class="form-control" [formControl]="purchaseForm.controls['wayBill']">
-                </div>
-                <div class="col-md-4 col-lt">
-                    <p>{{'purchase.transport' | translate}}: *</p>
-                    <input id="transport" class="form-control" [formControl]="purchaseForm.controls['transport']">
-                </div>
-                <div class="col-md-4 col-lt">
-                    <p>{{'purchase.cs' | translate}}: *</p>
-                    <input id="cs" class="form-control" [formControl]="purchaseForm.controls['cs']">
-                </div>
-            </form>
-        </div>
+ <div class="col-xs-7">
+ <br /><br />
+   <div class="col-xs-6 col-3-lt">
+     <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
+     [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'PurchaseDashBoardSft'"></app-synectiks-common-grid>
 
-        <div class="col-sm-6">
-            <form class="form">
-                <div class="col-md-6 col-lt">
-                    <p>{{'purchase.date' | translate}}: *</p>
-                    <input id="date" class="form-control" [formControl]="purchaseForm.controls['date']">
-                </div>
-                <div class="col-md-6 col-lt">
-                    <p>{{'purchase.invoiceDate' | translate}}: *</p>
-                    <input id="invoiceDate" class="form-control" [formControl]="purchaseForm.controls['invoiceDate']">
-                </div>
-                <div class="col-md-6 col-lt">
-                    <p>{{'purchase.mode' | translate}}: *</p>
-                    <input id="mode" maxlength="6" class="form-control" [formControl]="purchaseForm.controls['mode']">
-                </div>
-                <div class="col-md-6 col-lt">
-                    <p>{{'purchase.lrNumber' | translate}}: *</p>
-                    <input id="lrNumber" maxlength="15" class="form-control" [formControl]="purchaseForm.controls['lrNumber']">
-                </div>
+  </div>
+  <div class="col-xs-6 col-rt">
+    <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
+    [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'PurchaseDashBoardSft'"></app-synectiks-common-grid>
 
-                <div class="col-md-6 col-lt">
-                    <p>{{'purchase.lrDate' | translate}}: *</p>
-                    <input id="lrDate" class="form-control" [formControl]="purchaseForm.controls['lrDate']">
-                </div>
-                <div class="col-md-6 col-lt">
-                    <p>{{'purchase.deliveredFrom' | translate}}: *</p>
-                    <input id="delvFrom" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['delvFrom']">
-                </div>
-            </form>
-        </div>
-        <!-- Table Start -->
-        <div class="row pane">
-            <div class="col-sm-12">
-                <div class="table-responsive">
-                    <table id="purchaseDetailTable1" class="table table-header table-lg table-bordered">
-                        <thead>
-                            <tr>
-                                <th><p>{{'purchase.code' | translate}}</p></th>
-                                <th><p>{{'purchase.productname' | translate}}</p></th>
-                                <th><p>{{'purchase.batch' | translate}}</p></th>
-                                <th><p>{{'purchase.expiry' | translate}}</p></th>
-                                <th><p>{{'purchase.quantity' | translate}}</p></th>
-                                <th><p>{{'purchase.free' | translate}}</p></th>
-                                <th><p>{{'purchase.purchaserate' | translate}}</p></th>
-                                <th><p>{{'purchase.othCharges' | translate}}</p></th>
-                                <th><p>{{'purchase.grsValue' | translate}}</p></th>
-                                <th><p>{{'purchase.discount' | translate}}</p></th>
-                                <th><p>{{'purchase.ptd' | translate}}</p></th>
-                                <th><p>{{'purchase.saleRate' | translate}}</p></th>
-                                <th><p>{{'purchase.tax' | translate}}</p></th>
-                                <th><p>{{'purchase.hsn' | translate}}</p></th>
-                                <th><p>{{'purchase.mrp' | translate}}</p></th>
-                                <th><p>{{'purchase.mfgName' | translate}}</p></th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="productCode" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['productCode']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="productName" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['productName']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="batch" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['batch']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="expiry" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['expiry']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="qty" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['qty']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="free" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['free']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="purRate" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['purRate']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="othCharges" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['othCharges']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="grsValue" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['grsValue']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="discount" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['discount']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="ptd" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['ptd']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="saleRate" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['saleRate']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="tax" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['tax']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="hsn" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['hsn']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="mrp" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['mrp']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="mfgName" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['mfgName']">
-                                    </div>
-                                </td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Table End -->
-
-        <!-- Common Grid Start -->
-
-        <!-- Common Grid End -->
-
-
-        <div class="row">
-            <div class="col-sm-12">
-                <form class='form'>
-                    <div class="col-md-3 ">
-                        <p>{{'purchase.grsValue' | translate}}: *</p>
-                        <input id="grsValue" class="form-control" [formControl]="purchaseForm.controls['grsValue']">
-                    </div>
-                    <div class="col-md-3 ">
-                            <p>{{'purchase.discountValue' | translate}}: *</p>
-                            <input id="discountValue" class="form-control" [formControl]="purchaseForm.controls['discountValue']">
-                    </div>
-                    <div class="col-md-3 ">
-                        <p>{{'purchase.taxValue' | translate}}: *</p>
-                        <input id="taxValue" class="form-control" [formControl]="purchaseForm.controls['taxValue']">
-                    </div>
-                    <div class="col-md-3 ">
-                            <p>{{'purchase.netValue1' | translate}}: *</p>
-                            <input id="netValue" class="form-control" [formControl]="purchaseForm.controls['netValue']">
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="col-sm-12 ">
-<!-- As Per Software Table Start -->
-        <div class="row pane">
-            <div class="col-sm-6 col-lt">
-                <div class="table-responsive">
-                    <table id="purchaseDetailTable1" class="table table-header table-lg table-bordered">
-                        <thead>
-                            <tr>
-                                <th><p>{{'purchase.gst1' | translate}}</p></th>
-                                <th><p>{{'purchase.taxable1' | translate}}</p></th>
-                                <th><p>{{'purchase.cgstamount1' | translate}}</p></th>
-                                <th><p>{{'purchase.sgstamount1' | translate}}</p></th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="gstPercent" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['gstPercent']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="taxable" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['taxable']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="cgstAmt" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['cgstAmt']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="sgstAmt" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['sgstAmt']">
-                                    </div>
-                                </td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-
-        <!-- As Per Software Table End -->
-
-        <!-- As Per Invoice Table Start -->
-        <div class="row pane">
-            <div class="col-sm-6 col-rt">
-                <div class="table-responsive">
-                    <table id="purchaseDetailTable1" class="table table-header table-lg table-bordered">
-                        <thead>
-                            <tr>
-                                <th><p>{{'purchase.gst2' | translate}}</p></th>
-                                <th><p>{{'purchase.taxable2' | translate}}</p></th>
-                                <th><p>{{'purchase.cgstamount2' | translate}}</p></th>
-                                <th><p>{{'purchase.sgstamount2' | translate}}</p></th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="inGstPercent" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['inGstPercent']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="inTaxable" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['inTaxable']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="inCgstAmt" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['inCgstAmt']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="inSgstAmt" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseForm.controls['inSgstAmt']">
-                                    </div>
-                                </td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-        <!-- As Per Invoice Table End -->
-        </div>
-
-        <div class="col-sm-6 col-lt">
-                <form class="form">
-                    <div class="col-md-12 col-lt">
-                        <p>{{'purchase.debitAdjustmentLedger' | translate}}: *</p>
-                        <input id="debitAdjustmentLedger" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['debitAdjustmentLedger']">
-                    </div>
-                    <div class="col-md-12 col-lt">
-                        <p>{{'purchase.creditAdjustmentLedger' | translate}}: *</p>
-                        <input id="CreditAdjustmentLedger" class="form-control" [formControl]="purchaseForm.controls['CreditAdjustmentLedger']">
-                    </div>
-                    <div class="col-md-6 col-lt">
-                        <p>{{'purchase.netValue2' | translate}}: *</p>
-                        <input id="netValue" class="form-control" [formControl]="purchaseForm.controls['netValue']">
-                    </div>
-                    <div class="col-md-6 col-lt">
-                        <p>{{'purchase.remarks' | translate}}: *</p>
-                        <input id="remarks" class="form-control" [formControl]="purchaseForm.controls['remarks']">
-                    </div>
-                </form>
-            </div>
-
-            <div class="col-sm-6 col-rt">
-                    <form class="form">
-                        <div class="col-md-12 col-lt">
-                            <p>{{'purchase.debitAdjustmentValue' | translate}}: *</p>
-                            <input id="DebitAdjustmentValue" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseForm.controls['DebitAdjustmentValue']">
-                        </div>
-                        <div class="col-md-12 col-lt">
-                            <p>{{'purchase.creditAdjustmentValue' | translate}}: *</p>
-                            <input id="creditAdjustmentValue" class="form-control" [formControl]="purchaseForm.controls['creditAdjustmentValue']">
-                        </div>
-                        <div class="col-md-12 col-lt">
-                            <p>{{'purchase.invoiceValue' | translate}}: *</p>
-                            <input id="invoiceValue" class="form-control" [formControl]="purchaseForm.controls['invoiceValue']">
-                        </div>
-
-                    </form>
-                </div>
-
-        <div class="input-group">
-            <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
-            <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-            <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete'
-                | translate }}</button>
-        </div>
-
-
-    </div>
-
+  </div>
 </div>

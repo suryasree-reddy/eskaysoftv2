@@ -1,66 +1,50 @@
-<div class="col-md-5">
-    <h3>Order Purchase Register</h3>
-    <form [formGroup]="orederRegisterForm" (ngSubmit)="saveForm()" autocomplete="off">
-        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
-
-    </form>
-</div>
-
-
-<div class="col-md-12 mr-b-2">
-    <div class="row">
-        <div class="col-sm-6">
-            <form class="form">
-
-                <div class="input-group">
-                  <p>Company: *</p>
-                 <input id="zone" maxlength="7"  class="form-control" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
-                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
-                  <span class="caret"></span>
-            </div>
-                     <div class="input-group">
-                  <p>Supplier Option: *</p>
-                 <input id="zone" maxlength="7"  class="form-control" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
-                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
-                  <span class="caret"></span>
-            </div>
-                     <div class="input-group">
-                  <p>Report Option: *</p>
-                 <input id="zone" maxlength="7"  class="form-control" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
-                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
-                  <span class="caret"></span>
-            </div>
-                <div class="col-md-12 col-lt">
-                    <p>From Date: *</p>
-                    <input id="date" class="form-control" [formControl]="orderRegisterForm.controls['date']">
-                </div>
-              <div class="col-md-12 col-lt">
-                    <p>To Date: *</p>
-                    <input id="date" class="form-control" [formControl]="orderRegisterForm.controls['date']">
-                </div>
-
-
-            </form>
-        </div>
-
-
-
-
-
-<!-- As Per Software Table Start -->
-
-
-
+<div class="col-xs-5">
+  <h3>Order Purchase Register</h3>
+  <form [formGroup]="orederRegisterForm" autocomplete="off">
+      <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+        [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
         <div class="input-group">
-            <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
-            <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-            <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete'
-                | translate }}</button>
+          <p>Company: *</p>
+         <input id="zone" maxlength="7"  class="form-control" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
+        [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
+          <span class="caret"></span>
+        </div>
+             <div class="input-group">
+          <p>Supplier Option: *</p>
+         <input id="zone" maxlength="7"  class="form-control" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
+        [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
+          <span class="caret"></span>
+        </div>
+             <div class="input-group">
+          <p>Report Option: *</p>
+         <input id="zone" maxlength="7"  class="form-control" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
+        [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
+          <span class="caret"></span>
+        </div>
+        <div class="input-group">
+            <p>From Date: *</p>
+            <input id="date" class="form-control" [formControl]="orderRegisterForm.controls['date']">
+        </div>
+        <div class="input-group">
+            <p>To Date: *</p>
+            <input id="date" class="form-control" [formControl]="orderRegisterForm.controls['date']">
         </div>
 
+        <app-buttons [title]="'internal-stock-adj.title'" [deleteConfirmMsg]="'internal-stock-adj.deleteConfirmationMessage'"
+        [saveConfirmMsg]="'internal-stock-adj.saveConfirmationMessage'" [saveInfoMsg]="'internal-stock-adj.saveInformationMessage'"
+        [endPoint]="endPoint"
+        [deleteInfoMsg]="'internal-stock-adj.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+        [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+        [hideDeleteBtn]=false [formObj]="orederRegisterForm" (saveRecord)="save()"
+        (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+        (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
 
-    </div>
+  </form>
+</div>
 
+<div class="col-xs-7">
+  <br /><br />
+  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
+  [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'orderPurchaseRegisterColumns'"></app-synectiks-common-grid>
 </div>

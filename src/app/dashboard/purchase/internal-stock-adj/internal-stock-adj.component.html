@@ -1,169 +1,38 @@
-<div class="col-md-5">
-    <h3>{{'internalStockAdj.title' | translate}}</h3>
-    <form [formGroup]="internalStockForm" (ngSubmit)="saveForm()" autocomplete="off">
-          <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-          [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-            [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
-           [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
-    </form>
+<div class="col-xs-5">
+  <h3>{{'internalStockAdj.title' | translate}}</h3>
+  <form [formGroup]="internalStockForm" autocomplete="off">
+        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
+        [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+        [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
+        [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+
+         <div class="input-group">
+             <p>{{'internalStockAdj.number' | translate}}: *</p>
+             <input id="number" #focus [readonly]="nameFlag" class="form-control" [formControl]="internalStockForm.controls['number']">
+         </div>
+         <div class="input-group">
+             <p>{{'internalStockAdj.remarks' | translate}}: *</p>
+             <input id="remarks" class="form-control" [formControl]="internalStockForm.controls['remarks']">
+         </div>
+         <div class="input-group">
+             <p>{{'internalStockAdj.date' | translate}}: *</p>
+             <input id="date" class="form-control" [formControl]="internalStockForm.controls['date']">
+         </div>
+
+         <app-buttons [title]="'internal-stock-adj.title'" [deleteConfirmMsg]="'internal-stock-adj.deleteConfirmationMessage'"
+         [saveConfirmMsg]="'internal-stock-adj.saveConfirmationMessage'" [saveInfoMsg]="'internal-stock-adj.saveInformationMessage'"
+         [endPoint]="endPoint"
+         [deleteInfoMsg]="'internal-stock-adj.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+         [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+         [hideDeleteBtn]=false [formObj]="internalStockForm" (saveRecord)="save()"
+         (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+         (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
+
+  </form>
 </div>
 
-
-<div class="col-md-12 mr-b-2">
-    <div class="row">
-        <div class="col-sm-6">
-            <form class="form">
-                <div class="col-md-12 col-lt">
-                    <p>{{'internalStockAdj.number' | translate}}: *</p>
-                    <input id="number" #focus [readonly]="nameFlag" class="form-control" [formControl]="internalStockForm.controls['number']">
-                </div>
-
-                <div class="col-md-12 col-lt">
-                    <p>{{'internalStockAdj.remarks' | translate}}: *</p>
-                    <input id="remarks" class="form-control" [formControl]="internalStockForm.controls['remarks']">
-                </div>
-            </form>
-        </div>
-
-        <div class="col-sm-6">
-            <form class="form">
-                <div class="col-md-6 col-lt">
-                    <p>{{'internalStockAdj.date' | translate}}: *</p>
-                    <input id="date" class="form-control" [formControl]="internalStockForm.controls['date']">
-                </div>
-
-            </form>
-        </div>
-        <!-- Table Start -->
-        <div class="row pane">
-            <div class="col-sm-12">
-                <div class="table-responsive">
-                    <table id="purchaseDetailTable1" class="table table-header table-lg table-bordered">
-                        <thead>
-                            <tr>
-                                <th>{{'internalStockAdj.code' | translate}}</th>
-                                <th>{{'internalStockAdj.productName' | translate}}</th>
-                                <th>{{'internalStockAdj.pack' | translate}}</th>
-                                <th>{{'internalStockAdj.type' | translate}}</th>
-                                <th>{{'internalStockAdj.batch' | translate}}</th>
-                                <th>{{'internalStockAdj.qty' | translate}}</th>
-                                <th>{{'internalStockAdj.free' | translate}}</th>
-
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="code" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="internalStockForm.controls['code']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="productName" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="internalStockForm.controls['productName']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="pack" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="internalStockForm.controls['pack']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="type" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="internalStockForm.controls['type']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="batch" #focus [readonly]="nameFlag" class="form-control" [formControl]="internalStockForm.controls['batch']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="qty" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="internalStockForm.controls['qty']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="free" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="internalStockForm.controls['free']">
-                                    </div>
-                                </td>
-
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-
-
-
-<!-- As Per Software Table Start -->
-
-
-        <!-- <div class="col-sm-6 col-lt">
-                <form class="form">
-                    <div class="col-md-12 col-lt">
-                        <p>Debit Adjustment Ledger: *</p>
-                        <input id="debitAdjustmentLedger" #focus [readonly]="nameFlag" class="form-control" [formControl]="internalStockForm.controls['debitAdjustmentLedger']">
-                    </div>
-                    <div class="col-md-12 col-lt">
-                        <p>Credit Adjustment Ledger: *</p>
-                        <input id="CreditAdjustmentLedger" class="form-control" [formControl]="internalStockForm.controls['CreditAdjustmentLedger']">
-                    </div>
-                    <div class="col-md-6 col-lt">
-                        <p>Net Value: *</p>
-                        <input id="netValue" class="form-control" [formControl]="internalStockForm.controls['netValue']">
-                    </div>
-                    <div class="col-md-6 col-lt">
-                        <p>Remarks: *</p>
-                        <input id="remarks" class="form-control" [formControl]="internalStockForm.controls['remarks']">
-                    </div>
-                </form>
-            </div>
-
-            <div class="col-sm-6 col-rt">
-                    <form class="form">
-                        <div class="col-md-12 col-lt">
-                            <p>Debit Adjustment Value: *</p>
-                            <input id="DebitAdjustmentValue" #focus [readonly]="nameFlag" class="form-control" [formControl]="internalStockForm.controls['DebitAdjustmentValue']">
-                        </div>
-                        <div class="col-md-12 col-lt">
-                            <p>Credit Adjustment Value: *</p>
-                            <input id="creditAdjustmentValue" class="form-control" [formControl]="internalStockForm.controls['creditAdjustmentValue']">
-                        </div>
-                        <div class="col-md-12 col-lt">
-                            <p>Invoice Value: *</p>
-                            <input id="invoiceValue" class="form-control" [formControl]="internalStockForm.controls['invoiceValue']">
-                        </div>
-
-                    </form>
-                </div> -->
-
-        <!-- <div class="input-group">
-            <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
-            <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-            <button type="button" [dinternalStockAdjbled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete'
-                | translate }}</button>
-        </div> -->
-        <app-buttons [title]="'internal-stock-adj.title'" [deleteConfirmMsg]="'internal-stock-adj.deleteConfirmationMessage'"
-        [saveConfirmMsg]="'internal-stock-adj.saveConfirmationMessage'" [saveInfoMsg]="'internal-stock-adj.saveInformationMessage'"
-        [endPoint]="endPoint"
-        [deleteInfoMsg]="'internal-stock-adj.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-        [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-        [hideDeleteBtn]=false [formObj]="internalStockForm" (saveRecord)="save()"
-        (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-        (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
-
-    </div>
-
+<div class="col-xs-7">
+  <br /><br />
+  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
+  [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'InternalStockAdj'"></app-synectiks-common-grid>
 </div>

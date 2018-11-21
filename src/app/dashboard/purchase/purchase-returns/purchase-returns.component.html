@@ -1,139 +1,45 @@
-<div class="col-md-5">
-    <h3>{{'purchaseReturn.title' | translate}}</h3>
-    <form [formGroup]="purchaseReturnsForm" (ngSubmit)="saveForm()" autocomplete="off">
-        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()"
-            [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
-            [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
-            [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
-
-    </form>
-</div>
-
-
-<div class="col-md-12 mr-b-2">
-    <div class="row">
-        <div class="col-sm-6">
-            <form class="form">
-                <div class="col-md-12 col-lt">
-                    <p>{{'purchaseReturn.purchRetNumber' | translate}}: *</p>
-                    <input id="purchRetNumber" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseReturnsForm.controls['purchRetNumber']">
-                </div>
-                <div class="col-md-12 col-lt">
-                    <p>{{'common.supplier' | translate}}: *</p>
-                    <input id="supplier" class="form-control" [formControl]="purchaseReturnsForm.controls['supplier']">
-                </div>
-
-                <div class="col-md-12 col-lt">
-                    <p>{{'common.remarks' | translate}}: *</p>
-                    <input id="remarks" class="form-control" [formControl]="purchaseReturnsForm.controls['remarks']">
-                </div>
-
-
-            </form>
-        </div>
-
-        <div class="col-sm-6">
-            <form class="form">
-                <div class="col-md-6 col-lt">
-                    <p>{{'common.date' | translate}}: *</p>
-                    <input id="date" class="form-control" [formControl]="purchaseReturnsForm.controls['date']">
-                </div>
-
-            </form>
-        </div>
-        <!-- Table Start -->
-        <div class="row pane">
-            <div class="col-sm-12">
-                <div class="table-responsive">
-                    <table id="purchaseDetailTable1" class="table table-header table-lg table-bordered">
-                        <thead>
-                            <tr>
-                                <th>{{'common.sNo' | translate}}</th>
-                                <th>{{'purchaseReturn.productDesc' | translate}}</th>
-                                <th>{{'purchaseReturn.status' | translate}}</th>
-                                <th>{{'common.batch' | translate}}</th>
-                                <th>{{'common.qty' | translate}}</th>
-                                <th>{{'common.free' | translate}}</th>
-                                <th>{{'common.purchaseRate' | translate}}</th>
-                                <th>{{'purchaseReturn.amount' | translate}}</th>
-
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="sNo" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseReturnsForm.controls['sNo']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="prodDesc" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseReturnsForm.controls['prodDesc']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="status" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseReturnsForm.controls['status']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="batch" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseReturnsForm.controls['batch']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="qty" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseReturnsForm.controls['qty']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="free" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseReturnsForm.controls['free']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="purRate" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseReturnsForm.controls['purRate']">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input id="amount" #focus [readonly]="nameFlag" class="form-control"
-                                            [formControl]="purchaseReturnsForm.controls['amount']">
-                                    </div>
-                                </td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Table End -->
+<div class="col-xs-5">
+  <h3>{{'purchaseReturn.title' | translate}}</h3>
+  <form [formGroup]="purchaseReturnsForm" autocomplete="off">
+        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
+        [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+        [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
+        [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
         <div class="input-group">
-            <!-- <button type="button" (click)="resetForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
-            <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-            <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">{{'button.delete'
-                | translate }}</button> -->
-
-            <app-buttons [title]="'purchaseReturn.title'" [deleteConfirmMsg]="'purchaseReturn.deleteConfirmationMessage'"
-                [saveConfirmMsg]="'purchaseReturn.saveConfirmationMessage'" [saveInfoMsg]="'purchaseReturn.saveInformationMessage'"
-                [endPoint]="endPoint" [deleteInfoMsg]="'purchaseReturn.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-                [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=true [formObj]="purchaseReturnsForm"
-                (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-                (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
+            <p>{{'purchaseReturn.purchRetNumber' | translate}}: *</p>
+            <input id="purchRetNumber" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseReturnsForm.controls['purchRetNumber']">
         </div>
 
+        <div class="input-group">
+            <p>{{'common.supplier' | translate}}: *</p>
+            <input id="supplier" class="form-control" [formControl]="purchaseReturnsForm.controls['supplier']">
+        </div>
 
-    </div>
+        <div class="input-group">
+            <p>{{'common.remarks' | translate}}: *</p>
+            <input id="remarks" class="form-control" [formControl]="purchaseReturnsForm.controls['remarks']">
+        </div>
 
+        <div class="input-group">
+            <p>{{'common.date' | translate}}: *</p>
+            <input id="date" class="form-control" [formControl]="purchaseReturnsForm.controls['date']">
+        </div>
+
+      <app-buttons [title]="'internal-stock-adj.title'" [deleteConfirmMsg]="'internal-stock-adj.deleteConfirmationMessage'"
+      [saveConfirmMsg]="'internal-stock-adj.saveConfirmationMessage'" [saveInfoMsg]="'internal-stock-adj.saveInformationMessage'"
+      [endPoint]="endPoint"
+      [deleteInfoMsg]="'internal-stock-adj.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+      [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+      [hideDeleteBtn]=false [formObj]="purchaseReturnsForm" (saveRecord)="save()"
+      (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+      (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
+
+  </form>
+</div>
+
+<div class="col-xs-7">
+<br /><br />
+<app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
+[gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'PurchaseReturns'"></app-synectiks-common-grid>
 </div>
