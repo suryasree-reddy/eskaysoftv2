@@ -40,7 +40,7 @@
                 <div class="table-responsive">
                     <table id="purchaseDetailTable1" class="table table-header table-lg table-bordered">
                         <thead>
-                            <tr>                                
+                            <tr>
                                 <th>{{'internalStockAdj.code' | translate}}</th>
                                 <th>{{'internalStockAdj.productName' | translate}}</th>
                                 <th>{{'internalStockAdj.pack' | translate}}</th>
@@ -48,7 +48,7 @@
                                 <th>{{'internalStockAdj.batch' | translate}}</th>
                                 <th>{{'internalStockAdj.qty' | translate}}</th>
                                 <th>{{'internalStockAdj.free' | translate}}</th>
-                               
+
                             </tr>
                         </thead>
 
@@ -95,7 +95,7 @@
                                             [formControl]="internalStockForm.controls['free']">
                                     </div>
                                 </td>
-                               
+
 
                             </tr>
                         </tbody>
@@ -105,7 +105,7 @@
             </div>
         </div>
 
-       
+
 
 <!-- As Per Software Table Start -->
 
@@ -159,7 +159,7 @@
         [saveConfirmMsg]="'internal-stock-adj.saveConfirmationMessage'" [saveInfoMsg]="'internal-stock-adj.saveInformationMessage'"
         [endPoint]="endPoint"
         [deleteInfoMsg]="'internal-stock-adj.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-        [isBtnDeleteDinternalStockAdjble]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+        [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
         [hideDeleteBtn]=false [formObj]="internalStockForm" (saveRecord)="save()"
         (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
         (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>

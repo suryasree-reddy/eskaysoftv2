@@ -5,7 +5,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 import 'src/assets/styles/mainstyles.scss';
-import * as _ from 'lodash';
 
 @Component({
   selector: 'app-purchase-order',
