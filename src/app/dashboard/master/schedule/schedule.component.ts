@@ -25,7 +25,7 @@ export class ScheduleComponent implements OnInit {
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   public nameFlag;
-  public gridDataList: Observable<any[]>;
+  //public gridDataList: Observable<any[]>;
   public lastSchIndex;
   public cap;
   //modalRef: BsModalRef;
