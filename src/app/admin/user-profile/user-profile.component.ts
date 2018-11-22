@@ -31,60 +31,60 @@ export class UserProfileComponent implements OnInit {
   private duplicateUserName: boolean = false;
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
-  public userprofileList: any = [];
-  public accGstType: any[];
-  public accNatureOfGst: any[];
-  public accSaleType: any[];
-  public accCustomerType: any[];
+  private userprofileList: any = [];
+  private accGstType: any[];
+  private accNatureOfGst: any[];
+  private accSaleType: any[];
+  private accCustomerType: any[];
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private sharedDataService: SharedDataService,
-    private masterService: MasterService) { 
+    private masterService: MasterService) {
       translate.setDefaultLang('messages.en'); }
 
   ngOnInit() {
     this.userProfileForm = this.fb.group({
-      clientId: ['', Validators.required],
-      id: ['', Validators.required],
+//clientId: ['', Validators.required],
+      id: [''],
       name: ['', Validators.required],
       username: ['', Validators.required],
-      address1: [],
-      address2: [],
-      town: [],
-      pin: [],
-      district: [],
-      state: [],
-      statecode: [],
-      phoneLand1: [],
-      mobile1: [],
-      mobile2: [],
-      contactPerson: [],
-      cPersonMobile: [],
-      natureofbusiness: [],
-      bank1: [],
-      bankacno1: [],
-      bankifsc1: [],
-      bank2: [],
-      bankacno2: [],
-      bankifsc2: [],
-      licNo1: [],
-      licNo2: [],
-      licExpiry: [],
-      retLicNo1: [],
-      retLicNo2: [],
-      retExpiry: [],
-      foodLicNo: [],
-      otherLicense: [],
-      otherLicenseExpiry: [],
-      gstIN: [],
+      address1: ['', Validators.required],
+      address2: ['', Validators.required],
+      town: ['', Validators.required],
+      pin: ['', Validators.required],
+      district: ['', Validators.required],
+      state: ['', Validators.required],
+      statecode: ['', Validators.required],
+      phoneLand1: ['', Validators.required],
+      mobile1: ['', Validators.required],
+      mobile2: ['', Validators.required],
+      contactPerson: ['', Validators.required],
+      cPersonMobile: ['', Validators.required],
+      natureofbusiness: ['', Validators.required],
+      bank1: ['', Validators.required],
+      bankacno1: ['', Validators.required],
+      bankifsc1: ['', Validators.required],
+      bank2: ['', Validators.required],
+      bankacno2: ['', Validators.required],
+      bankifsc2: ['', Validators.required],
+      licNo1: ['', Validators.required],
+      licNo2: ['', Validators.required],
+      licExpiry: ['', Validators.required],
+      retLicNo1: ['', Validators.required],
+      retLicNo2: ['', Validators.required],
+      retExpiry: ['', Validators.required],
+      foodLicNo: ['', Validators.required],
+      otherLicense: ['', Validators.required],
+      otherLicenseExpiry: ['', Validators.required],
+      gstIN: ['', Validators.required],
       gstType: ['', Validators.required],
       natureOfGST: ['', Validators.required],
-      uin: [],
-      creditLimit: [],
-      dueDays: [],
+      uin: ['', Validators.required],
+      creditLimit: ['', Validators.required],
+      dueDays: ['', Validators.required],
       saleType:  ['', Validators.required],
       customerType:  ['', Validators.required],
 

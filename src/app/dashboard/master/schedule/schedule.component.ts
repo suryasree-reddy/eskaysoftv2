@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
-import { Observable } from 'rxjs/Observable';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
@@ -30,7 +28,7 @@ export class ScheduleComponent implements OnInit {
   public gridDataList: Observable<any[]>;
   public lastSchIndex;
   public cap;
-  modalRef: BsModalRef;
+  //modalRef: BsModalRef;
   private duplicateSchName: boolean = false;
   private duplicateSchIndex: boolean = false;
 
