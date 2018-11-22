@@ -191,6 +191,9 @@ padding-bottom: 0em;
 .pd-btm-1{
   padding-bottom: 1em;
 }
+.pd-btm-2{
+  padding-bottom: 2em;
+}
 .brdr-hide{
   border:hidden;
   margin: 5px;
@@ -207,6 +210,12 @@ padding-bottom: 0em;
 }
 .mr-t-1{
   margin-top: 1em;
+}
+.mr-t-0{
+  margin-top: 0em !important;
+}
+.mr-t-caret{
+  margin-top: -1.5em;
 }
 
 

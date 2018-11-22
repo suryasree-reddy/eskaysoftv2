@@ -4,6 +4,9 @@ import { MasterService } from 'src/app/dashboard/master/master.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
+import '../../../../assets/styles/mainstyles.scss';
+import { Observable } from 'rxjs/Observable';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-purchase-returns-register',
@@ -45,7 +48,7 @@ export class PurchaseReturnsRegisterComponent implements OnInit {
       custOption:[]
     });
 
-    this.focusField.nativeElement.focus();
+    // this.focusField.nativeElement.focus();
     this.reportType =  this.sharedDataService.getSharedCommonJsonData().ReportType;
   //  this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
   }

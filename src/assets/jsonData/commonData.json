@@ -1138,60 +1138,18 @@
     }
   ],
   "PurchaseOrderColumns": [{
-      "headerName": "Order Number",
-      "field": "orderNumber",
+      "headerName": "S No",
+      "field": "sNo",
+      "width":150,
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
       },
       "suppressSizeToFit": false
     },
-    {
-      "headerName": "Date",
-      "field": "date",
-      "filterParams": {
-        "filterOptions": ["contains"],
-        "newRowsAction": "keep"
-      },
-      "suppressSizeToFit": false
-    },
-    {
-      "headerName": "Supplier",
-      "field": "supplier",
-      "filterParams": {
-        "filterOptions": ["contains"],
-        "newRowsAction": "keep"
-      },
-      "suppressSizeToFit": false
-    },
-    {
-      "headerName": "Bank",
-      "field": "bank",
-      "filterParams": {
-        "filterOptions": ["contains"],
-        "newRowsAction": "keep"
-      },
-      "suppressSizeToFit": false
-    },
-    {
-      "headerName": "Remarks",
-      "field": "remarks",
-      "filterParams": {
-        "filterOptions": ["contains"],
-        "newRowsAction": "keep"
-      },
-      "suppressSizeToFit": false
-    }, {
+     {
       "headerName": "Code",
       "field": "code",
-      "filterParams": {
-        "filterOptions": ["contains"],
-        "newRowsAction": "keep"
-      },
-      "suppressSizeToFit": false
-    }, {
-      "headerName": "Transport",
-      "field": "transport",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -1221,15 +1179,8 @@
         "newRowsAction": "keep"
       },
       "suppressSizeToFit": false
-    }, {
-      "headerName": "Free",
-      "field": "free",
-      "filterParams": {
-        "filterOptions": ["contains"],
-        "newRowsAction": "keep"
-      },
-      "suppressSizeToFit": false
-    }, {
+    }, 
+    {
       "headerName": "Rate",
       "field": "rate",
       "filterParams": {
@@ -1237,25 +1188,19 @@
         "newRowsAction": "keep"
       },
       "suppressSizeToFit": false
-    }, {
-      "headerName": "B.Qty",
-      "field": "bQty",
+    },
+    {
+      "headerName": "Value",
+      "field": "value",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
       },
       "suppressSizeToFit": false
-    }, {
-      "headerName": "B.Free",
-      "field": "bFree",
-      "filterParams": {
-        "filterOptions": ["contains"],
-        "newRowsAction": "keep"
-      },
-      "suppressSizeToFit": false
-    }, {
-      "headerName": "B.Rate",
-      "field": "bRate",
+    },
+     {
+      "headerName": "Free",
+      "field": "free",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"

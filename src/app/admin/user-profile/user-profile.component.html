@@ -8,13 +8,13 @@
       </div>
       <div class="col-md-12">
         <p class="col-sm-4">{{'userprofile.clientid' | translate }}:
-          <input type="text" class="brdr-hide" [readonly]="true">
+          <!-- <input type="text" class="brdr-hide" [readonly]="true"> -->
         </p>
         <p class="col-sm-4">{{'userprofile.name' | translate }}:
-          <input type="text" class="brdr-hide" [readonly]="true">
+          <!-- <input type="text" class="brdr-hide" [readonly]="true"> -->
         </p>
         <p class="col-sm-4">{{'userprofile.town' | translate }}:
-          <input type="text" class="brdr-hide" [readonly]="true">
+          <!-- <input type="text" class="brdr-hide" [readonly]="true"> -->
         </p>
       </div>
     </div> <!-- header -->
@@ -208,66 +208,103 @@
                       <!-- Regs Info Starts -->
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.licno1' | translate}}: *</p>
+                          <div class="input-group mr-t-0">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>      
                           <input id="licNo1" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['licNo1']">
                         </div>
+                      </div>
     
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.licno2' | translate}}: *</p>
+                          <div class="input-group mr-t-0">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>     
                           <input id="licNo2" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['licNo2']">
                         </div>
+                      </div>
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.licexpiry' | translate}}: *</p>
+                          <div class="input-group mr-t-0">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>      
                           <input id="licExpiry" type="date"  class="form-control" [formControl]="userProfileForm.controls['licExpiry']">
                         </div>
+                      </div>
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.retlicno1' | translate}}: *</p>
+                          <div class="input-group mr-t-0">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                           <input id="retLicNo1" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['retLicNo1']">
+                       </div>
                         </div>
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.retlicno2' | translate}}: *</p>
+                          <div class="input-group mr-t-0">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                           <input id="retLicNo2" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['retLicNo2']">
+                        </div>
                         </div>
     
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.retexpiry' | translate}}: *</p>
+                          <div class="input-group mr-t-0">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                           <input id="retExpiry" type="date"  class="form-control" [formControl]="userProfileForm.controls['retExpiry']">
                         </div>
-    
+                        </div>
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.foodlicno1' | translate}}: *</p>
+                          <div class="input-group mr-t-0">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                           <input id="foodLicNo" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['foodLicNo']">
+                        </div>
                         </div>
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.otherlic' | translate}}: *</p>
+                          <div class="input-group mr-t-0">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                           <input id="otherLicense" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['otherLicense']">
+                        </div>
                         </div>
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.otherlicexp' | translate}}: *</p>
+                          <div class="input-group mr-t-0">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                           <input id="otherLicenseExpiry" type="date"  class="form-control" [formControl]="userProfileForm.controls['otherLicenseExpiry']">
+                        </div>
                         </div>
     
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.gsttype' | translate}}: *</p>
+                          <div class="input-group" style="margin-top:0em;">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span> 
                             <input id="gstType" maxlength="5" class="form-control"  [formControl]="userProfileForm.controls['gstType']" [typeahead]="accGstType"
                               typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-                              <span class="caret" ></span>
+                              <span class="caret" style="margin-top:-1.5em;" ></span>
                         </div>
-    
+                      </div>
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.gstin' | translate}}: *</p>
+                          <div class="input-group mr-t-0">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
                           <input id="gstIN" maxlength="15"  class="form-control" [formControl]="userProfileForm.controls['gstIN']">
+                        </div>
                         </div>
     
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.naturegst' | translate}}: *</p>
+                          <div class="input-group mr-t-0" >
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span> 
                             <input id="natureOfGST" maxlength="9"  class="form-control" [formControl]="userProfileForm.controls['natureOfGST']"
                               [typeahead]="accNatureOfGst" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-                              <span class="caret"></span>
+                              <span class="caret mr-t-caret"></span>
                         </div>
+                      </div>
     
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.uinNo' | translate}}: *</p>
+                          <div class="input-group mr-t-0">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
                           <input id="uin" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['uin']">
+                        </div>
                         </div>
                              <!-- Regs Info Ends -->
                     </tab>
@@ -277,30 +314,42 @@
                         <div style="height:335px;">
                           <div class="col-md-4 col-3-lt">
                             <p>{{'accountinfo.crlimit' | translate}}: *</p>
+                            <div class="input-group mr-t-0">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
                             <input id="creditLimit" type="number" maxlength="12" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                               class="form-control" [formControl]="userProfileForm.controls['creditLimit']">
                           </div>
-      
+                          </div>
+
+                          
                           <div class="col-md-4 col-3-lt">
                             <p>{{'accountinfo.saletype' | translate}}: *</p>
+                            <div class="input-group mr-t-0">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
                             <input id="saleType" maxlength="6"  class="form-control" [formControl]="userProfileForm.controls['saleType']"
                             [typeahead]="accSaleType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-                            <span class="caret"></span>
+                            <span class="caret mr-t-caret"></span>
+                          </div>
                           </div>
       
                           <div class="col-md-4 col-3-lt">
                             <p>{{'accountinfo.custType' | translate}}: *</p>
+                            <div class="input-group mr-t-0">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
                             <input id="customerType"  maxlength="10"  class="form-control" [formControl]="userProfileForm.controls['customerType']"
                             [typeahead]="accCustomerType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-                            <span class="caret"></span>
+                            <span class="caret mr-t-caret"></span>
                           </div>
-      
+                          </div>
       
                           <div class="col-md-4 col-3-lt">
                            <p>{{'accountinfo.duedays' | translate}}: *</p>
+                           <div class="input-group mr-t-0">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
                             <input id="dueDays" type="number" maxlength="3"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                              class="form-control" [formControl]="userProfileForm.controls['dueDays']">
                           </div>  
+                          </div>
                         </div>         
                         <!-- Credentials Ends -->
                       </tab>

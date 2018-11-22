@@ -358,7 +358,7 @@
     "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
   },
   "userprofile":{
-    "title": "User Profile",
+    "title": "Profile",
     "endPoint":"userProfile/",
     "clientid":"Client Id",
     "name":"Name",

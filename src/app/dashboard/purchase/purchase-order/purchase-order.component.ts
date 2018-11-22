@@ -39,7 +39,7 @@ export class PurchaseOrderComponent implements OnInit {
   ngOnInit() {
     this.purchaseOrderForm = this.fb.group({
       id: ['', Validators.required],
-      orderNumber: [],
+      orderNumber: ['', Validators.required],
       supplier: [],
       remarks: [],
       date: [],
@@ -51,13 +51,62 @@ export class PurchaseOrderComponent implements OnInit {
       productcode:[],
       pack:[],
       qty:[],
-      free:[],
       rate:[],
+      free:[],
+      value:[],
       bQty:[],
       bFree:[],
       bRate:[],
   });
-  this.focusField.nativeElement.focus();
+  // this.focusField.nativeElement.focus();
 }
 
+
+// checkForDuplicateName() {
+//   if (!this.nameFlag) {
+//     this.duplicateName = this.masterService.hasDataExist(this.internalStockList, 'name', this.purchaseOrderForm.value.number);
+//     this.getDuplicateErrorMessages();
+//   }
+// }
+
+
+
+// getDuplicateErrorMessages(): void {
+//   if (!this.checkForDuplicateName || !this.checkForDuplicateName) {
+//     this.formRequiredError = false;
+//     this.duplicateMessage = null;
+//     this.duplicateMessageParam = null;
+//   }
+// }
+
+save() {
+  this.buttonsComponent.save();
+}
+
+delete() {
+  this.buttonsComponent.delete();
+}
+
+successMsg() {
+  this.formSuccess = true;
+  this.formRequiredError = false;
+  this.resetForm();
+}
+
+requiredErrMsg() {
+  if (this.duplicateMessage == null) {
+    this.formRequiredError = true;
+    this.formSuccess = false;
+  }
+}
+
+resetForm() {
+  this.purchaseOrderForm.reset();
+  this.deleteFlag = true;
+  this.duplicateMessage = null;
+  this.duplicateMessageParam = null;
+  this.nameFlag = false;
+  this.duplicateName = false;
+  this.formRequiredError = this.formSuccess = false;
+}
 }

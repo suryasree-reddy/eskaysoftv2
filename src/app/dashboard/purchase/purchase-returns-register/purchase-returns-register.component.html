@@ -16,8 +16,8 @@
         </div>
                <div class="input-group">
           <p>{{'purchaseRetReg.repType'| translate}}: *</p>
-         <input id="repType" maxlength="7"  class="form-control" formControlName="repType" [typeahead]="reportType" typeaheadOptionField="description"
-        [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
+         <input id="repType" maxlength="7"  class="form-control" [formControl]="purchaseReturnRegisterForm.controls['repType']" [typeahead]="reportType"
+          typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
           <span class="caret"></span>
       </div>
              <div class="input-group">

@@ -32,6 +32,10 @@ export class UserProfileComponent implements OnInit {
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
   public userprofileList: any = [];
+  public accGstType: any[];
+  public accNatureOfGst: any[];
+  public accSaleType: any[];
+  public accCustomerType: any[];
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
@@ -66,7 +70,30 @@ export class UserProfileComponent implements OnInit {
       bank2: [],
       bankacno2: [],
       bankifsc2: [],
+      licNo1: [],
+      licNo2: [],
+      licExpiry: [],
+      retLicNo1: [],
+      retLicNo2: [],
+      retExpiry: [],
+      foodLicNo: [],
+      otherLicense: [],
+      otherLicenseExpiry: [],
+      gstIN: [],
+      gstType: ['', Validators.required],
+      natureOfGST: ['', Validators.required],
+      uin: [],
+      creditLimit: [],
+      dueDays: [],
+      saleType:  ['', Validators.required],
+      customerType:  ['', Validators.required],
+
     });
+
+    this.accGstType = this.sharedDataService.getSharedCommonJsonData().GstType;
+    this.accNatureOfGst = this.sharedDataService.getSharedCommonJsonData().NatureOfGst;
+    this.accSaleType = this.sharedDataService.getSharedCommonJsonData().SaleType;
+    this.accCustomerType = this.sharedDataService.getSharedCommonJsonData().CustomerType;
   }
 
   checkForDuplicateName() {
