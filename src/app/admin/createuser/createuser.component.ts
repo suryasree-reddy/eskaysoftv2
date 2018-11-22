@@ -44,21 +44,21 @@ export class CreateuserComponent implements OnInit {
 
   ngOnInit() {
     this.createUserForm = this.fb.group({
-      id: ['', Validators.required],
+      id: [],
       name: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
       confPassword: ['', Validators.required],
-      address: [],
-      town: [],
-      pin: [],
-      district: [],
-      state: [],
-      phone: [],
-      mobile: [],
+      address: ['', Validators.required],
+      town: ['', Validators.required],
+      pin: ['', Validators.required],
+      district: ['', Validators.required],
+      state: ['', Validators.required],
+      phone: ['', Validators.required],
+      mobile: ['', Validators.required],
       email: ['', Validators.required],
       roles: ['', Validators.required],
-      designation: [],
+      designation: ['', Validators.required]
     });
 
     this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;

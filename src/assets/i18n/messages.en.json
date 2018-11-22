@@ -293,7 +293,7 @@
     "discountValue":"Discount Value",
     "taxValue":"Tax Value",
     "netValue1": "Net Value",
-    
+
     "debitAdjustmentLedger": "Debit Adjustment Ledger",
     "debitAdjustmentValue": "Debit Adjustment Value",
     "creditAdjustmentLedger": "Credit Adjustment Ledger",
@@ -352,7 +352,7 @@
     "mobile":"Mobile",
     "email":"Email",
     "designation":"Designation",
-    "saveConfirmationMessage": "Are you sure you want to save Purchase?",
+    "saveConfirmationMessage": "Are you sure you want to save User?",
     "saveInformationMessage": "User record has been saved successfully.",
     "duplicateNameErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name.",
     "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
