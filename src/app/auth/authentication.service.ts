@@ -19,7 +19,12 @@ export class AuthenticationService {
     this.http.post(environment.api.url + 'auth/signin', user).subscribe(res => {
       if( res ){
         localStorage.setItem('id_token', JSON.stringify(res));
-        this.router.navigate(['dashboard']);
+        if(this.isNewUser()){
+          this.router.navigate(['admin/changePassword']);
+        }else{
+          this.router.navigate(['dashboard']);
+        }
+        
       }
       this.badCredentials.next(false);
 
@@ -47,6 +52,10 @@ export class AuthenticationService {
   getCurrentUserRoles(){
     let token = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));    
     return token.roles;
+  }
+  isNewUser(){
+    let token = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));    
+    return token.isNew;
   }
 
 }
