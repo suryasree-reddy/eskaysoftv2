@@ -1,188 +1,204 @@
-<header></header>
 <div class="  col-xs-12 card">
-
-  <div class="row">
-    <div class="col-xs-12 header">
-
-      <div class="row">
-        <h4>{{'createuser.title' | translate }}</h4>
-      </div>
-    </div> <!-- header -->
-    <form [formGroup]="createUserForm" autocomplete="off">
-      <div class="col-xs-12 card-body">
-    <div class="col-xs-12">
-
-
-      <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-      [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-        [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
-       [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+	<div class="row">
 
 
 
-       <div class="col-md-4 col-3-lt">
-          <p>{{'createuser.name' | translate }}: *</p>
-          <div class="input-group mr-t-0">
-          <input id="name" maxlength="50"  class="form-control" [formControl]="createUserForm.controls['name']">
-        </div>
-      </div>
+		<div class="col-xs-12 header">
+			<div *ngIf="!nameFlag" class="row">
+				<h4>{{'createuser.title' | translate }}</h4>
+			</div>
+			<div *ngIf="nameFlag" class="row">
+				<h4>{{'updateuser.title' | translate }}</h4>
+			</div>
+		</div> <!-- header -->
 
-      <div class="col-md-4 col-3-lt">
-          <p>{{'createuser.username' | translate }}: *</p>
-          <div class="input-group mr-t-0">
-          <input id="username" maxlength="50"  class="form-control" [formControl]="createUserForm.controls['username']">
-        </div>
-      </div>
+<form [formGroup]="createUserForm" autocomplete="off">
 
-      <div class="col-md-4 col-3-lt">
-          <p>{{'createuser.password' | translate }}: *</p>
-          <div class="input-group mr-t-0">
-          <input id="password" type="password" maxlength="50"  class="form-control" [formControl]="createUserForm.controls['password']">
-        </div>
-      </div>
+	<div class="col-xs-12 card-body">
 
-      <div class="col-md-4 col-3-lt">
-          <p>{{'createuser.confirmPassword' | translate }}: *</p>
-          <div class="input-group mr-t-0">
-          <input id="confirmPassword" type="password" maxlength="50"  class="form-control" [formControl]="createUserForm.controls['confirmPassword']">
-        </div>
-      </div>
+		<div *ngIf="nameFlag"> <!-- start of update profile-->
+			<div class="col-md-2 col-3-lt">
+				<p> Search By {{'updateuser.userId' | translate}}:</p>
+			</div>
+			<div class="col-md-4" style="margin-left: -2em;">
+				<input id="searchByUserName" maxlength="50" formControlName="userName"
+				[typeahead]="usersList" typeaheadOptionField="userName"
+				[typeaheadOptionsLimit]="7"
+				[typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)"
+				class="form-control capitalize">
+				<span class="caret"></span>
+			</div>
+		</div><!-- end of update profile-->
 
-      <div class="col-md-4 col-3-lt">
-          <p>{{'createuser.address' | translate }}: *</p>
-          <div class="input-group mr-t-0">
-          <input id="address"  maxlength="50"  class="form-control" [formControl]="createUserForm.controls['address']">
-        </div>
-      </div>
+		<div *ngIf="isNewuser" class="col-xs-12"><!-- start of create profile-->
+			<app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
+			[formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+			[errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
+			[duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
-      
-      <div class="col-md-4 col-3-lt">
-          <p>{{'createuser.town' | translate }}: *</p>
-          <div class="input-group mr-t-0">
-          <input id="town"  maxlength="20"  class="form-control" [formControl]="createUserForm.controls['town']">
-        </div>
-      </div>
+			<div class="col-md-4 col-3-lt">
+				<p>{{'createuser.name' | translate }}: *</p>
+				<div class="input-group mr-t-0">
+					<input id="name" maxlength="50"  class="form-control" [formControl]="createUserForm.controls['name']">
+				</div>
+			</div>
 
-      <div class="col-md-4 col-3-lt">
-          <p>{{'createuser.pin' | translate }}: *</p>
-          <div class="input-group mr-t-0">
-              <input id="pin" type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              class="form-control" [formControl]="createUserForm.controls['pin']" >
-        </div>
-      </div>
+			<div class="col-md-4 col-3-lt">
+				<p>{{'createuser.username' | translate }}: *</p>
+				<div class="input-group mr-t-0">
+					<input id="username" maxlength="50"  class="form-control" [formControl]="createUserForm.controls['username']">
+				</div>
+			</div>
 
-      <div class="col-md-4 col-3-lt">
-          <p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate, 'Districts')">create new</a>)</p>
-          <div class="input-group mr-t-0">
-              <input id="districtName" maxlength="20" class="form-control capitalize" [formControl]="createUserForm.controls['districtName']"
-              [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)" >
-              <span class="caret"></span>
-            </div>
-      </div>
-    
-      <div class="col-md-4 col-3-lt">
-          <p>{{'userprofile.state' | translate }}: *</p>
-          <div class="input-group mr-t-0">
-              <input id="state" [readonly]=true maxlength="25" class="form-control" [formControl]="createUserForm.controls['state']">
-            </div>
-      </div>
+			<div class="col-md-4 col-3-lt">
+				<p>{{'createuser.password' | translate }}: *</p>
+				<div class="input-group mr-t-0">
+					<input id="password" type="password" maxlength="50"  class="form-control" [formControl]="createUserForm.controls['password']">
+				</div>
+			</div>
 
-      <div class="col-md-4 col-3-lt">
-          <p>{{'createuser.phone' | translate }}: *</p>
-          <div class="input-group mr-t-0">
-              <input id="phone" maxlength="15" class="form-control" [formControl]="createUserForm.controls['phone']">
-            </div>
-      </div>
+			<div class="col-md-4 col-3-lt">
+				<p>{{'createuser.confirmPassword' | translate }}: *</p>
+				<div class="input-group mr-t-0">
+					<input id="confirmPassword" type="password" maxlength="50"  class="form-control" [formControl]="createUserForm.controls['confirmPassword']">
+				</div>
+			</div>
 
-      <div class="col-md-4 col-3-lt">
-          <p>{{'createuser.mobile' | translate }}: *</p>
-          <div class="input-group mr-t-0">
-              <input id="mobile" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              class="form-control" [formControl]="createUserForm.controls['mobile']" >
-         </div>
-      </div>
+			<div class="col-md-4 col-3-lt">
+				<p>{{'createuser.address' | translate }}: *</p>
+				<div class="input-group mr-t-0">
+					<input id="address"  maxlength="50"  class="form-control" [formControl]="createUserForm.controls['address']">
+				</div>
+			</div>
 
-      <div class="col-md-4 col-3-lt">
-          <p>{{'createuser.email' | translate }}: *</p>
-          <div class="input-group mr-t-0">
-              <input id="email" maxlength="15" class="form-control" [formControl]="createUserForm.controls['email']">
-            </div>
-      </div>
+			<div class="col-md-4 col-3-lt">
+				<p>{{'createuser.town' | translate }}: *</p>
+				<div class="input-group mr-t-0">
+					<input id="town"  maxlength="20"  class="form-control" [formControl]="createUserForm.controls['town']">
+				</div>
+			</div>
 
-      <div class="col-md-4 col-3-lt">
-          <p>{{'createuser.designation' | translate }}: *</p>
-          <div class="input-group mr-t-0">
-              <input id="designation"  class="form-control" [formControl]="createUserForm.controls['designation']">
-            </div>
-      </div>
+			<div class="col-md-4 col-3-lt">
+				<p>{{'createuser.pin' | translate }}: *</p>
+				<div class="input-group mr-t-0">
+					<input id="pin" type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+					class="form-control" [formControl]="createUserForm.controls['pin']" >
+				</div>
+			</div>
 
-      <div class="col-md-4 col-3-lt">
-          <p>{{'createuser.designation' | translate }}: *</p>
-          <div class="input-group mr-t-0">
-              <input id="designation"  class="form-control" [formControl]="createUserForm.controls['designation']">
-            </div>
-      </div>
+			<div class="col-md-4 col-3-lt">
+				<p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate, 'Districts')">create new</a>)</p>
+				<div class="input-group mr-t-0">
+					<input id="districtName" maxlength="20" class="form-control capitalize"
+					[formControl]="createUserForm.controls['districtName']"
+					[typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7"
+					[typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)" >
+					<span class="caret"></span>
+				</div>
+			</div>
+
+			<div class="col-md-4 col-3-lt">
+				<p>{{'userprofile.state' | translate }}: *</p>
+				<div class="input-group mr-t-0">
+				<input id="state" [readonly]=true maxlength="25" class="form-control" [formControl]="createUserForm.controls['state']">
+				</div>
+			</div>
+
+			<div class="col-md-4 col-3-lt">
+				<p>{{'createuser.phone' | translate }}: *</p>
+				<div class="input-group mr-t-0">
+				<input id="phone" maxlength="15" class="form-control" [formControl]="createUserForm.controls['phone']">
+				</div>
+			</div>
+
+			<div class="col-md-4 col-3-lt">
+				<p>{{'createuser.mobile' | translate }}: *</p>
+				<div class="input-group mr-t-0">
+				<input id="mobile" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+				class="form-control" [formControl]="createUserForm.controls['mobile']" >
+				</div>
+			</div>
+
+			<div class="col-md-4 col-3-lt">
+				<p>{{'createuser.email' | translate }}: *</p>
+				<div class="input-group mr-t-0">
+				<input id="email" maxlength="15" class="form-control" [formControl]="createUserForm.controls['email']">
+				</div>
+			</div>
+
+			<div class="col-md-4 col-3-lt">
+				<p>{{'createuser.designation' | translate }}: *</p>
+				<div class="input-group mr-t-0">
+				<input id="designation"  class="form-control" [formControl]="createUserForm.controls['designation']">
+				</div>
+			</div>
+
+			<!--  <div class="col-md-4 col-3-lt">
+			<p>{{'createuser.designation' | translate }}: *</p>
+			<div class="input-group mr-t-0">
+			<input id="designation"  class="form-control" [formControl]="createUserForm.controls['designation']">
+			</div>
+			</div>-->
 
 
-        <div  class="col-md-4 col-3-lt">
-          <div for="roles" class="input-group">
-              <p>{{'createuser.roles' | translate }}: *</p>
-            <select multiple name="roles" id="roles" type="text" class="form-control"
-            [formControl]="createUserForm.controls['roles']">
-              <option *ngFor="let role of rolesList" [ngValue]="role">{{role}}</option>
-          </select>
-          </div>
-        </div>
+			<div  class="col-md-4 col-3-lt">
+				<p>{{'createuser.roles' | translate }}: *</p>
+				<select multiple name="roles" id="roles" type="text" class="form-control"
+				[formControl]="createUserForm.controls['roles']">
+				<option *ngFor="let role of rolesList" [ngValue]="role">{{role}}</option>
+				</select>
+			</div>
 
-        <div class="btn-admin" >
-        <app-buttons [title]="'createuser.title'" [deleteConfirmMsg]="'createuser.deleteConfirmationMessage'"
-         [saveConfirmMsg]="'createuser.saveConfirmationMessage'" [saveInfoMsg]="'createuser.saveInformationMessage'"
-         [endPoint]="endPoint"
-         [deleteInfoMsg]="'createuser.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-         [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-         [hideDeleteBtn]=false [formObj]="createUserForm" (saveRecord)="save()"
-         (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-         (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
-        </div>
+			<div class="btn-admin" >
+				<app-buttons [title]="'createuser.title'" [deleteConfirmMsg]="'createuser.deleteConfirmationMessage'"
+				[saveConfirmMsg]="'createuser.saveConfirmationMessage'" [saveInfoMsg]="'createuser.saveInformationMessage'"
+				[endPoint]="endPoint"
+				[deleteInfoMsg]="'createuser.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+				[isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+				[hideDeleteBtn]=false [formObj]="createUserForm" (saveRecord)="save()"
+				(deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+				(afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
+			</div>
 
-</div></div>
-    </form>
-  </div>
-</div>
+		</div><!-- end of craete profile-->
+	</div>
+</form>
+
+	</div> <!-- row -->
+</div> <!-- main div  -->
 
 
 <ng-template #districtTemplate>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">{{'districts.create' | translate }}</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form [formGroup]="districtsForm" (ngSubmit)="saveChildForm('District', districtsForm)"  autocomplete="off">
+	<div class="modal-header">
+		<h4 class="modal-title pull-left">{{'districts.create' | translate }}</h4>
+		<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="districtsForm" (ngSubmit)="saveChildForm('District', districtsForm)"  autocomplete="off">
+			<app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
+			[formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+			[errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="childDuplicateMessage"
+			[duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
-        <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
-        [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="childDuplicateMessage"
-         [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+			<div class="input-group">
+				<p>{{'districts.name' | translate }}: *</p>
+				<input autofocus id="districtName" maxlength="20"  class="form-control capitalize" (blur)="checkForDuplicateDistrictName()"  [formControl]="districtsForm.controls['districtName']">
+			</div>
 
-         <div class="input-group">
-          <p>{{'districts.name' | translate }}: *</p>
-          <input autofocus id="districtName" maxlength="20"  class="form-control capitalize" (blur)="checkForDuplicateDistrictName()"  [formControl]="districtsForm.controls['districtName']">
-        </div>
-          <div class="input-group">
-            <p>{{'states.name' | translate }}: * &emsp;</p>
-            <input id="stateName" maxlength="20" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="stateName"
-              [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control capitalize">
-              <span class="caret"></span>
-        </div>
+			<div class="input-group">
+				<p>{{'states.name' | translate }}: * &emsp;</p>
+				<input id="stateName" maxlength="20" formControlName="stateName" [typeahead]="statesList"
+				typeaheadOptionField="stateName"
+				[typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control capitalize">
+				<span class="caret"></span>
+			</div>
 
-
-               <div class="input-group">
-                <button type="button" (click)="resetChildForm()" class="btn btn-primary">Reset</button>
-                <button type="submit" class="btn btn-primary mr-l-10">Save</button>
-              </div>
-      </form>
-
-    </div>
-  </ng-template>
+			<div class="input-group">
+				<button type="button" (click)="resetChildForm()" class="btn btn-primary">Reset</button>
+				<button type="submit" class="btn btn-primary mr-l-10">Save</button>
+			</div>
+		</form>
+	</div>
+</ng-template>

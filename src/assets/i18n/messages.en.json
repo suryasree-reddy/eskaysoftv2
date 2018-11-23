@@ -342,7 +342,7 @@
     "name":"Name",
     "username":"User Name",
     "password":"Password",
-    "confirmpassword":"Confirm Password",
+    "confirmPassword":"Confirm Password",
     "address":"Address",
     "town":"Town",
     "pin":"PIN",

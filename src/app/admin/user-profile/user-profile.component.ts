@@ -43,7 +43,6 @@ export class UserProfileComponent implements OnInit {
   private accCustomerType: any[];
   public districtsList: any = [];
   public statesList: any = [];
-  public selectedDistrict: any;
   private duplicateDistrictName: boolean = false;
   public scFormRequiredError: boolean = false;
   public scFormSuccess: boolean = false;
@@ -66,7 +65,8 @@ export class UserProfileComponent implements OnInit {
     this.userProfileForm = this.fb.group({
 //clientId: ['', Validators.required],
       id: [''],
-      districtId: [],
+        userId: [],
+    //  districtId: [],
       name: ['', Validators.required],
       username: ['', Validators.required],
       address1: ['', Validators.required],
@@ -75,7 +75,7 @@ export class UserProfileComponent implements OnInit {
       pin: ['', Validators.required],
       districtName: ['', Validators.required],
       state: ['', Validators.required],
-      statecode: ['', Validators.required],
+      stateCode: ['', Validators.required],
       phoneLand1: ['', Validators.required],
       mobile1: ['', Validators.required],
       mobile2: ['', Validators.required],
@@ -114,13 +114,13 @@ export class UserProfileComponent implements OnInit {
       stateId: [],
       stateName: []
     });
-
+  this.loadDistrictData();
     this.accGstType = this.sharedDataService.getSharedCommonJsonData().GstType;
     this.accNatureOfGst = this.sharedDataService.getSharedCommonJsonData().NatureOfGst;
     this.accSaleType = this.sharedDataService.getSharedCommonJsonData().SaleType;
     this.accCustomerType = this.sharedDataService.getSharedCommonJsonData().CustomerType;
   }
-  
+
   loadDistrictData() {
     this.masterService.getParentData("districts/").subscribe(list => {
       this.districtsList = list;
@@ -134,10 +134,11 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSelectDistrict(event) {
-    this.selectedDistrict = event.item;
-    this.userProfileForm.patchValue({ stateName: this.selectedDistrict.stateName });
-    this.userProfileForm.patchValue({ districtId: this.selectedDistrict.id });
-    this.userProfileForm.patchValue({ stateId: this.selectedDistrict.stateId });
+    this.userProfileForm.patchValue({ state: event.item.stateName });
+    //  this.createUserForm.patchValue({ districtId: this.selectedDistrict.id });
+    this.userProfileForm.patchValue({ districtName: event.item.districtName });
+
+    this.userProfileForm.patchValue({ stateCode: event.item.stateId });
   }
 
   openModal(template: TemplateRef<any>, templateName) {
@@ -169,7 +170,7 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  
+
   scRequiredErrMsg() {
     if (this.childDuplicateMessage == null) {
       this.scFormRequiredError = true;
@@ -190,7 +191,7 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  
+
   checkForDuplicateDistrictName() {
     this.duplicateDistrictName = this.masterService.hasDataExist(this.districtsList, 'districtName', this.districtsForm.value.districtName);
     this.getDuplicateErrorMessages();
@@ -269,7 +270,7 @@ export class UserProfileComponent implements OnInit {
     );
     (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
   }
-  
+
   showConfirmationModal(eventType): void {
     const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
@@ -278,7 +279,7 @@ export class UserProfileComponent implements OnInit {
       'green',
       ''
     );
-  
+
     (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
       if (result) {
         if (eventType == "Delete") {
@@ -299,8 +300,5 @@ export class UserProfileComponent implements OnInit {
       return { "title": "Districts", "confirmMessage": "districts.saveConfirmationMessage", "infoMessage": "districts.saveInformationMessage" };
     }
   }
-  
+
 }
-
-
-

@@ -1,4 +1,4 @@
-import { Component, OnInit,  NgModule, TemplateRef, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, NgModule, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsDropdownModule, TypeaheadModule, TabsModule } from 'ngx-bootstrap';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -30,7 +30,7 @@ export class CreateuserComponent implements OnInit {
   private createUserForm: FormGroup;
   public districtsForm: FormGroup;
   private deleteFlag: boolean = true;
-  private endPoint: string = "createUser/";
+  private endPoint: string = "auth/createUser/";
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
@@ -38,20 +38,19 @@ export class CreateuserComponent implements OnInit {
   private duplicateUserName: boolean = false;
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
-  private paramUserId: string = null;
   private rolesList: any = [];
   private userList: any = [];
   public districtsList: any = [];
   public statesList: any = [];
-  public selectedDistrict: any;
   private duplicateDistrictName: boolean = false;
   public scFormRequiredError: boolean = false;
   public scFormSuccess: boolean = false;
   public childDuplicateMessage: string = null;
   public childDuplicateMessageParam: string = null;
+  private isNewuser:boolean= true;
 
   modalRef: BsModalRef;
-  
+
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
   constructor(private fb: FormBuilder,
@@ -63,23 +62,29 @@ export class CreateuserComponent implements OnInit {
     translate.setDefaultLang('messages.en');
     this._routeParams.queryParams.subscribe(params => {
       this.nameFlag = params['editMode'];
-      this.paramUserId = params['userId'];
+      if(this.nameFlag == "false"){
+          this.isNewuser = true;
+      }else{
+        this.isNewuser = false;
+      }
+
     });
   }
 
   ngOnInit() {
     this.createUserForm = this.fb.group({
       id: [],
-      districtId: [],
+      //  districtId: [],
       name: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
-      confPassword: ['', Validators.required],
+      //  confPassword: ['', Validators.required],
       address: ['', Validators.required],
       town: ['', Validators.required],
       pin: ['', Validators.required],
       districtName: ['', Validators.required],
       state: ['', Validators.required],
+      stateCode: [],
       phone: ['', Validators.required],
       mobile: ['', Validators.required],
       email: ['', Validators.required],
@@ -93,11 +98,11 @@ export class CreateuserComponent implements OnInit {
       stateId: [],
       stateName: []
     });
-
+    this.loadDistrictData();
     this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
   }
 
-loadDistrictData() {
+  loadDistrictData() {
     this.masterService.getParentData("districts/").subscribe(list => {
       this.districtsList = list;
     })
@@ -110,20 +115,27 @@ loadDistrictData() {
   }
 
   onSelectDistrict(event) {
-    this.selectedDistrict = event.item;
-    this.createUserForm.patchValue({ stateName: this.selectedDistrict.stateName });
-    this.createUserForm.patchValue({ districtId: this.selectedDistrict.id });
-    this.createUserForm.patchValue({ stateId: this.selectedDistrict.stateId });
+    this.createUserForm.patchValue({ state: event.item.stateName });
+    //  this.createUserForm.patchValue({ districtId: this.selectedDistrict.id });
+    this.createUserForm.patchValue({ districtName: event.item.districtName });
+
+    this.createUserForm.patchValue({ stateCode: event.item.stateId });
   }
 
   openModal(template: TemplateRef<any>, templateName) {
-   if (templateName == "Districts") {
-      this.resetChildForm(this.districtsForm);
-      this.loadStatesData();
-    }
+    // if (templateName == "Districts") {
+    this.resetChildForm(this.districtsForm);
+    this.loadStatesData();
+    //  }
     //template, 'SubSchedule'
     this.scFormRequiredError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+  }
+
+  loadSelectedTypeahead(event) {
+    this.isNewuser = false;
+    this.nameFlag = true;
+
   }
 
   resetChildForm(formObj) {
@@ -132,7 +144,7 @@ loadDistrictData() {
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
     this.scFormRequiredError = this.scFormSuccess = false;
-    // formObj.reset();
+    formObj.reset();
     this.districtsForm.reset();
   }
 
@@ -145,7 +157,10 @@ loadDistrictData() {
     }
   }
 
-  
+  onSelectState(event) {
+    this.districtsForm.patchValue({ stateId: event.item.id });
+  }
+
   scRequiredErrMsg() {
     if (this.childDuplicateMessage == null) {
       this.scFormRequiredError = true;
@@ -156,9 +171,7 @@ loadDistrictData() {
   saveChild(screenName, formObj, targetUrl) {
     this.masterService.createRecord(targetUrl, formObj.value).subscribe(res => {
       this.showInformationModal(screenName);
-      if (screenName == "District") {
-        this.loadDistrictData();
-      }
+      this.loadDistrictData();
       this.modalRef.hide();
       formObj.reset();
     }, (error) => {
@@ -166,7 +179,7 @@ loadDistrictData() {
     });
   }
 
-  
+
   checkForDuplicateDistrictName() {
     this.duplicateDistrictName = this.masterService.hasDataExist(this.districtsList, 'districtName', this.districtsForm.value.districtName);
     this.getDuplicateErrorMessages();
@@ -243,7 +256,7 @@ loadDistrictData() {
     );
     (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
   }
-  
+
   showConfirmationModal(eventType): void {
     const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
@@ -252,7 +265,7 @@ loadDistrictData() {
       'green',
       ''
     );
-  
+
     (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
       if (result) {
         if (eventType == "Delete") {

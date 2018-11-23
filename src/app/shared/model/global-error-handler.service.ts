@@ -6,13 +6,10 @@ import { SharedDataService } from './shared-data.service';
 export class GlobalErrorHandlerService implements ErrorHandler {
 
   constructor(
-     private sharedDataService:SharedDataService) {
-
-
-        }
+     private sharedDataService:SharedDataService) {  }
 
   handleError(error: any) {
-    if (error instanceof HttpErrorResponse) {
+    if (error instanceof HttpErrorResponse && error.status > 0) {
       //Backend returns unsuccessful response codes such as 404, 500 etc.
 
       console.error('Backend returned status code: ', error.status);

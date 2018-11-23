@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 import { AuthenticationService } from '../../auth/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-changepassword',
@@ -29,7 +30,7 @@ export class ChangepasswordComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService, private authService: AuthenticationService,
-    private sharedDataService: SharedDataService,
+    private sharedDataService: SharedDataService,private router: Router,
     private masterService: MasterService) { translate.setDefaultLang('messages.en'); }
 
   ngOnInit() {
@@ -79,7 +80,7 @@ export class ChangepasswordComponent implements OnInit {
   successMsg() {
     this.formSuccess = true;
     this.formRequiredError = false;
-    this.resetForm();
+  this.router.navigate(['dashboard']);
   }
 
   requiredErrMsg() {

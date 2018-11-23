@@ -32,7 +32,7 @@
                 <tabset type="pills">
 
                   <tab heading="Profile Info">
-                    
+
 
                         <div class="col-md-4 col-3-lt">
                             <p>{{'userprofile.name' | translate }}: *</p>
@@ -40,7 +40,7 @@
                             <input id="name" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['name']">
                           </div>
                         </div>
-                        
+
                         <div class="col-md-4 col-3-lt">
                             <p>{{'userprofile.username' | translate }}: *</p>
                             <div class="input-group mr-t-0">
@@ -73,18 +73,22 @@
                             <p>{{'userprofile.pin' | translate }}: *</p>
                             <div class="input-group mr-t-0">
                                 <input id="pin" type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                class="form-control" [formControl]="userProfileForm.controls['pin']">      
+                                class="form-control" [formControl]="userProfileForm.controls['pin']">
                           </div>
                         </div>
 
-                        
+
                         <div class="col-md-4 col-3-lt">
                             <p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate, 'Districts')">create new</a>)</p>
                             <div class="input-group mr-t-0">
-                                <input id="districtName" maxlength="20" class="form-control capitalize" [formControl]="userProfileForm.controls['districtName']"
-                                [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)" >
+                              <input id="districtName" maxlength="20" class="form-control capitalize"
+                                [formControl]="userProfileForm.controls['districtName']"
+                                [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7"
+                                 [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)" >
                                 <span class="caret"></span>
                               </div>
+
+
                         </div>
 
                         <div class="col-md-4 col-3-lt">
@@ -97,15 +101,15 @@
                         <div class="col-md-4 col-3-lt">
                             <p>{{'userprofile.statecode' | translate }}: *</p>
                             <div class="input-group mr-t-0">
-                                <input id="statecode" type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                          class="form-control" [formControl]="userProfileForm.controls['statecode']"> 
+                                <input id="stateCode" [readonly]=true type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                          class="form-control" [formControl]="userProfileForm.controls['stateCode']">
                               </div>
                         </div>
 
                         <div class="col-md-4 col-3-lt">
                             <p>{{'userprofile.phone' | translate }}: *</p>
                             <div class="input-group mr-t-0">
-                                <input id="phone" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['phone']">
+                                <input id="phoneLand1" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['phoneLand1']">
                               </div>
                         </div>
 
@@ -136,7 +140,7 @@
                             <div class="input-group mr-t-0">
                                 <input id="contactPersonMobile" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                           class="form-control" [formControl]="userProfileForm.controls['contactPersonMobile']">
-                      
+
                               </div>
                         </div>
 
@@ -164,7 +168,7 @@
                         <div class="col-md-4 col-3-lt">
                             <p>{{'userprofile.bankifscno1' | translate }}: *</p>
                             <div class="input-group mr-t-0">
-                                <input id="bankifscno1" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['bankifscno1']">
+                                <input id="bankifsc1" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['bankifsc1']">
                               </div>
                         </div>
 
@@ -182,7 +186,7 @@
                               </div>
                         </div>
 
-                        
+
                         <div class="col-md-4 col-3-lt">
                             <p>{{'userprofile.bankifscno2' | translate }}: *</p>
                             <div class="input-group mr-t-0">
@@ -190,7 +194,7 @@
                               </div>
                         </div>
 
-                
+
                   </tab>
 
                   <tab heading="{{'accountinfo.reginfo' | translate}}">
@@ -201,7 +205,7 @@
                           <input id="licNo1" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['licNo1']">
                         </div>
                       </div>
-    
+
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.licno2' | translate}}: *</p>
                           <div class="input-group mr-t-0">
@@ -226,7 +230,7 @@
                           <input id="retLicNo2" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['retLicNo2']">
                         </div>
                         </div>
-    
+
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.retexpiry' | translate}}: *</p>
                           <div class="input-group mr-t-0">
@@ -251,7 +255,7 @@
                           <input id="otherLicenseExpiry" type="date"  class="form-control" [formControl]="userProfileForm.controls['otherLicenseExpiry']">
                         </div>
                         </div>
-    
+
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.gsttype' | translate}}: *</p>
                           <div class="input-group" style="margin-top:0em;">
@@ -266,7 +270,7 @@
                           <input id="gstIN" maxlength="15"  class="form-control" [formControl]="userProfileForm.controls['gstIN']">
                         </div>
                         </div>
-    
+
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.naturegst' | translate}}: *</p>
                           <div class="input-group mr-t-0" >
@@ -275,7 +279,7 @@
                               <span class="caret mr-t-caret"></span>
                         </div>
                       </div>
-    
+
                         <div class="col-md-4 col-3-lt">
                           <p>{{'accountinfo.uinNo' | translate}}: *</p>
                           <div class="input-group mr-t-0">
@@ -296,7 +300,7 @@
                           </div>
                           </div>
 
-                          
+
                           <div class="col-md-4 col-3-lt">
                             <p>{{'accountinfo.saletype' | translate}}: *</p>
                             <div class="input-group mr-t-0">
@@ -305,7 +309,7 @@
                             <span class="caret mr-t-caret"></span>
                           </div>
                           </div>
-      
+
                           <div class="col-md-4 col-3-lt">
                             <p>{{'accountinfo.custType' | translate}}: *</p>
                             <div class="input-group mr-t-0">
@@ -314,15 +318,15 @@
                             <span class="caret mr-t-caret"></span>
                           </div>
                           </div>
-      
+
                           <div class="col-md-4 col-3-lt">
                            <p>{{'accountinfo.duedays' | translate}}: *</p>
                            <div class="input-group mr-t-0">
                             <input id="dueDays" type="number" maxlength="3"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                              class="form-control" [formControl]="userProfileForm.controls['dueDays']">
-                          </div>  
                           </div>
-                        </div>         
+                          </div>
+                        </div>
                         <!-- Credentials Ends -->
                       </tab>
 

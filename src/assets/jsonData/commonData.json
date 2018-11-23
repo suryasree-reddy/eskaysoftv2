@@ -627,6 +627,10 @@
     }
   ],
   "UserRoles": [
+    "ROLE_USER",
+    "ROLE_ADMIN"
+  ],
+  "UserRoles_old": [
     "Roles",
     "Allow Masters",
     "Allow Purchase",
@@ -1179,7 +1183,7 @@
         "newRowsAction": "keep"
       },
       "suppressSizeToFit": false
-    }, 
+    },
     {
       "headerName": "Rate",
       "field": "rate",

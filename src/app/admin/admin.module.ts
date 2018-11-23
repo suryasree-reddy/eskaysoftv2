@@ -13,7 +13,6 @@ import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { CreateuserComponent } from './createuser/createuser.component';
-import { UpdateuserComponent } from './updateuser/updateuser.component';
 
 @NgModule({
   imports: [
@@ -39,7 +38,7 @@ import { UpdateuserComponent } from './updateuser/updateuser.component';
     NgModel,
     FormsModule
   ],
-  declarations: [UserProfileComponent, ChangepasswordComponent, CreateuserComponent, UpdateuserComponent]
+  declarations: [UserProfileComponent, ChangepasswordComponent, CreateuserComponent]
 })
 export class AdminModule { }
 export function HttpLoaderFactory(http: HttpClient) {
