@@ -46,7 +46,7 @@ export class ChangepasswordComponent implements OnInit {
       // designation: ['', Validators.required],
       // mobile: ['', Validators.required]
     });
-    this.authService.logout();
+  //  this.authService.logout();
   }
 
   checkForDuplicateUserName() {
@@ -68,7 +68,7 @@ export class ChangepasswordComponent implements OnInit {
   }
 
   save() {
-    this.changePasswordForm.patchValue({ id: "test" })
+    //this.changePasswordForm.patchValue({ id: "test" })
     this.buttonsComponent.save();
   }
 

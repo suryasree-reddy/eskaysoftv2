@@ -65,7 +65,6 @@ export class MasterService {
 
 
   createRecord(tragetServiceName, requestObj) {
-    console.log("tragetServiceName1111----", tragetServiceName);
     if(tragetServiceName == "changePassword/"){
       return this.httpClient.post(this.SETTINGS_END_POINT + tragetServiceName, requestObj);
     }else{
@@ -74,7 +73,6 @@ export class MasterService {
   }
 
   updateRecord(tragetServiceName, requestObj) {
-    console.log("tragetServiceName----", tragetServiceName);
     if(tragetServiceName == "changePassword/"){
       return this.httpClient.put(this.SETTINGS_END_POINT + tragetServiceName, requestObj);
     }else{
