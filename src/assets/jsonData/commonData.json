@@ -1139,7 +1139,7 @@
   ],
   "PurchaseOrderColumns": [{
       "headerName": "S No",
-      "field": "sNo",
+      "field": "id",
       "width":150,
       "filterParams": {
         "filterOptions": ["contains"],

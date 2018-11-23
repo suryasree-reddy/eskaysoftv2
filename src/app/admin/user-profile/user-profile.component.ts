@@ -62,7 +62,7 @@ export class UserProfileComponent implements OnInit {
       mobile1: ['', Validators.required],
       mobile2: ['', Validators.required],
       contactPerson: ['', Validators.required],
-      cPersonMobile: ['', Validators.required],
+      contactPersonMobile: ['', Validators.required],
       natureofbusiness: ['', Validators.required],
       bank1: ['', Validators.required],
       bankacno1: ['', Validators.required],
