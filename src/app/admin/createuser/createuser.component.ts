@@ -62,9 +62,11 @@ export class CreateuserComponent implements OnInit {
     translate.setDefaultLang('messages.en');
     this._routeParams.queryParams.subscribe(params => {
       this.nameFlag = params['editMode'];
-      if(this.nameFlag == "false"){
+      if(params['editMode'] == "false"){
+        this.nameFlag = false;
           this.isNewuser = true;
       }else{
+        this.nameFlag = true;
         this.isNewuser = false;
       }
 
