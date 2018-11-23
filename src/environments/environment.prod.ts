@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   api: {
-    url: 'http://localhost:8080/api/'
+    url: 'https://eskaysoftapi.synectiks.com/api/'
 	
   }
 };

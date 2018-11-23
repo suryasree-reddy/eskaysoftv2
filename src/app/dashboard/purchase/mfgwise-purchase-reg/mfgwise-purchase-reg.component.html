@@ -1,22 +1,22 @@
 <div class="col-xs-5">
-  <h3>Manufacturer-Wise Register</h3>
+  <h3>{{'mfgwisePurchaseReg.title' | translate}}</h3>
   <form [formGroup]="mfgwiseRegristerForm" autocomplete="off">
       <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
         [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
       <div class="input-group">
-         <p>Mfg. Option: *</p>
-         <input id="zone" maxlength="7"  class="form-control" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
+         <p>{{'mfgwisePurchaseReg.mfgOption' | translate}}: *</p>
+         <input id="mfgOption" maxlength="7"  class="form-control" formControlName="mfgOption" [typeahead]="mfgList" typeaheadOptionField="description"
          [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
          <span class="caret"></span>
        </div>
        <div class="input-group">
-         <p>From Date: *</p>
-         <input id="fromDate" class="form-control" [formControl]="mfgwiseRegristerForm.controls['date']">
+         <p>{{'common.fromDate' | translate}}: *</p>
+         <input id="fromDate" class="form-control" [formControl]="mfgwiseRegristerForm.controls['fromDate']">
        </div>
        <div class="input-group">
-         <p>To Date: *</p>
-         <input id="toDate" class="form-control" [formControl]="mfgwiseRegristerForm.controls['date']">
+         <p>{{'common.toDate'  | translate}}: *</p>
+         <input id="toDate" class="form-control" [formControl]="mfgwiseRegristerForm.controls['toDate']">
        </div>
 
        <app-buttons [title]="'internal-stock-adj.title'" [deleteConfirmMsg]="'internal-stock-adj.deleteConfirmationMessage'"

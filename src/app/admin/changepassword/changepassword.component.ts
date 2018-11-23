@@ -34,22 +34,22 @@ export class ChangepasswordComponent implements OnInit {
 
   ngOnInit() {
     this.changePasswordForm = this.fb.group({
-      name: ['', Validators.required],
+      // name: ['', Validators.required],
       usernameOrEmail: ['', Validators.required],
       password: ['', Validators.required],
-      email: ['', Validators.required],
-      roles: ['', Validators.required],
-      confPassword: ['', Validators.required],
-      address: ['', Validators.required],
-      town: ['', Validators.required],
-      designation: ['', Validators.required],
-      mobile: ['', Validators.required]
+      // email: ['', Validators.required],
+      // roles: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+      // address: ['', Validators.required],
+      // town: ['', Validators.required],
+      // designation: ['', Validators.required],
+      // mobile: ['', Validators.required]
     });
     this.authService.logout();
   }
 
   checkForDuplicateUserName() {
-      this.duplicateUserName = this.masterService.hasDataExist(this.chgPswdList, 'username', this.changePasswordForm.value.username);
+      this.duplicateUserName = this.masterService.hasDataExist(this.chgPswdList, 'usernameOrEmail', this.changePasswordForm.value.usernameOrEmail);
       this.getDuplicateErrorMessages();
   }
 

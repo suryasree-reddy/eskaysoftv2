@@ -13,7 +13,9 @@
           <div>
           	<h4>{{'updateuser.title' | translate }}</h4>
           	<p>{{'updateuser.userId' | translate }}
-          		<input type="text" id="userId"  [formControl]="updateUserForm.controls['userId']" style="border:hidden; margin: 5px;">
+              <input type="text" id="userId"  [formControl]="updateUserForm.controls['userId']" style="border:hidden; margin: 5px;" 
+              [typeahead]="updtUsrList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
+              <span class="caret"></span>
           		<button [routerLink]="['../createUser']" [queryParams]="{editMode:true, userId:updateUserForm.controls['userId'].value}"
               class="btn btn-xs btn-success">{{'updateuser.submit' | translate }}</button>
           	</p>

@@ -352,6 +352,7 @@
     "mobile":"Mobile",
     "email":"Email",
     "designation":"Designation",
+    "roles": "Roles",
     "saveConfirmationMessage": "Are you sure you want to save User?",
     "saveInformationMessage": "User record has been saved successfully.",
     "duplicateNameErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name.",
@@ -407,6 +408,23 @@
     "bfree": "B.Free",
     "brate": "B.Rate"
   },
+  "mfgwisePurchaseReg": {
+    "title": "Manufacturer-Wise Register",
+    "mfgOption": "Mfg. Option"
+  },
+  "orderPurchReg": {
+    "title": "Order Purchase Register",
+    "company": "Company",
+    "suppOption": "Supplier Option",
+    "repOption": "Report Option"
+  },
+  "purchaseReg": {
+    "title": "Purchase Register",
+    "company": "Company",
+    "suppOption": "Supplier Option",
+    "repType": "Report Type"
+  },
+
   "button": {
     "save": "Save",
     "reset": "Reset",

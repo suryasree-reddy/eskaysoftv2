@@ -25,6 +25,7 @@ export class MfgwisePurchaseRegComponent implements OnInit {
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
   private internalStockList: any = [];
+  private mfgList: any = [];
 
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
@@ -40,6 +41,7 @@ export class MfgwisePurchaseRegComponent implements OnInit {
   ngOnInit() {
     this.mfgwiseRegristerForm = this.fb.group({
       id: ['', Validators.required],
+      mfgOption: ['', Validators.required],
       fromDate: [],
       toDate: []
 

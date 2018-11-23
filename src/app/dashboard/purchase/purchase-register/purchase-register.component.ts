@@ -36,7 +36,11 @@ export class PurchaseRegisterComponent implements OnInit {
 
   ngOnInit() {
     this.purchaseRegisterForm = this.fb.group({
-      id: ['', Validators.required]
+      id: ['', Validators.required],
+      gsttype: ['', Validators.required],
+      fromDate: ['', Validators.required],
+      toDate: ['', Validators.required],
+      repType: ['', Validators.required]
     });
 
   //  this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
