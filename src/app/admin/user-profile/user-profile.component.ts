@@ -1,10 +1,14 @@
 import { Component, OnInit,  NgModule, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsDropdownModule, TypeaheadModule, TabsModule } from 'ngx-bootstrap';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { MasterService } from 'src/app/dashboard/master/master.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
+import { ConfirmationModelDialogComponent } from 'src/app/commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
+// import * as _ from 'lodash';
 
 @Component({
   selector: 'app-user-profile',
@@ -22,6 +26,7 @@ import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 export class UserProfileComponent implements OnInit {
 
   private userProfileForm: FormGroup;
+  public districtsForm: FormGroup;
   private deleteFlag: boolean = true;
   private endPoint: string = "userProfile/";
   private formSuccess: boolean = false;
@@ -36,11 +41,23 @@ export class UserProfileComponent implements OnInit {
   private accNatureOfGst: any[];
   private accSaleType: any[];
   private accCustomerType: any[];
+  public districtsList: any = [];
+  public statesList: any = [];
+  public selectedDistrict: any;
+  private duplicateDistrictName: boolean = false;
+  public scFormRequiredError: boolean = false;
+  public scFormSuccess: boolean = false;
+  public childDuplicateMessage: string = null;
+  public childDuplicateMessageParam: string = null;
+
+
+  modalRef: BsModalRef;
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
+    private modalService: BsModalService,
     private sharedDataService: SharedDataService,
     private masterService: MasterService) {
       translate.setDefaultLang('messages.en'); }
@@ -49,13 +66,14 @@ export class UserProfileComponent implements OnInit {
     this.userProfileForm = this.fb.group({
 //clientId: ['', Validators.required],
       id: [''],
+      districtId: [],
       name: ['', Validators.required],
       username: ['', Validators.required],
       address1: ['', Validators.required],
       address2: ['', Validators.required],
       town: ['', Validators.required],
       pin: ['', Validators.required],
-      district: ['', Validators.required],
+      districtName: ['', Validators.required],
       state: ['', Validators.required],
       statecode: ['', Validators.required],
       phoneLand1: ['', Validators.required],
@@ -90,11 +108,94 @@ export class UserProfileComponent implements OnInit {
 
     });
 
+    this.districtsForm = this.fb.group({
+      id: [],
+      districtName: ['', Validators.required],
+      stateId: [],
+      stateName: []
+    });
+
     this.accGstType = this.sharedDataService.getSharedCommonJsonData().GstType;
     this.accNatureOfGst = this.sharedDataService.getSharedCommonJsonData().NatureOfGst;
     this.accSaleType = this.sharedDataService.getSharedCommonJsonData().SaleType;
     this.accCustomerType = this.sharedDataService.getSharedCommonJsonData().CustomerType;
   }
+  
+  loadDistrictData() {
+    this.masterService.getParentData("districts/").subscribe(list => {
+      this.districtsList = list;
+    })
+  }
+
+  loadStatesData() {
+    this.masterService.getParentData("states/").subscribe(list => {
+      this.statesList = list;
+    })
+  }
+
+  onSelectDistrict(event) {
+    this.selectedDistrict = event.item;
+    this.userProfileForm.patchValue({ stateName: this.selectedDistrict.stateName });
+    this.userProfileForm.patchValue({ districtId: this.selectedDistrict.id });
+    this.userProfileForm.patchValue({ stateId: this.selectedDistrict.stateId });
+  }
+
+  openModal(template: TemplateRef<any>, templateName) {
+   if (templateName == "Districts") {
+      this.resetChildForm(this.districtsForm);
+      this.loadStatesData();
+    }
+    //template, 'SubSchedule'
+    this.scFormRequiredError = this.scFormSuccess = false;
+    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+  }
+
+  resetChildForm(formObj) {
+    this.scFormRequiredError = false;
+    this.duplicateDistrictName = false;
+    this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
+    this.scFormRequiredError = this.scFormSuccess = false;
+    // formObj.reset();
+    this.districtsForm.reset();
+  }
+
+  saveChildForm(screenName, formObj) {
+    this.scFormRequiredError = false;
+    if (formObj.valid && this.childDuplicateMessage == null) {
+      this.showConfirmationModal(screenName);
+    } else {
+      this.scRequiredErrMsg()
+    }
+  }
+
+  
+  scRequiredErrMsg() {
+    if (this.childDuplicateMessage == null) {
+      this.scFormRequiredError = true;
+      this.scFormSuccess = false;
+    }
+  }
+
+  saveChild(screenName, formObj, targetUrl) {
+    this.masterService.createRecord(targetUrl, formObj.value).subscribe(res => {
+      this.showInformationModal(screenName);
+      if (screenName == "District") {
+        this.loadDistrictData();
+      }
+      this.modalRef.hide();
+      formObj.reset();
+    }, (error) => {
+      throw error;
+    });
+  }
+
+  
+  checkForDuplicateDistrictName() {
+    this.duplicateDistrictName = this.masterService.hasDataExist(this.districtsList, 'districtName', this.districtsForm.value.districtName);
+    this.getDuplicateErrorMessages();
+  }
+
 
   checkForDuplicateName() {
     if (!this.nameFlag) {
@@ -115,6 +216,10 @@ export class UserProfileComponent implements OnInit {
       this.formRequiredError = false;
       this.duplicateMessage = null;
       this.duplicateMessageParam = null;
+    }
+    if (this.duplicateDistrictName) {
+      this.childDuplicateMessage = "districts.duplicateNameErrorMessage";
+      this.childDuplicateMessageParam = this.districtsForm.value.districtName;
     }
   }
 
@@ -144,9 +249,58 @@ export class UserProfileComponent implements OnInit {
     this.deleteFlag = true;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
+    this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
     this.nameFlag = false;
     this.duplicateName = false;
     this.duplicateUserName = false;
     this.formRequiredError = this.formSuccess = false;
+    this.duplicateDistrictName = false;
+    this.districtsForm.reset();
   }
+
+
+  showInformationModal(eventType) {
+    const modal = this.modalService.show(ConfirmationModelDialogComponent);
+    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
+      this.getFormDetails(eventType).title,
+      this.getFormDetails(eventType).infoMessage,
+      ''
+    );
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
+  }
+  
+  showConfirmationModal(eventType): void {
+    const modal = this.modalService.show(ConfirmationModelDialogComponent);
+    (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
+      this.getFormDetails(eventType).title,
+      this.getFormDetails(eventType).confirmMessage,
+      'green',
+      ''
+    );
+  
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
+      if (result) {
+        if (eventType == "Delete") {
+          this.delete();
+        }
+        else if (eventType == "District") {
+          this.saveChild(eventType, this.districtsForm, "districts/");
+        }
+      }
+    });
+  }
+
+  getFormDetails(screenName) {
+    if (screenName == "Save") {
+      return { "title": "Profile", "confirmMessage": "userprofile.saveConfirmationMessage", "infoMessage": "userprofile.saveInformationMessage" };
+    }
+    else if (screenName == "District") {
+      return { "title": "Districts", "confirmMessage": "districts.saveConfirmationMessage", "infoMessage": "districts.saveInformationMessage" };
+    }
+  }
+  
 }
+
+
+

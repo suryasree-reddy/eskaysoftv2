@@ -149,3 +149,40 @@
     </form>
   </div>
 </div>
+
+
+<ng-template #districtTemplate>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">{{'districts.create' | translate }}</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="districtsForm" (ngSubmit)="saveChildForm('District', districtsForm)"  autocomplete="off">
+
+        <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
+        [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="childDuplicateMessage"
+         [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+
+         <div class="input-group">
+          <p>{{'districts.name' | translate }}: *</p>
+          <input autofocus id="districtName" maxlength="20"  class="form-control capitalize" (blur)="checkForDuplicateDistrictName()"  [formControl]="districtsForm.controls['districtName']">
+        </div>
+          <div class="input-group">
+            <p>{{'states.name' | translate }}: * &emsp;</p>
+            <input id="stateName" maxlength="20" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="stateName"
+              [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control capitalize">
+              <span class="caret"></span>
+        </div>
+
+
+               <div class="input-group">
+                <button type="button" (click)="resetChildForm()" class="btn btn-primary">Reset</button>
+                <button type="submit" class="btn btn-primary mr-l-10">Save</button>
+              </div>
+      </form>
+
+    </div>
+  </ng-template>

@@ -393,12 +393,20 @@
     "purchRetNumber": "Purchase Return Number",
     "productDesc": "Product Description",
     "status": "Status",
-    "amount": "Amount"
+    "amount": "Amount",
+    "saveConfirmationMessage": "Are you sure you want to save Purchase Return?",
+    "saveInformationMessage": "Purchase Return record has been saved successfully.",
+    "duplicateNameErrorMessage":"The Purchase Return  '{{duplicateMessageParam}}' already exists with this Name.",
+    "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
   },
   "purchaseRetReg": {
     "title": "Purchase Returns Register",
     "repType": "Report Type",
-    "custOption": "Customer Option"
+    "custOption": "Customer Option",
+    "saveConfirmationMessage": "Are you sure you want to save Purchase Returns Register?",
+    "saveInformationMessage": "Purchase Returns Register record has been saved successfully.",
+    "duplicateNameErrorMessage":"The Purchase Returns Register '{{duplicateMessageParam}}' already exists with this Name.",
+    "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
   },
   "purchaseOrder": {
     "title": "Purchase Order",
@@ -406,23 +414,39 @@
     "rate": "Rate",
     "bqty": "B.Qty",
     "bfree": "B.Free",
-    "brate": "B.Rate"
+    "brate": "B.Rate",
+    "saveConfirmationMessage": "Are you sure you want to save Purchase Order?",
+    "saveInformationMessage": "Purchase Order record has been saved successfully.",
+    "duplicateNameErrorMessage":"The Purchase Order Name '{{duplicateMessageParam}}' already exists with this Name.",
+    "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
   },
   "mfgwisePurchaseReg": {
     "title": "Manufacturer-Wise Register",
-    "mfgOption": "Mfg. Option"
+    "mfgOption": "Mfg. Option",
+    "saveConfirmationMessage": "Are you sure you want to save Manufacturer-Wise Register?",
+    "saveInformationMessage": "Manufacturer-Wise Register record has been saved successfully.",
+    "duplicateNameErrorMessage":"The Manufacturer-Wise Register '{{duplicateMessageParam}}' already exists with this Name.",
+    "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
   },
   "orderPurchReg": {
     "title": "Order Purchase Register",
     "company": "Company",
     "suppOption": "Supplier Option",
-    "repOption": "Report Option"
+    "repOption": "Report Option",
+    "saveConfirmationMessage": "Are you sure you want to save Order Purchase Register?",
+    "saveInformationMessage": "Order Purchase Register record has been saved successfully.",
+    "duplicateNameErrorMessage":"The Order Purchase Register '{{duplicateMessageParam}}' already exists with this Name.",
+    "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
   },
   "purchaseReg": {
     "title": "Purchase Register",
     "company": "Company",
     "suppOption": "Supplier Option",
-    "repType": "Report Type"
+    "repType": "Report Type",
+    "saveConfirmationMessage": "Are you sure you want to save Purchase Register?",
+    "saveInformationMessage": "Purchase Register record has been saved successfully.",
+    "duplicateNameErrorMessage":"The Purchase Register '{{duplicateMessageParam}}' already exists with this Name.",
+    "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
   },
 
   "button": {
