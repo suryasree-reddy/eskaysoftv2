@@ -4,6 +4,7 @@ import { MasterService } from 'src/app/dashboard/master/master.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
+import { AuthenticationService } from '../../auth/authentication.service';
 
 @Component({
   selector: 'app-changepassword',
@@ -27,7 +28,7 @@ export class ChangepasswordComponent implements OnInit {
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
   constructor(private fb: FormBuilder,
-    private translate: TranslateService,
+    private translate: TranslateService, private authService: AuthenticationService,
     private sharedDataService: SharedDataService,
     private masterService: MasterService) { translate.setDefaultLang('messages.en'); }
 
@@ -44,6 +45,7 @@ export class ChangepasswordComponent implements OnInit {
       designation: ['', Validators.required],
       mobile: ['', Validators.required]
     });
+    this.authService.logout();
   }
 
   checkForDuplicateUserName() {
