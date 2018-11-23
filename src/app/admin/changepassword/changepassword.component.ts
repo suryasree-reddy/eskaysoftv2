@@ -35,6 +35,7 @@ export class ChangepasswordComponent implements OnInit {
   ngOnInit() {
     this.changePasswordForm = this.fb.group({
       // name: ['', Validators.required],
+      id:[],
       usernameOrEmail: ['', Validators.required],
       password: ['', Validators.required],
       // email: ['', Validators.required],
@@ -67,6 +68,7 @@ export class ChangepasswordComponent implements OnInit {
   }
 
   save() {
+    this.changePasswordForm.patchValue({ id: "test" })
     this.buttonsComponent.save();
   }
 

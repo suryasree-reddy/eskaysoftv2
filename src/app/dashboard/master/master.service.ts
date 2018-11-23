@@ -19,26 +19,44 @@ export class MasterService {
 
   constructor(private httpClient: HttpClient, private modalService: BsModalService) { }
 
-  END_POINt = 'https://eskaysoftapi.synectiks.com/api/v1/';
+  END_POINT = 'https://eskaysoftapi.synectiks.com/api/v1/';
+  SETTINGS_END_POINT = 'https://eskaysoftapi.synectiks.com/api/';
 
   getData(tragetServiceName) {
-    return this.httpClient.get(this.END_POINt + tragetServiceName).subscribe(res => {
-      this.resposeArray = res;
-      this.dataObject.next(this.resposeArray);
-    },error =>     {
-      this.resposeArray = error;
-      this.dataObject.next({"error_status":this.resposeArray.status, "error_message":this.resposeArray.message});
-    } );
+
+    if(tragetServiceName == "changePassword/"){
+      return this.httpClient.get(this.SETTINGS_END_POINT + tragetServiceName).subscribe(res => {
+        this.resposeArray = res;
+        this.dataObject.next(this.resposeArray);
+      },error =>     {
+        this.resposeArray = error;
+        this.dataObject.next({"error_status":this.resposeArray.status, "error_message":this.resposeArray.message});
+      } );
+
+    }else{
+      return this.httpClient.get(this.END_POINT + tragetServiceName).subscribe(res => {
+        this.resposeArray = res;
+        this.dataObject.next(this.resposeArray);
+      },error =>     {
+        this.resposeArray = error;
+        this.dataObject.next({"error_status":this.resposeArray.status, "error_message":this.resposeArray.message});
+      } );
+    }
   }
 
   getDataNew(tragetServiceName): Observable<any> { // for future reference
-    return this.httpClient.get(this.END_POINt + tragetServiceName).map(res => {
+    return this.httpClient.get(this.END_POINT + tragetServiceName).map(res => {
       this.dataObject.next(res);
     });
   }
 
   getParentData(tragetServiceName) {
-    return this.httpClient.get(this.END_POINt + tragetServiceName);
+    if(tragetServiceName == "changePassword/"){
+      return this.httpClient.get(this.SETTINGS_END_POINT + tragetServiceName);
+    }else{
+        return this.httpClient.get(this.END_POINT + tragetServiceName);
+    }
+
   }
 
   getLocalJsonData() {
@@ -47,15 +65,30 @@ export class MasterService {
 
 
   createRecord(tragetServiceName, requestObj) {
-    return this.httpClient.post(this.END_POINt + tragetServiceName, requestObj);
+    console.log("tragetServiceName1111----", tragetServiceName);
+    if(tragetServiceName == "changePassword/"){
+      return this.httpClient.post(this.SETTINGS_END_POINT + tragetServiceName, requestObj);
+    }else{
+      return this.httpClient.post(this.END_POINT + tragetServiceName, requestObj);
+    }
   }
 
   updateRecord(tragetServiceName, requestObj) {
-    return this.httpClient.put(this.END_POINt + tragetServiceName, requestObj);
+    console.log("tragetServiceName----", tragetServiceName);
+    if(tragetServiceName == "changePassword/"){
+      return this.httpClient.put(this.SETTINGS_END_POINT + tragetServiceName, requestObj);
+    }else{
+      return this.httpClient.put(this.END_POINT + tragetServiceName, requestObj);
+    }
   }
 
   deleteRecord(tragetServiceName, requestObj) {
-    return this.httpClient.delete(this.END_POINt + tragetServiceName + requestObj);
+    if(tragetServiceName == "changePassword/"){
+      return this.httpClient.delete(this.SETTINGS_END_POINT + tragetServiceName + requestObj);
+    }else{
+      return this.httpClient.delete(this.END_POINT + tragetServiceName + requestObj);
+    }
+
   }
 
   hasDataExist(listObj, key, value): boolean {
