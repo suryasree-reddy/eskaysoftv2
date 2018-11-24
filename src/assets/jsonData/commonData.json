@@ -1210,14 +1210,6 @@
         "newRowsAction": "keep"
       },
       "suppressSizeToFit": false
-    },
-    {
-      "headerName": "Status",
-      "field": "deleteFlag",
-      "cellRenderer": "deltaIndicator",
-      "suppressFilter": true,
-      "width": 120,
-      "suppressSizeToFit": false
     }
   ]
 

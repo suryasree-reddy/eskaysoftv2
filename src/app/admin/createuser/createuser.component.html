@@ -16,19 +16,19 @@
 
 	<div class="col-xs-12 card-body">
 
-		<div *ngIf="nameFlag"> <!-- start of update profile-->
+		<div><div *ngIf="nameFlag" style="margin-top:1em;"> <!-- start of update profile-->
 			<div class="col-md-2 col-3-lt">
 				<p> Search By {{'updateuser.userId' | translate}}:</p>
 			</div>
-			<div class="col-md-4" style="margin-left: -2em;">
+			<div class="col-md-4" style="margin-left: 2em; ">
 				<input id="searchByUserName" maxlength="50" formControlName="userName"
 				[typeahead]="usersList" typeaheadOptionField="userName"
 				[typeaheadOptionsLimit]="7"
 				[typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)"
-				class="form-control capitalize">
+				class="form-control capitalize" >
 				<span class="caret"></span>
 			</div>
-		</div><!-- end of update profile-->
+		</div></div><!-- end of update profile-->
 
 		<div *ngIf="isNewuser" class="col-xs-12"><!-- start of create profile-->
 			<app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
@@ -93,7 +93,7 @@
 					[formControl]="createUserForm.controls['districtName']"
 					[typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7"
 					[typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)" >
-					<span class="caret"></span>
+					<span class="caret mr-t-caret"></span>
 				</div>
 			</div>
 

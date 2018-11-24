@@ -1,5 +1,5 @@
 <header></header>
-<div class="  col-xs-12 card" style="margin-top:25em;">
+<div class="col-xs-12 card" style="margin-top:25em;">
   <div class="row">
     <div class="col-xs-12 header">
 
@@ -109,7 +109,7 @@
                                 [formControl]="userProfileForm.controls['districtName']"
                                 [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7"
                                  [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)" >
-                                <span class="caret"></span>
+                                <span class="caret  mr-t-caret"></span>
                               </div>
 
 
@@ -148,7 +148,8 @@
                         <div class="col-md-4 col-3-lt">
                             <p>{{'userprofile.mobile2' | translate }}: *</p>
                             <div class="input-group mr-t-0">
-                                <input id="mobile2" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['mobile2']">
+                                <input id="mobile2" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                 class="form-control" [formControl]="userProfileForm.controls['mobile2']">
                               </div>
                         </div>
 

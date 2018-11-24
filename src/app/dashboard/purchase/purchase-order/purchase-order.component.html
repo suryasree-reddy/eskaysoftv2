@@ -1,6 +1,6 @@
 <div class="col-xs-12">
 	<h3>{{'purchaseOrder.title' | translate}}</h3>
-	<form [formGroup]="purchaseOrderForm" autocomplete="off">
+	<form [formGroup]="purchaseOrderForm" autocomplete="off" class="mr-l-1" >
 		<app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()"
 		 [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
 		 [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
