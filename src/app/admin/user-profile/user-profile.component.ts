@@ -1,4 +1,4 @@
-import { Component, OnInit,  NgModule, TemplateRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, NgModule, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsDropdownModule, TypeaheadModule, TabsModule } from 'ngx-bootstrap';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -59,14 +59,13 @@ export class UserProfileComponent implements OnInit {
     private modalService: BsModalService,
     private sharedDataService: SharedDataService,
     private masterService: MasterService) {
-      translate.setDefaultLang('messages.en'); }
+    translate.setDefaultLang('messages.en');
+  }
 
   ngOnInit() {
     this.userProfileForm = this.fb.group({
-//clientId: ['', Validators.required],
       id: [''],
-        userId: [],
-    //  districtId: [],
+      userId: [],
       name: ['', Validators.required],
       username: ['', Validators.required],
       address1: ['', Validators.required],
@@ -76,18 +75,18 @@ export class UserProfileComponent implements OnInit {
       districtName: ['', Validators.required],
       state: ['', Validators.required],
       stateCode: ['', Validators.required],
-      phoneLand1: ['', Validators.required],
+      phone: ['', Validators.required],
       mobile1: ['', Validators.required],
       mobile2: ['', Validators.required],
       contactPerson: ['', Validators.required],
       contactPersonMobile: ['', Validators.required],
-      natureofbusiness: ['', Validators.required],
-      bank1: ['', Validators.required],
-      bankacno1: ['', Validators.required],
-      bankifsc1: ['', Validators.required],
-      bank2: ['', Validators.required],
-      bankacno2: ['', Validators.required],
-      bankifsc2: ['', Validators.required],
+      natureOfBusiness: ['', Validators.required],
+      bankName1: ['', Validators.required],
+      bankAcNo1: ['', Validators.required],
+      bankIfscNo1: ['', Validators.required],
+      bankName2: ['', Validators.required],
+      bankAcNo2: ['', Validators.required],
+      bankIfscNo2: ['', Validators.required],
       licNo1: ['', Validators.required],
       licNo2: ['', Validators.required],
       licExpiry: ['', Validators.required],
@@ -103,8 +102,8 @@ export class UserProfileComponent implements OnInit {
       uin: ['', Validators.required],
       creditLimit: ['', Validators.required],
       dueDays: ['', Validators.required],
-      saleType:  ['', Validators.required],
-      customerType:  ['', Validators.required],
+      saleType: ['', Validators.required],
+      customerType: ['', Validators.required]
 
     });
 
@@ -114,7 +113,7 @@ export class UserProfileComponent implements OnInit {
       stateId: [],
       stateName: []
     });
-  this.loadDistrictData();
+    this.loadDistrictData();
     this.accGstType = this.sharedDataService.getSharedCommonJsonData().GstType;
     this.accNatureOfGst = this.sharedDataService.getSharedCommonJsonData().NatureOfGst;
     this.accSaleType = this.sharedDataService.getSharedCommonJsonData().SaleType;
@@ -136,13 +135,13 @@ export class UserProfileComponent implements OnInit {
   onSelectDistrict(event) {
     this.userProfileForm.patchValue({ state: event.item.stateName });
     //  this.createUserForm.patchValue({ districtId: this.selectedDistrict.id });
-    this.userProfileForm.patchValue({ districtName: event.item.districtName });
+    this.userProfileForm.patchValue({ district: event.item.districtName });
 
     this.userProfileForm.patchValue({ stateCode: event.item.stateId });
   }
 
   openModal(template: TemplateRef<any>, templateName) {
-   if (templateName == "Districts") {
+    if (templateName == "Districts") {
       this.resetChildForm(this.districtsForm);
       this.loadStatesData();
     }

@@ -81,8 +81,8 @@
                         <div class="col-md-4 col-3-lt">
                             <p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate, 'Districts')">create new</a>)</p>
                             <div class="input-group mr-t-0">
-                              <input id="districtName" maxlength="20" class="form-control capitalize"
-                                [formControl]="userProfileForm.controls['districtName']"
+                              <input id="district" maxlength="20" class="form-control capitalize"
+                                [formControl]="userProfileForm.controls['district']"
                                 [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7"
                                  [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)" >
                                 <span class="caret"></span>
@@ -109,7 +109,7 @@
                         <div class="col-md-4 col-3-lt">
                             <p>{{'userprofile.phone' | translate }}: *</p>
                             <div class="input-group mr-t-0">
-                                <input id="phoneLand1" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['phoneLand1']">
+                                <input id="phone" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['phone']">
                               </div>
                         </div>
 
@@ -147,42 +147,42 @@
                         <div class="col-md-4 col-3-lt">
                             <p>{{'userprofile.natureofbusiness' | translate }}: *</p>
                             <div class="input-group mr-t-0">
-                                <input id="natureofbusiness" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['natureofbusiness']">
+                                <input id="natureOfBusiness" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['natureOfBusiness']">
                               </div>
                         </div>
 
                         <div class="col-md-4 col-3-lt">
                             <p>{{'userprofile.bankname1' | translate }}: *</p>
                             <div class="input-group mr-t-0">
-                                <input id="bank1" maxlength="30" class="form-control" [formControl]="userProfileForm.controls['bank1']">
+                                <input id="bankName1" maxlength="30" class="form-control" [formControl]="userProfileForm.controls['bankName1']">
                               </div>
                         </div>
 
                         <div class="col-md-4 col-3-lt">
                             <p>{{'userprofile.bankacno1' | translate }}: *</p>
                             <div class="input-group mr-t-0">
-                                <input id="bankacno1" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['bankacno1']">
+                                <input id="bankAcNo1" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['bankAcNo1']">
                               </div>
                         </div>
 
                         <div class="col-md-4 col-3-lt">
                             <p>{{'userprofile.bankifscno1' | translate }}: *</p>
                             <div class="input-group mr-t-0">
-                                <input id="bankifsc1" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['bankifsc1']">
+                                <input id="bankIfscNo1" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['bankIfscNo1']">
                               </div>
                         </div>
 
                         <div class="col-md-4 col-3-lt">
                             <p>{{'userprofile.bankname2' | translate }}: *</p>
                             <div class="input-group mr-t-0">
-                                <input id="bank2" maxlength="30" class="form-control" [formControl]="userProfileForm.controls['bank2']">
+                                <input id="bankName2" maxlength="30" class="form-control" [formControl]="userProfileForm.controls['bankName2']">
                               </div>
                         </div>
 
                         <div class="col-md-4 col-3-lt">
                             <p>{{'userprofile.bankacno2' | translate }}: *</p>
                             <div class="input-group mr-t-0">
-                                <input id="bankacno2" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['bankacno2']">
+                                <input id="bankAcNo2" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['bankAcNo2']">
                               </div>
                         </div>
 
@@ -190,7 +190,7 @@
                         <div class="col-md-4 col-3-lt">
                             <p>{{'userprofile.bankifscno2' | translate }}: *</p>
                             <div class="input-group mr-t-0">
-                                <input id="bankifsc2" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['bankifsc2']">
+                                <input id="bankIfscNo2" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['bankIfscNo2']">
                               </div>
                         </div>
 

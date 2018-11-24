@@ -67,7 +67,7 @@
 			<div class="col-md-4 col-3-lt">
 				<p>{{'createuser.address' | translate }}: *</p>
 				<div class="input-group mr-t-0">
-					<input id="address"  maxlength="50"  class="form-control" [formControl]="createUserForm.controls['address']">
+					<input id="address1"  maxlength="50"  class="form-control" [formControl]="createUserForm.controls['address1']">
 				</div>
 			</div>
 
@@ -89,8 +89,8 @@
 			<div class="col-md-4 col-3-lt">
 				<p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate, 'Districts')">create new</a>)</p>
 				<div class="input-group mr-t-0">
-					<input id="districtName" maxlength="20" class="form-control capitalize"
-					[formControl]="createUserForm.controls['districtName']"
+					<input id="district" maxlength="20" class="form-control capitalize"
+					[formControl]="createUserForm.controls['district']"
 					[typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7"
 					[typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)" >
 					<span class="caret"></span>
@@ -114,8 +114,8 @@
 			<div class="col-md-4 col-3-lt">
 				<p>{{'createuser.mobile' | translate }}: *</p>
 				<div class="input-group mr-t-0">
-				<input id="mobile" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-				class="form-control" [formControl]="createUserForm.controls['mobile']" >
+				<input id="mobile1" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+				class="form-control" [formControl]="createUserForm.controls['mobile1']" >
 				</div>
 			</div>
 
