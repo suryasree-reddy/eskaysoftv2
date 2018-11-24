@@ -89,8 +89,8 @@
 			<div class="col-md-4 col-3-lt">
 				<p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate, 'Districts')">create new</a>)</p>
 				<div class="input-group mr-t-0">
-					<input id="district" maxlength="20" class="form-control capitalize"
-					[formControl]="createUserForm.controls['district']"
+					<input id="districtName" maxlength="20" class="form-control capitalize"
+					[formControl]="createUserForm.controls['districtName']"
 					[typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7"
 					[typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)" >
 					<span class="caret"></span>

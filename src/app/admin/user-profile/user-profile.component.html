@@ -77,12 +77,36 @@
                           </div>
                         </div>
 
+<!-- vijay added below code for user save functionality-->
+<!--<div class="col-md-4 col-3-lt">
+  <p>{{'createuser.email' | translate }}: *</p>
+  <div class="input-group mr-t-0">
+  <input id="email" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['email']">
+  </div>
+</div>
+
+<div class="col-md-4 col-3-lt">
+  <p>{{'createuser.password' | translate }}: *</p>
+  <div class="input-group mr-t-0">
+    <input id="password" type="password" maxlength="50"  class="form-control" [formControl]="userProfileForm.controls['password']">
+  </div>
+</div>
+
+<div class="col-md-4 col-3-lt">
+  <p>{{'createuser.designation' | translate }}: *</p>
+  <div class="input-group mr-t-0">
+  <input id="designation"  class="form-control" [formControl]="userProfileForm.controls['designation']">
+  </div>
+</div>-->
+
+<!-- vijay added below code for user save functionality end here-->
+
 
                         <div class="col-md-4 col-3-lt">
                             <p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate, 'Districts')">create new</a>)</p>
                             <div class="input-group mr-t-0">
-                              <input id="district" maxlength="20" class="form-control capitalize"
-                                [formControl]="userProfileForm.controls['district']"
+                              <input id="districtName" maxlength="20" class="form-control capitalize"
+                                [formControl]="userProfileForm.controls['districtName']"
                                 [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7"
                                  [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)" >
                                 <span class="caret"></span>

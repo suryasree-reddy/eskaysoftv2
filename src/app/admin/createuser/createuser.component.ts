@@ -84,7 +84,7 @@ export class CreateuserComponent implements OnInit {
       address1: ['', Validators.required],
       town: ['', Validators.required],
       pin: ['', Validators.required],
-      district: ['', Validators.required],
+      districtName: ['', Validators.required],
       state: ['', Validators.required],
       stateCode: [],
       phone: ['', Validators.required],
@@ -119,7 +119,7 @@ export class CreateuserComponent implements OnInit {
   onSelectDistrict(event) {
     this.createUserForm.patchValue({ state: event.item.stateName });
     //  this.createUserForm.patchValue({ districtId: this.selectedDistrict.id });
-    this.createUserForm.patchValue({ district: event.item.districtName });
+    this.createUserForm.patchValue({ districtName: event.item.districtName });
 
     this.createUserForm.patchValue({ stateCode: event.item.stateId });
   }

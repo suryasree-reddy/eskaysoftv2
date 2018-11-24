@@ -103,8 +103,11 @@ export class UserProfileComponent implements OnInit {
       creditLimit: ['', Validators.required],
       dueDays: ['', Validators.required],
       saleType: ['', Validators.required],
-      customerType: ['', Validators.required]
+      customerType: ['', Validators.required],
 
+    //  email: ['', Validators.required],
+    //  password: ['', Validators.required],
+    //  designation: ['', Validators.required]
     });
 
     this.districtsForm = this.fb.group({
@@ -135,7 +138,7 @@ export class UserProfileComponent implements OnInit {
   onSelectDistrict(event) {
     this.userProfileForm.patchValue({ state: event.item.stateName });
     //  this.createUserForm.patchValue({ districtId: this.selectedDistrict.id });
-    this.userProfileForm.patchValue({ district: event.item.districtName });
+    this.userProfileForm.patchValue({ districtName: event.item.districtName });
 
     this.userProfileForm.patchValue({ stateCode: event.item.stateId });
   }
