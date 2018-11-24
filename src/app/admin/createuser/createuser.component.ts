@@ -47,7 +47,7 @@ export class CreateuserComponent implements OnInit {
   public scFormSuccess: boolean = false;
   public childDuplicateMessage: string = null;
   public childDuplicateMessageParam: string = null;
-  private isNewuser:boolean= true;
+  private isNewuser:boolean= false;
 
   modalRef: BsModalRef;
 
@@ -60,7 +60,7 @@ export class CreateuserComponent implements OnInit {
     private sharedDataService: SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
-    this._routeParams.queryParams.subscribe(params => {
+  /*  this._routeParams.queryParams.subscribe(params => {
       this.nameFlag = params['editMode'];
       if(params['editMode'] == "false"){
         this.nameFlag = false;
@@ -70,7 +70,7 @@ export class CreateuserComponent implements OnInit {
         this.isNewuser = false;
       }
 
-    });
+    });*/
   }
 
   ngOnInit() {
@@ -102,6 +102,15 @@ export class CreateuserComponent implements OnInit {
     });
     this.loadDistrictData();
     this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
+    this.loadUserData();
+  }
+
+
+  loadUserData() {
+    this.masterService.getData("users/");
+    this.masterService.dataObject.subscribe(list => {
+      this.userList = list;
+    });
   }
 
   loadDistrictData() {
@@ -135,9 +144,9 @@ export class CreateuserComponent implements OnInit {
   }
 
   loadSelectedTypeahead(event) {
-    this.isNewuser = false;
+    this.createUserForm.reset(event.item);
+    this.deleteFlag = !event.item.deleteFlag;
     this.nameFlag = true;
-
   }
 
   resetChildForm(formObj) {
