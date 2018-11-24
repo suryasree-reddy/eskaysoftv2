@@ -356,7 +356,8 @@
     "saveConfirmationMessage": "Are you sure you want to save User?",
     "saveInformationMessage": "User record has been saved successfully.",
     "duplicateNameErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name.",
-    "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
+    "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name.",
+    "passwordMissmatch":"The Password & Confirm Password values are not same."
   },
   "userprofile":{
     "title": "Profile",

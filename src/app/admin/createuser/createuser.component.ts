@@ -48,6 +48,7 @@ export class CreateuserComponent implements OnInit {
   public childDuplicateMessage: string = null;
   public childDuplicateMessageParam: string = null;
   private isNewuser:boolean= false;
+  private isPasswordNotMatch:boolean= false;
 
   modalRef: BsModalRef;
 
@@ -80,7 +81,7 @@ export class CreateuserComponent implements OnInit {
       name: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
-      //  confPassword: ['', Validators.required],
+      confPassword: ['', Validators.required],
       address1: ['', Validators.required],
       town: ['', Validators.required],
       pin: ['', Validators.required],
@@ -104,7 +105,6 @@ export class CreateuserComponent implements OnInit {
     this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
     this.loadUserData();
   }
-
 
   loadUserData() {
     this.masterService.getData("users/");
@@ -190,13 +190,10 @@ export class CreateuserComponent implements OnInit {
     });
   }
 
-
   checkForDuplicateDistrictName() {
     this.duplicateDistrictName = this.masterService.hasDataExist(this.districtsList, 'districtName', this.districtsForm.value.districtName);
     this.getDuplicateErrorMessages();
   }
-
-
 
   checkForDuplicateName() {
     if (!this.nameFlag) {
@@ -212,8 +209,20 @@ export class CreateuserComponent implements OnInit {
     }
   }
 
+  validatePassword(){
+    console.log("", this.createUserForm.value.password, ":::", this.createUserForm.value.confPassword)
+    if (this.createUserForm.value.password != "" && this.createUserForm.value.confPassword != ""){
+      if(this.createUserForm.value.password != this.createUserForm.value.confPassword) {
+        this.isPasswordNotMatch = true;
+      }else{
+        this.isPasswordNotMatch = false;
+      }
+    }
+this.getDuplicateErrorMessages();
+  }
+
   getDuplicateErrorMessages(): void {
-    if (!this.duplicateName || !this.duplicateUserName) {
+    if (!this.duplicateName || !this.duplicateUserName || !this.isPasswordNotMatch) {
       this.formRequiredError = false;
       this.duplicateMessage = null;
       this.duplicateMessageParam = null;
@@ -221,6 +230,9 @@ export class CreateuserComponent implements OnInit {
     if (this.duplicateDistrictName) {
       this.childDuplicateMessage = "districts.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.districtsForm.value.districtName;
+    }
+    if (this.isPasswordNotMatch) {
+      this.duplicateMessage = "createuser.passwordMissmatch";
     }
   }
 
