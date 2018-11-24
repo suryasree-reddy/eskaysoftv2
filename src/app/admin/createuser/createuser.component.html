@@ -61,7 +61,7 @@
 			<div class="col-md-4 col-3-lt">
 				<p>{{'createuser.confirmPassword' | translate }}: *</p>
 				<div class="input-group mr-t-0">
-					<input id="confirmPassword" type="password" maxlength="50"  class="form-control" [formControl]="createUserForm.controls['confirmPassword']">
+					<input id="password" type="password" maxlength="50"  class="form-control" [formControl]="createUserForm.controls['password']">
 				</div>
 			</div>
 
@@ -150,7 +150,7 @@
 				</select>
 			</div>
 
-			<div class="btn-admin" >
+			<div class="btn-admin mr-l-1">
 				<app-buttons [title]="'createuser.title'" [deleteConfirmMsg]="'createuser.deleteConfirmationMessage'"
 				[saveConfirmMsg]="'createuser.saveConfirmationMessage'" [saveInfoMsg]="'createuser.saveInformationMessage'"
 				[endPoint]="endPoint"
