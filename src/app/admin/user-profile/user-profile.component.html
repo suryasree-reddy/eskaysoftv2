@@ -77,32 +77,7 @@
                       </div>
                     </div>
 
-                    <!-- vijay added below code for user save functionality-->
-                    <!--<div class="col-md-4 col-3-lt">
-  <p>{{'createuser.email' | translate }}: *</p>
-  <div class="input-group mr-t-0">
-  <input id="email" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['email']">
-  </div>
-</div>
-
-<div class="col-md-4 col-3-lt">
-  <p>{{'createuser.password' | translate }}: *</p>
-  <div class="input-group mr-t-0">
-    <input id="password" type="password" maxlength="50"  class="form-control" [formControl]="userProfileForm.controls['password']">
-  </div>
-</div>
-
-<div class="col-md-4 col-3-lt">
-  <p>{{'createuser.designation' | translate }}: *</p>
-  <div class="input-group mr-t-0">
-  <input id="designation"  class="form-control" [formControl]="userProfileForm.controls['designation']">
-  </div>
-</div>-->
-
-                    <!-- vijay added below code for user save functionality end here-->
-
-
-                    <div class="col-md-4 col-3-lt">
+                   <div class="col-md-4 col-3-lt">
                       <p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate, 'Districts')">create
                           new</a>)</p>
                       <div class="input-group mr-t-0">
@@ -111,9 +86,7 @@
                           [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)">
                         <span class="caret  mr-t-caret"></span>
                       </div>
-
-
-                    </div>
+                  </div>
 
                     <div class="col-md-4 col-3-lt">
                       <p>{{'userprofile.state' | translate }}: *</p>
@@ -125,7 +98,7 @@
                     <div class="col-md-4 col-3-lt">
                       <p>{{'userprofile.statecode' | translate }}: *</p>
                       <div class="input-group mr-t-0">
-                        <input id="stateCode" [readonly]=true type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                        <input id="stateCode" [readonly]=true type="number" maxlength="6" 
                           class="form-control" [formControl]="userProfileForm.controls['stateCode']">
                       </div>
                     </div>
@@ -166,7 +139,6 @@
                       <div class="input-group mr-t-0">
                         <input id="contactPersonMobile" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                           class="form-control" [formControl]="userProfileForm.controls['contactPersonMobile']">
-
                       </div>
                     </div>
 
@@ -187,7 +159,7 @@
                     <div class="col-md-4 col-3-lt">
                       <p>{{'userprofile.bankacno1' | translate }}: *</p>
                       <div class="input-group mr-t-0">
-                        <input id="bankAcNo1" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['bankAcNo1']">
+                        <input id="bankAcNo1" type="number" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['bankAcNo1']">
                       </div>
                     </div>
 
@@ -208,10 +180,9 @@
                     <div class="col-md-4 col-3-lt">
                       <p>{{'userprofile.bankacno2' | translate }}: *</p>
                       <div class="input-group mr-t-0">
-                        <input id="bankAcNo2" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['bankAcNo2']">
+                        <input id="bankAcNo2" type="number" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['bankAcNo2']">
                       </div>
                     </div>
-
 
                     <div class="col-md-4 col-3-lt">
                       <p>{{'userprofile.bankifscno2' | translate }}: *</p>
@@ -219,8 +190,6 @@
                         <input id="bankIfscNo2" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['bankIfscNo2']">
                       </div>
                     </div>
-
-
                   </tab>
 
                   <tab heading="{{'accountinfo.reginfo' | translate}}">

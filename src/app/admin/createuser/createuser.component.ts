@@ -49,7 +49,6 @@ export class CreateuserComponent implements OnInit {
   public childDuplicateMessageParam: string = null;
   private isNewuser:boolean= false;
   private isPasswordNotMatch:boolean= false;
-
   modalRef: BsModalRef;
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
@@ -61,23 +60,12 @@ export class CreateuserComponent implements OnInit {
     private sharedDataService: SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
-  /*  this._routeParams.queryParams.subscribe(params => {
-      this.nameFlag = params['editMode'];
-      if(params['editMode'] == "false"){
-        this.nameFlag = false;
-          this.isNewuser = true;
-      }else{
-        this.nameFlag = true;
-        this.isNewuser = false;
-      }
-
-    });*/
   }
 
   ngOnInit() {
     this.createUserForm = this.fb.group({
       id: [],
-      //  districtId: [],
+      searchByUserName:[],
       name: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -145,6 +133,7 @@ export class CreateuserComponent implements OnInit {
 
   loadSelectedTypeahead(event) {
     this.createUserForm.reset(event.item);
+    this.createUserForm.patchValue({ searchByUserName: event.item.username });
     this.deleteFlag = !event.item.deleteFlag;
     this.nameFlag = true;
   }

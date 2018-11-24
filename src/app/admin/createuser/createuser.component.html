@@ -1,8 +1,6 @@
 <div class="col-xs-12 card">
 	<div class="row">
 
-
-
 		<div class="col-xs-12 header">
 			<div *ngIf="!nameFlag" class="row">
 				<h4>{{'createuser.title' | translate }}</h4>
@@ -21,7 +19,7 @@
 				<p> Search By {{'createuser.username' | translate}}:</p>
 			</div>
 			<div class="col-md-4" >
-				<input id="searchByUserName" maxlength="50" formControlName="username"
+				<input id="searchByUserName" maxlength="50" formControlName="searchByUserName"
 				[typeahead]="userList" typeaheadOptionField="username"
 				[typeaheadOptionsLimit]="7"
 				[typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)"
@@ -101,7 +99,8 @@
 			<div class="col-md-4 col-3-lt">
 				<p>{{'userprofile.state' | translate }}: *</p>
 				<div class="input-group mr-t-0">
-				<input id="state" [readonly]=true maxlength="25" class="form-control" [formControl]="createUserForm.controls['state']">
+				<input id="state" [readonly]=true maxlength="25" class="form-control"
+				[formControl]="createUserForm.controls['state']">
 				</div>
 			</div>
 
@@ -133,14 +132,6 @@
 				<input id="designation"  class="form-control" [formControl]="createUserForm.controls['designation']">
 				</div>
 			</div>
-
-			<!--  <div class="col-md-4 col-3-lt">
-			<p>{{'createuser.designation' | translate }}: *</p>
-			<div class="input-group mr-t-0">
-			<input id="designation"  class="form-control" [formControl]="createUserForm.controls['designation']">
-			</div>
-			</div>-->
-
 
 			<div  class="col-md-4 col-3-lt">
 				<p>{{'createuser.roles' | translate }}: *</p>

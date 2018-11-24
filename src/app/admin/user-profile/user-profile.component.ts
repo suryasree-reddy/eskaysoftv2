@@ -28,7 +28,7 @@ export class UserProfileComponent implements OnInit {
   private userProfileForm: FormGroup;
   public districtsForm: FormGroup;
   private deleteFlag: boolean = true;
-  private endPoint: string = "userProfile/";
+  private endPoint: string = "auth/createUser/";
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
@@ -64,8 +64,9 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.userProfileForm = this.fb.group({
-      id: [''],
+      id: [],
       userId: [],
+      districtId:[],
       name: ['', Validators.required],
       username: ['', Validators.required],
       address1: ['', Validators.required],
@@ -136,10 +137,10 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSelectDistrict(event) {
+    console.log(event.item);
     this.userProfileForm.patchValue({ state: event.item.stateName });
-    //  this.createUserForm.patchValue({ districtId: this.selectedDistrict.id });
+    this.userProfileForm.patchValue({ districtId: event.item.id });
     this.userProfileForm.patchValue({ districtName: event.item.districtName });
-
     this.userProfileForm.patchValue({ stateCode: event.item.stateId });
   }
 
