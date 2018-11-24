@@ -146,7 +146,7 @@ export class CreateuserComponent implements OnInit {
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
     this.scFormRequiredError = this.scFormSuccess = false;
-    formObj.reset();
+    // formObj.reset();
     this.districtsForm.reset();
   }
 

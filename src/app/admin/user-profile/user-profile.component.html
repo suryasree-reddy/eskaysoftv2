@@ -34,51 +34,51 @@
                   <tab heading="Profile Info">
 
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.name' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                            <input id="name" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['name']">
-                          </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.name' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="name" maxlength="25" class="form-control" [formControl]="userProfileForm.controls['name']">
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.username' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                            <input id="username" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['username']">
-                          </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.username' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="username" maxlength="25" class="form-control" [formControl]="userProfileForm.controls['username']">
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.address1' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                            <input id="address1" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['address1']">
-                          </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.address1' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="address1" maxlength="25" class="form-control" [formControl]="userProfileForm.controls['address1']">
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.address2' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                            <input id="address2" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['address2']">
-                          </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.address2' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="address2" maxlength="25" class="form-control" [formControl]="userProfileForm.controls['address2']">
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.town' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                            <input id="town" maxlength="20"  class="form-control" [formControl]="userProfileForm.controls['town']">
-                          </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.town' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="town" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['town']">
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.pin' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                                <input id="pin" type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                class="form-control" [formControl]="userProfileForm.controls['pin']">
-                          </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.pin' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="pin" type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                          class="form-control" [formControl]="userProfileForm.controls['pin']">
+                      </div>
+                    </div>
 
-<!-- vijay added below code for user save functionality-->
-<!--<div class="col-md-4 col-3-lt">
+                    <!-- vijay added below code for user save functionality-->
+                    <!--<div class="col-md-4 col-3-lt">
   <p>{{'createuser.email' | translate }}: *</p>
   <div class="input-group mr-t-0">
   <input id="email" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['email']">
@@ -99,125 +99,126 @@
   </div>
 </div>-->
 
-<!-- vijay added below code for user save functionality end here-->
+                    <!-- vijay added below code for user save functionality end here-->
 
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate, 'Districts')">create new</a>)</p>
-                            <div class="input-group mr-t-0">
-                              <input id="districtName" maxlength="20" class="form-control capitalize"
-                                [formControl]="userProfileForm.controls['districtName']"
-                                [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7"
-                                 [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)" >
-                                <span class="caret  mr-t-caret"></span>
-                              </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate, 'Districts')">create
+                          new</a>)</p>
+                      <div class="input-group mr-t-0">
+                        <input id="districtName" maxlength="20" class="form-control capitalize" [formControl]="userProfileForm.controls['districtName']"
+                          [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7"
+                          [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)">
+                        <span class="caret  mr-t-caret"></span>
+                      </div>
 
 
-                        </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.state' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                                <input id="state" [readonly]=true maxlength="25" class="form-control" [formControl]="userProfileForm.controls['state']">
-                              </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.state' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="state" [readonly]=true maxlength="25" class="form-control" [formControl]="userProfileForm.controls['state']">
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.statecode' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                                <input id="stateCode" [readonly]=true type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.statecode' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="stateCode" [readonly]=true type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                           class="form-control" [formControl]="userProfileForm.controls['stateCode']">
-                              </div>
-                        </div>
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.phone' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                                <input id="phone" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['phone']">
-                              </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.phone' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="phone" type="number" maxlength="15" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                        class="form-control" [formControl]="userProfileForm.controls['phone']">
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.mobile1' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                                <input id="mobile1" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                class="form-control" [formControl]="userProfileForm.controls['mobile1']" >
-                           </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.mobile1' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="mobile1" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                          class="form-control" [formControl]="userProfileForm.controls['mobile1']">
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.mobile2' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                                <input id="mobile2" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                 class="form-control" [formControl]="userProfileForm.controls['mobile2']">
-                              </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.mobile2' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="mobile2" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                          class="form-control" [formControl]="userProfileForm.controls['mobile2']">
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.contactperson' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                                <input id="contactPerson" maxlength="50" class="form-control" [formControl]="userProfileForm.controls['contactPerson']">
-                              </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.contactperson' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="contactPerson" maxlength="50" class="form-control" [formControl]="userProfileForm.controls['contactPerson']">
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.contactpersonmobile' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                                <input id="contactPersonMobile" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.contactpersonmobile' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="contactPersonMobile" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                           class="form-control" [formControl]="userProfileForm.controls['contactPersonMobile']">
 
-                              </div>
-                        </div>
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.natureofbusiness' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                                <input id="natureOfBusiness" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['natureOfBusiness']">
-                              </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.natureofbusiness' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="natureOfBusiness" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['natureOfBusiness']">
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.bankname1' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                                <input id="bankName1" maxlength="30" class="form-control" [formControl]="userProfileForm.controls['bankName1']">
-                              </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.bankname1' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="bankName1" maxlength="30" class="form-control" [formControl]="userProfileForm.controls['bankName1']">
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.bankacno1' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                                <input id="bankAcNo1" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['bankAcNo1']">
-                              </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.bankacno1' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="bankAcNo1" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['bankAcNo1']">
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.bankifscno1' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                                <input id="bankIfscNo1" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['bankIfscNo1']">
-                              </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.bankifscno1' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="bankIfscNo1" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['bankIfscNo1']">
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.bankname2' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                                <input id="bankName2" maxlength="30" class="form-control" [formControl]="userProfileForm.controls['bankName2']">
-                              </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.bankname2' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="bankName2" maxlength="30" class="form-control" [formControl]="userProfileForm.controls['bankName2']">
+                      </div>
+                    </div>
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.bankacno2' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                                <input id="bankAcNo2" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['bankAcNo2']">
-                              </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.bankacno2' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="bankAcNo2" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['bankAcNo2']">
+                      </div>
+                    </div>
 
 
-                        <div class="col-md-4 col-3-lt">
-                            <p>{{'userprofile.bankifscno2' | translate }}: *</p>
-                            <div class="input-group mr-t-0">
-                                <input id="bankIfscNo2" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['bankIfscNo2']">
-                              </div>
-                        </div>
+                    <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.bankifscno2' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="bankIfscNo2" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['bankIfscNo2']">
+                      </div>
+                    </div>
 
 
                   </tab>
@@ -225,137 +226,141 @@
                   <tab heading="{{'accountinfo.reginfo' | translate}}">
                     <div class="ht-475">
                       <!-- Regs Info Starts -->
-                        <div class="col-md-4 col-3-lt" >
-                          <p>{{'accountinfo.licno1' | translate}}: *</p>
-                          <div class="input-group mr-t-0">
-                          <input id="licNo1" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['licNo1']">
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.licno1' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="licNo1" maxlength="25" class="form-control" [formControl]="userProfileForm.controls['licNo1']">
                         </div>
                       </div>
 
-                        <div class="col-md-4 col-3-lt">
-                          <p>{{'accountinfo.licno2' | translate}}: *</p>
-                          <div class="input-group mr-t-0">
-                          <input id="licNo2" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['licNo2']">
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.licno2' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="licNo2" maxlength="25" class="form-control" [formControl]="userProfileForm.controls['licNo2']">
                         </div>
                       </div>
-                        <div class="col-md-4 col-3-lt">
-                          <p>{{'accountinfo.licexpiry' | translate}}: *</p>
-                          <div class="input-group mr-t-0">
-                          <input id="licExpiry" type="date"  class="form-control" [formControl]="userProfileForm.controls['licExpiry']">
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.licexpiry' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="licExpiry" type="date" class="form-control" [formControl]="userProfileForm.controls['licExpiry']">
                         </div>
                       </div>
-                        <div class="col-md-4 col-3-lt">
-                          <p>{{'accountinfo.retlicno1' | translate}}: *</p>
-                          <div class="input-group mr-t-0">
-                          <input id="retLicNo1" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['retLicNo1']">
-                       </div>
-                        </div>
-                        <div class="col-md-4 col-3-lt">
-                          <p>{{'accountinfo.retlicno2' | translate}}: *</p>
-                          <div class="input-group mr-t-0">
-                          <input id="retLicNo2" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['retLicNo2']">
-                        </div>
-                        </div>
-
-                        <div class="col-md-4 col-3-lt">
-                          <p>{{'accountinfo.retexpiry' | translate}}: *</p>
-                          <div class="input-group mr-t-0">
-                          <input id="retExpiry" type="date"  class="form-control" [formControl]="userProfileForm.controls['retExpiry']">
-                        </div>
-                        </div>
-                        <div class="col-md-4 col-3-lt">
-                          <p>{{'accountinfo.foodlicno1' | translate}}: *</p>
-                          <div class="input-group mr-t-0">
-                          <input id="foodLicNo" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['foodLicNo']">
-                        </div>
-                        </div>
-                        <div class="col-md-4 col-3-lt">
-                          <p>{{'accountinfo.otherlic' | translate}}: *</p>
-                          <div class="input-group mr-t-0">
-                          <input id="otherLicense" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['otherLicense']">
-                        </div>
-                        </div>
-                        <div class="col-md-4 col-3-lt">
-                          <p>{{'accountinfo.otherlicexp' | translate}}: *</p>
-                          <div class="input-group mr-t-0">
-                          <input id="otherLicenseExpiry" type="date"  class="form-control" [formControl]="userProfileForm.controls['otherLicenseExpiry']">
-                        </div>
-                        </div>
-
-                        <div class="col-md-4 col-3-lt">
-                          <p>{{'accountinfo.gsttype' | translate}}: *</p>
-                          <div class="input-group" style="margin-top:0em;">
-                            <input id="gstType" maxlength="5" class="form-control"  [formControl]="userProfileForm.controls['gstType']" [typeahead]="accGstType"
-                              typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-                              <span class="caret mr-t-caret"></span>
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.retlicno1' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="retLicNo1" maxlength="25" class="form-control" [formControl]="userProfileForm.controls['retLicNo1']">
                         </div>
                       </div>
-                        <div class="col-md-4 col-3-lt">
-                          <p>{{'accountinfo.gstin' | translate}}: *</p>
-                          <div class="input-group mr-t-0">
-                          <input id="gstIN" maxlength="15"  class="form-control" [formControl]="userProfileForm.controls['gstIN']">
-                        </div>
-                        </div>
-
-                        <div class="col-md-4 col-3-lt">
-                          <p>{{'accountinfo.naturegst' | translate}}: *</p>
-                          <div class="input-group mr-t-0" >
-                            <input id="natureOfGST" maxlength="9"  class="form-control" [formControl]="userProfileForm.controls['natureOfGST']"
-                              [typeahead]="accNatureOfGst" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-                              <span class="caret mr-t-caret"></span>
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.retlicno2' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="retLicNo2" maxlength="25" class="form-control" [formControl]="userProfileForm.controls['retLicNo2']">
                         </div>
                       </div>
 
-                        <div class="col-md-4 col-3-lt">
-                          <p>{{'accountinfo.uinNo' | translate}}: *</p>
-                          <div class="input-group mr-t-0">
-                          <input id="uin" maxlength="25"  class="form-control" [formControl]="userProfileForm.controls['uin']">
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.retexpiry' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="retExpiry" type="date" class="form-control" [formControl]="userProfileForm.controls['retExpiry']">
                         </div>
+                      </div>
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.foodlicno1' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="foodLicNo" maxlength="25" class="form-control" [formControl]="userProfileForm.controls['foodLicNo']">
                         </div>
-                             <!-- Regs Info Ends -->
-                            </div>
-                    </tab>
-
-                    <tab heading="{{'accountinfo.cred' | translate}}">
-                        <!-- Credentials Starts -->
-                        <div class="ht-475">
-                          <div class="col-md-4 col-3-lt">
-                            <p>{{'accountinfo.crlimit' | translate}}: *</p>
-                            <div class="input-group mr-t-0">
-                            <input id="creditLimit" type="number" maxlength="12" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                              class="form-control" [formControl]="userProfileForm.controls['creditLimit']">
-                          </div>
-                          </div>
-
-
-                          <div class="col-md-4 col-3-lt">
-                            <p>{{'accountinfo.saletype' | translate}}: *</p>
-                            <div class="input-group mr-t-0">
-                            <input id="saleType" maxlength="6"  class="form-control" [formControl]="userProfileForm.controls['saleType']"
-                            [typeahead]="accSaleType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-                            <span class="caret mr-t-caret"></span>
-                          </div>
-                          </div>
-
-                          <div class="col-md-4 col-3-lt">
-                            <p>{{'accountinfo.custType' | translate}}: *</p>
-                            <div class="input-group mr-t-0">
-                            <input id="customerType"  maxlength="10"  class="form-control" [formControl]="userProfileForm.controls['customerType']"
-                            [typeahead]="accCustomerType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-                            <span class="caret mr-t-caret"></span>
-                          </div>
-                          </div>
-
-                          <div class="col-md-4 col-3-lt">
-                           <p>{{'accountinfo.duedays' | translate}}: *</p>
-                           <div class="input-group mr-t-0">
-                            <input id="dueDays" type="number" maxlength="3"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                             class="form-control" [formControl]="userProfileForm.controls['dueDays']">
-                          </div>
-                          </div>
+                      </div>
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.otherlic' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="otherLicense" maxlength="25" class="form-control" [formControl]="userProfileForm.controls['otherLicense']">
                         </div>
-                        <!-- Credentials Ends -->
-                      </tab>
+                      </div>
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.otherlicexp' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="otherLicenseExpiry" type="date" class="form-control" [formControl]="userProfileForm.controls['otherLicenseExpiry']">
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.gsttype' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="gstType" maxlength="5" class="form-control" [formControl]="userProfileForm.controls['gstType']"
+                            [typeahead]="accGstType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7"
+                            [typeaheadMinLength]="0">
+                          <span class="caret mr-t-caret"></span>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.gstin' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="gstIN" maxlength="15" class="form-control" [formControl]="userProfileForm.controls['gstIN']">
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.naturegst' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="natureOfGST" maxlength="9" class="form-control" [formControl]="userProfileForm.controls['natureOfGST']"
+                            [typeahead]="accNatureOfGst" typeaheadOptionField="description" [typeaheadOptionsLimit]="7"
+                            [typeaheadMinLength]="0">
+                          <span class="caret mr-t-caret"></span>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.uinNo' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="uin" maxlength="25" class="form-control" [formControl]="userProfileForm.controls['uin']">
+                        </div>
+                      </div>
+                      <!-- Regs Info Ends -->
+                    </div>
+                  </tab>
+
+                  <tab heading="{{'accountinfo.cred' | translate}}">
+                    <!-- Credentials Starts -->
+                    <div class="ht-475">
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.crlimit' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="creditLimit" type="number" maxlength="12" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            class="form-control" [formControl]="userProfileForm.controls['creditLimit']">
+                        </div>
+                      </div>
+
+
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.saletype' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="saleType" maxlength="6" class="form-control" [formControl]="userProfileForm.controls['saleType']"
+                            [typeahead]="accSaleType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7"
+                            [typeaheadMinLength]="0">
+                          <span class="caret mr-t-caret"></span>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.custType' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="customerType" maxlength="10" class="form-control" [formControl]="userProfileForm.controls['customerType']"
+                            [typeahead]="accCustomerType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7"
+                            [typeaheadMinLength]="0">
+                          <span class="caret mr-t-caret"></span>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.duedays' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="dueDays" type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            class="form-control" [formControl]="userProfileForm.controls['dueDays']">
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Credentials Ends -->
+                  </tab>
 
                 </tabset>
               </div>
@@ -382,37 +387,38 @@
 </div>
 
 <ng-template #districtTemplate>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">{{'districts.create' | translate }}</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form [formGroup]="districtsForm" (ngSubmit)="saveChildForm('District', districtsForm)"  autocomplete="off">
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{'districts.create' | translate }}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="districtsForm" (ngSubmit)="saveChildForm('District', districtsForm)" autocomplete="off">
 
-        <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
-        [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="childDuplicateMessage"
-         [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+      <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()"
+        [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
+        [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="childDuplicateMessage"
+        [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
 
-         <div class="input-group">
-          <p>{{'districts.name' | translate }}: *</p>
-          <input autofocus id="districtName" maxlength="20"  class="form-control capitalize" (blur)="checkForDuplicateDistrictName()"  [formControl]="districtsForm.controls['districtName']">
-        </div>
-          <div class="input-group">
-            <p>{{'states.name' | translate }}: * &emsp;</p>
-            <input id="stateName" maxlength="20" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="stateName"
-              [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control capitalize">
-              <span class="caret"></span>
-        </div>
+      <div class="input-group">
+        <p>{{'districts.name' | translate }}: *</p>
+        <input autofocus id="districtName" maxlength="20" class="form-control capitalize" (blur)="checkForDuplicateDistrictName()"
+          [formControl]="districtsForm.controls['districtName']">
+      </div>
+      <div class="input-group">
+        <p>{{'states.name' | translate }}: * &emsp;</p>
+        <input id="stateName" maxlength="20" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="stateName"
+          [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control capitalize">
+        <span class="caret"></span>
+      </div>
 
 
-               <div class="input-group">
-                <button type="button" (click)="resetChildForm()" class="btn btn-primary">Reset</button>
-                <button type="submit" class="btn btn-primary mr-l-10">Save</button>
-              </div>
-      </form>
+      <div class="input-group">
+        <button type="button" (click)="resetChildForm()" class="btn btn-primary">Reset</button>
+        <button type="submit" class="btn btn-primary mr-l-10">Save</button>
+      </div>
+    </form>
 
-    </div>
-  </ng-template>
+  </div>
+</ng-template>
