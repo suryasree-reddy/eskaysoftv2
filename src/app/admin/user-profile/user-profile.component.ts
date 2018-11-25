@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 import { ConfirmationModelDialogComponent } from 'src/app/commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
-// import * as _ from 'lodash';
+import { AuthenticationService } from 'src/app/auth/authentication.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -48,8 +48,6 @@ export class UserProfileComponent implements OnInit {
   public scFormSuccess: boolean = false;
   public childDuplicateMessage: string = null;
   public childDuplicateMessageParam: string = null;
-
-
   modalRef: BsModalRef;
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
@@ -58,6 +56,7 @@ export class UserProfileComponent implements OnInit {
     private translate: TranslateService,
     private modalService: BsModalService,
     private sharedDataService: SharedDataService,
+    private authenticationService: AuthenticationService
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
@@ -65,7 +64,7 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.userProfileForm = this.fb.group({
       id: [],
-      districtId:[],
+      districtId: [],
       name: ['', Validators.required],
       username: ['', Validators.required],
       address1: ['', Validators.required],
@@ -104,10 +103,9 @@ export class UserProfileComponent implements OnInit {
       dueDays: ['', Validators.required],
       saleType: ['', Validators.required],
       customerType: ['', Validators.required],
-
-    //  email: ['', Validators.required],
-    //  password: ['', Validators.required],
-    //  designation: ['', Validators.required]
+      roles: [],
+      email: [],
+      designation: []
     });
 
     this.districtsForm = this.fb.group({
@@ -121,6 +119,17 @@ export class UserProfileComponent implements OnInit {
     this.accNatureOfGst = this.sharedDataService.getSharedCommonJsonData().NatureOfGst;
     this.accSaleType = this.sharedDataService.getSharedCommonJsonData().SaleType;
     this.accCustomerType = this.sharedDataService.getSharedCommonJsonData().CustomerType;
+    this.loadUserData();
+  }
+
+  loadUserData() {
+    this.masterService.getData("users/" + this.authenticationService.getCurrentUserName());
+    this.masterService.dataObject.subscribe(item => {
+      this.userProfileForm.reset(item);
+      //  this.deleteFlag = !event.item.deleteFlag;
+      this.nameFlag = true;
+      this.endPoint = "updateUser/";
+    });
   }
 
   loadDistrictData() {
@@ -237,6 +246,12 @@ export class UserProfileComponent implements OnInit {
     this.formSuccess = true;
     this.formRequiredError = false;
     this.resetForm();
+    this.loadDistrictData();
+    this.accGstType = this.sharedDataService.getSharedCommonJsonData().GstType;
+    this.accNatureOfGst = this.sharedDataService.getSharedCommonJsonData().NatureOfGst;
+    this.accSaleType = this.sharedDataService.getSharedCommonJsonData().SaleType;
+    this.accCustomerType = this.sharedDataService.getSharedCommonJsonData().CustomerType;
+    this.loadUserData();
   }
 
   requiredErrMsg() {
