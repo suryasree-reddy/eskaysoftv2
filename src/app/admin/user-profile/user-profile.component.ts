@@ -65,7 +65,6 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.userProfileForm = this.fb.group({
       id: [],
-      userId: [],
       districtId:[],
       name: ['', Validators.required],
       username: ['', Validators.required],
@@ -137,7 +136,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSelectDistrict(event) {
-    console.log(event.item);
     this.userProfileForm.patchValue({ state: event.item.stateName });
     this.userProfileForm.patchValue({ districtId: event.item.id });
     this.userProfileForm.patchValue({ districtName: event.item.districtName });

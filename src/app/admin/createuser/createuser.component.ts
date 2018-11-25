@@ -66,6 +66,7 @@ export class CreateuserComponent implements OnInit {
     this.createUserForm = this.fb.group({
       id: [],
       searchByUserName: [],
+        districtId:[],
       name: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -115,9 +116,8 @@ export class CreateuserComponent implements OnInit {
 
   onSelectDistrict(event) {
     this.createUserForm.patchValue({ state: event.item.stateName });
-    //  this.createUserForm.patchValue({ districtId: this.selectedDistrict.id });
+    this.createUserForm.patchValue({ districtId: event.item.id });
     this.createUserForm.patchValue({ districtName: event.item.districtName });
-
     this.createUserForm.patchValue({ stateCode: event.item.stateId });
   }
 
@@ -239,6 +239,7 @@ export class CreateuserComponent implements OnInit {
     this.formSuccess = true;
     this.formRequiredError = false;
     this.resetForm();
+    this.loadUserData();
   }
 
   requiredErrMsg() {
