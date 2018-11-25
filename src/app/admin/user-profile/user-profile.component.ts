@@ -56,7 +56,7 @@ export class UserProfileComponent implements OnInit {
     private translate: TranslateService,
     private modalService: BsModalService,
     private sharedDataService: SharedDataService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
