@@ -24,7 +24,8 @@ export class MasterService {
 
   getData(tragetServiceName) {
 
-    if(tragetServiceName == "changePassword/" || tragetServiceName == "auth/createUser/"|| tragetServiceName == "users/"){
+    if(tragetServiceName == "changePassword/" || tragetServiceName == "auth/createUser/"
+    || tragetServiceName == "users/" || tragetServiceName == "updateUser/"){
       return this.httpClient.get(this.SETTINGS_END_POINT + tragetServiceName).subscribe(res => {
         this.resposeArray = res;
         this.dataObject.next(this.resposeArray);
@@ -51,21 +52,21 @@ export class MasterService {
   }
 
   getParentData(tragetServiceName) {
-    if(tragetServiceName == "changePassword/" || tragetServiceName == "auth/createUser/"|| tragetServiceName == "users/"){
+    if(tragetServiceName == "changePassword/" || tragetServiceName == "auth/createUser/"
+    || tragetServiceName == "users/" || tragetServiceName == "updateUser/"){
       return this.httpClient.get(this.SETTINGS_END_POINT + tragetServiceName);
     }else{
         return this.httpClient.get(this.END_POINT + tragetServiceName);
     }
-
   }
 
   getLocalJsonData() {
     return this.httpClient.get(this._localUrl);
   }
 
-
   createRecord(tragetServiceName, requestObj) {
-    if(tragetServiceName == "changePassword/"|| tragetServiceName == "auth/createUser/"|| tragetServiceName == "users/"){
+    if(tragetServiceName == "changePassword/"|| tragetServiceName == "auth/createUser/"
+    || tragetServiceName == "users/" || tragetServiceName == "updateUser/"){
       return this.httpClient.post(this.SETTINGS_END_POINT + tragetServiceName, requestObj);
     }else{
       return this.httpClient.post(this.END_POINT + tragetServiceName, requestObj);
@@ -73,7 +74,8 @@ export class MasterService {
   }
 
   updateRecord(tragetServiceName, requestObj) {
-    if(tragetServiceName == "changePassword/"|| tragetServiceName == "auth/createUser/"|| tragetServiceName == "users/"){
+    if(tragetServiceName == "changePassword/"|| tragetServiceName == "auth/createUser/"
+    || tragetServiceName == "users/" || tragetServiceName == "updateUser/"){
       return this.httpClient.put(this.SETTINGS_END_POINT + tragetServiceName, requestObj);
     }else{
       return this.httpClient.put(this.END_POINT + tragetServiceName, requestObj);
@@ -81,7 +83,8 @@ export class MasterService {
   }
 
   deleteRecord(tragetServiceName, requestObj) {
-    if(tragetServiceName == "changePassword/"|| tragetServiceName == "auth/createUser/"|| tragetServiceName == "users/"){
+    if(tragetServiceName == "changePassword/"|| tragetServiceName == "auth/createUser/"
+    || tragetServiceName == "users/" || tragetServiceName == "updateUser/"){
       return this.httpClient.delete(this.SETTINGS_END_POINT + tragetServiceName + requestObj);
     }else{
       return this.httpClient.delete(this.END_POINT + tragetServiceName + requestObj);

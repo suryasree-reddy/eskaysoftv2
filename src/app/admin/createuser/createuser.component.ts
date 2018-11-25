@@ -47,8 +47,8 @@ export class CreateuserComponent implements OnInit {
   public scFormSuccess: boolean = false;
   public childDuplicateMessage: string = null;
   public childDuplicateMessageParam: string = null;
-  private isNewuser:boolean= false;
-  private isPasswordNotMatch:boolean= false;
+  private isNewuser: boolean = false;
+  private isPasswordNotMatch: boolean = false;
   modalRef: BsModalRef;
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
@@ -65,7 +65,7 @@ export class CreateuserComponent implements OnInit {
   ngOnInit() {
     this.createUserForm = this.fb.group({
       id: [],
-      searchByUserName:[],
+      searchByUserName: [],
       name: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -136,6 +136,8 @@ export class CreateuserComponent implements OnInit {
     this.createUserForm.patchValue({ searchByUserName: event.item.username });
     this.deleteFlag = !event.item.deleteFlag;
     this.nameFlag = true;
+    this.endPoint="updateUser/";
+  //  anand.kadiveti@gmail.com
   }
 
   resetChildForm(formObj) {
@@ -198,16 +200,16 @@ export class CreateuserComponent implements OnInit {
     }
   }
 
-  validatePassword(){
-    console.log("", this.createUserForm.value.password, ":::", this.createUserForm.value.confPassword)
-    if (this.createUserForm.value.password != "" && this.createUserForm.value.confPassword != ""){
-      if(this.createUserForm.value.password != this.createUserForm.value.confPassword) {
+  validatePassword() {
+    if ( (this.createUserForm.value.password != "" && this.createUserForm.value.password != null)
+      && (this.createUserForm.value.confPassword != "" && this.createUserForm.value.confPassword != null)) {
+      if (this.createUserForm.value.password != this.createUserForm.value.confPassword) {
         this.isPasswordNotMatch = true;
-      }else{
+      }else {
         this.isPasswordNotMatch = false;
       }
     }
-this.getDuplicateErrorMessages();
+    this.getDuplicateErrorMessages();
   }
 
   getDuplicateErrorMessages(): void {
