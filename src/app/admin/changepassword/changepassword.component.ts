@@ -48,7 +48,7 @@ export class ChangepasswordComponent implements OnInit {
       // designation: ['', Validators.required],
       // mobile: ['', Validators.required]
     });
-    this.authService.logout();
+    // this.authService.logout();
   }
 
   checkForDuplicateUserName() {

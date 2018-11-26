@@ -129,9 +129,19 @@ export class UserProfileComponent implements OnInit {
       //  this.deleteFlag = !event.item.deleteFlag;
       this.nameFlag = true;
       this.endPoint = "updateUser/";
+  
     });
+    this.masterService.dataObject.subscribe(list => {
+           this.userprofileList = list;
+        });
   }
 
+  // loadUserData() {
+  //   this.masterService.getData("users/");
+  //   this.masterService.dataObject.subscribe(list => {
+  //      this.userprofileList = list;
+  //   });
+  // }
   loadDistrictData() {
     this.masterService.getParentData("districts/").subscribe(list => {
       this.districtsList = list;
@@ -210,14 +220,14 @@ export class UserProfileComponent implements OnInit {
 
   checkForDuplicateName() {
     if (!this.nameFlag) {
-      this.duplicateUserName = this.masterService.hasDataExist(this.userprofileList, 'Email', this.userProfileForm.value.Email);
+      this.duplicateName = this.masterService.hasDataExist(this.userprofileList, 'name', this.userProfileForm.value.name);
       this.getDuplicateErrorMessages();
     }
   }
 
   checkForDuplicateUserName() {
     if (!this.nameFlag) {
-      this.duplicateUserName = this.masterService.hasDataExist(this.userprofileList, 'UserName', this.userProfileForm.value.username);
+      this.duplicateUserName = this.masterService.hasDataExist(this.userprofileList, 'username', this.userProfileForm.value.username);
       this.getDuplicateErrorMessages();
     }
   }
@@ -227,6 +237,14 @@ export class UserProfileComponent implements OnInit {
       this.formRequiredError = false;
       this.duplicateMessage = null;
       this.duplicateMessageParam = null;
+    }
+    if (this.duplicateName) {
+      this.duplicateMessage = "userprofile.duplicateNameErrorMessage";
+      this.duplicateMessageParam = this.userProfileForm.value.name;
+    }
+    if (this.duplicateUserName) {
+      this.duplicateMessage = "userprofile.duplicateNameErrorMessage";
+      this.duplicateMessageParam = this.userProfileForm.value.username;
     }
     if (this.duplicateDistrictName) {
       this.childDuplicateMessage = "districts.duplicateNameErrorMessage";

@@ -628,7 +628,15 @@
   ],
   "UserRoles": [
     "ROLE_USER",
-    "ROLE_ADMIN"
+    "ROLE_ADMIN",
+    "ALLOW_MASTERS",
+    "ALLOW_PURCHASE",
+    "ALLOW_SALES",
+    "ALLOW_INVENTORY_REPORTS",
+    "ALLOW_GST_REPORTS",
+    "ALLOW_MISCELLANEOUS",
+    "ALLOW_INVOICE_DATE_CHANGE",
+    "ALLOW_MODIFICATION_OR_DELETION"
   ],
   "UserRoles_old": [
     "Roles",

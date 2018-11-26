@@ -38,14 +38,14 @@
 			<div class="col-md-4 col-3-lt">
 				<p>{{'createuser.name' | translate }}: *</p>
 				<div class="input-group mr-t-0">
-					<input id="name"  [readonly]="nameFlag" maxlength="50"  class="form-control" [formControl]="createUserForm.controls['name']">
+					<input id="name"  [readonly]="nameFlag" maxlength="50"  class="form-control" (blur)="checkForDuplicateName()" [formControl]="createUserForm.controls['name']">
 				</div>
 			</div>
 
 			<div class="col-md-4 col-3-lt">
 				<p>{{'createuser.username' | translate }}: *</p>
 				<div class="input-group mr-t-0">
-					<input id="username" maxlength="50"  [readonly]="nameFlag" class="form-control" [formControl]="createUserForm.controls['username']">
+					<input id="username" maxlength="50"  [readonly]="nameFlag" class="form-control" (blur)="checkForDuplicateUserName()" [formControl]="createUserForm.controls['username']">
 				</div>
 			</div>
 

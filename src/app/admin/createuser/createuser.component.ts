@@ -195,7 +195,7 @@ export class CreateuserComponent implements OnInit {
 
   checkForDuplicateUserName() {
     if (!this.nameFlag) {
-      this.duplicateUserName = this.masterService.hasDataExist(this.userList, 'UserName', this.createUserForm.value.username);
+      this.duplicateUserName = this.masterService.hasDataExist(this.userList, 'username', this.createUserForm.value.username);
       this.getDuplicateErrorMessages();
     }
   }
@@ -217,6 +217,14 @@ export class CreateuserComponent implements OnInit {
       this.formRequiredError = false;
       this.duplicateMessage = null;
       this.duplicateMessageParam = null;
+    }
+    if (this.duplicateName) {
+      this.duplicateMessage = "createuser.duplicateNameErrorMessage";
+      this.duplicateMessageParam = this.createUserForm.value.name;
+    }
+    if (this.duplicateUserName) {
+      this.duplicateMessage = "createuser.duplicateNameErrorMessage";
+      this.duplicateMessageParam = this.createUserForm.value.username;
     }
     if (this.duplicateDistrictName) {
       this.childDuplicateMessage = "districts.duplicateNameErrorMessage";
