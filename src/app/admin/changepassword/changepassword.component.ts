@@ -25,6 +25,7 @@ export class ChangepasswordComponent implements OnInit {
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
   public chgPswdList: any = [];
+  private isPasswordNotMatch:boolean= false;
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
@@ -55,6 +56,31 @@ export class ChangepasswordComponent implements OnInit {
       this.getDuplicateErrorMessages();
   }
 
+//   validatePassword(){
+//     console.log("", this.changePasswordForm.value.password, ":::", this.changePasswordForm.value.confirmPassword)
+//     if (this.changePasswordForm.value.password != "" && this.changePasswordForm.value.confirmPassword != null){
+//       if(this.changePasswordForm.value.password != this.changePasswordForm.value.confirmPassword) {
+//         this.isPasswordNotMatch = true;
+//       }else{
+//         this.isPasswordNotMatch = false;
+//       }
+//     }
+// this.getDuplicateErrorMessages();
+//   }
+
+validatePassword() {
+  if ( (this.changePasswordForm.value.password != "" && this.changePasswordForm.value.password != null)
+    && (this.changePasswordForm.value.confirmPassword != "" && this.changePasswordForm.value.confirmPassword != null)) {
+    if (this.changePasswordForm.value.password != this.changePasswordForm.value.confirmPassword) {
+      this.isPasswordNotMatch = true;
+    }else {
+      this.isPasswordNotMatch = false;
+    }
+  }
+  this.getDuplicateErrorMessages();
+}
+  
+
   getDuplicateErrorMessages(): void {
     if (!this.duplicateUserName) {
       this.formRequiredError = false;
@@ -65,6 +91,9 @@ export class ChangepasswordComponent implements OnInit {
     if (this.duplicateUserName) {
       this.duplicateMessage = null;
       this.duplicateMessageParam = null;
+    }
+    if (this.isPasswordNotMatch) {
+      this.duplicateMessage = "changepassword.passwordMissmatch";
     }
   }
 
@@ -89,6 +118,7 @@ export class ChangepasswordComponent implements OnInit {
       this.formSuccess = false;
     }
   }
+  
 
   resetForm() {
     this.changePasswordForm.reset();

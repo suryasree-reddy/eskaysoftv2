@@ -267,7 +267,8 @@
     "confirmPassword": "Confirm Password",
     "saveConfirmationMessage": "Are you sure you want to Change Password?",
     "saveInformationMessage": "Password has been changed successfully.",
-    "duplicateNameErrorMessage":"The User Name '{{duplicateMessageParam}}' already exists with this name."
+    "duplicateNameErrorMessage":"The User Name '{{duplicateMessageParam}}' already exists with this name.",
+    "passwordMissmatch":"The Password & Confirm Password values are not same."
     },
   "tax": {
     "title": "Tax",
