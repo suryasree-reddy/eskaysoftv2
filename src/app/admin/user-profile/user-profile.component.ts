@@ -28,7 +28,7 @@ export class UserProfileComponent implements OnInit {
   private userProfileForm: FormGroup;
   public districtsForm: FormGroup;
   private deleteFlag: boolean = true;
-  private endPoint: string = "auth/createUser/";
+  private endPoint: string = "updateUser/";
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
