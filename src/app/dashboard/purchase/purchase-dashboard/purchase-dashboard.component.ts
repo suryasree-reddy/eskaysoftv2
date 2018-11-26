@@ -16,7 +16,7 @@ import * as _ from 'lodash';
 export class PurchaseDashboardComponent implements OnInit {
 
   public purchaseForm: FormGroup;
-  private endPoint: string = "purchase-dashboard/";
+  private endPoint: string = "purchaseDashboard/";
   public gridDataList: any = [];
   public gridColumnNamesList;
   public gridSelectedRow;
@@ -28,7 +28,7 @@ export class PurchaseDashboardComponent implements OnInit {
 
   @ViewChild('focus') focusField: ElementRef;
 
-  constructor(private fb: FormBuilder, private translate: TranslateService, 
+  constructor(private fb: FormBuilder, private translate: TranslateService,
     private sharedDataService:SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');

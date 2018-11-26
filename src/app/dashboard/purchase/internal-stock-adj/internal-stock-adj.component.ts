@@ -32,7 +32,7 @@ export class InternalStockAdjComponent implements OnInit {
     translate.setDefaultLang('messages.en');
 
   }
-  
+
   ngOnInit() {
     this.internalStockForm = this.fb.group({
       id: ['', Validators.required],
@@ -57,7 +57,7 @@ export class InternalStockAdjComponent implements OnInit {
     }
   }
 
- 
+
 
   getDuplicateErrorMessages(): void {
     if (!this.checkForDuplicateName || !this.checkForDuplicateName) {
@@ -87,7 +87,7 @@ export class InternalStockAdjComponent implements OnInit {
       this.formSuccess = false;
     }
   }
- 
+
   resetForm() {
     this.internalStockForm.reset();
     this.deleteFlag = true;

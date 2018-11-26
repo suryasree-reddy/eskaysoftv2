@@ -66,7 +66,7 @@ export class CreateuserComponent implements OnInit {
     this.createUserForm = this.fb.group({
       id: [],
       searchByUserName: [],
-        districtId:[],
+      districtId: [],
       name: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -136,8 +136,8 @@ export class CreateuserComponent implements OnInit {
     this.createUserForm.patchValue({ searchByUserName: event.item.username });
     this.deleteFlag = !event.item.deleteFlag;
     this.nameFlag = true;
-    this.endPoint="updateUser/";
-  //  anand.kadiveti@gmail.com
+    this.endPoint = "updateUser/";
+    //  anand.kadiveti@gmail.com
   }
 
   resetChildForm(formObj) {
@@ -201,11 +201,11 @@ export class CreateuserComponent implements OnInit {
   }
 
   validatePassword() {
-    if ( (this.createUserForm.value.password != "" && this.createUserForm.value.password != null)
+    if ((this.createUserForm.value.password != "" && this.createUserForm.value.password != null)
       && (this.createUserForm.value.confPassword != "" && this.createUserForm.value.confPassword != null)) {
       if (this.createUserForm.value.password != this.createUserForm.value.confPassword) {
         this.isPasswordNotMatch = true;
-      }else {
+      } else {
         this.isPasswordNotMatch = false;
       }
     }
@@ -218,14 +218,18 @@ export class CreateuserComponent implements OnInit {
       this.duplicateMessage = null;
       this.duplicateMessageParam = null;
     }
-    if (this.duplicateName) {
+    if (this.duplicateName && this.duplicateUserName) {
+      this.duplicateMessage = "createuser.duplicateNameErrorMessage";
+    }
+    else if (this.duplicateName) {
       this.duplicateMessage = "createuser.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.createUserForm.value.name;
     }
-    if (this.duplicateUserName) {
+    else if (this.duplicateUserName) {
       this.duplicateMessage = "createuser.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.createUserForm.value.username;
     }
+
     if (this.duplicateDistrictName) {
       this.childDuplicateMessage = "districts.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.districtsForm.value.districtName;
@@ -291,22 +295,12 @@ export class CreateuserComponent implements OnInit {
 
     (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
       if (result) {
-        if (eventType == "Delete") {
-          this.delete();
-        }
-        else if (eventType == "District") {
-          this.saveChild(eventType, this.districtsForm, "districts/");
-        }
+        this.saveChild(eventType, this.districtsForm, "districts/");
       }
     });
   }
 
   getFormDetails(screenName) {
-    if (screenName == "Save") {
-      return { "title": "Create User", "confirmMessage": "createuser.saveConfirmationMessage", "infoMessage": "createuser.saveInformationMessage" };
-    }
-    else if (screenName == "District") {
-      return { "title": "Districts", "confirmMessage": "districts.saveConfirmationMessage", "infoMessage": "districts.saveInformationMessage" };
-    }
+    return { "title": "Districts", "confirmMessage": "districts.saveConfirmationMessage", "infoMessage": "districts.saveInformationMessage" };
   }
 }

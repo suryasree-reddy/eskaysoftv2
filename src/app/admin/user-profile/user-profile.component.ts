@@ -129,11 +129,11 @@ export class UserProfileComponent implements OnInit {
       //  this.deleteFlag = !event.item.deleteFlag;
       this.nameFlag = true;
       this.endPoint = "updateUser/";
-  
+
     });
     this.masterService.dataObject.subscribe(list => {
-           this.userprofileList = list;
-        });
+      this.userprofileList = list;
+    });
   }
 
   // loadUserData() {
@@ -162,11 +162,8 @@ export class UserProfileComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>, templateName) {
-    if (templateName == "Districts") {
-      this.resetChildForm(this.districtsForm);
-      this.loadStatesData();
-    }
-    //template, 'SubSchedule'
+    this.resetChildForm(this.districtsForm);
+    this.loadStatesData();
     this.scFormRequiredError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
@@ -177,7 +174,6 @@ export class UserProfileComponent implements OnInit {
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
     this.scFormRequiredError = this.scFormSuccess = false;
-    // formObj.reset();
     this.districtsForm.reset();
   }
 
@@ -190,7 +186,6 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-
   scRequiredErrMsg() {
     if (this.childDuplicateMessage == null) {
       this.scFormRequiredError = true;
@@ -201,9 +196,7 @@ export class UserProfileComponent implements OnInit {
   saveChild(screenName, formObj, targetUrl) {
     this.masterService.createRecord(targetUrl, formObj.value).subscribe(res => {
       this.showInformationModal(screenName);
-      if (screenName == "District") {
-        this.loadDistrictData();
-      }
+      this.loadDistrictData();
       this.modalRef.hide();
       formObj.reset();
     }, (error) => {
@@ -211,12 +204,10 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-
   checkForDuplicateDistrictName() {
     this.duplicateDistrictName = this.masterService.hasDataExist(this.districtsList, 'districtName', this.districtsForm.value.districtName);
     this.getDuplicateErrorMessages();
   }
-
 
   checkForDuplicateName() {
     if (!this.nameFlag) {
@@ -238,14 +229,18 @@ export class UserProfileComponent implements OnInit {
       this.duplicateMessage = null;
       this.duplicateMessageParam = null;
     }
-    if (this.duplicateName) {
+    if (this.duplicateName && this.duplicateUserName) {
+      this.duplicateMessage = "userprofile.duplicateNameErrorMessage";
+
+    } else if(this.duplicateName) {
       this.duplicateMessage = "userprofile.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.userProfileForm.value.name;
-    }
-    if (this.duplicateUserName) {
+
+    } else if (this.duplicateUserName) {
       this.duplicateMessage = "userprofile.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.userProfileForm.value.username;
     }
+
     if (this.duplicateDistrictName) {
       this.childDuplicateMessage = "districts.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.districtsForm.value.districtName;
@@ -294,7 +289,6 @@ export class UserProfileComponent implements OnInit {
     this.districtsForm.reset();
   }
 
-
   showInformationModal(eventType) {
     const modal = this.modalService.show(ConfirmationModelDialogComponent);
     (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
@@ -316,23 +310,13 @@ export class UserProfileComponent implements OnInit {
 
     (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
       if (result) {
-        if (eventType == "Delete") {
-          this.delete();
-        }
-        else if (eventType == "District") {
-          this.saveChild(eventType, this.districtsForm, "districts/");
-        }
+        this.saveChild(eventType, this.districtsForm, "districts/");
       }
     });
   }
 
   getFormDetails(screenName) {
-    if (screenName == "Save") {
-      return { "title": "Profile", "confirmMessage": "userprofile.saveConfirmationMessage", "infoMessage": "userprofile.saveInformationMessage" };
-    }
-    else if (screenName == "District") {
-      return { "title": "Districts", "confirmMessage": "districts.saveConfirmationMessage", "infoMessage": "districts.saveInformationMessage" };
-    }
+    return { "title": "Districts", "confirmMessage": "districts.saveConfirmationMessage", "infoMessage": "districts.saveInformationMessage" };
   }
 
 }

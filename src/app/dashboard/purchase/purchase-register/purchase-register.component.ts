@@ -14,7 +14,7 @@ export class PurchaseRegisterComponent implements OnInit {
 
   private purchaseRegisterForm: FormGroup;
   private deleteFlag: boolean = true;
-  private endPoint: string = "purchase-register/";
+  private endPoint: string = "purchaseentry/";
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;

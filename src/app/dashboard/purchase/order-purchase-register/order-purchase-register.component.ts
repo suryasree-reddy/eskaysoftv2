@@ -16,7 +16,7 @@ export class OrderPurchaseRegisterComponent implements OnInit {
 
   private orderRegisterForm: FormGroup;
   private deleteFlag: boolean = true;
-  private endPoint: string = "order-purchase-register/";
+  private endPoint: string = "orderPurchaseRegister/";
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;

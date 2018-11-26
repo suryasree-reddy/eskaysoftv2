@@ -14,7 +14,7 @@ export class PurchaseReturnsComponent implements OnInit {
 
   private purchaseReturnsForm: FormGroup;
   private deleteFlag: boolean = true;
-  private endPoint: string = "purchase-returns/";
+  private endPoint: string = "purchaseReturns/";
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;

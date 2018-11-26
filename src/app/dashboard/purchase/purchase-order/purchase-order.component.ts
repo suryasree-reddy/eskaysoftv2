@@ -15,7 +15,7 @@ export class PurchaseOrderComponent implements OnInit {
 
   public purchaseOrderForm: FormGroup;
   private deleteFlag: boolean = true;
-  private endPoint: string = "purchase-order/";
+  private endPoint: string = "purchaseOrder/";
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
