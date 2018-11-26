@@ -25,7 +25,7 @@ export class MasterService {
   getData(tragetServiceName) {
 
     if(tragetServiceName == "changePassword/" || tragetServiceName == "auth/createUser/"
-    || tragetServiceName == "users/" || tragetServiceName == "updateUser/"){
+    || tragetServiceName.includes('users/')  || tragetServiceName == "updateUser/"){
       return this.httpClient.get(this.SETTINGS_END_POINT + tragetServiceName).subscribe(res => {
         this.resposeArray = res;
         this.dataObject.next(this.resposeArray);
