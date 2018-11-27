@@ -17,18 +17,10 @@ import { ConfirmationModelDialogComponent } from 'src/app/commonComponents/confi
   styleUrls: ['./createuser.component.scss']
 })
 
-@NgModule({
-  imports: [
-    BsDropdownModule.forRoot(),
-    TypeaheadModule.forRoot(),
-    TabsModule.forRoot()
-  ],
-})
 
 export class CreateuserComponent implements OnInit {
 
   private createUserForm: FormGroup;
-  public districtsForm: FormGroup;
   private deleteFlag: boolean = true;
   private endPoint: string = "auth/createUser/";
   private formSuccess: boolean = false;
@@ -40,13 +32,6 @@ export class CreateuserComponent implements OnInit {
   private duplicateMessageParam: string = null;
   private rolesList: any = [];
   private userList: any = [];
-  public districtsList: any = [];
-  public statesList: any = [];
-  private duplicateDistrictName: boolean = false;
-  public scFormRequiredError: boolean = false;
-  public scFormSuccess: boolean = false;
-  public childDuplicateMessage: string = null;
-  public childDuplicateMessageParam: string = null;
   private isNewuser: boolean = false;
   private isPasswordNotMatch: boolean = false;
   modalRef: BsModalRef;
@@ -66,7 +51,6 @@ export class CreateuserComponent implements OnInit {
     this.createUserForm = this.fb.group({
       id: [],
       searchByUserName: [],
-      districtId: [],
       name: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -74,23 +58,11 @@ export class CreateuserComponent implements OnInit {
       address1: ['', Validators.required],
       town: ['', Validators.required],
       pin: ['', Validators.required],
-      districtName: ['', Validators.required],
-      state: ['', Validators.required],
-      stateCode: [],
-      phone: ['', Validators.required],
       mobile1: ['', Validators.required],
-      email: ['', Validators.required],
       roles: ['', Validators.required],
       designation: ['', Validators.required]
     });
 
-    this.districtsForm = this.fb.group({
-      id: [],
-      districtName: ['', Validators.required],
-      stateId: [],
-      stateName: []
-    });
-    this.loadDistrictData();
     this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
     this.loadUserData();
   }
@@ -102,35 +74,6 @@ export class CreateuserComponent implements OnInit {
     });
   }
 
-  loadDistrictData() {
-    this.masterService.getParentData("districts/").subscribe(list => {
-      this.districtsList = list;
-    })
-  }
-
-  loadStatesData() {
-    this.masterService.getParentData("states/").subscribe(list => {
-      this.statesList = list;
-    })
-  }
-
-  onSelectDistrict(event) {
-    this.createUserForm.patchValue({ state: event.item.stateName });
-    this.createUserForm.patchValue({ districtId: event.item.id });
-    this.createUserForm.patchValue({ districtName: event.item.districtName });
-    this.createUserForm.patchValue({ stateCode: event.item.stateId });
-  }
-
-  openModal(template: TemplateRef<any>, templateName) {
-    // if (templateName == "Districts") {
-    this.resetChildForm(this.districtsForm);
-    this.loadStatesData();
-    //  }
-    //template, 'SubSchedule'
-    this.scFormRequiredError = this.scFormSuccess = false;
-    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
-  }
-
   loadSelectedTypeahead(event) {
     this.createUserForm.reset(event.item);
     this.createUserForm.patchValue({ searchByUserName: event.item.username });
@@ -138,52 +81,6 @@ export class CreateuserComponent implements OnInit {
     this.nameFlag = true;
     this.endPoint = "updateUser/";
     //  anand.kadiveti@gmail.com
-  }
-
-  resetChildForm(formObj) {
-    this.scFormRequiredError = false;
-    this.duplicateDistrictName = false;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
-    this.scFormRequiredError = this.scFormSuccess = false;
-    // formObj.reset();
-    this.districtsForm.reset();
-  }
-
-  saveChildForm(screenName, formObj) {
-    this.scFormRequiredError = false;
-    if (formObj.valid && this.childDuplicateMessage == null) {
-      this.showConfirmationModal(screenName);
-    } else {
-      this.scRequiredErrMsg()
-    }
-  }
-
-  onSelectState(event) {
-    this.districtsForm.patchValue({ stateId: event.item.id });
-  }
-
-  scRequiredErrMsg() {
-    if (this.childDuplicateMessage == null) {
-      this.scFormRequiredError = true;
-      this.scFormSuccess = false;
-    }
-  }
-
-  saveChild(screenName, formObj, targetUrl) {
-    this.masterService.createRecord(targetUrl, formObj.value).subscribe(res => {
-      this.showInformationModal(screenName);
-      this.loadDistrictData();
-      this.modalRef.hide();
-      formObj.reset();
-    }, (error) => {
-      throw error;
-    });
-  }
-
-  checkForDuplicateDistrictName() {
-    this.duplicateDistrictName = this.masterService.hasDataExist(this.districtsList, 'districtName', this.districtsForm.value.districtName);
-    this.getDuplicateErrorMessages();
   }
 
   checkForDuplicateName() {
@@ -230,10 +127,6 @@ export class CreateuserComponent implements OnInit {
       this.duplicateMessageParam = this.createUserForm.value.username;
     }
 
-    if (this.duplicateDistrictName) {
-      this.childDuplicateMessage = "districts.duplicateNameErrorMessage";
-      this.childDuplicateMessageParam = this.districtsForm.value.districtName;
-    }
     if (this.isPasswordNotMatch) {
       this.duplicateMessage = "createuser.passwordMissmatch";
     }
@@ -270,37 +163,5 @@ export class CreateuserComponent implements OnInit {
     this.duplicateName = false;
     this.duplicateUserName = false;
     this.formRequiredError = this.formSuccess = false;
-    this.duplicateDistrictName = false;
-    this.districtsForm.reset();
-  }
-
-  showInformationModal(eventType) {
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
-      this.getFormDetails(eventType).title,
-      this.getFormDetails(eventType).infoMessage,
-      ''
-    );
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
-  }
-
-  showConfirmationModal(eventType): void {
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
-      this.getFormDetails(eventType).title,
-      this.getFormDetails(eventType).confirmMessage,
-      'green',
-      ''
-    );
-
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
-      if (result) {
-        this.saveChild(eventType, this.districtsForm, "districts/");
-      }
-    });
-  }
-
-  getFormDetails(screenName) {
-    return { "title": "Districts", "confirmMessage": "districts.saveConfirmationMessage", "infoMessage": "districts.saveInformationMessage" };
   }
 }

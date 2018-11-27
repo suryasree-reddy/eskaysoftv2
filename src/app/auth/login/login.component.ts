@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit {
     this.authService.logout();
     this.loginForm = this.fb.group({
       usernameOrEmail: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      logonDate: ['', Validators.required]
     });
 
     this.authService.badCredentials.subscribe(res => {

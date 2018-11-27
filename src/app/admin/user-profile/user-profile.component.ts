@@ -105,8 +105,8 @@ export class UserProfileComponent implements OnInit {
       saleType: ['', Validators.required],
       customerType: ['', Validators.required],
       roles: [],
-      email: [],
-      designation: []
+    //  email: [],
+    //  designation: []
     });
 
     this.districtsForm = this.fb.group({
