@@ -20,10 +20,10 @@ export class PurchaseOrderComponent implements OnInit {
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
   private duplicateName: boolean = false;
-  private duplicateUserName: boolean = false;
+  private duplicateOrderNo: boolean = false;
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
-  private internalStockList: any = [];
+  private purchaseOrderList: any = [];
 
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
@@ -59,13 +59,25 @@ export class PurchaseOrderComponent implements OnInit {
 }
 
 
-// checkForDuplicateName() {
-//   if (!this.nameFlag) {
-//     this.duplicateName = this.masterService.hasDataExist(this.internalStockList, 'name', this.purchaseOrderForm.value.number);
-//     this.getDuplicateErrorMessages();
-//   }
-// }
+checkForDuplicateOrderNo() {
+  if (!this.nameFlag) {
+    this.duplicateOrderNo = this.masterService.hasDataExist(this.purchaseOrderList, 'orderNumber', this.purchaseOrderForm.value.orderNumber);
+    this.getDuplicateErrorMessages();
+  }
+}
 
+getDuplicateErrorMessages(): void {
+  if (!this.duplicateOrderNo ) {
+    this.formRequiredError = false;
+    this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
+  }
+  if (this.duplicateOrderNo) {
+    this.duplicateMessage = "purchaseOrder.duplicateNameErrorMessage";
+    this.duplicateMessageParam = this.purchaseOrderForm.value.orderNumber;
+  }
+
+}
 
 
 // getDuplicateErrorMessages(): void {
@@ -103,7 +115,7 @@ resetForm() {
   this.duplicateMessage = null;
   this.duplicateMessageParam = null;
   this.nameFlag = false;
-  this.duplicateName = false;
+  this.duplicateOrderNo = false;
   this.formRequiredError = this.formSuccess = false;
 }
 }

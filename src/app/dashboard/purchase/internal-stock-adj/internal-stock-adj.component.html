@@ -8,15 +8,15 @@
 
          <div class="input-group">
              <p>{{'internalStockAdj.number' | translate}}: *</p>
-             <input id="number" #focus [readonly]="nameFlag" class="form-control" [formControl]="internalStockForm.controls['number']">
+             <input id="number" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateNum()" class="form-control" [formControl]="internalStockForm.controls['number']">
          </div>
          <div class="input-group">
              <p>{{'internalStockAdj.remarks' | translate}}: *</p>
-             <input id="remarks" class="form-control" [formControl]="internalStockForm.controls['remarks']">
+             <input id="remarks" maxlength="40" class="form-control" [formControl]="internalStockForm.controls['remarks']">
          </div>
          <div class="input-group">
              <p>{{'internalStockAdj.date' | translate}}: *</p>
-             <input id="date" class="form-control" [formControl]="internalStockForm.controls['date']">
+             <input id="date" type="date" class="form-control" [formControl]="internalStockForm.controls['date']">
          </div>
 
          <app-buttons [title]="'internal-stock-adj.title'" [deleteConfirmMsg]="'internal-stock-adj.deleteConfirmationMessage'"
@@ -24,7 +24,7 @@
          [endPoint]="endPoint"
          [deleteInfoMsg]="'internal-stock-adj.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
          [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-         [hideDeleteBtn]=false [formObj]="internalStockForm" (saveRecord)="save()"
+         [hideDeleteBtn]=true [formObj]="internalStockForm" (saveRecord)="save()"
          (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
          (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
 

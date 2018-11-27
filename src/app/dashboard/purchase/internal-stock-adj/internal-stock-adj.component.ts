@@ -19,6 +19,7 @@ export class InternalStockAdjComponent implements OnInit {
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
   private duplicateName: boolean = false;
+  private duplicateNum: boolean = false;
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
   private internalStockList: any = [];
@@ -40,7 +41,7 @@ export class InternalStockAdjComponent implements OnInit {
       remarks: [],
       date: [],
       sNo: [],
-      code: [],
+      productcode: [],
       productName: [],
       pack: [],
       type: [],
@@ -50,9 +51,9 @@ export class InternalStockAdjComponent implements OnInit {
        });
   }
 
-  checkForDuplicateName() {
+  checkForDuplicateNum() {
     if (!this.nameFlag) {
-      this.duplicateName = this.masterService.hasDataExist(this.internalStockList, 'name', this.internalStockForm.value.number);
+      this.duplicateNum = this.masterService.hasDataExist(this.internalStockList, 'number', this.internalStockForm.value.number);
       this.getDuplicateErrorMessages();
     }
   }
@@ -60,10 +61,14 @@ export class InternalStockAdjComponent implements OnInit {
 
 
   getDuplicateErrorMessages(): void {
-    if (!this.checkForDuplicateName || !this.checkForDuplicateName) {
+    if (!this.checkForDuplicateNum ) {
       this.formRequiredError = false;
       this.duplicateMessage = null;
       this.duplicateMessageParam = null;
+    }
+    if (this.duplicateNum) {
+      this.duplicateMessage = "internalStockAdj.duplicateNameErrorMessage";
+      this.duplicateMessageParam = this.internalStockForm.value.number;
     }
   }
 
@@ -94,7 +99,7 @@ export class InternalStockAdjComponent implements OnInit {
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
     this.nameFlag = false;
-    this.duplicateName = false;
+    this.duplicateNum = false;
     this.formRequiredError = this.formSuccess = false;
   }
 

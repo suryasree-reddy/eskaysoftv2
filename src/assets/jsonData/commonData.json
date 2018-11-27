@@ -683,7 +683,7 @@
   ],
   "InternalStockAdj": [{
       "headerName": "Code",
-      "field": "code",
+      "field": "productcode",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -744,14 +744,6 @@
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
       },
-      "suppressSizeToFit": false
-    },
-    {
-      "headerName": "Status",
-      "field": "deleteFlag",
-      "cellRenderer": "deltaIndicator",
-      "suppressFilter": true,
-      "width": 120,
       "suppressSizeToFit": false
     }
   ],
@@ -944,17 +936,9 @@
       "suppressSizeToFit": false
     }
   ],
-  "PurchaseReturns": [{
-      "headerName": "Purchase Return Number",
-      "field": "purchRetNumber",
-      "filterParams": {
-        "filterOptions": ["contains"],
-        "newRowsAction": "keep"
-      },
-      "suppressSizeToFit": false
-    }, {
+  "PurchaseReturns": [ {
       "headerName": "Product Description",
-      "field": "productDesc",
+      "field": "prodDesc",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -979,7 +963,7 @@
     },
     {
       "headerName": "Quantity",
-      "field": "quantity",
+      "field": "qty",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -997,7 +981,7 @@
     },
     {
       "headerName": "Purchase Rate",
-      "field": "purchaserate",
+      "field": "pRate",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
@@ -1174,7 +1158,7 @@
     },
      {
       "headerName": "Code",
-      "field": "code",
+      "field": "productcode",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"

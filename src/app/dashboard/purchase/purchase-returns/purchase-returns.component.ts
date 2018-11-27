@@ -20,9 +20,10 @@ export class PurchaseReturnsComponent implements OnInit {
   private nameFlag: boolean = false;
   private duplicateName: boolean = false;
   private duplicateUserName: boolean = false;
+  private duplicatePurRetnNo: boolean = false;
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
-  private internalStockList: any = [];
+  private PurRetnList: any = [];
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
@@ -37,17 +38,19 @@ export class PurchaseReturnsComponent implements OnInit {
   ngOnInit() {
     this.purchaseReturnsForm = this.fb.group({
       id: ['', Validators.required],
-      purchRetNumber: [],
+      purReturnNumber: [],
       supplier: [],
       remarks: [],
       date: [],
+      productName: [],
+      productcode: [],
       sNo:[],
       prodDesc:[],
-      status:[],
+      // status:[],
       batch:[],
       qty:[],
       free:[],
-      purRate:[],
+      pRate:[],
       amount:[]
 
     });
@@ -55,7 +58,11 @@ export class PurchaseReturnsComponent implements OnInit {
   //  this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
   }
 
-  checkForDuplicateName() {
+  checkForDuplicatePurRetnNo() {
+    if (!this.nameFlag) {
+      this.duplicatePurRetnNo = this.masterService.hasDataExist(this.PurRetnList, 'purReturnNumber', this.purchaseReturnsForm.value.purReturnNumber);
+      this.getDuplicateErrorMessages();
+    }
 
   }
 
@@ -64,10 +71,14 @@ export class PurchaseReturnsComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
-    if (!this.duplicateName || !this.duplicateUserName) {
+    if (!this.duplicatePurRetnNo ) {
       this.formRequiredError = false;
       this.duplicateMessage = null;
       this.duplicateMessageParam = null;
+    }
+    if (this.duplicatePurRetnNo) {
+      this.duplicateMessage = "purchaseReturn.duplicateNameErrorMessage";
+      this.duplicateMessageParam = this.purchaseReturnsForm.value.purReturnNumber;
     }
   }
 
@@ -98,7 +109,7 @@ export class PurchaseReturnsComponent implements OnInit {
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
     this.nameFlag = false;
-    this.duplicateName = false;
+    this.duplicatePurRetnNo = false;
     this.duplicateUserName = false;
     this.formRequiredError = this.formSuccess = false;
   }

@@ -8,28 +8,28 @@
 
         <div class="input-group">
             <p>{{'purchaseReturn.purchRetNumber' | translate}}: *</p>
-            <input id="purchRetNumber" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseReturnsForm.controls['purchRetNumber']">
+            <input id="purReturnNumber" maxlength="30" (blur)="checkForDuplicatePurRetnNo()" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseReturnsForm.controls['purReturnNumber']">
         </div>
 
         <div class="input-group">
             <p>{{'common.supplier' | translate}}: *</p>
-            <input id="supplier" class="form-control" [formControl]="purchaseReturnsForm.controls['supplier']">
+            <input id="supplier" maxlength="50" class="form-control" [formControl]="purchaseReturnsForm.controls['supplier']">
         </div>
 
         <div class="input-group">
             <p>{{'common.remarks' | translate}}: *</p>
-            <input id="remarks" class="form-control" [formControl]="purchaseReturnsForm.controls['remarks']">
+            <input id="remarks" maxlength="40" class="form-control" [formControl]="purchaseReturnsForm.controls['remarks']">
         </div>
 
         <div class="input-group">
             <p>{{'common.date' | translate}}: *</p>
-            <input id="date" class="form-control" [formControl]="purchaseReturnsForm.controls['date']">
+            <input id="date" type="date" class="form-control" [formControl]="purchaseReturnsForm.controls['date']">
         </div>
 
-      <app-buttons [title]="'internal-stock-adj.title'" [deleteConfirmMsg]="'internal-stock-adj.deleteConfirmationMessage'"
-      [saveConfirmMsg]="'internal-stock-adj.saveConfirmationMessage'" [saveInfoMsg]="'internal-stock-adj.saveInformationMessage'"
+      <app-buttons [title]="'purchaseReturn.title'" [deleteConfirmMsg]="'purchaseReturn.deleteConfirmationMessage'"
+      [saveConfirmMsg]="'purchaseReturn.saveConfirmationMessage'" [saveInfoMsg]="'purchaseReturn.saveInformationMessage'"
       [endPoint]="endPoint"
-      [deleteInfoMsg]="'internal-stock-adj.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+      [deleteInfoMsg]="'purchaseReturn.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
       [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
       [hideDeleteBtn]=false [formObj]="purchaseReturnsForm" (saveRecord)="save()"
       (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"

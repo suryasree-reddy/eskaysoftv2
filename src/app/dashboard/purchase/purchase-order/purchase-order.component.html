@@ -7,7 +7,7 @@
 
 		<div class="col-xs-3">
 			<p>{{'common.orderNumber' | translate}}: *</p>
-			<input id="orderNumber" maxlength="20" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseOrderForm.controls['orderNumber']">
+			<input id="orderNumber" maxlength="40" #focus [readonly]="nameFlag" (blur)="checkForDuplicateOrderNo()" class="form-control" [formControl]="purchaseOrderForm.controls['orderNumber']">
 		</div>
 		<div class="col-xs-3">
 			<p>{{'common.date' | translate}}: *</p>
@@ -22,7 +22,7 @@
 
 		<div class="col-xs-3">
 			<p>{{'common.remarks' | translate}}: *</p>
-			<input id="remarks" maxlength="20" class="form-control" [formControl]="purchaseOrderForm.controls['remarks']">
+			<input id="remarks" maxlength="40" class="form-control" [formControl]="purchaseOrderForm.controls['remarks']">
 			<span class="caret hide-caret"></span>
 		</div>
 
@@ -35,7 +35,7 @@
 
 		<div class="col-xs-3">
 			<p>{{'common.pack' | translate}}: *</p>
-			<input id="pack" maxlength="20" class="form-control" [formControl]="purchaseOrderForm.controls['pack']">
+			<input id="pack" maxlength="10" class="form-control" [formControl]="purchaseOrderForm.controls['pack']">
 		</div>
 
 		<div class="col-xs-3">
@@ -56,22 +56,22 @@
 		</div>
 		<div class="col-xs-3">
 			<p>{{'purchaseOrder.bqty' | translate}}: *</p>
-			<input id="bQty" [readonly]="true" class="form-control" [formControl]="purchaseOrderForm.controls['bQty']">
+			<input id="bQty" [readonly]="true" maxlength="10" class="form-control" [formControl]="purchaseOrderForm.controls['bQty']">
 		</div>
 		<div class="col-xs-3">
 			<p>{{'purchaseOrder.brate' | translate}}: *</p>
-			<input id="bRate" [readonly]="true" class="form-control" [formControl]="purchaseOrderForm.controls['bRate']">
+			<input id="bRate" [readonly]="true" maxlength="10" class="form-control" [formControl]="purchaseOrderForm.controls['bRate']">
 		</div>
 
 		<div class="col-xs-3">
 			<p>{{'purchaseOrder.bfree' | translate}}: *</p>
-			<input id="bFree" [readonly]="true" class="form-control" [formControl]="purchaseOrderForm.controls['bFree']">
+			<input id="bFree" [readonly]="true" maxlength="10" class="form-control" [formControl]="purchaseOrderForm.controls['bFree']">
 		</div>
 
 		<div class="col-xs-12">
-			<app-buttons [title]="'purchaseReturn.title'" [deleteConfirmMsg]="'purchaseReturn.deleteConfirmationMessage'"
-			 [saveConfirmMsg]="'purchaseReturn.saveConfirmationMessage'" [saveInfoMsg]="'purchaseReturn.saveInformationMessage'"
-			 [endPoint]="endPoint" [deleteInfoMsg]="'purchaseReturn.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+			<app-buttons [title]="'purchaseOrder.title'" [deleteConfirmMsg]="'purchaseOrder.deleteConfirmationMessage'"
+			 [saveConfirmMsg]="'purchaseOrder.saveConfirmationMessage'" [saveInfoMsg]="'purchaseOrder.saveInformationMessage'"
+			 [endPoint]="endPoint" [deleteInfoMsg]="'purchaseOrder.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
 			 [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=true [formObj]="purchaseOrderForm"
 			 (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (afterSuccess)="successMsg()"
 			 (resetForm)="resetForm()"></app-buttons>

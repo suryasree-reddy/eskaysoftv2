@@ -419,7 +419,7 @@
     "brate": "Box Rate",
     "saveConfirmationMessage": "Are you sure you want to save Purchase Order?",
     "saveInformationMessage": "Purchase Order record has been saved successfully.",
-    "duplicateNameErrorMessage":"The Purchase Order Name '{{duplicateMessageParam}}' already exists with this Name.",
+    "duplicateNameErrorMessage":"The Purchase Order Number '{{duplicateMessageParam}}' already exists.",
     "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
   },
   "mfgwisePurchaseReg": {
@@ -445,6 +445,15 @@
     "company": "Company",
     "suppOption": "Supplier Option",
     "repType": "Report Type",
+    "saveConfirmationMessage": "Are you sure you want to save Purchase Register?",
+    "saveInformationMessage": "Purchase Register record has been saved successfully.",
+    "duplicateNameErrorMessage":"The Purchase Register '{{duplicateMessageParam}}' already exists with this Name.",
+    "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
+  },
+  "purchaseOrderPrint": {
+    "title": "Purchase Order Print",
+    "fromOrder": "From Order No.",
+    "toOrder": "To Order No.",
     "saveConfirmationMessage": "Are you sure you want to save Purchase Register?",
     "saveInformationMessage": "Purchase Register record has been saved successfully.",
     "duplicateNameErrorMessage":"The Purchase Register '{{duplicateMessageParam}}' already exists with this Name.",
