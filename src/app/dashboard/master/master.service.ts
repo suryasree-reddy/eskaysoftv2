@@ -20,7 +20,7 @@ export class MasterService {
   constructor(private httpClient: HttpClient, private modalService: BsModalService) { }
 
   END_POINT = 'https://eskaysoftapi.synectiks.com/api/v1/';
-  SETTINGS_END_POINT = 'http://eskaysoftapi.synectiks.com/api/';
+  SETTINGS_END_POINT = 'https://eskaysoftapi.synectiks.com/api/';
 
   getData(tragetServiceName) {
 
