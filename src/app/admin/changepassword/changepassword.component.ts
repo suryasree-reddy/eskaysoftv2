@@ -18,7 +18,7 @@ export class ChangepasswordComponent implements OnInit {
   private changePasswordForm: FormGroup;
   private deleteFlag: boolean = true;
   private formSuccess: boolean = false;
-  private endPoint: string = "changePassword/";
+  private endPoint: string = "auth/changePassword/";
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
   private duplicateUserName: boolean = false;
@@ -41,6 +41,7 @@ export class ChangepasswordComponent implements OnInit {
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
     });
+    this.authService.logout();
   }
 
   checkForDuplicateUserName() {
