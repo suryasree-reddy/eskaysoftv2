@@ -1,6 +1,6 @@
 <div class="col-xs-12">
 	<h3>{{'purchaseOrder.title' | translate}}</h3>
-	<form [formGroup]="purchaseOrderForm" autocomplete="off" class="mr-l-1" >
+	<form [formGroup]="purchaseOrderForm" autocomplete="off" class="mr-l-1">
 		<app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()"
 		 [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
 		 [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
@@ -15,8 +15,8 @@
 		</div>
 		<div class="col-xs-3">
 			<p>{{'common.supplier' | translate}}: *</p>
-			<input id="supplier" maxlength="20" class="form-control" [formControl]="purchaseOrderForm.controls['supplier']" [typeahead]="districtsList"
-			 typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+			<input id="supplier" maxlength="20" class="form-control" [formControl]="purchaseOrderForm.controls['supplier']"
+			 [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
 			<span class="caret"></span>
 		</div>
 
@@ -28,9 +28,9 @@
 
 		<div class="col-xs-3">
 			<p>{{'common.productName' | translate}}: *</p>
-			<input id="productName" maxlength="40" class="form-control" [formControl]="purchaseOrderForm.controls['productName']" [typeahead]="districtsList"
-			 typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-			<span class="caret" ></span>
+			<input id="productName" maxlength="40" class="form-control" [formControl]="purchaseOrderForm.controls['productName']"
+			 [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+			<span class="caret"></span>
 		</div>
 
 		<div class="col-xs-3">
@@ -38,21 +38,21 @@
 			<input id="pack" maxlength="20" class="form-control" [formControl]="purchaseOrderForm.controls['pack']">
 		</div>
 
-		<div class="col-xs-3" >
+		<div class="col-xs-3">
 			<p>{{'common.qty' | translate}}: *</p>
 			<input id="qty" maxlength="10" class="form-control" [formControl]="purchaseOrderForm.controls['qty']">
 			<span class="caret hide-caret"></span>
 		</div>
 
 		<div class="col-xs-3">
-			<p>{{'purchaseOrder.rate' | translate}}: *</p>
-			<input id="rate" maxlength="10" class="form-control" [formControl]="purchaseOrderForm.controls['rate']">
+			<p>{{'common.free' | translate}}: *</p>
+			<input id="free" maxlength="10" class="form-control" [formControl]="purchaseOrderForm.controls['free']">
 			<span class="caret hide-caret"></span>
 		</div>
 
 		<div class="col-xs-3">
-			<p>{{'common.free' | translate}}: *</p>
-			<input id="free" maxlength="10" class="form-control" [formControl]="purchaseOrderForm.controls['free']">
+			<p>{{'purchaseOrder.rate' | translate}}: *</p>
+			<input id="rate" maxlength="10" class="form-control" [formControl]="purchaseOrderForm.controls['rate']">
 		</div>
 		<div class="col-xs-3">
 			<p>{{'purchaseOrder.bqty' | translate}}: *</p>
@@ -68,7 +68,7 @@
 			<input id="bFree" [readonly]="true" class="form-control" [formControl]="purchaseOrderForm.controls['bFree']">
 		</div>
 
-		<div class="col-xs-12" >
+		<div class="col-xs-12">
 			<app-buttons [title]="'purchaseReturn.title'" [deleteConfirmMsg]="'purchaseReturn.deleteConfirmationMessage'"
 			 [saveConfirmMsg]="'purchaseReturn.saveConfirmationMessage'" [saveInfoMsg]="'purchaseReturn.saveInformationMessage'"
 			 [endPoint]="endPoint" [deleteInfoMsg]="'purchaseReturn.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
@@ -78,7 +78,7 @@
 		</div>
 	</form>
 </div>
-<div class="col-md-12 " >
+<div class="col-md-12 ">
 	<br /><br />
 	<app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList"
 	 (valueChange)='valueChange($event)' [screenColums]="'PurchaseOrderColumns'"></app-synectiks-common-grid>

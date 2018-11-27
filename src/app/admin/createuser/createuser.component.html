@@ -70,14 +70,14 @@
 				</div>
 			</div>
 
-			<div class="col-md-4 col-3-lt">
+			<div class="col-md-2 col-3-lt">
 				<p>{{'createuser.town' | translate }}: *</p>
 				<div class="input-group mr-t-0">
 					<input id="town"  maxlength="20"  class="form-control" [formControl]="createUserForm.controls['town']">
 				</div>
 			</div>
 
-			<div class="col-md-4 col-3-lt">
+			<div class="col-md-2 col-3-lt mr-l-10" >
 				<p>{{'createuser.pin' | translate }}: *</p>
 				<div class="input-group mr-t-0">
 					<input id="pin" type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
@@ -85,7 +85,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-4 col-3-lt">
+			<!-- <div class="col-md-4 col-3-lt">
 				<p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate, 'Districts')">create new</a>)</p>
 				<div class="input-group mr-t-0">
 					<input id="districtName" maxlength="20" class="form-control capitalize"
@@ -109,7 +109,7 @@
 				<div class="input-group mr-t-0">
 				<input id="phone" maxlength="15" class="form-control" [formControl]="createUserForm.controls['phone']">
 				</div>
-			</div>
+			</div> -->
 
 			<div class="col-md-4 col-3-lt">
 				<p>{{'createuser.mobile' | translate }}: *</p>
@@ -119,12 +119,12 @@
 				</div>
 			</div>
 
-			<div class="col-md-4 col-3-lt">
+			<!-- <div class="col-md-4 col-3-lt">
 				<p>{{'createuser.email' | translate }}: *</p>
 				<div class="input-group mr-t-0">
-				<input id="email" maxlength="15" class="form-control" [formControl]="createUserForm.controls['email']">
+				<input id="email" maxlength="50" class="form-control" [formControl]="createUserForm.controls['email']">
 				</div>
-			</div>
+			</div> -->
 
 			<div class="col-md-4 col-3-lt">
 				<p>{{'createuser.designation' | translate }}: *</p>

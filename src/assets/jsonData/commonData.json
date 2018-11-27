@@ -626,6 +626,19 @@
       "suppressSizeToFit": false
     }
   ],
+  "NatureOfBusiness": [{
+    "code": "Whl",
+    "description": "Wholesale"
+  },
+  {
+    "code": "Ret",
+    "description": "Retail"
+  },
+  {
+    "code": "Whl & Ret",
+    "description": "Wholesale & Retail"
+  }
+],
   "UserRoles": [
     "ROLE_USER",
     "ROLE_ADMIN",
@@ -1193,6 +1206,15 @@
       "suppressSizeToFit": false
     },
     {
+      "headerName": "Free",
+      "field": "free",
+      "filterParams": {
+        "filterOptions": ["contains"],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
       "headerName": "Rate",
       "field": "rate",
       "filterParams": {
@@ -1204,15 +1226,6 @@
     {
       "headerName": "Value",
       "field": "value",
-      "filterParams": {
-        "filterOptions": ["contains"],
-        "newRowsAction": "keep"
-      },
-      "suppressSizeToFit": false
-    },
-     {
-      "headerName": "Free",
-      "field": "free",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"

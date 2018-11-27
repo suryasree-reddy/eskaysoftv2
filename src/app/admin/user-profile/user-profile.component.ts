@@ -39,6 +39,7 @@ export class UserProfileComponent implements OnInit {
   private userprofileList: any = [];
   private accGstType: any[];
   private accNatureOfGst: any[];
+  private natureOfBusiness: any[];
   private accSaleType: any[];
   private accCustomerType: any[];
   public districtsList: any = [];
@@ -115,6 +116,7 @@ export class UserProfileComponent implements OnInit {
       stateName: []
     });
     this.loadDistrictData();
+    this.natureOfBusiness= this.sharedDataService.getSharedCommonJsonData().NatureOfBusiness;
     this.accGstType = this.sharedDataService.getSharedCommonJsonData().GstType;
     this.accNatureOfGst = this.sharedDataService.getSharedCommonJsonData().NatureOfGst;
     this.accSaleType = this.sharedDataService.getSharedCommonJsonData().SaleType;
@@ -260,6 +262,7 @@ export class UserProfileComponent implements OnInit {
     this.formRequiredError = false;
     this.resetForm();
     this.loadDistrictData();
+    this.natureOfBusiness = this.sharedDataService.getSharedCommonJsonData().NatureOfBusiness;
     this.accGstType = this.sharedDataService.getSharedCommonJsonData().GstType;
     this.accNatureOfGst = this.sharedDataService.getSharedCommonJsonData().NatureOfGst;
     this.accSaleType = this.sharedDataService.getSharedCommonJsonData().SaleType;
