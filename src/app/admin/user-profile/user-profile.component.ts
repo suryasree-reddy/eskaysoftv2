@@ -105,6 +105,7 @@ export class UserProfileComponent implements OnInit {
       saleType: ['', Validators.required],
       customerType: ['', Validators.required],
       roles: [],
+        password: []
     //  email: [],
     //  designation: []
     });
