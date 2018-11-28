@@ -52,14 +52,14 @@
 			<div *ngIf="!nameFlag" class="col-md-4 col-3-lt">
 				<p>{{'createuser.password' | translate }}: *</p>
 				<div class="input-group mr-t-0">
-					<input id="password" type="password" maxlength="50"  (blur)="validatePassword()" class="form-control" [formControl]="createUserForm.controls['password']">
+					<input id="password" type="password"  (blur)="validatePassword()" class="form-control" [formControl]="createUserForm.controls['password']">
 				</div>
 			</div>
 
 			<div *ngIf="!nameFlag" class="col-md-4 col-3-lt">
 				<p>{{'createuser.confirmPassword' | translate }}: *</p>
 				<div class="input-group mr-t-0">
-					<input id="confPassword" type="password" maxlength="50" (blur)="validatePassword()" class="form-control" [formControl]="createUserForm.controls['confPassword']">
+					<input id="confPassword" type="password" (blur)="validatePassword()" class="form-control" [formControl]="createUserForm.controls['confPassword']">
 				</div>
 			</div>
 

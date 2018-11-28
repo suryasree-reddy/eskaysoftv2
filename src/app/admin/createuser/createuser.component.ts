@@ -51,6 +51,8 @@ export class CreateuserComponent implements OnInit {
     this.createUserForm = this.fb.group({
       id: [],
       searchByUserName: [],
+      districtId:[],
+      phone:[],
       name: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -157,6 +159,7 @@ export class CreateuserComponent implements OnInit {
 
   resetForm() {
     this.createUserForm.reset();
+    this.endPoint = "auth/createUser/";
     this.deleteFlag = true;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
