@@ -42,18 +42,7 @@ export class PurchaseReturnsComponent implements OnInit {
       purReturnNumber: ['', Validators.required],
       supplier: ['', Validators.required],
       remarks: ['', Validators.required],
-      date: ['', Validators.required],
-      productName: ['', Validators.required],
-      productcode: ['', Validators.required],
-      sNo: ['', Validators.required],
-      prodDesc: ['', Validators.required],
-      // status:[],
-      batch: ['', Validators.required],
-      qty: ['', Validators.required],
-      free: ['', Validators.required],
-      pRate: ['', Validators.required],
-      amount: ['', Validators.required]
-
+      date: ['', Validators.required]
     });
 
     //  this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;

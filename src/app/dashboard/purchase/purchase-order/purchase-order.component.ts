@@ -78,7 +78,7 @@ export class PurchaseOrderComponent implements OnInit {
       this.suppliersList = list;
     });
   }
-  
+
   getDuplicateErrorMessages(): void {
     if (!this.duplicateOrderNo) {
       this.formRequiredError = false;
@@ -89,17 +89,7 @@ export class PurchaseOrderComponent implements OnInit {
       this.duplicateMessage = "purchaseOrder.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.purchaseOrderForm.value.orderNumber;
     }
-
   }
-
-
-  // getDuplicateErrorMessages(): void {
-  //   if (!this.checkForDuplicateName || !this.checkForDuplicateName) {
-  //     this.formRequiredError = false;
-  //     this.duplicateMessage = null;
-  //     this.duplicateMessageParam = null;
-  //   }
-  // }
 
   save() {
     this.buttonsComponent.save();
