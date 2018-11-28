@@ -77,6 +77,7 @@ export class CreateuserComponent implements OnInit {
   loadSelectedTypeahead(event) {
     this.createUserForm.reset(event.item);
     this.createUserForm.patchValue({ searchByUserName: event.item.username });
+    this.createUserForm.patchValue({ confPassword: event.item.password });
     this.deleteFlag = !event.item.deleteFlag;
     this.nameFlag = true;
     this.endPoint = "updateUser/";
