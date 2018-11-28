@@ -1,3 +1,125 @@
-<p>
-  reports works!
-</p>
+<div class="col-xs-12">
+  <h3>{{'purchaseReports.title' | translate}}</h3>
+  <form [formGroup]="purcahseReportForm" autocomplete="off">
+    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()"
+      [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
+      [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+
+      <div >
+      <button type="submit" (click)="show = !show" class="btn btn-success">Purchase Order Print</button>
+      <div *ngIf="show" class="col-xs-12 card-body">
+        <div class="col-xs-12">
+          <div class=" col-xs-4">
+            <p>{{'purchaseOrderPrint.fromOrder' | translate}}: *</p>
+            <input id="fromOrderNo" class="form-control" [formControl]="purcahseReportForm.controls['fromOrderNo']">
+          </div>
+
+          <div class=" col-xs-4">
+            <p>{{'purchaseOrderPrint.toOrder' | translate}}: *</p>
+            <input id="toOrderNo" class="form-control" [formControl]="purcahseReportForm.controls['toOrderNo']">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+        <button type="submit" (click)="show = !show" class="btn btn-success">GST Purchase Register</button>
+        <div *ngIf="show" class="col-xs-12 card-body">
+          <div class="col-xs-12">
+              <div class="col-xs-3">
+                  <p>{{'accountinfo.gsttype' | translate}}: *</p>
+                  <input id="gsttype" maxlength="7"  class="form-control" formControlName="gsttype" [typeahead]="stateZone" typeaheadOptionField="description"
+                  [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
+                  <span class="caret"></span>
+                </div>
+          
+                <div class="col-xs-3">
+                  <p>{{'common.fromDate' | translate}}: *</p>
+                  <input id="fromDate" class="form-control" [formControl]="purcahseReportForm.controls['fromDate']">
+                </div>
+          
+                <div class="col-xs-3">
+                  <p>{{'common.toDate' | translate}}: *</p>
+                  <input id="toDate" class="form-control" [formControl]="purcahseReportForm.controls['toDate']">
+                </div>
+          
+                <div class="col-xs-3">
+                  <p>{{'purchaseReg.repType' | translate}}: *</p>
+                  <input id="repType" maxlength="7"  class="form-control" formControlName="repType" [typeahead]="repType" typeaheadOptionField="description"
+                  [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
+                  <span class="caret"></span>
+                </div>
+          </div>
+        </div>
+      </div>
+
+      <div >
+          <button type="submit" (click)="show = !show" class="btn btn-success">Purchase Return(Debit Note) Printing</button>
+          <div *ngIf="show" class="col-xs-12 card-body">
+            <div class="col-xs-12">
+                <div class="col-xs-3">
+                    <p>From Purchase Return No.: *</p>
+                    <input id="fromDate" class="form-control" [formControl]="purcahseReportForm.controls['fromDate']">
+                  </div>
+            
+                  <div class="col-xs-3">
+                    <p>To Purchase Return No.: *</p>
+                    <input id="toDate" class="form-control" [formControl]="purcahseReportForm.controls['toDate']">
+                  </div>
+                    
+                  <div class="col-xs-3">
+                    <p>No. of Copies: *</p>
+                    <input id="toDate" class="form-control" [formControl]="purcahseReportForm.controls['toDate']">
+                  </div>
+            
+            </div>
+          </div>
+        </div>
+
+        <div >
+            <button type="submit" (click)="show = !show" class="btn btn-success">{{'purchaseRetReg.title' | translate}}</button>
+            <div *ngIf="show" class="col-xs-12 card-body">
+              <div class="col-xs-12">
+                  <div class="col-xs-3">
+                      <p>{{'common.fromDate'| translate}}: *</p>
+                      <input id="fromDate" type="date" class="form-control" [formControl]="purchaseReturnRegisterForm.controls['fromDate']">
+                  </div>
+                <div class="col-xs-3">
+                      <p>{{'common.toDate'| translate}}: *</p>
+                      <input id="toDate" type="date" class="form-control" [formControl]="purchaseReturnRegisterForm.controls['toDate']">
+                  </div>
+                         <div class="col-xs-3">
+                    <p>{{'purchaseRetReg.repType'| translate}}: *</p>
+                   <input id="repType" maxlength="7"  class="form-control" [formControl]="purchaseReturnRegisterForm.controls['repType']" [typeahead]="reportType"
+                    typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
+                    <span class="caret"></span>
+                </div>
+                       <div class="col-xs-3">
+                    <p>{{'purchaseRetReg.custOption'| translate}}: *</p>
+                   <input id="custOption" maxlength="7"  class="form-control" formControlName="custOption" [typeahead]="custOption" typeaheadOptionField="description"
+                  [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
+                    <span class="caret"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+
+    <!-- <app-buttons [title]="'internal-stock-adj.title'" [deleteConfirmMsg]="'internal-stock-adj.deleteConfirmationMessage'"
+           [saveConfirmMsg]="'internal-stock-adj.saveConfirmationMessage'" [saveInfoMsg]="'internal-stock-adj.saveInformationMessage'"
+           [endPoint]="endPoint"
+           [deleteInfoMsg]="'internal-stock-adj.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+           [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+           [hideDeleteBtn]=true [formObj]="purcahseReportForm" (saveRecord)="save()"
+           (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+           (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons> -->
+
+  </form>
+</div>
+
+<!-- <div class="col-xs-7">
+    <br /><br />
+    <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
+    [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'InternalStockAdj'"></app-synectiks-common-grid>
+  </div>
+   -->

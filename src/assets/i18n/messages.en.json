@@ -459,6 +459,15 @@
     "duplicateNameErrorMessage":"The Purchase Register '{{duplicateMessageParam}}' already exists with this Name.",
     "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
   },
+  "purchaseReports": {
+    "title": "Purchase Reports",
+    "repType": "Report Type",
+    "custOption": "Customer Option",
+    "saveConfirmationMessage": "Are you sure you want to save Purchase Returns Register?",
+    "saveInformationMessage": "Purchase Returns Register record has been saved successfully.",
+    "duplicateNameErrorMessage":"The Purchase Returns Register '{{duplicateMessageParam}}' already exists with this Name.",
+    "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
+  },
 
   "button": {
     "save": "Save",
