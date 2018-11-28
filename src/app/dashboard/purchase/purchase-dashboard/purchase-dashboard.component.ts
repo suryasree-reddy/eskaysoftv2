@@ -16,7 +16,7 @@ import * as _ from 'lodash';
 export class PurchaseDashboardComponent implements OnInit {
 
   public purchaseForm: FormGroup;
-  private endPoint: string = "purchaseDashboard/";
+  private endPoint: string = "purchaseentry/";
   public gridDataList: any = [];
   public gridColumnNamesList;
   public gridSelectedRow;

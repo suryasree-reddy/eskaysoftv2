@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MasterService } from 'src/app/dashboard/master/master.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -24,98 +24,111 @@ export class PurchaseOrderComponent implements OnInit {
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
   private purchaseOrderList: any = [];
+  private productsList: any = [];
+  private suppliersList: any = [];
 
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
-
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private sharedDataService: SharedDataService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
-   }
+  }
 
   ngOnInit() {
     this.purchaseOrderForm = this.fb.group({
       id: ['', Validators.required],
       orderNumber: ['', Validators.required],
-      supplier: [],
-      remarks: [],
-      date: [],
-      productId:[],
-      productName:[],
-      productcode:[],
-      pack:[],
-      qty:[],
-      rate:[],
-      free:[],
-      value:[],
-      bQty:[],
-      bFree:[],
-      bRate:[],
-  });
-  // this.focusField.nativeElement.focus();
-}
-
-
-checkForDuplicateOrderNo() {
-  if (!this.nameFlag) {
-    this.duplicateOrderNo = this.masterService.hasDataExist(this.purchaseOrderList, 'orderNumber', this.purchaseOrderForm.value.orderNumber);
-    this.getDuplicateErrorMessages();
+      supplier: ['', Validators.required],
+      remarks: ['', Validators.required],
+      date: ['', Validators.required],
+      productId: ['', Validators.required],
+      productName: ['', Validators.required],
+      productcode: ['', Validators.required],
+      pack: ['', Validators.required],
+      qty: ['', Validators.required],
+      rate: ['', Validators.required],
+      free: ['', Validators.required],
+      value: ['', Validators.required],
+      bQty: ['', Validators.required],
+      bFree: ['', Validators.required],
+      bRate: ['', Validators.required]
+    });
+    this.loadProductData();
+    this.loadSupplierData();
   }
-}
 
-getDuplicateErrorMessages(): void {
-  if (!this.duplicateOrderNo ) {
+  checkForDuplicateOrderNo() {
+    if (!this.nameFlag) {
+      this.duplicateOrderNo = this.masterService.hasDataExist(this.purchaseOrderList, 'orderNumber', this.purchaseOrderForm.value.orderNumber);
+      this.getDuplicateErrorMessages();
+    }
+  }
+
+  loadProductData() {
+    this.masterService.getParentData("product/").subscribe(list => {
+      this.productsList = list;
+    });
+  }
+
+  loadSupplierData() {
+    this.masterService.getParentData("accountinformation/").subscribe(list => {
+      this.suppliersList = list;
+    });
+  }
+  
+  getDuplicateErrorMessages(): void {
+    if (!this.duplicateOrderNo) {
+      this.formRequiredError = false;
+      this.duplicateMessage = null;
+      this.duplicateMessageParam = null;
+    }
+    if (this.duplicateOrderNo) {
+      this.duplicateMessage = "purchaseOrder.duplicateNameErrorMessage";
+      this.duplicateMessageParam = this.purchaseOrderForm.value.orderNumber;
+    }
+
+  }
+
+
+  // getDuplicateErrorMessages(): void {
+  //   if (!this.checkForDuplicateName || !this.checkForDuplicateName) {
+  //     this.formRequiredError = false;
+  //     this.duplicateMessage = null;
+  //     this.duplicateMessageParam = null;
+  //   }
+  // }
+
+  save() {
+    this.buttonsComponent.save();
+  }
+
+  delete() {
+    this.buttonsComponent.delete();
+  }
+
+  successMsg() {
+    this.formSuccess = true;
     this.formRequiredError = false;
+    this.resetForm();
+  }
+
+  requiredErrMsg() {
+    if (this.duplicateMessage == null) {
+      this.formRequiredError = true;
+      this.formSuccess = false;
+    }
+  }
+
+  resetForm() {
+    this.purchaseOrderForm.reset();
+    this.deleteFlag = true;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
+    this.nameFlag = false;
+    this.duplicateOrderNo = false;
+    this.formRequiredError = this.formSuccess = false;
   }
-  if (this.duplicateOrderNo) {
-    this.duplicateMessage = "purchaseOrder.duplicateNameErrorMessage";
-    this.duplicateMessageParam = this.purchaseOrderForm.value.orderNumber;
-  }
-
-}
-
-
-// getDuplicateErrorMessages(): void {
-//   if (!this.checkForDuplicateName || !this.checkForDuplicateName) {
-//     this.formRequiredError = false;
-//     this.duplicateMessage = null;
-//     this.duplicateMessageParam = null;
-//   }
-// }
-
-save() {
-  this.buttonsComponent.save();
-}
-
-delete() {
-  this.buttonsComponent.delete();
-}
-
-successMsg() {
-  this.formSuccess = true;
-  this.formRequiredError = false;
-  this.resetForm();
-}
-
-requiredErrMsg() {
-  if (this.duplicateMessage == null) {
-    this.formRequiredError = true;
-    this.formSuccess = false;
-  }
-}
-
-resetForm() {
-  this.purchaseOrderForm.reset();
-  this.deleteFlag = true;
-  this.duplicateMessage = null;
-  this.duplicateMessageParam = null;
-  this.nameFlag = false;
-  this.duplicateOrderNo = false;
-  this.formRequiredError = this.formSuccess = false;
-}
 }

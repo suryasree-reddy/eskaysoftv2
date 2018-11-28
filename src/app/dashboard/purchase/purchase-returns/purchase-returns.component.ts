@@ -24,6 +24,7 @@ export class PurchaseReturnsComponent implements OnInit {
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
   private PurRetnList: any = [];
+  private suppliersList: any = [];
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
@@ -37,25 +38,25 @@ export class PurchaseReturnsComponent implements OnInit {
 
   ngOnInit() {
     this.purchaseReturnsForm = this.fb.group({
-      id: ['', Validators.required],
-      purReturnNumber: [],
-      supplier: [],
-      remarks: [],
-      date: [],
-      productName: [],
-      productcode: [],
-      sNo:[],
-      prodDesc:[],
+      id: [],
+      purReturnNumber: ['', Validators.required],
+      supplier: ['', Validators.required],
+      remarks: ['', Validators.required],
+      date: ['', Validators.required],
+      productName: ['', Validators.required],
+      productcode: ['', Validators.required],
+      sNo: ['', Validators.required],
+      prodDesc: ['', Validators.required],
       // status:[],
-      batch:[],
-      qty:[],
-      free:[],
-      pRate:[],
-      amount:[]
+      batch: ['', Validators.required],
+      qty: ['', Validators.required],
+      free: ['', Validators.required],
+      pRate: ['', Validators.required],
+      amount: ['', Validators.required]
 
     });
 
-  //  this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
+    //  this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
   }
 
   checkForDuplicatePurRetnNo() {
@@ -66,12 +67,17 @@ export class PurchaseReturnsComponent implements OnInit {
 
   }
 
+  loadSupplierData() {
+    this.masterService.getParentData("accountinformation/").subscribe(list => {
+      this.suppliersList = list;
+    });
+  }
   checkForDuplicateUserName() {
 
   }
 
   getDuplicateErrorMessages(): void {
-    if (!this.duplicatePurRetnNo ) {
+    if (!this.duplicatePurRetnNo) {
       this.formRequiredError = false;
       this.duplicateMessage = null;
       this.duplicateMessageParam = null;
