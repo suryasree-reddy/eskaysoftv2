@@ -9,7 +9,8 @@ export const dashboardRouter: Routes = [
     children: [
       { path: '', redirectTo: 'master' },
       { path: 'master', loadChildren: './master/master.module#MasterModule', canActivate: [AuthGuard] },
-      { path: 'purchase', loadChildren: './purchase/purchase.module#PurchaseModule', canActivate: [AuthGuard] }
+      { path: 'purchase', loadChildren: './purchase/purchase.module#PurchaseModule', canActivate: [AuthGuard] },
+      { path: 'sales', loadChildren: './sales/sales.module#SalesModule', canActivate: [AuthGuard] },
     ]
   },
 ];

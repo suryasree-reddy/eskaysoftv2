@@ -38,17 +38,12 @@
           </button>
           <ul (mouseenter) ="dropdown2.isOpen=true"  (mouseleave) ="dropdown2.isOpen=false"
            id="dropdownPurchase" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-		   <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-order']">Purchase Order</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-dashboard']">Purchases</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-returns']">Purchase Returns</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/internal-stock-adj']">Internal Stock</a></li>
-			<li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/reports']">Reports</a></li>
-            <!--<li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/mfgwise-purchase-reg']">Manufacturer-wise Register</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/order-purchase-register']">Order Register</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-register']">Register</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-returns-register']">Register Returns</a></li>-->
-            
-          </ul>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-order']">Purchase Order</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-dashboard']">Purchases</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-returns']">Purchase Returns</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/internal-stock-adj']">Internal Stock</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/reports']">Reports</a></li>
+              </ul>
         </div>
       </div>
     </div>
@@ -59,8 +54,12 @@
             Sales
           </button>
           <ul (mouseenter) ="dropdown3.isOpen=true"  (mouseleave) ="dropdown3.isOpen=false" id="dropdownSales" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['schedule']">Action</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['schedule']">Another action</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Sales</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesRetruns']">Sales Returns</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesOrders']">Sales Orders</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Deleivery Challan</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Quotations/Tenders</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/reports']">Reports</a></li>
           </ul>
         </div>
       </div>

@@ -11,10 +11,6 @@ import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
 
 import { PurchaseDashboardComponent } from './purchase-dashboard/purchase-dashboard.component';
 import { InternalStockAdjComponent } from './internal-stock-adj/internal-stock-adj.component';
-import { MfgwisePurchaseRegComponent } from './mfgwise-purchase-reg/mfgwise-purchase-reg.component';
-import { OrderPurchaseRegisterComponent } from './order-purchase-register/order-purchase-register.component';
-import { PurchaseRegisterComponent } from './purchase-register/purchase-register.component';
-import { PurchaseReturnsRegisterComponent } from './purchase-returns-register/purchase-returns-register.component';
 import { PurchaseReturnsComponent } from './purchase-returns/purchase-returns.component';
 import { PurchaseOrderComponent } from './purchase-order/purchase-order.component';
 import { ReportsComponent } from './reports/reports.component';
@@ -44,7 +40,7 @@ import { ReportsComponent } from './reports/reports.component';
     NgModel,
     FormsModule
   ],
-  declarations: [ PurchaseDashboardComponent, InternalStockAdjComponent, MfgwisePurchaseRegComponent, OrderPurchaseRegisterComponent, PurchaseRegisterComponent, PurchaseReturnsRegisterComponent, PurchaseReturnsComponent, PurchaseOrderComponent, ReportsComponent]
+  declarations: [ PurchaseDashboardComponent, InternalStockAdjComponent, PurchaseReturnsComponent, PurchaseOrderComponent, ReportsComponent]
 })
 
 export class PurchaseModule { }
