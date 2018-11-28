@@ -1,14 +1,16 @@
-
-<div class="container">
-  <accordion [closeOthers]="true">
-      <accordion-group heading="About me">
-          Its all about me.
-      </accordion-group>
-      <accordion-group heading="Contacts">
-          This is content of the contacts
-      </accordion-group>
-      <accordion-group heading="Map">
-          Content of the Map
-      </accordion-group>
-  </accordion>
+<div class="col-xs-12">
+  <h3>{{'schedule.title' | translate }}</h3>
+  <div class="container">
+    <accordion [closeOthers]="true">
+        <accordion-group heading="About me">
+            Its all about me.
+        </accordion-group>
+        <accordion-group heading="Contacts">
+            This is content of the contacts
+        </accordion-group>
+        <accordion-group heading="Map">
+            Content of the Map
+        </accordion-group>
+    </accordion>
+  </div>
 </div>
