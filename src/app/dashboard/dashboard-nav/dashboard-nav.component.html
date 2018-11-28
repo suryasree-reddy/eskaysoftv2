@@ -38,14 +38,16 @@
           </button>
           <ul (mouseenter) ="dropdown2.isOpen=true"  (mouseleave) ="dropdown2.isOpen=false"
            id="dropdownPurchase" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-dashboard']">Purchase-Dashboard</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-order']">Purchase Order</a></li>
+		   <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-order']">Purchase Order</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-dashboard']">Purchases</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-returns']">Purchase Returns</a></li>
             <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/internal-stock-adj']">Internal Stock</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/mfgwise-purchase-reg']">Manufacturer-wise Register</a></li>
+			<li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/reports']">Reports</a></li>
+            <!--<li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/mfgwise-purchase-reg']">Manufacturer-wise Register</a></li>
             <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/order-purchase-register']">Order Register</a></li>
             <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-register']">Register</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-returns-register']">Register Returns</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-returns']">Returns</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-returns-register']">Register Returns</a></li>-->
+            
           </ul>
         </div>
       </div>

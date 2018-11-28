@@ -17,6 +17,7 @@ import { PurchaseRegisterComponent } from './purchase-register/purchase-register
 import { PurchaseReturnsRegisterComponent } from './purchase-returns-register/purchase-returns-register.component';
 import { PurchaseReturnsComponent } from './purchase-returns/purchase-returns.component';
 import { PurchaseOrderComponent } from './purchase-order/purchase-order.component';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,7 @@ import { PurchaseOrderComponent } from './purchase-order/purchase-order.componen
     NgModel,
     FormsModule
   ],
-  declarations: [ PurchaseDashboardComponent, InternalStockAdjComponent, MfgwisePurchaseRegComponent, OrderPurchaseRegisterComponent, PurchaseRegisterComponent, PurchaseReturnsRegisterComponent, PurchaseReturnsComponent, PurchaseOrderComponent]
+  declarations: [ PurchaseDashboardComponent, InternalStockAdjComponent, MfgwisePurchaseRegComponent, OrderPurchaseRegisterComponent, PurchaseRegisterComponent, PurchaseReturnsRegisterComponent, PurchaseReturnsComponent, PurchaseOrderComponent, ReportsComponent]
 })
 
 export class PurchaseModule { }

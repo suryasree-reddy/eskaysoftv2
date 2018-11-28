@@ -9,6 +9,7 @@ import { PurchaseRegisterComponent } from './purchase-register/purchase-register
 import { PurchaseReturnsComponent } from './purchase-returns/purchase-returns.component';
 import { PurchaseReturnsRegisterComponent } from './purchase-returns-register/purchase-returns-register.component';
 import { PurchaseOrderComponent } from './purchase-order/purchase-order.component';
+import { ReportsComponent } from './reports/reports.component';
 
 export const purchaseRouter: Routes = [
     { path: '', redirectTo: 'purchase-dashboard', pathMatch: 'full' },
@@ -20,6 +21,7 @@ export const purchaseRouter: Routes = [
     { path: 'purchase-register', component: PurchaseRegisterComponent, canActivate: [AuthGuard]  },
     { path: 'purchase-returns-register', component: PurchaseReturnsRegisterComponent, canActivate: [AuthGuard]  },
     { path: 'purchase-returns', component: PurchaseReturnsComponent, canActivate: [AuthGuard]  },
+	{ path: 'reports', component: ReportsComponent, canActivate: [AuthGuard]  }
     
 ];
 
