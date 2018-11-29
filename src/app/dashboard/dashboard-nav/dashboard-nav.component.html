@@ -69,8 +69,16 @@
             Inventory Reports
           </button>
           <ul (mouseenter) ="dropdown4.isOpen=true"  (mouseleave) ="dropdown4.isOpen=false" id="dropdownInventory" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['schedule']">Action</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['schedule']">Another action</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Area Reports</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Company Reports</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Customer Reports</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Product Reports</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Purchase Reports</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Rep. Reports</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Sale Reports</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Stock Reports</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">HSN/Comp.wise List</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Salesmanwise Analysis</a></li>
           </ul>
         </div>
       </div>
@@ -82,8 +90,17 @@
             Finance
           </button>
           <ul (mouseenter) ="dropdown5.isOpen=true"  (mouseleave) ="dropdown5.isOpen=false" id="dropdownFinance" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['schedule']">Action</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['schedule']">Another action</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Payment Vouchers</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesRetruns']">Receipt Vouchers</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesOrders']">GST Payment Vouchers</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Journal Vouchers</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Supplier Issued Credit Note Entry</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Supplier Issued Debit Note Entry</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">RCM Invoice</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">General Purchases(GST)</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">General Sales(GST)</a></li>
+            <li class="divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/register']">Register</a></li>
           </ul>
         </div>
       </div>
@@ -93,8 +110,25 @@
             Finance Reports
           </button>
           <ul (mouseenter) ="dropdown6.isOpen=true"  (mouseleave) ="dropdown6.isOpen=false" id="dropdownReports" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['schedule']">Action</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['schedule']">Another action</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Cash Register</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesRetruns']">Cash Book</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesOrders']">Day Book</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">General Ledger Account Copy</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Group Account Copy</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Trail Balance</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Trail Balance(Zooming)</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Schedule Printing</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Debitors OutStanding</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Ageing Analysis</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/register']">Creditors OutStanding</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/register']">Interest Calculation</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Interest Calculation Group</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Interest Calculation(Due Days)</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Bal.Confirmation letter</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/register']">Bal.Confirmation Account Copy</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Closeup Account Register</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Debitors Interest Analysis</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Salesmanwise OutStanding</a></li>
           </ul>
         </div>
       </div>
@@ -106,8 +140,11 @@
             GST Reports
           </button>
           <ul (mouseenter) ="dropdown7.isOpen=true"  (mouseleave) ="dropdown7.isOpen=false" id="dropdownGST" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['schedule']">Action</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['schedule']">Another action</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">GST Resgisters</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">GSTR-1</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">GSTR-2</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">GSTR-3</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">GST Consolidations</a></li>
           </ul>
         </div>
       </div>
@@ -117,8 +154,20 @@
             Miscellaneous
           </button>
           <ul (mouseenter) ="dropdown8.isOpen=true"  (mouseleave) ="dropdown8.isOpen=false" id="dropdownMiscellaneous" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['schedule']">Action</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['schedule']">Another action</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Data Indexing</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesRetruns']">Backup</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesOrders']">Restore</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Code Conversion</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Multi Product Code Conversion</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Multi Area Customer Conversion</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Label Printing</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Customer Indexing</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Accounts Rechecking</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/register']">Coupon Issues</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/register']">Coupon Issues Register</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Article Issues</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Article Issues Register</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Year End</a></li>
           </ul>
         </div>
       </div>
