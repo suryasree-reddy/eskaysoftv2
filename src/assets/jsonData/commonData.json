@@ -1216,6 +1216,88 @@
       },
       "suppressSizeToFit": false
     }
-  ]
+  ],
+  "SalesOrderColumns": [{
+    "headerName": "S No",
+    "field": "id",
+    "width":150,
+    "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    },
+    "suppressSizeToFit": false
+  },
+   {
+    "headerName": "Code",
+    "field": "productcode",
+    "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    },
+    "suppressSizeToFit": false
+  }, {
+    "headerName": "Product Name",
+    "field": "productName",
+    "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    },
+    "suppressSizeToFit": false
+  }, {
+    "headerName": "Packing",
+    "field": "packing",
+    "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    },
+    "suppressSizeToFit": false
+  }, {
+    "headerName": "Qty",
+    "field": "qty",
+    "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    },
+    "suppressSizeToFit": false
+  },
+  {
+    "headerName": "Free",
+    "field": "free",
+    "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    },
+    "suppressSizeToFit": false
+  },
+  {
+    "headerName": "Rate",
+    "field": "rate",
+    "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    },
+    "suppressSizeToFit": false
+  },
+  {
+    "headerName": "Value",
+    "field": "value",
+    "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    },
+    "suppressSizeToFit": false
+  }
+],
 
+"RateType": [
+ {
+  "code": "pts",
+  "description": "P. T. S."
+},
+{
+  "code": "ptd",
+  "description": "P. T. D."
+}
+]
+  
 }

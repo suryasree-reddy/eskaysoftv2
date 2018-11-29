@@ -1,3 +1,80 @@
-<p>
-  sales-orders works!
-</p>
+<div class="col-xs-12">
+	<h3>{{'salesOrder.title' | translate}}</h3>
+	<form [formGroup]="salesOrderForm" autocomplete="off" class="mr-l-1" >
+		<app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()"
+		 [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
+		 [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+
+		<div class="col-xs-3">
+			<p>{{'common.orderNumber' | translate}}: *</p>
+			<input id="orderNumber" maxlength="40" #focus [readonly]="nameFlag" class="form-control" [formControl]="salesOrderForm.controls['orderNumber']">
+		</div>
+		<div class="col-xs-3">
+			<p>{{'common.date' | translate}}: *</p>
+			<input id="date" type="date" class="form-control" [formControl]="salesOrderForm.controls['date']">
+		</div>
+		<div class="col-xs-3">
+			<p>{{'salesOrder.customer' | translate}}: *</p>
+			<input id="customer" maxlength="20" class="form-control" [formControl]="salesOrderForm.controls['customer']" [typeahead]="districtsList"
+			 typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+			<span class="caret"></span>
+		</div>
+
+		<div class="col-xs-3">
+			<p>{{'common.remarks' | translate}}: *</p>
+			<input id="remarks" maxlength="40" class="form-control" [formControl]="salesOrderForm.controls['remarks']">
+			<span class="caret hide-caret"></span>
+		</div>
+
+    <div class="col-xs-3">
+			<p>{{'salesOrder.rateType' | translate}}: *</p>
+      <input  id="rateType" maxlength="10" class="form-control" [formControl]="salesOrderForm.controls['rateType']" [typeahead]="rateTypeList"
+      typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+			<span class="caret" ></span>
+    </div>
+    
+		<div class="col-xs-3">
+			<p>{{'common.productName' | translate}}: *</p>
+			<input id="productName" maxlength="40" class="form-control" [formControl]="salesOrderForm.controls['productName']" [typeahead]="districtsList"
+			 typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+			<span class="caret" ></span>
+		</div>
+    
+		<div class="col-xs-3">
+			<p>{{'salesOrder.packing' | translate}}: *</p>
+			<input id="packing" maxlength="10" class="form-control" [formControl]="salesOrderForm.controls['packing']">
+    </div>
+    
+    <div class="col-xs-3" >
+			<p>{{'common.qty' | translate}}: *</p>
+			<input id="qty" maxlength="10" class="form-control" [formControl]="salesOrderForm.controls['qty']">
+			<span class="caret hide-caret"></span>
+    </div>
+    
+		<div class="col-xs-3">
+			<p>{{'purchaseOrder.rate' | translate}}: *</p>
+			<input id="rate" maxlength="10" class="form-control" [formControl]="salesOrderForm.controls['rate']">
+			<span class="caret hide-caret"></span>
+    </div>
+    
+    <div class="col-xs-3">
+			<p>{{'common.free' | translate}}: *</p>
+			<input id="free" maxlength="10" class="form-control" [formControl]="salesOrderForm.controls['free']">
+		</div>
+		
+
+		<div class="col-xs-12" >
+			<app-buttons [title]="'salesOrder.title'" [deleteConfirmMsg]="'salesOrder.deleteConfirmationMessage'"
+			 [saveConfirmMsg]="'salesOrder.saveConfirmationMessage'" [saveInfoMsg]="'salesOrder.saveInformationMessage'"
+			 [endPoint]="endPoint" [deleteInfoMsg]="'salesOrder.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+			 [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=true [formObj]="salesOrderForm"
+			 (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (afterSuccess)="successMsg()"
+			 (resetForm)="resetForm()"></app-buttons>
+		</div>
+	</form>
+</div>
+<div class="col-md-12 " >
+	<br /><br />
+	<app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList"
+	 (valueChange)='valueChange($event)' [screenColums]="'SalesOrderColumns'"></app-synectiks-common-grid>
+</div>
