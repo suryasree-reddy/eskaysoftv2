@@ -21,8 +21,9 @@ import { ConfirmationModelDialogComponent } from 'src/app/commonComponents/confi
 export class CreateuserComponent implements OnInit {
 
   private createUserForm: FormGroup;
+  public districtsForm: FormGroup;
   private deleteFlag: boolean = true;
-  private endPoint: string = "auth/createUser/";
+  private endPoint: string = "createUser/";
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
@@ -32,6 +33,9 @@ export class CreateuserComponent implements OnInit {
   private duplicateMessageParam: string = null;
   private rolesList: any = [];
   private userList: any = [];
+  public districtsList: any = [];
+  public statesList: any = [];
+  private duplicateDistrictName: boolean = false;
   private isNewuser: boolean = false;
   private isPasswordNotMatch: boolean = false;
   modalRef: BsModalRef;
@@ -52,7 +56,7 @@ export class CreateuserComponent implements OnInit {
       id: [],
       searchByUserName: [],
       districtId:[],
-      phone:[],
+      // phone:[],
       name: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -60,10 +64,20 @@ export class CreateuserComponent implements OnInit {
       address1: ['', Validators.required],
       town: ['', Validators.required],
       pin: ['', Validators.required],
+      districtName: ['', Validators.required],
+      state: ['', Validators.required],
       mobile1: ['', Validators.required],
       roles: ['', Validators.required],
       designation: ['', Validators.required]
     });
+
+    this.districtsForm = this.fb.group({
+      id: [],
+      districtName: ['', Validators.required],
+      stateId: [],
+      stateName: []
+    });
+    this.loadDistrictData();
 
     this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
     this.loadUserData();
@@ -74,6 +88,23 @@ export class CreateuserComponent implements OnInit {
     this.masterService.dataObject.subscribe(list => {
       this.userList = list;
     });
+  }
+
+  loadDistrictData() {
+    this.masterService.getParentData("districts/").subscribe(list => {
+      this.districtsList = list;
+    })
+  }
+   loadStatesData() {
+    this.masterService.getParentData("states/").subscribe(list => {
+      this.statesList = list;
+    })
+  }
+   onSelectDistrict(event) {
+    this.createUserForm.patchValue({ state: event.item.stateName });
+    this.createUserForm.patchValue({ districtId: event.item.id });
+    this.createUserForm.patchValue({ districtName: event.item.districtName });
+    this.createUserForm.patchValue({ stateCode: event.item.stateId });
   }
 
   loadSelectedTypeahead(event) {
@@ -98,6 +129,11 @@ export class CreateuserComponent implements OnInit {
       this.duplicateUserName = this.masterService.hasDataExist(this.userList, 'username', this.createUserForm.value.username);
       this.getDuplicateErrorMessages();
     }
+  }
+
+  checkForDuplicateDistrictName() {
+    this.duplicateDistrictName = this.masterService.hasDataExist(this.districtsList, 'districtName', this.districtsForm.value.districtName);
+    this.getDuplicateErrorMessages();
   }
 
   validatePassword() {
@@ -159,7 +195,7 @@ export class CreateuserComponent implements OnInit {
 
   resetForm() {
     this.createUserForm.reset();
-    this.endPoint = "auth/createUser/";
+    this.endPoint = "createUser/";
     this.deleteFlag = true;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
@@ -167,5 +203,7 @@ export class CreateuserComponent implements OnInit {
     this.duplicateName = false;
     this.duplicateUserName = false;
     this.formRequiredError = this.formSuccess = false;
+    this.duplicateDistrictName = false;
+    this.districtsForm.reset();
   }
 }

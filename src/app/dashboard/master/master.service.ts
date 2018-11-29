@@ -24,7 +24,7 @@ export class MasterService {
 
   getData(tragetServiceName) {
 
-    if(tragetServiceName == "auth/changePassword/" || tragetServiceName == "auth/createUser/"
+    if(tragetServiceName == "auth/changePassword/" || tragetServiceName == "createUser/"
     || tragetServiceName.includes('users/')  || tragetServiceName == "updateUser/"){
       return this.httpClient.get(this.SETTINGS_END_POINT + tragetServiceName).subscribe(res => {
         this.resposeArray = res;
@@ -52,7 +52,7 @@ export class MasterService {
   }
 
   getParentData(tragetServiceName) {
-    if(tragetServiceName == "auth/changePassword/" || tragetServiceName == "auth/createUser/"
+    if(tragetServiceName == "auth/changePassword/" || tragetServiceName == "createUser/"
     || tragetServiceName == "users/" || tragetServiceName == "updateUser/"){
       return this.httpClient.get(this.SETTINGS_END_POINT + tragetServiceName);
     }else{
@@ -65,7 +65,7 @@ export class MasterService {
   }
 
   createRecord(tragetServiceName, requestObj) {
-    if(tragetServiceName == "auth/changePassword/"|| tragetServiceName == "auth/createUser/"
+    if(tragetServiceName == "auth/changePassword/"|| tragetServiceName == "createUser/"
     || tragetServiceName == "users/" || tragetServiceName == "updateUser/"){
       return this.httpClient.post(this.SETTINGS_END_POINT + tragetServiceName, requestObj);
     }else{
@@ -74,7 +74,7 @@ export class MasterService {
   }
 
   updateRecord(tragetServiceName, requestObj) {
-    if(tragetServiceName == "auth/changePassword/"|| tragetServiceName == "auth/createUser/"
+    if(tragetServiceName == "auth/changePassword/"|| tragetServiceName == "createUser/"
     || tragetServiceName == "users/" || tragetServiceName == "updateUser/"){
       return this.httpClient.put(this.SETTINGS_END_POINT + tragetServiceName, requestObj);
     }else{
@@ -83,7 +83,7 @@ export class MasterService {
   }
 
   deleteRecord(tragetServiceName, requestObj) {
-    if(tragetServiceName == "auth/changePassword/"|| tragetServiceName == "auth/createUser/"
+    if(tragetServiceName == "auth/changePassword/"|| tragetServiceName == "createUser/"
     || tragetServiceName == "users/" || tragetServiceName == "updateUser/"){
       return this.httpClient.delete(this.SETTINGS_END_POINT + tragetServiceName + requestObj);
     }else{

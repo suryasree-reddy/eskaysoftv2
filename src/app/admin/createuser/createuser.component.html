@@ -86,6 +86,25 @@
 			</div>
 
 			<div class="col-md-4 col-3-lt">
+					<p>{{'districts.name' | translate }}: *</p>
+					<div class="input-group mr-t-0">
+						<input id="districtName" maxlength="20" class="form-control capitalize"
+						[formControl]="createUserForm.controls['districtName']"
+						[typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7"
+						[typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)" >
+						<span class="caret mr-t-caret"></span>
+					</div>
+				</div>
+
+				 <div class="col-md-4 col-3-lt">
+					<p>{{'userprofile.state' | translate }}: *</p>
+					<div class="input-group mr-t-0">
+					<input id="state" [readonly]=true maxlength="25" class="form-control"
+					[formControl]="createUserForm.controls['state']">
+					</div>
+				</div>
+
+			<div class="col-md-4 col-3-lt">
 				<p>{{'createuser.mobile' | translate }}: *</p>
 				<div class="input-group mr-t-0">
 				<input id="mobile1" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
