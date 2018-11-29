@@ -13,11 +13,13 @@ import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 export class ReportsComponent implements OnInit {
 
   private purcahseReportForm: FormGroup;
+  private companyForm: FormGroup;
   private deleteFlag: boolean = true;
   private endPoint: string = "reports/";
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
+  public companyList: any = [];
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
@@ -33,6 +35,7 @@ export class ReportsComponent implements OnInit {
     this.purcahseReportForm = this.fb.group({
       id: ['', Validators.required],
       number: ['', Validators.required],
+      companyId:[],
       gsttype:[],
       fromDate:[],
       toDate:[],
@@ -40,6 +43,31 @@ export class ReportsComponent implements OnInit {
       custOption:[],
 
     });
+    this.companyForm = this.fb.group({
+      id: [],
+      companyName: ['', Validators.required]
+    });
+    this.loadCompanyData();
+
+  }
+
+  loadCompanyData() {
+    this.masterService.getParentData("company/").subscribe(list => {
+      this.companyList = list;
+    })
+  }
+
+  onSelectCompany(event) {
+    this.purcahseReportForm.patchValue({ companyId: event.item.id });
+    this.purcahseReportForm.patchValue({ companyName: event.item.companyName });
+  }
+
+  resetForm() {
+    this.purcahseReportForm.reset();
+    this.endPoint = "reports/";
+    this.deleteFlag = true;
+    this.nameFlag = false;
+    this.companyForm.reset();
   }
 
 }

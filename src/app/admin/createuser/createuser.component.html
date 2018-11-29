@@ -70,14 +70,14 @@
 				</div>
 			</div>
 
-			<div class="col-md-2 col-3-lt">
+			<div class="col-md-4 col-3-lt">
 				<p>{{'createuser.town' | translate }}: *</p>
 				<div class="input-group mr-t-0">
 					<input id="town"  maxlength="20"  class="form-control" [formControl]="createUserForm.controls['town']">
 				</div>
 			</div>
 
-			<div class="col-md-2 col-3-lt mr-l-10" >
+			<div class="col-md-4 col-3-lt mr-l-10" >
 				<p>{{'createuser.pin' | translate }}: *</p>
 				<div class="input-group mr-t-0">
 					<input id="pin" type="number" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
@@ -119,7 +119,7 @@
 				</div>
 			</div>
 
-			<div  class="col-md-4 col-3-lt">
+			<div  class="col-md-4 col-3-lt pd-btm-1">
 				<p>{{'createuser.roles' | translate }}: *</p>
 				<select multiple name="roles" id="roles" type="text" class="form-control"
 				[formControl]="createUserForm.controls['roles']">
