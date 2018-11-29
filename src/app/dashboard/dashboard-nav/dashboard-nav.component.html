@@ -42,7 +42,11 @@
                 <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-dashboard']">Purchases</a></li>
                 <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-returns']">Purchase Returns</a></li>
                 <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/internal-stock-adj']">Internal Stock</a></li>
-                <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/reports']">Reports</a></li>
+  <li class="divider"></li>
+                <li role="none"><a role="menuitem" class="dropdown-item" [routerLink]="['purchase/reports']">Reports</a>
+
+
+                </li>
               </ul>
         </div>
       </div>
@@ -59,6 +63,7 @@
             <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesOrders']">Sales Orders</a></li>
             <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Deleivery Challan</a></li>
             <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Quotations/Tenders</a></li>
+              <li class="divider"></li>
             <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/reports']">Reports</a></li>
           </ul>
         </div>
