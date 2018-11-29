@@ -468,6 +468,17 @@
     "duplicateNameErrorMessage":"The Purchase Returns Register '{{duplicateMessageParam}}' already exists with this Name.",
     "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
   },
+  "salesOrder":{
+    "title": "Sales Order",
+    "customer": "Customer",
+    "rateType": "Rate Type",
+    "packing": "Packing",
+    "value": "Value",   
+    "saveConfirmationMessage": "Are you sure you want to save Sales Order?",
+    "saveInformationMessage": "Sales Order record has been saved successfully.",
+    "duplicateNameErrorMessage":"The Sales Order Name '{{duplicateMessageParam}}' already exists with this Name.",
+    "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
+  },
 
   "button": {
     "save": "Save",
