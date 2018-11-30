@@ -1,3 +1,64 @@
-<p>
-  quotations works!
-</p>
+<div class="col-xs-12">
+    <h3>{{'quotation.title' | translate}}</h3>
+    <form [formGroup]="quotationForm" autocomplete="off" class="mr-l-1">
+      <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()"
+       [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
+       [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+  
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'common.orderNumber' | translate}}: *</p>
+        <input id="orderNumber" maxlength="40" #focus [readonly]="nameFlag" (blur)="checkForDuplicateOrderNo()" class="form-control" [formControl]="quotationForm.controls['orderNumber']">
+      </div>
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'common.date' | translate}}: *</p>
+        <input id="date" type="date" class="form-control" [formControl]="quotationForm.controls['date']">
+      </div>
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'common.customer' | translate}}: *</p>
+        <input id="customer" maxlength="20" class="form-control" [formControl]="quotationForm.controls['customer']"
+         [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+         <span class="caret"></span>
+      </div>
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'common.remarks' | translate}}: *</p>
+        <input id="remarks" maxlength="40" class="form-control" [formControl]="quotationForm.controls['remarks']">
+        <span class="caret hide-caret"></span>
+      </div>
+  
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'common.productName' | translate}}: *</p>
+        <input id="productName" maxlength="40" class="form-control" [formControl]="quotationForm.controls['productName']"
+         [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+        <span class="caret"></span>
+      </div>
+  
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'common.pack' | translate}}: *</p>
+        <input id="pack" maxlength="10" class="form-control" [formControl]="quotationForm.controls['pack']">
+      </div>
+  
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'common.qty' | translate}}: *</p>
+        <input id="qty" maxlength="10" class="form-control" [formControl]="quotationForm.controls['qty']">
+        <span class="caret hide-caret"></span>
+      </div>
+      <div class="col-xs-3 mr-t-1">
+          <p>{{'common.rate' | translate}}: *</p>
+          <input id="rate" maxlength="10" class="form-control" [formControl]="quotationForm.controls['rate']">
+          <span class="caret hide-caret"></span>
+        </div>
+      <div class="col-xs-12">
+        <app-buttons [title]="'quotation.title'" [deleteConfirmMsg]="'quotation.deleteConfirmationMessage'"
+         [saveConfirmMsg]="'quotation.saveConfirmationMessage'" [saveInfoMsg]="'quotation.saveInformationMessage'"
+         [endPoint]="endPoint" [deleteInfoMsg]="'quotation.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+         [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=true [formObj]="quotationForm"
+         (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (afterSuccess)="successMsg()"
+         (resetForm)="resetForm()"></app-buttons>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-12 ">
+    <br /><br />
+    <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList"
+     (valueChange)='valueChange($event)' [screenColums]="'QuotationColumns'"></app-synectiks-common-grid>
+  </div>

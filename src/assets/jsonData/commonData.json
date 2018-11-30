@@ -570,6 +570,15 @@
       "description": "Debit"
     }
   ],
+  "Mode": [{
+    "code": "Cr",
+    "description": "Credit"
+  },
+  {
+    "code": "Dbt",
+    "description": "Debit"
+  }
+],
   "AccountsOpeningsColumns": [{
       "headerName": "Code",
       "field": "shortName",
@@ -1297,7 +1306,230 @@
 {
   "code": "ptd",
   "description": "P. T. D."
-}
-]
+}],
+"salesInvoiceColumns": [{
+  "headerName": "Code",
+  "field": "productcode",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "Product Name",
+  "field": "productName",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "Batch",
+  "field": "batch",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "Exp",
+  "field": "exp",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "Qty",
+  "field": "qty",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "Free",
+  "field": "free",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "S.Rate",
+  "field": "sRate",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "Disc",
+  "field": "disc",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "GST%",
+  "field": "gstPerc",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+}],
+"salesReturnColumns": [{
+  "headerName": "Code",
+  "field": "productcode",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "Product Name",
+  "field": "productName",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "Batch",
+  "field": "batch",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "Exp",
+  "field": "exp",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "Qty",
+  "field": "qty",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "Free",
+  "field": "free",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "S.Rate",
+  "field": "sRate",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "Disc",
+  "field": "disc",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "GST%",
+  "field": "gstPerc",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+}],
+"QuotationColumns": [{
+  "headerName": "S No",
+  "field": "id",
+  "width":150,
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+ {
+  "headerName": "Code",
+  "field": "productcode",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+}, {
+  "headerName": "Product Name",
+  "field": "productName",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+}, {
+  "headerName": "Packing",
+  "field": "packing",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+}, {
+  "headerName": "Qty",
+  "field": "qty",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "Rate",
+  "field": "rate",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "Amount",
+  "field": "amount",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+}]
+
   
 }

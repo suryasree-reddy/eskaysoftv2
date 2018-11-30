@@ -1,3 +1,101 @@
-<p>
-  sales works!
-</p>
+<div class="col-xs-12">
+    <h3>{{'salesInvoice.title' | translate}}</h3>
+    <form [formGroup]="salesInvocieForm" autocomplete="off" class="mr-l-1">
+      <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()"
+       [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
+       [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+  
+       <div class="col-xs-3 mr-t-1">
+          <p>{{'accountinfo.gsttype' | translate}}: *</p>
+          <div class="input-group mr-t-0">
+            <input id="gstType" maxlength="5" class="form-control" [formControl]="salesInvocieForm.controls['gstType']"
+              [typeahead]="accGstType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7"
+              [typeaheadMinLength]="0">
+            <span class="caret mr-t-caret"></span>
+          </div>
+        </div>
+
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'salesInvoice.invoiceNo' | translate}}: *</p>
+        <input id="invNum" maxlength="40" #focus [readonly]="nameFlag" (blur)="checkForDuplicateInvNo()" class="form-control" [formControl]="salesInvocieForm.controls['invNum']">
+      </div>
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'salesInvoice.invoiceDate' | translate}}: *</p>
+        <input id="invDate" type="date" class="form-control" [formControl]="salesInvocieForm.controls['invDate']">
+      </div>
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'salesOrder.customer' | translate}}: *</p>
+        <input id="customer" maxlength="20" class="form-control" [formControl]="salesInvocieForm.controls['customer']"
+         [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+        <span class="caret"></span>
+      </div>
+  
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'accountinfo.gstin' | translate}}: *</p>
+        <input id="gstIN" maxlength="40" class="form-control" [formControl]="salesInvocieForm.controls['gstIN']">
+      </div>
+  
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'salesInvoice.delivTo' | translate}}: *</p>
+        <input id="delivTo" maxlength="40" class="form-control" [formControl]="salesInvocieForm.controls['delivTo']">
+      </div>
+  
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'salesInvoice.mode' | translate}}: *</p>
+        <input id="mode" maxlength="10" class="form-control" [formControl]="salesInvocieForm.controls['mode']"
+        [typeahead]="modeType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+        <span class="caret"></span>
+      </div>
+  
+      <div class="col-xs-3 mr-t-1">
+          <p>{{'common.productName' | translate}}: *</p>
+          <input id="productName" maxlength="40" class="form-control" [formControl]="salesInvocieForm.controls['productName']"
+           [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+          <span class="caret"></span>
+        </div>
+
+        <div class="col-xs-3 mr-t-1">
+            <p>{{'common.batch' | translate}}: *</p>
+            <input id="batch" maxlength="10" class="form-control" [formControl]="salesInvocieForm.controls['batch']">
+          </div>
+          <div class="col-xs-3 mr-t-1">
+              <p>{{'salesInvoice.exp' | translate}}: *</p>
+              <input id="exp" maxlength="10" class="form-control" [formControl]="salesInvocieForm.controls['exp']">
+            </div>
+
+    
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'common.qty' | translate}}: *</p>
+        <input id="qty" maxlength="10" class="form-control" [formControl]="salesInvocieForm.controls['qty']">
+      </div>
+  
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'common.free' | translate}}: *</p>
+        <input id="free" maxlength="10" class="form-control" [formControl]="salesInvocieForm.controls['free']">
+        <span class="caret hide-caret"></span>
+      </div>
+  
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'salesInvoice.sRate' | translate}}: *</p>
+        <input id="sRate" maxlength="10" class="form-control" [formControl]="salesInvocieForm.controls['sRate']">
+      </div>
+      <div class="col-xs-3 mr-t-1">
+        <p>{{'salesInvoice.disc' | translate}}: *</p>
+        <input id="disc"  maxlength="10" class="form-control" [formControl]="salesInvocieForm.controls['disc']">
+      </div>
+  
+      <div class="col-xs-12">
+        <app-buttons [title]="'salesInvoice.title'" [deleteConfirmMsg]="'salesInvoice.deleteConfirmationMessage'"
+         [saveConfirmMsg]="'salesInvoice.saveConfirmationMessage'" [saveInfoMsg]="'salesInvoice.saveInformationMessage'"
+         [endPoint]="endPoint" [deleteInfoMsg]="'salesInvoice.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+         [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=true [formObj]="salesInvocieForm"
+         (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (afterSuccess)="successMsg()"
+         (resetForm)="resetForm()"></app-buttons>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-12 ">
+    <br /><br />
+    <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList"
+     (valueChange)='valueChange($event)' [screenColums]="'salesInvoiceColumns'"></app-synectiks-common-grid>
+  </div>

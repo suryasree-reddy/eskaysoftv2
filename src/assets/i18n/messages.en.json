@@ -323,6 +323,7 @@
   "common":{
     "orderNumber":"Order Number",
     "supplier":"Supplier",
+    "customer":"Customer",
     "remarks":"Remarks",
     "date":"Date",
     "transport":"Transport",
@@ -331,6 +332,7 @@
     "productName":"Product Name",
     "pack":"Pack",
     "qty":"Quantity",
+    "rate":"Rate",
     "free":"Free",
     "batch":"Batch",
     "purchaseRate":"Purchase Rate",
@@ -455,6 +457,41 @@
     "saveInformationMessage": "Sales Order record has been saved successfully.",
     "duplicateNameErrorMessage":"The Sales Order Name '{{duplicateMessageParam}}' already exists with this Name.",
     "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
+  },
+  "salesInvoice":{
+    "title": "Sales Invoice",
+    "endPoint":"sales/",
+    "invoiceNo": "Invoice Number",
+    "invoiceDate": "Invoice Date",
+    "mode": "Mode",
+    "delivTo": "Delivery To",
+    "value": "Value",  
+    "exp":"Exp", 
+    "sRate":"S.Rate", 
+    "disc":"Discount",
+    "gstPerc":"GST%",
+    "saveConfirmationMessage": "Are you sure you want to save Sales Invoice?",
+    "saveInformationMessage": "Sales Invoice record has been saved successfully.",
+    "duplicateNameErrorMessage":"The Sales Invoice Number '{{duplicateMessageParam}}' already exists.",
+    "duplicateCodeErrorMessage":"The Number '{{duplicateMessageParam}}' already exists."
+  },
+  "salesReturn":{
+    "title": "Sales Returns Entry",
+    "endPoint":"salesRetruns/",
+    "salesReturnNo": "Sales Return Number",
+    "salesReturnDate": "Sales Return Date",
+    "saveConfirmationMessage": "Are you sure you want to save Sales Return Entry?",
+    "saveInformationMessage": "Sales Return record has been saved successfully.",
+    "duplicateNameErrorMessage":"The Sales Return Number '{{duplicateMessageParam}}' already exists.",
+    "duplicateCodeErrorMessage":"The Number '{{duplicateMessageParam}}' already exists."
+  },
+  "quotation":{
+    "title": "Quotation Entry",
+    "endPoint":"quotations/",
+    "saveConfirmationMessage": "Are you sure you want to save Quotation Entry?",
+    "saveInformationMessage": "Quotation record has been saved successfully.",
+    "duplicateNameErrorMessage":"The Order Number '{{duplicateMessageParam}}' already exists.",
+    "duplicateCodeErrorMessage":"The Number '{{duplicateMessageParam}}' already exists."
   },
 
   "button": {
