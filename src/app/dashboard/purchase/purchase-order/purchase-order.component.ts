@@ -70,6 +70,7 @@ export class PurchaseOrderComponent implements OnInit {
   loadProductData() {
     this.masterService.getParentData("product/").subscribe(list => {
       this.productsList = list;
+      console.log(this.productsList)
     });
   }
 

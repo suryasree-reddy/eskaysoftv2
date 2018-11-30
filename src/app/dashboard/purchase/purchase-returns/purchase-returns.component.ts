@@ -44,7 +44,7 @@ export class PurchaseReturnsComponent implements OnInit {
       remarks: ['', Validators.required],
       date: ['', Validators.required]
     });
-
+this.loadSupplierData();
     //  this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
   }
 

@@ -13,9 +13,9 @@
 
         <div class="input-group">
             <p>{{'common.supplier' | translate}}: *</p>
-            <input id="supplier" maxlength="20" class="form-control" [formControl]="purchaseReturnsForm.controls['supplier']"
-            [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-			<span class="caret"></span>
+            <input id="supplier" maxlength="20" class="form-control" formControlName="supplier" typeaheadOptionField="accountName"
+      				 [typeahead]="suppliersList"  [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+      			<span class="caret"></span>
         </div>
 
         <div class="input-group">
