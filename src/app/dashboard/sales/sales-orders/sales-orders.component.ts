@@ -27,7 +27,7 @@ export class SalesOrdersComponent implements OnInit {
   private duplicateMessageParam: string = null;
   private internalStockList: any = [];
   public rateTypeList: any = [];
-  public companyStatusList: any = [];
+ 
 
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;

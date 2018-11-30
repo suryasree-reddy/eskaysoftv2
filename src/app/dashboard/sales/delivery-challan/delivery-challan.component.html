@@ -1,3 +1,93 @@
-<p>
-  delivery-challan works!
-</p>
+<div class="col-xs-12">
+	<h3>{{'deliveryChallan.title' | translate}}</h3>
+	<form [formGroup]="deliveryChallanForm" autocomplete="off" class="mr-l-1" >
+		<app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()"
+		 [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
+		 [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+
+    <div class="col-xs-3 mr-t-1">
+			<p>{{'deliveryChallan.gstType' | translate}}: *</p>
+      <input  id="gstType" maxlength="10" class="form-control" [formControl]="deliveryChallanForm.controls['gstType']" [typeahead]="gstTypeList"
+      typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+			<span class="caret" ></span>
+    </div>
+
+		<div class="col-xs-3 mr-t-1">
+			<p>{{'deliveryChallan.dcNumber' | translate}}: *</p>
+			<input id="dcNumber" type= "number" maxlength="40" #focus [readonly]="nameFlag" class="form-control" [formControl]="deliveryChallanForm.controls['dcNumber']">
+		</div>
+		<div class="col-xs-3 mr-t-1">
+			<p>{{'deliveryChallan.dcDate' | translate}}: *</p>
+			<input id="dcDate" type="date" class="form-control" [formControl]="deliveryChallanForm.controls['dcDate']">
+		</div>
+		<div class="col-xs-3 mr-t-1">
+			<p>{{'salesOrder.customer' | translate}}: *</p>
+			<input id="customer" maxlength="20" class="form-control" [formControl]="deliveryChallanForm.controls['customer']" [typeahead]="districtsList"
+			 typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+			<span class="caret"></span>
+    </div>
+    <div class="col-xs-3 mr-t-1">
+      <p>{{'accountinfo.gstin' | translate}}: *</p>
+      <input id="gstin" maxlength="16"  class="form-control" [formControl]="deliveryChallanForm.controls['gstin']">
+    </div>
+    <div class="col-xs-3 mr-t-1">
+			<p>{{'deliveryChallan.deliverTo' | translate}}: *</p>
+			<input id="deliverTo" maxlength="40" class="form-control" [formControl]="deliveryChallanForm.controls['deliverTo']">
+			<span class="caret hide-caret"></span>
+    </div>
+    <div class="col-xs-3 mr-t-1">
+			<p>{{'deliveryChallan.mode' | translate}}: *</p>
+      <input  id="mode" maxlength="10" class="form-control" [formControl]="deliveryChallanForm.controls['mode']" [typeahead]="modeList"
+      typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+			<span class="caret" ></span>
+    </div>
+		<div class="col-xs-3 mr-t-1">
+			<p>{{'common.productName' | translate}}: *</p>
+			<input id="productName" maxlength="40" class="form-control" [formControl]="deliveryChallanForm.controls['productName']"
+			 [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+			<span class="caret"></span>
+    </div>
+    <div class="col-xs-3 mr-t-1">
+			<p>{{'common.batch' | translate}}: *</p>
+			<input id="batch" maxlength="10" class="form-control" [formControl]="deliveryChallanForm.controls['batch']">
+		</div>
+    
+    <div class="col-xs-3 mr-t-1">
+			<p>{{'deliveryChallan.exp' | translate}}: *</p>
+			<input id="expiry" type="date" maxlength="10" class="form-control" [formControl]="deliveryChallanForm.controls['expiry']">
+    </div>
+    <div class="col-xs-3 mr-t-1">
+			<p>{{'common.qty' | translate}}: *</p>
+			<input id="qty" type = "number" maxlength="10" class="form-control" [formControl]="deliveryChallanForm.controls['qty']">
+    </div>
+    <div class="col-xs-3 mr-t-1">
+			<p>{{'product.free' | translate}}: *</p>
+			<input id="free" type= "number"  maxlength="10" class="form-control" [formControl]="deliveryChallanForm.controls['free']">
+    </div>
+    <div class="col-xs-3 mr-t-1">
+			<p>{{'deliveryChallan.sRate' | translate}}: *</p>
+			<input id="sRate" type="number" maxlength="10" class="form-control" [formControl]="deliveryChallanForm.controls['sRate']">
+    </div>
+    <div class="col-xs-3 mr-t-1">
+			<p>{{'customerdiscount.disc' | translate}}: *</p>
+			<input id="disc" type="number" maxlength="10" class="form-control" [formControl]="deliveryChallanForm.controls['disc']">
+    </div>
+    <div class="col-xs-3 mr-t-1">
+			<p>{{'deliveryChallan.gst' | translate}}: *</p>
+			<input id="gstp" type="number"  maxlength="10" class="form-control" [formControl]="deliveryChallanForm.controls['gstp']">
+		</div>
+		<div class="col-xs-12" >
+			<app-buttons [title]="'deliveryChallan.title'" [deleteConfirmMsg]="'deliveryChallan.deleteConfirmationMessage'"
+			 [saveConfirmMsg]="'deliveryChallan.saveConfirmationMessage'" [saveInfoMsg]="'deliveryChallan.saveInformationMessage'"
+			 [endPoint]="endPoint" [deleteInfoMsg]="'deliveryChallan.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+			 [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=true [formObj]="deliveryChallanForm"
+			 (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (afterSuccess)="successMsg()"
+			 (resetForm)="resetForm()"></app-buttons>
+		</div>
+	</form>
+</div>
+<div class="col-md-12 " >
+	<br /><br />
+	<app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList"
+	 (valueChange)='valueChange($event)' [screenColums]="'GSTChallanColumns'"></app-synectiks-common-grid>
+</div>
