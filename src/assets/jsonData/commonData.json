@@ -1227,6 +1227,7 @@
     },
     "suppressSizeToFit": false
   },
+  
    {
     "headerName": "Code",
     "field": "productcode",
@@ -1288,16 +1289,109 @@
     "suppressSizeToFit": false
   }
 ],
-
-"RateType": [
- {
-  "code": "pts",
-  "description": "P. T. S."
+"GSTChallanColumns": [{
+  
+  "headerName": "Code",
+  "field": "productcode",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+}, {
+  "headerName": "Product Name",
+  "field": "productName",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+}, {
+  "headerName": "Batch",
+  "field": "batch",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+}, {
+  "headerName": "Exp",
+  "field": "exp.",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},{
+"headerName": "Qty",
+  "field": "qty",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
 },
 {
-  "code": "ptd",
-  "description": "P. T. D."
+  "headerName": "Free",
+  "field": "free",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "S Rate",
+  "field": "srate",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "Disc",
+  "field": "disc",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "GST%",
+  "field": "disc",
+  "filterParams": {
+    "filterOptions": ["contains"],
+    "newRowsAction": "keep"
+  },
+  "suppressSizeToFit": false
+},
+{
+  "headerName": "Status",
+  "field": "deleteFlag",
+  "cellRenderer": "deltaIndicator",
+  "suppressFilter": true,
+   "suppressSizeToFit": false
 }
-]
-  
+],
+"RateType": [
+ {
+  "code": "PTS",
+  "description": "PTS."
+},
+{
+  "code": "PTD",
+  "description": "PTD"
+}
+ ],
+ "Mode": [
+  {
+   "code": "credit",
+   "description": "CREDIT"
+ },
+ {
+   "code": "debit",
+   "description": "DEBIT"
+ }]
 }

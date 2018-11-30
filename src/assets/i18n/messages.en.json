@@ -456,7 +456,21 @@
     "duplicateNameErrorMessage":"The Sales Order Name '{{duplicateMessageParam}}' already exists with this Name.",
     "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
   },
-
+  "deliveryChallan":{
+    "title": "Delivery Challan",
+    "gstType": "GST Type",
+    "dcNumber": "DC Number",
+    "dcDate": "DC Date",
+    "mode": "Mode", 
+    "deliverTo": "DelvTo", 
+    "exp": "Exp",
+    "sRate":"S Rate",
+    "gst": "GST %", 
+    "saveConfirmationMessage": "Are you sure you want to save Delivery Challan?",
+    "saveInformationMessage": "Delivery Challan record has been saved successfully.",
+    "duplicateNameErrorMessage":"The Delivery Challan Name '{{duplicateMessageParam}}' already exists with this Name.",
+    "duplicateCodeErrorMessage":"The Name '{{duplicateMessageParam}}' already exists with this Name."
+  },
   "button": {
     "save": "Save",
     "reset": "Reset",
