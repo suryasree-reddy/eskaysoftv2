@@ -8,7 +8,7 @@
 
          <div class="input-group">
              <p>{{'internalStockAdj.number' | translate}}: *</p>
-             <input id="number" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateNum()" class="form-control" [formControl]="internalStockForm.controls['number']">
+             <input id="number" type="number"  maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateNum()" class="form-control" [formControl]="internalStockForm.controls['number']">
          </div>
          <div class="input-group">
              <p>{{'internalStockAdj.remarks' | translate}}: *</p>

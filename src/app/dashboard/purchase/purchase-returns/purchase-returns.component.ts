@@ -42,9 +42,10 @@ export class PurchaseReturnsComponent implements OnInit {
       purReturnNumber: ['', Validators.required],
       supplier: ['', Validators.required],
       remarks: ['', Validators.required],
-      date: ['', Validators.required]
+      date: ['', Validators.required],
+      accountInformationId: ['', Validators.required],
     });
-this.loadSupplierData();
+    this.loadSupplierData();
     //  this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
   }
 
@@ -75,6 +76,10 @@ this.loadSupplierData();
       this.duplicateMessage = "purchaseReturn.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.purchaseReturnsForm.value.purReturnNumber;
     }
+  }
+
+  onSelectSupplier(event) {
+    this.purchaseReturnsForm.patchValue({ accountInformationId: event.item.id });
   }
 
   save() {

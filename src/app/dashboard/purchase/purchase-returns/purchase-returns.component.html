@@ -8,13 +8,13 @@
 
         <div class="input-group">
             <p>{{'purchaseReturn.purchRetNumber' | translate}}: *</p>
-            <input id="purReturnNumber" maxlength="30" (blur)="checkForDuplicatePurRetnNo()" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseReturnsForm.controls['purReturnNumber']">
+            <input id="purReturnNumber" type="number"  maxlength="30" (blur)="checkForDuplicatePurRetnNo()" #focus [readonly]="nameFlag" class="form-control" [formControl]="purchaseReturnsForm.controls['purReturnNumber']">
         </div>
 
         <div class="input-group">
             <p>{{'common.supplier' | translate}}: *</p>
             <input id="supplier" maxlength="20" class="form-control" formControlName="supplier" typeaheadOptionField="accountName"
-      				 [typeahead]="suppliersList"  [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+      				 [typeahead]="suppliersList" (typeaheadOnSelect)="onSelectSupplier($event)"  [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
       			<span class="caret"></span>
         </div>
 

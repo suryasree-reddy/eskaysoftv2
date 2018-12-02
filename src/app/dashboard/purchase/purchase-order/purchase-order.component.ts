@@ -39,7 +39,8 @@ export class PurchaseOrderComponent implements OnInit {
 
   ngOnInit() {
     this.purchaseOrderForm = this.fb.group({
-      id: ['', Validators.required],
+      id: [],
+      accountInformationId: ['', Validators.required],
       orderNumber: ['', Validators.required],
       supplier: ['', Validators.required],
       remarks: ['', Validators.required],
@@ -90,6 +91,18 @@ export class PurchaseOrderComponent implements OnInit {
       this.duplicateMessage = "purchaseOrder.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.purchaseOrderForm.value.orderNumber;
     }
+  }
+
+  onSelectProduct(event){
+    this.purchaseOrderForm.patchValue({ pack: event.item.packing });
+    this.purchaseOrderForm.patchValue({ free: event.item.free });
+    this.purchaseOrderForm.patchValue({ rate: event.item.netRate  });
+    this.purchaseOrderForm.patchValue({ productId: event.item.id  });
+    this.purchaseOrderForm.patchValue({ productcode: event.item.productcode  });
+  }
+
+  onSelectSupplier(event){
+    this.purchaseOrderForm.patchValue({ accountInformationId: event.item.id });
   }
 
   save() {

@@ -379,12 +379,14 @@ export class AccountsInfoComponent implements OnInit {
     if (this.accInfoForm.value.id) {
       this.masterService.updateRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
         this.showInformationModal("Save");
+        this.successMsg();
       }, (error) => {
         throw error;
       });
     } else {
       this.masterService.createRecord(this.endPoint, this.accInfoForm.value).subscribe(res => {
         this.showInformationModal("Save");
+          this.successMsg();
       }, (error) => {
         throw error;
       });
@@ -402,6 +404,7 @@ export class AccountsInfoComponent implements OnInit {
     this.accInfoForm.reset();
     this.resetForm();
   }
+
 
   requiredErrMsg() {
     if (this.duplicateMessage == null) {
@@ -456,7 +459,7 @@ export class AccountsInfoComponent implements OnInit {
       this.getFormDetails(eventType).infoMessage,
       ''
     );
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => { this.successMsg(); });
+    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe();
   }
 
   showConfirmationModal(eventType): void {

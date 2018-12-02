@@ -14,7 +14,7 @@ export class QuotationsComponent implements OnInit {
 
   public  quotationForm: FormGroup;
   private deleteFlag: boolean = true;
-  private endPoint: string = "quotations/";
+  private endPoint: string = "quatationEntry/";
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
@@ -118,5 +118,3 @@ export class QuotationsComponent implements OnInit {
   }
 
 }
-
-

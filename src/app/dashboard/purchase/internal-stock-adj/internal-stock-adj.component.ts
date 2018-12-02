@@ -36,18 +36,11 @@ export class InternalStockAdjComponent implements OnInit {
 
   ngOnInit() {
     this.internalStockForm = this.fb.group({
-      id: ['', Validators.required],
+      id: [],
       number: ['', Validators.required],
       remarks: [],
-      date: [],
-      sNo: [],
-      productcode: [],
-      productName: [],
-      pack: [],
-      type: [],
-      batch: [],
-      qty: [],
-      free: []
+      date: []
+
        });
   }
 

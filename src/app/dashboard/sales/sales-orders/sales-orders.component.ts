@@ -10,7 +10,7 @@ import 'src/assets/styles/mainstyles.scss';
 @Component({
   selector: 'app-sales-orders',
   templateUrl: './sales-orders.component.html',
- 
+
 })
 export class SalesOrdersComponent implements OnInit {
 
@@ -27,7 +27,7 @@ export class SalesOrdersComponent implements OnInit {
   private duplicateMessageParam: string = null;
   private internalStockList: any = [];
   public rateTypeList: any = [];
- 
+
 
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
@@ -55,13 +55,13 @@ export class SalesOrdersComponent implements OnInit {
       free:[],
       rate:[],
       value:[],
-     
-     
+
+
   });
-  
+
   this.focusField.nativeElement.focus();
   this.rateTypeList = this.sharedDataService.getSharedCommonJsonData().RateType;
- 
+
 
 }
 save() {
@@ -94,5 +94,5 @@ resetForm() {
   this.formRequiredError = this.formSuccess = false;
 }
 
- 
+
 }
