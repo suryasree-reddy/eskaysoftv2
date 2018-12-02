@@ -85,7 +85,7 @@ export class SubscheduleComponent implements OnInit {
     this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
       this.subScheduleList = list;
-      localStorage.setItem('rowDataLength', JSON.stringify(this.scheduleList.length));
+      localStorage.setItem('rowDataLength', JSON.stringify(this.subScheduleList.length));
     })
   }
 
@@ -93,7 +93,7 @@ export class SubscheduleComponent implements OnInit {
     this.selectedSchedule = event.item;
     const temp = this.selectedSchedule.id;
     const selectedScheduleNameList = _.filter(this.subScheduleList, function(o) { return o.scheduleId == temp });
-    this.subScheduleForm.patchValue({ subScheduleIndex: selectedScheduleNameList.length + 1 })
+    this.subScheduleForm.patchValue({ subScheduleIndex: selectedScheduleNameList.length + 1 });
   }
 
   openModal(template: TemplateRef<any>) {

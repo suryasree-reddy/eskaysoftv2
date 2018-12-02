@@ -23,7 +23,7 @@ export class PurchaseOrderComponent implements OnInit {
   private duplicateOrderNo: boolean = false;
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
-  private purchaseOrderList: any = [];
+  private gridDataList: any = [];
   private productsList: any = [];
   private suppliersList: any = [];
 
@@ -48,6 +48,7 @@ export class PurchaseOrderComponent implements OnInit {
       productId: ['', Validators.required],
       productName: ['', Validators.required],
       productcode: ['', Validators.required],
+      productBoxPack: ['', Validators.required],
       pack: ['', Validators.required],
       qty: ['', Validators.required],
       rate: ['', Validators.required],
@@ -61,9 +62,25 @@ export class PurchaseOrderComponent implements OnInit {
     this.loadSupplierData();
   }
 
+  onInitialDataLoad(dataList: any[]) {
+    this.gridDataList = dataList;
+  }
+
+  loadGridData() {
+    this.masterService.getData(this.endPoint);
+    this.masterService.dataObject.subscribe(list => {
+      this.gridDataList = list;
+      localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
+    })
+  }
+
+  valueChange(selectedRow: any[]): void {
+    this.editable(selectedRow);
+  }
+
   checkForDuplicateOrderNo() {
     if (!this.nameFlag) {
-      this.duplicateOrderNo = this.masterService.hasDataExist(this.purchaseOrderList, 'orderNumber', this.purchaseOrderForm.value.orderNumber);
+      this.duplicateOrderNo = this.masterService.hasDataExist(this.gridDataList, 'orderNumber', this.purchaseOrderForm.value.orderNumber);
       this.getDuplicateErrorMessages();
     }
   }
@@ -71,7 +88,6 @@ export class PurchaseOrderComponent implements OnInit {
   loadProductData() {
     this.masterService.getParentData("product/").subscribe(list => {
       this.productsList = list;
-      console.log(this.productsList)
     });
   }
 
@@ -93,15 +109,26 @@ export class PurchaseOrderComponent implements OnInit {
     }
   }
 
-  onSelectProduct(event){
+  onSelectProduct(event) {
     this.purchaseOrderForm.patchValue({ pack: event.item.packing });
     this.purchaseOrderForm.patchValue({ free: event.item.free });
-    this.purchaseOrderForm.patchValue({ rate: event.item.netRate  });
-    this.purchaseOrderForm.patchValue({ productId: event.item.id  });
-    this.purchaseOrderForm.patchValue({ productcode: event.item.productcode  });
+    this.purchaseOrderForm.patchValue({ productBoxPack: event.item.boxQty });
+    this.purchaseOrderForm.patchValue({ productId: event.item.id });
+    this.purchaseOrderForm.patchValue({ productcode: event.item.productcode });
+    this.purchaseOrderForm.patchValue({ bFree: event.item.free / event.item.boxQty });
+    const productPurchaseList = _.filter(this.gridDataList, function(o) {return o.productId == event.item.id });
+    this.purchaseOrderForm.patchValue({ orderNumber: productPurchaseList.length + 1 });
   }
 
-  onSelectSupplier(event){
+  calculateRate() {
+    console.log("---", this.purchaseOrderForm.value.productBoxPack);
+    this.purchaseOrderForm.patchValue({ rate: this.purchaseOrderForm.value.pack * this.purchaseOrderForm.value.qty });
+    this.purchaseOrderForm.patchValue({ bQty: this.purchaseOrderForm.value.productBoxPack * this.purchaseOrderForm.value.qty });
+    this.purchaseOrderForm.patchValue({ bRate: this.purchaseOrderForm.value.productBoxPack * this.purchaseOrderForm.value.qty });
+    this.purchaseOrderForm.patchValue({ value: this.purchaseOrderForm.value.rate * this.purchaseOrderForm.value.qty });
+  }
+
+  onSelectSupplier(event) {
     this.purchaseOrderForm.patchValue({ accountInformationId: event.item.id });
   }
 
@@ -117,6 +144,7 @@ export class PurchaseOrderComponent implements OnInit {
     this.formSuccess = true;
     this.formRequiredError = false;
     this.resetForm();
+    this.loadGridData();
   }
 
   requiredErrMsg() {
@@ -134,5 +162,20 @@ export class PurchaseOrderComponent implements OnInit {
     this.nameFlag = false;
     this.duplicateOrderNo = false;
     this.formRequiredError = this.formSuccess = false;
+    this.loadGridData();
+  }
+
+  editable(s) {
+    this.nameFlag = true;
+    this.formRequiredError = false;
+    this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
+  //  this.deleteFlag = !s.deleteFlag;
+    this.deleteFlag = false;
+    this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
+    this.purchaseOrderForm.reset(s);
+  //  const productObj = _.find(this.productsList, function(o) {return o.id == s.productId; });
+  //  this.purchaseOrderForm.patchValue({ productBoxPack: productObj.boxQty });
   }
 }
