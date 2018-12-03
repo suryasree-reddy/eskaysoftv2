@@ -8,7 +8,7 @@
 		 <div class="container-fluid"  style="border-style: outset;">
 		<div class="col-xs-3 mr-t-1">
 			<p>{{'common.orderNumber' | translate}}: *</p>
-			<input id="orderNumber" maxlength="40" #focus [readonly]=true (blur)="checkForDuplicateOrderNo()" class="form-control" [formControl]="purchaseOrderForm.controls['orderNumber']">
+			<input id="orderNumber" maxlength="40" #focus [readonly]=true class="form-control" [formControl]="purchaseOrderForm.controls['orderNumber']">
 		</div>
 		<div class="col-xs-3 mr-t-1">
 			<p>{{'common.date' | translate}}: *</p>
