@@ -7,8 +7,7 @@ import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-purchase-returns',
-  templateUrl: './purchase-returns.component.html',
-  styleUrls: ['./purchase-returns.component.scss']
+  templateUrl: './purchase-returns.component.html'
 })
 export class PurchaseReturnsComponent implements OnInit {
 

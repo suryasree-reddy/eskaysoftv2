@@ -7,8 +7,7 @@ import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-internal-stock-adj',
-  templateUrl: './internal-stock-adj.component.html',
-  styleUrls: ['./internal-stock-adj.component.scss']
+  templateUrl: './internal-stock-adj.component.html'
 })
 export class InternalStockAdjComponent implements OnInit {
 

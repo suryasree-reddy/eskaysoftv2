@@ -7,8 +7,7 @@ import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
 @Component({
   selector: 'app-reports',
-  templateUrl: './reports.component.html',
-  styleUrls: ['./reports.component.scss']
+  templateUrl: './reports.component.html'
 })
 export class ReportsComponent implements OnInit {
 

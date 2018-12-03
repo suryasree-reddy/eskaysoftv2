@@ -10,8 +10,7 @@ import * as _ from 'lodash';
 
 @Component({
   selector: 'app-purchase-order',
-  templateUrl: './purchase-order.component.html',
-  styleUrls: ['./purchase-order.component.scss']
+  templateUrl: './purchase-order.component.html'
 })
 export class PurchaseOrderComponent implements OnInit {
 
