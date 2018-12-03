@@ -5,6 +5,7 @@
 		 [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
 		 [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
+		 <div class="container-fluid"  style="border-style: outset;">
 		<div class="col-xs-3 mr-t-1">
 			<p>{{'common.orderNumber' | translate}}: *</p>
 			<input id="orderNumber" maxlength="40" #focus [readonly]=true (blur)="checkForDuplicateOrderNo()" class="form-control" [formControl]="purchaseOrderForm.controls['orderNumber']">
@@ -20,12 +21,13 @@
 				 [typeahead]="suppliersList"  [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
 			<span class="caret"></span>
 		</div>
-
 		<div class="col-xs-3 mr-t-1">
 			<p>{{'common.remarks' | translate}}: *</p>
 			<input id="remarks" maxlength="40" class="form-control" [formControl]="purchaseOrderForm.controls['remarks']">
 			<span class="caret hide-caret"></span>
 		</div>
+	</div>
+		<!-- <div class="row line"></div> -->
 
 		<div class="col-xs-3 mr-t-1">
 			<p>{{'common.productName' | translate}}: *</p>
@@ -62,13 +64,12 @@
 			<input id="bQty" [readonly]="true"  type="number" maxlength="10" class="form-control" [formControl]="purchaseOrderForm.controls['bQty']">
 		</div>
 		<div class="col-xs-3 mr-t-1">
+				<p>{{'purchaseOrder.bfree' | translate}}: *</p>
+				<input id="bFree" [readonly]="true"  type="number" maxlength="10" class="form-control" [formControl]="purchaseOrderForm.controls['bFree']">
+			</div>
+		<div class="col-xs-3 mr-t-1">
 			<p>{{'purchaseOrder.brate' | translate}}: *</p>
 			<input id="bRate" [readonly]="true"  type="number" maxlength="10" class="form-control" [formControl]="purchaseOrderForm.controls['bRate']">
-		</div>
-
-		<div class="col-xs-3 mr-t-1">
-			<p>{{'purchaseOrder.bfree' | translate}}: *</p>
-			<input id="bFree" [readonly]="true"  type="number" maxlength="10" class="form-control" [formControl]="purchaseOrderForm.controls['bFree']">
 		</div>
 
 		<div class="col-xs-12">

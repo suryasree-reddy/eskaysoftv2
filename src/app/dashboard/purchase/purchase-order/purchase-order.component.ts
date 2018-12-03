@@ -6,6 +6,8 @@ import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.compo
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 import 'src/assets/styles/mainstyles.scss';
 
+import * as _ from 'lodash';
+
 @Component({
   selector: 'app-purchase-order',
   templateUrl: './purchase-order.component.html',
@@ -23,9 +25,11 @@ export class PurchaseOrderComponent implements OnInit {
   private duplicateOrderNo: boolean = false;
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
-  private gridDataList: any = [];
+  public gridDataList: any = [];
   private productsList: any = [];
   private suppliersList: any = [];
+  public childDuplicateMessage: string = null;
+  public childDuplicateMessageParam: string = null;
 
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
@@ -121,7 +125,7 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   calculateRate() {
-    console.log("---", this.purchaseOrderForm.value.productBoxPack);
+    // console.log("---", this.purchaseOrderForm.value.productBoxPack);
     this.purchaseOrderForm.patchValue({ rate: this.purchaseOrderForm.value.pack * this.purchaseOrderForm.value.qty });
     this.purchaseOrderForm.patchValue({ bQty: this.purchaseOrderForm.value.productBoxPack * this.purchaseOrderForm.value.qty });
     this.purchaseOrderForm.patchValue({ bRate: this.purchaseOrderForm.value.productBoxPack * this.purchaseOrderForm.value.qty });

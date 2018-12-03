@@ -294,6 +294,9 @@
     "discountValue":"Discount Value",
     "taxValue":"Tax Value",
     "netValue1": "Net Value",
+    "asPerSoftware": "As Per Software",
+    "asPerInvoice": "As Per Invoice",
+
 
     "debitAdjustmentLedger": "Debit Adjustment Ledger",
     "debitAdjustmentValue": "Debit Adjustment Value",
