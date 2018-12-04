@@ -107,7 +107,6 @@ export class CompaniesComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
-
     if (!this.duplicateCompanyName || !this.duplicateCompanyCode) {
       this.duplicateMessageParam = null;
       this.duplicateMessage = null;
@@ -135,8 +134,6 @@ export class CompaniesComponent implements OnInit {
       this.childDuplicateMessage = "companygroup.duplicateNameErrorMessage";
       this.childDuplicateMessageParam = this.companyGroupForm.value.companyGroupName;
     }
-
-
   }
 
   checkForDuplicateCompanyCode() {
@@ -252,7 +249,9 @@ export class CompaniesComponent implements OnInit {
     this.formRequiredError = this.formSuccess = false;
     this.duplicateCompanyName = false;
     this.duplicateCompanyCode = false;
-    this.loadGridData();
+    if(!this.isModelWindowView){
+        this.loadGridData();
+    }
     this.focusField.nativeElement.focus();
   }
 

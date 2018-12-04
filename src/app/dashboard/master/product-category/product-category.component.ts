@@ -124,7 +124,9 @@ export class ProductCategoryComponent implements OnInit {
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
     this.duplicateProdCategory = false;
-    this.loadGridData();
+    if(!this.isModelWindowView){
+        this.loadGridData();
+    }
     this.focusField.nativeElement.focus();
   }
 

@@ -120,7 +120,9 @@ export class ProductGroupComponent implements OnInit {
     this.duplicateProdGroup = false;
     this.duplicateMessageParam = null;
     this.formRequiredError = this.formSuccess = false;
-    this.loadGridData();
+    if(!this.isModelWindowView){
+        this.loadGridData();
+    }
     this.focusField.nativeElement.focus();
   }
 
