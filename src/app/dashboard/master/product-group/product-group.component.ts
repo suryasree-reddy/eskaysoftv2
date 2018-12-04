@@ -15,7 +15,7 @@ export class ProductGroupComponent implements OnInit {
 
   public productGroupForm: FormGroup;
   private endPoint: string = "productgroup/";
-  public gridDataList: any = [];
+  @Input() gridDataList: any = [];
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
@@ -46,9 +46,7 @@ export class ProductGroupComponent implements OnInit {
       id: [],
       productGroupName: ['', Validators.required]
     });
-    if(this.isModelWindowView){
-      this.loadGridData();
-    }
+
     this.focusField.nativeElement.focus();
   }
 

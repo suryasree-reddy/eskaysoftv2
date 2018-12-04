@@ -61,9 +61,7 @@ export class StatesComponent implements OnInit {
       stateCode: ['', Validators.required],
       zone: ['', Validators.required],
     });
-    if(this.isModelWindowView){
-      this.loadGridData();
-    }
+  
     this.focusField.nativeElement.focus();
   this.stateZone =  this.sharedDataService.getSharedCommonJsonData().StateZone;
   }

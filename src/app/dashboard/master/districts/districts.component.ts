@@ -82,9 +82,7 @@ export class DistrictsComponent implements OnInit {
       stateId: ['', Validators.required],
       stateName: ['', Validators.required]
     });
-    if(this.isModelWindowView){
-      this.loadGridData();
-    }
+  
     this.loadStatesData();
     this.focusField.nativeElement.focus();
     this.stateZone = this.sharedDataService.getSharedCommonJsonData().StateZone;

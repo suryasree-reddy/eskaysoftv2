@@ -51,10 +51,6 @@ export class BusinessexecutivesComponent implements OnInit {
       town: ['', Validators.required],
       mobile: ['', Validators.required]
     });
-
-    if(this.isModelWindowView){
-      this.loadGridData();
-    }
     this.focusField.nativeElement.focus();
   }
 
@@ -102,7 +98,7 @@ export class BusinessexecutivesComponent implements OnInit {
   }
 
   loadGridData() {
-    this.masterService.getData(this.endPoint);
+    this.masterService.getData("businessexecutive/");
     this.masterService.dataObject.subscribe(list => {
       this.gridDataList = list;
       localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));

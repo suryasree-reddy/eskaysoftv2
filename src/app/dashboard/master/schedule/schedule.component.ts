@@ -57,9 +57,7 @@ export class ScheduleComponent implements OnInit {
       scheduleIndex: ['', Validators.required],
       scheduleType: ['', Validators.required],
     });
-    if(this.isModelWindowView){
-      this.loadGridData();
-    }
+  
     this.focusField.nativeElement.focus();
     this.scheduleTypes = this.sharedDataService.getSharedCommonJsonData().ScheduleTypes;
   }

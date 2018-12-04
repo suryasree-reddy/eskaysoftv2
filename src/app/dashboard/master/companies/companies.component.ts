@@ -20,7 +20,7 @@ export class CompaniesComponent implements OnInit {
   public companyGroupForm: FormGroup;
   private endPoint: string = "company/";
   private cgEndPoint: string = "companygroup/";
-  public gridDataList: any = [];
+  @Input() gridDataList: any = [];
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
@@ -78,9 +78,7 @@ export class CompaniesComponent implements OnInit {
     this.invGenList = this.sharedDataService.getSharedCommonJsonData().InvGenType;
     this.loadTypeaheadData();
     this.focusField.nativeElement.focus();
-    if(this.isModelWindowView){
-      this.loadGridData();
-    }
+
   }
 
   valueChange(selectedRow: any[]): void {

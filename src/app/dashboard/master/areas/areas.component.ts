@@ -115,7 +115,6 @@ export class AreasComponent implements OnInit {
   }
 
   successMsg() {
-    console.log("this.this.modalRef-", this.modalRef)
     if (this.modalRef != undefined) {
       this.modalRef.hide();
       this.modalService.hide(1);

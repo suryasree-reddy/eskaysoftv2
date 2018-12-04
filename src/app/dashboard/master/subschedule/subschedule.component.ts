@@ -76,9 +76,7 @@ export class SubscheduleComponent implements OnInit {
     this.loadScheduleData();
     this.focusField.nativeElement.focus();
     this.scheduleTypes = this.sharedDataService.getSharedCommonJsonData().ScheduleTypes;
-    if(this.isModelWindowView){
-      this.loadGridData();
-    }
+    
   }
 
   loadScheduleData() {

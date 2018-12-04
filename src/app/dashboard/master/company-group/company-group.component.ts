@@ -46,9 +46,7 @@ export class CompanyGroupComponent implements OnInit {
       id: [],
       companyGroupName: ['', Validators.required]
     });
-    if(this.isModelWindowView){
-      this.loadGridData();
-    }
+
     this.focusField.nativeElement.focus();
   }
 
@@ -132,5 +130,5 @@ export class CompanyGroupComponent implements OnInit {
     this.duplicateMessage = null;
     this.deleteFlag = !this.gridSelectedRow.deleteFlag;
   }
-  
+
 }
