@@ -50,8 +50,7 @@ export class AuthenticationService {
   }
 
   getCurrentUserRoles(){
-    let token = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));
-    console.log(token);    
+    let token = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));      
     return token.roles;
   }
   isNewUser(){
@@ -60,8 +59,7 @@ export class AuthenticationService {
   }
   roleMatch(allowedRoles){
     var ismatch = false;
-    var userRoles:string[] = this.getCurrentUserRoles();
-    console.log(userRoles);
+    var userRoles:string[] = this.getCurrentUserRoles();    
     allowedRoles.forEach(element => {
       if(userRoles.indexOf(element) > -1){
         ismatch = true;
