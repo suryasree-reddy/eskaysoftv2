@@ -50,12 +50,25 @@ export class AuthenticationService {
   }
 
   getCurrentUserRoles(){
-    let token = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));    
+    let token = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));
+    console.log(token);    
     return token.roles;
   }
   isNewUser(){
     let token = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));    
     return token.isNew;
+  }
+  roleMatch(allowedRoles){
+    var ismatch = false;
+    var userRoles:string[] = this.getCurrentUserRoles();
+    console.log(userRoles);
+    allowedRoles.forEach(element => {
+      if(userRoles.indexOf(element) > -1){
+        ismatch = true;
+        return false;
+      }
+    });
+    return ismatch;
   }
 
 }
