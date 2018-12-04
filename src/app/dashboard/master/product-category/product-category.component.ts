@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
-import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
@@ -28,14 +27,12 @@ export class ProductCategoryComponent implements OnInit {
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
-  private formTitle: string = "Product Category";
-  private deleteConfirmMsg: string = "productcategory.deleteConfirmationMessage";
-  private saveConfirmMsg: string = "productcategory.saveConfirmationMessage";
-  private saveInfoMsg: string = "productcategory.saveInformationMessage";
-  private deleteInfoMsg: string = "productcategory.deleteInformationMessage";
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
+  @Input() isModelWindowView: boolean = false;
+  @Input() bodyStyle: string = "col-xs-5";
+  @Output() callbackOnModelWindowClose: EventEmitter<null> = new EventEmitter();
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
@@ -49,7 +46,9 @@ export class ProductCategoryComponent implements OnInit {
       id: [],
       productCategoryName: ['', Validators.required]
     });
-    //  this.loadGridData();
+    if(this.isModelWindowView){
+      this.loadGridData();
+    }
     this.focusField.nativeElement.focus();
   }
 
@@ -79,7 +78,6 @@ export class ProductCategoryComponent implements OnInit {
       this.duplicateProdCategory = this.masterService.hasDataExist(this.gridDataList, 'productCategoryName', this.productCategoryForm.value.productCategoryName);
       this.getDuplicateErrorMessages();
     }
-
   }
 
   loadGridData() {
@@ -104,9 +102,13 @@ export class ProductCategoryComponent implements OnInit {
   }
 
   successMsg() {
-    this.formSuccess = true;
-    this.formRequiredError = false;
-    this.resetForm();
+    if(this.isModelWindowView){
+      this.callbackOnModelWindowClose.emit();
+    }else{
+      this.formSuccess = true;
+      this.formRequiredError = false;
+      this.resetForm();
+    }
   }
 
   requiredErrMsg() {
@@ -137,6 +139,5 @@ export class ProductCategoryComponent implements OnInit {
     this.nameFlag = true;
     this.deleteFlag = !this.gridSelectedRow.deleteFlag;
   }
-
 
 }

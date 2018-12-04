@@ -1,47 +1,45 @@
-<div class="col-md-12">
-    <div class="row">
-      <div class="col-md-5">
-        <h3>{{'states.title' | translate }}</h3>
-        <form [formGroup]="statesForm" autocomplete="off">
-          <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-          [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-            [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
-           [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+<div [ngClass]="bodyStyle">
+  <h3>{{'states.title' | translate }}</h3>
+  <form [formGroup]="statesForm" autocomplete="off">
+    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
+      [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+      [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
+      [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam">
+    </app-errormessages>
 
-            <div class="input-group">
-              <p>{{'states.name' | translate }}: *</p>
-              <input id="stateName" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateStateName()" class="form-control capitalize" [formControl]="statesForm.controls['stateName']">
-          </div>
-          <div class="input-group">
-              <p>{{'states.code' | translate }}: *</p>
-              <input id="stateCode" type="number" min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-               [readonly]="duplicateStateName" (blur)="checkForDuplicateStateCode()" class="form-control" [formControl]="statesForm.controls['stateCode']">
-            </div>
-
-              <div class="input-group">
-                  <p>{{'states.zone' | translate }}: *</p>
-                 <input id="zone" maxlength="7"  class="form-control" formControlName="zone" [typeahead]="stateZone" typeaheadOptionField="description"
-                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
-                  <span class="caret"></span>
-            </div>
-
-              <app-buttons [title]="'states.title'" [deleteConfirmMsg]="'states.deleteConfirmationMessage'"
-                           [saveConfirmMsg]="'states.saveConfirmationMessage'" [saveInfoMsg]="'states.saveInformationMessage'" [endPoint]="endPoint"
-                           [deleteInfoMsg]="'states.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-                           [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-                           [hideDeleteBtn]=true [formObj]="statesForm" (saveRecord)="save()"
-                           (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-                           (afterSuccess)="successMsg()" (resetForm)="resetForm()" ></app-buttons>
-        </form>
-      </div>
-
-      <div class="col-md-7">
-        <br /><br />
-
-        <app-synectiks-common-grid [endPoint]="endPoint"  [rowSelection]="'single'" (intialLoad)='onInitialDataLoad($event)'
-         [gridDataList]="statesList" (valueChange)='valueChange($event)' [screenColums]="'StateListColumns'"></app-synectiks-common-grid>
-      </div>
-
+    <div class="input-group">
+      <p>{{'states.name' | translate }}: *</p>
+      <input id="stateName" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateStateName()" class="form-control capitalize" [formControl]="statesForm.controls['stateName']">
     </div>
 
-  </div>
+    <div class="input-group">
+      <p>{{'states.code' | translate }}: *</p>
+      <input id="stateCode" type="number" min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+       [readonly]="duplicateStateName" (blur)="checkForDuplicateStateCode()" class="form-control" [formControl]="statesForm.controls['stateCode']">
+    </div>
+
+    <div class="input-group">
+        <p>{{'states.zone' | translate }}: *</p>
+       <input id="zone" maxlength="7"  class="form-control" formControlName="zone"
+          [typeahead]="stateZone" typeaheadOptionField="description"
+          [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
+        <span class="caret"></span>
+    </div>
+
+    <app-buttons [title]="'states.title'" [deleteConfirmMsg]="'states.deleteConfirmationMessage'"
+         [saveConfirmMsg]="'states.saveConfirmationMessage'" [saveInfoMsg]="'states.saveInformationMessage'"
+         [endPoint]="endPoint"
+         [deleteInfoMsg]="'states.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+         [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+         [hideDeleteBtn]=true [formObj]="statesForm" (saveRecord)="save()"
+         (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+         (afterSuccess)="successMsg()" (resetForm)="resetForm()" >
+    </app-buttons>
+  </form>
+</div>
+
+<div *ngIf="!isModelWindowView" class="col-xs-7">
+  <br /><br />
+  <app-synectiks-common-grid [endPoint]="endPoint"  [rowSelection]="'single'" (intialLoad)='onInitialDataLoad($event)'
+   [gridDataList]="statesList" (valueChange)='valueChange($event)' [screenColums]="'StateListColumns'"></app-synectiks-common-grid>
+</div>

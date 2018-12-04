@@ -1,13 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
-import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
-
 
 @Component({
   selector: 'app-product-group',
@@ -29,14 +27,12 @@ export class ProductGroupComponent implements OnInit {
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
-  private formTitle: string = "Product Group";
-  private deleteConfirmMsg: string = "productgroup.deleteConfirmationMessage";
-  private saveConfirmMsg: string = "productgroup.saveConfirmationMessage";
-  private saveInfoMsg: string = "productgroup.saveInformationMessage";
-  private deleteInfoMsg: string = "productgroup.deleteInformationMessage";
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
+  @Input() isModelWindowView: boolean = false;
+  @Input() bodyStyle: string = "col-xs-5";
+  @Output() callbackOnModelWindowClose: EventEmitter<null> = new EventEmitter();
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
@@ -50,6 +46,9 @@ export class ProductGroupComponent implements OnInit {
       id: [],
       productGroupName: ['', Validators.required]
     });
+    if(this.isModelWindowView){
+      this.loadGridData();
+    }
     this.focusField.nativeElement.focus();
   }
 
@@ -98,9 +97,13 @@ export class ProductGroupComponent implements OnInit {
   }
 
   successMsg() {
-    this.formSuccess = true;
-    this.formRequiredError = false;
-    this.resetForm();
+    if(this.isModelWindowView){
+      this.callbackOnModelWindowClose.emit();
+    }else{
+      this.formSuccess = true;
+      this.formRequiredError = false;
+      this.resetForm();
+    }
   }
 
   requiredErrMsg() {

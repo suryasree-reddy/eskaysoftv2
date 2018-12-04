@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -64,6 +64,9 @@ export class ProductComponent implements OnInit {
   message: string;
 
   @ViewChild('focus') focusField: ElementRef;
+  @Input() isModelWindowView: boolean = false;
+  @Input() bodyStyle: string = "col-xs-5";
+  @Output() callbackOnModelWindowClose: EventEmitter<null> = new EventEmitter();
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
@@ -127,6 +130,9 @@ export class ProductComponent implements OnInit {
     this.companyStatusList = this.sharedDataService.getSharedCommonJsonData().CompanyStatus;
     this.invGenList = this.sharedDataService.getSharedCommonJsonData().InvGenType;
     this.focusField.nativeElement.focus();
+    if(this.isModelWindowView){
+      this.loadGridData();
+    }
   }
 
   loadCompanyGroupTypeaheadData() {
@@ -344,10 +350,15 @@ export class ProductComponent implements OnInit {
   }
 
   successMsg() {
-    this.formSuccess = true;
-    this.formRequiredError = false;
-    this.resetForm();
-    this.resetChildForm();
+    if(this.isModelWindowView){
+      this.callbackOnModelWindowClose.emit();
+    }else{
+      this.formSuccess = true;
+      this.formRequiredError = false;
+      this.resetForm();
+      this.resetChildForm();
+    }
+
   }
 
   requiredErrMsg() {

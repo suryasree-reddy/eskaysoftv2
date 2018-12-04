@@ -1,130 +1,123 @@
-<div class="col-xs-12 mr-b-2">
-    <div class="row">
-        <div class="col-xs-5">
-            <h3>{{'product.title' | translate}}</h3>
-            <form [formGroup]="productForm"  autocomplete="off">
-                <app-errormessages [formRequiredError]="formRequiredError"
-                        [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-                          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
-                        [duplicateMessage]="duplicateMessage"
-                        [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+<div [ngClass]="bodyStyle">
+    <h3>{{'product.title' | translate}}</h3>
+    <form [formGroup]="productForm"  autocomplete="off">
+        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
+            [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+            [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
+            [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam">
+        </app-errormessages>
 
-                <div class="col-xs-6 col-3-lt">
-                    <p>{{'product.name' | translate}}: *</p>
-                    <input #focus id="name" maxlength="30"  [readonly]="nameFlag" class="form-control capitalize"
-                     [formControl]="productForm.controls['name']" (blur)="checkForDuplicateProductName()">
-                </div>
-
-                <div class="col-xs-6 col-rt">
-                    <p>{{'companies.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
-                    <input id="companyName"  formControlName="companyName" [typeahead]="typeaheadCompanyDataList"
-                    typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
-                    (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control capitalize">
-                    <span class="caret"></span>
-                </div>
-
-                <div class="margin-top-0px">
-                    <div class="col-xs-6 col-3-lt">
-                    <p>{{'productgroup.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
-                      <input id="productGroupName" formControlName="productGroupName" [typeahead]="typeaheadGroupDataList"
-                      typeaheadOptionField="productGroupName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
-                      (typeaheadOnSelect)="loadSelectedGroupTypeahead($event)" class="form-control capitalize">
-                      <span class="caret"></span>
-                    </div>
-                    <div class="col-xs-3 col-rt">
-                      <p>{{'product.packing' | translate}}: *</p>
-                      <input id="packing" type="number" maxlength="4" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                      class="form-control" [formControl]="productForm.controls['packing']">
-                    </div>
-                    <div class="col-xs-3 col-rt">
-                      <p>{{'product.boxqty' | translate}}: *</p>
-                      <input id="boxQty" type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                       class="form-control" [formControl]="productForm.controls['boxQty']">
-                    </div>
-                </div>
-
-                <div class="margin-top-0px">
-                  <div class="col-xs-6 col-3-lt">
-                      <p>{{'productcategory.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(pcTemplate)">create
-                      </a>)</p>
-                      <input id="productCategoryName" formControlName="productCategoryName" [typeahead]="typeaheadCategoryDataList"
-                      typeaheadOptionField="productCategoryName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
-                      (typeaheadOnSelect)="loadSelectedCategoryTypeahead($event)" class="form-control capitalize">
-                      <span class="caret"></span>
-                    </div>
-                  <div class="col-xs-3 col-rt">
-                      <p>{{'product.caseqty' | translate}}: *</p>
-                      <input id="caseQty" type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                      class="form-control" [formControl]="productForm.controls['caseQty']">
-                  </div>
-                  <div class="col-xs-3 col-rt">
-                      <p>{{'product.schemeqty' | translate}}: *</p>
-                        <input id="schemeQty"  class="form-control"
-type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                         [formControl]="productForm.controls['schemeQty']">
-                  </div>
-
-                </div>
-
-                <div class="margin-top-0px">
-                  <div class="col-xs-6 col-3-lt">
-                    <p>{{'product.content' | translate}}: *</p>
-                    <input id="contents" maxlength="80"  class="form-control" [formControl]="productForm.controls['contents']">
-                  </div>
-                  <div class="col-xs-3 col-rt">
-                    <p>{{'product.netrate' | translate}}: *</p>
-                    <input id="netRate" class="form-control" [formControl]="productForm.controls['netRate']"
-                    type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
-                  </div>
-                  <div class="col-xs-3 col-rt">
-                    <p>{{'product.isNetRateItem' | translate}}: *</p>
-                    <input id="isNetRateItem" maxlength="20"  class="form-control" [formControl]="productForm.controls['isNetRateItem']">
-                  </div>
-                </div>
-
-                <div class="margin-top-0px">
-                 <div class="col-xs-6 col-3-lt">
-                    <p>{{'product.tax' | translate}}: *</p>
-                    <input id="tax" formControlName="tax" [typeahead]="typeaheadTaxDataList" typeaheadOptionField="tax"
-                    [typeaheadOptionsLimit]="7"
-                     [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTaxTypeahead($event)"
-                    class="form-control">
-                    <span class="caret"></span>
-                  </div>
-                  <div class="col-xs-3 col-rt">
-                    <p>{{'product.free' | translate}}: *</p>
-                    <input id="free"  type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                    class="form-control" [formControl]="productForm.controls['free']">
-                  </div>
-                  <div class="col-xs-3 col-rt">
-                    <p>{{'product.prodcode' | translate}}: *</p>
-                    <input id="productcode" [readonly]="nameFlag" type="text" min="0" maxlength="5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                    class="form-control" [formControl]="productForm.controls['productcode']" (blur)="checkForDuplicateProductCode()">
-                  </div>
-                </div>
-
-
-                <app-buttons [title]="'product.title'" [deleteConfirmMsg]="'product.deleteConfirmationMessage'"
-                [saveConfirmMsg]="'product.saveConfirmationMessage'" [saveInfoMsg]="'product.saveInformationMessage'"
-                [endPoint]="endPoint"
-                [deleteInfoMsg]="'product.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-                [isBtnDeleteDisable]="false" [hideSaveBtn]=true [hideResetBtn]=true
-                [hideDeleteBtn]=true [formObj]="productForm" (saveRecord)="save()"
-                (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-                (afterSuccess)="successMsg()" (resetForm)="resetForm()" ></app-buttons>
-
-            </form>
+        <div class="col-xs-6 col-3-lt">
+            <p>{{'product.name' | translate}}: *</p>
+            <input #focus id="name" maxlength="30"  [readonly]="nameFlag" class="form-control capitalize"
+             [formControl]="productForm.controls['name']" (blur)="checkForDuplicateProductName()">
         </div>
 
-        <div class="col-xs-7">
-            <br /><br />
-            <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList"
-                (valueChange)='valueChange($event)' [screenColums]="'ProductColumns'"></app-synectiks-common-grid>
+        <div class="col-xs-6 col-rt">
+            <p>{{'companies.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
+            <input id="companyName"  formControlName="companyName" [typeahead]="typeaheadCompanyDataList"
+            typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
+            (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control capitalize">
+            <span class="caret"></span>
         </div>
 
-    </div>
+        <div class="margin-top-0px">
+            <div class="col-xs-6 col-3-lt">
+            <p>{{'productgroup.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
+              <input id="productGroupName" formControlName="productGroupName" [typeahead]="typeaheadGroupDataList"
+              typeaheadOptionField="productGroupName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
+              (typeaheadOnSelect)="loadSelectedGroupTypeahead($event)" class="form-control capitalize">
+              <span class="caret"></span>
+            </div>
+            <div class="col-xs-3 col-rt">
+              <p>{{'product.packing' | translate}}: *</p>
+              <input id="packing" type="number" maxlength="4" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              class="form-control" [formControl]="productForm.controls['packing']">
+            </div>
+            <div class="col-xs-3 col-rt">
+              <p>{{'product.boxqty' | translate}}: *</p>
+              <input id="boxQty" type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+               class="form-control" [formControl]="productForm.controls['boxQty']">
+            </div>
+        </div>
 
+        <div class="margin-top-0px">
+          <div class="col-xs-6 col-3-lt">
+              <p>{{'productcategory.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(pcTemplate)">create
+              </a>)</p>
+              <input id="productCategoryName" formControlName="productCategoryName" [typeahead]="typeaheadCategoryDataList"
+              typeaheadOptionField="productCategoryName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
+              (typeaheadOnSelect)="loadSelectedCategoryTypeahead($event)" class="form-control capitalize">
+              <span class="caret"></span>
+            </div>
+          <div class="col-xs-3 col-rt">
+              <p>{{'product.caseqty' | translate}}: *</p>
+              <input id="caseQty" type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              class="form-control" [formControl]="productForm.controls['caseQty']">
+          </div>
+          <div class="col-xs-3 col-rt">
+              <p>{{'product.schemeqty' | translate}}: *</p>
+                <input id="schemeQty"  class="form-control" type="number" min="0" maxlength="02"
+                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                 [formControl]="productForm.controls['schemeQty']">
+          </div>
+        </div>
+
+        <div class="margin-top-0px">
+          <div class="col-xs-6 col-3-lt">
+            <p>{{'product.content' | translate}}: *</p>
+            <input id="contents" maxlength="80"  class="form-control" [formControl]="productForm.controls['contents']">
+          </div>
+          <div class="col-xs-3 col-rt">
+            <p>{{'product.netrate' | translate}}: *</p>
+            <input id="netRate" class="form-control" [formControl]="productForm.controls['netRate']"
+            type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+          </div>
+          <div class="col-xs-3 col-rt">
+            <p>{{'product.isNetRateItem' | translate}}: *</p>
+            <input id="isNetRateItem" maxlength="20"  class="form-control" [formControl]="productForm.controls['isNetRateItem']">
+          </div>
+        </div>
+
+        <div class="margin-top-0px">
+         <div class="col-xs-6 col-3-lt">
+            <p>{{'product.tax' | translate}}: *</p>
+            <input id="tax" formControlName="tax" [typeahead]="typeaheadTaxDataList" typeaheadOptionField="tax"
+            [typeaheadOptionsLimit]="7"
+             [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTaxTypeahead($event)"
+            class="form-control">
+            <span class="caret"></span>
+          </div>
+          <div class="col-xs-3 col-rt">
+            <p>{{'product.free' | translate}}: *</p>
+            <input id="free"  type="number" min="0" maxlength="02" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            class="form-control" [formControl]="productForm.controls['free']">
+          </div>
+          <div class="col-xs-3 col-rt">
+            <p>{{'product.prodcode' | translate}}: *</p>
+            <input id="productcode" [readonly]="nameFlag" type="text" min="0" maxlength="5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            class="form-control" [formControl]="productForm.controls['productcode']" (blur)="checkForDuplicateProductCode()">
+          </div>
+        </div>
+
+        <app-buttons [title]="'product.title'" [deleteConfirmMsg]="'product.deleteConfirmationMessage'"
+        [saveConfirmMsg]="'product.saveConfirmationMessage'" [saveInfoMsg]="'product.saveInformationMessage'"
+        [endPoint]="endPoint"
+        [deleteInfoMsg]="'product.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+        [isBtnDeleteDisable]="false" [hideSaveBtn]=true [hideResetBtn]=true
+        [hideDeleteBtn]="!isModelWindowView" [formObj]="productForm" (saveRecord)="save()"
+        (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+        (afterSuccess)="successMsg()" (resetForm)="resetForm()" ></app-buttons>
+
+    </form>
 </div>
+
+<div *ngIf="!isModelWindowView" class="col-xs-7">
+    <br /><br />
+    <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList"
+        (valueChange)='valueChange($event)' [screenColums]="'ProductColumns'"></app-synectiks-common-grid>
+</div>
+
 <!-- Product Group Modal -->
 <ng-template #template>
     <div class="modal-header">

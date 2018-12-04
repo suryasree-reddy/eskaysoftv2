@@ -4,7 +4,6 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
-import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
@@ -12,6 +11,7 @@ import { SharedDataService } from 'src/app/shared/model/shared-data.service';
   selector: 'app-manufacturer',
   templateUrl: './manufacturer.component.html'
 })
+
 export class ManufacturerComponent implements OnInit {
 
   public manufacturerForm: FormGroup;
@@ -28,11 +28,6 @@ export class ManufacturerComponent implements OnInit {
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
-  private formTitle: string = "Manufacturer";
-  private deleteConfirmMsg: string = "manufacturer.deleteConfirmationMessage";
-  private saveConfirmMsg: string = "manufacturer.saveConfirmationMessage";
-  private saveInfoMsg: string = "manufacturer.saveInformationMessage";
-  private deleteInfoMsg: string = "manufacturer.deleteInformationMessage";
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;

@@ -1,49 +1,45 @@
-<div class="col-md-12">
-  <div class="row">
-    <div class="col-md-5">
-      <h3>{{'schedule.title' | translate }}</h3>
-      <form [formGroup]="scheduleForm" autocomplete="off">
-        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-        [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
-         [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+<div [ngClass]="bodyStyle">
+  <h3>{{'schedule.title' | translate }}</h3>
+  <form [formGroup]="scheduleForm" autocomplete="off">
+    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
+      [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+      [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
+      [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam">
+   </app-errormessages>
 
-        <div class="input-group">
-          <p>{{'schedule.name' | translate}}: *</p>
-          <input   id="scheduleName"   maxlength="40" #focus [readonly]="nameFlag" (blur)="checkForDuplicateScheduleName()"
-          class="form-control capitalize" [formControl]="scheduleForm.controls['scheduleName']">
-        </div>
-        <div class="input-group">
-            <p>{{'schedule.index' | translate }}: *</p>
-            <input id="scheduleIndex" type="number"  min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-            class="form-control" (blur)="validateFormOnBlur()" [formControl]="scheduleForm.controls['scheduleIndex']">
-        </div>
-        <div class="input-group">
-              <p>{{'schedule.type' | translate }}: *</p>
-             <input id="scheduleType" maxlength="15" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="description"
-            [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"   class="form-control">
-              <span class="caret"></span>
-        </div>
-
-        <app-buttons [title]="'schedule.title'" [deleteConfirmMsg]="'schedule.deleteConfirmationMessage'"
-               [saveConfirmMsg]="'schedule.saveConfirmationMessage'" [saveInfoMsg]="'schedule.saveInformationMessage'"
-               [endPoint]="endPoint"
-               [deleteInfoMsg]="'schedule.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-               [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-               [hideDeleteBtn]=true [formObj]="scheduleForm" (saveRecord)="save()"
-               (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-               (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
-
-
-        </form>
+    <div class="input-group">
+      <p>{{'schedule.name' | translate}}: *</p>
+      <input   id="scheduleName"   maxlength="40" #focus [readonly]="nameFlag" (blur)="checkForDuplicateScheduleName()"
+      class="form-control capitalize" [formControl]="scheduleForm.controls['scheduleName']">
     </div>
 
-    <div class="col-md-7">
-      <br /><br />
-  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="scheduleList"
-      (valueChange)='valueChange($event)' [screenColums]="'ScheduleListColumns'"></app-synectiks-common-grid>
+    <div class="input-group">
+        <p>{{'schedule.index' | translate }}: *</p>
+        <input id="scheduleIndex" type="number"  min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        class="form-control" (blur)="validateFormOnBlur()" [formControl]="scheduleForm.controls['scheduleIndex']">
     </div>
 
-  </div>
+    <div class="input-group">
+          <p>{{'schedule.type' | translate }}: *</p>
+         <input id="scheduleType" maxlength="15" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="description"
+        [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"   class="form-control">
+          <span class="caret"></span>
+    </div>
 
+    <app-buttons [title]="'schedule.title'" [deleteConfirmMsg]="'schedule.deleteConfirmationMessage'"
+           [saveConfirmMsg]="'schedule.saveConfirmationMessage'" [saveInfoMsg]="'schedule.saveInformationMessage'"
+           [endPoint]="endPoint"
+           [deleteInfoMsg]="'schedule.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+           [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
+           [hideDeleteBtn]="!isModelWindowView" [formObj]="scheduleForm" (saveRecord)="save()"
+           (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+           (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
+    </form>
+</div>
+
+<div *ngIf="!isModelWindowView" class="col-xs-7">
+  <br /><br />
+  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
+      [gridDataList]="scheduleList" (valueChange)='valueChange($event)' [screenColums]="'ScheduleListColumns'">
+  </app-synectiks-common-grid>
 </div>

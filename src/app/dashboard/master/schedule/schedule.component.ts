@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
-import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
@@ -25,15 +24,16 @@ export class ScheduleComponent implements OnInit {
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   public nameFlag;
-  //public gridDataList: Observable<any[]>;
   public lastSchIndex;
   public cap;
-  //modalRef: BsModalRef;
   private duplicateSchName: boolean = false;
   private duplicateSchIndex: boolean = false;
 
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
+  @Input() isModelWindowView: boolean = false;
+  @Input() bodyStyle: string = "col-xs-5";
+  @Output() callbackOnModelWindowClose: EventEmitter<null> = new EventEmitter();
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
@@ -57,6 +57,9 @@ export class ScheduleComponent implements OnInit {
       scheduleIndex: ['', Validators.required],
       scheduleType: ['', Validators.required],
     });
+    if(this.isModelWindowView){
+      this.loadGridData();
+    }
     this.focusField.nativeElement.focus();
     this.scheduleTypes = this.sharedDataService.getSharedCommonJsonData().ScheduleTypes;
   }
@@ -115,9 +118,13 @@ export class ScheduleComponent implements OnInit {
   }
 
   successMsg() {
-    this.formSuccess = true;
-    this.formRequiredError = false;
-    this.resetForm();
+    if(this.isModelWindowView){
+      this.callbackOnModelWindowClose.emit();
+    }else{
+      this.formSuccess = true;
+      this.formRequiredError = false;
+      this.resetForm();
+    }
   }
 
   requiredErrMsg() {

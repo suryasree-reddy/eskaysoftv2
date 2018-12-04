@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -42,6 +42,9 @@ export class DistrictsComponent implements OnInit {
   public childDuplicateMessage: string = null;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
+  @Input() isModelWindowView: boolean = false;
+  @Input() bodyStyle: string = "col-xs-5";
+  @Output() callbackOnModelWindowClose: EventEmitter<null> = new EventEmitter();
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
@@ -79,7 +82,9 @@ export class DistrictsComponent implements OnInit {
       stateId: ['', Validators.required],
       stateName: ['', Validators.required]
     });
-
+    if(this.isModelWindowView){
+      this.loadGridData();
+    }
     this.loadStatesData();
     this.focusField.nativeElement.focus();
     this.stateZone = this.sharedDataService.getSharedCommonJsonData().StateZone;
@@ -194,9 +199,13 @@ export class DistrictsComponent implements OnInit {
       this.loadStatesData();
       //  this.focusField.nativeElement.focus();
     } else {
-      this.formSuccess = true;
-      this.formRequiredError = false;
-      this.resetForm();
+      if(this.isModelWindowView){
+        this.callbackOnModelWindowClose.emit();
+      }else{
+        this.formSuccess = true;
+        this.formRequiredError = false;
+        this.resetForm();
+      }
     }
   }
 

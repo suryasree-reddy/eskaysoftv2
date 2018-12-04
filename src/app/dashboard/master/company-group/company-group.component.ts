@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
-import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 
@@ -28,14 +27,12 @@ export class CompanyGroupComponent implements OnInit {
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
-  private formTitle: string = "Company Group";
-  private deleteConfirmMsg: string = "companygroup.deleteConfirmationMessage";
-  private saveConfirmMsg: string = "companygroup.saveConfirmationMessage";
-  private saveInfoMsg: string = "companygroup.saveInformationMessage";
-  private deleteInfoMsg: string = "companygroup.deleteInformationMessage";
 
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
+  @Input() isModelWindowView: boolean = false;
+  @Input() bodyStyle: string = "col-xs-5";
+  @Output() callbackOnModelWindowClose: EventEmitter<null> = new EventEmitter();
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
@@ -49,7 +46,9 @@ export class CompanyGroupComponent implements OnInit {
       id: [],
       companyGroupName: ['', Validators.required]
     });
-    //this.loadGridData();
+    if(this.isModelWindowView){
+      this.loadGridData();
+    }
     this.focusField.nativeElement.focus();
   }
 
@@ -60,13 +59,13 @@ export class CompanyGroupComponent implements OnInit {
   onInitialDataLoad(dataList: any[]) {
     this.gridDataList = dataList;
   }
+
   getDuplicateErrorMessages(): void {
     if (!this.duplicateCompanyGrp) {
       this.duplicateMessage = null;
       this.formRequiredError = false;
       this.duplicateMessageParam = null;
     }
-
     if (this.duplicateCompanyGrp) {
       this.duplicateMessage = "companygroup.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.companyGroupForm.value.companyGroupName;
@@ -97,9 +96,13 @@ export class CompanyGroupComponent implements OnInit {
   }
 
   successMsg() {
-    this.formSuccess = true;
-    this.formRequiredError = false;
-    this.resetForm();
+    if(this.isModelWindowView){
+     this.callbackOnModelWindowClose.emit();
+   }else{
+     this.formSuccess = true;
+     this.formRequiredError = false;
+     this.resetForm();
+   }
   }
 
   requiredErrMsg() {
@@ -129,6 +132,5 @@ export class CompanyGroupComponent implements OnInit {
     this.duplicateMessage = null;
     this.deleteFlag = !this.gridSelectedRow.deleteFlag;
   }
-
-
+  
 }

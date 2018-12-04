@@ -1,6 +1,4 @@
-<div class="col-md-12">
-    <div class="row">
-      <div class="col-md-5">
+<div [ngClass]="bodyStyle">
         <h3>{{'districts.title' | translate }}</h3>
         <form [formGroup]="districtsForm"  autocomplete="off">
           <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
@@ -24,24 +22,19 @@
                  [endPoint]="endPoint"
                  [deleteInfoMsg]="'districts.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
                  [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-                 [hideDeleteBtn]=true [formObj]="districtsForm" (saveRecord)="save()"
+                 [hideDeleteBtn]="!isModelWindowView" [formObj]="districtsForm" (saveRecord)="save()"
                  (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
                  (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
 
         </form>
       </div>
-
-      <div class="col-md-7">
+<div *ngIf="!isModelWindowView" class="col-xs-7">
         <br /><br />
 
         <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
          [gridDataList]="districtsList" (valueChange)='valueChange($event)'
          [screenColums]="'DistrictsColumns'"></app-synectiks-common-grid>
       </div>
-
-    </div>
-
-  </div>
 
   <ng-template #template>
     <div class="modal-header">

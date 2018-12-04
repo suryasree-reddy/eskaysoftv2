@@ -5,7 +5,6 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { MasterService } from '../master.service';
 import { TranslateService } from '@ngx-translate/core';
 import '../../../../assets/styles/mainstyles.scss';
-import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
@@ -18,7 +17,6 @@ import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 export class AreasComponent implements OnInit {
 
   public areaForm: FormGroup;
-  public businessExecutiveForm: FormGroup;
   private areaEndPoint: string = "area/";
   private beEndPoint: string = "businessexecutive/";
   public gridDataList: any = [];
@@ -28,16 +26,10 @@ export class AreasComponent implements OnInit {
   public deleteFlag: boolean = true;
   public formRequiredError: boolean = false;
   public formSuccess: boolean = false;
-  public scFormRequiredError: boolean = false;
-  public scFormSuccess: boolean = false;
   public nameFlag;
   public areaName;
   private duplicateAreaName: boolean = false;
-  private duplicateBusExecName: boolean = false;
-  private duplicateBusExecNum: boolean = false;
   public duplicateMessage: string = null;
-  public childDuplicateMessage: string = null;
-  public childDuplicateMessageParam: string = null;
   public duplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
@@ -57,6 +49,7 @@ export class AreasComponent implements OnInit {
   onInitialDataLoad(dataList: any[]) {
     this.gridDataList = dataList;
   }
+
   ngOnInit() {
     this.areaForm = this.fb.group({
       id: [],
@@ -64,17 +57,7 @@ export class AreasComponent implements OnInit {
       businessExecutiveId: [],
       businessExecutiveName: []
     });
-
-    this.businessExecutiveForm = this.fb.group({
-      id: [],
-      name: ['', Validators.required],
-      address: ['', Validators.required],
-      town: ['', Validators.required],
-      mobile: ['', Validators.required]
-    });
-
     this.loadTypeaheadData();
-    //this.loadGridData();
     this.focusField.nativeElement.focus();
   }
 
@@ -93,44 +76,16 @@ export class AreasComponent implements OnInit {
   }
 
   getDuplicateErrorMessages(): void {
-    if (!this.duplicateBusExecName || !this.duplicateBusExecNum) {
-      this.childDuplicateMessage = null;
-      this.childDuplicateMessageParam = null;
-      this.scFormRequiredError = false;
-    }
     if (!this.duplicateAreaName) {
       this.duplicateMessageParam = null;
       this.duplicateMessage = null;
       this.formRequiredError = false;
     }
-
     if (this.duplicateAreaName) {
       this.duplicateMessage = "areas.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.areaForm.value.areaName;
       this.formRequiredError = false;
     }
-    if (this.duplicateBusExecName && this.duplicateBusExecNum) {
-      this.childDuplicateMessage = "businessexecutive.duplicateErrorMessage";
-    }
-    else if (this.duplicateBusExecName) {
-      this.childDuplicateMessage = "businessexecutive.duplicateNameErrorMessage";
-      this.childDuplicateMessageParam = this.businessExecutiveForm.value.name;
-    }
-    else if (this.duplicateBusExecNum) {
-      this.childDuplicateMessage = "businessexecutive.duplicateIndexErrorMessage";
-      this.childDuplicateMessageParam = this.businessExecutiveForm.value.mobile;
-    }
-  }
-
-  checkForDuplicatePhone() {
-    this.duplicateBusExecNum = this.masterService.hasDataExist(this.typeaheadDataList, 'mobile', parseInt(this.businessExecutiveForm.value.mobile));
-    this.getDuplicateErrorMessages();
-
-  }
-
-  checkForDuplicateBusiExecName() {
-    this.duplicateBusExecName = this.masterService.hasDataExist(this.typeaheadDataList, 'name', this.businessExecutiveForm.value.name);
-    this.getDuplicateErrorMessages();
   }
 
   loadGridData() {
@@ -147,28 +102,7 @@ export class AreasComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-    this.resetBusinessExecutiveForm();
-    this.scFormRequiredError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
-  }
-
-  saveBusinessExecutive() {
-    if (this.businessExecutiveForm.valid) {
-      this.showConfirmationModal();
-    } else {
-      this.scRequiredErrMsg();
-    }
-  }
-
-  save_BusinessExecutive() {
-    this.masterService.createRecord(this.beEndPoint, this.businessExecutiveForm.value).subscribe(res => {
-      this.showInformationModal();
-      this.loadTypeaheadData();
-      this.modalRef.hide();
-      this.businessExecutiveForm.reset();
-    }, (error) => {
-      throw error;
-    });
   }
 
   save() {
@@ -181,10 +115,11 @@ export class AreasComponent implements OnInit {
   }
 
   successMsg() {
+    console.log("this.this.modalRef-", this.modalRef)
     if (this.modalRef != undefined) {
       this.modalRef.hide();
+      this.modalService.hide(1);
       this.loadTypeaheadData();
-      this.businessExecutiveForm.reset();
     } else {
       this.formSuccess = true;
       this.formRequiredError = false;
@@ -199,15 +134,7 @@ export class AreasComponent implements OnInit {
     }
   }
 
-  scRequiredErrMsg() {
-    if (this.childDuplicateMessage == null) {
-      this.scFormRequiredError = true;
-      this.scFormSuccess = false;
-    }
-  }
-
   resetForm() {
-    this.businessExecutiveForm.reset();
     this.areaForm.reset();
     this.gridSelectedRow = null;
     this.nameFlag = false;
@@ -217,8 +144,6 @@ export class AreasComponent implements OnInit {
     this.formRequiredError = false;
     this.duplicateAreaName = false;
     this.duplicateMessage = null;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
     this.focusField.nativeElement.focus();
   }
 
@@ -227,37 +152,8 @@ export class AreasComponent implements OnInit {
     this.areaForm.reset(s);
     this.formRequiredError = false;
     this.duplicateMessage = null;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
     this.nameFlag = true;
     this.deleteFlag = !this.gridSelectedRow.deleteFlag;
-  }
-
-  resetBusinessExecutiveForm() {
-    this.scFormRequiredError = false;
-    this.duplicateBusExecName = false;
-    this.duplicateBusExecNum = false;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
-    this.businessExecutiveForm.reset();
-  }
-
-  showInformationModal() {
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
-      "Business Executive", "businessexecutive.saveInformationMessage", '');
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe();
-  }
-
-  showConfirmationModal(): void {
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
-      "Business Executive", "businessexecutive.saveConfirmationMessage", 'green', '');
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
-      if (result) {
-        this.save_BusinessExecutive();
-      }
-    });
   }
 
 }

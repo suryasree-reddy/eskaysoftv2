@@ -1,47 +1,42 @@
-<div class="col-md-12">
-  <div class="row">
-    <div class="col-md-5">
-      <h3>{{'subschedule.title' | translate}}</h3>
-      <form [formGroup]="subScheduleForm" (ngSubmit)="save()" autocomplete="off">
-        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-        [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
-         [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+<div [ngClass]="bodyStyle">
+  <h3>{{'subschedule.title' | translate}}</h3>
+  <form [formGroup]="subScheduleForm" (ngSubmit)="save()" autocomplete="off">
+    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
+      [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
+      [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
+      [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam">
+    </app-errormessages>
 
-        <div class="input-group">
-          <p>{{'subschedule.name' | translate}}: *</p>
-          <input #focus id="subScheduleName" maxlength="40" [readonly]="nameFlag" class="form-control capitalize" (blur)="checkForDuplicateSubScheduleName()" [formControl]="subScheduleForm.controls['subScheduleName']">
-        </div>
-          <div class="input-group">
-            <p>{{'schedule.name' | translate}}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
-            <input id="scheduleType" maxlength="40" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="typeheadDisplay"
-            [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control capitalize">
-          </div><span class="caret"></span>
-          <div class="input-group">
-            <p>{{'subschedule.index' | translate}}: *</p>
-            <input id="subScheduleIndex" type="number"  min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-             [readonly]="true" class="form-control" [formControl]="subScheduleForm.controls['subScheduleIndex']">
-        </div>
-            <div class="input-group">
-              <button type="button" (click)="resetForm()" class="btn btn-primary">Reset</button>
-              <button type="submit" class="btn btn-primary mr-l-10">Save</button>
-              <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">Delete</button>
-            </div>
-
-
-      </form>
+    <div class="input-group">
+      <p>{{'subschedule.name' | translate}}: *</p>
+      <input #focus id="subScheduleName" maxlength="40" [readonly]="nameFlag" class="form-control capitalize" (blur)="checkForDuplicateSubScheduleName()" [formControl]="subScheduleForm.controls['subScheduleName']">
     </div>
-    <div class="col-md-7">
-      <br /><br />
 
-      <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
-      [gridDataList]="subScheduleList" (valueChange)='valueChange($event)'
-       [screenColums]="'SubScheduleListColumns'"></app-synectiks-common-grid>
+    <div class="input-group">
+      <p>{{'schedule.name' | translate}}: * &emsp; (<a style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
+      <input id="scheduleType" maxlength="40" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="typeheadDisplay"
+      [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control capitalize">
+    </div><span class="caret"></span>
 
+    <div class="input-group">
+      <p>{{'subschedule.index' | translate}}: *</p>
+      <input id="subScheduleIndex" type="number"  min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+       [readonly]="true" class="form-control" [formControl]="subScheduleForm.controls['subScheduleIndex']">
     </div>
-  </div>
+
+    <div class="input-group">
+      <button type="button" (click)="resetForm()" class="btn btn-primary">Reset</button>
+      <button type="submit" class="btn btn-primary mr-l-10">Save</button>
+      <button type="button" [disabled]="deleteFlag" (click)="showConfirmationModal('Delete')" class="btn btn-danger float-right">Delete</button>
+    </div>
+  </form>
 </div>
-
+<div *ngIf="!isModelWindowView" class="col-xs-7">
+  <br /><br />
+  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
+  [gridDataList]="subScheduleList" (valueChange)='valueChange($event)'
+   [screenColums]="'SubScheduleListColumns'"></app-synectiks-common-grid>
+</div>
 
 <ng-template #template>
   <div class="modal-header">
