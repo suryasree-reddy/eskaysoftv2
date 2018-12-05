@@ -79,22 +79,7 @@
       </button>
     </div>
     <div class="modal-body">
-      <form [formGroup]="companyGroupForm" (ngSubmit)="saveChildForm()" autocomplete="off">
-        <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"
-        [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-          [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"  [duplicateMessage]="childDuplicateMessage"
-         [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+      <app-company-group [isModelWindowView]=true [bodyStyle]="row" [gridDataList]="typeaheadDataList"  (callbackOnModelWindowClose)="successMsg()"></app-company-group>
 
-        <div class="input-group">
-          <p>{{'companygroup.name' | translate }}: *</p>
-          <input autofocus id="companyGroupName" maxlength="20" (blur)="checkForDuplicateCompanyGrp()" class="form-control capitalize"
-          [formControl]="companyGroupForm.controls['companyGroupName']">
-        </div>
-
-            <div class="input-group">
-              <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
-              <button type="submit"  class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-            </div>
-      </form>
     </div>
   </ng-template>

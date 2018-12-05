@@ -44,6 +44,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-businessexecutives [isModelWindowView]=true [bodyStyle]="row" (callbackOnModelWindowClose)="successMsg()"></app-businessexecutives>
+    <app-businessexecutives [isModelWindowView]=true [bodyStyle]="row"
+    [gridDataList]="typeaheadDataList" (callbackOnModelWindowClose)="successMsg()"></app-businessexecutives>
   </div>
 </ng-template>

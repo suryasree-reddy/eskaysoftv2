@@ -41,5 +41,5 @@
 <div *ngIf="!isModelWindowView" class="col-xs-7">
   <br /><br />
   <app-synectiks-common-grid [endPoint]="endPoint"  [rowSelection]="'single'" (intialLoad)='onInitialDataLoad($event)'
-   [gridDataList]="statesList" (valueChange)='valueChange($event)' [screenColums]="'StateListColumns'"></app-synectiks-common-grid>
+   [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'StateListColumns'"></app-synectiks-common-grid>
 </div>

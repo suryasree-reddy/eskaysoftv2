@@ -34,7 +34,7 @@
             (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control capitalize">
           <span class="caret"></span>
         </div>
-        
+
         <div class="input-group" >
             <p>{{'customerdiscount.disc' | translate}}: *</p>
             <input id="disc" type="number" min="0" maxlength="2" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
@@ -69,56 +69,7 @@
       </button>
   </div>
   <div class="modal-body">
-      <form [formGroup]="companyForm" (ngSubmit)="saveChildCmpForm()" autocomplete="off">
-          <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess"[formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-            [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
+    <app-companies [isModelWindowView]=true [bodyStyle]="row" [gridDataList]="typeaheadCompanyDataList"  (callbackOnModelWindowClose)="successMsg()"></app-companies>
 
-              <div class="input-group">
-                <p>{{'companies.name' | translate}}: *</p>
-                <input autofocus id="companyName" maxlength="40"   (blur)="checkForDuplicateCompanyName()"  class="form-control capitalize" [formControl]="companyForm.controls['companyName']">
-            </div>
-
-          <div class="input-group">
-              <p>{{'companies.code' | translate}}: *</p>
-              <input id="companyCode"  maxlength="40"  (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['companyCode']">
-          </div>
-
-    <div class="input-group">
-      <p>{{'companygroup.name' | translate }}: * &emsp; </p>
-      <input id="companyGroupName" maxlength="20" formControlName="companyGroupName" [typeahead]="typeaheadCompanyGroupDataList" typeaheadOptionField="companyGroupName"
-      [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedCompanyGroupData($event)" class="form-control capitalize"/>
-      <span class="caret"></span>
-    </div>
-
-          <div class="input-group">
-            <p>{{'companies.type' | translate}}: *</p>
-            <input id="companyType" maxlength="10" class="form-control" [formControl]="companyForm.controls['companyType']"
-            [typeahead]="companyTypeList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
-            <span class="caret"></span>
-          </div>
-
-          <div class="input-group">
-            <p>{{'companies.status' | translate}}: *</p>
-            <input id="companyStatus" maxlength="10" class="form-control" [formControl]="companyForm.controls['companyStatus']"
-            [typeahead]="companyStatusList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-            <span class="caret"></span>
-        </div>
-
-        <div class="input-group">
-            <p>{{'companies.invGenType' | translate}}: *</p>
-            <input id="invGenType" maxlength="8" class="form-control" [formControl]="companyForm.controls['invGenType']"
-            [typeahead]="invGenList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-          <span class="caret"></span>
-          </div>
-          <div class="input-group">
-            <p>{{'companies.invPrefix' | translate}}: *</p>
-            <input id="invPrefix" maxlength="10" class="form-control" [formControl]="companyForm.controls['invPrefix']">
-          </div>
-
-          <div class="input-group">
-              <button type="button" (click)="resetChildForm()" class="btn btn-primary">{{'button.reset' | translate }}</button>
-              <button type="submit" class="btn btn-primary mr-l-10">{{'button.save' | translate }}</button>
-          </div>
-      </form>
   </div>
 </ng-template>

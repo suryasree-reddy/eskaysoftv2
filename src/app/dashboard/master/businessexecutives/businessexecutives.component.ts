@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,7 +16,7 @@ export class BusinessexecutivesComponent implements OnInit {
 
   public businessExecutiveForm: FormGroup;
   private endPoint: string = "businessexecutive/";
-  public gridDataList: any = [];
+  @Input() gridDataList: any = [];
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
@@ -139,7 +139,9 @@ export class BusinessexecutivesComponent implements OnInit {
     this.duplicateBusExecName = false;
     this.duplicateBusExecNum = false;
     this.formRequiredError = this.formSuccess = false;
-    this.loadGridData();
+    if(!this.isModelWindowView){
+        this.loadGridData();
+    }
     this.focusField.nativeElement.focus();
   }
 

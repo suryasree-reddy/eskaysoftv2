@@ -19,9 +19,8 @@ export class StatesComponent implements OnInit {
   private prevStateCode: string = null;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
-  public statesList: any = [];
+  @Input() gridDataList: any = [];
   public stateZone: any[];
-  public statesListColumns;
   public editStates;
   public deleteFlag: boolean = true;
   public nameFlag;
@@ -51,7 +50,7 @@ export class StatesComponent implements OnInit {
   }
 
   onInitialDataLoad(dataList: any[]) {
-    this.statesList = dataList;
+    this.gridDataList = dataList;
   }
 
   ngOnInit() {
@@ -61,7 +60,7 @@ export class StatesComponent implements OnInit {
       stateCode: ['', Validators.required],
       zone: ['', Validators.required],
     });
-  
+
     this.focusField.nativeElement.focus();
   this.stateZone =  this.sharedDataService.getSharedCommonJsonData().StateZone;
   }
@@ -86,10 +85,10 @@ export class StatesComponent implements OnInit {
 
   checkForDuplicateStateName() {
     if (!this.nameFlag) {
-      this.duplicateStateName = this.masterService.hasDataExist(this.statesList, 'stateName', this.statesForm.value.stateName);
+      this.duplicateStateName = this.masterService.hasDataExist(this.gridDataList, 'stateName', this.statesForm.value.stateName);
       if (this.duplicateStateName) {
         const temp = this.statesForm.value.stateName;
-        const stateObj = _.filter(this.statesList, function(o) { return o.stateName.toLowerCase() == temp.toLowerCase() });
+        const stateObj = _.filter(this.gridDataList, function(o) { return o.stateName.toLowerCase() == temp.toLowerCase() });
         this.statesForm.patchValue({ stateCode: stateObj[0].stateCode })
         this.statesForm.patchValue({ zone: stateObj[0].zone })
       }
@@ -100,7 +99,7 @@ export class StatesComponent implements OnInit {
   checkForDuplicateStateCode() {
     this.duplicateStateCode = false;
     if (this.prevStateCode != this.statesForm.value.stateCode) {
-      this.duplicateStateCode = this.masterService.hasDataExist(this.statesList, 'stateCode', parseInt(this.statesForm.value.stateCode));
+      this.duplicateStateCode = this.masterService.hasDataExist(this.gridDataList, 'stateCode', parseInt(this.statesForm.value.stateCode));
     }
     this.getDuplicateErrorMessages();
   }
@@ -108,8 +107,8 @@ export class StatesComponent implements OnInit {
   loadGridData() {
     this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
-      this.statesList = list;
-      localStorage.setItem('rowDataLength', JSON.stringify(this.statesList.length));
+      this.gridDataList = list;
+      localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
     });
   }
 
@@ -149,7 +148,9 @@ export class StatesComponent implements OnInit {
     this.duplicateStateName = false;
     this.duplicateStateCode = false;
     this.formRequiredError = this.formSuccess = false;
-    this.loadGridData();
+    if(!this.isModelWindowView){
+        this.loadGridData();
+    }
     this.focusField.nativeElement.focus();
   }
 

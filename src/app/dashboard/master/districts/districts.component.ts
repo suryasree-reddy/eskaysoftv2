@@ -5,7 +5,6 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from '../master.service';
 import '../../../../assets/styles/mainstyles.scss';
-import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
@@ -18,16 +17,12 @@ export class DistrictsComponent implements OnInit {
   private endPoint: string = "districts/";
   private stateEndPoint: string = "states/";
   public districtsForm: FormGroup;
-  public statesForm: FormGroup;
   public formSuccess: boolean = false;
   private duplicateStateName: boolean = false;
   private duplicateStateCode: boolean = false;
   public formRequiredError: boolean = false;
-  public scFormRequiredError: boolean = false;
-  public scFormSuccess: boolean = false;
   public districtsList: any = [];
   public statesList: any = [];
-  public editDistricts;
   public nameFlag;
   public deleteFlag: boolean = true;
   public selectedState: any;
@@ -36,10 +31,8 @@ export class DistrictsComponent implements OnInit {
   private duplicateDistName: boolean = false;
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
-  public childDuplicateMessageParam: string = null;
   modalRef: BsModalRef;
   message: string;
-  public childDuplicateMessage: string = null;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
   @Input() isModelWindowView: boolean = false;
@@ -63,26 +56,17 @@ export class DistrictsComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-    this.resetStatesForm();
-    this.scFormRequiredError = this.scFormSuccess = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
   ngOnInit() {
-    this.statesForm = this.fb.group({
-      id: [],
-      stateName: ['', Validators.required],
-      stateCode: ['', Validators.required],
-      zone: ['', Validators.required],
-    });
-
     this.districtsForm = this.fb.group({
       id: [],
       districtName: ['', Validators.required],
       stateId: ['', Validators.required],
       stateName: ['', Validators.required]
     });
-  
+
     this.loadStatesData();
     this.focusField.nativeElement.focus();
     this.stateZone = this.sharedDataService.getSharedCommonJsonData().StateZone;
@@ -96,29 +80,10 @@ export class DistrictsComponent implements OnInit {
       this.formRequiredError = false;
     }
 
-    if (!this.duplicateStateName || !this.duplicateStateCode) {
-      this.childDuplicateMessage = null;
-      this.childDuplicateMessageParam = null;
-      this.scFormRequiredError = false;
-    }
-
     if (this.duplicateDistName) {
       this.duplicateMessage = "districts.duplicateNameErrorMessage";
       this.duplicateMessageParam = this.districtsForm.value.districtName;
     }
-    if (this.duplicateStateName && this.duplicateStateCode) {
-      this.childDuplicateMessage = "states.duplicateErrorMessage";
-
-    }
-    else if (this.duplicateStateName) {
-      this.childDuplicateMessage = "states.duplicateNameErrorMessage";
-      this.childDuplicateMessageParam = this.statesForm.value.stateName;
-
-    } else if (this.duplicateStateCode) {
-      this.childDuplicateMessage = "states.duplicateCodeErrorMessage";
-      this.childDuplicateMessageParam = this.statesForm.value.stateCode;
-    }
-
   }
 
   checkForDuplicateDistName() {
@@ -147,16 +112,6 @@ export class DistrictsComponent implements OnInit {
     });
   }
 
-  checkForDuplicateStateCode() {
-    this.duplicateStateCode = this.masterService.hasDataExist(this.statesList, 'stateCode', parseInt(this.statesForm.value.stateCode));
-    this.getDuplicateErrorMessages();
-  }
-
-  checkForDuplicateStateName() {
-    this.duplicateStateName = this.masterService.hasDataExist(this.statesList, 'stateName', this.statesForm.value.stateName);
-    this.getDuplicateErrorMessages();
-  }
-
   verifyDistDuplicates() {
     let distNameList = this.districtsList.map((item) => { return item.districtName });
     return this.masterService.verifyDuplicates(distNameList, this.districtsForm.value.districtName, true);
@@ -164,26 +119,6 @@ export class DistrictsComponent implements OnInit {
 
   save() {
     this.buttonsComponent.save();
-  }
-
-  saveState() {
-    if (this.statesForm.valid && this.childDuplicateMessage == null) {
-      this.showConfirmationModal();
-    } else {
-      this.scRequiredErrMsg();
-    }
-  }
-
-  save_State() {
-    this.masterService.createRecord("states/", this.statesForm.value).subscribe(res => {
-      this.showInformationModal();
-      this.loadStatesData();
-      this.modalRef.hide();
-      this.statesForm.reset();
-
-    }, (error) => {
-      throw error;
-    });
   }
 
   delete() {
@@ -214,67 +149,27 @@ export class DistrictsComponent implements OnInit {
     }
   }
 
-  scRequiredErrMsg() {
-    if (this.childDuplicateMessage == null) {
-      this.scFormRequiredError = true;
-      this.scFormSuccess = false;
-    }
-
-  }
-
   resetForm() {
     this.loadGridData();
     this.loadStatesData();
     this.formRequiredError = this.formSuccess = false;
     this.districtsForm.reset();
-    this.childDuplicateMessage = null;
-    this.editDistricts = null;
     this.nameFlag = false;
     this.deleteFlag = false;
     this.formRequiredError = false;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
-    this.childDuplicateMessageParam = null;
     this.duplicateDistName = false;
     this.focusField.nativeElement.focus();
   }
 
-  resetStatesForm() {
-    this.childDuplicateMessageParam = null;
-    this.childDuplicateMessage = null;
-    this.scFormRequiredError = this.scFormSuccess = false;
-    this.duplicateStateName = false;
-    this.duplicateStateCode = false;
-    this.statesForm.reset();
-  }
-
   editable(s) {
-    this.editDistricts = s;
     this.districtsForm.reset(s);
     this.nameFlag = true;
     this.selectedState = {};
-    this.childDuplicateMessage = null;
     this.selectedState.id = s.stateId;
-    this.deleteFlag = !this.editDistricts.deleteFlag;
+    this.deleteFlag = !s.deleteFlag;
     this.districtsForm.reset(s);
-  }
-
-  showInformationModal() {
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
-      "State", "states.saveInformationMessage", '');
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe();
-  }
-
-  showConfirmationModal(): void {
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
-      "State", "states.saveConfirmationMessage", 'green', '');
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
-      if (result) {
-        this.save_State();
-      }
-    });
   }
 
 }

@@ -15,7 +15,7 @@ export class CompanyGroupComponent implements OnInit {
 
   public companyGroupForm: FormGroup;
   private endPoint: string = "companygroup/";
-  public gridDataList: any = [];
+  @Input() gridDataList: any = [];
   public gridSelectedRow;
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
@@ -117,7 +117,9 @@ export class CompanyGroupComponent implements OnInit {
     this.deleteFlag = true;
     this.duplicateCompanyGrp = false;
     this.formRequiredError = this.formSuccess = false;
-    this.loadGridData();
+    if(!this.isModelWindowView){
+        this.loadGridData();
+    }
     this.focusField.nativeElement.focus();
   }
 

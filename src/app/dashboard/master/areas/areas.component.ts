@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -19,10 +19,9 @@ export class AreasComponent implements OnInit {
   public areaForm: FormGroup;
   private areaEndPoint: string = "area/";
   private beEndPoint: string = "businessexecutive/";
-  public gridDataList: any = [];
+  @Input() gridDataList: any = [];
   public typeaheadDataList: any = [];
   public gridSelectedRow;
-  public selectedTypeahead: any;
   public deleteFlag: boolean = true;
   public formRequiredError: boolean = false;
   public formSuccess: boolean = false;
@@ -35,6 +34,10 @@ export class AreasComponent implements OnInit {
   message: string;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   @ViewChild('focus') focusField: ElementRef;
+
+  @Input() isModelWindowView: boolean = false;
+  @Input() bodyStyle: string = "col-xs-5";
+  @Output() callbackOnModelWindowClose: EventEmitter<null> = new EventEmitter();
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
@@ -98,7 +101,7 @@ export class AreasComponent implements OnInit {
   }
 
   loadSelectedTypeahead(event) {
-    this.selectedTypeahead = event.item;
+    this.areaForm.patchValue({ businessExecutiveId: event.item.id });
   }
 
   openModal(template: TemplateRef<any>) {
@@ -106,7 +109,6 @@ export class AreasComponent implements OnInit {
   }
 
   save() {
-    this.areaForm.value.businessExecutiveId = this.selectedTypeahead.id;
     this.buttonsComponent.save();
   }
 
@@ -139,7 +141,9 @@ export class AreasComponent implements OnInit {
     this.nameFlag = false;
     this.deleteFlag = true;
     this.formRequiredError = this.formSuccess = false;
-    this.loadGridData();
+    if(!this.isModelWindowView){
+        this.loadGridData();
+    }
     this.formRequiredError = false;
     this.duplicateAreaName = false;
     this.duplicateMessage = null;
