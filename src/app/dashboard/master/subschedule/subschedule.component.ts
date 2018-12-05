@@ -8,6 +8,7 @@ import '../../../../assets/styles/mainstyles.scss';
 import { ConfirmationModelDialogComponent } from '../../../commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
+import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 
 @Component({
   selector: 'app-subschedule',
@@ -17,12 +18,12 @@ import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 export class SubscheduleComponent implements OnInit {
 
   public scheduleForm: FormGroup;
-  private endPoint: string = "subschedules/";
+  private endPoint = 'subschedules/';
   public subScheduleForm: FormGroup;
-  public formRequiredError: boolean = false;
-  public formSuccess: boolean = false;
-  public scFormRequiredError: boolean = false;
-  public scFormSuccess: boolean = false;
+  public formRequiredError = false;
+  public formSuccess = false;
+  public scFormRequiredError = false;
+  public scFormSuccess = false;
   public nameFlag;
   subScheduleList: any = [];
   public childDuplicateMessage: string = null;
@@ -33,16 +34,17 @@ export class SubscheduleComponent implements OnInit {
   scheduleTypes: any;
   modalRef: BsModalRef;
   message: string;
-  public deleteFlag: boolean = true;
-  private duplicateSchName: boolean = false;
-  private duplicateSubSchName: boolean = false;
-  private duplicateSchIndex: boolean = false;
+  private deleteFlag = true;
+  private duplicateSchName = false;
+  private duplicateSubSchName = false;
+  private duplicateSchIndex = false;
   public duplicateMessage: string = null;
   public duplicateMessageParam: string = null;
   @ViewChild('focus') focusField: ElementRef;
-  @Input() isModelWindowView: boolean = false;
-  @Input() bodyStyle: string = "col-xs-5";
+  @Input() isModelWindowView = false;
+  @Input() bodyStyle = 'col-xs-5';
   @Output() callbackOnModelWindowClose: EventEmitter<null> = new EventEmitter();
+  @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
@@ -76,13 +78,12 @@ export class SubscheduleComponent implements OnInit {
     this.loadScheduleData();
     this.focusField.nativeElement.focus();
     this.scheduleTypes = this.sharedDataService.getSharedCommonJsonData().ScheduleTypes;
-    
   }
 
   loadScheduleData() {
-    this.masterService.getParentData("schedules/").subscribe(list => {
+    this.masterService.getParentData('schedules/').subscribe(list => {
       this.scheduleList = list;
-    })
+    });
   }
 
   loadGridData() {
@@ -90,52 +91,31 @@ export class SubscheduleComponent implements OnInit {
     this.masterService.dataObject.subscribe(list => {
       this.subScheduleList = list;
       localStorage.setItem('rowDataLength', JSON.stringify(this.subScheduleList.length));
-    })
+    });
   }
 
   onSelectSchedule(event) {
     this.selectedSchedule = event.item;
     const temp = this.selectedSchedule.id;
-    const selectedScheduleNameList = _.filter(this.subScheduleList, function(o) { return o.scheduleId == temp });
-    this.subScheduleForm.patchValue({ subScheduleIndex: selectedScheduleNameList.length + 1 });
-  }
-
-  openModal(template: TemplateRef<any>) {
-    this.resetScheduleForm();
-    this.scFormRequiredError = this.scFormSuccess = false;
-    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
-  }
-
-  saveSchedule() {
-    if (this.scheduleForm.valid && this.childDuplicateMessage == null) {
-      this.showConfirmationModal("SaveSchedule");
-    } else {
-      this.scRequiredErrMsg();
+    const tempName = this.selectedSchedule.name;
+    const selectedScheduleNameList = _.filter(this.subScheduleList, function(o) { return o.scheduleId === temp ; });
+    if (this.nameFlag && this.editSubSchedule.scheduleId !== event.item.id) {
+      this.subScheduleForm.patchValue({ subScheduleIndex: selectedScheduleNameList.length + 1 });
+    }
+    if (!this.nameFlag) {
+      this.subScheduleForm.patchValue({ subScheduleIndex: selectedScheduleNameList.length + 1 });
     }
   }
 
-  saveScheduleForm() {
-    this.masterService.createRecord("schedules/", this.scheduleForm.value).subscribe(res => {
-      this.showInformationModal("SaveSchedule");
-      this.modalRef.hide();
-      this.scheduleForm.reset();
-    }, (error) => {
-      throw error;
-    });
+  openModal(template: TemplateRef<any>) {
+      this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
-  resetScheduleForm() {
-    this.scFormRequiredError = false;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
-    this.duplicateSchIndex = false;
-    this.duplicateSchName = false;
-    this.scheduleForm.reset();
-  }
 
   checkForDuplicateSubScheduleName() {
     if (!this.nameFlag) {
-      this.duplicateSubSchName = this.masterService.hasDataExist(this.subScheduleList, 'subScheduleName', this.subScheduleForm.value.subScheduleName);
+      this.duplicateSubSchName = this.masterService.hasDataExist(this.subScheduleList,
+        'subScheduleName', this.subScheduleForm.value.subScheduleName);
       this.getDuplicateErrorMessages();
     }
   }
@@ -147,7 +127,8 @@ export class SubscheduleComponent implements OnInit {
 
   validateFormOnBlur() {
     this.formRequiredError = false;
-    this.duplicateSchIndex = this.masterService.hasDataExist(this.scheduleList, 'scheduleIndex', parseInt(this.scheduleForm.value.scheduleIndex));
+    this.duplicateSchIndex = this.masterService.hasDataExist(this.scheduleList,
+      'scheduleIndex', parseInt(this.scheduleForm.value.scheduleIndex, 0));
     this.getDuplicateErrorMessages();
   }
 
@@ -164,65 +145,41 @@ export class SubscheduleComponent implements OnInit {
     }
 
     if (this.duplicateSubSchName) {
-      this.duplicateMessage = "subschedule.duplicateNameErrorMessage";
+      this.duplicateMessage = 'subschedule.duplicateNameErrorMessage';
       this.duplicateMessageParam = this.subScheduleForm.value.subScheduleName;
     }
     if (this.duplicateSchName && this.duplicateSchIndex) {
-      this.childDuplicateMessage = "schedule.duplicateErrorMessage";
-    }
-    else if (this.duplicateSchIndex) {
-      this.childDuplicateMessage = "schedule.duplicateIndexErrorMessage";
+      this.childDuplicateMessage = 'schedule.duplicateErrorMessage';
+    } else if (this.duplicateSchIndex) {
+      this.childDuplicateMessage = 'schedule.duplicateIndexErrorMessage';
       this.childDuplicateMessageParam = this.scheduleForm.value.scheduleIndex;
-    }
-    else if (this.duplicateSchName) {
-      this.childDuplicateMessage = "schedule.duplicateNameErrorMessage";
+    } else if (this.duplicateSchName) {
+      this.childDuplicateMessage = 'schedule.duplicateNameErrorMessage';
       this.childDuplicateMessageParam = this.scheduleForm.value.scheduleName;
     }
   }
 
-  saveForm() {
-    this.subScheduleForm.value.scheduleId = this.selectedSchedule.id;
-    if (this.subScheduleForm.value.id) {
-      this.masterService.updateRecord(this.endPoint, this.subScheduleForm.value).subscribe(res => {
-        this.showInformationModal("Save");
-      }, (error) => {
-        throw error;
-      });
-    } else {
-      this.masterService.createRecord(this.endPoint, this.subScheduleForm.value).subscribe(res => {
-        this.showInformationModal("Save");
-      }, (error) => {
-      throw error;
-      });
-    }
-  }
-
   save() {
-    this.formRequiredError = false;
-    if (this.subScheduleForm.valid && this.selectedSchedule && this.selectedSchedule.id && this.duplicateMessage == null) {
-      this.showConfirmationModal('Save');
-    } else {
-      this.requiredErrMsg();
-    }
+    this.buttonsComponent.save();
   }
 
   delete() {
-    console.log("this.editSubSchedule--", this.editSubSchedule);
-    this.masterService.deleteRecord(this.endPoint, this.editSubSchedule.id).subscribe(res => {
-      this.showInformationModal("Delete");
-    }, (error) => {
-      throw error;
-    });
-    localStorage.removeItem('ag-activeRow');
+    this.buttonsComponent.delete();
   }
 
   successMsg() {
-    if(this.isModelWindowView){
-      this.callbackOnModelWindowClose.emit();
-    }else{
-      this.formSuccess = true;
-      this.formRequiredError = false;
-      this.resetForm();
+    if (this.modalRef !== undefined) {
+      this.modalRef.hide();
+      this.modalService.hide(1);
+      this.loadScheduleData();
+    } else {
+      if (this.isModelWindowView) {
+        this.callbackOnModelWindowClose.emit();
+      } else {
+        this.formSuccess = true;
+        this.formRequiredError = false;
+        this.resetForm();
+      }
     }
   }
 
@@ -233,15 +190,10 @@ export class SubscheduleComponent implements OnInit {
     }
   }
 
-  scRequiredErrMsg() {
-    if (this.childDuplicateMessage == null) {
-      this.scFormRequiredError = true;
-      this.scFormSuccess = false;
-    }
-  }
-
   resetForm() {
-    this.loadGridData();
+    if(!this.isModelWindowView){
+        this.loadGridData();
+    }
     this.loadScheduleData();
     this.formRequiredError = this.formSuccess = false;
     this.subScheduleForm.reset();
@@ -272,66 +224,5 @@ export class SubscheduleComponent implements OnInit {
     this.subScheduleForm.reset(s);
   }
 
-  showInformationModal(eventType) {
-    var msg;
-    var title;
-    if (eventType === "Delete") {
-      msg = 'subschedule.deleteInformationMessage';
-      title = 'Sub-Schedule';
-    } else if (eventType === "SaveSchedule") {
-      title = 'Schedule';
-      msg = 'schedule.saveInformationMessage';
-    } else {
-      title = 'Sub-Schedule';
-      msg = 'subschedule.saveInformationMessage';
-    }
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showInformationModal(
-      title,
-      msg,
-      ''
-    );
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
-      if (eventType === "SaveSchedule") {
-        this.loadScheduleData();
-      } else {
-        this.successMsg();
-      }
-    });
-  }
-
-  showConfirmationModal(eventType): void {
-    var msg;
-    var title;
-    if (eventType === "Delete") {
-      title = 'Sub-Schedule';
-      msg = 'subschedule.deleteConfirmationMessage';
-    } else if (eventType === "SaveSchedule") {
-      title = 'Schedule';
-      msg = 'schedule.saveConfirmationMessage';
-    } else {
-      title = 'Sub-Schedule';
-      msg = 'subschedule.saveConfirmationMessage';
-    }
-    const modal = this.modalService.show(ConfirmationModelDialogComponent);
-    (<ConfirmationModelDialogComponent>modal.content).showConfirmationModal(
-      title,
-      msg,
-      'green',
-      ''
-    );
-
-    (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
-      if (result) {
-        if (eventType === "Delete") {
-          this.delete();
-        } else if (eventType === "SaveSchedule") {
-          this.saveScheduleForm();
-        } else {
-          this.saveForm();
-        }
-      }
-    });
-  }
 
 }

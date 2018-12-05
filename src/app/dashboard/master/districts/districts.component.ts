@@ -150,7 +150,9 @@ export class DistrictsComponent implements OnInit {
   }
 
   resetForm() {
-    this.loadGridData();
+    if(!this.isModelWindowView){
+        this.loadGridData();
+    }
     this.loadStatesData();
     this.formRequiredError = this.formSuccess = false;
     this.districtsForm.reset();

@@ -18,7 +18,7 @@ export class ScheduleComponent implements OnInit {
   public scheduleTypes: any = [];
   public formSuccess: boolean = false;
   public formRequiredError: boolean = false;
-  public scheduleList: any = [];
+  @Input() gridDataList: any = [];
   public editSchedule;
   public deleteFlag: boolean = true;
   public duplicateMessage: string = null;
@@ -47,7 +47,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   onInitialDataLoad(dataList: any[]) {
-    this.scheduleList = dataList;
+    this.gridDataList = dataList;
   }
 
   ngOnInit() {
@@ -57,7 +57,7 @@ export class ScheduleComponent implements OnInit {
       scheduleIndex: ['', Validators.required],
       scheduleType: ['', Validators.required],
     });
-  
+
     this.focusField.nativeElement.focus();
     this.scheduleTypes = this.sharedDataService.getSharedCommonJsonData().ScheduleTypes;
   }
@@ -66,7 +66,7 @@ export class ScheduleComponent implements OnInit {
     this.formRequiredError = false;
     this.duplicateSchIndex = false;
     if (this.lastSchIndex != this.scheduleForm.value.scheduleIndex) {
-      this.duplicateSchIndex = this.masterService.hasDataExist(this.scheduleList, 'scheduleIndex', parseInt(this.scheduleForm.value.scheduleIndex));
+      this.duplicateSchIndex = this.masterService.hasDataExist(this.gridDataList, 'scheduleIndex', parseInt(this.scheduleForm.value.scheduleIndex));
       this.getDuplicateErrorMessages();
     }
   }
@@ -94,7 +94,7 @@ export class ScheduleComponent implements OnInit {
 
   checkForDuplicateScheduleName() {
     if (!this.nameFlag) {
-      this.duplicateSchName = this.masterService.hasDataExist(this.scheduleList, 'scheduleName', this.scheduleForm.value.scheduleName);
+      this.duplicateSchName = this.masterService.hasDataExist(this.gridDataList, 'scheduleName', this.scheduleForm.value.scheduleName);
       this.getDuplicateErrorMessages();
     }
   }
@@ -102,8 +102,8 @@ export class ScheduleComponent implements OnInit {
   loadGridData() {
     this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
-      this.scheduleList = list;
-      localStorage.setItem('rowDataLength', JSON.stringify(this.scheduleList.length));
+      this.gridDataList = list;
+      localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
     });
   }
 
@@ -145,7 +145,9 @@ export class ScheduleComponent implements OnInit {
     this.nameFlag = false;
     this.lastSchIndex;
     this.formRequiredError = this.formSuccess = false;
-    this.loadGridData();
+    if(!this.isModelWindowView){
+        this.loadGridData();
+    }
     this.focusField.nativeElement.focus();
   }
 

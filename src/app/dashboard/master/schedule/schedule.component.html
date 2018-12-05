@@ -40,6 +40,6 @@
 <div *ngIf="!isModelWindowView" class="col-xs-7">
   <br /><br />
   <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
-      [gridDataList]="scheduleList" (valueChange)='valueChange($event)' [screenColums]="'ScheduleListColumns'">
+      [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'ScheduleListColumns'">
   </app-synectiks-common-grid>
 </div>

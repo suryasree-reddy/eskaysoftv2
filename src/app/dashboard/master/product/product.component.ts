@@ -243,7 +243,9 @@ export class ProductComponent implements OnInit {
     this.nameFlag = false;
     // this.deleteFlag = true;
     this.formRequiredError = this.formSuccess = false;
-    this.loadGridData();
+    if(!this.isModelWindowView){
+        this.loadGridData();
+    }
     this.loadTaxTypeaheadData();
     this.duplicateProductCode = false;
     this.duplicateProductName = false;
