@@ -14,7 +14,7 @@
         </div>
 
         <div class="col-xs-6 col-rt">
-            <p>{{'companies.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
+            <p>{{'companies.name' | translate}}: * &emsp; (<a *ngIf="!isModelWindowView"style="cursor: pointer" (click)="openModal(cmpTemplate)">create</a>)</p>
             <input id="companyName"  formControlName="companyName" [typeahead]="typeaheadCompanyDataList"
             typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
             (typeaheadOnSelect)="loadSelectedCompanyTypeahead($event)" class="form-control capitalize">
@@ -23,7 +23,7 @@
 
         <div class="margin-top-0px">
             <div class="col-xs-6 col-3-lt">
-            <p>{{'productgroup.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
+            <p>{{'productgroup.name' | translate}}: * &emsp; (<a *ngIf="!isModelWindowView" style="cursor: pointer" (click)="openModal(template)">create </a>)</p>
               <input id="productGroupName" formControlName="productGroupName" [typeahead]="typeaheadGroupDataList"
               typeaheadOptionField="productGroupName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"
               (typeaheadOnSelect)="loadSelectedGroupTypeahead($event)" class="form-control capitalize">
@@ -43,7 +43,7 @@
 
         <div class="margin-top-0px">
           <div class="col-xs-6 col-3-lt">
-              <p>{{'productcategory.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(pcTemplate)">create
+              <p>{{'productcategory.name' | translate}}: * &emsp; (<a *ngIf="!isModelWindowView"style="cursor: pointer" (click)="openModal(pcTemplate)">create
               </a>)</p>
               <input id="productCategoryName" formControlName="productCategoryName" [typeahead]="typeaheadCategoryDataList"
               typeaheadOptionField="productCategoryName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"

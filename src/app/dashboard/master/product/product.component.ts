@@ -22,7 +22,7 @@ export class ProductComponent implements OnInit {
   private cEndPoint: string = "company/";
   private cgEndPoint: string = "companygroup/";
   private taxEndPoint: string = "tax/";
-  public gridDataList: any = [];
+  @Input() gridDataList: any = [];
   public companyTypeList: any = [];
   public companyStatusList: any = [];
   public typeaheadDataList: any = [];
