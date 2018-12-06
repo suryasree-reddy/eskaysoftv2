@@ -9,7 +9,7 @@
       <input id="districtName" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateDistName()" class="form-control capitalize" [formControl]="districtsForm.controls['districtName']">
     </div>
     <div class="input-group">
-      <p>{{'states.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">{{'common.createNew' | translate}}</a>)</p>
+      <p>{{'states.name' | translate }}: * &emsp; (<a *ngIf="!isModelWindowView" style="cursor: pointer" (click)="openModal(template)">{{'common.createNew' | translate}}</a>)</p>
       <input id="stateName" maxlength="20" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control capitalize">
       <span class="caret"></span>
     </div>
@@ -21,7 +21,7 @@
   </form>
 </div>
 <div *ngIf="!isModelWindowView" class="col-xs-7">
-  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="districtsList" (valueChange)='valueChange($event)' [screenColums]="'DistrictsColumns'"></app-synectiks-common-grid>
+  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'DistrictsColumns'"></app-synectiks-common-grid>
 </div>
 
 <ng-template #template>

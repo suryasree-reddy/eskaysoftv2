@@ -11,7 +11,7 @@
     </div>
 
     <div class="input-group">
-      <p>{{'schedule.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">{{'common.createNew' | translate}}</a>)</p>
+      <p>{{'schedule.name' | translate}}: * &emsp; (<a *ngIf="!isModelWindowView" style="cursor: pointer" (click)="openModal(template)">{{'common.createNew' | translate}}</a>)</p>
       <input id="scheduleType" maxlength="40" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control capitalize">
     </div><span class="caret"></span>
 
@@ -26,7 +26,7 @@
   </form>
 </div>
 <div *ngIf="!isModelWindowView" class="col-xs-7">
-  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="subScheduleList" (valueChange)='valueChange($event)' [screenColums]="'SubScheduleListColumns'"></app-synectiks-common-grid>
+  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'SubScheduleListColumns'"></app-synectiks-common-grid>
 </div>
 
 <ng-template #template>

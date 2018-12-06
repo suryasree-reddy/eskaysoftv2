@@ -10,7 +10,7 @@
           <p> Search By {{'accountinfo.name' | translate}}:</p>
         </div>
         <div class="col-md-4" style="margin-left: -2em;">
-          <input id="searchByAccountName" maxlength="50" formControlName="accountName" [typeahead]="accountsList" typeaheadOptionField="accountName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)"
+          <input id="searchByAccountName" maxlength="50" formControlName="accountName" [typeahead]="gridDataList" typeaheadOptionField="accountName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)"
             class="form-control capitalize">
           <span class="caret"></span>
         </div>
@@ -316,32 +316,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="subScheduleForm" (ngSubmit)="saveChildForm('SubSchedule', subScheduleForm)" autocomplete="off">
-
-      <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
-        [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
-
-      <div class="input-group">
-        <p>{{'subschedule.name' | translate}}: *</p>
-        <input autofocus id="subScheduleName" maxlength="40" class="form-control capitalize" (blur)="checkForDuplicateSubScheduleName()" [formControl]="subScheduleForm.controls['subScheduleName']">
-      </div>
-      <div class="input-group">
-        <p>{{'schedule.name' | translate}}: * &emsp; </p>
-        <input id="scheduleType" maxlength="40" formControlName="scheduleName" [typeahead]="scheduleList" typeaheadOptionField="scheduleName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSchedule($event)" class="form-control capitalize">
-      </div><span class="caret"></span>
-
-      <div class="input-group">
-        <p>{{'subschedule.index' | translate}}: *</p>
-        <input id="subScheduleIndex" type="number" min="0" maxlength="2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" [readonly]="true" class="form-control" [formControl]="subScheduleForm.controls['subScheduleIndex']">
-      </div>
-
-      <div class="input-group">
-        <button type="button" (click)="resetChildForm()" class="btn btn-primary">Reset</button>
-        <button type="submit" class="btn btn-primary mr-l-10">Save</button>
-      </div>
-
-    </form>
-
+    <app-subschedule [isModelWindowView]=true [bodyStyle]="row" [gridDataList]="subScheduleList" (callbackOnModelWindowClose)="successMsg()"></app-subschedule>
   </div>
 </ng-template>
 
@@ -353,30 +328,10 @@
     </button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="districtsForm" (ngSubmit)="saveChildForm('District', districtsForm)" autocomplete="off">
-
-      <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
-        [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
-
-      <div class="input-group">
-        <p>{{'districts.name' | translate }}: *</p>
-        <input autofocus id="districtName" maxlength="20" class="form-control capitalize" (blur)="checkForDuplicateDistrictName()" [formControl]="districtsForm.controls['districtName']">
-      </div>
-      <div class="input-group">
-        <p>{{'states.name' | translate }}: * &emsp;</p>
-        <input id="stateName" maxlength="20" formControlName="stateName" [typeahead]="statesList" typeaheadOptionField="stateName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectState($event)" class="form-control capitalize">
-        <span class="caret"></span>
-      </div>
-
-
-      <div class="input-group">
-        <button type="button" (click)="resetChildForm()" class="btn btn-primary">Reset</button>
-        <button type="submit" class="btn btn-primary mr-l-10">Save</button>
-      </div>
-    </form>
-
+    <app-districts [isModelWindowView]=true [bodyStyle]="row" [gridDataList]="districtsList" (callbackOnModelWindowClose)="successMsg()"></app-districts>
   </div>
 </ng-template>
+
 
 <ng-template #areaTemplate>
   <div class="modal-header">
@@ -386,27 +341,6 @@
     </button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="areaForm" (ngSubmit)="saveChildForm('Area', areaForm)" autocomplete="off">
-
-      <app-errormessages [formRequiredError]="scFormRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
-        [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="childDuplicateMessage" [duplicateMessageParam]="childDuplicateMessageParam"></app-errormessages>
-
-      <div class="input-group">
-        <p>{{'areas.name' | translate }}: *</p>
-        <input autofocus id="areaName" maxlength="40" (blur)="checkForDuplicateArea()" class="form-control capitalize" [formControl]="areaForm.controls['areaName']">
-      </div>
-
-      <div class="input-group">
-        <p>{{'businessexecutive.name' | translate }}: * &emsp;</p>
-        <input id="businessExecutiveId" maxlength="50" formControlName="businessExecutiveName" [typeahead]="businessExecList" typeaheadOptionField="name" (typeaheadOnSelect)="onSelectBusinessExecutive($event)" [typeaheadOptionsLimit]="7"
-          [typeaheadMinLength]="0" class="form-control capitalize">
-        <span class="caret"></span>
-      </div>
-      <div class="input-group">
-        <button type="button" (click)="resetChildForm()" class="btn btn-primary">Reset</button>
-        <button type="submit" class="btn btn-primary mr-l-10">Save</button>
-      </div>
-    </form>
-
+    <app-areas [isModelWindowView]=true [bodyStyle]="row" [gridDataList]="areasList" (callbackOnModelWindowClose)="successMsg()"></app-areas>
   </div>
 </ng-template>

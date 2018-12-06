@@ -1,4 +1,4 @@
-<div class="col-xs-5">
+<div [ngClass]="bodyStyle">
   <h3>{{'areas.title' | translate }}</h3>
   <form [formGroup]="areaForm" (ngSubmit)="saveForm()" autocomplete="off">
     <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
@@ -10,7 +10,7 @@
     </div>
 
     <div class="input-group">
-      <p>{{'businessexecutive.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">{{'common.createNew' | translate}}</a>)</p>
+      <p>{{'businessexecutive.name' | translate }}: * &emsp; (<a *ngIf="!isModelWindowView"style="cursor: pointer" (click)="openModal(template)">{{'common.createNew' | translate}}</a>)</p>
       <input id="businessExecutiveId" maxlength="20" formControlName="businessExecutiveName" [typeahead]="typeaheadDataList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)"
         class="form-control capitalize">
       <span class="caret"></span>
@@ -23,7 +23,7 @@
   </form>
 </div>
 
-<div class="col-xs-7">
+<div *ngIf="!isModelWindowView" class="col-xs-7">
   <app-synectiks-common-grid [endPoint]="areaEndPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'AreaColumns'"></app-synectiks-common-grid>
 </div>
 

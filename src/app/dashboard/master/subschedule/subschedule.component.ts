@@ -23,7 +23,7 @@ export class SubscheduleComponent implements OnInit {
   public formRequiredError = false;
   public formSuccess = false;
   public nameFlag;
-  subScheduleList: any = [];
+  @Input() gridDataList: any = [];
   scheduleList: any = [];
   editSubSchedule: any;
   public selectedSchedule: any;
@@ -53,7 +53,7 @@ export class SubscheduleComponent implements OnInit {
   }
 
   onInitialDataLoad(dataList: any[]) {
-    this.subScheduleList = dataList;
+    this.gridDataList = dataList;
   }
 
   ngOnInit() {
@@ -78,8 +78,8 @@ export class SubscheduleComponent implements OnInit {
   loadGridData() {
     this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
-      this.subScheduleList = list;
-      localStorage.setItem('rowDataLength', JSON.stringify(this.subScheduleList.length));
+      this.gridDataList = list;
+      localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
     });
   }
 
@@ -87,7 +87,8 @@ export class SubscheduleComponent implements OnInit {
     this.selectedSchedule = event.item;
     const temp = this.selectedSchedule.id;
     const tempName = this.selectedSchedule.name;
-    const selectedScheduleNameList = _.filter(this.subScheduleList, function(o) { return o.scheduleId === temp ; });
+    this.subScheduleForm.patchValue({ scheduleId: temp});
+    const selectedScheduleNameList = _.filter(this.gridDataList, function(o) { return o.scheduleId === temp ; });
     if (this.nameFlag && this.editSubSchedule.scheduleId !== event.item.id) {
       this.subScheduleForm.patchValue({ subScheduleIndex: selectedScheduleNameList.length + 1 });
     }
@@ -103,7 +104,7 @@ export class SubscheduleComponent implements OnInit {
 
   checkForDuplicateSubScheduleName() {
     if (!this.nameFlag) {
-      this.duplicateSubSchName = this.masterService.hasDataExist(this.subScheduleList,
+      this.duplicateSubSchName = this.masterService.hasDataExist(this.gridDataList,
         'subScheduleName', this.subScheduleForm.value.subScheduleName);
       this.getDuplicateErrorMessages();
     }

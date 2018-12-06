@@ -21,7 +21,7 @@ export class DistrictsComponent implements OnInit {
   private duplicateStateName: boolean = false;
   private duplicateStateCode: boolean = false;
   public formRequiredError: boolean = false;
-  public districtsList: any = [];
+  @Input() gridDataList: any = [];
   public statesList: any = [];
   public nameFlag;
   public deleteFlag: boolean = true;
@@ -52,7 +52,7 @@ export class DistrictsComponent implements OnInit {
   }
 
   onInitialDataLoad(dataList: any[]) {
-    this.districtsList = dataList;
+    this.gridDataList = dataList;
   }
 
   openModal(template: TemplateRef<any>) {
@@ -88,7 +88,7 @@ export class DistrictsComponent implements OnInit {
 
   checkForDuplicateDistName() {
     if (!this.nameFlag) {
-      this.duplicateDistName = this.masterService.hasDataExist(this.districtsList, 'districtName', this.districtsForm.value.districtName);
+      this.duplicateDistName = this.masterService.hasDataExist(this.gridDataList, 'districtName', this.districtsForm.value.districtName);
       this.getDuplicateErrorMessages();
     }
   }
@@ -107,13 +107,13 @@ export class DistrictsComponent implements OnInit {
   loadGridData() {
     this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
-      this.districtsList = list;
-      localStorage.setItem('rowDataLength', JSON.stringify(this.districtsList.length));
+      this.gridDataList = list;
+      localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
     });
   }
 
   verifyDistDuplicates() {
-    let distNameList = this.districtsList.map((item) => { return item.districtName });
+    let distNameList = this.gridDataList.map((item) => { return item.districtName });
     return this.masterService.verifyDuplicates(distNameList, this.districtsForm.value.districtName, true);
   }
 
