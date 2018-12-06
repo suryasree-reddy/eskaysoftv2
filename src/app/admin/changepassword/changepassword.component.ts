@@ -40,8 +40,7 @@ export class ChangepasswordComponent implements OnInit {
       usernameOrEmail: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-    });
-    this.authService.logout();
+    });    
   }
 
   checkForDuplicateUserName() {
