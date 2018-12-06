@@ -20,10 +20,10 @@
     </div>
 
     <div class="input-group">
-          <p>{{'schedule.type' | translate }}: *</p>
-         <input id="scheduleType" maxlength="15" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="description"
-        [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"   class="form-control">
-          <span class="caret"></span>
+      <p>{{'schedule.type' | translate }}: *</p>
+      <input id="scheduleType" maxlength="15" formControlName="scheduleType" [typeahead]="scheduleTypes" typeaheadOptionField="description"
+      [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"   class="form-control">
+      <span class="caret"></span>
     </div>
 
     <app-buttons [title]="'schedule.title'" [deleteConfirmMsg]="'schedule.deleteConfirmationMessage'"
@@ -38,8 +38,6 @@
 </div>
 
 <div *ngIf="!isModelWindowView" class="col-xs-7">
-  <br /><br />
   <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
-      [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'ScheduleListColumns'">
-  </app-synectiks-common-grid>
+      [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'ScheduleListColumns'"></app-synectiks-common-grid>
 </div>

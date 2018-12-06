@@ -97,7 +97,7 @@ export class SubscheduleComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-      this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+      this.modalRef = this.modalService.show(template, { class: 'modal-dialog-centered' });
   }
 
 

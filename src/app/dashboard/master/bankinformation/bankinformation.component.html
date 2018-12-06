@@ -2,10 +2,8 @@
   <h3>{{'bankinfo.title' | translate }}</h3>
   <form [formGroup]="bankInformationForm" autocomplete="off">
 
-    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-      [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-      [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"  [duplicateMessage]="duplicateMessage"
-      [duplicateMessageParam]="duplicateMessageParam">
+    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
+      [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam">
     </app-errormessages>
 
     <div class="input-group">
@@ -18,20 +16,13 @@
       <input id="address" maxlength="20" class="form-control" [formControl]="bankInformationForm.controls['address']">
     </div>
 
-    <app-buttons [title]="'Bank Information'" [deleteConfirmMsg]="'bankinfo.deleteConfirmationMessage'"
-      [saveConfirmMsg]="'bankinfo.saveConfirmationMessage'" [saveInfoMsg]="'bankinfo.saveInformationMessage'"
-      [endPoint]="endPoint"
-      [deleteInfoMsg]="'bankinfo.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-      [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-      [hideDeleteBtn]=true [formObj]="bankInformationForm" (saveRecord)="save()"
-      (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-      (afterSuccess)="successMsg()" (resetForm)="resetForm()" >
+    <app-buttons [title]="'Bank Information'" [deleteConfirmMsg]="'bankinfo.deleteConfirmationMessage'" [saveConfirmMsg]="'bankinfo.saveConfirmationMessage'" [saveInfoMsg]="'bankinfo.saveInformationMessage'" [endPoint]="endPoint" [deleteInfoMsg]="'bankinfo.deleteInformationMessage'"
+      [duplicateMessage]="duplicateMessage" [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=true [formObj]="bankInformationForm" (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+      (afterSuccess)="successMsg()" (resetForm)="resetForm()">
     </app-buttons>
   </form>
 </div>
 
 <div class="col-xs-7">
-  <br /><br />
-  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
-  [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'BankInformationColumns'"></app-synectiks-common-grid>
+  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'BankInformationColumns'"></app-synectiks-common-grid>
 </div>

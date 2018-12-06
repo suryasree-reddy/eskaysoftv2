@@ -1,30 +1,21 @@
 <div [ngClass]="bodyStyle">
   <h3>{{'productcategory.title' | translate}}</h3>
-  <form [formGroup]="productCategoryForm"  autocomplete="off">
-    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-    [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-      [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"  [duplicateMessage]="duplicateMessage"
-     [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+  <form [formGroup]="productCategoryForm" autocomplete="off">
+    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
+      [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
     <div class="input-group">
       <p>{{'productcategory.name' | translate}}: *</p>
       <input id="productCategoryName" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateProdCategory()" class="form-control capitalize" [formControl]="productCategoryForm.controls['productCategoryName']">
     </div>
 
-    <app-buttons [title]="'productcategory.title'" [deleteConfirmMsg]="'productcategory.deleteConfirmationMessage'"
-           [saveConfirmMsg]="'productcategory.saveConfirmationMessage'" [saveInfoMsg]="'productcategory.saveInformationMessage'"
-           [endPoint]="endPoint"
-           [deleteInfoMsg]="'productcategory.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-           [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]="!nameFlag" [hideResetBtn]=true
-           [hideDeleteBtn]="!isModelWindowView" [formObj]="productCategoryForm" (saveRecord)="save()"
-           (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-           (afterSuccess)="successMsg()" (resetForm)="resetForm()" >
+    <app-buttons [title]="'productcategory.title'" [deleteConfirmMsg]="'productcategory.deleteConfirmationMessage'" [saveConfirmMsg]="'productcategory.saveConfirmationMessage'" [saveInfoMsg]="'productcategory.saveInformationMessage'" [endPoint]="endPoint"
+      [deleteInfoMsg]="'productcategory.deleteInformationMessage'" [duplicateMessage]="duplicateMessage" [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]="!nameFlag" [hideResetBtn]=true [hideDeleteBtn]="!isModelWindowView" [formObj]="productCategoryForm"
+      (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (afterSuccess)="successMsg()" (resetForm)="resetForm()">
     </app-buttons>
   </form>
 </div>
 
 <div *ngIf="!isModelWindowView" class="col-xs-7">
-  <br /><br />
-  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
-   [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'ProductCategoryColumns'"></app-synectiks-common-grid>
+  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'ProductCategoryColumns'"></app-synectiks-common-grid>
 </div>

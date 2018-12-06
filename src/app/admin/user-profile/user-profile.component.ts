@@ -168,7 +168,7 @@ export class UserProfileComponent implements OnInit {
     this.resetChildForm(this.districtsForm);
     this.loadStatesData();
     this.scFormRequiredError = this.scFormSuccess = false;
-    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+    this.modalRef = this.modalService.show(template, { class: 'modal-dialog-centered' });
   }
 
   resetChildForm(formObj) {

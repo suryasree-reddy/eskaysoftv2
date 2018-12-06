@@ -286,7 +286,7 @@ export class AccountsInfoComponent implements OnInit {
     }
     //template, 'SubSchedule'
     this.scFormRequiredError = this.scFormSuccess = false;
-    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+    this.modalRef = this.modalService.show(template, { class: 'modal-dialog-centered' });
   }
 
   saveChildForm(screenName, formObj) {

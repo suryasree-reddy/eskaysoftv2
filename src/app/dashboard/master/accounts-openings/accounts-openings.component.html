@@ -1,52 +1,44 @@
 <div class="col-xs-5">
   <h3>Accounts Openings </h3>
   <form [formGroup]="accOpeningForm" autocomplete="off">
-      <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-        [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-        [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()">
-      </app-errormessages>
+    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
+      [errorStatusMsg]="sharedDataService.getErrorMesage()">
+    </app-errormessages>
 
-      <div class="input-group">
-        <p>Code: *</p>
-        <input id="shortName"  [readonly]=true  class="form-control" [formControl]="accOpeningForm.controls['shortName']">
-      </div>
+    <div class="input-group">
+      <p>Code: *</p>
+      <input id="shortName" [readonly]=true class="form-control" [formControl]="accOpeningForm.controls['shortName']">
+    </div>
 
-      <div class="input-group">
-        <p>Account Name: *</p>
-        <input id="accountName" [readonly]=true class="form-control" [formControl]="accOpeningForm.controls['accountName']">
-      </div>
+    <div class="input-group">
+      <p>Account Name: *</p>
+      <input id="accountName" [readonly]=true class="form-control" [formControl]="accOpeningForm.controls['accountName']">
+    </div>
 
-      <div class="input-group">
-        <p>Town: *</p>
-        <input id="town" [readonly]=true class="form-control" [formControl]="accOpeningForm.controls['town']">
-      </div>
+    <div class="input-group">
+      <p>Town: *</p>
+      <input id="town" [readonly]=true class="form-control" [formControl]="accOpeningForm.controls['town']">
+    </div>
 
-      <div class="input-group">
-        <p>Opening: *</p>
-        <input id="openingBalance" #focus class="form-control" [formControl]="accOpeningForm.controls['openingBalance']">
-      </div>
+    <div class="input-group">
+      <p>Opening: *</p>
+      <input id="openingBalance" #focus class="form-control" [formControl]="accOpeningForm.controls['openingBalance']">
+    </div>
 
-      <div class="input-group">
-        <p>Type: *</p>
-        <input id="openingType" formControlName="openingType" [typeahead]="openingType" typeaheadOptionField="description"
-        [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0"   class="form-control">
-        <span class="caret"></span>
-      </div>
+    <div class="input-group">
+      <p>Type: *</p>
+      <input id="openingType" formControlName="openingType" [typeahead]="openingType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" class="form-control">
+      <span class="caret"></span>
+    </div>
 
-      <app-buttons [title]="'accountopenings.title'" [deleteConfirmMsg]="'accountopenings.deleteConfirmationMessage'"
-        [saveConfirmMsg]="'accountopenings.saveConfirmationMessage'" [saveInfoMsg]="'accountopenings.saveInformationMessage'" [endPoint]="endPoint"
-        [deleteInfoMsg]="'accountopenings.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-        [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true  [hideResetBtn]=true
-        [hideDeleteBtn]=false [formObj]="accOpeningForm" (saveRecord)="save()"
-        (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-        (afterSuccess)="successMsg()" (resetForm)="resetForm()">
-      </app-buttons>
-    </form>
+    <app-buttons [title]="'accountopenings.title'"   [deleteConfirmMsg]="'accountopenings.deleteConfirmationMessage'" [saveConfirmMsg]="'accountopenings.saveConfirmationMessage'" [saveInfoMsg]="'accountopenings.saveInformationMessage'" [endPoint]="endPoint"
+    [deleteInfoMsg]="'accountopenings.deleteInformationMessage'" [duplicateMessage]="duplicateMessage" [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=false [formObj]="accOpeningForm" (saveRecord)="save()"
+    (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (afterSuccess)="successMsg()" (resetForm)="resetForm()">
+    </app-buttons>
+  </form>
 
 </div>
 
 <div class="col-xs-7">
-  <br /><br />
-  <app-synectiks-common-grid [endPoint]="endPoint"  [rowSelection]="'single'" (intialLoad)='onInitialDataLoad($event)'
-  [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'AccountsOpeningsColumns'"></app-synectiks-common-grid>
+  <app-synectiks-common-grid [endPoint]="endPoint" [rowSelection]="'single'" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'AccountsOpeningsColumns'"></app-synectiks-common-grid>
 </div>

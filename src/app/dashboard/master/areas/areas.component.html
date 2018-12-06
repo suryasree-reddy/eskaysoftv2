@@ -1,42 +1,34 @@
 <div class="col-xs-5">
   <h3>{{'areas.title' | translate }}</h3>
   <form [formGroup]="areaForm" (ngSubmit)="saveForm()" autocomplete="off">
-    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-    [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-    [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
-    [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
+      [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
     <div class="input-group">
       <p>{{'areas.name' | translate }}: *</p>
-      <input id="areaName" maxlength="20" #focus [readonly]="nameFlag" (blur)="validateFormOnBlur()"  class="form-control capitalize" [formControl]="areaForm.controls['areaName']">
+      <input id="areaName" maxlength="20" #focus [readonly]="nameFlag" (blur)="validateFormOnBlur()" class="form-control capitalize" [formControl]="areaForm.controls['areaName']">
     </div>
 
     <div class="input-group">
-      <p>{{'businessexecutive.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">create new</a>)</p>
-      <input id="businessExecutiveId" maxlength="20" formControlName="businessExecutiveName" [typeahead]="typeaheadDataList" typeaheadOptionField="typeheadDisplay"
-      [typeaheadOptionsLimit]="7"   [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control capitalize">
+      <p>{{'businessexecutive.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template)">{{'common.createNew' | translate}}</a>)</p>
+      <input id="businessExecutiveId" maxlength="20" formControlName="businessExecutiveName" [typeahead]="typeaheadDataList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)"
+        class="form-control capitalize">
       <span class="caret"></span>
     </div>
 
-    <app-buttons [title]="'areas.title'" [deleteConfirmMsg]="'areas.deleteConfirmationMessage'"
-      [saveConfirmMsg]="'areas.saveConfirmationMessage'" [saveInfoMsg]="'areas.saveInformationMessage'"
-      [endPoint]="areaEndPoint" [deleteInfoMsg]="'areas.deleteInformationMessage'"
-      [duplicateMessage]="duplicateMessage" [isBtnDeleteDisable]="deleteFlag"
-      [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=true
-      [formObj]="areaForm" (saveRecord)="save()"
-      (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+    <app-buttons [title]="'areas.title'" [deleteConfirmMsg]="'areas.deleteConfirmationMessage'" [saveConfirmMsg]="'areas.saveConfirmationMessage'" [saveInfoMsg]="'areas.saveInformationMessage'" [endPoint]="areaEndPoint" [deleteInfoMsg]="'areas.deleteInformationMessage'"
+      [duplicateMessage]="duplicateMessage" [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=true [formObj]="areaForm" (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
       (afterSuccess)="successMsg()" (resetForm)="resetForm()">
     </app-buttons>
   </form>
 </div>
 
 <div class="col-xs-7">
-  <br/><br />
-  <app-synectiks-common-grid [endPoint]="areaEndPoint" (intialLoad)='onInitialDataLoad($event)'
-  [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'AreaColumns'"></app-synectiks-common-grid>
+  <app-synectiks-common-grid [endPoint]="areaEndPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'AreaColumns'"></app-synectiks-common-grid>
 </div>
 
 <ng-template #template>
+  <br /><br />
   <div class="modal-header">
     <h4 class="modal-title pull-left">{{'businessexecutive.create' | translate }}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -44,7 +36,6 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-businessexecutives [isModelWindowView]=true [bodyStyle]="row"
-    [gridDataList]="typeaheadDataList" (callbackOnModelWindowClose)="successMsg()"></app-businessexecutives>
+    <app-businessexecutives [isModelWindowView]=true [bodyStyle]="row" [gridDataList]="typeaheadDataList" (callbackOnModelWindowClose)="successMsg()"></app-businessexecutives>
   </div>
 </ng-template>

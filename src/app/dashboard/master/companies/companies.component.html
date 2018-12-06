@@ -1,85 +1,70 @@
 <div [ngClass]="bodyStyle">
   <h3>{{'companies.title' | translate}}</h3>
   <form [formGroup]="companyForm" (ngSubmit)="saveForm()" autocomplete="off">
-    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-      [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-      [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
-      [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam">
-   </app-errormessages>
+    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
+      [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam">
+    </app-errormessages>
 
-   <div class="input-group">
-     <p>{{'companies.name' | translate}}: *</p>
-     <input id="companyName" maxlength="40"  #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyName()"  class="form-control capitalize" [formControl]="companyForm.controls['companyName']"/>
-   </div>
+    <div class="input-group">
+      <p>{{'companies.name' | translate}}: *</p>
+      <input id="companyName" maxlength="40" #focus [readonly]="nameFlag" (blur)="checkForDuplicateCompanyName()" class="form-control capitalize" [formControl]="companyForm.controls['companyName']" />
+    </div>
 
-  <div class="input-group">
-    <p>{{'companies.code' | translate}}: *</p>
-    <input id="companyCode" maxlength="40" (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['companyCode']">
-  </div>
+    <div class="input-group">
+      <p>{{'companies.code' | translate}}: *</p>
+      <input id="companyCode" maxlength="40" (blur)="checkForDuplicateCompanyCode()" class="form-control" [formControl]="companyForm.controls['companyCode']">
+    </div>
 
-  <div class="col-xs-6 col-lt">
-    <p>{{'companygroup.name' | translate }}: * &emsp; (<a *ngIf="!isModelWindowView" style="cursor: pointer"  (click)="openModal(template)">create new</a>)</p>
-    <input id="companyGroupName" maxlength="20" formControlName="companyGroupName" [typeahead]="typeaheadDataList" typeaheadOptionField="companyGroupName"
-    [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)" class="form-control capitalize"/>
-    <span class="caret"></span>
-  </div>
+    <div class="col-xs-6 col-lt">
+      <p>{{'companygroup.name' | translate }}: * &emsp; (<a *ngIf="!isModelWindowView" style="cursor: pointer" (click)="openModal(template)">{{'common.createNew' | translate}}</a>)</p>
+      <input id="companyGroupName" maxlength="20" formControlName="companyGroupName" [typeahead]="typeaheadDataList" typeaheadOptionField="companyGroupName" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTypeahead($event)"
+        class="form-control capitalize" />
+      <span class="caret"></span>
+    </div>
 
-  <div class="col-xs-6 col-rt">
+    <div class="col-xs-6 col-rt">
       <p>{{'companies.type' | translate}}: *</p>
-      <input id="companyType" maxlength="10" class="form-control" [formControl]="companyForm.controls['companyType']"
-      [typeahead]="companyTypeList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" >
-      <span class="caret"></span>
-  </div>
-
-  <div class="input-group">
-    <p>{{'companies.status' | translate}}: *</p>
-    <input id="companyStatus" maxlength="10" class="form-control" [formControl]="companyForm.controls['companyStatus']"
-    [typeahead]="companyStatusList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-    <span class="caret"></span>
-  </div>
-
-  <div >
-    <div class="col-md-6 col-lt ">
-      <p>{{'companies.invGenType' | translate}}: *</p>
-      <input id="invGenType" maxlength="8" class="form-control" [formControl]="companyForm.controls['invGenType']"
-      [typeahead]="invGenList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+      <input id="companyType" maxlength="10" class="form-control" [formControl]="companyForm.controls['companyType']" [typeahead]="companyTypeList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
       <span class="caret"></span>
     </div>
 
-    <div class="col-md-6 col-rt">
-      <p>{{'companies.invPrefix' | translate}}: *</p>
-      <input id="invPrefix" maxlength="10" class="form-control" [formControl]="companyForm.controls['invPrefix']">
+    <div class="input-group">
+      <p>{{'companies.status' | translate}}: *</p>
+      <input id="companyStatus" maxlength="10" class="form-control" [formControl]="companyForm.controls['companyStatus']" [typeahead]="companyStatusList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+      <span class="caret"></span>
     </div>
-  </div>
 
-    <app-buttons [title]="'companies.title'" [deleteConfirmMsg]="'companies.deleteConfirmationMessage'"
-    [saveConfirmMsg]="'companies.saveConfirmationMessage'" [saveInfoMsg]="'companies.saveInformationMessage'"
-    [endPoint]="endPoint"
-    [deleteInfoMsg]="'companies.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-    [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-    [hideDeleteBtn]="!isModelWindowView" [formObj]="companyForm" (saveRecord)="save()"
-    (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-    (afterSuccess)="successMsg()" (resetForm)="resetForm()" ></app-buttons>
+    <div>
+      <div class="col-md-6 col-lt ">
+        <p>{{'companies.invGenType' | translate}}: *</p>
+        <input id="invGenType" maxlength="8" class="form-control" [formControl]="companyForm.controls['invGenType']" [typeahead]="invGenList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+        <span class="caret"></span>
+      </div>
 
+      <div class="col-md-6 col-rt">
+        <p>{{'companies.invPrefix' | translate}}: *</p>
+        <input id="invPrefix" maxlength="10" class="form-control" [formControl]="companyForm.controls['invPrefix']">
+      </div>
+    </div>
+
+    <app-buttons [title]="'companies.title'" [deleteConfirmMsg]="'companies.deleteConfirmationMessage'" [saveConfirmMsg]="'companies.saveConfirmationMessage'" [saveInfoMsg]="'companies.saveInformationMessage'" [endPoint]="endPoint" [deleteInfoMsg]="'companies.deleteInformationMessage'"
+      [duplicateMessage]="duplicateMessage" [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]="!isModelWindowView" [formObj]="companyForm" (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+      (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
   </form>
 </div>
 
 <div *ngIf="!isModelWindowView" class="col-xs-7">
-  <br /><br />
-  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
-   [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'CompanyColumns'"></app-synectiks-common-grid>
+  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'CompanyColumns'"></app-synectiks-common-grid>
 </div>
 
-
-  <ng-template #template>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">{{'companygroup.create' | translate }}</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <app-company-group [isModelWindowView]=true [bodyStyle]="row" [gridDataList]="typeaheadDataList"  (callbackOnModelWindowClose)="successMsg()"></app-company-group>
-
-    </div>
-  </ng-template>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{'companygroup.create' | translate }}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-company-group [isModelWindowView]=true [bodyStyle]="row" [gridDataList]="typeaheadDataList" (callbackOnModelWindowClose)="successMsg()"></app-company-group>
+  </div>
+</ng-template>

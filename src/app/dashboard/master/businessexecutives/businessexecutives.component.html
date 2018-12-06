@@ -1,43 +1,32 @@
 <div [ngClass]="bodyStyle">
   <h3>{{'businessexecutive.title' | translate }}</h3>
   <form [formGroup]="businessExecutiveForm" autocomplete="off">
-    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-    [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-      [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"  [duplicateMessage]="duplicateMessage"
-     [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
+      [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
     <div class="input-group">
       <p>{{'businessexecutive.name' | translate }}: *</p>
-      <input id="name" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateBusiExecName()"  class="form-control capitalize" [formControl]="businessExecutiveForm.controls['name']">
-    </div>
-      <div class="input-group">
-        <p>{{'businessexecutive.address' | translate }}: *</p>
-        <input id="address" maxlength="20" class="form-control"  [formControl]="businessExecutiveForm.controls['address']">
+      <input id="name" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateBusiExecName()" class="form-control capitalize" [formControl]="businessExecutiveForm.controls['name']">
     </div>
     <div class="input-group">
-        <p>{{'businessexecutive.town' | translate }}: *</p>
-        <input id="town" maxlength="20" #focus  class="form-control" [formControl]="businessExecutiveForm.controls['town']">
-      </div>
-        <div class="input-group">
-          <p>{{'businessexecutive.mobile' | translate }}: *</p>
-          <input id="mobile" type="number" min="0" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-          class="form-control"  (blur)="validateFormOnBlur()" [formControl]="businessExecutiveForm.controls['mobile']">
-      </div>
+      <p>{{'businessexecutive.address' | translate }}: *</p>
+      <input id="address" maxlength="20" class="form-control" [formControl]="businessExecutiveForm.controls['address']">
+    </div>
+    <div class="input-group">
+      <p>{{'businessexecutive.town' | translate }}: *</p>
+      <input id="town" maxlength="20" #focus class="form-control" [formControl]="businessExecutiveForm.controls['town']">
+    </div>
+    <div class="input-group">
+      <p>{{'businessexecutive.mobile' | translate }}: *</p>
+      <input id="mobile" type="number" min="0" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" (blur)="validateFormOnBlur()" [formControl]="businessExecutiveForm.controls['mobile']">
+    </div>
 
-      <app-buttons [title]="'businessexecutive.title'" [deleteConfirmMsg]="'businessexecutive.deleteConfirmationMessage'"
-             [saveConfirmMsg]="'businessexecutive.saveConfirmationMessage'" [saveInfoMsg]="'businessexecutive.saveInformationMessage'"
-             [endPoint]="endPoint"
-             [deleteInfoMsg]="'businessexecutive.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-             [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-             [hideDeleteBtn]="!isModelWindowView" [formObj]="businessExecutiveForm" (saveRecord)="save()"
-             (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-             (afterSuccess)="successMsg()" (resetForm)="resetForm()" >
-      </app-buttons>
+    <app-buttons [title]="'businessexecutive.title'" [deleteConfirmMsg]="'businessexecutive.deleteConfirmationMessage'" [saveConfirmMsg]="'businessexecutive.saveConfirmationMessage'" [saveInfoMsg]="'businessexecutive.saveInformationMessage'"
+      [endPoint]="endPoint" [deleteInfoMsg]="'businessexecutive.deleteInformationMessage'" [duplicateMessage]="duplicateMessage" [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]="!isModelWindowView" [formObj]="businessExecutiveForm"
+      (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
   </form>
 </div>
 
 <div *ngIf="!isModelWindowView" class="col-xs-7">
-  <br /><br />
-  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
-  [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'BusinessExecutiveColumns'"></app-synectiks-common-grid>
+  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'BusinessExecutiveColumns'"></app-synectiks-common-grid>
 </div>
