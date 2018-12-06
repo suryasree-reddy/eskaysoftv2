@@ -40,7 +40,9 @@ export class ChangepasswordComponent implements OnInit {
       usernameOrEmail: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-    });    
+    });
+
+    //removed
   }
 
   checkForDuplicateUserName() {
@@ -59,7 +61,6 @@ export class ChangepasswordComponent implements OnInit {
     }
     this.getDuplicateErrorMessages();
   }
-
 
   getDuplicateErrorMessages(): void {
     if (!this.duplicateUserName) {
