@@ -37,7 +37,7 @@ export class UserProfileComponent implements OnInit {
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
   private userprofileList: any = [];
-  private accGstType: any[];
+  private profileGstType: any[];
   private accNatureOfGst: any[];
   private natureOfBusiness: any[];
   private accSaleType: any[];
@@ -118,7 +118,7 @@ export class UserProfileComponent implements OnInit {
     });
     this.loadDistrictData();
     this.natureOfBusiness= this.sharedDataService.getSharedCommonJsonData().NatureOfBusiness;
-    this.accGstType = this.sharedDataService.getSharedCommonJsonData().GstType;
+    this.profileGstType = this.sharedDataService.getSharedCommonJsonData().ProfileGstType;
     this.accNatureOfGst = this.sharedDataService.getSharedCommonJsonData().NatureOfGst;
     this.accSaleType = this.sharedDataService.getSharedCommonJsonData().SaleType;
     this.accCustomerType = this.sharedDataService.getSharedCommonJsonData().CustomerType;
@@ -264,7 +264,7 @@ export class UserProfileComponent implements OnInit {
     this.resetForm();
     this.loadDistrictData();
     this.natureOfBusiness = this.sharedDataService.getSharedCommonJsonData().NatureOfBusiness;
-    this.accGstType = this.sharedDataService.getSharedCommonJsonData().GstType;
+    this.profileGstType = this.sharedDataService.getSharedCommonJsonData().ProfileGstType;
     this.accNatureOfGst = this.sharedDataService.getSharedCommonJsonData().NatureOfGst;
     this.accSaleType = this.sharedDataService.getSharedCommonJsonData().SaleType;
     this.accCustomerType = this.sharedDataService.getSharedCommonJsonData().CustomerType;

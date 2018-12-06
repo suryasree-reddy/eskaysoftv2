@@ -39,7 +39,7 @@
 		</div>
 
 		<div class="col-xs-3 mr-t-1">
-			<p>{{'common.pack' | translate}}: *</p>
+			<p>{{'product.packing' | translate}}: *</p>
 			<input id="pack" type="number" maxlength="10" [readonly]=true oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
 			 class="form-control" [formControl]="purchaseOrderForm.controls['pack']">
 		</div>

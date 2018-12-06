@@ -525,6 +525,15 @@
       "description": "IUGST"
     }
   ],
+  "ProfileGstType": [{
+    "code": "RGST",
+    "description": "RGST"
+  },
+  {
+    "code": "UGST",
+    "description": "UGST"
+  }
+],
   "NatureOfGst": [{
       "code": "Reg",
       "description": "Regular"
@@ -649,8 +658,6 @@
   }
 ],
   "UserRoles": [
-    "ROLE_USER",
-    "ROLE_ADMIN",
     "ALLOW_MASTERS",
     "ALLOW_PURCHASE",
     "ALLOW_SALES",

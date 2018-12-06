@@ -55,6 +55,7 @@ export class PurchaseOrderComponent implements OnInit {
       productBoxPack: ['', Validators.required],
       pack: ['', Validators.required],
       qty: ['', Validators.required],
+      netRate: ['', Validators.required],
       rate: ['', Validators.required],
       free: ['', Validators.required],
       value: ['', Validators.required],
@@ -112,16 +113,19 @@ export class PurchaseOrderComponent implements OnInit {
     this.purchaseOrderForm.patchValue({ productBoxPack: event.item.boxQty });
     this.purchaseOrderForm.patchValue({ productId: event.item.id });
     this.purchaseOrderForm.patchValue({ productcode: event.item.productcode });
-    this.purchaseOrderForm.patchValue({ bFree: event.item.free / event.item.boxQty });
+    // this.purchaseOrderForm.patchValue({ bQty: event.item.bQty });
+    // this.purchaseOrderForm.patchValue({ bFree: event.item.free * event.item.bQty });
+    this.purchaseOrderForm.patchValue({ netRate: event.item.netRate });
     //  const productPurchaseList = _.filter(this.gridDataList, function(o) {return o.productId == event.item.id });
     //  this.purchaseOrderForm.patchValue({ orderNumber: productPurchaseList.length + 1 });
   }
 
   calculateRate() {
-    this.purchaseOrderForm.patchValue({ rate: this.purchaseOrderForm.value.pack * this.purchaseOrderForm.value.qty });
-    this.purchaseOrderForm.patchValue({ bQty: this.purchaseOrderForm.value.productBoxPack * this.purchaseOrderForm.value.qty });
-    this.purchaseOrderForm.patchValue({ bRate: this.purchaseOrderForm.value.productBoxPack * this.purchaseOrderForm.value.qty });
+    this.purchaseOrderForm.patchValue({ rate: this.purchaseOrderForm.value.qty * this.purchaseOrderForm.value.netRate });
+    this.purchaseOrderForm.patchValue({ bQty: this.purchaseOrderForm.value.qty / this.purchaseOrderForm.value.productBoxPack });
+    this.purchaseOrderForm.patchValue({ bRate: this.purchaseOrderForm.value.bQty * this.purchaseOrderForm.value.rate });
     this.purchaseOrderForm.patchValue({ value: this.purchaseOrderForm.value.rate * this.purchaseOrderForm.value.qty });
+    this.purchaseOrderForm.patchValue({ bFree: this.purchaseOrderForm.value.bQty * this.purchaseOrderForm.value.free });
   }
 
   onSelectSupplier(event) {

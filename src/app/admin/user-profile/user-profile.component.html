@@ -258,7 +258,7 @@
                         <p>{{'accountinfo.gsttype' | translate}}: *</p>
                         <div class="input-group mr-t-0">
                           <input id="gstType" maxlength="5" class="form-control" [formControl]="userProfileForm.controls['gstType']"
-                            [typeahead]="accGstType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7"
+                            [typeahead]="profileGstType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7"
                             [typeaheadMinLength]="0">
                           <span class="caret mr-t-caret"></span>
                         </div>
