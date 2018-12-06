@@ -15,13 +15,13 @@ import * as _ from 'lodash';
 export class PurchaseOrderComponent implements OnInit {
 
   public purchaseOrderForm: FormGroup;
-  private deleteFlag: boolean = true;
-  private endPoint: string = "purchaseOrder/";
-  private formSuccess: boolean = false;
-  private formRequiredError: boolean = false;
-  private nameFlag: boolean = false;
-  private duplicateName: boolean = false;
-  private duplicateOrderNo: boolean = false;
+  private deleteFlag = true;
+  private endPoint = 'purchaseOrder/';
+  private formSuccess = false;
+  private formRequiredError = false;
+  private nameFlag = false;
+  private duplicateName = false;
+  private duplicateOrderNo = false;
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
   public gridDataList: any = [];
@@ -29,7 +29,7 @@ export class PurchaseOrderComponent implements OnInit {
   private suppliersList: any = [];
   private childDuplicateMessage: string = null;
   private childDuplicateMessageParam: string = null;
-  private savedSupplierId: number = 0;
+  private savedSupplierId = 0;
 
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
@@ -75,7 +75,7 @@ export class PurchaseOrderComponent implements OnInit {
     this.masterService.dataObject.subscribe(list => {
       this.gridDataList = list;
       localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
-    })
+    });
   }
 
   valueChange(selectedRow: any[]): void {
@@ -83,13 +83,13 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   loadProductData() {
-    this.masterService.getParentData("product/").subscribe(list => {
+    this.masterService.getParentData('product/').subscribe(list => {
       this.productsList = list;
     });
   }
 
   loadSupplierData() {
-    this.masterService.getParentData("accountinformation/").subscribe(list => {
+    this.masterService.getParentData('accountinformation/').subscribe(list => {
       this.suppliersList = list;
     });
   }
@@ -101,7 +101,7 @@ export class PurchaseOrderComponent implements OnInit {
       this.duplicateMessageParam = null;
     }
     if (this.duplicateOrderNo) {
-      this.duplicateMessage = "purchaseOrder.duplicateNameErrorMessage";
+      this.duplicateMessage = 'purchaseOrder.duplicateNameErrorMessage';
       this.duplicateMessageParam = this.purchaseOrderForm.value.orderNumber;
     }
   }
@@ -113,8 +113,8 @@ export class PurchaseOrderComponent implements OnInit {
     this.purchaseOrderForm.patchValue({ productId: event.item.id });
     this.purchaseOrderForm.patchValue({ productcode: event.item.productcode });
     this.purchaseOrderForm.patchValue({ bFree: event.item.free / event.item.boxQty });
-  //  const productPurchaseList = _.filter(this.gridDataList, function(o) {return o.productId == event.item.id });
-  //  this.purchaseOrderForm.patchValue({ orderNumber: productPurchaseList.length + 1 });
+    //  const productPurchaseList = _.filter(this.gridDataList, function(o) {return o.productId == event.item.id });
+    //  this.purchaseOrderForm.patchValue({ orderNumber: productPurchaseList.length + 1 });
   }
 
   calculateRate() {
@@ -125,8 +125,7 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   onSelectSupplier(event) {
-    if(this.savedSupplierId >= 0 && this.savedSupplierId != event.item.id)
-    {
+    if (this.savedSupplierId >= 0 && this.savedSupplierId !== event.item.id) {
       this.purchaseOrderForm.patchValue({ accountInformationId: event.item.id });
       this.purchaseOrderForm.patchValue({ orderNumber: this.gridDataList.length + 1 });
     }
@@ -141,12 +140,16 @@ export class PurchaseOrderComponent implements OnInit {
     this.buttonsComponent.delete();
   }
 
+  deleteOrder() {
+    this.buttonsComponent.manualDelete(this.endPoint + '/orderNumber', this.purchaseOrderForm.value.orderNumber);
+  }
+
   successMsg() {
     this.formSuccess = true;
     this.formRequiredError = false;
     const tempSupplierId = this.purchaseOrderForm.value.accountInformationId;
     const tempSupplierName = this.purchaseOrderForm.value.supplier;
-    this.resetForm();
+    this.resetForm(null);
     this.purchaseOrderForm.value.accountInformationId = tempSupplierId;
     this.purchaseOrderForm.value.supplier = tempSupplierName;
     this.loadGridData();
@@ -159,8 +162,17 @@ export class PurchaseOrderComponent implements OnInit {
     }
   }
 
-  resetForm() {
+  resetForm(param) {
+    const tempSupplierId = this.purchaseOrderForm.value.accountInformationId;
+    const tempSupplierName = this.purchaseOrderForm.value.supplier;
+    const tempOrderNum = this.purchaseOrderForm.value.orderNumber;
     this.purchaseOrderForm.reset();
+    if ((param === undefined || param === null )&& !this.nameFlag) {
+      this.purchaseOrderForm.patchValue({ accountInformationId: tempSupplierId });
+      this.purchaseOrderForm.patchValue({ supplier: tempSupplierName });
+      this.purchaseOrderForm.patchValue({ orderNumber: tempOrderNum });
+    }
+
     this.deleteFlag = true;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
@@ -175,12 +187,12 @@ export class PurchaseOrderComponent implements OnInit {
     this.formRequiredError = false;
     this.childDuplicateMessage = null;
     this.childDuplicateMessageParam = null;
-  //  this.deleteFlag = !s.deleteFlag;
+    //  this.deleteFlag = !s.deleteFlag;
     this.deleteFlag = false;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
     this.purchaseOrderForm.reset(s);
-  //  const productObj = _.find(this.productsList, function(o) {return o.id == s.productId; });
-  //  this.purchaseOrderForm.patchValue({ productBoxPack: productObj.boxQty });
+    //  const productObj = _.find(this.productsList, function(o) {return o.id == s.productId; });
+    //  this.purchaseOrderForm.patchValue({ productBoxPack: productObj.boxQty });
   }
 }

@@ -11,10 +11,10 @@ import { MasterService } from 'src/app/dashboard/master/master.service';
 })
 export class ButtonsComponent implements OnInit {
 
-  @Input() isBtnDeleteDisable: boolean = false;
-  @Input() hideSaveBtn: boolean = false;
-  @Input() hideDeleteBtn: boolean = false;
-  @Input() hideResetBtn: boolean = false;
+  @Input() isBtnDeleteDisable = false;
+  @Input() hideSaveBtn = false;
+  @Input() hideDeleteBtn = false;
+  @Input() hideResetBtn = false;
   @Input() deleteConfirmMsg: string = null;
   @Input() saveConfirmMsg: string = null;
   @Input() deleteInfoMsg: string = null;
@@ -42,7 +42,7 @@ export class ButtonsComponent implements OnInit {
 
   saveForm() {
     if (this.formObj.valid && this.duplicateMessage == null) {
-      this.showConfirmationModal("Save");
+      this.showConfirmationModal('Save');
     } else {
       this.displayErrorMessages.emit();
     }
@@ -51,13 +51,13 @@ export class ButtonsComponent implements OnInit {
   save() {
     if (this.formObj.value.id) {
       this.masterService.updateRecord(this.endPoint, this.formObj.value).subscribe(res => {
-        this.showInformationModal("Save");
+        this.showInformationModal('Save');
       }, error => {
         throw error;
       });
     } else {
       this.masterService.createRecord(this.endPoint, this.formObj.value).subscribe(res => {
-        this.showInformationModal("Save");
+        this.showInformationModal('Save');
       }, error => {
         throw error;
       });
@@ -67,14 +67,23 @@ export class ButtonsComponent implements OnInit {
   delete() {
     this.masterService.deleteRecord(this.endPoint, this.formObj.value.id).subscribe(res => {
       localStorage.removeItem('ag-activeRow');
-      this.showInformationModal("Delete");
+      this.showInformationModal('Delete');
+    }, error => {
+      throw error;
+    });
+  }
+
+  manualDelete(endPoint, deleteId) {
+    this.masterService.deleteRecord(this.endPoint, deleteId).subscribe(res => {
+      localStorage.removeItem('ag-activeRow');
+      this.showInformationModal('Delete');
     }, error => {
       throw error;
     });
   }
 
   showInformationModal(eventType) {
-    if (eventType === "Delete") {
+    if (eventType === 'Delete') {
       this.displayMsg = this.deleteInfoMsg;
     } else {
       this.displayMsg = this.saveInfoMsg;
@@ -89,7 +98,7 @@ export class ButtonsComponent implements OnInit {
   }
 
   showConfirmationModal(eventType): void {
-    if (eventType === "Delete") {
+    if (eventType === 'Delete') {
       this.displayMsg = this.deleteConfirmMsg;
     } else {
       this.displayMsg = this.saveConfirmMsg;
@@ -104,7 +113,7 @@ export class ButtonsComponent implements OnInit {
 
     (<ConfirmationModelDialogComponent>modal.content).onClose.subscribe(result => {
       if (result) {
-        if (eventType === "Delete") {
+        if (eventType === 'Delete') {
           this.deleteRecord.emit();
         } else {
           this.saveRecord.emit();
@@ -114,7 +123,7 @@ export class ButtonsComponent implements OnInit {
   }
 
   showConfirmModal(eventType, displayConfMsg, displayInMsg, title, formObject, endPoint, callBack1, callBac2): void {
-    if (eventType === "Delete") {
+    if (eventType === 'Delete') {
       this.deleteInfoMsg = displayInMsg;
       this.deleteConfirmMsg = displayConfMsg;
       this.deleteRecord = callBack1;

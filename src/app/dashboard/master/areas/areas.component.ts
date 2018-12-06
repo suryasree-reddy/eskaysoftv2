@@ -117,14 +117,19 @@ export class AreasComponent implements OnInit {
   }
 
   successMsg() {
-    if (this.modalRef != undefined) {
+    if (this.modalRef !== undefined && this.modalRef !== null) {
       this.modalRef.hide();
       this.modalService.hide(1);
+      this.modalRef = null;
       this.loadTypeaheadData();
     } else {
-      this.formSuccess = true;
-      this.formRequiredError = false;
-      this.resetForm();
+      if (this.isModelWindowView) {
+        this.callbackOnModelWindowClose.emit();
+      } else {
+        this.formSuccess = true;
+        this.formRequiredError = false;
+        this.resetForm();
+      }
     }
   }
 
@@ -141,8 +146,8 @@ export class AreasComponent implements OnInit {
     this.nameFlag = false;
     this.deleteFlag = true;
     this.formRequiredError = this.formSuccess = false;
-    if(!this.isModelWindowView){
-        this.loadGridData();
+    if (!this.isModelWindowView) {
+      this.loadGridData();
     }
     this.formRequiredError = false;
     this.duplicateAreaName = false;

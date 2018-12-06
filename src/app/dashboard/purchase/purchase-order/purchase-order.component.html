@@ -7,7 +7,7 @@
 
 		 <div class="container-fluid"  style="border-style: outset;">
 		<div class="col-xs-3 mr-t-1">
-			<p>{{'common.orderNumber' | translate}}: *</p>
+			<p>{{'common.orderNumber' | translate}}: * &emsp;(<a style="cursor: pointer"  (click)="resetForm('CloseOrder')">Close Order</a>) &emsp; <span *ngIf="nameFlag">(<a style="cursor: pointer"  (click)="deleteOrder()">Delete Order</a>)</span></p>
 			<input id="orderNumber" maxlength="40" #focus [readonly]=true class="form-control" [formControl]="purchaseOrderForm.controls['orderNumber']">
 		</div>
 		<div class="col-xs-3 mr-t-1">

@@ -44,7 +44,6 @@ export class CompaniesComponent implements OnInit {
   @Output() callbackOnModelWindowClose: EventEmitter<null> = new EventEmitter();
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
-
   constructor(private fb: FormBuilder,
     private translate: TranslateService,
     private modalService: BsModalService,
@@ -139,12 +138,19 @@ export class CompaniesComponent implements OnInit {
   }
 
   successMsg() {
-    if(this.isModelWindowView){
-      this.callbackOnModelWindowClose.emit();
-    }else{
-      this.formSuccess = true;
-      this.formRequiredError = false;
-      this.resetForm();
+      if (this.modalRef !== undefined && this.modalRef !== null) {
+      this.modalRef.hide();
+      this.modalService.hide(1);
+        this.modalRef = null;
+      this.loadTypeaheadData();
+    } else {
+      if (this.isModelWindowView) {
+        this.callbackOnModelWindowClose.emit();
+      } else {
+        this.formSuccess = true;
+        this.formRequiredError = false;
+        this.resetForm();
+      }
     }
   }
 

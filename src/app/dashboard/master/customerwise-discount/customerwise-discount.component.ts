@@ -149,9 +149,10 @@ export class CustomerwiseDiscountComponent implements OnInit {
   }
 
   successMsg() {
-    if (this.modalRef != undefined) {
+    if (this.modalRef !== undefined && this.modalRef !== null) {
       this.modalRef.hide();
       this.modalService.hide(1);
+      this.modalRef = null;
       this.loadCompanyTypeaheadData();
 
     } else {

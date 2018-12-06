@@ -210,16 +210,17 @@ export class ProductComponent implements OnInit {
   }
 
   successMsg() {
-    if (this.modalRef != undefined) {
+    if (this.modalRef !== undefined && this.modalRef !== null) {
       this.modalRef.hide();
       this.modalService.hide(1);
+      this.modalRef = null;
       this.loadGroupTypeaheadData();
       this.loadCategoryTypeaheadData();
       this.loadCompanyTypeaheadData();
     } else {
-      if(this.isModelWindowView){
+      if (this.isModelWindowView){
         this.callbackOnModelWindowClose.emit();
-      }else{
+      } else {
         this.formSuccess = true;
         this.formRequiredError = false;
         this.resetForm();
