@@ -41,7 +41,8 @@ export class ChangepasswordComponent implements OnInit {
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
     });
-    this.authService.logout();
+
+    //removed
   }
 
   checkForDuplicateUserName() {
@@ -60,7 +61,6 @@ export class ChangepasswordComponent implements OnInit {
     }
     this.getDuplicateErrorMessages();
   }
-
 
   getDuplicateErrorMessages(): void {
     if (!this.duplicateUserName) {
