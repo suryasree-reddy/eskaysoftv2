@@ -277,6 +277,8 @@
     "purchase": {
     "title": "Purchase",
     "endPoint":"purchaseentry/",
+    "header": "Header",
+    "footer":"Footer Inputs",
     "purchaseNumber":"Purchase Number",
     "invoiceNumber":"Invoice Number",
     "date":"Date",
@@ -296,8 +298,15 @@
     "netValue1": "Net Value",
     "asPerSoftware": "As Per Software",
     "asPerInvoice": "As Per Invoice",
-
-
+    "expiry":"Expiry",
+    "othrCharges":"othrCharges",
+    "grsValue":"GRS Value",
+    "ptd": "PTD",
+    "saleRate":"Sale Rate",
+    "mrp":"MRP",
+    "detailed":"Detailed Inputs",
+    "mfg":"MFG Name",
+    
     "debitAdjustmentLedger": "Debit Adjustment Ledger",
     "debitAdjustmentValue": "Debit Adjustment Value",
     "creditAdjustmentLedger": "Credit Adjustment Ledger",
@@ -339,6 +348,8 @@
     "free":"Free",
     "batch":"Batch",
     "purchaseRate":"Purchase Rate",
+    "purRate": "Pur Rate",
+    
     "fromDate":"From Date",
     "toDate":"To Date"
   },

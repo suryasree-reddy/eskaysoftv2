@@ -1,5 +1,6 @@
-import { Component, OnInit, TemplateRef, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, NgModule, TemplateRef, ViewChild, ElementRef  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BsDropdownModule, TypeaheadModule } from 'ngx-bootstrap';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,6 +14,14 @@ import * as _ from 'lodash';
   selector: 'app-purchase-dashboard',
   templateUrl: './purchase-dashboard.component.html'
 })
+
+@NgModule({
+  imports: [
+    BsDropdownModule.forRoot(),
+    TypeaheadModule.forRoot(),
+   
+  ],
+})
 export class PurchaseDashboardComponent implements OnInit {
 
   public purchaseForm: FormGroup;
@@ -25,7 +34,7 @@ export class PurchaseDashboardComponent implements OnInit {
   public nameFlag;
   public deleteFlag: boolean =true;
   public duplicateMessage: string = null;
-
+  private modeType: any[];
   @ViewChild('focus') focusField: ElementRef;
 
   constructor(private fb: FormBuilder, private translate: TranslateService,
@@ -34,6 +43,8 @@ export class PurchaseDashboardComponent implements OnInit {
     translate.setDefaultLang('messages.en');
   }
 
+  
+  
 
   ngOnInit() {
 
@@ -56,6 +67,7 @@ export class PurchaseDashboardComponent implements OnInit {
       batch:[],
       expiry:[],
       qty:[],
+    
       othCharges:[],
       grsValue:[],
       discount:[],
@@ -91,6 +103,7 @@ export class PurchaseDashboardComponent implements OnInit {
     // this.loadGridData();
     // this.getGridCloumsList();
      this.focusField.nativeElement.focus();
+     this.modeType = this.sharedDataService.getSharedCommonJsonData().Mode;
   }
 
 }
