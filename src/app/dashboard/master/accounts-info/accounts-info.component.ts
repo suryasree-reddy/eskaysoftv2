@@ -17,31 +17,19 @@ import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.comp
 
 export class AccountsInfoComponent implements OnInit {
   public accInfoForm: FormGroup;
-  public subScheduleForm: FormGroup;
-  public districtsForm: FormGroup;
-  public areaForm: FormGroup;
   private endPoint = 'accountinformation/';
   private taxEndPoint = 'tax/';
-  public deleteFlag: boolean = true;
-  public formRequiredError: boolean = false;
-  public formSuccess: boolean = false;
-  public scFormRequiredError: boolean = false;
-  public scFormSuccess: boolean = false;
+  public deleteFlag = true;
+  public formRequiredError = false;
+  public formSuccess = false;
   public duplicateMessage = null;
-  public childDuplicateMessage = null;
-  public childDuplicateMessageParam = null;
   public duplicateMessageParam = null;
   public nameFlag;
-  public scheduleList: any = [];
   public subScheduleList: any = [];
   public districtsList: any = [];
-  public statesList: any = [];
   public areasList: any = [];
-  public businessExecList: any = [];
-  public selectedSchedule: any;
   public selectedSubSchedule: any;
   public selectedDistrict: any;
-  public selectedState: any;
   public selectedArea: any;
   public accGstType: any[];
   public accNatureOfGst: any[];
@@ -49,21 +37,16 @@ export class AccountsInfoComponent implements OnInit {
   public accSaleType: any[];
   public accOpeningType: any[];
   @Input() gridDataList: any = [];
-  public selectedTaxTypeahead: any;
-  private duplicateAreaName: boolean = false;
   public typeaheadTaxDataList: any = [];
-  private duplicateSubSchName: boolean = false;
-  private duplicateDistrictName: boolean = false;
-  private duplicateAcctShortName: boolean = false;
-  private duplicateAcctName: boolean = false;
-
+  private duplicateAcctShortName = false;
+  private duplicateAcctName = false;
   modalRef: BsModalRef;
   message: string;
 
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
-  @Input() isModelWindowView: boolean = false;
+  @Input() isModelWindowView = false;
   @Input() bodyStyle = 'col-xs-5';
   @Output() callbackOnModelWindowClose: EventEmitter<null> = new EventEmitter();
 
@@ -147,41 +130,22 @@ export class AccountsInfoComponent implements OnInit {
   loadSubScheduleData() {
     this.masterService.getParentData('subschedules/').subscribe(list => {
       this.subScheduleList = list;
-    })
-  }
-
-  loadScheduleData() {
-    this.masterService.getParentData('schedules/').subscribe(list => {
-      this.scheduleList = list;
-    })
-  }
-
-  loadStatesData() {
-    this.masterService.getParentData('states/').subscribe(list => {
-      this.statesList = list;
-    })
+    });
   }
 
   loadDistrictData() {
     this.masterService.getParentData('districts/').subscribe(list => {
       this.districtsList = list;
-    })
+    });
   }
 
   loadAreaData() {
     this.masterService.getParentData('area/').subscribe(list => {
       this.areasList = list;
-    })
-  }
-
-  loadBusinessExecutiveData() {
-    this.masterService.getParentData('businessexecutive/').subscribe(list => {
-      this.businessExecList = list;
-    })
+    });
   }
 
   loadSelectedTaxTypeahead(event) {
-    this.selectedTaxTypeahead = event.item;
     this.accInfoForm.patchValue({ taxId: event.item.id });
   }
 
@@ -206,7 +170,7 @@ export class AccountsInfoComponent implements OnInit {
     this.accInfoForm.patchValue({ scheduleId: this.selectedSubSchedule.scheduleId });
     this.accInfoForm.patchValue({ scheduleName: this.selectedSubSchedule.scheduleName });
     const temp = this.selectedSubSchedule.id;
-    const selectedSubScheduleNameList = _.filter(this.subScheduleList, function(o) { return o.subScheduleId == temp });
+    const selectedSubScheduleNameList = _.filter(this.subScheduleList, function(o) { return o.subScheduleId === temp; });
     this.accInfoForm.patchValue({ subScheduleIndex: selectedSubScheduleNameList });
   }
 
@@ -273,7 +237,7 @@ export class AccountsInfoComponent implements OnInit {
       this.loadSubScheduleData();
       this.loadDistrictData();
     } else {
-      if (this.isModelWindowView){
+      if (this.isModelWindowView) {
         this.callbackOnModelWindowClose.emit();
       } else {
         this.formSuccess = true;
@@ -282,7 +246,6 @@ export class AccountsInfoComponent implements OnInit {
       }
     }
   }
-
 
   requiredErrMsg() {
     if (this.duplicateMessage == null) {
@@ -293,23 +256,16 @@ export class AccountsInfoComponent implements OnInit {
 
   resetForm() {
     this.formRequiredError = this.formSuccess = false;
-    this.scFormRequiredError = false;
     this.nameFlag = false;
     this.deleteFlag = true;
     this.duplicateMessage = null;
-    this.childDuplicateMessage = null;
     this.duplicateMessageParam = null;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
-    this.duplicateSubSchName = false;
-    this.duplicateDistrictName = false;
     this.duplicateAcctShortName = false;
     this.duplicateAcctShortName = false;
     this.accInfoForm.reset();
-    if(!this.isModelWindowView){
+    if (!this.isModelWindowView) {
         this.loadGridData();
     }
-    // this.focusField.nativeElement.focus();
   }
 
 }
