@@ -11,6 +11,11 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
 
 import { GstReportsRoutingModule } from './gst-reports-routing.module';
+import { GstRegistersComponent } from './gst-registers/gst-registers.component';
+import { GstrOneComponent } from './gstr-one/gstr-one.component';
+import { GstrTwoComponent } from './gstr-two/gstr-two.component';
+import { GstrThreeComponent } from './gstr-three/gstr-three.component';
+import { GstConsolidationsComponent } from './gst-consolidations/gst-consolidations.component';
 
 @NgModule({
   imports: [
@@ -33,7 +38,7 @@ import { GstReportsRoutingModule } from './gst-reports-routing.module';
     })
 
   ],
-  declarations: []
+  declarations: [GstRegistersComponent, GstrOneComponent, GstrTwoComponent, GstrThreeComponent, GstConsolidationsComponent]
 })
 export class GstReportsModule { }
 export function HttpLoaderFactory(http: HttpClient) {

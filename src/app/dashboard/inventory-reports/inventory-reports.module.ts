@@ -11,6 +11,16 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
 
 import { InventoryReportsRoutingModule } from './inventory-reports-routing.module';
+import { AreaReportsComponent } from './area-reports/area-reports.component';
+import { CompanyReportsComponent } from './company-reports/company-reports.component';
+import { CustomerReportsComponent } from './customer-reports/customer-reports.component';
+import { ProductReportsComponent } from './product-reports/product-reports.component';
+import { PurchaseReportsComponent } from './purchase-reports/purchase-reports.component';
+import { RepReportsComponent } from './rep-reports/rep-reports.component';
+import { SaleReportsComponent } from './sale-reports/sale-reports.component';
+import { StockReportsComponent } from './stock-reports/stock-reports.component';
+import { HsnCompwiseListComponent } from './hsn-compwise-list/hsn-compwise-list.component';
+import { SalesmanwiseAnalysisComponent } from './salesmanwise-analysis/salesmanwise-analysis.component';
 
 @NgModule({
   imports: [
@@ -32,7 +42,7 @@ import { InventoryReportsRoutingModule } from './inventory-reports-routing.modul
       }
     })
   ],
-  declarations: []
+  declarations: [AreaReportsComponent, CompanyReportsComponent, CustomerReportsComponent, ProductReportsComponent, PurchaseReportsComponent, RepReportsComponent, SaleReportsComponent, StockReportsComponent, HsnCompwiseListComponent, SalesmanwiseAnalysisComponent]
 })
 export class InventoryReportsModule { }
 export function HttpLoaderFactory(http: HttpClient) {
