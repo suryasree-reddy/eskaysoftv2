@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRouter } from 'src/app/dashboard/dashboard.router';
 import { DashboardNavComponent } from './dashboard-nav/dashboard-nav.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 @NgModule({
   imports: [
@@ -11,6 +12,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     DashboardRouter,
     BsDropdownModule
   ],
-  declarations: [DashboardComponent, DashboardNavComponent]
+  declarations: [DashboardComponent, DashboardNavComponent, ForbiddenComponent]
 })
 export class DashboardModule { }
