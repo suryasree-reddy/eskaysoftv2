@@ -1,195 +1,204 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light dashboard-navbar">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Master</a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['schedule']">Schedule</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['subschedule']">Sub-Schedule</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['states']">States</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['districts']">Districts</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['businessExecutives']">Business Executives</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['areas']">Areas</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['bankInformation']">Bank Information</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['manufacturer']">Manufacturer</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['companyGroup']">Company Group</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['companies']">Companies</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['accountopenings']">Accounts Openings</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['accountinformation']">Accounts Information</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['customerDiscount']">Customerwise Discount</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['product']">Product</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['productCategory']">Product Category</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['productGroup']">Product Group</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-  <!-- end of master -->
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Purchase</a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-order']">Purchase Order</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-dashboard']">Purchases</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-returns']">Purchase Returns</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/internal-stock-adj']">Internal Stock</a></li>
-          <li class="divider"></li>
-          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Reports</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Submenu</a></li>
-              <li><a class="dropdown-item" href="#">Submenu0</a></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-  <!-- end of purchase -->
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sales</a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Sales</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesRetruns']">Sales Returns</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesOrders']">Sales Orders</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Deleivery Challan</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Quotations/Tenders</a></li>
-          <li class="divider"></li>
-          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Reports</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Submenu</a></li>
-              <li><a class="dropdown-item" href="#">Submenu0</a></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-  <!-- end of sales -->
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Inventory Reports</a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Area Reports</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Company Reports</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Customer Reports</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Product Reports</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Purchase Reports</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Rep. Reports</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Sale Reports</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Stock Reports</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">HSN/Comp.wise List</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Salesmanwise Analysis</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-<!-- end of Inventory Reports -->
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Finance</a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Payment Vouchers</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesRetruns']">Receipt Vouchers</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesOrders']">GST Payment Vouchers</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Journal Vouchers</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Supplier Issued Credit Note Entry</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Supplier Issued Debit Note Entry</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">RCM Invoice</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">General Purchases(GST)</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">General Sales(GST)</a></li>
-          <li class="divider"></li>
-          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Reports</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Submenu</a></li>
-              <li><a class="dropdown-item" href="#">Submenu0</a></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-<!-- end of Finance -->
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Finance Reports</a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Cash Register</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesRetruns']">Cash Book</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesOrders']">Day Book</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">General Ledger Account Copy</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Group Account Copy</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Trail Balance</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Trail Balance(Zooming)</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Schedule Printing</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Debitors OutStanding</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Ageing Analysis</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/register']">Creditors OutStanding</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/register']">Interest Calculation</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Interest Calculation Group</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Interest Calculation(Due Days)</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Bal.Confirmation letter</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/register']">Bal.Confirmation Account Copy</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Closeup Account Register</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Debitors Interest Analysis</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Salesmanwise OutStanding</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-<!-- end of Finance Reports -->
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">GST Reports</a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">GST Resgisters</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">GSTR-1</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">GSTR-2</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">GSTR-3</a></li>
-              <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">GST Consolidations</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-<!-- end of GST Reports -->
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Miscellaneous</a>
-        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Data Indexing</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesRetruns']">Backup</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesOrders']">Restore</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Code Conversion</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Multi Product Code Conversion</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Multi Area Customer Conversion</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Label Printing</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Customer Indexing</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Accounts Rechecking</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/register']">Coupon Issues</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/register']">Coupon Issues Register</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Article Issues</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Article Issues Register</a></li>
-          <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Year End</a></li>
-          <li class="divider"></li>
-          <li class="dropdown-submenu-right"><a class="dropdown-item dropdown-toggle">Reports</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Submenu</a></li>
-              <li><a class="dropdown-item" href="#">Submenu0</a></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-  <!-- end of Miscellaneous -->
-</nav>
+
+<script>
+    $( '.dropdown-menu dropdown-item li' ).on( 'click', function () {
+    $( '.navbar-nav nav-item' ).find( '.active' ).removeClass( 'active' );
+    $( this ).parent( 'li' ).addClass( 'active' );
+  });
+  </script>
+  
+  <nav class="navbar navbar-expand-md  dashboard-navbar">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Master</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['schedule']">Schedule</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['subschedule']">Sub-Schedule</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['states']">States</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['districts']">Districts</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['businessExecutives']">Business Executives</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['areas']">Areas</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['bankInformation']">Bank Information</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['manufacturer']">Manufacturer</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['companyGroup']">Company Group</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['companies']">Companies</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['accountopenings']">Accounts Openings</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['accountinformation']">Accounts Information</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['customerDiscount']">Customerwise Discount</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['product']">Product</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['productCategory']">Product Category</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['productGroup']">Product Group</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- end of master -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Purchase</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-order']">Purchase Order</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-dashboard']">Purchases</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/purchase-returns']">Purchase Returns</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['purchase/internal-stock-adj']">Internal Stock</a></li>
+            <li class="divider"></li>
+            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Reports</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Submenu</a></li>
+                <li><a class="dropdown-item" href="#">Submenu0</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- end of purchase -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sales</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Sales</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesRetruns']">Sales Returns</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesOrders']">Sales Orders</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Delivery Challan</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Quotations/Tenders</a></li>
+            <li class="divider"></li>
+            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Reports</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Submenu</a></li>
+                <li><a class="dropdown-item" href="#">Submenu0</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- end of sales -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Inventory Reports</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Area Reports</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Company Reports</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Customer Reports</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Product Reports</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Purchase Reports</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Rep. Reports</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Sale Reports</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Stock Reports</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">HSN/Comp.wise List</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Salesmanwise Analysis</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  <!-- end of Inventory Reports -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Finance</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Payment Vouchers</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesRetruns']">Receipt Vouchers</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesOrders']">GST Payment Vouchers</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Journal Vouchers</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Supplier Issued Credit Note Entry</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Supplier Issued Debit Note Entry</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">RCM Invoice</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">General Purchases(GST)</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">General Sales(GST)</a></li>
+            <li class="divider"></li>
+            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Reports</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Submenu</a></li>
+                <li><a class="dropdown-item" href="#">Submenu0</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  <!-- end of Finance -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Finance Reports</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Cash Register</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesRetruns']">Cash Book</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesOrders']">Day Book</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">General Ledger Account Copy</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Group Account Copy</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Trail Balance</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Trail Balance(Zooming)</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Schedule Printing</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Debitors OutStanding</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Ageing Analysis</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/register']">Creditors OutStanding</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/register']">Interest Calculation</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Interest Calculation Group</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Interest Calculation(Due Days)</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Bal.Confirmation letter</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/register']">Bal.Confirmation Account Copy</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Closeup Account Register</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Debitors Interest Analysis</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Salesmanwise OutStanding</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  <!-- end of Finance Reports -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">GST Reports</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">GST Resgisters</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">GSTR-1</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">GSTR-2</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">GSTR-3</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">GST Consolidations</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  <!-- end of GST Reports -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Miscellaneous</a>
+          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/sales']">Data Indexing</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesRetruns']">Backup</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/salesOrders']">Restore</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Code Conversion</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Multi Product Code Conversion</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Multi Area Customer Conversion</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Label Printing</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Customer Indexing</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Accounts Rechecking</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/register']">Coupon Issues</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/register']">Coupon Issues Register</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/deleiveryChallan']">Article Issues</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Article Issues Register</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['sales/quotations']">Year End</a></li>
+            <li class="divider"></li>
+            <li class="dropdown-submenu-right"><a class="dropdown-item dropdown-toggle">Reports</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Submenu</a></li>
+                <li><a class="dropdown-item" href="#">Submenu0</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- end of Miscellaneous -->
+  </nav>
+  

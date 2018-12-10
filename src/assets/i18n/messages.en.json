@@ -306,7 +306,10 @@
     "mrp": "MRP",
     "detailed": "Detailed Inputs",
     "mfg": "MFG Name",
-
+    "gst":"GST%",
+    "taxable":"Taxable",
+    "cgstamount":"CGST Amount",
+    "sgstamount":"SGST Amount",
     "debitAdjustmentLedger": "Debit Adjustment Ledger",
     "debitAdjustmentValue": "Debit Adjustment Value",
     "creditAdjustmentLedger": "Credit Adjustment Ledger",

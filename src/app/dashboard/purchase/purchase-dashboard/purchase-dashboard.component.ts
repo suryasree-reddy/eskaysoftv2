@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule, TemplateRef, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, NgModule, TemplateRef,Input, Output, ViewChild, ElementRef,EventEmitter     } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsDropdownModule, TypeaheadModule } from 'ngx-bootstrap';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from 'src/app/dashboard/master/master.service';
 import 'src/assets/styles/mainstyles.scss';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
+import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 // import { ConfirmationModelDialogComponent } from 'src/app/commonComponents/confirmation-model-dialog/confirmation-model-dialog.component';
 import * as _ from 'lodash';
 
@@ -19,9 +20,10 @@ import * as _ from 'lodash';
   imports: [
     BsDropdownModule.forRoot(),
     TypeaheadModule.forRoot(),
-   
+    BsModalService
   ],
 })
+
 export class PurchaseDashboardComponent implements OnInit {
 
   public purchaseForm: FormGroup;
@@ -35,17 +37,25 @@ export class PurchaseDashboardComponent implements OnInit {
   public deleteFlag: boolean =true;
   public duplicateMessage: string = null;
   private modeType: any[];
-  @ViewChild('focus') focusField: ElementRef;
 
-  constructor(private fb: FormBuilder, private translate: TranslateService,
+  @ViewChild('focus') focusField: ElementRef;
+  @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
+  @Input() isModelWindowView: boolean = false;
+  @Input() bodyStyle: string = "col-xs-12";
+  @Output() callbackOnModelWindowClose: EventEmitter<null> = new EventEmitter();
+
+  modalRef: BsModalRef;
+  message: string;
+
+  constructor(private fb: FormBuilder,
+    private translate: TranslateService,
     private sharedDataService:SharedDataService,
+    private modalService: BsModalService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
 
   
-  
-
   ngOnInit() {
 
     this.purchaseForm = this.fb.group({
@@ -105,5 +115,7 @@ export class PurchaseDashboardComponent implements OnInit {
      this.focusField.nativeElement.focus();
      this.modeType = this.sharedDataService.getSharedCommonJsonData().Mode;
   }
-
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+  }
 }
