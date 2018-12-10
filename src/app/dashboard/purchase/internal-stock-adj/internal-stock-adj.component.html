@@ -1,38 +1,78 @@
-<div class="col-xs-5">
-  <h3>{{'internalStockAdj.title' | translate}}</h3>
-  <form [formGroup]="internalStockForm" autocomplete="off">
-        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess"
-        [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'"
-        [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
-        [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
+<div class="col-xs-12">
+    <h3>{{'internalStockAdj.title' | translate}}</h3>
+    <form [formGroup]="purchaseReturnsForm" autocomplete="off">
+        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()"
+            [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
+            [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
+            [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
-         <div class="input-group">
-             <p>{{'internalStockAdj.number' | translate}}: *</p>
-             <input id="number" type="number"  maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateNum()" class="form-control" [formControl]="internalStockForm.controls['number']">
-         </div>
-         <div class="input-group">
-             <p>{{'internalStockAdj.remarks' | translate}}: *</p>
-             <input id="remarks" maxlength="40" class="form-control" [formControl]="internalStockForm.controls['remarks']">
-         </div>
-         <div class="input-group">
-             <p>{{'internalStockAdj.date' | translate}}: *</p>
-             <input id="date" type="date" class="form-control" [formControl]="internalStockForm.controls['date']">
-         </div>
 
-         <app-buttons [title]="'internal-stock-adj.title'" [deleteConfirmMsg]="'internal-stock-adj.deleteConfirmationMessage'"
-         [saveConfirmMsg]="'internal-stock-adj.saveConfirmationMessage'" [saveInfoMsg]="'internal-stock-adj.saveInformationMessage'"
-         [endPoint]="endPoint"
-         [deleteInfoMsg]="'internal-stock-adj.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-         [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true
-         [hideDeleteBtn]=true [formObj]="internalStockForm" (saveRecord)="save()"
-         (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-         (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
+        <div class="col-xs-3 mr-t-1">
+            <p>{{'internalStockAdj.number' | translate}}: *</p>
+            <input id="number" type="number" maxlength="20" #focus [readonly]="nameFlag" (blur)="checkForDuplicateNum()"
+                class="form-control" [formControl]="internalStockForm.controls['number']">
+        </div>
 
-  </form>
+        <div class="col-xs-3 mr-t-1">
+            <p>{{'internalStockAdj.remarks' | translate}}: *</p>
+            <input id="remarks" maxlength="40" class="form-control" [formControl]="internalStockForm.controls['remarks']">
+        </div>
+        <div class="col-xs-3 mr-t-1">
+            <p>{{'internalStockAdj.date' | translate}}: *</p>
+            <input id="date" type="date" class="form-control" [formControl]="internalStockForm.controls['date']">
+        </div>
+       
+        <div class="col-xs-3 mr-t-1">
+            <p>{{'product.packing' | translate}}: *</p>
+            <input id="pack" type="number" maxlength="10" [readonly]=true oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                class="form-control" [formControl]="internalStockForm.controls['pack']">
+        </div>
+        <div class="col-xs-3 mr-t-1">
+                <p>{{'common.productName' | translate}}: *</p>
+                <input id="productName" class="form-control" formControlName="productName" typeaheadOptionField="name" [typeahead]="productsList"
+                    (typeaheadOnSelect)="onSelectProduct($event)" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+                <span class="caret"></span>
+        </div>
+        <div class="col-xs-3 mr-t-1">
+                <p>{{'internalStockAdj.type' | translate}}: *</p>
+          <input  id="rateType" maxlength="10" class="form-control" [formControl]="internalStockForm.controls['type']" [typeahead]="typeList"
+          typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+                <span class="caret" ></span>
+        </div>
+        <div class="col-xs-3 mr-t-1">
+            <p>{{'common.batch' | translate}}: *</p>
+            <input id="batch" maxlength="12" class="form-control" [formControl]="internalStockForm.controls['batch']">
+            <span class="caret hide-caret"></span>
+        </div>
+
+        <div class="col-xs-3 mr-t-1">
+            <p>{{'common.qty' | translate}}: *</p>
+            <input id="qty" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            class="form-control" (blur)="calculateRate()" [formControl]="internalStockForm.controls['qty']">
+            <span class="caret hide-caret"></span>
+            </div>
+
+        <div class="col-xs-3 mr-t-1">
+            <p>{{'common.free' | translate}}: *</p>
+            <input id="free" #focus [readonly]=true type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                class="form-control" [formControl]="internalStockForm.controls['free']">
+            <span class="caret hide-caret"></span>
+        </div>
+
+        <div class="col-xs-12">
+                <app-buttons [title]="'internalStockForm.title'" [deleteConfirmMsg]="'internalStockForm.deleteConfirmationMessage'"
+                 [saveConfirmMsg]="'internalStockForm.saveConfirmationMessage'" [saveInfoMsg]="'internalStockForm.saveInformationMessage'"
+                 [endPoint]="endPoint" [deleteInfoMsg]="'internalStockForm.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+                 [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=true [formObj]="internalStockForm"
+                 (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (afterSuccess)="successMsg()"
+                 (resetForm)="resetForm()"></app-buttons>
+            </div>
+
+    </form>
 </div>
 
-<div class="col-xs-7">
-  <br /><br />
-  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
-  [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'InternalStockAdj'"></app-synectiks-common-grid>
+<div class="col-xs-12">
+    <br /><br />
+    <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList"
+        (valueChange)='valueChange($event)' [screenColums]="'InternalStockAdjColumns'"></app-synectiks-common-grid>
 </div>

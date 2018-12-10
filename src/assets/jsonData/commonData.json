@@ -697,7 +697,17 @@
       "description": "Summary"
     }
   ],
-  "InternalStockAdj": [{
+  "InternalStockAdjColumns": [{
+    "headerName": "S No",
+    "field": "id",
+    "width":150,
+    "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    },
+    "suppressSizeToFit": false
+  },
+  {
       "headerName": "Code",
       "field": "productcode",
       "filterParams": {
@@ -952,22 +962,25 @@
       "suppressSizeToFit": false
     }
   ],
-  "PurchaseReturns": [ {
+  "PurchaseReturnColumns": [{
+    "headerName": "S No",
+    "field": "id",
+    "width":150,
+    "filterParams": {
+      "filterOptions": ["contains"],
+      "newRowsAction": "keep"
+    },
+    "suppressSizeToFit": false
+  },
+    {
       "headerName": "Product Description",
-      "field": "prodDesc",
+      "field": "productName",
       "filterParams": {
         "filterOptions": ["contains"],
         "newRowsAction": "keep"
       },
       "suppressSizeToFit": false
-    }, {
-      "headerName": "Status",
-      "field": "status",
-      "filterParams": {
-        "filterOptions": ["contains"],
-        "newRowsAction": "keep"
-      },
-      "suppressSizeToFit": false
+    
     }, {
       "headerName": "Batch",
       "field": "batch",
@@ -996,7 +1009,7 @@
       "suppressSizeToFit": false
     },
     {
-      "headerName": "Purchase Rate",
+      "headerName": "P Rate",
       "field": "pRate",
       "filterParams": {
         "filterOptions": ["contains"],
@@ -1020,7 +1033,7 @@
       "suppressFilter": true,
       "width": 120,
       "suppressSizeToFit": false
-    }
+    } 
   ],
   "mfgwisePurchaseColumns": [{
       "headerName": "Mfg. Option",
@@ -1400,6 +1413,16 @@
   "code": "PTD",
   "description": "PTD"
 }],
+
+"Type": [
+  {
+   "code": "ADD",
+   "description": "ADD"
+ },
+ {
+   "code": "LESS",
+   "description": "LESS"
+ }],
 "salesInvoiceColumns": [{
   "headerName": "Code",
   "field": "productcode",

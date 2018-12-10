@@ -299,7 +299,7 @@
     "asPerSoftware": "As Per Software",
     "asPerInvoice": "As Per Invoice",
     "expiry": "Expiry",
-    "othrCharges": "othrCharges",
+    "othrCharges": "Other Charges",
     "grsValue": "GRS Value",
     "ptd": "PTD",
     "saleRate": "Sale Rate",
@@ -327,6 +327,7 @@
     "number": "Number",
     "remarks": "Remarks",
     "date": "Date",
+    "type": "Type",
     "saveConfirmationMessage": "Are you sure you want to save Internal Stock Adjustment?",
     "saveInformationMessage": "number record has been saved successfully.",
     "duplicateNameErrorMessage": "The Number '{{duplicateMessageParam}}' already exists with this Number.",
@@ -353,6 +354,7 @@
     "fromDate": "From Date",
     "toDate": "To Date"
   },
+ 
   "createuser": {
     "title": "Create User",
     "endPoint": "createUser/",
@@ -408,14 +410,16 @@
   },
   "purchaseReturn": {
     "title": "Purchase Returns",
-    "purchRetNumber": "Purchase Return Number",
+    "purReturnNumber": "Purchase Return Number",
     "productDesc": "Product Description",
     "status": "Status",
     "amount": "Amount",
+    "pRate": "P Rate",
     "saveConfirmationMessage": "Are you sure you want to save Purchase Return?",
     "saveInformationMessage": "Purchase Return record has been saved successfully.",
     "duplicateNameErrorMessage": "The Purchase Return  '{{duplicateMessageParam}}' already exists with this Name.",
-    "duplicateCodeErrorMessage": "The Name '{{duplicateMessageParam}}' already exists with this Name."
+    "duplicateCodeErrorMessage": "The Name '{{duplicateMessageParam}}' already exists with this Name.",
+    "deleteConfirmationMessage": "Are you sure you want to delete Purchase Returns?"
   },
   "purchaseOrder": {
     "title": "Purchase Order",
@@ -427,7 +431,8 @@
     "saveConfirmationMessage": "Are you sure you want to save Purchase Order?",
     "saveInformationMessage": "Purchase Order record has been saved successfully.",
     "duplicateNameErrorMessage": "The Purchase Order Number '{{duplicateMessageParam}}' already exists.",
-    "duplicateCodeErrorMessage": "The Name '{{duplicateMessageParam}}' already exists with this Name."
+    "duplicateCodeErrorMessage": "The Name '{{duplicateMessageParam}}' already exists with this Name.",
+    "deleteConfirmationMessage": "Are you sure you want to delete Purchase Order?"
   },
   "purchaseReports": {
     "title": "Purchase Reports",
@@ -459,7 +464,8 @@
     "saveConfirmationMessage": "Are you sure you want to save Purchase Returns Register?",
     "saveInformationMessage": "Purchase Returns Register record has been saved successfully.",
     "duplicateNameErrorMessage": "The Purchase Returns Register '{{duplicateMessageParam}}' already exists with this Name.",
-    "duplicateCodeErrorMessage": "The Name '{{duplicateMessageParam}}' already exists with this Name."
+    "duplicateCodeErrorMessage": "The Name '{{duplicateMessageParam}}' already exists with this Name.",
+    "deleteConfirmationMessage": "Are you sure you want to delete Purchase Reports?"
   },
   "salesOrder": {
     "title": "Sales Order",
@@ -508,6 +514,7 @@
     "duplicateCodeErrorMessage": "The Number '{{duplicateMessageParam}}' already exists."
   },
 
+  
   "deliveryChallan": {
     "title": "Delivery Challan",
     "gstType": "GST Type",

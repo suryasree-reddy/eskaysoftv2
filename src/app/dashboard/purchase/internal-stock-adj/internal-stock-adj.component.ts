@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MasterService } from 'src/app/dashboard/master/master.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -22,7 +22,12 @@ export class InternalStockAdjComponent implements OnInit {
   private duplicateMessage: string = null;
   private duplicateMessageParam: string = null;
   private internalStockList: any = [];
+  private productsList: any = [];
+  public gridDataList: any = [];
+  public typeList: any = [];
 
+
+  @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
   constructor(private fb: FormBuilder,
@@ -38,9 +43,63 @@ export class InternalStockAdjComponent implements OnInit {
       id: [],
       number: ['', Validators.required],
       remarks: [],
-      date: []
+      date: [],
+      productId: ['', Validators.required],
+      productName: ['', Validators.required],
+      productcode: ['', Validators.required],
+      pack: ['', Validators.required],
+      type: ['', Validators.required],
+      batch: ['', Validators.required],
+      qty: ['', Validators.required],
+      free: ['', Validators.required]
+    });
+    this.loadProductData();
+    this.typeList = this.sharedDataService.getSharedCommonJsonData().Type;
+  }
 
-       });
+  onInitialDataLoad(dataList: any[]) {
+    this.gridDataList = dataList;
+  }
+
+
+  loadGridData() {
+    this.masterService.getData(this.endPoint);
+    this.masterService.dataObject.subscribe(list => {
+      this.gridDataList = list;
+      localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
+    });
+  }
+
+  valueChange(selectedRow: any[]): void {
+    this.editable(selectedRow);
+  }
+
+  loadProductData() {
+    this.masterService.getParentData('product/').subscribe(list => {
+      this.productsList = list;
+    });
+  }
+
+ 
+  getDuplicateErrorMessages(): void {
+    if (!this.checkForDuplicateNum) {
+      this.formRequiredError = false;
+      this.duplicateMessage = null;
+      this.duplicateMessageParam = null;
+    }
+    if (this.checkForDuplicateNum) {
+      this.duplicateMessage = 'internalStockAdj.duplicateNameErrorMessage';
+      this.duplicateMessageParam = this.internalStockForm.value.number;
+    }
+  }
+
+  editable(s) {
+    this.nameFlag = true;
+    this.formRequiredError = false;
+    this.deleteFlag = false;
+    this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
+    this.internalStockForm.reset(s);
   }
 
   checkForDuplicateNum() {
@@ -52,17 +111,16 @@ export class InternalStockAdjComponent implements OnInit {
 
 
 
-  getDuplicateErrorMessages(): void {
-    if (!this.checkForDuplicateNum ) {
-      this.formRequiredError = false;
-      this.duplicateMessage = null;
-      this.duplicateMessageParam = null;
-    }
-    if (this.duplicateNum) {
-      this.duplicateMessage = "internalStockAdj.duplicateNameErrorMessage";
-      this.duplicateMessageParam = this.internalStockForm.value.number;
-    }
+ 
+  onSelectProduct(event) {
+    this.internalStockForm.patchValue({ pack: event.item.packing });
+    this.internalStockForm.patchValue({ free: event.item.free });
+    this.internalStockForm.patchValue({ productId: event.item.id });
+    this.internalStockForm.patchValue({ productcode: event.item.productcode });
+
   }
+
+
 
   save() {
     this.buttonsComponent.save();

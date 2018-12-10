@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MasterService } from 'src/app/dashboard/master/master.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -24,7 +24,14 @@ export class PurchaseReturnsComponent implements OnInit {
   private duplicateMessageParam: string = null;
   private PurRetnList: any = [];
   private suppliersList: any = [];
+  private productsList: any = [];
+  public gridDataList: any = [];
+  private childDuplicateMessage: string = null;
+  private childDuplicateMessageParam: string = null;
+  private savedSupplierId = 0;
+ 
 
+  @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
   constructor(private fb: FormBuilder,
@@ -42,10 +49,47 @@ export class PurchaseReturnsComponent implements OnInit {
       supplier: ['', Validators.required],
       remarks: ['', Validators.required],
       date: ['', Validators.required],
+      productName: ['', Validators.required],
+      batch: ['', Validators.required],
+      qty: ['', Validators.required],
+      free: ['', Validators.required],
+      pRate: ['', Validators.required],
       accountInformationId: ['', Validators.required],
+      productId: ['', Validators.required],
+      netRate: ['', Validators.required],
+      amount: ['', Validators.required]
     });
     this.loadSupplierData();
+    this.loadProductData();
     //  this.rolesList = this.sharedDataService.getSharedCommonJsonData().UserRoles;
+  }
+
+  onInitialDataLoad(dataList: any[]) {
+    this.gridDataList = dataList;
+  }
+
+  loadGridData() {
+    this.masterService.getData(this.endPoint);
+    this.masterService.dataObject.subscribe(list => {
+      this.gridDataList = list;
+      localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
+    });
+  }
+
+  valueChange(selectedRow: any[]): void {
+    this.editable(selectedRow);
+  }
+
+  loadProductData() {
+    this.masterService.getParentData('product/').subscribe(list => {
+      this.productsList = list;
+    });
+  }
+
+  loadSupplierData() {
+    this.masterService.getParentData('accountinformation/').subscribe(list => {
+      this.suppliersList = list;
+    });
   }
 
   checkForDuplicatePurRetnNo() {
@@ -56,14 +100,7 @@ export class PurchaseReturnsComponent implements OnInit {
 
   }
 
-  loadSupplierData() {
-    this.masterService.getParentData("accountinformation/").subscribe(list => {
-      this.suppliersList = list;
-    });
-  }
-  checkForDuplicateUserName() {
 
-  }
 
   getDuplicateErrorMessages(): void {
     if (!this.duplicatePurRetnNo) {
@@ -77,11 +114,30 @@ export class PurchaseReturnsComponent implements OnInit {
     }
   }
 
+
+
+  onSelectProduct(event) {
+
+    this.purchaseReturnsForm.patchValue({ free: event.item.free });
+
+    this.purchaseReturnsForm.patchValue({ productId: event.item.id });
+    this.purchaseReturnsForm.patchValue({ netRate: event.item.netRate });
+    this.purchaseReturnsForm.patchValue({ productcode: event.item.productcode });
+
+  }
   onSelectSupplier(event) {
-    this.purchaseReturnsForm.patchValue({ accountInformationId: event.item.id });
+    if (this.savedSupplierId >= 0 && this.savedSupplierId !== event.item.id) {
+      this.purchaseReturnsForm.patchValue({ accountInformationId: event.item.id });
+      this.purchaseReturnsForm.patchValue({ purReturnNumber: this.gridDataList.length + 1 });
+    }
+  }
+  calculateRate() {
+    this.purchaseReturnsForm.patchValue({ pRate: this.purchaseReturnsForm.value.qty * this.purchaseReturnsForm.value.netRate });
+    this.purchaseReturnsForm.patchValue({ amount: this.purchaseReturnsForm.value.netRate * this.purchaseReturnsForm.value.qty });
   }
 
   save() {
+    this.savedSupplierId = this.purchaseReturnsForm.value.accountInformationId;
     this.buttonsComponent.save();
   }
 
@@ -90,9 +146,32 @@ export class PurchaseReturnsComponent implements OnInit {
   }
 
   successMsg() {
-    this.formSuccess = true;
-    this.formRequiredError = false;
-    this.resetForm();
+    const tempSupplierId = this.purchaseReturnsForm.value.accountInformationId;
+    const tempSupplierName = this.purchaseReturnsForm.value.supplier;
+    this.resetForm(null);
+    this.purchaseReturnsForm.value.accountInformationId = tempSupplierId;
+    this.purchaseReturnsForm.value.supplier = tempSupplierName;
+    this.loadGridData();
+
+  }
+  resetForm(param) {
+    const tempSupplierId = this.purchaseReturnsForm.value.accountInformationId;
+    const tempSupplierName = this.purchaseReturnsForm.value.supplier;
+    const temppurReturnNumber = this.purchaseReturnsForm.value.purReturnNumber;
+    this.purchaseReturnsForm.reset();
+    if ((param === undefined || param === null )&& !this.nameFlag) {
+      this.purchaseReturnsForm.patchValue({ accountInformationId: tempSupplierId });
+      this.purchaseReturnsForm.patchValue({ supplier: tempSupplierName });
+      this.purchaseReturnsForm.patchValue({ purReturnNumber: temppurReturnNumber });
+    }
+
+    this.deleteFlag = true;
+    this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
+    this.nameFlag = false;
+    this.duplicatePurRetnNo = false;
+    this.formRequiredError = this.formSuccess = false;
+    this.loadGridData();
   }
 
   requiredErrMsg() {
@@ -102,15 +181,17 @@ export class PurchaseReturnsComponent implements OnInit {
     }
   }
 
-  resetForm() {
-    this.purchaseReturnsForm.reset();
-    this.deleteFlag = true;
+ 
+
+  editable(s) {
+    this.nameFlag = true;
+    this.formRequiredError = false;
+    this.childDuplicateMessage = null;
+    this.childDuplicateMessageParam = null;
+    this.deleteFlag = false;
     this.duplicateMessage = null;
     this.duplicateMessageParam = null;
-    this.nameFlag = false;
-    this.duplicatePurRetnNo = false;
-    this.duplicateUserName = false;
-    this.formRequiredError = this.formSuccess = false;
-  }
+    this.purchaseReturnsForm.reset(s);
 
+  }
 }
