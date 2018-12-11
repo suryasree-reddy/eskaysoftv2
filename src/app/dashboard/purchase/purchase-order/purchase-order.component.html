@@ -45,16 +45,16 @@
 		</div>
 
 		<div class="col-xs-3 mr-t-1">
+				<p>{{'common.qty' | translate}}: *</p>
+				<input id="qty" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+				 class="form-control" (blur)="calculateRate()"  [formControl]="purchaseOrderForm.controls['qty']">
+				<span class="caret hide-caret"></span>
+			</div>
+
+		<div class="col-xs-3 mr-t-1">
 			<p>{{'common.free' | translate}}: *</p>
 			<input id="free" type="number" maxlength="10" [readonly]=true oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
 			 class="form-control" [formControl]="purchaseOrderForm.controls['free']">
-			<span class="caret hide-caret"></span>
-		</div>
-
-		<div class="col-xs-3 mr-t-1">
-			<p>{{'common.qty' | translate}}: *</p>
-			<input id="qty" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-			 class="form-control" (blur)="calculateRate()"  [formControl]="purchaseOrderForm.controls['qty']">
 			<span class="caret hide-caret"></span>
 		</div>
 

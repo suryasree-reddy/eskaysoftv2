@@ -1,69 +1,76 @@
 <div class="col-xs-12">
 	<h3>{{'salesOrder.title' | translate}}</h3>
-	<form [formGroup]="salesOrderForm" autocomplete="off" class="mr-l-1" >
+	<form [formGroup]="salesOrderForm" autocomplete="off" class="mr-l-1">
 		<app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()"
 		 [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
 		 [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
-		<div class="col-xs-3">
-			<p>{{'common.orderNumber' | translate}}: *</p>
-			<input id="orderNumber" maxlength="40" #focus [readonly]="nameFlag" class="form-control" [formControl]="salesOrderForm.controls['orderNumber']">
+
+		<div class="col-xs-3 mr-t-1">
+			<p>{{'common.orderNumber' | translate}}: * &emsp;(<a style="cursor: pointer" (click)="resetForm('CloseOrder')">Close
+					Order</a>) &emsp; <span *ngIf="nameFlag">(<a style="cursor: pointer" (click)="deleteOrder()">Delete Order</a>)</span></p>
+			<input id="orderNumber" maxlength="40" #focus [readonly]=true class="form-control" [formControl]="salesOrderForm.controls['orderNumber']">
 		</div>
-		<div class="col-xs-3">
+		<div class="col-xs-3 mr-t-1">
 			<p>{{'common.date' | translate}}: *</p>
 			<input id="date" type="date" class="form-control" [formControl]="salesOrderForm.controls['date']">
 		</div>
-		<div class="col-xs-3">
-			<p>{{'salesOrder.customer' | translate}}: *</p>
-			<input id="customer" maxlength="20" class="form-control" [formControl]="salesOrderForm.controls['customer']" [typeahead]="districtsList"
-			 typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+		<div class="col-xs-3 mr-t-1">
+			<p>{{'common.customer' | translate}}: *</p>
+			<input id="customer" maxlength="20" class="form-control" formControlName="customer" typeaheadOptionField="accountName"
+			 (typeaheadOnSelect)="onSelectCustomer($event)" [typeahead]="customersList" [typeaheadOptionsLimit]="7"
+			 [typeaheadMinLength]="0">
 			<span class="caret"></span>
 		</div>
-
-		<div class="col-xs-3">
+		<div class="col-xs-3 mr-t-1">
+			<p>{{'internalStockAdj.type' | translate}}: *</p>
+			<input id="rateType" maxlength="10" class="form-control" [formControl]="salesOrderForm.controls['rateType']"
+			 [typeahead]="typeList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+			<span class="caret"></span>
+		</div>
+		<div class="col-xs-3 mr-t-1">
 			<p>{{'common.remarks' | translate}}: *</p>
 			<input id="remarks" maxlength="40" class="form-control" [formControl]="salesOrderForm.controls['remarks']">
 			<span class="caret hide-caret"></span>
 		</div>
 
-    <div class="col-xs-3">
-			<p>{{'salesOrder.rateType' | translate}}: *</p>
-      <input  id="rateType" maxlength="10" class="form-control" [formControl]="salesOrderForm.controls['rateType']" [typeahead]="rateTypeList"
-      typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-			<span class="caret" ></span>
-    </div>
-    
-		<div class="col-xs-3">
-			<p>{{'common.productName' | translate}}: *</p>
-			<input id="productName" maxlength="40" class="form-control" [formControl]="salesOrderForm.controls['productName']" [typeahead]="districtsList"
-			 typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-			<span class="caret" ></span>
-		</div>
-    
-		<div class="col-xs-3">
-			<p>{{'salesOrder.packing' | translate}}: *</p>
-			<input id="packing" maxlength="10" class="form-control" [formControl]="salesOrderForm.controls['packing']">
-    </div>
-    
-    <div class="col-xs-3" >
-			<p>{{'common.qty' | translate}}: *</p>
-			<input id="qty" maxlength="10" class="form-control" [formControl]="salesOrderForm.controls['qty']">
-			<span class="caret hide-caret"></span>
-    </div>
-    
-		<div class="col-xs-3">
-			<p>{{'purchaseOrder.rate' | translate}}: *</p>
-			<input id="rate" maxlength="10" class="form-control" [formControl]="salesOrderForm.controls['rate']">
-			<span class="caret hide-caret"></span>
-    </div>
-    
-    <div class="col-xs-3">
-			<p>{{'common.free' | translate}}: *</p>
-			<input id="free" maxlength="10" class="form-control" [formControl]="salesOrderForm.controls['free']">
-		</div>
-		
+		<!-- <div class="row line"></div> -->
 
-		<div class="col-xs-12" >
+		<div class="col-xs-3 mr-t-1">
+			<p>{{'common.productName' | translate}}: *</p>
+			<input id="productName" class="form-control" formControlName="productName" typeaheadOptionField="name" [typeahead]="productsList"
+			 (typeaheadOnSelect)="onSelectProduct($event)" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+			<span class="caret"></span>
+		</div>
+
+		<div class="col-xs-3 mr-t-1">
+			<p>{{'product.packing' | translate}}: *</p>
+			<input id="pack" type="number" maxlength="10" [readonly]=true oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+			 class="form-control" [formControl]="salesOrderForm.controls['pack']">
+		</div>
+
+		<div class="col-xs-3 mr-t-1">
+			<p>{{'common.qty' | translate}}: *</p>
+			<input id="qty" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+			 class="form-control" (blur)="calculateRate()" [formControl]="salesOrderForm.controls['qty']">
+			<span class="caret hide-caret"></span>
+		</div>
+
+		<div class="col-xs-3 mr-t-1">
+			<p>{{'common.free' | translate}}: *</p>
+			<input id="free" type="number" maxlength="10" [readonly]=true oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+			 class="form-control" [formControl]="salesOrderForm.controls['free']">
+			<span class="caret hide-caret"></span>
+		</div>
+
+		<div class="col-xs-3 mr-t-1">
+			<p>{{'purchaseOrder.rate' | translate}}: *</p>
+			<input id="rate" [readonly]=true type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+			 class="form-control" [formControl]="salesOrderForm.controls['rate']">
+		</div>
+
+
+		<div class="col-xs-12">
 			<app-buttons [title]="'salesOrder.title'" [deleteConfirmMsg]="'salesOrder.deleteConfirmationMessage'"
 			 [saveConfirmMsg]="'salesOrder.saveConfirmationMessage'" [saveInfoMsg]="'salesOrder.saveInformationMessage'"
 			 [endPoint]="endPoint" [deleteInfoMsg]="'salesOrder.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
@@ -73,7 +80,7 @@
 		</div>
 	</form>
 </div>
-<div class="col-md-12 " >
+<div class="col-md-12 ">
 	<br /><br />
 	<app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList"
 	 (valueChange)='valueChange($event)' [screenColums]="'SalesOrderColumns'"></app-synectiks-common-grid>
