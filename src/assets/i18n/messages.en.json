@@ -324,7 +324,6 @@
     "duplicateNameErrorMessage": "The Account Name '{{duplicateMessageParam}}' already exists with this name.",
     "duplicateCodeErrorMessage": "The Account code '{{duplicateMessageParam}}' already exists with this code."
   },
-
   "internalStockAdj": {
     "title": "Internal Stock Adjustments",
     "endPoint": "internalStockAdjustments/",
@@ -336,31 +335,9 @@
     "saveInformationMessage": "number record has been saved successfully.",
     "duplicateNameErrorMessage": "The Number '{{duplicateMessageParam}}' already exists with this Number.",
     "duplicateCodeErrorMessage": "The Number '{{duplicateMessageParam}}' already exists with this Number.",
-    "deleteConfirmationMessage": "Are you sure you want to delete Internal stock?",
+  "deleteConfirmationMessage": "Are you sure you want to delete Internal stock?",
     "deleteInformationMessage": "Internal stock record has been deleted successfully."
   },
-  "common": {
-    "orderNumber": "Order Number",
-    "supplier": "Supplier",
-    "customer": "Customer",
-    "remarks": "Remarks",
-    "date": "Date",
-    "transport": "Transport",
-    "sNo": "S No",
-    "code": "Code",
-    "productName": "Product Name",
-    "pack": "Pack",
-    "qty": "Quantity",
-    "rate": "Rate",
-    "free": "Free",
-    "batch": "Batch",
-    "purchaseRate": "Purchase Rate",
-    "purRate": "Pur Rate",
-    "createNew": "Create New",
-    "fromDate": "From Date",
-    "toDate": "To Date"
-  },
- 
   "createuser": {
     "title": "Create User",
     "endPoint": "createUser/",
@@ -438,7 +415,7 @@
     "saveInformationMessage": "Purchase Order record has been saved successfully.",
     "duplicateNameErrorMessage": "The Purchase Order Number '{{duplicateMessageParam}}' already exists.",
     "duplicateCodeErrorMessage": "The Name '{{duplicateMessageParam}}' already exists with this Name.",
-    "deleteConfirmationMessage": "Are you sure you want to delete Purchase Order?",
+   "deleteConfirmationMessage": "Are you sure you want to delete Purchase Order?",
     "deleteInformationMessage": "Purchase Order record has been deleted successfully."
   },
   "purchaseReports": {
@@ -472,7 +449,7 @@
     "saveInformationMessage": "Purchase Returns Register record has been saved successfully.",
     "duplicateNameErrorMessage": "The Purchase Returns Register '{{duplicateMessageParam}}' already exists with this Name.",
     "duplicateCodeErrorMessage": "The Name '{{duplicateMessageParam}}' already exists with this Name.",
-    "deleteConfirmationMessage": "Are you sure you want to delete Purchase Reports?",
+     "deleteConfirmationMessage": "Are you sure you want to delete Purchase Reports?",
     "deleteInformationMessage": "Purchase Reports record has been deleted successfully."
   },
   "salesOrder": {
@@ -485,9 +462,9 @@
     "saveInformationMessage": "Sales Order record has been saved successfully.",
     "duplicateNameErrorMessage": "The Sales Order Name '{{duplicateMessageParam}}' already exists with this Name.",
     "duplicateCodeErrorMessage": "The Name '{{duplicateMessageParam}}' already exists with this Name.",
-    "deleteConfirmationMessage": "Are you sure you want to delete Sales?",
+	"deleteConfirmationMessage": "Are you sure you want to delete Sales?",
     "deleteInformationMessage": "Sales record has been deleted successfully."
-  },
+    },
   "salesInvoice": {
     "title": "Sales Invoice",
     "endPoint": "sales/",
@@ -523,8 +500,6 @@
     "duplicateNameErrorMessage": "The Order Number '{{duplicateMessageParam}}' already exists.",
     "duplicateCodeErrorMessage": "The Number '{{duplicateMessageParam}}' already exists."
   },
-
-  
   "deliveryChallan": {
     "title": "Delivery Challan",
     "gstType": "GST Type",
@@ -539,6 +514,218 @@
     "saveInformationMessage": "Delivery Challan record has been saved successfully.",
     "duplicateNameErrorMessage": "The Delivery Challan Name '{{duplicateMessageParam}}' already exists with this Name.",
     "duplicateCodeErrorMessage": "The Name '{{duplicateMessageParam}}' already exists with this Name."
+  },
+  "areaReports": {
+    "segmentoption": "Segment Option"
+  },
+  "companyReports": {
+    "districtoption": "District Option",
+    "discountoption": "Discount Option",
+    "inclNetRate": "Include Net Rates",
+    "saleoption": "Sale Option"
+  },
+  "customerReports": {
+    "percent": "Percent",
+    "rateOption": "Rate Option",
+    "salesOption": "Sales Option",
+    "saleRateOption": "Sale Rate Option",
+    "sortorder": "Sort Order",
+    "sortOption": "Sort Option"
+  },
+  "productReports": {
+    "batchSelection": "Batch Selection",
+    "detailOption": "Detail Option",
+    "prodcode": "Product Code",
+    "printRate": "Print Rates",
+    "schemeoption": "Scheme Option",
+    "targetOption": "Target Option"
+  },
+  "repReports": {
+    "printTarget": "Print Only Targets",
+    "repOption": "Rep.Option",
+    "reportYear": "Report Year",
+    "reportDate": "Report Date",
+    "year": "Year"
+  },
+  "saleReports": {
+    "returnOption": "Return Option"
+  },
+  "stockReports": { 
+    "batchOption": "Batch Option",
+    "company": "Company",
+    "companyName": "Company Name",
+    "expiryDays": "Expiry Days",
+    "itemValue": "Item Value",
+    "minStock": "Minimum Stock",
+    "prod": "Product",
+    "priceListFor": "Price List For",
+    "printProfitLoss": "Print Profit & Loss",
+    "printQty": "Print Quantity",
+    "printNilQty": "Print Nil Quantity",
+    "printNilItems": "Print Nil Items",
+    "printExcess": "Print Excess/Req.",
+    "reportAsOn": "Report As On",
+    "reportType": "Report Type",
+    "reportMonth": "Report Month",
+    "reqDays": "Req.Days",
+    "stmtFor": "Statement For",
+    "stockPosition": "Stock Position For",
+    "stockCheck": "Stock Checking For",
+    "fromProduct": "From Product",
+    "toProduct": "To Product",
+    "wantPageNo": "Want Page No.s",
+    "wantDoubleNo": "Want Double Prn"
+  },
+  "gstRegister": {
+    "dateOption": "Date Option",
+    "acPostOption": "A/C Post Option",
+    "month":"Month"
+  },
+  "misc": {
+    "chklistOption": "Checklist Option",
+    "codeType": "Code Type",
+    "coupon": "Coupon",
+    "customers":"Customers",
+    "fromAreaName": "From Area Name",
+    "fromCode": "From Code",
+    "newArea": "New Area",
+    "newCompany": "New Company",
+    "oldArea": "Old Area",
+    "oldCompany": "Old Company",
+    "prize": "Prize",
+    "products": "Products",
+    "scheme": "Scheme",
+    "schemeName": "Scheme Name",
+    "toAreaName": "To Area Name",
+    "toCode": "To Code"
+  },
+  "paymentVoucher": {
+    "paymentCode": "Payment Code"
+  },
+  "receiptVoucher": {
+    "headOfAccount": "Head Of Account",
+    "narration": "Narration",
+    "rcNo": "RC.No.",
+    "receiptCode": "Receipt Code"
+  },
+  "gstPaymentVoucher": {
+    "bank": "Bank",
+    "fee": "Fee",
+    "gstTaxAc": "GST Tax A/C",
+    "interest": "Interest",
+    "majorHead": "Major Head",
+    "penalty": "Penalty",
+    "rcm": "RCM",
+    "subTotal": "Sub Total",
+    "totals": "Totals",
+    "tax": "Tax",
+    "taxMonth": "Tax Month"
+  },
+  "rcmInvoiceEntry": {
+    "hsnCode": "HSN Code",
+    "sacCode": "SAC Code",
+    "taxElig": "Tax Eligible"  
+  },
+  "genPurchases": {
+    "genPurNo": "Gen.Pur.No.",
+    "gstin": "GSTIN",
+    "invoiceDt": "Invoice Date",
+    "invoiceNo": "Invoice No.",
+    "taxElig": "Tax Eligibility"
+  },
+  "financeRegister": {
+    "printOnly": "Print Only",
+    "fromGenInv": "From Gen.Inv.No.",
+    "fromRcm": "From RCM.No.",
+    "inclCredits": "Incl. All Credits",
+    "noOfCopy": "No Of Copies",
+    "toGenInv": "To Gen.Inv.No.",
+    "toRcm": "To RCM.No.",
+    "transType": "Transaction Type",
+    "wantVouchTotal": "Want Voucher Totals"
+  },
+  "financeReports": {
+    "agingSlot": "Aging Slot",
+    "asOnDate": "As On Date",
+    "dayBook": "Daybook Type",
+    "dueDays": "Due Days",
+    "dueDaysOn": "Due Days On",
+    "freshPage": "Fresh Page",
+    "freshPageArea": "Fresh Page for Every Area",
+    "freshPageCust": "Fresh Page for Every Customer",
+    "fromAcc": "From Account",
+    "fromSchd": "From Schedule",
+    "grpSelect": "Group Selection",
+    "interest": "Interest",
+    "interestPrc": "Interest(%)",
+    "pageNo": "Page No.",
+    "pageOption": "Page Option",
+    "printBalnc": "Print Balances",
+    "Printinterest": "Print Interest",
+    "printOnly": "Print Only",
+    "salesmanOption": "Salesman Option",
+    "scheduleOption": "Schedule Option",
+    "sortOption": "Sort Option",
+    "toAcc": "To Account",
+    "toSchd": "To Schedule",
+    "trailBalnc": "Trail Balance Type",
+    "wantDblSpc": "Want Double Space",
+    "wantPageNo": "Want Page No.s",
+    "wantVoucherNo": "Want Voucher No."
+  },
+  "common": {
+    "amount": "Amount",
+    "areaoption": "Area Option",
+    "batch": "Batch",
+    "code": "Code",
+    "companyoption": "Company Option",
+    "createNew": "Create New",
+    "customer": "Customer",
+    "custOption": "Customer Option",
+    "custType": "Customer Type",
+    "date": "Date",
+    "desc": "Description",
+    "desc1": "Description1",
+    "desc2": "Description2",
+    "detailOption": "Detail Option",
+    "disc": "Discount",
+    "discountoption": "Discount Option",
+    "free": "Free",
+    "fromDate": "From Date",
+    "fromMonth": "From Month",
+    "gstType": "GST Type",
+    "hsnSacNo": "HSN/SAC No.",
+    "invoiceAmt": "Invoice Amt",
+    "ledgerAC": "Ledger A/C",
+    "mode": "Mode",
+    "no": "No.",
+    "orderNumber": "Order Number", 
+    "productName": "Product Name",
+    "prodoption": "Product Option",
+    "purchaseRate": "Purchase Rate",
+    "purRate": "Pur Rate",
+    "pack": "Pack",
+    "qty": "Quantity",
+    "rate": "Rate",
+    "rateOption": "Rate Option",
+    "remarks": "Remarks",
+    "reportDate": "Report Date",
+    "repOption": "Report Option",
+    "reportType": "Report Type",
+    "schemeoption": "Scheme Option",
+    "sNo": "S No",
+    "sortorder": "Sort Order",
+    "supplier": "Supplier",
+    "suppOption": "Supplier Option",
+    "tax": "Tax(%)",
+    "taxAmt": "Tax Amt",
+    "taxableAmt": "Taxable Amt",  
+    "transport": "Transport",
+    "toDate": "To Date",
+    "toMonth": "To Month",
+    "type": "Type",
+    "voucherNo": "Voucher No."
+     
   },
   "button": {
     "save": "Save",
