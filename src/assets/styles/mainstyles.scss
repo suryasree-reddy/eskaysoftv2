@@ -290,3 +290,18 @@ h3{
 .outset{
   border-style: outset;
 }
+
+FIELDSET {
+    margin: 8px;
+    border: 1px solid silver;
+    padding: 8px;
+    border-radius: 4px;
+}
+LEGEND{
+  border-bottom: 0px;
+  margin-bottom: 0px;
+  font-size: 17px;
+  padding-left: 4px;
+  padding-right: 4px;
+  width:22%;
+}
