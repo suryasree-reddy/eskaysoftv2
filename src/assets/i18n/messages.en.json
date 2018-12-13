@@ -393,7 +393,7 @@
   },
   "purchaseReturn": {
     "title": "Purchase Returns",
-    "purReturnNumber": "Purchase Return Number",
+    "purReturnNumber": "Return Number",
     "productDesc": "Product Description",
     "status": "Status",
     "amount": "Amount",
@@ -550,7 +550,7 @@
   "saleReports": {
     "returnOption": "Return Option"
   },
-  "stockReports": { 
+  "stockReports": {
     "batchOption": "Batch Option",
     "company": "Company",
     "companyName": "Company Name",
@@ -624,7 +624,7 @@
   "rcmInvoiceEntry": {
     "hsnCode": "HSN Code",
     "sacCode": "SAC Code",
-    "taxElig": "Tax Eligible"  
+    "taxElig": "Tax Eligible"
   },
   "genPurchases": {
     "genPurNo": "Gen.Pur.No.",
@@ -700,7 +700,7 @@
     "ledgerAC": "Ledger A/C",
     "mode": "Mode",
     "no": "No.",
-    "orderNumber": "Order Number", 
+    "orderNumber": "Order Number",
     "productName": "Product Name",
     "prodoption": "Product Option",
     "purchaseRate": "Purchase Rate",
@@ -720,13 +720,13 @@
     "suppOption": "Supplier Option",
     "tax": "Tax(%)",
     "taxAmt": "Tax Amt",
-    "taxableAmt": "Taxable Amt",  
+    "taxableAmt": "Taxable Amt",
     "transport": "Transport",
     "toDate": "To Date",
     "toMonth": "To Month",
     "type": "Type",
     "voucherNo": "Voucher No."
-     
+
   },
   "button": {
     "save": "Save",
