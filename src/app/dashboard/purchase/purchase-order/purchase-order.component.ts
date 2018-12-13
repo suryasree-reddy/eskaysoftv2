@@ -20,15 +20,9 @@ export class PurchaseOrderComponent implements OnInit {
   private formSuccess = false;
   private formRequiredError = false;
   private nameFlag = false;
-  private duplicateName = false;
-  private duplicateOrderNo = false;
-  private duplicateMessage: string = null;
-  private duplicateMessageParam: string = null;
   public gridDataList: any = [];
   private productsList: any = [];
   private suppliersList: any = [];
-  private childDuplicateMessage: string = null;
-  private childDuplicateMessageParam: string = null;
   private savedSupplierId = 0;
 
   @ViewChild('focus') focusField: ElementRef;
@@ -95,29 +89,14 @@ export class PurchaseOrderComponent implements OnInit {
     });
   }
 
-  getDuplicateErrorMessages(): void {
-    if (!this.duplicateOrderNo) {
-      this.formRequiredError = false;
-      this.duplicateMessage = null;
-      this.duplicateMessageParam = null;
-    }
-    if (this.duplicateOrderNo) {
-      this.duplicateMessage = 'purchaseOrder.duplicateNameErrorMessage';
-      this.duplicateMessageParam = this.purchaseOrderForm.value.orderNumber;
-    }
-  }
-
   onSelectProduct(event) {
     this.purchaseOrderForm.patchValue({ pack: event.item.packing });
     this.purchaseOrderForm.patchValue({ free: event.item.free });
     this.purchaseOrderForm.patchValue({ productBoxPack: event.item.boxQty });
     this.purchaseOrderForm.patchValue({ productId: event.item.id });
     this.purchaseOrderForm.patchValue({ productcode: event.item.productcode });
-    // this.purchaseOrderForm.patchValue({ bQty: event.item.bQty });
-    // this.purchaseOrderForm.patchValue({ bFree: event.item.free * event.item.bQty });
     this.purchaseOrderForm.patchValue({ netRate: event.item.netRate });
-    //  const productPurchaseList = _.filter(this.gridDataList, function(o) {return o.productId == event.item.id });
-    //  this.purchaseOrderForm.patchValue({ orderNumber: productPurchaseList.length + 1 });
+    this.calculateRate();
   }
 
   calculateRate() {
@@ -156,14 +135,12 @@ export class PurchaseOrderComponent implements OnInit {
     this.resetForm(null);
     this.purchaseOrderForm.value.accountInformationId = tempSupplierId;
     this.purchaseOrderForm.value.supplier = tempSupplierName;
-    this.loadGridData();
+  //  this.loadGridData();
   }
 
   requiredErrMsg() {
-    if (this.duplicateMessage == null) {
       this.formRequiredError = true;
       this.formSuccess = false;
-    }
   }
 
   resetForm(param) {
@@ -171,17 +148,13 @@ export class PurchaseOrderComponent implements OnInit {
     const tempSupplierName = this.purchaseOrderForm.value.supplier;
     const tempOrderNum = this.purchaseOrderForm.value.orderNumber;
     this.purchaseOrderForm.reset();
-    if ((param === undefined || param === null )&& !this.nameFlag) {
+    if ((param === undefined || param === null ) && !this.nameFlag) {
       this.purchaseOrderForm.patchValue({ accountInformationId: tempSupplierId });
       this.purchaseOrderForm.patchValue({ supplier: tempSupplierName });
       this.purchaseOrderForm.patchValue({ orderNumber: tempOrderNum });
     }
-
     this.deleteFlag = true;
-    this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
     this.nameFlag = false;
-    this.duplicateOrderNo = false;
     this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
   }
@@ -189,14 +162,9 @@ export class PurchaseOrderComponent implements OnInit {
   editable(s) {
     this.nameFlag = true;
     this.formRequiredError = false;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
-    //  this.deleteFlag = !s.deleteFlag;
     this.deleteFlag = false;
-    this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
     this.purchaseOrderForm.reset(s);
-    //  const productObj = _.find(this.productsList, function(o) {return o.id == s.productId; });
-    //  this.purchaseOrderForm.patchValue({ productBoxPack: productObj.boxQty });
+    const productObj = _.find(this.productsList, function(o) {return o.id === s.productId; });
+    this.onSelectProduct({item : productObj});
   }
 }
