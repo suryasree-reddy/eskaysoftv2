@@ -24,7 +24,7 @@ export class QuotationsComponent implements OnInit {
   private duplicateMessageParam: string = null;
   private quotationList: any = [];
   private productsList: any = [];
-  private suppliersList: any = [];
+  private customersList: any = [];
 
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
@@ -40,19 +40,20 @@ export class QuotationsComponent implements OnInit {
     this.quotationForm = this.fb.group({
       id: ['', Validators.required],
       orderNumber: ['', Validators.required],
+      accountInformationId: ['', Validators.required],
       customer: ['', Validators.required],
       remarks: [],
       date: [],
       productId: ['', Validators.required],
       productName: ['', Validators.required],
-      // productcode: [],
+      productcode: ['', Validators.required],
       pack: [],
       qty: [],
       rate: [],
-      // amount: [],
+      amount: [],
     });
     this.loadProductData();
-    this.loadSupplierData();
+    this.loadCustomerData();
   }
 
   checkForDuplicateOrderNo() {
@@ -63,16 +64,27 @@ export class QuotationsComponent implements OnInit {
   }
 
   loadProductData() {
-    this.masterService.getParentData("product/").subscribe(list => {
+    this.masterService.getParentData('product/').subscribe(list => {
       this.productsList = list;
     });
   }
 
-  loadSupplierData() {
-    this.masterService.getParentData("accountinformation/").subscribe(list => {
-      this.suppliersList = list;
+  loadCustomerData() {
+    this.masterService.getParentData('accountinformation/').subscribe(list => {
+      this.customersList = list;
     });
   }
+  onSelectProduct(event) {
+    this.quotationForm.patchValue({ pack: event.item.packing });
+    this.quotationForm.patchValue({ free: event.item.free });
+
+  }
+  onSelectCustomer(event) {
+   
+      this.quotationForm.patchValue({ accountInformationId: event.item.id });
+   
+    }
+  
 
   getDuplicateErrorMessages(): void {
     if (!this.duplicateOrderNo) {

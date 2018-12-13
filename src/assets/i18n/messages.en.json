@@ -275,7 +275,7 @@
     "endPoint": "tax/"
   },
   "purchase": {
-    "title": "Purchase",
+    "title": "Gst Purchase Invoice Entry",
     "endPoint": "purchaseentry/",
     "header": "Header",
     "footer": "Footer Inputs",
@@ -691,6 +691,7 @@
     "disc": "Discount",
     "discountoption": "Discount Option",
     "free": "Free",
+    "gstp": "GST%",
     "fromDate": "From Date",
     "fromMonth": "From Month",
     "gstType": "GST Type",

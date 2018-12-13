@@ -1578,7 +1578,7 @@
 },
 {
   "headerName": "GST%",
-  "field": "gstPerc",
+  "field": "gstp",
   "filterParams": {
     "filterOptions": ["contains"],
     "newRowsAction": "keep"

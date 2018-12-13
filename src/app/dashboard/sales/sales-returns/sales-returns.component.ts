@@ -24,10 +24,12 @@ export class SalesReturnsComponent implements OnInit {
     private duplicateMessageParam: string = null;
     private salesReturnList: any = [];
     private productsList: any = [];
-    private suppliersList: any = [];
+    private customersList: any = [];
     private accGstType: any[];
     private modeType: any[];
-  
+    public gridDataList: any = [];
+    private savedCustomerId = 0;
+
     @ViewChild('focus') focusField: ElementRef;
     @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
   
@@ -40,27 +42,57 @@ export class SalesReturnsComponent implements OnInit {
   ngOnInit() {
     this.salesReturnForm  = this.fb.group({
       id: [],
-      gstType: ['', Validators.required],
       salesReturnNo:['', Validators.required],
       salesReturnDate:[],
+      gstType: ['', Validators.required],
+      accountInformationId: ['', Validators.required],
       customer: [],
+      remarks: ['', Validators.required],
       gstIN: [],
       delivTo: [],
       mode: [],
       productId: ['', Validators.required],
       productName: ['', Validators.required],
-      // productcode: ['', Validators.required],
-      batch: [],
-      exp: [],
-      qty: [],
       free: [],
+      batch: [],
+      expiry: [],
+      qty: [],
       sRate: [],
-      disc: [],
-      // gstPerc: [],
-    });
+      disc: ['', Validators.required],
+      gstp: ['', Validators.required]
+         });
     this.accGstType = this.sharedDataService.getSharedCommonJsonData().GstType;
     this.modeType = this.sharedDataService.getSharedCommonJsonData().Mode;
+    this.loadCustomerData();
+    this.loadProductData();
   }
+  loadProductData() {
+    this.masterService.getParentData('product/').subscribe(list => {
+      this.productsList = list;
+    });
+  }
+  loadCustomerData() {
+    this.masterService.getParentData('accountinformation/').subscribe(list => {
+      this.customersList = list;
+    });
+  }
+  onInitialDataLoad(dataList: any[]) {
+    this.gridDataList = dataList;
+  }
+
+  loadGridData() {
+    this.masterService.getData(this.endPoint);
+    this.masterService.dataObject.subscribe(list => {
+      this.gridDataList = list;
+      localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
+    });
+  }
+
+  valueChange(selectedRow: any[]): void {
+    this.editable(selectedRow);
+  }
+
+  
 
   checkForDuplicateSaleRetNo() {
     if (!this.nameFlag) {
@@ -80,8 +112,30 @@ export class SalesReturnsComponent implements OnInit {
       this.duplicateMessageParam = this.salesReturnForm.value.salesReturnNo;
     }
   }
+  onSelectProduct(event) {
 
+    this.salesReturnForm.patchValue({ free: event.item.free });
+
+    this.salesReturnForm.patchValue({ productId: event.item.id });
+    this.salesReturnForm.patchValue({ netRate: event.item.netRate });
+    this.salesReturnForm.patchValue({ productcode: event.item.productcode });
+
+  }
+  onSelectCustomer(event) {
+   
+    if (this.savedCustomerId >= 0 && this.savedCustomerId !== event.item.id) {
+      this.salesReturnForm.patchValue({ accountInformationId: event.item.id });
+      this.salesReturnForm.patchValue({gstIN: event.item.gstIN});
+      this.salesReturnForm.patchValue({ salesReturnNo: this.gridDataList.length + 1 });
+      
+    }
+  }
+  calculateRate() {
+    this.salesReturnForm.patchValue({ sRate: this.salesReturnForm.value.qty * this.salesReturnForm.value.qty });
+  
+  }
   save() {
+    this.savedCustomerId = this.salesReturnForm.value.accountInformationId;
     this.buttonsComponent.save();
   }
 
@@ -110,5 +164,15 @@ export class SalesReturnsComponent implements OnInit {
     this.duplicateSaleRetNo = false;
     this.formRequiredError = this.formSuccess = false;
   }
-  
+  editable(s) {
+    this.nameFlag = true;
+    this.formRequiredError = false;
+   
+    this.deleteFlag = false;
+    this.duplicateMessage = null;
+    this.duplicateMessageParam = null;
+    this.salesReturnForm.reset(s);
+
+  }
+
 }
