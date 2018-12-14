@@ -124,7 +124,7 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   deleteOrder() {
-    this.buttonsComponent.manualDelete(this.endPoint + '/orderNumber', this.purchaseOrderForm.value.orderNumber);
+    this.buttonsComponent.manualDelete(this.endPoint + 'orderNumber/', this.purchaseOrderForm.value.orderNumber);
   }
 
   successMsg() {

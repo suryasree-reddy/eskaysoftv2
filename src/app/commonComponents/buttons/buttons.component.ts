@@ -74,7 +74,7 @@ export class ButtonsComponent implements OnInit {
   }
 
   manualDelete(endPoint, deleteId) {
-    this.masterService.deleteRecord(this.endPoint, deleteId).subscribe(res => {
+    this.masterService.deleteRecord(endPoint, deleteId).subscribe(res => {
       localStorage.removeItem('ag-activeRow');
       this.showInformationModal('Delete');
     }, error => {
