@@ -36,7 +36,6 @@ export class SalesOrdersComponent implements OnInit {
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
-
   ngOnInit() {
     this.salesOrderForm = this.fb.group({
       id: [],

@@ -14,8 +14,8 @@
 			</div>
 			<div class="col-xs-6">
 				<p>{{'salesInvoice.mode' | translate}}: *</p>
-				<input id="mode" maxlength="10" class="form-control" [formControl]="deliveryChallanForm.controls['mode']" [typeahead]="modeTypeList"
-				 typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+				<input id="mode" maxlength="10" class="form-control" [formControl]="deliveryChallanForm.controls['mode']"
+				 [typeahead]="modeTypeList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
 			</div>
 			<div class="col-xs-6">
 				<p>{{'deliveryChallan.dcDate' | translate}}: *</p>
@@ -28,12 +28,12 @@
 				 [typeaheadMinLength]="0">
 				<span class="caret"></span>
 			</div>
-			
+
 			<div class="col-xs-6">
-					<p>{{'salesInvoice.delivTo' | translate}}: *</p>
-					<input id="delivTo"  class="form-control" [formControl]="deliveryChallanForm.controls['deliverTo']">
-				</div>
-			
+				<p>{{'salesInvoice.delivTo' | translate}}: *</p>
+				<input id="delivTo" class="form-control" [formControl]="deliveryChallanForm.controls['deliverTo']">
+			</div>
+
 			<div class="col-xs-6">
 				<p>{{'common.productName' | translate}}: *</p>
 				<input id="productName" class="form-control" formControlName="productName" typeaheadOptionField="name" [typeahead]="productsList"
@@ -61,46 +61,54 @@
 				<p>{{'common.gstp' | translate}}: *</p>
 				<input id="gstp" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
 				 class="form-control" [formControl]="deliveryChallanForm.controls['gstp']">
-				</div>
+			</div>
 			<div class="col-xs-4">
 				<p>{{'common.disc' | translate}}: *</p>
 				<input id="disc" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
 				 class="form-control" [formControl]="deliveryChallanForm.controls['disc']">
 			</div>
-			    
+
 		</fieldset>
-  
+
 		<fieldset>
-		  <legend>Calculations</legend>
-		  <div class="col-xs-12">
-			  <p>{{'deliveryChallan.dcNo' | translate}}: * &emsp;(<a style="cursor: pointer" (click)="resetForm('CloseOrder')">Close Order</a>) &emsp; <span *ngIf="nameFlag">(<a style="cursor: pointer" (click)="deleteOrder()">Delete Order</a>)</span></p>
-			  <input id="dcNo" maxlength="40" #focus [readonly]=true class="form-control" [formControl]="deliveryChallanForm.controls['dcNo']">
+			<legend>Calculations</legend>
+			<div class="col-xs-12">
+				<p>{{'deliveryChallan.dcNo' | translate}}: * &emsp;(<a style="cursor: pointer" (click)="resetForm('CloseOrder')">Close
+						Order</a>) &emsp; <span *ngIf="nameFlag">(<a style="cursor: pointer" (click)="deleteOrder()">Delete Order</a>)</span></p>
+				<input id="dcNo" maxlength="40" #focus [readonly]=true class="form-control" [formControl]="deliveryChallanForm.controls['dcNo']">
 			</div>
-		   <div class="col-xs-4">
-			<p>{{'purchase.gstIN' | translate}}: *</p>
-			<input id="gstIN" #focus [readonly]=true oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" [formControl]="deliveryChallanForm.controls['gstIN']">
-		  </div>
-		  <div class="col-xs-4">
-			  <p>{{'common.free' | translate}}: *</p>
-			  <input id="free" type="number" maxlength="10" [readonly]=true oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" [formControl]="deliveryChallanForm.controls['free']">
-			  <span class="caret hide-caret"></span>
+			<div class="col-xs-4">
+				<p>{{'purchase.gstIN' | translate}}: *</p>
+				<input id="gstIN" #focus [readonly]=true oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+				 class="form-control" [formControl]="deliveryChallanForm.controls['gstIN']">
 			</div>
-	  
-		  <div class="col-xs-4">
-			<p>{{'deliveryChallan.sRate' | translate}}: *</p>
-			<input id="sRate" [readonly]=true type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" [formControl]="deliveryChallanForm.controls['sRate']">
-		  </div>
-	
-		 
-		
+			<div class="col-xs-4">
+				<p>{{'common.free' | translate}}: *</p>
+				<input id="free" type="number" maxlength="10" [readonly]=true oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+				 class="form-control" [formControl]="deliveryChallanForm.controls['free']">
+				<span class="caret hide-caret"></span>
+			</div>
+
+			<div class="col-xs-4">
+				<p>{{'deliveryChallan.sRate' | translate}}: *</p>
+				<input id="sRate" [readonly]=true type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+				 class="form-control" [formControl]="deliveryChallanForm.controls['sRate']">
+			</div>
+
+
+
 		</fieldset>
-	
-		<app-buttons [title]="'deliveryChallan.title'" [endPoint]="endPoint" (resetForm)="resetForm()" [deleteConfirmMsg]="'salesReturn.deleteConfirmationMessage'" (saveRecord)="save()" [saveConfirmMsg]="'salesReturn.saveConfirmationMessage'" [hideResetBtn]=true [saveInfoMsg]="'salesReturn.saveInformationMessage'" [hideSaveBtn]=true [hideDeleteBtn]=true [deleteInfoMsg]="'salesReturn.deleteInformationMessage'" [duplicateMessage]="duplicateMessage" [isBtnDeleteDisable]="deleteFlag"  [formObj]="deliveryChallanForm" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (afterSuccess)="successMsg()">
+
+		<app-buttons [title]="'deliveryChallan.title'" [endPoint]="endPoint" (resetForm)="resetForm()" [deleteConfirmMsg]="'salesReturn.deleteConfirmationMessage'"
+		 (saveRecord)="save()" [saveConfirmMsg]="'salesReturn.saveConfirmationMessage'" [hideResetBtn]=true [saveInfoMsg]="'salesReturn.saveInformationMessage'"
+		 [hideSaveBtn]=true [hideDeleteBtn]=true [deleteInfoMsg]="'salesReturn.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
+		 [isBtnDeleteDisable]="deleteFlag" [formObj]="deliveryChallanForm" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
+		 (afterSuccess)="successMsg()">
 		</app-buttons>
-	  </form>
-	</div>
-	
-	<div class="col-md-7 ">
-	  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'GSTChallanColumns'"></app-synectiks-common-grid>
-	</div>
-	
+	</form>
+</div>
+
+<div class="col-md-7 ">
+	<app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList"
+	 (valueChange)='valueChange($event)' [screenColums]="'GSTChallanColumns'"></app-synectiks-common-grid>
+</div>

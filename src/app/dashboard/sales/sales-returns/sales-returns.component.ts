@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MasterService } from 'src/app/dashboard/master/master.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -47,18 +47,18 @@ export class SalesReturnsComponent implements OnInit {
       productId: ['', Validators.required],
       productName: ['', Validators.required],
       productcode: ['', Validators.required],
-     
+
       mode: ['', Validators.required],
       gstType: ['', Validators.required],
-    
+
       free: ['', Validators.required],
       batch: ['', Validators.required],
-     
+
       expiry: ['', Validators.required],
       qty: ['', Validators.required],
       sRate: ['', Validators.required],
       disc: ['', Validators.required],
-      gstp:['', Validators.required]
+      gstp: ['', Validators.required]
     });
     this.loadProductData();
     this.loadCustomerData();
@@ -105,15 +105,15 @@ export class SalesReturnsComponent implements OnInit {
   }
 
   calculateRate() {
-  
+
     this.salesReturnForm.patchValue({ sRate: this.salesReturnForm.value.free * this.salesReturnForm.value.qty });
-    
+
   }
 
   onSelectSupplier(event) {
     if (this.savedSupplierId >= 0 && this.savedSupplierId !== event.item.id) {
       this.salesReturnForm.patchValue({ accountInformationId: event.item.id });
-      this.salesReturnForm.patchValue({gstIN: event.item.gstIN});
+      this.salesReturnForm.patchValue({ gstIN: event.item.gstIN });
       this.salesReturnForm.patchValue({ salesReturnNo: this.gridDataList.length + 1 });
     }
   }
@@ -139,12 +139,12 @@ export class SalesReturnsComponent implements OnInit {
     this.resetForm(null);
     this.salesReturnForm.value.accountInformationId = tempSupplierId;
     this.salesReturnForm.value.customer = tempSupplierName;
-  //  this.loadGridData();
+    //  this.loadGridData();
   }
 
   requiredErrMsg() {
-      this.formRequiredError = true;
-      this.formSuccess = false;
+    this.formRequiredError = true;
+    this.formSuccess = false;
   }
 
   resetForm(param) {
@@ -152,7 +152,7 @@ export class SalesReturnsComponent implements OnInit {
     const tempSupplierName = this.salesReturnForm.value.supplier;
     const tempOrderNum = this.salesReturnForm.value.salesReturnNo;
     this.salesReturnForm.reset();
-    if ((param === undefined || param === null ) && !this.nameFlag) {
+    if ((param === undefined || param === null) && !this.nameFlag) {
       this.salesReturnForm.patchValue({ accountInformationId: tempSupplierId });
       this.salesReturnForm.patchValue({ customer: tempSupplierName });
       this.salesReturnForm.patchValue({ salesReturnNo: tempOrderNum });
@@ -168,7 +168,7 @@ export class SalesReturnsComponent implements OnInit {
     this.formRequiredError = false;
     this.deleteFlag = false;
     this.salesReturnForm.reset(s);
-    const productObj = _.find(this.productsList, function(o) {return o.id === s.productId; });
-    this.onSelectProduct({item : productObj});
+    const productObj = _.find(this.productsList, function (o) { return o.id === s.productId; });
+    this.onSelectProduct({ item: productObj });
   }
 }
