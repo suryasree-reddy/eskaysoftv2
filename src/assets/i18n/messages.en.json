@@ -465,6 +465,7 @@
 	"deleteConfirmationMessage": "Are you sure you want to delete Sales?",
     "deleteInformationMessage": "Sales record has been deleted successfully."
     },
+    
   "salesInvoice": {
     "title": "Sales Invoice",
     "endPoint": "sales/",

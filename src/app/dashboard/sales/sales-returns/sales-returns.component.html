@@ -96,9 +96,6 @@
         <input id="sRate" [readonly]=true type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
           class="form-control" [formControl]="salesReturnForm.controls['sRate']">
       </div>
-
-
-
     </fieldset>
 
     <app-buttons [title]="'salesReturn.title'" [endPoint]="endPoint" (resetForm)="resetForm()" [deleteConfirmMsg]="'salesReturn.deleteConfirmationMessage'"

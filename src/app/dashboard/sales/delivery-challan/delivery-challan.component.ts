@@ -110,7 +110,6 @@ export class DeliveryChallanComponent implements OnInit {
   calculateRate() {
 
     this.deliveryChallanForm.patchValue({ sRate: this.deliveryChallanForm.value.free * this.deliveryChallanForm.value.qty });
-
   }
 
   onSelectSupplier(event) {

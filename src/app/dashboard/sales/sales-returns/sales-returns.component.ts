@@ -35,7 +35,6 @@ export class SalesReturnsComponent implements OnInit {
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
-
   ngOnInit() {
     this.salesReturnForm = this.fb.group({
       id: [],
