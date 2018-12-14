@@ -1,109 +1,94 @@
-<div class="col-xs-12">
-  <h3>{{'salesReturn.title' | translate}}</h3>
-  <form [formGroup]="salesReturnForm" autocomplete="off" class="mr-l-1">
-    <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()"
-      [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()" [errorStatusMsg]="sharedDataService.getErrorMesage()"
-      [duplicateMessage]="duplicateMessage" [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
-
-
-    <div class="col-xs-3 mr-t-1">
-      <p>{{'salesReturn.salesReturnNo' | translate}}: *</p>
-      <input id="salesReturnNo" maxlength="40" #focus [readonly]="nameFlag" (blur)="checkForDuplicateSaleRetNo()" class="form-control"
-        [formControl]="salesReturnForm.controls['salesReturnNo']">
-    </div>
-
-    <div class="col-xs-3 mr-t-1">
-      <p>{{'salesReturn.salesReturnDate' | translate}}: *</p>
-      <input id="salesReturnDate" type="date" class="form-control" [formControl]="salesReturnForm.controls['salesReturnDate']">
-    </div>
-
-    <div class="col-xs-3 mr-t-1">
-      <p>{{'salesOrder.customer' | translate}}: *</p>
-      <input id="customer" maxlength="20" class="form-control" formControlName="customer" 
-      typeaheadOptionField="accountName"  [typeahead]="customersList" [formControl]="salesReturnForm.controls['customer']"
-        (typeaheadOnSelect)="onSelectCustomer($event)"  [typeaheadOptionsLimit]="7"
-        [typeaheadMinLength]="0">
-      <span class="caret"></span>
-    </div>
+<div class="col-xs-5">
+    <h3>{{'salesReturn.title' | translate}}</h3>
+      <form [formGroup]="salesReturnForm" autocomplete="off">
+        <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()" [duplicateMessage]="duplicateMessage" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessageParam]="duplicateMessageParam">
+        </app-errormessages>
+  
+  
+      <fieldset>
+        <legend>Input Area</legend>
+          <div class="col-xs-6">
+            <p>{{'salesReturn.salesReturnDate' | translate}}: *</p>
+            <input id="salesReturnDate" type="date" class="form-control" [formControl]="salesReturnForm.controls['salesReturnDate']">
+          </div>
+  
+          <div class="col-xs-6">
+              <p>{{'salesOrder.customer' | translate}}: *</p>
+            <input id="customer" maxlength="20" class="form-control" formControlName="customer" typeaheadOptionField="accountName" (typeaheadOnSelect)="onSelectSupplier($event)" [typeahead]="customersList" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+            <span class="caret"></span>
+          </div>
+          <div class="col-xs-6">
+            <p>{{'accountinfo.gsttype' | translate}}: *</p>
+            <input id="gstType" maxlength="5" class="form-control" [formControl]="salesReturnForm.controls['gstType']" [typeahead]="accGstTypeList" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+          </div>
+          <div class="col-xs-6">
+            <p>{{'salesInvoice.mode' | translate}}: *</p>
+              <input id="mode" maxlength="10" class="form-control" [formControl]="salesReturnForm.controls['mode']" [typeahead]="modeTypeList"
+            typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+          </div>
+            <div class="col-xs-6">
+            <p>{{'common.productName' | translate}}: *</p>
+            <input id="productName" class="form-control" formControlName="productName" typeaheadOptionField="name" [typeahead]="productsList" [typeaheadOptionsLimit]="7" (typeaheadOnSelect)="onSelectProduct($event)" [typeaheadMinLength]="0">
+            <span class="caret"></span>
+          </div>
+          <div class="col-xs-6">
+              <p>{{'common.batch' | translate}}: *</p>
+              <input id="batch"  maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" (blur)="calculateRate()" [formControl]="salesReturnForm.controls['batch']">
+              <span class="caret hide-caret"></span>
+            </div>
+            <div class="col-xs-6">
+                <p>{{'purchase.expiry' | translate}}: *</p>
+                <input id="expiry" type="date" class="form-control" [formControl]="salesReturnForm.controls['expiry']">
+              </div>
+              <div class="col-xs-6">
+            <p>{{'common.qty' | translate}}: *</p>
+            <input id="qty" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" (blur)="calculateRate()" [formControl]="salesReturnForm.controls['qty']">
+            <span class="caret hide-caret"></span>
+          </div>
+          <div class="col-xs-6">
+              <p>{{'common.gstp' | translate}}: *</p>
+              <input id="gstp" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control"  [formControl]="salesReturnForm.controls['gstp']">
+              <span class="caret hide-caret"></span>
+            </div>
+            <div class="col-xs-6">
+                <p>{{'common.disc' | translate}}: *</p>
+                <input id="disc" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control"  [formControl]="salesReturnForm.controls['disc']">
+                <span class="caret hide-caret"></span>
+              </div>
+        
+      </fieldset>
+  
+      <fieldset>
+        <legend>Calculations</legend>
+        <div class="col-xs-12">
+            <p>{{'salesReturn.salesReturnNo' | translate}}: * &emsp;(<a style="cursor: pointer" (click)="resetForm('CloseOrder')">Close Order</a>) &emsp; <span *ngIf="nameFlag">(<a style="cursor: pointer" (click)="deleteOrder()">Delete Order</a>)</span></p>
+            <input id="salesReturnNo" maxlength="40" #focus [readonly]=true class="form-control" [formControl]="salesReturnForm.controls['salesReturnNo']">
+          </div>
+         <div class="col-xs-4">
+          <p>{{'purchase.gstIN' | translate}}: *</p>
+          <input id="gstIN"  maxlength="10" [readonly]=true oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" [formControl]="salesReturnForm.controls['gstIN']">
+        </div>
+        <div class="col-xs-4">
+            <p>{{'common.free' | translate}}: *</p>
+            <input id="free" type="number" maxlength="10" [readonly]=true oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" [formControl]="salesReturnForm.controls['free']">
+            <span class="caret hide-caret"></span>
+          </div>
     
-    <div class="col-xs-3 mr-t-1">
-      <p>{{'accountinfo.gstin' | translate}}: *</p>
-      <input id="gstIN" maxlength="16"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" [formControl]="salesReturnForm.controls['gstIN']">
-      <span class="caret hide-caret"></span>
-    </div>
-   
-    <div class="col-xs-3 mr-t-1">
-      <p>{{'accountinfo.gsttype' | translate}}: *</p>
-      <div class="input-group mr-t-0">
-        <input id="gstType" maxlength="5" class="form-control" [formControl]="salesReturnForm.controls['gstType']"
-          [typeahead]="accGstType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-        <span class="caret mr-t-caret"></span>
-      </div>
-    </div>
-
-    <div class="col-xs-3 mr-t-1">
-      <p>{{'salesInvoice.mode' | translate}}: *</p>
-      <input id="mode" maxlength="10" class="form-control" [formControl]="salesReturnForm.controls['mode']" [typeahead]="modeType"
-        typeaheadOptionField="description" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-      <span class="caret"></span>
-    </div>
-
-    <div class="col-xs-3 mr-t-1">
-        <p>{{'common.productName' | translate}}: *</p>
-        <input id="productName"  class="form-control" formControlName="productName" typeaheadOptionField="name"
-            [typeahead]="productsList" (typeaheadOnSelect)="onSelectProduct($event)" [typeaheadOptionsLimit]="7"
-            [typeaheadMinLength]="0">
-        <span class="caret"></span>
-    </div>
-    <div class="col-xs-3 mr-t-1">
-      <p>{{'common.batch' | translate}}: *</p>
-      <input id="batch" maxlength="12" class="form-control" [formControl]="salesReturnForm.controls['batch']">
-      <span class="caret hide-caret"></span>
-    </div>
-    <div class="col-xs-3 mr-t-1">
-      <p>{{'salesInvoice.exp' | translate}}: *</p>
-      <input id="expiry"  type="date" class="form-control" [formControl]="salesReturnForm.controls['expiry']">
-
-    </div>
-
-   <div class="col-xs-3 mr-t-1">
-      <p>{{'common.qty' | translate}}: *</p>
-      <input id="qty" maxlength="10" class="form-control" [formControl]="salesReturnForm.controls['qty']">
-    </div>
-
-    <div class="col-xs-3 mr-t-1">
-      <p>{{'common.free' | translate}}: *</p>
-      <input id="free" maxlength="10" class="form-control" [formControl]="salesReturnForm.controls['free']">
-
-    </div>
-
-    <div class="col-xs-3 mr-t-1">
-        <p>{{'salesInvoice.sRate' | translate}}: *</p>
-        <input id="sRate" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-            class="form-control" [formControl]="salesReturnForm.controls['sRate']">
-    </div>
-    <div class="col-xs-3 mr-t-1">
-      <p>{{'salesInvoice.disc' | translate}}: *</p>
-      <input id="disc" type="number"  step="0.01" class="form-control" [formControl]="salesReturnForm.controls['disc']">
-    </div>
-
-    <div class="col-xs-3 mr-t-1">
-        <p>{{'common.gstp' | translate}}: *</p>
-        <input id="gstp"  type="number" maxlength="12" step="0.01" class="form-control" [formControl]="salesReturnForm.controls['gstp']">
-      </div>
-
-    <div class="col-xs-12">
-      <app-buttons [title]="'salesReturn.title'" [deleteConfirmMsg]="'salesReturn.deleteConfirmationMessage'"
-        [saveConfirmMsg]="'salesReturn.saveConfirmationMessage'" [saveInfoMsg]="'salesReturn.saveInformationMessage'"
-        [endPoint]="endPoint" [deleteInfoMsg]="'salesReturn.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-        [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=true [formObj]="salesReturnForm"
-        (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (afterSuccess)="successMsg()"
-        (resetForm)="resetForm()"></app-buttons>
-    </div>
-  </form>
-</div>
-<div class="col-md-12 ">
-  <br /><br />
-  <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList"
-    (valueChange)='valueChange($event)' [screenColums]="'salesReturnColumns'"></app-synectiks-common-grid>
-</div>
+        <div class="col-xs-4">
+          <p>{{'deliveryChallan.sRate' | translate}}: *</p>
+          <input id="sRate" [readonly]=true type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" [formControl]="salesReturnForm.controls['sRate']">
+        </div>
+  
+       
+      
+      </fieldset>
+  
+      <app-buttons [title]="'salesReturn.title'" [endPoint]="endPoint" (resetForm)="resetForm()" [deleteConfirmMsg]="'salesReturn.deleteConfirmationMessage'" (saveRecord)="save()" [saveConfirmMsg]="'salesReturn.saveConfirmationMessage'" [hideResetBtn]=true [saveInfoMsg]="'salesReturn.saveInformationMessage'" [hideSaveBtn]=true [hideDeleteBtn]=true [deleteInfoMsg]="'salesReturn.deleteInformationMessage'" [duplicateMessage]="duplicateMessage" [isBtnDeleteDisable]="deleteFlag"  [formObj]="salesReturnForm" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (afterSuccess)="successMsg()">
+      </app-buttons>
+    </form>
+  </div>
+  
+  <div class="col-md-7 ">
+    <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'SalesReturnColumns'"></app-synectiks-common-grid>
+  </div>
+  

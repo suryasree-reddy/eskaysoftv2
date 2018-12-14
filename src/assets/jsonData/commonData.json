@@ -1344,8 +1344,8 @@
   },
   "suppressSizeToFit": false
 }, {
-  "headerName": "Exp",
-  "field": "exp.",
+  "headerName": "Expiry",
+  "field": "expiry",
   "filterParams": {
     "filterOptions": ["contains"],
     "newRowsAction": "keep"
@@ -1371,7 +1371,7 @@
 },
 {
   "headerName": "S Rate",
-  "field": "srate",
+  "field": "sRate",
   "filterParams": {
     "filterOptions": ["contains"],
     "newRowsAction": "keep"
@@ -1389,7 +1389,7 @@
 },
 {
   "headerName": "GST%",
-  "field": "disc",
+  "field": "gstp",
   "filterParams": {
     "filterOptions": ["contains"],
     "newRowsAction": "keep"
@@ -1504,7 +1504,7 @@
   },
   "suppressSizeToFit": false
 }],
-"salesReturnColumns": [{
+"SalesReturnColumns": [{
   "headerName": "Code",
   "field": "productcode",
   "filterParams": {
@@ -1532,8 +1532,8 @@
   "suppressSizeToFit": false
 },
 {
-  "headerName": "Exp",
-  "field": "exp",
+  "headerName": "Expiry",
+  "field": "expiry",
   "filterParams": {
     "filterOptions": ["contains"],
     "newRowsAction": "keep"
@@ -1584,7 +1584,15 @@
     "newRowsAction": "keep"
   },
   "suppressSizeToFit": false
-}],
+},
+{
+  "headerName": "Status",
+  "field": "deleteFlag",
+  "cellRenderer": "deltaIndicator",
+  "suppressFilter": true,
+   "suppressSizeToFit": false
+}
+],
 "QuotationColumns": [{
   "headerName": "S No",
   "field": "id",

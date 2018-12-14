@@ -286,7 +286,7 @@
     "supplier": "Supplier",
     "mode": "Mode",
     "lrNumber": "LR Number",
-    "gstin": "GSTIN",
+    "gstIN": "GSTIN",
     "lrDate": "LR Date",
     "deliveredFrom": "Delivered From",
     "wayBill": "Way-Bill Number",
@@ -330,7 +330,7 @@
     "number": "Number",
     "remarks": "Remarks",
     "date": "Date",
-    "type": "Type",
+    "type": "Rate Type",
     "saveConfirmationMessage": "Are you sure you want to save Internal Stock Adjustment?",
     "saveInformationMessage": "number record has been saved successfully.",
     "duplicateNameErrorMessage": "The Number '{{duplicateMessageParam}}' already exists with this Number.",
@@ -480,17 +480,21 @@
     "saveConfirmationMessage": "Are you sure you want to save Sales Invoice?",
     "saveInformationMessage": "Sales Invoice record has been saved successfully.",
     "duplicateNameErrorMessage": "The Sales Invoice Number '{{duplicateMessageParam}}' already exists.",
-    "duplicateCodeErrorMessage": "The Number '{{duplicateMessageParam}}' already exists."
+    "duplicateCodeErrorMessage": "The Number '{{duplicateMessageParam}}' already exists.",
+    "deleteConfirmationMessage": "Are you sure you want to delete Sales?",
+    "deleteInformationMessage": "Sales record has been deleted successfully."
   },
   "salesReturn": {
     "title": "Sales Returns Entry",
     "endPoint": "salesRetruns/",
-    "salesReturnNo": "Sales Return Number",
-    "salesReturnDate": "Sales Return Date",
+    "salesReturnNo": "S Ret No",
+    "salesReturnDate": "S Ret Date",
     "saveConfirmationMessage": "Are you sure you want to save Sales Return Entry?",
     "saveInformationMessage": "Sales Return record has been saved successfully.",
     "duplicateNameErrorMessage": "The Sales Return Number '{{duplicateMessageParam}}' already exists.",
-    "duplicateCodeErrorMessage": "The Number '{{duplicateMessageParam}}' already exists."
+    "duplicateCodeErrorMessage": "The Number '{{duplicateMessageParam}}' already exists.",
+    "deleteConfirmationMessage": "Are you sure you want to delete Sales?",
+    "deleteInformationMessage": "Sales record has been deleted successfully."
   },
   "quotation": {
     "title": "Quotation Entry",
@@ -498,12 +502,14 @@
     "saveConfirmationMessage": "Are you sure you want to save Quotation Entry?",
     "saveInformationMessage": "Quotation record has been saved successfully.",
     "duplicateNameErrorMessage": "The Order Number '{{duplicateMessageParam}}' already exists.",
-    "duplicateCodeErrorMessage": "The Number '{{duplicateMessageParam}}' already exists."
+    "duplicateCodeErrorMessage": "The Number '{{duplicateMessageParam}}' already exists.",
+    "deleteConfirmationMessage": "Are you sure you want to delete Sales?",
+    "deleteInformationMessage": "Sales record has been deleted successfully."
   },
   "deliveryChallan": {
-    "title": "Delivery Challan",
+    "title": "GST Delivery Challan Entry",
     "gstType": "GST Type",
-    "dcNumber": "DC Number",
+    "dcNo": "DC Number",
     "dcDate": "DC Date",
     "mode": "Mode",
     "deliverTo": "DelvTo",
@@ -513,7 +519,9 @@
     "saveConfirmationMessage": "Are you sure you want to save Delivery Challan?",
     "saveInformationMessage": "Delivery Challan record has been saved successfully.",
     "duplicateNameErrorMessage": "The Delivery Challan Name '{{duplicateMessageParam}}' already exists with this Name.",
-    "duplicateCodeErrorMessage": "The Name '{{duplicateMessageParam}}' already exists with this Name."
+    "duplicateCodeErrorMessage": "The Name '{{duplicateMessageParam}}' already exists with this Name.",
+    "deleteConfirmationMessage": "Are you sure you want to delete Sales?",
+    "deleteInformationMessage": "Sales record has been deleted successfully."
   },
   "areaReports": {
     "segmentoption": "Segment Option"

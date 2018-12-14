@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MasterService } from 'src/app/dashboard/master/master.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -6,6 +6,7 @@ import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.compo
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 import 'src/assets/styles/mainstyles.scss';
 
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-sales-orders',
@@ -20,17 +21,11 @@ export class SalesOrdersComponent implements OnInit {
   private formSuccess = false;
   private formRequiredError = false;
   private nameFlag = false;
-  private duplicateName = false;
-  private duplicateOrderNo = false;
-  private duplicateMessage: string = null;
-  private duplicateMessageParam: string = null;
   public gridDataList: any = [];
   private productsList: any = [];
   private customersList: any = [];
-  private childDuplicateMessage: string = null;
-  private childDuplicateMessageParam: string = null;
-  private savedCustomerId = 0;
-  public typeList: any = [];
+  private savedSupplierId = 0;
+  private typeList: any[];
 
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
@@ -94,49 +89,32 @@ export class SalesOrdersComponent implements OnInit {
     });
   }
 
-  
-  getDuplicateErrorMessages(): void {
-    if (!this.duplicateOrderNo) {
-      this.formRequiredError = false;
-      this.duplicateMessage = null;
-      this.duplicateMessageParam = null;
-    }
-    if (this.duplicateOrderNo) {
-      this.duplicateMessage = 'salesOrder.duplicateNameErrorMessage';
-      this.duplicateMessageParam = this.salesOrderForm.value.orderNumber;
-    }
-  }
-
   onSelectProduct(event) {
     this.salesOrderForm.patchValue({ pack: event.item.packing });
     this.salesOrderForm.patchValue({ free: event.item.free });
     this.salesOrderForm.patchValue({ productBoxPack: event.item.boxQty });
     this.salesOrderForm.patchValue({ productId: event.item.id });
     this.salesOrderForm.patchValue({ productcode: event.item.productcode });
-    // this.salesOrderForm.patchValue({ bQty: event.item.bQty });
-    // this.salesOrderForm.patchValue({ bFree: event.item.free * event.item.bQty });
     this.salesOrderForm.patchValue({ netRate: event.item.netRate });
-    //  const productPurchaseList = _.filter(this.gridDataList, function(o) {return o.productId == event.item.id });
-    //  this.salesOrderForm.patchValue({ orderNumber: productPurchaseList.length + 1 });
+    this.calculateRate();
   }
 
   calculateRate() {
     this.salesOrderForm.patchValue({ rate: this.salesOrderForm.value.qty * this.salesOrderForm.value.netRate });
-    this.salesOrderForm.patchValue({ bQty: this.salesOrderForm.value.qty / this.salesOrderForm.value.productBoxPack });
-    this.salesOrderForm.patchValue({ bRate: this.salesOrderForm.value.bQty * this.salesOrderForm.value.rate });
     this.salesOrderForm.patchValue({ value: this.salesOrderForm.value.rate * this.salesOrderForm.value.qty });
-    this.salesOrderForm.patchValue({ bFree: this.salesOrderForm.value.bQty * this.salesOrderForm.value.free });
+
+
   }
 
-  onSelectCustomer(event) {
-    if (this.savedCustomerId >= 0 && this.savedCustomerId !== event.item.id) {
+  onSelectSupplier(event) {
+    if (this.savedSupplierId >= 0 && this.savedSupplierId !== event.item.id) {
       this.salesOrderForm.patchValue({ accountInformationId: event.item.id });
       this.salesOrderForm.patchValue({ orderNumber: this.gridDataList.length + 1 });
     }
   }
 
   save() {
-    this.savedCustomerId = this.salesOrderForm.value.accountInformationId;
+    this.savedSupplierId = this.salesOrderForm.value.accountInformationId;
     this.buttonsComponent.save();
   }
 
@@ -156,14 +134,12 @@ export class SalesOrdersComponent implements OnInit {
     this.resetForm(null);
     this.salesOrderForm.value.accountInformationId = tempSupplierId;
     this.salesOrderForm.value.supplier = tempSupplierName;
-    this.loadGridData();
+    //  this.loadGridData();
   }
 
   requiredErrMsg() {
-    if (this.duplicateMessage == null) {
-      this.formRequiredError = true;
-      this.formSuccess = false;
-    }
+    this.formRequiredError = true;
+    this.formSuccess = false;
   }
 
   resetForm(param) {
@@ -171,17 +147,13 @@ export class SalesOrdersComponent implements OnInit {
     const tempSupplierName = this.salesOrderForm.value.supplier;
     const tempOrderNum = this.salesOrderForm.value.orderNumber;
     this.salesOrderForm.reset();
-    if ((param === undefined || param === null )&& !this.nameFlag) {
+    if ((param === undefined || param === null) && !this.nameFlag) {
       this.salesOrderForm.patchValue({ accountInformationId: tempSupplierId });
       this.salesOrderForm.patchValue({ supplier: tempSupplierName });
       this.salesOrderForm.patchValue({ orderNumber: tempOrderNum });
     }
-
     this.deleteFlag = true;
-    this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
     this.nameFlag = false;
-    this.duplicateOrderNo = false;
     this.formRequiredError = this.formSuccess = false;
     this.loadGridData();
   }
@@ -189,14 +161,9 @@ export class SalesOrdersComponent implements OnInit {
   editable(s) {
     this.nameFlag = true;
     this.formRequiredError = false;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
-    //  this.deleteFlag = !s.deleteFlag;
     this.deleteFlag = false;
-    this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
     this.salesOrderForm.reset(s);
-    //  const productObj = _.find(this.productsList, function(o) {return o.id == s.productId; });
-    //  this.salesOrderForm.patchValue({ productBoxPack: productObj.boxQty });
+    const productObj = _.find(this.productsList, function (o) { return o.id === s.productId; });
+    this.onSelectProduct({ item: productObj });
   }
 }
