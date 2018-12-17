@@ -86,92 +86,105 @@
                                                     <input id="cs" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['cs']">
                                                 </div>
                                             </div>
-                                            <!-- <h4>{{'purchase.detailed' | translate}}</h4> -->
-                                            <div class="row line"></div>
-                                            <div class="container-fluid mr-t-1 mr-l-2">
-                                                <div class="col-xs-2 mr-t-1">
-                                                    <p>{{'common.productName' | translate}}: *</p>
-                                                    <input id="productName" class="form-control" formControlName="productName"
-                                                        typeaheadOptionField="name" [typeahead]="productsList"
-                                                        (typeaheadOnSelect)="onSelectProduct($event)"
-                                                        [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-                                                    <span class="caret"></span>
-                                                </div>
-                                                <div class="col-xs-2 mr-t-1">
-                                                    <p>{{'common.batch' | translate}}: *</p>
-                                                    <input id="gstIN" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['gstIN']">
-                                                </div>
-                                                <div class="col-xs-2 mr-t-1">
-                                                    <p>{{'purchase.expiry' | translate}}: *</p>
-                                                    <input id="expiry" type="date" maxlength="20" class="form-control "
-                                                        [formControl]="purchaseForm.controls['expiry']">
-                                                </div>
-                                                <div class="col-xs-2 mr-t-1">
-                                                    <p>{{'common.qty' | translate}}: *</p>
-                                                    <input id="qty" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['qty']">
-                                                    <span class="caret hide-caret"></span>
-                                                </div>
-                                                <div class="col-xs-2 mr-t-1">
-                                                    <p>{{'common.free' | translate}}: *</p>
-                                                    <input id="free" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['free']">
-                                                </div>
-                                                <div class="col-xs-2 mr-t-1">
-                                                    <p>{{'common.purRate' | translate}}: *</p>
-                                                    <input id="purRate" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['purRate']">
-                                                    <span class="caret hide-caret"></span>
-                                                </div>
-                                                <div class="col-xs-2 mr-t-1">
-                                                    <p>{{'purchase.othrCharges' | translate}}: *</p>
-                                                    <input id="othrCharges" maxlength="20" class="form-control"
-                                                        [formControl]="purchaseForm.controls['othrCharges']">
-                                                </div>
-                                                <div class="col-xs-2 mr-t-1">
-                                                    <p>{{'purchase.grsValue' | translate}}: *</p>
-                                                    <input id="grsValue" [readonly]="true" maxlength="20" class="form-control"
-                                                        [formControl]="purchaseForm.controls['greValue']">
-                                                    <span class="caret hide-caret"></span>
-                                                </div>
-                                                <div class="col-xs-2 mr-t-1">
-                                                    <p>{{'salesInvoice.disc' | translate}}: *</p>
-                                                    <input id="disc" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['disc']">
-                                                </div>
-                                                <div class="col-xs-2 mr-t-1">
-                                                    <p>{{'purchase.ptd' | translate}}: *</p>
-                                                    <input id="ptd" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['ptd']">
-                                                </div>
-                                                <div class="col-xs-2 mr-t-1">
-                                                    <p>{{'purchase.saleRate' | translate}}: *</p>
-                                                    <input id="saleRate" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['saleRate']">
-                                                </div>
-                                                <div class="col-xs-2 mr-t-1">
-                                                    <p>{{'product.tax' | translate}}: *</p>
-                                                    <input id="tax" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['tax']">
-                                                    <span class="caret hide-caret"></span>
-                                                </div>
-                                                <div class="col-xs-2 mr-t-1">
-                                                    <p>{{'accountinfo.hsncode' | translate}}: *</p>
-                                                    <input id="hsncode" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['hsncode']">
-                                                </div>
-                                                <div class="col-xs-2 mr-t-1">
-                                                    <p>{{'purchase.mrp' | translate}}: *</p>
-                                                    <input id="mrp" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['mrp']">
-                                                </div>
-                                                <div class="col-xs-2 mr-t-1">
-                                                    <p>{{'purchase.mfg' | translate}}: *</p>
-                                                    <input id="mfg" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['mfg']">
-                                                </div>
-    
-                                                <!-- <div class="col-xs-3 mr-t-1">
-                                                    <p>(<a *ngIf="!isModelWindowView" style="cursor: pointer" (click)="openModal(gridTemplate)">View Invoice Grid Details</a>)</p>
-                                                </div> -->
-                                                <!-- <div class="col-xs-3 mr-t-1">
-                                                    <p>Click</p>
-                                                    <button type="submit" class="btn btn-success"
-                                                     *ngIf="!isModelWindowView" (click)="openModal(gridTemplate)">View Grid Details</button>
-                                                </div> -->
-                                            </div>
+                                            
                                         </div>
                                     </tab>
+                                    <tab heading="Detailed Inputs">
+                                        <div>
+                                         
+                                                <div class="container-fluid mr-l-2">
+                                               <div class="col-xs-2 mr-t-1">
+                                                   <p>{{'common.productName' | translate}}: *</p>
+                                                   <input id="productName" class="form-control" formControlName="productName"
+                                                       typeaheadOptionField="name" [typeahead]="productsList"
+                                                       (typeaheadOnSelect)="onSelectProduct($event)"
+                                                       [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+                                                   <span class="caret"></span>
+                                               </div>
+                                               <div class="col-xs-2 mr-t-1">
+                                                   <p>{{'common.batch' | translate}}: *</p>
+                                                   <input id="gstIN" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['gstIN']">
+                                               </div>
+                                               <div class="col-xs-2 mr-t-1">
+                                                   <p>{{'purchase.expiry' | translate}}: *</p>
+                                                   <input id="expiry" type="date" maxlength="20" class="form-control "
+                                                       [formControl]="purchaseForm.controls['expiry']">
+                                               </div>
+                                               <div class="col-xs-2 mr-t-1">
+                                                   <p>{{'common.qty' | translate}}: *</p>
+                                                   <input id="qty" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['qty']">
+                                                   <span class="caret hide-caret"></span>
+                                               </div>
+                                               <div class="col-xs-2 mr-t-1">
+                                                   <p>{{'common.free' | translate}}: *</p>
+                                                   <input id="free" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['free']">
+                                               </div>
+                                               <div class="col-xs-2 mr-t-1">
+                                                   <p>{{'common.purRate' | translate}}: *</p>
+                                                   <input id="purRate" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['purRate']">
+                                                   <span class="caret hide-caret"></span>
+                                               </div>
+                                               <div class="col-xs-2 mr-t-1">
+                                                   <p>{{'purchase.othrCharges' | translate}}: *</p>
+                                                   <input id="othrCharges" maxlength="20" class="form-control"
+                                                       [formControl]="purchaseForm.controls['othrCharges']">
+                                               </div>
+                                               <div class="col-xs-2 mr-t-1">
+                                                   <p>{{'purchase.grsValue' | translate}}: *</p>
+                                                   <input id="grsValue"  maxlength="20" class="form-control"
+                                                       [formControl]="purchaseForm.controls['greValue']">
+                                                   <span class="caret hide-caret"></span>
+                                               </div>
+                                               <div class="col-xs-2 mr-t-1">
+                                                   <p>{{'salesInvoice.disc' | translate}}: *</p>
+                                                   <input id="disc" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['disc']">
+                                               </div>
+                                               <div class="col-xs-2 mr-t-1">
+                                                   <p>{{'purchase.ptd' | translate}}: *</p>
+                                                   <input id="ptd" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['ptd']">
+                                               </div>
+                                               <div class="col-xs-2 mr-t-1">
+                                                   <p>{{'purchase.saleRate' | translate}}: *</p>
+                                                   <input id="saleRate" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['saleRate']">
+                                               </div>
+                                               <div class="col-xs-2 mr-t-1">
+                                                   <p>{{'product.tax' | translate}}: *</p>
+                                                   <input id="tax" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['tax']">
+                                                   <span class="caret hide-caret"></span>
+                                               </div>
+                                               <div class="col-xs-2 mr-t-1">
+                                                   <p>{{'accountinfo.hsncode' | translate}}: *</p>
+                                                   <input id="hsncode" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['hsncode']">
+                                               </div>
+                                               <div class="col-xs-2 mr-t-1">
+                                                   <p>{{'purchase.mrp' | translate}}: *</p>
+                                                   <input id="mrp" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['mrp']">
+                                               </div>
+                                               <div class="col-xs-2 mr-t-1">
+                                                   <p>{{'purchase.mfg' | translate}}: *</p>
+                                                   <input id="mfg" maxlength="20" class="form-control" [formControl]="purchaseForm.controls['mfg']">
+                                               </div>
+   
+                                               <!-- <div class="col-xs-3 mr-t-1">
+                                                   <p>(<a *ngIf="!isModelWindowView" style="cursor: pointer" (click)="openModal(gridTemplate)">View Invoice Grid Details</a>)</p>
+                                               </div> -->
+                                               <!-- <div class="col-xs-3 mr-t-1">
+                                                   <p>Click</p>
+                                                   <button type="submit" class="btn btn-success"
+                                                    *ngIf="!isModelWindowView" (click)="openModal(gridTemplate)">View Grid Details</button>
+                                               </div> -->
+                                           </div>
+                                       
+                                          
+                                          
+                                         
+                                          
+                                            </div>
+                                
+        
+                
+        
+                                 </tab>
                                     <tab heading="Footer Inputs">
                                         <!-- <h4>Footer Inputs</h4> -->
                                         <div class="container-fluid  mr-l-2">
