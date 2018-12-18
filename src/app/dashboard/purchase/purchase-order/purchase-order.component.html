@@ -1,85 +1,66 @@
-<div class="col-xs-5">
+<div class="col-xs-12">
 	<h3>{{'purchaseOrder.title' | translate}}</h3>
 	<form [formGroup]="purchaseOrderForm" autocomplete="off">
 			<app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()" [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()" [duplicateMessage]="duplicateMessage" [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessageParam]="duplicateMessageParam">
 			</app-errormessages>
 
-		<fieldset>
-			<legend>Input Area</legend>
-				<div class="col-xs-6">
-					<p>{{'common.date' | translate}}: *</p>
-					<input id="date" type="date" class="form-control" [formControl]="purchaseOrderForm.controls['date']">
-				</div>
-
-			  <div class="col-xs-6">
-					<p>{{'common.supplier' | translate}}: *</p>
-					<input id="supplier" maxlength="20" class="form-control" formControlName="supplier" typeaheadOptionField="accountName" (typeaheadOnSelect)="onSelectSupplier($event)" [typeahead]="suppliersList" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
-					<span class="caret"></span>
-				</div>
-
-				<div class="col-xs-6">
-					<p>{{'common.productName' | translate}}: *</p>
-					<input id="productName" class="form-control" formControlName="productName" typeaheadOptionField="name" [typeahead]="productsList" [typeaheadOptionsLimit]="7" (typeaheadOnSelect)="onSelectProduct($event)" [typeaheadMinLength]="0">
-					<span class="caret"></span>
-				</div>
-
-				<div class="col-xs-6">
-					<p>{{'common.qty' | translate}}: *</p>
-					<input id="qty" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" (blur)="calculateRate()" [formControl]="purchaseOrderForm.controls['qty']">
-					<span class="caret hide-caret"></span>
-				</div>
-
-				<div class="col-xs-12">
-					<p>{{'common.remarks' | translate}}: *</p>
-					<input id="remarks" maxlength="40" class="form-control" [formControl]="purchaseOrderForm.controls['remarks']">
-					<span class="caret hide-caret"></span>
-				</div>
-		</fieldset>
-
-		<fieldset>
-			<legend>Calculations</legend>
-			<div class="col-xs-12">
-				<p>{{'common.orderNumber' | translate}}: * &emsp;(<a style="cursor: pointer" (click)="resetForm('CloseOrder')">Close Order</a>) &emsp; <span *ngIf="nameFlag">(<a style="cursor: pointer" (click)="deleteOrder()">Delete Order</a>)</span></p>
-				<input id="orderNumber" maxlength="40" #focus [readonly]=true class="form-control" [formControl]="purchaseOrderForm.controls['orderNumber']">
+		<div class="container-fluid"  style="border-style: outset;">
+		<div class="col-xs-3 mr-t-1">
+			<p>{{'common.orderNumber' | translate}}: * &emsp;(<a style="cursor: pointer" (click)="resetForm('CloseOrder')">Close Order</a>) &emsp; <span *ngIf="nameFlag">(<a style="cursor: pointer" (click)="deleteOrder()">Delete Order</a>)</span></p>
+			<input id="orderNumber" maxlength="40" #focus [readonly]=true class="form-control" [formControl]="purchaseOrderForm.controls['orderNumber']">
+		</div>
+		<div class="col-xs-3 mr-t-1">
+				<p>{{'common.date' | translate}}: *</p>
+				<input id="date" type="date" class="form-control" [formControl]="purchaseOrderForm.controls['date']">
+		</div>
+		<div class="col-xs-3 mr-t-1">
+			<p>{{'common.supplier' | translate}}: *</p>
+			<input id="supplier" maxlength="20" class="form-control" formControlName="supplier" typeaheadOptionField="accountName" (typeaheadOnSelect)="onSelectSupplier($event)" [typeahead]="suppliersList" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+			<span class="caret"></span>
+		</div>
+		<div class="col-xs-3 mr-t-1">
+				<p>{{'common.remarks' | translate}}: *</p>
+				<input id="remarks" maxlength="40" class="form-control" [formControl]="purchaseOrderForm.controls['remarks']">
+				<span class="caret hide-caret"></span>
+		</div>
+		</div>
+			<div class="col-xs-3 mr-t-1">
+				<p>{{'common.productName' | translate}}: *</p>
+				<input id="productName" class="form-control" formControlName="productName" typeaheadOptionField="name" [typeahead]="productsList" [typeaheadOptionsLimit]="7" (typeaheadOnSelect)="onSelectProduct($event)" [typeaheadMinLength]="0">
+				<span class="caret"></span>
 			</div>
-
-			<div class="col-xs-4">
+			<div class="col-xs-3 mr-t-1">
 				<p>{{'product.packing' | translate}}: *</p>
 				<input id="pack" type="number" maxlength="10" [readonly]=true oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" [formControl]="purchaseOrderForm.controls['pack']">
 			</div>
-
-			<div class="col-xs-4">
-				<p>{{'purchaseOrder.rate' | translate}}: *</p>
-				<input id="rate" [readonly]=true type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" [formControl]="purchaseOrderForm.controls['rate']">
-			</div>
-
-			<div class="col-xs-4">
+			<div class="col-xs-3 mr-t-1">
 				<p>{{'common.free' | translate}}: *</p>
 				<input id="free" type="number" maxlength="10" [readonly]=true oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" [formControl]="purchaseOrderForm.controls['free']">
 				<span class="caret hide-caret"></span>
 			</div>
-
-			<div class="col-xs-4">
-				<p>{{'purchaseOrder.bqty' | translate}}: *</p>
-				<input id="bQty" [readonly]="true" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" [formControl]="purchaseOrderForm.controls['bQty']">
+			
+			<!-- <div class="col-xs-6 mr-l-1"> -->
+					<div class="col-xs-3 mr-t-1">
+				<p>{{'common.qty' | translate}}: *</p>
+				<input id="qty" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" (blur)="calculateRate()" [formControl]="purchaseOrderForm.controls['qty']">
+				<span class="caret hide-caret"></span>
 			</div>
-
-			<div class="col-xs-4">
-				<p>{{'purchaseOrder.bfree' | translate}}: *</p>
-				<input id="bFree" [readonly]="true" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" [formControl]="purchaseOrderForm.controls['bFree']">
+			
+			<div class="col-xs-3 mr-t-1">
+				<p>{{'purchaseOrder.rate' | translate}}: *</p>
+				<input id="rate" [readonly]=true type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" [formControl]="purchaseOrderForm.controls['rate']">
 			</div>
+			<!-- </div> -->
+		
 
-			<div class="col-xs-4">
-				<p>{{'purchaseOrder.brate' | translate}}: *</p>
-				<input id="bRate" [readonly]="true" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" [formControl]="purchaseOrderForm.controls['bRate']">
-			</div>
-		</fieldset>
+			
+		
 
 		<app-buttons [title]="'purchaseOrder.title'" [endPoint]="endPoint" (resetForm)="resetForm()" [deleteConfirmMsg]="'purchaseOrder.deleteConfirmationMessage'" (saveRecord)="save()" [saveConfirmMsg]="'purchaseOrder.saveConfirmationMessage'" [hideResetBtn]=true [saveInfoMsg]="'purchaseOrder.saveInformationMessage'" [hideSaveBtn]=true [hideDeleteBtn]=true [deleteInfoMsg]="'purchaseOrder.deleteInformationMessage'" [duplicateMessage]="duplicateMessage" [isBtnDeleteDisable]="deleteFlag"  [formObj]="purchaseOrderForm" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (afterSuccess)="successMsg()">
 		</app-buttons>
 	</form>
 </div>
 
-<div class="col-md-7 ">
+<div class="col-md-12 ">
 	<app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'PurchaseOrderColumns'"></app-synectiks-common-grid>
 </div>

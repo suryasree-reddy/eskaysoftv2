@@ -1484,6 +1484,39 @@
       "suppressSizeToFit": false
     },
     {
+      "headerName": "B Qty",
+      "field": "bQty",
+      "filterParams": {
+        "filterOptions": [
+          "contains"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "B Free",
+      "field": "bFree",
+      "filterParams": {
+        "filterOptions": [
+          "contains"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "B Rate",
+      "field": "bRate",
+      "filterParams": {
+        "filterOptions": [
+          "contains"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
       "headerName": "Value",
       "field": "value",
       "filterParams": {
