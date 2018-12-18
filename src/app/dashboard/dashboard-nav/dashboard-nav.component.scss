@@ -4,7 +4,7 @@
   margin-top: -10px;
   padding: 1px 15px;
   position:fixed;
-  z-index: 100;
+  z-index: 10;
   
   }
 
@@ -49,5 +49,5 @@
   background-color: rgb(199, 194, 194);
   }
   .navbar-nav li.active  {
-    background-color: rgb(199, 194, 194);
+    background-color: none;
   }
