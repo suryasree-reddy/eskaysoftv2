@@ -3,13 +3,17 @@
   width: 100%;
   margin-top: -10px;
   padding: 1px 15px;
-}
+  position:fixed;
+  z-index: 100;
+  
+  }
 
 .btn, .btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary {
   background: none;
   border: none;
   color: #666;
   box-shadow: none;
+ 
 }
 
 @media only screen and (max-width: 768px) {
@@ -18,6 +22,7 @@
     width: 100%;
     margin: -10px -2.5rem;
     padding: 10px 5px;
+   
   }
  .mw-25 {
   width: 20%
