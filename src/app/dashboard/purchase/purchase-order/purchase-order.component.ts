@@ -135,8 +135,7 @@ export class PurchaseOrderComponent implements OnInit {
     this.resetForm(null);
     this.purchaseOrderForm.value.accountInformationId = tempSupplierId;
     this.purchaseOrderForm.value.supplier = tempSupplierName;
-  //  this.loadGridData();
-  }
+    }
 
   requiredErrMsg() {
       this.formRequiredError = true;
