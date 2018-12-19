@@ -53,6 +53,10 @@ export class AuthenticationService {
     let token = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));      
     return token.roles;
   }
+  getUserState(){
+    let token = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));      
+    return token.stateCode;
+  }
   isNewUser(){
     let token = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));    
     return token.isNew;
