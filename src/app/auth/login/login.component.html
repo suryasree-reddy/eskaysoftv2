@@ -1,33 +1,33 @@
 <header></header>
-<div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6 col-xs-12 card">
+<div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6 col-md-12 card">
   <div class="row">
 
-    <div class="col-xs-12 header">
-      <div class="col-xs-6">
+    <div class="col-md-12 header">
+      <div class="col-md-6">
         <div class="row">
           <!-- <p class="pointer">Sign In</p> -->
         </div>
       </div>
-      <div class="col-xs-6">
+      <div class="col-md-6">
           <div class="row">
               <h4>Login</h4>
           </div>
         </div>
-      <div class="col-xs-6">
+      <div class="col-md-6">
         <div class="row">
           <!-- <p class="pointer">Forgot Password?</p> -->
         </div>
       </div>
     </div>
     <!-- header -->
-    <div class="col-xs-12 card-body">
-      <div class="col-xs-12">
+    <div class="col-md-12 card-body">
+      <div class="col-md-12">
         <div class="row">
           <form [formGroup]="loginForm" (ngSubmit)="login()">
-            <div class="error-text col-xs-12" *ngIf="badCredentials">
+            <div class="error-text col-md-12" *ngIf="badCredentials">
               <p class="text-danger">Invalid Username or Password!!</p>
             </div>
-            <div class="error-text col-xs-12" *ngIf="formError">
+            <div class="error-text col-md-12" *ngIf="formError">
               <p class="text-danger">Username and Password is mandatory!</p>
             </div>
             <div class="input-group">
@@ -51,8 +51,8 @@
             </div> -->
             <!-- <div class="row line"></div> -->
             <div class="row btn-admin mr-l-2">
-              <div class="col-xs-12 card-footer">
-                  <div class="row col-xs-3">
+              <div class="col-md-12 ">
+                  <div class="row col-md-6">
                       <button type="reset" class="btn btn-success" (resetForm)="resetForm()">Reset</button>
                     </div>
                 <div class="row">

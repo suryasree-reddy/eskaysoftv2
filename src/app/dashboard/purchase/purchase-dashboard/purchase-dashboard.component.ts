@@ -89,7 +89,7 @@ export class PurchaseDashboardComponent implements OnInit {
       ptd:['', Validators.required],
       saleRate:['', Validators.required],
       tax:['', Validators.required],
-      hsn:['', Validators.required],
+      hsnCode:['', Validators.required],
       mrp:['', Validators.required],
       mfgName:['', Validators.required],
       purRate:['', Validators.required],
@@ -158,18 +158,20 @@ export class PurchaseDashboardComponent implements OnInit {
   }
 
   calculateRate() {
-    this.purchaseForm.patchValue({ purRate: this.purchaseForm.value.qty * this.purchaseForm.value.netRate });
-    this.purchaseForm.patchValue({ bQty: this.purchaseForm.value.qty / this.purchaseForm.value.productBoxPack });
-    this.purchaseForm.patchValue({ taxable: this.purchaseForm.value.grossValue -  this.purchaseForm.value.discountValue });
-    this.purchaseForm.patchValue({ bFree: this.purchaseForm.value.bQty * this.purchaseForm.value.free });
+    
     this.purchaseForm.patchValue({ grossValue: this.purchaseForm.value.qty * this.purchaseForm.value.netRate });
+    this.purchaseForm.patchValue({ discountValue: this.purchaseForm.value.qty * this.purchaseForm.value.netRate  });
+    this.purchaseForm.patchValue({ taxValue: this.purchaseForm.value.qty * this.purchaseForm.value.netRate  });
+    this.purchaseForm.patchValue({ netValue: this.purchaseForm.value.qty * this.purchaseForm.value.netRate  });
+    
+  
   }
 
   onSelectSupplier(event) {
     if (this.savedSupplierId >= 0 && this.savedSupplierId !== event.item.id) {
       this.purchaseForm.patchValue({ accountInformationId: event.item.id });
       this.purchaseForm.patchValue({ gstIN: event.item.gstIN });
-      this.purchaseForm.patchValue({ hsn: event.item.hsnCode });
+      this.purchaseForm.patchValue({ hsnCode: event.item.hsnCode });
       this.purchaseForm.patchValue({ purchaseNumber: this.gridDataList.length + 1 });
     }
   }

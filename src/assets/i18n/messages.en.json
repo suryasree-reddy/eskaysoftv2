@@ -275,7 +275,7 @@
     "endPoint": "tax/"
   },
   "purchase": {
-    "title": "Gst Purchase Invoice Entry",
+    "title": "Purchase Invoice Entry",
     "endPoint": "purchaseentry/",
     "header": "Header",
     "footer": "Footer Inputs",
@@ -291,7 +291,7 @@
     "deliveredFrom": "Delivered From",
     "wayBill": "Way-Bill Number",
     "transport": "Transport",
-    "cs": "CS",
+    "cs": "Cases",
     "grossValue": "Gross Value",
     "discountValue": "Discount Value",
     "taxValue": "Tax Value",
