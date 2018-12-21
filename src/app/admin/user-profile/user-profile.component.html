@@ -1,7 +1,7 @@
 <header></header>
 <div class="col-md-12 card" style="margin-top:25em;">
   <div class="row">
-    <div class="col-xs-12 header">
+    <div class="col-md-12 header">
 
       <div class="row">
         <h4>{{'userprofile.title' | translate }}</h4>
@@ -12,15 +12,17 @@
         </p>
         <p class="col-sm-4">{{'userprofile.name' | translate }}:
           <!-- <input type="text" class="brdr-hide" [readonly]="true"> -->
+          <input id="name" maxlength="20"   [formControl]="userProfileForm.controls['name']" (blur)="checkForDuplicateName()">
         </p>
         <p class="col-sm-4">{{'userprofile.town' | translate }}:
           <!-- <input type="text" class="brdr-hide" [readonly]="true"> -->
+          <input id="town" maxlength="20"  [formControl]="userProfileForm.controls['town']" (blur)="checkForDuplicateName()">
         </p>
       </div>
     </div> <!-- header -->
     <form [formGroup]="userProfileForm" autocomplete="off">
       <div class="col-md-12 card-body">
-        <div class="col-xs-12">
+        <div class="col-md-12">
           <div class="row">
             <app-errormessages [formRequiredError]="formRequiredError" [formSuccess]="formSuccess" [formServerError]="sharedDataService.getErrorMesage()"
               [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
@@ -28,18 +30,18 @@
               [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
 
             <div>
-              <div id="tab" class='col-xs-12 mr-t-1'>
+              <div id="tab" class='col-md-12 mr-t-1'>
                 <tabset type="pills">
 
                   <tab heading="Profile Info">
 
 
-                    <div class="col-md-4 col-3-lt">
+                    <!-- <div class="col-md-4 col-3-lt">
                       <p>{{'userprofile.name' | translate }}: *</p>
                       <div class="input-group mr-t-0">
                         <input id="name" maxlength="25" class="form-control" (blur)="checkForDuplicateName()" [formControl]="userProfileForm.controls['name']" (blur)="checkForDuplicateName()">
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="col-md-4 col-3-lt">
                       <p>{{'userprofile.username' | translate }}: *</p>
@@ -62,12 +64,12 @@
                       </div>
                     </div>
 
-                    <div class="col-md-4 col-3-lt">
+                    <!-- <div class="col-md-4 col-3-lt">
                       <p>{{'userprofile.town' | translate }}: *</p>
                       <div class="input-group mr-t-0">
                         <input id="town" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['town']">
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="col-md-4 col-3-lt">
                       <p>{{'userprofile.pin' | translate }}: *</p>
