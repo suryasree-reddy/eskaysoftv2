@@ -37,6 +37,9 @@ export class ConfirmationModelDialogComponent   implements OnInit {
         this.body =  body;
         this.activeInformation = true;
           this.msgParam=msgParam;
+          setTimeout(()=>{    
+            this.onCancel();
+       }, 3000);
     }
 
     public onConfirm(): void {
