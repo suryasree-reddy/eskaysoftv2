@@ -33,6 +33,8 @@ export class PurchaseDashboardComponent implements OnInit {
   public gridDataList: any = [];
   private productsList: any = [];
   private suppliersList: any = [];
+  private creditAdjList: any = [];
+  private debitAdjList: any = [];
   private savedSupplierId = 0;
   private modeType: any[];
   private deleteFlag = true;
@@ -99,7 +101,7 @@ export class PurchaseDashboardComponent implements OnInit {
       taxValue:['', Validators.required],
       netValue:['', Validators.required],
       debitAdjustmentLedger:['', Validators.required],
-      CreditAdjustmentLedger:['', Validators.required],
+      creditAdjustmentLedger:['', Validators.required],
       remarks:['', Validators.required],
       DebitAdjustmentValue:['', Validators.required],
       creditAdjustmentValue:['', Validators.required],
@@ -117,6 +119,8 @@ export class PurchaseDashboardComponent implements OnInit {
     });
     this.loadProductData();
     this.loadSupplierData();
+    this.loadDebitAdjustmentLedgerData();
+    this.loadCreditAdjustmentLedgerData();
      this.focusField.nativeElement.focus();
      this.modeType = this.sharedDataService.getSharedCommonJsonData().Mode;
   }
@@ -146,6 +150,16 @@ export class PurchaseDashboardComponent implements OnInit {
       this.suppliersList = list;
     });
   }
+  loadDebitAdjustmentLedgerData() {
+    this.masterService.getParentData('accountinformation/').subscribe(list => {
+      this.debitAdjList = list;
+    });
+  }
+  loadCreditAdjustmentLedgerData() {
+    this.masterService.getParentData('accountinformation/').subscribe(list => {
+      this.creditAdjList = list;
+    });
+  }
 
   onSelectProduct(event) {
     this.purchaseForm.patchValue({ pack: event.item.packing });
@@ -166,6 +180,17 @@ export class PurchaseDashboardComponent implements OnInit {
     
   
   }
+
+  onSelectDebitAdjustmentLedger(event) {
+    
+      this.purchaseForm.patchValue({ accountInformationId: event.item.id });
+      
+    }
+  onSelectCreditAdjustmentLedger(event) {
+    
+      this.purchaseForm.patchValue({ accountInformationId: event.item.id });
+      
+    }
 
   onSelectSupplier(event) {
     if (this.savedSupplierId >= 0 && this.savedSupplierId !== event.item.id) {

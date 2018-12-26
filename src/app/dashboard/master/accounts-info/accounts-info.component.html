@@ -34,14 +34,14 @@
 
                     <div class="col-md-4 col-3-lt">
                       <p>{{'subschedule.name' | translate}}: * &emsp; (<a style="cursor: pointer" (click)="openModal(template, 'SubSchedule')">{{'common.createNew' | translate}}</a>)</p>
-                      <input id="subScheduleName" maxlength="40" class="form-control capitalize" [formControl]="accInfoForm.controls['subScheduleName']" [typeahead]="subScheduleList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7"
+                      <input id="subScheduleName"  class="form-control capitalize" [formControl]="accInfoForm.controls['subScheduleName']" [typeahead]="subScheduleList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7"
                         [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectSubSchedule($event)">
                       <span class="caret"></span>
                     </div>
 
                     <div class="col-md-4 col-3-lt">
                       <p>{{'schedule.name' | translate}}: * &emsp; </p>
-                      <input id="scheduleName" [readonly]="true" maxlength="40" [formControl]="accInfoForm.controls['scheduleName']" class="form-control capitalize">
+                      <input id="scheduleName" [readonly]="true"  [formControl]="accInfoForm.controls['scheduleName']" class="form-control capitalize">
                       <span class="caret hide-caret"></span>
                     </div>
 
@@ -57,7 +57,7 @@
 
                     <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.town' | translate}}: *</p>
-                      <input id="town" maxlength="20" class="form-control" [formControl]="accInfoForm.controls['town']">
+                      <input id="town"  class="form-control" [formControl]="accInfoForm.controls['town']">
                     </div>
 
                     <div class="col-md-4 col-3-lt">
@@ -67,20 +67,20 @@
 
                     <div class="col-md-4 col-3-lt">
                       <p>{{'districts.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(districtTemplate, 'Districts')">{{'common.createNew' | translate}}</a>)</p>
-                      <input id="districtName" maxlength="20" class="form-control capitalize" [formControl]="accInfoForm.controls['districtName']" [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7"
+                      <input id="districtName"  class="form-control capitalize" [formControl]="accInfoForm.controls['districtName']" [typeahead]="districtsList" typeaheadOptionField="typeheadDisplay" [typeaheadOptionsLimit]="7"
                         [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectDistrict($event)">
                       <span class="caret"></span>
                     </div>
 
                     <div class="col-md-4 col-3-lt">
                       <p>{{'states.name' | translate }}: *</p>
-                      <input id="stateName" maxlength="20" [readonly]="true" [formControl]="accInfoForm.controls['stateName']" class="form-control capitalize">
+                      <input id="stateName"  [readonly]="true" [formControl]="accInfoForm.controls['stateName']" class="form-control capitalize">
                       <span class="caret hide-caret"></span>
                     </div>
 
                     <div class="col-md-4 col-3-lt">
                       <p>{{'areas.name' | translate }}: * &emsp; (<a style="cursor: pointer" (click)="openModal(areaTemplate, 'Area')">{{'common.createNew' | translate}}</a>)</p>
-                      <input id="areaName" maxlength="40" class="form-control capitalize" [formControl]="accInfoForm.controls['areaName']" [typeahead]="areasList" (typeaheadOnSelect)="onSelectArea($event)" typeaheadOptionField="typeheadDisplay"
+                      <input id="areaName"  class="form-control capitalize" [formControl]="accInfoForm.controls['areaName']" [typeahead]="areasList" (typeaheadOnSelect)="onSelectArea($event)" typeaheadOptionField="typeheadDisplay"
                         [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
                       <span class="caret"></span>
                     </div>
@@ -241,7 +241,7 @@
                     <div class="col-md-4 col-3-lt">
                       <p>{{'accountinfo.rateoftax' | translate}}: *</p>
 
-                      <input id="rateOfTax" [formControl]="accInfoForm.controls['rateOfTax']" [typeahead]="typeaheadTaxDataList" typeaheadOptionField="tax" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTaxTypeahead($event)"
+                      <input id="rateOfTax" [formControl]="accInfoForm.controls['rateOfTax']" step="0.01" [typeahead]="typeaheadTaxDataList" typeaheadOptionField="tax" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="loadSelectedTaxTypeahead($event)"
                         class="form-control">
                       <span class="caret"></span>
 
