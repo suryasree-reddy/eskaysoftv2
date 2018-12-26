@@ -190,17 +190,11 @@ export class PurchaseDashboardComponent implements OnInit {
   }
 
   onSelectDebitAdjustmentLedger(event) {
-    //this.purchaseForm.patchValue({ debitAdjustmentLedger: event.item.accountName });
-    this.purchaseForm.patchValue({ accountInformationId: event.item.id});
-  
-    
+      this.purchaseForm.patchValue({ accountInformationId: event.item.id});
     }
   onSelectCreditAdjustmentLedger(event) {
-    
-      //this.purchaseForm.patchValue({ creditAdjustmentLedger: event.item.accountName });
       this.purchaseForm.patchValue({ accountInformationId: event.item.id});
-
-    }
+}
 
   onSelectSupplier(event) {
     if (this.savedSupplierId >= 0 && this.savedSupplierId !== event.item.id) {
