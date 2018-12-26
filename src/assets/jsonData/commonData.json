@@ -913,7 +913,7 @@
   "PurchaseDashBoard": [
     {
       "headerName": "Code",
-      "field": "code",
+      "field": "productcode",
       "filterParams": {
         "filterOptions": [
           "contains"
@@ -958,107 +958,62 @@
       "suppressSizeToFit": false
     },
     {
-      "headerName": "Quantity",
-      "field": "quantity",
-      "filterParams": {
-        "filterOptions": [
-          "contains"
-        ],
-        "newRowsAction": "keep"
-      },
+      "headerName": "Qty",
+      "field": "qty",
+      
       "suppressSizeToFit": false
     },
     {
       "headerName": "Free",
       "field": "free",
-      "filterParams": {
-        "filterOptions": [
-          "contains"
-        ],
-        "newRowsAction": "keep"
-      },
+     
       "suppressSizeToFit": false
     },
     {
-      "headerName": "Purchase Rate",
-      "field": "purchaserate",
-      "filterParams": {
-        "filterOptions": [
-          "contains"
-        ],
-        "newRowsAction": "keep"
-      },
+      "headerName": "P Rate",
+      "field": "purRate",
+      
       "suppressSizeToFit": false
     },
     {
       "headerName": "Other Charges",
       "field": "othCharges",
-      "filterParams": {
-        "filterOptions": [
-          "contains"
-        ],
-        "newRowsAction": "keep"
-      },
+      
       "suppressSizeToFit": false
     },
     {
       "headerName": "GRS Value",
       "field": "grsValue",
-      "filterParams": {
-        "filterOptions": [
-          "contains"
-        ],
-        "newRowsAction": "keep"
-      },
+      
       "suppressSizeToFit": false
     },
     {
       "headerName": "Discount",
       "field": "discount",
-      "filterParams": {
-        "filterOptions": [
-          "contains"
-        ],
-        "newRowsAction": "keep"
-      },
+      
       "suppressSizeToFit": false
     },
     {
       "headerName": "PTD",
       "field": "ptd",
-      "filterParams": {
-        "filterOptions": [
-          "contains"
-        ],
-        "newRowsAction": "keep"
-      },
+      
       "suppressSizeToFit": false
     },
     {
-      "headerName": "Sale Rate",
+      "headerName": "S Rate",
       "field": "saleRate",
-      "filterParams": {
-        "filterOptions": [
-          "contains"
-        ],
-        "newRowsAction": "keep"
-      },
+      
       "suppressSizeToFit": false
     },
     {
       "headerName": "Tax",
       "field": "tax",
-      "filterParams": {
-        "filterOptions": [
-          "contains"
-        ],
-        "newRowsAction": "keep"
-      },
+      
       "suppressSizeToFit": false
     },
     {
       "headerName": "HSN",
-      "field": "hsn",
+      "field": "hsnCode",
       "filterParams": {
         "filterOptions": [
           "contains"
@@ -1070,16 +1025,11 @@
     {
       "headerName": "MRP",
       "field": "mrp",
-      "filterParams": {
-        "filterOptions": [
-          "contains"
-        ],
-        "newRowsAction": "keep"
-      },
+     
       "suppressSizeToFit": false
     },
     {
-      "headerName": "Manfacturer Name",
+      "headerName": "Mfg Name",
       "field": "mfgName",
       "filterParams": {
         "filterOptions": [
@@ -1409,12 +1359,7 @@
       "headerName": "S No",
       "field": "serialNumber",
       "width": 150,
-      "filterParams": {
-        "filterOptions": [
-          "contains"
-        ],
-        "newRowsAction": "keep"
-      },
+      
       "suppressSizeToFit": false
     },
     {

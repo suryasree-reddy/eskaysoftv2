@@ -41,7 +41,7 @@ export class PurchaseOrderComponent implements OnInit {
       accountInformationId: ['', Validators.required],
       orderNumber: ['', Validators.required],
       supplier: ['', Validators.required],
-      remarks: ['', Validators.required],
+      remarks: [],
       date: ['', Validators.required],
       productId: ['', Validators.required],
       productName: ['', Validators.required],
@@ -55,7 +55,8 @@ export class PurchaseOrderComponent implements OnInit {
       value: ['', Validators.required],
       bQty: ['', Validators.required],
       bFree: ['', Validators.required],
-      bRate: ['', Validators.required]
+      bRate: ['', Validators.required],
+      serialNumber: []
     });
     this.loadProductData();
     this.loadSupplierData();

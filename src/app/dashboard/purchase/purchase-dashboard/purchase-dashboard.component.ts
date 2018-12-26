@@ -35,6 +35,7 @@ export class PurchaseDashboardComponent implements OnInit {
   private suppliersList: any = [];
   private creditAdjList: any = [];
   private debitAdjList: any = [];
+  private manfacturerList: any = [];
   private savedSupplierId = 0;
   private modeType: any[];
   private deleteFlag = true;
@@ -93,6 +94,7 @@ export class PurchaseDashboardComponent implements OnInit {
       tax:['', Validators.required],
       hsnCode:['', Validators.required],
       mrp:['', Validators.required],
+      manfacturerId: ['', Validators.required],
       mfgName:['', Validators.required],
       purRate:['', Validators.required],
       free:['', Validators.required],
@@ -119,9 +121,13 @@ export class PurchaseDashboardComponent implements OnInit {
     });
     this.loadProductData();
     this.loadSupplierData();
+    this.loadCreditAdjustmentLedgerData();
+    this.loadDebitAdjustmentLedgerData();
     this.loadDebitAdjustmentLedgerData();
     this.loadCreditAdjustmentLedgerData();
+    this.loadManfacturerData();
      this.focusField.nativeElement.focus();
+     
      this.modeType = this.sharedDataService.getSharedCommonJsonData().Mode;
   }
   onInitialDataLoad(dataList: any[]) {
@@ -160,11 +166,15 @@ export class PurchaseDashboardComponent implements OnInit {
       this.creditAdjList = list;
     });
   }
+  loadManfacturerData() {
+    this.masterService.getParentData('manfacturer/').subscribe(list => {
+      this.manfacturerList = list;
+    });
+  }
 
   onSelectProduct(event) {
     this.purchaseForm.patchValue({ pack: event.item.packing });
     this.purchaseForm.patchValue({ free: event.item.free });
-    this.purchaseForm.patchValue({ productBoxPack: event.item.boxQty });
     this.purchaseForm.patchValue({ productId: event.item.id });
     this.purchaseForm.patchValue({ productcode: event.item.productcode });
     this.purchaseForm.patchValue({ netRate: event.item.netRate });
@@ -173,23 +183,23 @@ export class PurchaseDashboardComponent implements OnInit {
 
   calculateRate() {
     
-    this.purchaseForm.patchValue({ grossValue: this.purchaseForm.value.qty * this.purchaseForm.value.netRate });
-    this.purchaseForm.patchValue({ discountValue: this.purchaseForm.value.qty * this.purchaseForm.value.netRate  });
-    this.purchaseForm.patchValue({ taxValue: this.purchaseForm.value.qty * this.purchaseForm.value.netRate  });
-    this.purchaseForm.patchValue({ netValue: this.purchaseForm.value.qty * this.purchaseForm.value.netRate  });
+    this.purchaseForm.patchValue({ grossValue: this.purchaseForm.value.qty * this.purchaseForm.value.purRate });
+    this.purchaseForm.patchValue({ netValue: this.purchaseForm.value.grossValue - this.purchaseForm.value.discountValue + this.purchaseForm.value.taxValue });
     
   
   }
 
   onSelectDebitAdjustmentLedger(event) {
+    //this.purchaseForm.patchValue({ debitAdjustmentLedger: event.item.accountName });
+    this.purchaseForm.patchValue({ accountInformationId: event.item.id});
+  
     
-      this.purchaseForm.patchValue({ accountInformationId: event.item.id });
-      
     }
   onSelectCreditAdjustmentLedger(event) {
     
-      this.purchaseForm.patchValue({ accountInformationId: event.item.id });
-      
+      //this.purchaseForm.patchValue({ creditAdjustmentLedger: event.item.accountName });
+      this.purchaseForm.patchValue({ accountInformationId: event.item.id});
+
     }
 
   onSelectSupplier(event) {
@@ -200,7 +210,9 @@ export class PurchaseDashboardComponent implements OnInit {
       this.purchaseForm.patchValue({ purchaseNumber: this.gridDataList.length + 1 });
     }
   }
-
+  onSelectManfacturer(event){
+    this.purchaseForm.patchValue({manfacturerId: event.item.id})
+  }
   save() {
     this.savedSupplierId = this.purchaseForm.value.accountInformationId;
     this.buttonsComponent.save();
