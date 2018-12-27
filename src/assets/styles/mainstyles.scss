@@ -150,12 +150,7 @@ table {
 }
 
 .row h4{
-  //margin: 1px;   
-    position: relative;
-    //top: 50%;
-    left: 50%;
-    right:50%
-   // margin-right: -50%;
+  width:100%;
   
 }
 
@@ -189,6 +184,8 @@ padding-bottom: 0em;
 .col-xs-12{
   padding-top:50px;
   padding-bottom:0px;
+  margin-top:0px;
+  margin-bottom: 0px;
 }
 
 .col-xs-12.panels{
@@ -197,7 +194,9 @@ padding-bottom: 0em;
 }
 .col-md-12{
   padding-top:0px;
+  padding-bottom: 0px;
   padding-bottom:0px;
+  padding-top:0px;
 }
 
 .discount{
@@ -327,9 +326,18 @@ padding-bottom: 0em;
     margin-top:-6px;
 }
 
-h3{
+// h3{
+//   margin-top:10px;
+//   margin-bottom: 10px;
+//   padding-top: 0px;
+//   padding-bottom: 0px;
+// }
+
+.col-xs-5 h3{
   margin-top:10px;
   margin-bottom: 10px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .outset{
@@ -351,4 +359,41 @@ LEGEND{
   width:22%;
 }
 
+.col-xs-12 h3{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 
+.ag-theme-balham{
+  margin-top:5px;
+  margin-bottom: 0px;
+  padding-top:0px;
+  padding-bottom:0px
+}
+
+.container-fluid{
+  padding-bottom:0px;
+  padding-top:0px;
+}
+
+.col-md-12.mr-t-1{
+  margin-top:0px;
+  margin-bottom:0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+
+
+.col-md-12.header.row.h4{
+  width:100%;
+  
+  
+}
+
+.col-md-12.row{
+  width:100%;
+
+}
