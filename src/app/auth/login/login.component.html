@@ -20,9 +20,10 @@
       </div>
     </div>
     <!-- header -->
-    <div class="col-md-12 card-body">
+
+
       <div class="col-md-12">
-        <div class="row">
+       
           <form [formGroup]="loginForm" (ngSubmit)="login()">
             <div class="error-text col-md-12" *ngIf="badCredentials">
               <p class="text-danger">Invalid Username or Password!!</p>
@@ -52,7 +53,7 @@
             <!-- <div class="row line"></div> -->
             <div class="row btn-admin mr-l-2">
               <div class="col-md-12 ">
-                  <div class="row col-md-6">
+                  <div class="row col-md-4">
                       <button type="reset" class="btn btn-success" (resetForm)="resetForm()">Reset</button>
                     </div>
                 <div class="row">
@@ -61,7 +62,7 @@
               </div>
             </div>
           </form>
-        </div>
+        
         <!--   <div class="row line"></div>
        <div class="row">
           <div class="col-xs-12 card-footer">
@@ -72,7 +73,7 @@
             </div>
           </div>
         </div> -->
-      </div>
-    </div> <!-- card-body -->
+           <!-- card-body -->
+          </div>
   </div>
 </div>
