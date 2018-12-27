@@ -273,10 +273,12 @@
       </div>
     </div>
   </form>
+  <div class="input-group">
   <app-buttons [title]="'accountinfo.title'" [deleteConfirmMsg]="'accountinfo.deleteConfirmationMessage'" [saveConfirmMsg]="'accountinfo.saveConfirmationMessage'" [saveInfoMsg]="'accountinfo.saveInformationMessage'" [endPoint]="endPoint"
     [deleteInfoMsg]="'accountinfo.deleteInformationMessage'" [duplicateMessage]="duplicateMessage" [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=true [formObj]="accInfoForm" (saveRecord)="save()"
     (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
-</div>
+  </div>
+  </div>
 <!-- Acc Info Ends -->
 
 
