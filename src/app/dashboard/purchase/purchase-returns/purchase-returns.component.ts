@@ -47,7 +47,7 @@ export class PurchaseReturnsComponent implements OnInit {
       id: [],
       purReturnNumber: ['', Validators.required],
       supplier: ['', Validators.required],
-      remarks: ['', Validators.required],
+      remarks: [],
       date: ['', Validators.required],
       productName: ['', Validators.required],
       batch: ['', Validators.required],
@@ -57,7 +57,7 @@ export class PurchaseReturnsComponent implements OnInit {
       accountInformationId: ['', Validators.required],
       productId: ['', Validators.required],
       netRate: ['', Validators.required],
-      amount: ['', Validators.required]
+      ammount: ['', Validators.required]
     });
     this.loadSupplierData();
     this.loadProductData();
@@ -133,7 +133,7 @@ export class PurchaseReturnsComponent implements OnInit {
   }
   calculateRate() {
     this.purchaseReturnsForm.patchValue({ pRate: this.purchaseReturnsForm.value.qty * this.purchaseReturnsForm.value.netRate });
-    this.purchaseReturnsForm.patchValue({ amount: this.purchaseReturnsForm.value.netRate * this.purchaseReturnsForm.value.qty });
+    this.purchaseReturnsForm.patchValue({ ammount: this.purchaseReturnsForm.value.qty * this.purchaseReturnsForm.value.netRate });
   }
 
   save() {

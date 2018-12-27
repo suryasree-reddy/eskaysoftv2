@@ -56,7 +56,6 @@ export class PurchaseOrderComponent implements OnInit {
       bQty: ['', Validators.required],
       bFree: ['', Validators.required],
       bRate: ['', Validators.required],
-      serialNumber: []
     });
     this.loadProductData();
     this.loadSupplierData();

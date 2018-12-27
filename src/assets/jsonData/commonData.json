@@ -1172,7 +1172,7 @@
     },
     {
       "headerName": "Amount",
-      "field": "amount",
+      "field": "ammount",
       "filterParams": {
         "filterOptions": [
           "contains"

@@ -402,7 +402,8 @@
     "saveInformationMessage": "Purchase Return record has been saved successfully.",
     "duplicateNameErrorMessage": "The Purchase Return  '{{duplicateMessageParam}}' already exists with this Name.",
     "duplicateCodeErrorMessage": "The Name '{{duplicateMessageParam}}' already exists with this Name.",
-    "deleteConfirmationMessage": "Are you sure you want to delete Purchase Returns?"
+    "deleteConfirmationMessage": "Are you sure you want to delete Purchase Returns?",
+    "deleteInformationMessage": "Purchase Return record has been deleted successfully."  
   },
   "purchaseOrder": {
     "title": "Purchase Order",
@@ -462,7 +463,7 @@
     "saveInformationMessage": "Sales Order record has been saved successfully.",
     "duplicateNameErrorMessage": "The Sales Order Name '{{duplicateMessageParam}}' already exists with this Name.",
     "duplicateCodeErrorMessage": "The Name '{{duplicateMessageParam}}' already exists with this Name.",
-	"deleteConfirmationMessage": "Are you sure you want to delete Sales?",
+	  "deleteConfirmationMessage": "Are you sure you want to delete Sales?",
     "deleteInformationMessage": "Sales record has been deleted successfully."
     },
     
