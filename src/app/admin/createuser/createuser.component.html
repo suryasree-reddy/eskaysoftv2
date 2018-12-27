@@ -18,7 +18,9 @@
 			<div class="col-md-12">
 				<p> Search By {{'createuser.username' | translate}}:</p>
 			</div>
-			<div class="col-md-4" >
+		</div>
+			<div class="col-md-12">			
+					<div class="col-md-4 col-3-lt">
 				<input id="searchByUserName" maxlength="50" formControlName="searchByUserName"
 				[typeahead]="userList" typeaheadOptionField="username"
 				[typeaheadOptionsLimit]="7"

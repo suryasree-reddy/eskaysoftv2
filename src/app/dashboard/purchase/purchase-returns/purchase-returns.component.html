@@ -30,52 +30,41 @@
         </div>
     </div>
 
-
-
     <div class="col-md-12 mr-t-1">
-
       <div class="col-xs-3 mr-t-1">
-        <p>{{'common.productName' | translate}}: *</p>
-        <input id="productName" class="form-control" formControlName="productName" typeaheadOptionField="name" [typeahead]="productsList" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectProduct($event)" [typeaheadOptionsLimit]="7">
-        <span class="caret"></span>
-      </div>
-
-      <div class="col-xs-3 mr-t-1">
-          <p>{{'common.batch' | translate}}: *</p>
-          <input id="batch" maxlength="12" class="form-control" [formControl]="purchaseReturnsForm.controls['batch']">
+          <p>{{'common.productName' | translate}}: *</p>
+          <input id="productName" class="form-control" formControlName="productName" typeaheadOptionField="name" [typeahead]="productsList" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectProduct($event)" [typeaheadOptionsLimit]="7">
+          <span class="caret"></span>
         </div>
+
+        <div class="col-xs-3 mr-t-1">
+            <p>{{'common.batch' | translate}}: *</p>
+            <input id="batch" maxlength="12" class="form-control" [formControl]="purchaseReturnsForm.controls['batch']">
+          </div>
 
       <div class="col-xs-3 mr-t-1">
         <p>{{'common.qty' | translate}}: *</p>
         <input id="qty" type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" (blur)="calculateRate()" [formControl]="purchaseReturnsForm.controls['qty']">
         <span class="caret hide-caret"></span>
-      </div>
+      </div>        
 
-      
-
-      
-  
-
-    
-     
       <div class="col-xs-3 mr-t-1">
-          <div class="col-xs-6 ">
+        <div class="col-xs-6">
         <p>{{'common.free' | translate}}: *</p>
         <input id="free" #focus [readonly]=true type="number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" [formControl]="purchaseReturnsForm.controls['free']">
         <span class="caret hide-caret"></span>
       </div>
-      <div class="col-xs-6 ">
+      <div class="col-xs-6">
         <p>{{'purchaseReturn.pRate' | translate}}: *</p>
         <input id="pRate" type="number" [readonly]=true maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" [formControl]="purchaseReturnsForm.controls['pRate']">
       </div>
-      </div>
     </div>
-    
-      <div class="col-md-12 mr-t-1">
+    </div>
+
+<div class="col-md-12 mr-t-1">
     <app-buttons [title]="'purchaseReturn.title'" [endPoint]="endPoint" [hideSaveBtn]=true [deleteConfirmMsg]="'purchaseReturn.deleteConfirmationMessage'" [hideResetBtn]=true [saveConfirmMsg]="'purchaseReturn.saveConfirmationMessage'" (afterSuccess)="successMsg()"      [hideDeleteBtn]=true [saveInfoMsg]="'purchaseReturn.saveInformationMessage'" (saveRecord)="save()" [deleteInfoMsg]="'purchaseReturn.deleteInformationMessage'" [duplicateMessage]=null [isBtnDeleteDisable]="deleteFlag" [formObj]="purchaseReturnsForm" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (resetForm)="resetForm()">
     </app-buttons>
-      </div>
-
+  </div>
   </form>
 </div>
 
