@@ -69,7 +69,7 @@
 		
 		<div class="col-md-12 mr-t-1">
 		<app-buttons [title]="'purchaseOrder.title'" [endPoint]="endPoint" (resetForm)="resetForm()" [deleteConfirmMsg]="'purchaseOrder.deleteConfirmationMessage'"
-			 (saveRecord)="save()" [saveConfirmMsg]="'purchaseOrder.saveConfirmationMessage'" [hideResetBtn]=true [saveInfoMsg]="'purchaseOrder.saveInformationMessage'"
+			 (saveRecord)="onSelectSave($event)" [saveConfirmMsg]="'purchaseOrder.saveConfirmationMessage'" [hideResetBtn]=true [saveInfoMsg]="'purchaseOrder.saveInformationMessage'"
 			 [hideSaveBtn]=true [hideDeleteBtn]=true [deleteInfoMsg]="'purchaseOrder.deleteInformationMessage'"
 			 [duplicateMessage]="duplicateMessage" [isBtnDeleteDisable]="deleteFlag" [formObj]="purchaseOrderForm"
 			 (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()" (afterSuccess)="successMsg()">
