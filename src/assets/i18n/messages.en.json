@@ -270,6 +270,16 @@
     "duplicateNameErrorMessage": "The User Name '{{duplicateMessageParam}}' already exists with this name.",
     "passwordMissmatch": "The Password & Confirm Password values are not same."
   },
+
+  "preferences":{
+    "title": "Preferences",
+    "endPoint": "Preferences/",
+    "saveConfirmationMessage": "Are you sure you want to Change preferences?",
+    "saveInformationMessage": "preferences has been changed successfully.",
+    "deleteConfirmationMessage": "Are you sure you want to delete preferences?",
+    "deleteInformationMessage": "preferences has been deleted successfully."
+     },
+     
   "tax": {
     "title": "Tax",
     "endPoint": "tax/"

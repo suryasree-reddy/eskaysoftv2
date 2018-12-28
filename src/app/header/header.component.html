@@ -15,11 +15,12 @@
       <ul id="dropdownMaster" (mouseenter) ="dropdown1.isOpen=true"  (mouseleave) ="dropdown1.isOpen=false" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
         <li *ngIf="authService.roleMatch(['ROLE_ADMIN'])" role="menuitem"><a class="dropdown-item" [routerLink]="['admin/userProfile']">Profile</a></li>
         <li *ngIf="authService.roleMatch(['ROLE_ADMIN'])" role="menuitem"><a class="dropdown-item" [routerLink]="['admin/createUser']">Create User</a></li>
-      <!--  <li role="menuitem"><a class="dropdown-item" [routerLink]="['admin/createUser']"  [queryParams]="{editMode:true}">Update User</a></li>-->
         <li role="menuitem"><a class="dropdown-item" [routerLink]="['admin/changePassword']">Change Password</a></li>
+        <li role="menuitem"><a class="dropdown-item" [routerLink]="['admin/preferences']">Preferences</a></li>
       </ul>
     </div>
 </span>
+
 <span class="" style="float: right;padding:1em; ">
     <a class="text-right log-resp" href="#" [routerLink]="['/dashboard']"><span class="glyphicon glyphicon-home"></span></a>
 </span>
