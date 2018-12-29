@@ -1398,9 +1398,12 @@
     {
       "headerName": "Qty",
       "field": "qty",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },

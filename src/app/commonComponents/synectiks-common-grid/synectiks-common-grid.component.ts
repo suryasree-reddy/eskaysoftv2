@@ -174,6 +174,7 @@ export class SynectiksCommonGridComponent implements OnInit {
             {
               // take a slice of the total rows
               let dataAfterSortingAndFiltering = sortAndFilter(list, params.sortModel, params.filterModel);
+             // this.intialLoad.emit(dataAfterSortingAndFiltering);
               let rowsThisPage = dataAfterSortingAndFiltering.slice(params.startRow, params.endRow);
               // if on or after the last page, work out the last row.
               let lastRow = -1;
@@ -198,9 +199,6 @@ export class SynectiksCommonGridComponent implements OnInit {
         params.api.setDatasource(dataSource);
         params.api.showNoRowsOverlay();
       }
-
-
-
 
     });
 
@@ -261,7 +259,7 @@ function filterSearch(colName, filterModel, tempFilter) {
     if (filterModel[colName]) {
       var itemName = item[colName];
       if (filterModel[colName].type == "contains") {
-        if (!itemName.includes(filterModel[colName].filter)) {
+        if (!itemName.toLowerCase().includes(filterModel[colName].filter)) {
           continue;
         }
       } else {
