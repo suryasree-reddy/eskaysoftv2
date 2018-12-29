@@ -67,7 +67,7 @@ export class PurchaseDashboardComponent implements OnInit {
       invoiceNumber:['', Validators.required],
       purDate: ['', Validators.required],
       invoiceDate: ['', Validators.required],
-      accountInformationId: ['', Validators.required],
+      accountInformationId: [],
       supplier: ['', Validators.required],
       gstIN: ['', Validators.required],
       wayBill: ['', Validators.required],
@@ -78,8 +78,8 @@ export class PurchaseDashboardComponent implements OnInit {
       lrNumber: ['', Validators.required],
       lrDate: ['', Validators.required],
       delvFrom: ['', Validators.required],
-      productId: ['', Validators.required],
-      productCode: ['', Validators.required],
+      productId: [],
+      productcode: ['', Validators.required],
       productName: ['', Validators.required],
       batch:['', Validators.required],
       expiry:['', Validators.required],
@@ -89,11 +89,11 @@ export class PurchaseDashboardComponent implements OnInit {
       discount:['', Validators.required],
       ptd:['', Validators.required],
       saleRate:['', Validators.required],
-      taxId: ['', Validators.required],
+      taxId: [],
       tax:['', Validators.required],
       hsnCode:['', Validators.required],
       mrp:['', Validators.required],
-      manfacturerId: ['', Validators.required],
+      manfacturerId: [],
       mfgName:['', Validators.required],
       purRate:['', Validators.required],
       free:['', Validators.required],
@@ -204,11 +204,11 @@ export class PurchaseDashboardComponent implements OnInit {
 }
 
   onSelectedTaxTypeahead(event) {
-  this.purchaseForm.patchValue({ taxId: event.item.id });
+  this.purchaseForm.patchValue({ taxId: event.item.id});
 }
 
 onSelectManfacturer(event){
-  this.purchaseForm.patchValue({manfacturerId: event.item.id})
+  this.purchaseForm.patchValue({manfacturerId: event.item.id});
 }
 
 
