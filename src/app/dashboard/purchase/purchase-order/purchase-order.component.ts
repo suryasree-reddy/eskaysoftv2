@@ -24,6 +24,7 @@ export class PurchaseOrderComponent implements OnInit {
   private productsList: any = [];
   private suppliersList: any = [];
   private savedSupplierId = 0;
+  private savedserialNumber=0;
 
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
@@ -38,6 +39,7 @@ export class PurchaseOrderComponent implements OnInit {
   ngOnInit() {
     this.purchaseOrderForm = this.fb.group({
       id: [],
+      serialNumber:[''],
       accountInformationId: ['', Validators.required],
       orderNumber: ['', Validators.required],
       supplier: ['', Validators.required],
@@ -116,8 +118,16 @@ export class PurchaseOrderComponent implements OnInit {
 
   save() {
     this.savedSupplierId = this.purchaseOrderForm.value.accountInformationId;
+   this.savedserialNumber=this.purchaseOrderForm.value.serialNumber;
     this.buttonsComponent.save();
   }
+
+onSelectSave(event){
+  if (this.savedserialNumber >= 0 && this.savedserialNumber !== event.item.serialNumber) {
+    this.purchaseOrderForm.patchValue({ savedserialNumber: event.item.serialNumber });
+    this.purchaseOrderForm.patchValue({ serialNumber: this.gridDataList.length + 1 });
+}
+}
 
   delete() {
     this.buttonsComponent.delete();
