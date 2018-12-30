@@ -23,8 +23,7 @@ export class PurchaseOrderComponent implements OnInit {
   public gridDataList: any = [];
   private productsList: any = [];
   private suppliersList: any = [];
-  private savedSupplierId = 0;
-  private savedserialNumber=0;
+  private savedSupplierId = 0;  
   private totalValue;
 
   @ViewChild('focus') focusField: ElementRef;
@@ -40,7 +39,7 @@ export class PurchaseOrderComponent implements OnInit {
   ngOnInit() {
     this.purchaseOrderForm = this.fb.group({
       id: [],
-      serialNumber:[''],
+      serialNumber:['', Validators.required],
       accountInformationId: ['', Validators.required],
       orderNumber: ['', Validators.required],
       supplier: ['', Validators.required],
@@ -108,6 +107,7 @@ export class PurchaseOrderComponent implements OnInit {
     this.purchaseOrderForm.patchValue({ productcode: event.item.productcode });
     this.purchaseOrderForm.patchValue({ netRate: event.item.netRate });
     this.calculateRate();
+    this.generateSerialNo();
   }
 
   calculateRate() {
@@ -118,16 +118,29 @@ export class PurchaseOrderComponent implements OnInit {
     this.purchaseOrderForm.patchValue({ bFree: this.purchaseOrderForm.value.bQty * this.purchaseOrderForm.value.free });
   }
 
-  onSelectSupplier(event) {
-    if (this.savedSupplierId >= 0 && this.savedSupplierId !== event.item.id) {
-      this.purchaseOrderForm.patchValue({ accountInformationId: event.item.id });
-      this.purchaseOrderForm.patchValue({ orderNumber: this.gridDataList.length + 1 });
+  onSelectSupplier(event) {    
+    this.purchaseOrderForm.patchValue({ accountInformationId: event.item.id });  
+    this.generateOrderNo(); 
+  }
+  generateOrderNo(){
+    if(this.gridDataList && this.gridDataList.length == 0){
+      this.purchaseOrderForm.patchValue({ orderNumber: 1});
+    }else{
+      let orderN0 = Math.max.apply(Math, this.gridDataList.map(function(o) { return o.orderNumber; }))
+      this.purchaseOrderForm.patchValue({ orderNumber: orderN0+1});
+    }     
+  }
+  generateSerialNo(){
+    let subList = this.gridDataList.filter(v => v.orderNumber === this.purchaseOrderForm.value.orderNumber)
+    if(subList && subList.length == 0){
+      this.purchaseOrderForm.patchValue({ serialNumber: 1});
+    }else{
+      let serialN0 = Math.max.apply(Math, subList.map(function(o) { return o.serialNumber; }))
+      this.purchaseOrderForm.patchValue({ serialNumber: serialN0+1});
     }
   }
-
   save() {
-    this.savedSupplierId = this.purchaseOrderForm.value.accountInformationId;
-   this.savedserialNumber=this.purchaseOrderForm.value.serialNumber;
+    this.savedSupplierId = this.purchaseOrderForm.value.accountInformationId;      
     this.buttonsComponent.save();
   }
 
