@@ -822,9 +822,12 @@
       "headerName": "S No",
       "field": "id",
       "width": 150,
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -857,9 +860,12 @@
       "headerName": "Pack",
       "field": "pack",
       "tooltipField": "pack",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -890,9 +896,12 @@
     {
       "headerName": "Qty",
       "field": "qty",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -901,9 +910,12 @@
     {
       "headerName": "Free",
       "field": "free",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -960,63 +972,138 @@
     {
       "headerName": "Qty",
       "field": "qty",
-      
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
       "suppressSizeToFit": false
     },
     {
       "headerName": "Free",
       "field": "free",
-     
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
       "suppressSizeToFit": false
     },
     {
       "headerName": "P Rate",
       "field": "purRate",
-      
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
       "suppressSizeToFit": false
     },
     {
       "headerName": "Other Charges",
       "field": "othCharges",
-      
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
       "suppressSizeToFit": false
     },
     {
       "headerName": "GRS Value",
       "field": "grsValue",
-      
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
       "suppressSizeToFit": false
     },
     {
       "headerName": "Discount",
       "field": "discount",
-      
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
       "suppressSizeToFit": false
     },
     {
       "headerName": "PTD",
       "field": "ptd",
-      
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
       "suppressSizeToFit": false
     },
     {
       "headerName": "S Rate",
       "field": "saleRate",
-      
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
       "suppressSizeToFit": false
     },
     {
       "headerName": "Tax",
       "field": "tax",
-      
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
       "suppressSizeToFit": false
     },
     {
       "headerName": "HSN",
       "field": "hsnCode",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1107,9 +1194,12 @@
       "headerName": "S No",
       "field": "id",
       "width": 150,
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1140,9 +1230,12 @@
     {
       "headerName": "Quantity",
       "field": "qty",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1151,9 +1244,12 @@
     {
       "headerName": "Free",
       "field": "free",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1162,9 +1258,12 @@
     {
       "headerName": "P Rate",
       "field": "pRate",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1173,9 +1272,12 @@
     {
       "headerName": "Amount",
       "field": "ammount",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1359,7 +1461,15 @@
       "headerName": "S No",
       "field": "serialNumber",
       "width": 150,
-      
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
       "suppressSizeToFit": false
     },
     {
@@ -1387,9 +1497,12 @@
     {
       "headerName": "Pack",
       "field": "pack",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1412,9 +1525,12 @@
     {
       "headerName": "Free",
       "field": "free",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1423,9 +1539,12 @@
     {
       "headerName": "Rate",
       "field": "rate",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1434,9 +1553,12 @@
     {
       "headerName": "B Qty",
       "field": "bQty",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1445,9 +1567,12 @@
     {
       "headerName": "B Free",
       "field": "bFree",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1456,9 +1581,12 @@
     {
       "headerName": "B Rate",
       "field": "bRate",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1467,9 +1595,12 @@
     {
       "headerName": "Value",
       "field": "value",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1481,6 +1612,7 @@
       "headerName": "S No",
       "field": "id",
       "width": 150,
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
           "contains"

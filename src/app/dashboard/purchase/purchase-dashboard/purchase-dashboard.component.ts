@@ -36,6 +36,7 @@ export class PurchaseDashboardComponent implements OnInit {
   private creditAdjList: any = [];
   private debitAdjList: any = [];
   private manfacturerList: any = [];
+  private typeaheadTaxDataList: any = [];
   private savedSupplierId = 0;
   private modeType: any[];
   private deleteFlag = true;
@@ -61,12 +62,12 @@ export class PurchaseDashboardComponent implements OnInit {
   ngOnInit() {
 
     this.purchaseForm = this.fb.group({
-      id: ['', Validators.required],
-      purchaseNumber: ['', Validators.required],
+      id: [],
+      purchaseNumber: [],
       invoiceNumber:['', Validators.required],
-      date: ['', Validators.required],
+      purDate: ['', Validators.required],
       invoiceDate: ['', Validators.required],
-      accountInformationId: ['', Validators.required],
+      accountInformationId: [],
       supplier: ['', Validators.required],
       gstIN: ['', Validators.required],
       wayBill: ['', Validators.required],
@@ -77,24 +78,22 @@ export class PurchaseDashboardComponent implements OnInit {
       lrNumber: ['', Validators.required],
       lrDate: ['', Validators.required],
       delvFrom: ['', Validators.required],
-      productId: ['', Validators.required],
-      productCode: ['', Validators.required],
+      productId: [],
+      productcode: ['', Validators.required],
       productName: ['', Validators.required],
       batch:['', Validators.required],
       expiry:['', Validators.required],
       qty:['', Validators.required],
-    
-
-
       othCharges:['', Validators.required],
       grsValue:['', Validators.required],
       discount:['', Validators.required],
       ptd:['', Validators.required],
       saleRate:['', Validators.required],
+      taxId: [],
       tax:['', Validators.required],
       hsnCode:['', Validators.required],
       mrp:['', Validators.required],
-      manfacturerId: ['', Validators.required],
+      manfacturerId: [],
       mfgName:['', Validators.required],
       purRate:['', Validators.required],
       free:['', Validators.required],
@@ -104,23 +103,19 @@ export class PurchaseDashboardComponent implements OnInit {
       netValue:['', Validators.required],
       debitAdjustmentLedger:['', Validators.required],
       creditAdjustmentLedger:['', Validators.required],
-      remarks:['', Validators.required],
-      DebitAdjustmentValue:['', Validators.required],
+      remarks:[],
+      debitAdjustmentValue:['', Validators.required],
       creditAdjustmentValue:['', Validators.required],
       invoiceValue:['', Validators.required],
-
-      gstp1:['', Validators.required],
-      gstp2:['', Validators.required],
-      taxable1:['', Validators.required],
-      taxable2:['', Validators.required],
-      cgstAmt1:['', Validators.required],
-      cgstAmt2:['', Validators.required],
-      sgstAmt1:['', Validators.required],
-      sgstAmt2:['', Validators.required],
-      inGstPercent:['', Validators.required],
-      inTaxable:['', Validators.required],
-      inCgstAmt:['', Validators.required],
-      inSgstAmt:['', Validators.required],
+      asPerSwgstp:['', Validators.required],
+      asPerInvgstp:['', Validators.required],
+      asPerSwtaxable:['', Validators.required],
+      asPerInvtaxable:['', Validators.required],
+      asPerSwcgstAmt:['', Validators.required],
+      asPerInvcgstAmt:['', Validators.required],
+      asPerSwsgstAmt:['', Validators.required],
+      asPerInvsgstAmt:['', Validators.required]
+      
 
     });
     this.loadProductData();
@@ -130,7 +125,8 @@ export class PurchaseDashboardComponent implements OnInit {
     this.loadDebitAdjustmentLedgerData();
     this.loadCreditAdjustmentLedgerData();
     this.loadManfacturerData();
-     this.focusField.nativeElement.focus();
+    this.focusField.nativeElement.focus();
+    this.loadTaxTypeaheadData();
      
      this.modeType = this.sharedDataService.getSharedCommonJsonData().Mode;
   }
@@ -175,9 +171,15 @@ export class PurchaseDashboardComponent implements OnInit {
       this.manfacturerList = list;
     });
   }
+ 
 
+  loadTaxTypeaheadData() {
+    this.masterService.getParentData('tax/').subscribe(list => {
+      this.typeaheadTaxDataList = list;
+    });
+  }
   onSelectProduct(event) {
-    this.purchaseForm.patchValue({ pack: event.item.packing });
+    
     this.purchaseForm.patchValue({ free: event.item.free });
     this.purchaseForm.patchValue({ productId: event.item.id });
     this.purchaseForm.patchValue({ productcode: event.item.productcode });
@@ -187,9 +189,10 @@ export class PurchaseDashboardComponent implements OnInit {
 
   calculateRate() {
     
-    this.purchaseForm.patchValue({ grossValue: this.purchaseForm.value.qty * this.purchaseForm.value.purRate });
-    this.purchaseForm.patchValue({ netValue: this.purchaseForm.value.grossValue - this.purchaseForm.value.discountValue + this.purchaseForm.value.taxValue });
-    
+    this.purchaseForm.patchValue({ grossValue: this.purchaseForm.value.qty * this.purchaseForm.value.qty });
+    this.purchaseForm.patchValue({ netValue: this.purchaseForm.value.qty * this.purchaseForm.value.qty });
+    this.purchaseForm.patchValue({discountValue: this.purchaseForm.value.qty * this.purchaseForm.value.qty });
+    this.purchaseForm.patchValue({taxValue: this.purchaseForm.value.qty * this.purchaseForm.value.qty});
   
   }
 
@@ -200,6 +203,15 @@ export class PurchaseDashboardComponent implements OnInit {
       this.purchaseForm.patchValue({ accountInformationId: event.item.id});
 }
 
+  onSelectedTaxTypeahead(event) {
+  this.purchaseForm.patchValue({ taxId: event.item.id});
+}
+
+onSelectManfacturer(event){
+  this.purchaseForm.patchValue({manfacturerId: event.item.id});
+}
+
+
   onSelectSupplier(event) {
     if (this.savedSupplierId >= 0 && this.savedSupplierId !== event.item.id) {
       this.purchaseForm.patchValue({ accountInformationId: event.item.id });
@@ -208,9 +220,7 @@ export class PurchaseDashboardComponent implements OnInit {
       this.purchaseForm.patchValue({ purchaseNumber: this.gridDataList.length + 1 });
     }
   }
-  onSelectManfacturer(event){
-    this.purchaseForm.patchValue({manfacturerId: event.item.id})
-  }
+  
   save() {
     this.savedSupplierId = this.purchaseForm.value.accountInformationId;
     this.buttonsComponent.save();
@@ -220,10 +230,7 @@ export class PurchaseDashboardComponent implements OnInit {
     this.buttonsComponent.delete();
   }
 
-  deleteOrder() {
-    this.buttonsComponent.manualDelete(this.endPoint + 'purchaseNumber/', this.purchaseForm.value.purchaseNumber);
-  }
-
+ 
   successMsg() {
     this.formSuccess = true;
     this.formRequiredError = false;
@@ -250,6 +257,7 @@ export class PurchaseDashboardComponent implements OnInit {
       this.purchaseForm.patchValue({ supplier: tempSupplierName });
       this.purchaseForm.patchValue({ purchaseNumber: tempOrderNum });
     }
+    
     this.deleteFlag = true;
     this.nameFlag = false;
     this.formRequiredError = this.formSuccess = false;

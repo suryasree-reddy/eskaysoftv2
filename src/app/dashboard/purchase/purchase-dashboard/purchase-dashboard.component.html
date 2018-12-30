@@ -19,16 +19,16 @@
                                         <div class="container-fluid mr-l-2">
                                             <div class="col-xs-2 mr-t-1">
                                                 <p>{{'purchase.purchaseNumber' | translate}}: *</p>
-                                                <input id="purchaseNumber" type="number" #focus [readonly]="true" (blur)="checkForDuplicateOrderNo()" class="form-control"
+                                                <input id="purchaseNumber" type="number" #focus [readonly]="true"  class="form-control"
                                                     [formControl]="purchaseForm.controls['purchaseNumber']">
                                             </div>
                                             <div class="col-xs-2 mr-t-1">
                                                 <p>{{'purchase.date' | translate}}: *</p>
-                                                <input id="date" type="date" class="form-control" [formControl]="purchaseForm.controls['date']">
+                                                <input id="purDate" type="date" class="form-control" [formControl]="purchaseForm.controls['purDate']">
                                             </div>
                                             <div class="col-xs-2 mr-t-1">
                                                 <p>{{'purchase.invoiceNumber' | translate}}: *</p>
-                                                <input id="invoiceNumber" type="number" #focus [readonly]="nameFlag" (blur)="checkForDuplicateOrderNo()" class="form-control"
+                                                <input id="invoiceNumber"  #focus   class="form-control"
                                                     [formControl]="purchaseForm.controls['invoiceNumber']">
                                             </div>
                                             <div class="col-xs-2 mr-t-1">
@@ -72,7 +72,7 @@
                                             </div>
                                             <div class="col-xs-2 mr-t-1">
                                                 <p>{{'purchase.deliveredFrom' | translate}}: *</p>
-                                                <input id="deliveredFrom"  class="form-control"[formControl]="purchaseForm.controls['deliveredFrom']">
+                                                <input id="delvFrom"  class="form-control"[formControl]="purchaseForm.controls['delvFrom']">
                                                 <span class="caret hide-caret"></span>
                                             </div>
                                             <div class="col-xs-2 mr-t-1">
@@ -97,7 +97,7 @@
                                            </div>
                                            <div class="col-xs-2 mr-t-1">
                                                <p>{{'common.batch' | translate}}: *</p>
-                                               <input id="gstIN"  class="form-control" [formControl]="purchaseForm.controls['gstIN']">
+                                               <input id="batch"  class="form-control" [formControl]="purchaseForm.controls['batch']">
                                            </div>
                                            <div class="col-xs-2 mr-t-1">
                                                <p>{{'purchase.expiry' | translate}}: *</p>
@@ -120,8 +120,8 @@
                                            </div>
                                            <div class="col-xs-2 mr-t-1">
                                                <p>{{'purchase.othrCharges' | translate}}: *</p>
-                                               <input id="othrCharges" type = "number"  class="form-control"
-                                                   [formControl]="purchaseForm.controls['othrCharges']">
+                                               <input id="othCharges" type = "number"  class="form-control"
+                                                   [formControl]="purchaseForm.controls['othCharges']">
                                            </div>
                                            <div class="col-xs-2 mr-t-1">
                                                <p>{{'purchase.grsValue' | translate}}: *</p>
@@ -138,11 +138,11 @@
                                            </div>
                                            <div class="col-xs-2 mr-t-1">
                                                <p>{{'purchase.saleRate' | translate}}: *</p>
-                                               <input id="saleRate" tyep= "number" class="form-control" [formControl]="purchaseForm.controls['saleRate']">
+                                               <input id="saleRate" type= "number" class="form-control" [formControl]="purchaseForm.controls['saleRate']">
                                            </div>
                                            <div class="col-xs-2 mr-t-1">
                                                <p>{{'product.tax' | translate}}: *</p>
-                                               <input id="tax" type = "number" class="form-control" [formControl]="purchaseForm.controls['tax']">
+                                               <input id="tax" formControlName="tax" [typeahead]="typeaheadTaxDataList" typeaheadOptionField="tax" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelectedTaxTypeahead($event)" class="form-control">
                                                <span class="caret hide-caret"></span>
                                            </div>
                                            <div class="col-xs-2 mr-t-1">
@@ -157,7 +157,7 @@
                                            <div class="col-xs-2 mr-t-1">
                                                <p>{{'purchase.mfg' | translate}}: *</p>
                                                <input id="mfgName" class="form-control" formControlName="mfgName" typeaheadOptionField="manfacturerName" [typeahead]="manfacturerList"
-                                               (typeaheadOnSelect)="onSelectManfacturer(event)"
+                                               (typeaheadOnSelect)="onSelectManfacturer($event)"
                                                [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
                                            <span class="caret"></span>
                                             </div>
@@ -196,23 +196,23 @@
                                        
                                             <div class="col-xs-3 ">
                                                 <p>{{'purchase.gst' | translate}}: *</p>
-                                                <input id="gstp1" type= "number"  #focus [readonly]="nameFlag" class="form-control"
-                                                    [formControl]="purchaseForm.controls['gstp1']">
+                                                <input id="asPerSwgstp" type= "number"  #focus  class="form-control"
+                                                    [formControl]="purchaseForm.controls['asPerSwgstp']">
                                             </div>
                                             <div class="col-xs-3 ">
                                                 <p>{{'purchase.taxable' | translate}}: *</p>
-                                                <input id="taxable1" type= "number" #focus [readonly]="nameFlag" class="form-control"
-                                                    [formControl]="purchaseForm.controls['taxable1']">
+                                                <input id="asPerSwtaxable" type= "number" #focus  class="form-control"
+                                                    [formControl]="purchaseForm.controls['asPerSwtaxable']">
                                             </div>
                                             <div class="col-xs-3 ">
                                                 <p>{{'purchase.cgstamount' | translate}}: *</p>
-                                                <input id="cgstamount1" type= "number" #focus [readonly]="nameFlag" class="form-control"
-                                                    [formControl]="purchaseForm.controls['cgstamount1']">
+                                                <input id="asPerSwcgstAmt" type= "number" #focus  class="form-control"
+                                                    [formControl]="purchaseForm.controls['asPerSwcgstAmt']">
                                             </div>
                                             <div class="col-xs-3 ">
                                                 <p>{{'purchase.sgstamount' | translate}}: *</p>
-                                                <input id="sgstamount1" type= "number" #focus [readonly]="nameFlag" class="form-control"
-                                                    [formControl]="purchaseForm.controls['sgstamount1']">
+                                                <input id="asPerSwsgstAmt" type= "number" #focus  class="form-control"
+                                                    [formControl]="purchaseForm.controls['asPerSwsgstAmt']">
                                             </div>
                                             <!-- <div class="col-xs-2 mr-t-1">
                                                           
@@ -224,29 +224,25 @@
                                         <h4>{{'purchase.asPerInvoice' | translate}}</h4>
                                             <div class="col-xs-3">
                                                 <p>{{'purchase.gst' | translate}}: *</p>
-                                                <input id="gstp2" type= "number" #focus [readonly]="nameFlag" class="form-control"
-                                                    [formControl]="purchaseForm.controls['gstp2']">
+                                                <input id="asPerInvgstp" type= "number" #focus  class="form-control"
+                                                    [formControl]="purchaseForm.controls['asPerInvgstp']">
                                             </div>
                                             <div class="col-xs-3 ">
                                                 <p>{{'purchase.taxable' | translate}}: *</p>
-                                                <input id="taxable2"  type= "number" #focus [readonly]="nameFlag" class="form-control"
-                                                    [formControl]="purchaseForm.controls['taxable2']">
+                                                <input id="asPerInvtaxable"  type= "number" #focus  class="form-control"
+                                                    [formControl]="purchaseForm.controls['asPerInvtaxable']">
                                             </div>
                                             <div class="col-xs-3">
                                                 <p>{{'purchase.cgstamount' | translate}}: *</p>
-                                                <input id="cgstamount2" type= "number" #focus [readonly]="nameFlag" class="form-control"
-                                                    [formControl]="purchaseForm.controls['cgstamount2']">
+                                                <input id="asPerInvcgstAmt" type= "number" #focus  class="form-control"
+                                                    [formControl]="purchaseForm.controls['asPerInvcgstAmt']">
                                             </div>
                                             <div class="col-xs-3">
                                                 <p>{{'purchase.sgstamount' | translate}}: *</p>
-                                                <input id="sgstamount2" type= "number" #focus [readonly]="nameFlag" class="form-control"
-                                                    [formControl]="purchaseForm.controls['sgstamount2']">
+                                                <input id="asPerInvsgstAmt" type= "number" #focus  class="form-control"
+                                                    [formControl]="purchaseForm.controls['asPerInvsgstAmt']">
                                             </div>
-                                            <!-- <div class="col-xs-2 mr-t-1"> 
-                                                            <button type="submit" class="btn btn-success"
-                                                             *ngIf="!isModelWindowView" (click)="openModal(asPerInvoiceGridTemplate)">View Grid Details</button>
-                                                        </div> -->
-                                        <!-- </div> -->
+                                           
                                         </div>
                                     </div>
                                     <!-- <hr style="	border-top: 1px solid #000000;"> -->
@@ -261,8 +257,8 @@
                                         <div class="col-xs-2 mr-t-1">
                                                 <div class="row line"></div>
                                             <p>{{'purchase.debitAdjustmentValue' | translate}}: *</p>
-                                            <input id="DebitAdjustmentValue" type= "number" #focus [readonly]="nameFlag" class="form-control"
-                                                [formControl]="purchaseForm.controls['DebitAdjustmentValue']">
+                                            <input id="debitAdjustmentValue" type= "number" #focus  class="form-control"
+                                                [formControl]="purchaseForm.controls['debitAdjustmentValue']">
                                         </div>
                                         
                                         <div class="col-xs-2 mr-t-1">
@@ -295,28 +291,7 @@
 
                                     </div>
 
-                                    <!-- </form> -->
-                                    <!-- <div class="col-xs-12">
-                                    <br /><br />
-                                    <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
-                                        [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'PurchaseDashBoard'"></app-synectiks-common-grid>
-                                </div> 
-                                <div class="col-xs-12">
-                                        <br /><br />
-                                        <div class="col-xs-6 col-3-lt">
-                                            <h3>{{'purchase.asPerSoftware' | translate}}</h3>
-                                            <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
-                                                [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'PurchaseDashBoardSft'"></app-synectiks-common-grid>
-                            
-                                        </div>
-                                        <div class="col-xs-6 col-rt">
-                                            <h3>{{'purchase.asPerInvoice' | translate}}</h3>
-                                            <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)'
-                                                [gridDataList]="gridDataList" (valueChange)='valueChange($event)' [screenColums]="'PurchaseDashBoardSft'"></app-synectiks-common-grid>
-                            
-                                        </div>
-                                    </div>
-                                     -->
+                                   
 
                                 </tab>
                             </tabset>
@@ -327,14 +302,15 @@
         </div>
         <!-- <hr style="	border: 1px solid #000000;"> -->
         <div class="col-md-12 mr-t-1">
-            <app-buttons [title]="'purchase.title'" [deleteConfirmMsg]="'purchase.deleteConfirmationMessage'"
-                [saveConfirmMsg]="'purchase.saveConfirmationMessage'" [saveInfoMsg]="'purchase.saveInformationMessage'"
-                [endPoint]="endPoint" [deleteInfoMsg]="'purchase.deleteInformationMessage'" [duplicateMessage]="duplicateMessage"
-                [isBtnDeleteDisable]="deleteFlag" [hideSaveBtn]=true [hideResetBtn]=true [hideDeleteBtn]=true [formObj]="purchaseForm"
-                (saveRecord)="save()" (deleteRecord)="delete()" (displayErrorMessages)="requiredErrMsg()"
-                (afterSuccess)="successMsg()" (resetForm)="resetForm()"></app-buttons>
-        </div>
-
+            <app-buttons [title]="'purchase.title'" [endPoint]="endPoint" [hideSaveBtn]=true 
+            [deleteConfirmMsg]="'purchase.deleteConfirmationMessage'" [hideResetBtn]=true 
+            [saveConfirmMsg]="'purchase.saveConfirmationMessage'" (afterSuccess)="successMsg()"    
+              [hideDeleteBtn]=true [saveInfoMsg]="'purchase.saveInformationMessage'" 
+              (saveRecord)="save()" [deleteInfoMsg]="'purchase.deleteInformationMessage'" [duplicateMessage]=null
+               [isBtnDeleteDisable]="deleteFlag" [formObj]="purchaseForm" (deleteRecord)="delete()"
+                (displayErrorMessages)="requiredErrMsg()" (resetForm)="resetForm()">
+            </app-buttons>
+          </div>
     </form>
 </div>
 
@@ -344,51 +320,6 @@
     </div>
     
 
-<ng-template #gridTemplate>
-    <div style="margin-top:12em;">
-        <div class="modal-header">
-            <h4 class="modal-title pull-left">Purchase Invoice Grid </h4>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body col-xs-12" style="background-color: rgb(253, 252, 253);">
-            
-            <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList"
-                (valueChange)='valueChange($event)' [screenColums]="'PurchaseDashBoard'"></app-synectiks-common-grid>
-        </div>
-    </div>
-</ng-template>
 
-<ng-template #asPerSoftwareGridTemplate>
-    <div style="margin-top:12em;">
-        <div class="modal-header">
-            <h4 class="modal-title pull-left">As Per Software Grid </h4>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body col-xs-12" style="background-color: rgb(253, 252, 253);">
-           
-            <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList"
-                (valueChange)='valueChange($event)' [screenColums]="'PurchaseDashBoardSft'"></app-synectiks-common-grid>
 
-        </div>
-    </div>
-</ng-template>
 
-<ng-template #asPerInvoiceGridTemplate>
-    <div style="margin-top:12em;">
-        <div class="modal-header">
-            <h4 class="modal-title pull-left">As Per Invoice Grid </h4>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body col-xs-12" style="background-color: rgb(253, 252, 253);">
-            
-            <app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList"
-                (valueChange)='valueChange($event)' [screenColums]="'PurchaseDashBoardSft'"></app-synectiks-common-grid>
-        </div>
-    </div>
-</ng-template>
