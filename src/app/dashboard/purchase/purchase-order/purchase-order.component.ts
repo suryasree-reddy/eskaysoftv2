@@ -79,6 +79,7 @@ export class PurchaseOrderComponent implements OnInit {
     this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
       this.gridDataList = list;
+      this.totalCalculation();
       localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
     });
   }

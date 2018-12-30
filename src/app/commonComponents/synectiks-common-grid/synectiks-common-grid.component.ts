@@ -164,17 +164,15 @@ export class SynectiksCommonGridComponent implements OnInit {
     this.masterService.dataObject.subscribe(list => {
       if (list.length != undefined && list.length >0) {
 
-        this.intialLoad.emit(list);
+        this.intialLoad.emit(list);        
         let dataSource = {
           rowCount: null, // behave as infinite scroll
           getRows: function(params) {
-            console.log('asking for ' + params.startRow + ' to ' + params.endRow);
-            // At this point in your code, you would call the server, using $http if in AngularJS 1.x.
-            // To make the demo look real, wait for 500ms before returning
+            console.log('asking for ' + params.startRow + ' to ' + params.endRow);           
             {
               // take a slice of the total rows
               let dataAfterSortingAndFiltering = sortAndFilter(list, params.sortModel, params.filterModel);
-             // this.intialLoad.emit(dataAfterSortingAndFiltering);
+              this.intialLoad.emit(dataAfterSortingAndFiltering);
               let rowsThisPage = dataAfterSortingAndFiltering.slice(params.startRow, params.endRow);
               // if on or after the last page, work out the last row.
               let lastRow = -1;
@@ -184,9 +182,9 @@ export class SynectiksCommonGridComponent implements OnInit {
               // call the success callback
               params.successCallback(rowsThisPage, lastRow);
             };
-          }
-        };
-          params.api.hideOverlay();
+          }.bind(this)
+        };        
+        params.api.hideOverlay();
         params.api.setDatasource(dataSource);
         localStorage.setItem('rowDataLength', JSON.stringify(list.length));
       } else {
@@ -204,9 +202,8 @@ export class SynectiksCommonGridComponent implements OnInit {
 
   }
 
-
-
 }
+
 function sortAndFilter(allOfTheData, sortModel, filterModel) {
 
   return sortData(sortModel, filterData(filterModel, allOfTheData));
