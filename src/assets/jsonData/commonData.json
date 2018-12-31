@@ -1458,6 +1458,21 @@
   ],
   "PurchaseOrderColumns": [
     {
+      "headerName": "Order No",
+      "field": "orderNumber",
+      "width": 200,
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
       "headerName": "S No",
       "field": "serialNumber",
       "width": 150,
@@ -1486,6 +1501,7 @@
     {
       "headerName": "Product Name",
       "field": "productName",
+      "width": 300,
       "filterParams": {
         "filterOptions": [
           "contains"
