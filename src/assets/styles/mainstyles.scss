@@ -199,6 +199,8 @@ padding-bottom: 0em;
   margin-top:0px;
 }
 
+
+
 .discount{
   display:none;
 }
@@ -259,9 +261,17 @@ padding-bottom: 0em;
 .mr-t-6{
   margin-top: 6em !important;
 }
+
+.mr-r-10 p{
+
+  float: right;
+  margin-right:7em;
+}
+
 .ht-475{
   height: 475px;
 }
+
 
 .error-text.col-xs-12{
   padding-top:0px;
@@ -398,6 +408,13 @@ LEGEND{
   padding-left: 0px;
   margin-right: 0px;
   margin-left:0px;
+  padding-top:0px;
+  padding-bottom: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.col-md-4.col-3-lt{   
   padding-top:0px;
   padding-bottom: 0px;
   margin-top: 0px;
