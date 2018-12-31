@@ -27,6 +27,7 @@ export class PurchaseDashboardComponent implements OnInit {
 
   public purchaseForm: FormGroup;
   private endPoint: string = "purchaseentry/";
+  private deleteFlag: boolean = true;
   private formSuccess = false;
   private formRequiredError = false;
   private nameFlag = false;
@@ -36,10 +37,11 @@ export class PurchaseDashboardComponent implements OnInit {
   private creditAdjList: any = [];
   private debitAdjList: any = [];
   private manfacturerList: any = [];
+ 
   private typeaheadTaxDataList: any = [];
   private savedSupplierId = 0;
   private modeType: any[];
-  private deleteFlag = true;
+  
 
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
@@ -104,6 +106,7 @@ export class PurchaseDashboardComponent implements OnInit {
       debitAdjustmentLedger:['', Validators.required],
       creditAdjustmentLedger:['', Validators.required],
       remarks:[],
+      stateCode:[],
       debitAdjustmentValue:['', Validators.required],
       creditAdjustmentValue:['', Validators.required],
       invoiceValue:['', Validators.required],
@@ -114,7 +117,9 @@ export class PurchaseDashboardComponent implements OnInit {
       asPerSwcgstAmt:['', Validators.required],
       asPerInvcgstAmt:['', Validators.required],
       asPerSwsgstAmt:['', Validators.required],
-      asPerInvsgstAmt:['', Validators.required]
+      asPerInvsgstAmt:['', Validators.required],
+      asPerInvIgstAmt:['', Validators.required],
+      asPerSwIgstAmt:['', Validators.required]
       
 
     });
@@ -133,6 +138,7 @@ export class PurchaseDashboardComponent implements OnInit {
   onInitialDataLoad(dataList: any[]) {
     this.gridDataList = dataList;
   }
+
   loadGridData() {
     this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
@@ -217,6 +223,7 @@ onSelectManfacturer(event){
       this.purchaseForm.patchValue({ accountInformationId: event.item.id });
       this.purchaseForm.patchValue({ gstIN: event.item.gstIN });
       this.purchaseForm.patchValue({ hsnCode: event.item.hsnCode });
+      this.purchaseForm.patchValue({stateCode: event.item.stateId})
       this.purchaseForm.patchValue({ purchaseNumber: this.gridDataList.length + 1 });
     }
   }

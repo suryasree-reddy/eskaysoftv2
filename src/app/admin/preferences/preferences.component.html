@@ -1,37 +1,44 @@
-<div class="col-md-12 card">
-                            <div class="row">
-                          
-                              <div class="col-md-12 header">
-                                  <div class="row">
-                                      <h4>{{'preferences.title'| translate}}</h4>                          
-                                    </div> 
-                                    </div>
+              <div class="col-md-12 card">
+                          <div class="row">                        
+                            <div class="col-md-12 header">
+                                <h4>{{'preferences.title'| translate}}</h4>                          </div> <!-- header -->
+                        
+                        <form [formGroup]="PreferencesForm" autocomplete="off">                          <div class="col-md-12 card-body">                                                                      
+                            <div class="col-md-12"><!-- start of preferences-->
+                             
                               
-                          
-                          <form [formGroup]="createUserForm" autocomplete="off">
-                          
-                            <div class="col-md-12 card-body">
-                                <div class="col-md-12">
-                           <!-- start of update profile-->
-                           <div class="checkbox">
-                              <label><input type="checkbox"> FloatValues</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox"> DoubleValues</label>
-                              </div>
                               <div class="checkbox">
-                                  <label><input type="checkbox"> IntegerValues</label>
+                                  <label><input type="checkbox"> FloatValues</label>
                                 </div>
                                 <div class="checkbox">
-                                    <label><input type="checkbox"> IntValues</label>
+                                    <label><input type="checkbox"> DoubleValues</label>
                                   </div>
-                                </div>
-                            </div>
-                          
-                            
-                          </form>
-                          
-                            </div> 
-                          </div> 
+                                  <div class="checkbox">
+                                      <label><input type="checkbox"> IntegerValues</label>
+                                    </div>
+                                
+                                       
+                              
+                             
                         
-                          
+                             
+                        
+                             
+                        
+                             
+                        
+                              
+                        
+                              
+                        
+                             
+                        
+                        
+                              
+                            </div><!-- end of preferences-->
+                          </div>
+                        </form>
+                        
+                          </div> <!-- row -->
+                        </div> <!-- main div  -->
+                        

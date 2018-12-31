@@ -1,6 +1,8 @@
-<div class="col-md-12 card" >
+<header></header>
+<div class="col-md-12 card" style="margin-top:25em;">
   <div class="row">
     <div class="col-md-12 header">
+
       <div class="row">
         <h4>{{'userprofile.title' | translate }}</h4>
       </div>
@@ -29,16 +31,20 @@
               [errorMessage]="'serverError.errorMessage'" [errorStatusCode]="sharedDataService.getErrorCode()"
               [errorStatusMsg]="sharedDataService.getErrorMesage()" [duplicateMessage]="duplicateMessage"
               [duplicateMessageParam]="duplicateMessageParam"></app-errormessages>
-          </div>
 
-            
+            <div>
               <div id="tab" class='col-md-12 mr-t-1'>
                 <tabset type="pills">
 
                   <tab heading="Profile Info">
 
 
-                  
+                    <!-- <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.name' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="name" maxlength="25" class="form-control" (blur)="checkForDuplicateName()" [formControl]="userProfileForm.controls['name']" (blur)="checkForDuplicateName()">
+                      </div>
+                    </div> -->
 
                     <div class="col-md-4 col-3-lt">
                       <p>{{'userprofile.username' | translate }}: *</p>
@@ -61,7 +67,12 @@
                       </div>
                     </div>
 
-                  
+                    <!-- <div class="col-md-4 col-3-lt">
+                      <p>{{'userprofile.town' | translate }}: *</p>
+                      <div class="input-group mr-t-0">
+                        <input id="town" maxlength="20" class="form-control" [formControl]="userProfileForm.controls['town']">
+                      </div>
+                    </div> -->
 
                     <div class="col-md-4 col-3-lt">
                       <p>{{'userprofile.pin' | translate }}: *</p>
@@ -283,10 +294,55 @@
                       <!-- Regs Info Ends -->
                     </div>
                   </tab>
- 
+  <!-- Credentials Starts -->
+
+                <!--  <tab heading="{{'accountinfo.cred' | translate}}">
+
+
+                    <div class="ht-475">
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.crlimit' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="creditLimit" type="number" maxlength="12" step="0.01" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            class="form-control" [formControl]="userProfileForm.controls['creditLimit']">
+                        </div>
+                      </div>
+
+
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.saletype' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="saleType" maxlength="6" class="form-control" [formControl]="userProfileForm.controls['saleType']"
+                            [typeahead]="accSaleType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7"
+                            [typeaheadMinLength]="0">
+                          <span class="caret mr-t-caret"></span>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.custType' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="customerType" maxlength="10" class="form-control" [formControl]="userProfileForm.controls['customerType']"
+                            [typeahead]="accCustomerType" typeaheadOptionField="description" [typeaheadOptionsLimit]="7"
+                            [typeaheadMinLength]="0">
+                          <span class="caret mr-t-caret"></span>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 col-3-lt">
+                        <p>{{'accountinfo.duedays' | translate}}: *</p>
+                        <div class="input-group mr-t-0">
+                          <input id="dueDays" type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            class="form-control" [formControl]="userProfileForm.controls['dueDays']">
+                        </div>
+                      </div>
+                    </div>
+
+                  </tab> -->
+  <!-- Credentials Ends -->
                 </tabset>
               </div>
-            
+            </div>
 
           </div>
 
@@ -303,22 +359,10 @@
           <!-- card-body -->
 
         </div>
-      </form>
       </div>
-    
+    </form>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
 
 <ng-template #districtTemplate>
   <div class="modal-header">
