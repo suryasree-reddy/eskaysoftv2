@@ -1457,10 +1457,10 @@
     }
   ],
   "PurchaseOrderColumns": [
-    {
-      "headerName": "S No",
-      "field": "serialNumber",
-      "width": 150,
+    {      
+      "headerName": "OD.No",
+      "field": "orderNumber",
+      "width": 110,
       "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
@@ -1472,9 +1472,26 @@
       },
       "suppressSizeToFit": false
     },
+    {      
+      "headerName": "S.No",
+      "field": "serialNumber",
+      "width": 110,
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+
     {
       "headerName": "Code",
       "field": "productcode",
+      "width": 130,
       "filterParams": {
         "filterOptions": [
           "contains"
@@ -1486,6 +1503,7 @@
     {
       "headerName": "Product Name",
       "field": "productName",
+      "width": 150,
       "filterParams": {
         "filterOptions": [
           "contains"
@@ -1497,6 +1515,7 @@
     {
       "headerName": "Pack",
       "field": "pack",
+      "width": 120,
       "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
@@ -1511,6 +1530,7 @@
     {
       "headerName": "Qty",
       "field": "qty",
+      "width": 120,
       "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
@@ -1525,6 +1545,7 @@
     {
       "headerName": "Free",
       "field": "free",
+      "width": 110,
       "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
@@ -1539,6 +1560,7 @@
     {
       "headerName": "Rate",
       "field": "rate",
+      "width": 120,
       "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
@@ -1553,6 +1575,7 @@
     {
       "headerName": "B Qty",
       "field": "bQty",
+      "width": 120,
       "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
@@ -1567,6 +1590,7 @@
     {
       "headerName": "B Free",
       "field": "bFree",
+      "width": 120,
       "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
@@ -1581,6 +1605,7 @@
     {
       "headerName": "B Rate",
       "field": "bRate",
+      "width": 120,
       "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
@@ -1595,6 +1620,7 @@
     {
       "headerName": "Value",
       "field": "value",
+      "width": 140,
       "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
