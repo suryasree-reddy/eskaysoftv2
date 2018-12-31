@@ -39,9 +39,9 @@ export class PurchaseOrderComponent implements OnInit {
   ngOnInit() {
     this.purchaseOrderForm = this.fb.group({
       id: [],
-      serialNumber:['', Validators.required],
+      serialNumber:[''],
       accountInformationId: ['', Validators.required],
-      orderNumber: ['', Validators.required],
+      orderNumber: [''],
       supplier: ['', Validators.required],
       remarks: [],
       date: ['', Validators.required],
@@ -106,8 +106,7 @@ export class PurchaseOrderComponent implements OnInit {
     this.purchaseOrderForm.patchValue({ productId: event.item.id });
     this.purchaseOrderForm.patchValue({ productcode: event.item.productcode });
     this.purchaseOrderForm.patchValue({ netRate: event.item.netRate });
-    this.calculateRate();
-    this.generateSerialNo();
+    this.calculateRate();    
   }
 
   calculateRate() {
@@ -119,16 +118,17 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   onSelectSupplier(event) {    
-    this.purchaseOrderForm.patchValue({ accountInformationId: event.item.id });  
-    this.generateOrderNo(); 
+    this.purchaseOrderForm.patchValue({ accountInformationId: event.item.id });   
   }
   generateOrderNo(){
-    if(this.gridDataList && this.gridDataList.length == 0){
-      this.purchaseOrderForm.patchValue({ orderNumber: 1});
-    }else{
-      let orderN0 = Math.max.apply(Math, this.gridDataList.map(function(o) { return o.orderNumber; }))
-      this.purchaseOrderForm.patchValue({ orderNumber: orderN0+1});
-    }     
+    if(!this.purchaseOrderForm.value.orderNumber){
+      if(this.gridDataList && this.gridDataList.length == 0){
+        this.purchaseOrderForm.patchValue({ orderNumber: 1});
+      }else{
+        let orderN0 = Math.max.apply(Math, this.gridDataList.map(function(o) { return o.orderNumber; }))
+        this.purchaseOrderForm.patchValue({ orderNumber: orderN0+1});
+      } 
+    }        
   }
   generateSerialNo(){
     let subList = this.gridDataList.filter(v => v.orderNumber === this.purchaseOrderForm.value.orderNumber)
@@ -140,7 +140,9 @@ export class PurchaseOrderComponent implements OnInit {
     }
   }
   save() {
-    this.savedSupplierId = this.purchaseOrderForm.value.accountInformationId;      
+    this.savedSupplierId = this.purchaseOrderForm.value.accountInformationId;     
+    this.generateOrderNo(); 
+    this.generateSerialNo();     
     this.buttonsComponent.save();
   }
 
@@ -171,11 +173,15 @@ export class PurchaseOrderComponent implements OnInit {
     const tempSupplierId = this.purchaseOrderForm.value.accountInformationId;
     const tempSupplierName = this.purchaseOrderForm.value.supplier;
     const tempOrderNum = this.purchaseOrderForm.value.orderNumber;
+    const tempDate = this.purchaseOrderForm.value.date;
+    const tempRemarks = this.purchaseOrderForm.value.remarks;
     this.purchaseOrderForm.reset();
     if ((param === undefined || param === null ) && !this.nameFlag) {
       this.purchaseOrderForm.patchValue({ accountInformationId: tempSupplierId });
       this.purchaseOrderForm.patchValue({ supplier: tempSupplierName });
       this.purchaseOrderForm.patchValue({ orderNumber: tempOrderNum });
+      this.purchaseOrderForm.patchValue({ date: tempDate });
+      this.purchaseOrderForm.patchValue({ remarks: tempRemarks });
     }
     this.deleteFlag = true;
     this.nameFlag = false;
