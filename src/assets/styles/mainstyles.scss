@@ -263,11 +263,17 @@ padding-bottom: 0em;
 }
 
 .mr-r-10 p{
-
   float: right;
-  margin-right:7em;
 }
+ .col-xs-1.mr-r-10{
+   float: right;
+   width: 10%;
+  
+ }
 
+.col-xs-11.mr-r-10 {
+  width: 88.0%;
+}
 .ht-475{
   height: 475px;
 }
