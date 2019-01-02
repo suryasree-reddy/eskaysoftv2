@@ -1,7 +1,7 @@
 .card{
     position: absolute;
-    margin-top: 20em;
-    margin-bottom: 2em;
+    margin-top:20em;
+    margin-bottom: 0em;
     width: 80%;
     margin-left: 10em;
   
@@ -13,7 +13,7 @@
 }
 .card .header{
     background: #d8edf6;
-    padding: 10px 15px 0px;
+    padding: 5px 15px 0px;
     color: #0000ff;
     text-align: center;
 }
@@ -26,4 +26,10 @@
 }
 .card-footer p span{
     color: #0000ff;
+}
+
+.col-md-12.card{
+    margin-top:25em;
+    margin-bottom: 0em;
+    
 }

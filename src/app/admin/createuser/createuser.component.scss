@@ -1,6 +1,6 @@
 .card{
     position: absolute;
-    margin-top: 20em;
+    margin-top: 25em;
     margin-bottom: 2em;
     width: 80%;
     margin-left: 10em;
@@ -26,4 +26,8 @@
 }
 .card-footer p span{
     color: #0000ff;
+}
+
+.col-md-12.card-body{
+    padding-bottom:0px;
 }
