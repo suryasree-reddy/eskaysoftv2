@@ -80,14 +80,17 @@
 		
 	</form>
 </div>
+
 <div class="col-md-12">
+
 	<div class="col-xs-11 mr-r-10">
-		<p>Total value: </p>
+		<p> Total value:</p>
 	</div>
-	<div class="col-xs-1 mr-r-10 ">
+	<div class="col-xs-1">
 			{{this.totalValue}}	
 	</div>
 </div>
+
 <div class="col-md-12">
 	<app-synectiks-common-grid [endPoint]="endPoint" (intialLoad)='onInitialDataLoad($event)' [gridDataList]="gridDataList"
 	 (valueChange)='valueChange($event)' [screenColums]="'PurchaseOrderColumns'"></app-synectiks-common-grid>

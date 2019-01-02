@@ -1,9 +1,10 @@
 .card{
     position: absolute;
-    margin-top:20em;
-    margin-bottom: 0em;
+    margin-top:30em;
+    margin-bottom: 2em;
     width: 80%;
     margin-left: 10em;
+  
   
    
     transform: translateY(-50%);
@@ -19,6 +20,7 @@
 }
 .card-body{
     background: #ffffff;
+    
 }
 .card-body .input-group{
     margin-top: 1em;
@@ -27,9 +29,10 @@
 .card-footer p span{
     color: #0000ff;
 }
-
-.col-md-12.card{
-    margin-top:25em;
-    margin-bottom: 0em;
+.col-md-12.card-body{    
+    margin-bottom: 0px;
+    padding-bottom:0px;
+   ;
+    
     
 }
