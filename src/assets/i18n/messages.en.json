@@ -320,6 +320,7 @@
     "taxable":"Taxable",
     "cgstamount":"CGST Amount",
     "sgstamount":"SGST Amount",
+    "igstamount": "IGST Amount",
     "debitAdjustmentLedger": "Debit Adjustment Ledger",
     "debitAdjustmentValue": "Debit Adjustment Value",
     "creditAdjustmentLedger": "Credit Adjustment Ledger",

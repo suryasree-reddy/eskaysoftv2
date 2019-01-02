@@ -130,10 +130,9 @@ export class PurchaseDashboardComponent implements OnInit {
     this.loadDebitAdjustmentLedgerData();
     this.loadCreditAdjustmentLedgerData();
     this.loadManfacturerData();
-    this.focusField.nativeElement.focus();
     this.loadTaxTypeaheadData();
-     
-     this.modeType = this.sharedDataService.getSharedCommonJsonData().Mode;
+    this.modeType = this.sharedDataService.getSharedCommonJsonData().Mode;
+    this.focusField.nativeElement.focus();
   }
   onInitialDataLoad(dataList: any[]) {
     this.gridDataList = dataList;
