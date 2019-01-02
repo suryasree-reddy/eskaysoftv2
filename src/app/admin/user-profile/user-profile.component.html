@@ -13,7 +13,8 @@
         
         <p class="col-sm-4">{{'userprofile.name' | translate }}:
           <!-- <input type="text" class="brdr-hide" [readonly]="true"> -->
-          <input id="name" maxlength="20"   [formControl]="userProfileForm.controls['name']" (blur)="checkForDuplicateName()">
+          <input  id="name" maxlength="20"   [formControl]="userProfileForm.controls['name']" (blur)="checkForDuplicateName()">
+         
         </p>
         <p class="col-sm-4">{{'userprofile.town' | translate }}:
           <!-- <input type="text" class="brdr-hide" [readonly]="true"> -->
