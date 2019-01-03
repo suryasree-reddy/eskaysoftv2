@@ -168,6 +168,7 @@
     
                              </tab>
                                 <tab heading="Footer">
+                                    <div>
                                     <!-- <h4>Footer Inputs</h4> -->
                                     <div class="container-fluid  mr-l-2">
                                         <div class="col-xs-3 mr-t-1">
@@ -187,11 +188,13 @@
                                             <p>{{'purchase.netValue1' | translate}}: *</p>
                                             <input id="netValue" type= "number" class="form-control" [readonly]="true" [formControl]="purchaseForm.controls['netValue']">
                                         </div>
-                                    </div>
-                                    <div class="row line"></div>
+                                   
+                                    
                                   
                                     <div class="col-xs-12 mr-l-1">
+                                            <div class="row line "></div>
                                             <div class="col-xs-6 mr-l-1">
+                                                    
                                         <h4>{{'purchase.asPerSoftware' | translate}}</h4>
                                        
                                             <div class="col-xs-3 ">
@@ -219,20 +222,17 @@
                                             </div>
                                         </div>
                                             <div *ngIf=" purchaseForm.controls['stateCode'].value != 35">
-
                                             <div class="col-xs-3 ">
                                                 <p>{{'purchase.igstamount' | translate}}: *</p>
                                                 <input id="asPerSwIgstAmt" type= "number" #focus  class="form-control"
                                                     [formControl]="purchaseForm.controls['asPerSwIgstAmt']">
                                             </div>
                                         </div>
-                                            <!-- <div class="col-xs-2 mr-t-1">
-                                                          
-                                                            <button type="submit" class="btn btn-success"
-                                                             *ngIf="!isModelWindowView" (click)="openModal(asPerSoftwareGridTemplate)">View Grid Details</button>
-                                                        </div> -->
+                                         
                                         </div>
+                                       
                                         <div class="col-xs-6 mr-left-1">
+                                                
                                         <h4>{{'purchase.asPerInvoice' | translate}}</h4>
                                         
                                             <div class="col-xs-3">
@@ -270,51 +270,55 @@
                                         </div>
                                     </div>
                                     <!-- <hr style="	border-top: 1px solid #000000;"> -->
-                                    <div class="mr-l-1">
-                                        
+                                    <div class="col-xs-12 mrow">  
+                                            <div class="row line"></div>                                      
+                                            <div class="container-fluid mr">
+                                                    
                                         <div class="col-xs-2 mr-t-1">
-                                            <div class="row line"></div>
-                                        <p>{{'purchase.debitAdjustmentLedger' | translate}}: *</p>
+                                          
+                                        <p>{{'purchase.debitAdjustmentLedger' | translate}}:*</p>
                                         <input id="debitAdjustmentLedger" class="form-control" formControlName="debitAdjustmentLedger" typeaheadOptionField="accountName" (typeaheadOnSelect)="onSelectDebitAdjustmentLedger(event)" [typeahead]="debitAdjList" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
                                         <span class="caret"></span>
                                             </div>
                                         <div class="col-xs-2 mr-t-1">
-                                                <div class="row line"></div>
-                                            <p>{{'purchase.debitAdjustmentValue' | translate}}: *</p>
+                                             
+                                            <p>{{'purchase.debitAdjustmentValue' | translate}}:*</p>
                                             <input id="debitAdjustmentValue" type= "number" #focus  class="form-control"
                                                 [formControl]="purchaseForm.controls['debitAdjustmentValue']">
                                         </div>
                                         
                                         <div class="col-xs-2 mr-t-1">
-                                                <div class="row line"></div>
-                                            <p>{{'purchase.creditAdjustmentLedger' | translate}}: *</p>
+                                               
+                                            <p>{{'purchase.creditAdjustmentLedger' | translate}}:*</p>
                                             <input id="supplier" class="form-control" formControlName="creditAdjustmentLedger" typeaheadOptionField="accountName" (typeaheadOnSelect)="onSelectCreditAdjustmentLedger(event)" [typeahead]="creditAdjList" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
                                             <span class="caret"></span>
                                     </div>
                                         <div class="col-xs-2 mr-t-1">
-                                                <div class="row line"></div>
-                                            <p>{{'purchase.creditAdjustmentValue' | translate}}: *</p>
+                                              
+                                            <p>{{'purchase.creditAdjustmentValue' | translate}}:*</p>
                                             <input id="creditAdjustmentValue" type= "number" class="form-control" [formControl]="purchaseForm.controls['creditAdjustmentValue']">
                                         </div>
                                         <div class="col-xs-2 mr-t-1">
-                                                <div class="row line"></div>
-                                            <p>{{'purchase.invoiceValue' | translate}}: *</p>
+                                                
+                                            <p>{{'purchase.invoiceValue' | translate}}:*</p>
                                             <input id="invoiceValue" type= "number" class="form-control" [formControl]="purchaseForm.controls['invoiceValue']">
                                         </div>
                                         <div class="col-xs-2 mr-t-1">
-                                                <div class="row line"></div>
-                                            <p>{{'purchase.netValue2' | translate}}: *</p>
+                                               
+                                            <p>{{'purchase.netValue2' | translate}}:*</p>
                                             <input id="netValue"  type= "number" class="form-control" [formControl]="purchaseForm.controls['netValue']">
                                             <span class="caret"></span>
                                         </div>
                                         <div class="col-xs-2 mr-t-1">
-                                            <p>{{'purchase.remarks' | translate}}: *</p>
+                                            <p>{{'purchase.remarks' | translate}}:*</p>
                                             <input id="remarks" class="form-control" [formControl]="purchaseForm.controls['remarks']">
                                             
                                         </div>
-
                                     </div>
 
+                                    </div>
+                                </div>
+                            </div>
                                    
 
                                 </tab>
@@ -325,7 +329,7 @@
             </div>
         </div>
         <!-- <hr style="	border: 1px solid #000000;"> -->
-        <div class="col-md-12 mr-t-1">
+        <div class="col-md-12 mr-rt-5">
             <app-buttons [title]="'purchase.title'" [endPoint]="endPoint" [hideSaveBtn]=true 
             [deleteConfirmMsg]="'purchase.deleteConfirmationMessage'" [hideResetBtn]=true 
             [saveConfirmMsg]="'purchase.saveConfirmationMessage'" (afterSuccess)="successMsg()"    
