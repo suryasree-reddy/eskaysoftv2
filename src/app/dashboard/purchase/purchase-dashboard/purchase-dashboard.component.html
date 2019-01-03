@@ -212,9 +212,8 @@
                                                 <p>{{'purchase.cgstamount' | translate}}: *</p>
                                                 <input id="asPerSwcgstAmt" type= "number" #focus  class="form-control"
                                                     [formControl]="purchaseForm.controls['asPerSwcgstAmt']">
+        
                                             </div>
-                                            </div>
-                                            <div *ngIf="purchaseForm.controls['stateCode'].value == 35">
                                             <div class="col-xs-3 ">
                                                 <p>{{'purchase.sgstamount' | translate}}: *</p>
                                                 <input id="asPerSwsgstAmt" type= "number" #focus  class="form-control"
@@ -252,8 +251,8 @@
                                                 <input id="asPerInvcgstAmt" type= "number" #focus  class="form-control"
                                                     [formControl]="purchaseForm.controls['asPerInvcgstAmt']">
                                             </div>
-                                        </div>
-                                        <div *ngIf="purchaseForm.controls['stateCode'].value == 35">
+                                       
+                                      
                                             <div class="col-xs-3">
                                                 <p>{{'purchase.sgstamount' | translate}}: *</p>
                                                 <input id="asPerInvsgstAmt" type= "number" #focus  class="form-control"

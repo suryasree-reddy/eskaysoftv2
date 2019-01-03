@@ -9,6 +9,7 @@ import 'src/assets/styles/mainstyles.scss';
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 import * as _ from 'lodash';
+import { UserProfileComponent } from 'src/app/admin/user-profile/user-profile.component';
 
 @Component({
   selector: 'app-purchase-dashboard',
@@ -19,7 +20,8 @@ import * as _ from 'lodash';
   imports: [
     BsDropdownModule.forRoot(),
     TypeaheadModule.forRoot(),
-    BsModalService
+    BsModalService,
+    UserProfileComponent
   ],
 })
 
