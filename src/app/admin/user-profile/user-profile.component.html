@@ -7,18 +7,14 @@
       </div>
 
       <div class="col-md-12">
-        <p class="col-sm-4">{{'userprofile.clientid' | translate }}:
+        <p class="col-sm-4">{{'userprofile.clientid' | translate }}: 
           <!-- <input type="text" class="brdr-hide" [readonly]="true"> -->
         </p>
         
-        <p class="col-sm-4">{{'userprofile.name' | translate }}:
-          <!-- <input type="text" class="brdr-hide" [readonly]="true"> -->
-          <input  id="name" maxlength="20"   [formControl]="userProfileForm.controls['name']" (blur)="checkForDuplicateName()">
+        <p class="col-sm-4">{{'userprofile.name' | translate }}: <b>{{userProfileForm.controls['name'].value}} &emsp;</b>
+         </p>
+        <p class="col-sm-4">{{'userprofile.town' | translate }}: <b>{{userProfileForm.controls['town'].value}} &emsp;</b>
          
-        </p>
-        <p class="col-sm-4">{{'userprofile.town' | translate }}:
-          <!-- <input type="text" class="brdr-hide" [readonly]="true"> -->
-          <input id="town" maxlength="20"  [formControl]="userProfileForm.controls['town']" (blur)="checkForDuplicateName()">
         </p>
       </div>
     </div> <!-- header -->
