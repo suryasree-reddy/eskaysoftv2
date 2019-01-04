@@ -109,7 +109,7 @@ export class PurchaseDashboardComponent implements OnInit {
       netValue:['', Validators.required],
       debitAdjustmentLedger:['', Validators.required],
       creditAdjustmentLedger:['', Validators.required],
-      remarks:[],
+      
       stateCode:[],
       debitAdjustmentValue:['', Validators.required],
       creditAdjustmentValue:['', Validators.required],
@@ -118,13 +118,13 @@ export class PurchaseDashboardComponent implements OnInit {
       asPerInvgstp:['', Validators.required],
       asPerSwtaxable:['', Validators.required],
       asPerInvtaxable:['', Validators.required],
-      asPerSwcgstAmt:['', Validators.required],
-      asPerInvcgstAmt:['', Validators.required],
-      asPerSwsgstAmt:['', Validators.required],
-      asPerInvsgstAmt:['', Validators.required],
-      asPerInvIgstAmt:['', Validators.required],
-      asPerSwIgstAmt:['', Validators.required]
-      
+      asPerSwcgstAmt:[],
+      asPerInvcgstAmt:[],
+      asPerSwsgstAmt:[],
+      asPerInvsgstAmt:[],
+      asPerInvIgst:[],
+      asPerSwIgst:[],
+      remarks:[]
 
     });
     this.loadProductData();

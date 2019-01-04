@@ -230,8 +230,8 @@
                                             <div *ngIf="!validateState()">
                                             <div class="col-xs-3 ">
                                                 <p>{{'purchase.igstamount' | translate}}: *</p>
-                                                <input id="asPerSwIgstAmt" type= "number" #focus  class="form-control"
-                                                    [formControl]="purchaseForm.controls['asPerSwIgstAmt']">
+                                                <input id="asPerSwIgst" type= "number" #focus  class="form-control"
+                                                    [formControl]="purchaseForm.controls['asPerSwIgst']">
                                             </div>
                                         </div>
                                          
@@ -243,8 +243,8 @@
                                         
                                             <div class="col-xs-3">
                                                 <p>{{'purchase.gst' | translate}}: *</p>
-                                                <input id="asPerInvgstAmt" type= "number" #focus  class="form-control"
-                                                    [formControl]="purchaseForm.controls['asPerInvgstAmt']">
+                                                <input id="asPerInvgstp" type= "number" #focus  class="form-control"
+                                                    [formControl]="purchaseForm.controls['asPerInvgstp']">
                                             </div>
                                         
                                             <div class="col-xs-3 ">
@@ -269,8 +269,8 @@
                                         <div *ngIf="!validateState()">
                                             <div class="col-xs-3">
                                                 <p>{{'purchase.igstamount' | translate}}: *</p>
-                                                <input id="asPerInvIgstAmt" type= "number" #focus  class="form-control"
-                                                    [formControl]="purchaseForm.controls['asPerInvIgstAmt']">
+                                                <input id="asPerInvIgst" type= "number" #focus  class="form-control"
+                                                    [formControl]="purchaseForm.controls['asPerInvIgst']">
                                             </div>
                                         </div>
                                         </div>
