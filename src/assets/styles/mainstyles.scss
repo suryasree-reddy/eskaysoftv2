@@ -452,11 +452,11 @@ LEGEND{
 }
 
 .col-md-12.mr-rt-5{
-  margin-left: -0.3em;
-  margin-right:0px;
-  width: 96%;
+  margin-left: 2.5em;
+  margin-right: 0px;
+  width: 94.5%;
   padding-bottom: 0px;
-  margin-bottom: 0px;
+  margin-bottom: 0px
 }
 
 .col-xs-12.mrow{
@@ -466,7 +466,7 @@ LEGEND{
   margin-bottom: 0px;
 }
 
-.col-xs-6.mr-l-1 h4{
+.col-md-6.mr-l-1 h4{
   padding-top:0px;
   padding-bottom: 0px;
   margin-top: 0px;
@@ -474,26 +474,54 @@ LEGEND{
   margin-left: 15px;
 }
 
-.col-xs-6.mr-left-1 h4{
+.col-md-6.mr-left-1 h4{
   padding-top:0px;
   padding-bottom: 0px;
   margin-top: 0px;
   margin-bottom: 0px;
   margin-left: 15px;
 }
-.container-fluid.mr{
- 
-  width: 104.5%;
-  padding-top:0px;
-  padding-bottom: 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-left: -2em;
-}
+
 .col-md-4.col-3-lt{
 
   padding-top:0px;
   padding-bottom: 0px;
   margin-top: 0px;
   margin-bottom: 0px;
+}
+
+.nav{
+  padding-left:3.5em;
+  padding-top:0px;
+  padding-bottom:0px;
+  margin-top:0px;
+  margin-bottom:0px;
+}
+
+.col-md-12.mr-l-1{
+  padding-top:0px;
+  padding-bottom:0px;
+  margin-top:0px;
+  margin-bottom:0px;
+
+}
+
+.col-md-12.mr{
+  padding-top:0px;
+  padding-bottom:0px;
+  margin-top:0px;
+  margin-bottom:0px;
+}
+
+.col-xs-12.mr h3{
+padding-left:1.5em;
+}
+
+.container-fluid.mr-l-1.mr{
+  width:103%;
+  margin-left: -1em;
+  padding-top:0px;
+  padding-bottom:0px;
+  margin-top:0px;
+  margin-bottom:0px;
 }
