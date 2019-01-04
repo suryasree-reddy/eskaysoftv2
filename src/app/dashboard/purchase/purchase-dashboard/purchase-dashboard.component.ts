@@ -10,6 +10,7 @@ import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 import { ButtonsComponent } from '../../../commonComponents/buttons/buttons.component';
 import * as _ from 'lodash';
 import { UserProfileComponent } from 'src/app/admin/user-profile/user-profile.component';
+import { AuthenticationService } from 'src/app/auth/authentication.service';
 
 @Component({
   selector: 'app-purchase-dashboard',
@@ -58,6 +59,7 @@ export class PurchaseDashboardComponent implements OnInit {
     private translate: TranslateService,
     private sharedDataService:SharedDataService,
     private modalService: BsModalService,
+    private auth:AuthenticationService,
     private masterService: MasterService) {
     translate.setDefaultLang('messages.en');
   }
@@ -227,6 +229,14 @@ onSelectManfacturer(event){
       this.purchaseForm.patchValue({stateCode: event.item.stateId})
       this.purchaseForm.patchValue({ purchaseNumber: this.gridDataList.length + 1 });
     }
+  }
+
+  validateState(){
+    let userState = this.auth.getUserState();
+    if(this.purchaseForm.value.stateCode && this.purchaseForm.value.stateCode == userState){
+      return true;
+    }else
+    return false;
   }
   
   save() {

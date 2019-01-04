@@ -207,7 +207,7 @@
                                                 <input id="asPerSwtaxable" type= "number" #focus  class="form-control"
                                                     [formControl]="purchaseForm.controls['asPerSwtaxable']">
                                             </div>
-                                            <div *ngIf="purchaseForm.controls['stateCode'].value == 35">
+                                            <div *ngIf="validateState()">
                                             <div class="col-xs-3 ">
                                                 <p>{{'purchase.cgstamount' | translate}}: *</p>
                                                 <input id="asPerSwcgstAmt" type= "number" #focus  class="form-control"
@@ -220,7 +220,7 @@
                                                     [formControl]="purchaseForm.controls['asPerSwsgstAmt']">
                                             </div>
                                         </div>
-                                            <div *ngIf="purchaseForm.controls['stateCode'].value != 35">
+                                            <div *ngIf="!validateState()">
                                             <div class="col-xs-3 ">
                                                 <p>{{'purchase.igstamount' | translate}}: *</p>
                                                 <input id="asPerSwIgstAmt" type= "number" #focus  class="form-control"
@@ -245,7 +245,7 @@
                                                 <input id="asPerInvtaxable"  type= "number" #focus  class="form-control"
                                                     [formControl]="purchaseForm.controls['asPerInvtaxable']">
                                             </div>
-                                            <div *ngIf="purchaseForm.controls['stateCode'].value == 35">
+                                            <div *ngIf="validateState()">
                                             <div class="col-xs-3 ">
                                                 <p>{{'purchase.cgstamount' | translate}}: *</p>
                                                 <input id="asPerInvcgstAmt" type= "number" #focus  class="form-control"
@@ -259,7 +259,7 @@
                                                     [formControl]="purchaseForm.controls['asPerInvsgstAmt']">
                                             </div>
                                         </div>
-                                        <div *ngIf=" purchaseForm.controls['stateCode'].value != 35">
+                                        <div *ngIf="!validateState()">
                                             <div class="col-xs-3">
                                                 <p>{{'purchase.igstamount' | translate}}: *</p>
                                                 <input id="asPerInvIgstAmt" type= "number" #focus  class="form-control"
