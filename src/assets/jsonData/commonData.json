@@ -1511,6 +1511,17 @@
       "suppressSizeToFit": false
     },
     {
+      "headerName": "supplier",
+      "field": "supplier",
+      "filterParams": {
+        "filterOptions": [
+          "contains"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
       "headerName": "Pack",
       "field": "pack",
       "filter": "agNumberColumnFilter",
