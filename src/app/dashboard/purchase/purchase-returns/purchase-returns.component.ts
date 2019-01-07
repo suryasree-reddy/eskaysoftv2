@@ -30,6 +30,7 @@ export class PurchaseReturnsComponent implements OnInit {
   private childDuplicateMessageParam: string = null;
   private savedSupplierId = 0;
  
+ 
 
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
@@ -45,7 +46,7 @@ export class PurchaseReturnsComponent implements OnInit {
   ngOnInit() {
     this.purchaseReturnsForm = this.fb.group({
       id: [],
-      purReturnNumber: ['', Validators.required],
+      purReturnNumber: [],
       supplier: ['', Validators.required],
       remarks: [],
       date: ['', Validators.required],
@@ -54,8 +55,8 @@ export class PurchaseReturnsComponent implements OnInit {
       qty: ['', Validators.required],
       free: ['', Validators.required],
       pRate: ['', Validators.required],
-      accountInformationId: ['', Validators.required],
-      productId: ['', Validators.required],
+      accountInformationId: [],
+      productId: [],
       netRate: ['', Validators.required],
       ammount: ['', Validators.required]
     });
@@ -126,19 +127,28 @@ export class PurchaseReturnsComponent implements OnInit {
 
   }
   onSelectSupplier(event) {
-    if (this.savedSupplierId >= 0 && this.savedSupplierId !== event.item.id) {
-      this.purchaseReturnsForm.patchValue({ accountInformationId: event.item.id });
-      this.purchaseReturnsForm.patchValue({ purReturnNumber: this.gridDataList.length + 1 });
-    }
+ this.purchaseReturnsForm.patchValue({ accountInformationId: event.item.id });
   }
   calculateRate() {
     this.purchaseReturnsForm.patchValue({ pRate: this.purchaseReturnsForm.value.qty * this.purchaseReturnsForm.value.netRate });
     this.purchaseReturnsForm.patchValue({ ammount: this.purchaseReturnsForm.value.qty * this.purchaseReturnsForm.value.netRate });
   }
 
+  generateReturnNo(){
+    if(!this.purchaseReturnsForm.value.purReturnNumber){
+      if(this.gridDataList && this.gridDataList.length == 0){
+        this.purchaseReturnsForm.patchValue({ purReturnNumber: 1});
+      }else{
+        let orderN0 = Math.max.apply(Math, this.gridDataList.map(function(o) { return o.purReturnNumber; }))
+        this.purchaseReturnsForm.patchValue({ purReturnNumber: orderN0+1});
+      } 
+    }        
+  }
   save() {
-    this.savedSupplierId = this.purchaseReturnsForm.value.accountInformationId;
+    this.generateReturnNo(); 
+    this.savedSupplierId = this.purchaseReturnsForm.value.suplierId;
     this.buttonsComponent.save();
+    
   }
 
   delete() {
@@ -158,10 +168,12 @@ export class PurchaseReturnsComponent implements OnInit {
     const tempSupplierId = this.purchaseReturnsForm.value.accountInformationId;
     const tempSupplierName = this.purchaseReturnsForm.value.supplier;
     const temppurReturnNumber = this.purchaseReturnsForm.value.purReturnNumber;
+    const tempRemarks = this.purchaseReturnsForm.value.remarks;
     this.purchaseReturnsForm.reset();
     if ((param === undefined || param === null )&& !this.nameFlag) {
       this.purchaseReturnsForm.patchValue({ accountInformationId: tempSupplierId });
       this.purchaseReturnsForm.patchValue({ supplier: tempSupplierName });
+      this.purchaseReturnsForm.patchValue({remarks: tempRemarks });
       this.purchaseReturnsForm.patchValue({ purReturnNumber: temppurReturnNumber });
     }
 
