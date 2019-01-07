@@ -18,7 +18,7 @@
 
       <div class="col-xs-3 mr-t-1">
         <p>{{'common.supplier' | translate}}: *</p>
-        <input id="supplier" maxlength="20" class="form-control" formControlName="supplier" typeaheadOptionField="accountName" [typeahead]="suppliersList" (typeaheadOnSelect)="onSelectSupplier($event)" [typeaheadMinLength]="0"
+        <input id="supplier"  class="form-control" formControlName="supplier" typeaheadOptionField="accountName" [typeahead]="suppliersList" (typeaheadOnSelect)="onSelectSupplier($event)" [typeaheadMinLength]="0"
           [typeaheadOptionsLimit]="7">
         <span class="caret"></span>
       </div>

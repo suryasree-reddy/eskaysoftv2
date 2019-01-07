@@ -819,6 +819,20 @@
   ],
   "InternalStockAdjColumns": [
     {
+      "headerName": "Number",
+      "field": "number",
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
       "headerName": "S No",
       "field": "id",
       "width": 150,
@@ -1204,6 +1218,20 @@
     }
   ],
   "PurchaseReturnColumns": [
+    {
+      "headerName": "Return No",
+      "field": "purReturnNumber",
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
     {
       "headerName": "S No",
       "field": "id",

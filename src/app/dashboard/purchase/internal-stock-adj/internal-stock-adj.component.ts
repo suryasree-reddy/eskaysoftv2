@@ -17,18 +17,14 @@ export class InternalStockAdjComponent implements OnInit {
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
-  private duplicateName: boolean = false;
-  private duplicateNum: boolean = false;
+
   private duplicateMessage: string = null;
-  private duplicateMessageParam: string = null;
+
   private internalStockList: any = [];
   private productsList: any = [];
   public gridDataList: any = [];
   public typeList: any = [];
   private duplicateNumber = false;
-  private suppliersList: any = [];
-  private childDuplicateMessage: string = null;
-  private childDuplicateMessageParam: string = null;
   private savedProductId = 0;
   public typeDataList: any = [];
 
@@ -50,16 +46,15 @@ export class InternalStockAdjComponent implements OnInit {
       number: [],
       remarks: [],
       date: ['', Validators.required],
-      productId: ['', Validators.required],
+      productId: [],
       productName: ['', Validators.required],
       productcode: ['', Validators.required],
-      
-      pack: ['', Validators.required],
+      pack: [],
       type: ['', Validators.required],
       batch: ['', Validators.required],
       qty: ['', Validators.required],
       free: ['', Validators.required]
-     
+
     });
     this.loadProductData();
     this.typeList = this.sharedDataService.getSharedCommonJsonData().Type;
@@ -86,35 +81,27 @@ export class InternalStockAdjComponent implements OnInit {
       this.productsList = list;
     });
   }
-  
-  getDuplicateErrorMessages(): void {
-    if (!this.duplicateNumber) {
-      this.formRequiredError = false;
-      this.duplicateMessage = null;
-      this.duplicateMessageParam = null;
-    }
-    if (this.duplicateNumber) {
-      this.duplicateMessage = 'internalStockAdj.duplicateNameErrorMessage';
-      this.duplicateMessageParam = this.internalStockForm.value.number;
-    }
-  }
 
-  onSelectProduct(event) {
+onSelectProduct(event) {
     this.internalStockForm.patchValue({ pack: event.item.packing });
     this.internalStockForm.patchValue({ free: event.item.free });
     this.internalStockForm.patchValue({ productId: event.item.id });
     this.internalStockForm.patchValue({ productcode: event.item.productcode });
 
-    if (this.savedProductId >= 0 && this.savedProductId !== event.item.id) {
-      this.internalStockForm.patchValue({ productId: event.item.id });
-      this.internalStockForm.patchValue({ number: this.gridDataList.length + 1 });
+
+  }
+  generateNumber() {
+    if (!this.internalStockForm.value.number) {
+      if (this.gridDataList && this.gridDataList.length == 0) {
+        this.internalStockForm.patchValue({ number: 1 });
+      } else {
+        let orderN0 = Math.max.apply(Math, this.gridDataList.map(function (o) { return o.number; }))
+        this.internalStockForm.patchValue({ number: orderN0 + 1 });
+      }
     }
   }
-
-  
-  
-
-  save() {
+save() {
+    this.generateNumber();
     this.savedProductId = this.internalStockForm.value.productId;
     this.buttonsComponent.save();
   }
@@ -123,15 +110,11 @@ export class InternalStockAdjComponent implements OnInit {
     this.buttonsComponent.delete();
   }
 
-  deleteOrder() {
-    this.buttonsComponent.manualDelete(this.endPoint + '/orderNumber', this.internalStockForm.value.orderNumber);
-  }
-
   successMsg() {
     this.formSuccess = true;
     this.formRequiredError = false;
     this.resetForm(null);
-       this.loadGridData();
+    this.loadGridData();
   }
 
   requiredErrMsg() {
@@ -142,19 +125,19 @@ export class InternalStockAdjComponent implements OnInit {
   }
 
   resetForm(param) {
-    const tempSupplierId = this.internalStockForm.value.accountInformationId;
-    const tempSupplierName = this.internalStockForm.value.supplier;
-    const tempOrderNum = this.internalStockForm.value.orderNumber;
+    const tempOrderNum = this.internalStockForm.value.number;
+    const tempDate = this.internalStockForm.value.date;
+    const tempRemarks = this.internalStockForm.value.remarks;
     this.internalStockForm.reset();
-    if ((param === undefined || param === null )&& !this.nameFlag) {
-      this.internalStockForm.patchValue({ accountInformationId: tempSupplierId });
-      this.internalStockForm.patchValue({ supplier: tempSupplierName });
-      this.internalStockForm.patchValue({ orderNumber: tempOrderNum });
+    if ((param === undefined || param === null) && !this.nameFlag) {
+      this.internalStockForm.patchValue({ number: tempOrderNum });
+      this.internalStockForm.patchValue({ date: tempDate });
+      this.internalStockForm.patchValue({ remarks: tempRemarks });
     }
 
     this.deleteFlag = true;
     this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
+
     this.nameFlag = false;
     this.duplicateNumber = false;
     this.formRequiredError = this.formSuccess = false;
@@ -164,14 +147,9 @@ export class InternalStockAdjComponent implements OnInit {
   editable(s) {
     this.nameFlag = true;
     this.formRequiredError = false;
-    this.childDuplicateMessage = null;
-    this.childDuplicateMessageParam = null;
-    //  this.deleteFlag = !s.deleteFlag;
-    this.deleteFlag = false;
+     this.deleteFlag = false;
     this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
+
     this.internalStockForm.reset(s);
-    //  const productObj = _.find(this.productsList, function(o) {return o.id == s.productId; });
-    //  this.internalStockForm.patchValue({ productBoxPack: productObj.boxQty });
-  }
+     }
 }

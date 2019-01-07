@@ -167,6 +167,7 @@ export class PurchaseReturnsComponent implements OnInit {
   resetForm(param) {
     const tempSupplierId = this.purchaseReturnsForm.value.accountInformationId;
     const tempSupplierName = this.purchaseReturnsForm.value.supplier;
+    const tempDate = this.purchaseReturnsForm.value.date
     const temppurReturnNumber = this.purchaseReturnsForm.value.purReturnNumber;
     const tempRemarks = this.purchaseReturnsForm.value.remarks;
     this.purchaseReturnsForm.reset();
@@ -174,6 +175,7 @@ export class PurchaseReturnsComponent implements OnInit {
       this.purchaseReturnsForm.patchValue({ accountInformationId: tempSupplierId });
       this.purchaseReturnsForm.patchValue({ supplier: tempSupplierName });
       this.purchaseReturnsForm.patchValue({remarks: tempRemarks });
+      this.purchaseReturnsForm.patchValue({ date: tempDate});
       this.purchaseReturnsForm.patchValue({ purReturnNumber: temppurReturnNumber });
     }
 

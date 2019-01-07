@@ -77,11 +77,11 @@ export class PurchaseDashboardComponent implements OnInit {
       supplier: [],
       gstIN: ['', Validators.required],
       wayBill: ['', Validators.required],
-      transport: ['', Validators.required],
+      transport: [],
       numberOfCases: ['', Validators.required],
      
       mode: ['', Validators.required],
-      lrNumber: ['', Validators.required],
+      lrNumber: [],
       lrDate: ['', Validators.required],
       delvFrom: ['', Validators.required],
       productId: [],
