@@ -283,7 +283,7 @@
                                         <div class="col-xs-2 mr-t-1">
                                           
                                         <p>{{'purchase.debitAdjustmentLedger' | translate}}:*</p>
-                                        <input id="debitAdjustmentLedger" class="form-control" formControlName="debitAdjustmentLedger" typeaheadOptionField="accountName" (typeaheadOnSelect)="onSelectDebitAdjustmentLedger(event)" [typeahead]="debitAdjList" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+                                        <input id="debitAdjustmentLedger" class="form-control" formControlName="debitAdjustmentLedger" typeaheadOptionField="accountName" (typeaheadOnSelect)="onSelectDebitAdjustmentLedger($event)" [typeahead]="debitAdjList" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
                                         <span class="caret"></span>
                                             </div>
                                         <div class="col-xs-2 mr-t-1">
@@ -296,7 +296,7 @@
                                         <div class="col-xs-2 mr-t-1">
                                                
                                             <p>{{'purchase.creditAdjustmentLedger' | translate}}:*</p>
-                                            <input id="supplier" class="form-control" formControlName="creditAdjustmentLedger" typeaheadOptionField="accountName" (typeaheadOnSelect)="onSelectCreditAdjustmentLedger(event)" [typeahead]="creditAdjList" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
+                                            <input id="creditAdjustmentLedger" class="form-control" formControlName="creditAdjustmentLedger" typeaheadOptionField="accountName" (typeaheadOnSelect)="onSelectCreditAdjustmentLedger($event)" [typeahead]="creditAdjList" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0">
                                             <span class="caret"></span>
                                     </div>
                                         <div class="col-xs-2 mr-t-1">

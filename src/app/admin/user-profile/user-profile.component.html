@@ -46,7 +46,7 @@
                     <div class="col-md-4 col-3-lt">
                       <p>{{'userprofile.username' | translate }}: *</p>
                       <div class="input-group mr-t-0">
-                        <input id="username" maxlength="25" class="form-control" (blur)="checkForDuplicateUserName()" [formControl]="userProfileForm.controls['username']" (blur)="checkForDuplicateUserName()">
+                        <input id="username" maxlength="25" [readonly]="true" class="form-control" (blur)="checkForDuplicateUserName()" [formControl]="userProfileForm.controls['username']" (blur)="checkForDuplicateUserName()">
                       </div>
                     </div>
 

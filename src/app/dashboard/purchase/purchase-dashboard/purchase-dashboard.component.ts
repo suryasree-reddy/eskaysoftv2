@@ -73,8 +73,8 @@ export class PurchaseDashboardComponent implements OnInit {
       invoiceNumber:['', Validators.required],
       purDate: ['', Validators.required],
       invoiceDate: ['', Validators.required],
-      accountInformationId: [],
-      supplier: ['', Validators.required],
+      suplierId: [],
+      supplier: [],
       gstIN: ['', Validators.required],
       wayBill: ['', Validators.required],
       transport: ['', Validators.required],
@@ -102,37 +102,34 @@ export class PurchaseDashboardComponent implements OnInit {
       manfacturerId: [],
       mfgName:['', Validators.required],
       purRate:['', Validators.required],
-      free:['', Validators.required],
-      grossValue:['', Validators.required],
-      discountValue:['', Validators.required],
-      taxValue:['', Validators.required],
-      netValue:['', Validators.required],
-      debitAdjustmentLedger:['', Validators.required],
-      creditAdjustmentLedger:['', Validators.required],
-      
+      free: ['', Validators.required],
+      grossValue: ['', Validators.required],
+      discountValue: ['', Validators.required],
+      taxValue: ['', Validators.required],
+      netValue: ['', Validators.required],
+      drAdjLedjerId: [],
+      debitAdjustmentLedger:[],
+      crAdjLedjerId: [],
+      creditAdjustmentLedger:[],
       stateCode:[],
-      debitAdjustmentValue:['', Validators.required],
-      creditAdjustmentValue:['', Validators.required],
-      invoiceValue:['', Validators.required],
-      asPerSwgstp:['', Validators.required],
-      asPerInvgstp:['', Validators.required],
-      asPerSwtaxable:['', Validators.required],
-      asPerInvtaxable:['', Validators.required],
-      asPerSwcgstAmt:[],
-      asPerInvcgstAmt:[],
-      asPerSwsgstAmt:[],
-      asPerInvsgstAmt:[],
-      asPerInvIgst:[],
-      asPerSwIgst:[],
-      remarks:[]
-
+      debitAdjustmentValue: ['', Validators.required],
+      creditAdjustmentValue: ['', Validators.required],
+      invoiceValue: ['', Validators.required],
+      asPerSwgstp: ['', Validators.required],
+      asPerInvgstp: ['', Validators.required],
+      asPerSwtaxable: ['', Validators.required],
+      asPerInvtaxable: ['', Validators.required],
+      asPerInvIgst: [],
+      asPerSwIgst: [],
+      asPerSwcgstAmt: [],
+      asPerInvcgstAmt: [],
+      asPerSwsgstAmt: [],
+      asPerInvsgstAmt: [],
+      remarks: []
     });
     this.loadProductData();
     this.loadSupplierData();
-    this.loadCreditAdjustmentLedgerData();
-    this.loadDebitAdjustmentLedgerData();
-    this.loadDebitAdjustmentLedgerData();
-    this.loadCreditAdjustmentLedgerData();
+   
     this.loadManfacturerData();
     this.loadTaxTypeaheadData();
     this.modeType = this.sharedDataService.getSharedCommonJsonData().Mode;
@@ -163,18 +160,11 @@ export class PurchaseDashboardComponent implements OnInit {
   loadSupplierData() {
     this.masterService.getParentData('accountinformation/').subscribe(list => {
       this.suppliersList = list;
-    });
-  }
-  loadDebitAdjustmentLedgerData() {
-    this.masterService.getParentData('accountinformation/').subscribe(list => {
       this.debitAdjList = list;
-    });
-  }
-  loadCreditAdjustmentLedgerData() {
-    this.masterService.getParentData('accountinformation/').subscribe(list => {
       this.creditAdjList = list;
     });
   }
+ 
   loadManfacturerData() {
     this.masterService.getParentData('manfacturer/').subscribe(list => {
       this.manfacturerList = list;
@@ -198,18 +188,18 @@ export class PurchaseDashboardComponent implements OnInit {
 
   calculateRate() {
     
-    this.purchaseForm.patchValue({ grossValue: this.purchaseForm.value.qty * this.purchaseForm.value.qty });
-    this.purchaseForm.patchValue({ netValue: this.purchaseForm.value.qty * this.purchaseForm.value.qty });
+    this.purchaseForm.patchValue({ grossValue: this.purchaseForm.value.qty * this.purchaseForm.value.purRate });
+    this.purchaseForm.patchValue({ netValue: this.purchaseForm.value.qty - this.purchaseForm.value.discount + this.purchaseForm.value.taxValue });
     this.purchaseForm.patchValue({discountValue: this.purchaseForm.value.qty * this.purchaseForm.value.qty });
-    this.purchaseForm.patchValue({taxValue: this.purchaseForm.value.qty * this.purchaseForm.value.qty});
+    this.purchaseForm.patchValue({taxValue: this.purchaseForm.value.grossValue - this.purchaseForm.value.discountValue});
   
   }
 
   onSelectDebitAdjustmentLedger(event) {
-      this.purchaseForm.patchValue({ accountInformationId: event.item.id});
+      this.purchaseForm.patchValue({ drAdjLedjerId: event.item.id});
     }
   onSelectCreditAdjustmentLedger(event) {
-      this.purchaseForm.patchValue({ accountInformationId: event.item.id});
+      this.purchaseForm.patchValue({ crAdjLedjerId: event.item.id});
 }
 
   onSelectedTaxTypeahead(event) {
@@ -223,14 +213,23 @@ onSelectManfacturer(event){
 
   onSelectSupplier(event) {
     if (this.savedSupplierId >= 0 && this.savedSupplierId !== event.item.id) {
-      this.purchaseForm.patchValue({ accountInformationId: event.item.id });
+      this.purchaseForm.patchValue({ suplierId: event.item.id });
       this.purchaseForm.patchValue({ gstIN: event.item.gstIN });
       this.purchaseForm.patchValue({ hsnCode: event.item.hsnCode });
       this.purchaseForm.patchValue({stateCode: event.item.stateId})
-      this.purchaseForm.patchValue({ purchaseNumber: this.gridDataList.length + 1 });
+      
     }
   }
-
+  generateOrderNo(){
+    if(!this.purchaseForm.value.purchaseNumber){
+      if(this.gridDataList && this.gridDataList.length == 0){
+        this.purchaseForm.patchValue({ purchaseNumber: 1});
+      }else{
+        let orderN0 = Math.max.apply(Math, this.gridDataList.map(function(o) { return o.purchaseNumber; }))
+        this.purchaseForm.patchValue({ purchaseNumber: orderN0+1});
+      } 
+    }        
+  }
   validateState(){
     let userState = this.auth.getUserState();
     if(this.purchaseForm.value.stateCode && this.purchaseForm.value.stateCode == userState){
@@ -240,7 +239,8 @@ onSelectManfacturer(event){
   }
   
   save() {
-    this.savedSupplierId = this.purchaseForm.value.accountInformationId;
+    this.generateOrderNo(); 
+    this.savedSupplierId = this.purchaseForm.value.suplierId;
     this.buttonsComponent.save();
   }
 
@@ -252,10 +252,10 @@ onSelectManfacturer(event){
   successMsg() {
     this.formSuccess = true;
     this.formRequiredError = false;
-    const tempSupplierId = this.purchaseForm.value.accountInformationId;
+    const tempSupplierId = this.purchaseForm.value.suplierId;
     const tempSupplierName = this.purchaseForm.value.supplier;
     this.resetForm(null);
-    this.purchaseForm.value.accountInformationId = tempSupplierId;
+    this.purchaseForm.value.suplierIdsuplierId = tempSupplierId;
     this.purchaseForm.value.supplier = tempSupplierName;
   //  this.loadGridData();
   }
@@ -266,12 +266,12 @@ onSelectManfacturer(event){
   }
 
   resetForm(param) {
-    const tempSupplierId = this.purchaseForm.value.accountInformationId;
+    const tempSupplierId = this.purchaseForm.value.suplierId;
     const tempSupplierName = this.purchaseForm.value.supplier;
     const tempOrderNum = this.purchaseForm.value.purchaseNumber;
     this.purchaseForm.reset();
     if ((param === undefined || param === null ) && !this.nameFlag) {
-      this.purchaseForm.patchValue({ accountInformationId: tempSupplierId });
+      this.purchaseForm.patchValue({ suplierId: tempSupplierId });
       this.purchaseForm.patchValue({ supplier: tempSupplierName });
       this.purchaseForm.patchValue({ purchaseNumber: tempOrderNum });
     }

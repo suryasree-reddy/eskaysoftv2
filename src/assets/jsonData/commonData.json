@@ -924,6 +924,20 @@
   ],
   "PurchaseDashBoard": [
     {
+      "headerName": "P No",
+      "field": "purchaseNumber",
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
       "headerName": "Code",
       "field": "productcode",
       "filterParams": {
