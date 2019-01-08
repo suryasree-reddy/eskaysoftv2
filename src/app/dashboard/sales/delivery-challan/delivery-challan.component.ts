@@ -27,6 +27,7 @@ export class DeliveryChallanComponent implements OnInit {
   public modeTypeList: any = [];
   public accGstTypeList: any = [];
   private savedSupplierId = 0;
+  private saveProductId = 0;
 
 
 
@@ -60,8 +61,10 @@ export class DeliveryChallanComponent implements OnInit {
       qty: ['', Validators.required],
       sRate: ['', Validators.required],
       disc: ['', Validators.required],
-      gstp: ['', Validators.required],
-      dcNo: ['', Validators.required]
+      dcNo: [''],
+      serialNumber: [],
+      gstp: ['', Validators.required]
+      
 
     });
     this.loadProductData();
@@ -113,15 +116,36 @@ export class DeliveryChallanComponent implements OnInit {
   }
 
   onSelectSupplier(event) {
-    if (this.savedSupplierId >= 0 && this.savedSupplierId !== event.item.id) {
+ 
       this.deliveryChallanForm.patchValue({ accountInformationId: event.item.id });
       this.deliveryChallanForm.patchValue({ gstIN: event.item.gstIN });
-      this.deliveryChallanForm.patchValue({ dcNo: this.gridDataList.length + 1 });
+ 
     }
-  }
+    generateOrderNo(){
+      if(!this.deliveryChallanForm.value.dcNo){
+        if(this.gridDataList && this.gridDataList.length == 0){
+          this.deliveryChallanForm.patchValue({ dcNo: 1});
+        }else{
+          let orderN0 = Math.max.apply(Math, this.gridDataList.map(function(o) { return o.dcNo; }))
+          this.deliveryChallanForm.patchValue({ dcNo: orderN0 + 1});
+        } 
+      }        
+    }
+    generateSerialNo(){
+      let subList = this.gridDataList.filter(v => v.dcNo === this.deliveryChallanForm.value.dcNo)
+      if(subList && subList.length == 0){
+        this.deliveryChallanForm.patchValue({ serialNumber: 1});
+      }else{
+        let serialN0 = Math.max.apply(Math, subList.map(function(o) { return o.serialNumber; }))
+        this.deliveryChallanForm.patchValue({ serialNumber: serialN0 + 1});
+      }
+    }
 
   save() {
     this.savedSupplierId = this.deliveryChallanForm.value.accountInformationId;
+    this.saveProductId = this.deliveryChallanForm.value.productId;
+    this.generateOrderNo();
+    this.generateSerialNo();
     this.buttonsComponent.save();
   }
 
@@ -130,18 +154,17 @@ export class DeliveryChallanComponent implements OnInit {
   }
 
   deleteOrder() {
-    this.buttonsComponent.manualDelete(this.endPoint + '/deliveryChallanForm', this.deliveryChallanForm.value.deliveryChallanForm);
+    this.buttonsComponent.manualDelete(this.endPoint + '/dcno', this.deliveryChallanForm.value.dcNo);
   }
 
   successMsg() {
     this.formSuccess = true;
     this.formRequiredError = false;
     const tempSupplierId = this.deliveryChallanForm.value.accountInformationId;
-    const tempSupplierName = this.deliveryChallanForm.value.customer;
+    const tempSupplierName = this.deliveryChallanForm.value.supplier;
     this.resetForm(null);
     this.deliveryChallanForm.value.accountInformationId = tempSupplierId;
-    this.deliveryChallanForm.value.customer = tempSupplierName;
-    //  this.loadGridData();
+    this.deliveryChallanForm.value.supplier = tempSupplierName;
   }
 
   requiredErrMsg() {
@@ -152,12 +175,24 @@ export class DeliveryChallanComponent implements OnInit {
   resetForm(param) {
     const tempSupplierId = this.deliveryChallanForm.value.accountInformationId;
     const tempSupplierName = this.deliveryChallanForm.value.customer;
+    const tempGstIn = this.deliveryChallanForm.value.gstIN;
+    const tempdelv = this.deliveryChallanForm.value.deliverTo
     const tempOrderNum = this.deliveryChallanForm.value.dcNo;
+    const tempFree = this.deliveryChallanForm.value.free;
+    const tempDcdate = this.deliveryChallanForm.value.date;
+    const tempproduct = this.deliveryChallanForm.value.productName;
+    const tempproductcode = this.deliveryChallanForm.value.productcode;
     this.deliveryChallanForm.reset();
     if ((param === undefined || param === null) && !this.nameFlag) {
       this.deliveryChallanForm.patchValue({ accountInformationId: tempSupplierId });
       this.deliveryChallanForm.patchValue({ customer: tempSupplierName });
+      this.deliveryChallanForm.patchValue({gstIN: tempGstIn});
+      this.deliveryChallanForm.patchValue({deliverTo: tempdelv});
+      this.deliveryChallanForm.patchValue({productName: tempproduct});
       this.deliveryChallanForm.patchValue({ dcNo: tempOrderNum });
+      this.deliveryChallanForm.patchValue({free: tempFree});
+      this.deliveryChallanForm.patchValue({date: tempDcdate});
+      this.deliveryChallanForm.patchValue({productcode: tempproductcode});
     }
     this.deleteFlag = true;
     this.nameFlag = false;

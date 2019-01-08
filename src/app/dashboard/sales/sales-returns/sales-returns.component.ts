@@ -26,6 +26,7 @@ export class SalesReturnsComponent implements OnInit {
   public modeTypeList: any = [];
   public accGstTypeList: any = [];
   private savedSupplierId = 0;
+
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
 
@@ -41,7 +42,8 @@ export class SalesReturnsComponent implements OnInit {
       accountInformationId: ['', Validators.required],
       gstIN: ['', Validators.required],
       customer: ['', Validators.required],
-      salesReturnNo: ['', Validators.required],
+      salesReturnNo: [],
+      serialNumber: [''],
       salesReturnDate: ['', Validators.required],
       productId: ['', Validators.required],
       productName: ['', Validators.required],
@@ -110,15 +112,33 @@ export class SalesReturnsComponent implements OnInit {
   }
 
   onSelectSupplier(event) {
-    if (this.savedSupplierId >= 0 && this.savedSupplierId !== event.item.id) {
+    
       this.salesReturnForm.patchValue({ accountInformationId: event.item.id });
       this.salesReturnForm.patchValue({ gstIN: event.item.gstIN });
-      this.salesReturnForm.patchValue({ salesReturnNo: this.gridDataList.length + 1 });
+  }
+  generateOrderNo(){
+    if(!this.salesReturnForm.value.salesReturnNo){
+      if(this.gridDataList && this.gridDataList.length == 0){
+        this.salesReturnForm.patchValue({ salesReturnNo: 1});
+      }else{
+        let orderN0 = Math.max.apply(Math, this.gridDataList.map(function(o) { return o.salesReturnNo; }))
+        this.salesReturnForm.patchValue({ salesReturnNo: orderN0+1});
+      } 
+    }        
+  }
+  generateSerialNo(){
+    let subList = this.gridDataList.filter(v => v.salesReturnNo === this.salesReturnForm.value.salesReturnNo)
+    if(subList && subList.length == 0){
+      this.salesReturnForm.patchValue({ serialNumber: 1});
+    }else{
+      let serialN0 = Math.max.apply(Math, subList.map(function(o) { return o.serialNumber; }))
+      this.salesReturnForm.patchValue({ serialNumber: serialN0+1});
     }
   }
-
   save() {
     this.savedSupplierId = this.salesReturnForm.value.accountInformationId;
+    this.generateOrderNo();
+    this.generateSerialNo();
     this.buttonsComponent.save();
   }
 
@@ -127,9 +147,10 @@ export class SalesReturnsComponent implements OnInit {
   }
 
   deleteOrder() {
-    this.buttonsComponent.manualDelete(this.endPoint + '/salesReturnForm', this.salesReturnForm.value.salesReturnForm);
+    this.buttonsComponent.manualDelete(this.endPoint + '/salesReturnForm', this.salesReturnForm.value.salesReturnNo);
   }
 
+  
   successMsg() {
     this.formSuccess = true;
     this.formRequiredError = false;
@@ -138,23 +159,26 @@ export class SalesReturnsComponent implements OnInit {
     this.resetForm(null);
     this.salesReturnForm.value.accountInformationId = tempSupplierId;
     this.salesReturnForm.value.customer = tempSupplierName;
-    //  this.loadGridData();
-  }
+    }
 
   requiredErrMsg() {
-    this.formRequiredError = true;
-    this.formSuccess = false;
+      this.formRequiredError = true;
+      this.formSuccess = false;
   }
 
   resetForm(param) {
     const tempSupplierId = this.salesReturnForm.value.accountInformationId;
-    const tempSupplierName = this.salesReturnForm.value.supplier;
+    const tempSupplierName = this.salesReturnForm.value.customer;
     const tempOrderNum = this.salesReturnForm.value.salesReturnNo;
+    const tempDate = this.salesReturnForm.value.date;
+   
     this.salesReturnForm.reset();
-    if ((param === undefined || param === null) && !this.nameFlag) {
+    if ((param === undefined || param === null ) && !this.nameFlag) {
       this.salesReturnForm.patchValue({ accountInformationId: tempSupplierId });
       this.salesReturnForm.patchValue({ customer: tempSupplierName });
       this.salesReturnForm.patchValue({ salesReturnNo: tempOrderNum });
+      this.salesReturnForm.patchValue({ date: tempDate });
+      
     }
     this.deleteFlag = true;
     this.nameFlag = false;
@@ -167,7 +191,7 @@ export class SalesReturnsComponent implements OnInit {
     this.formRequiredError = false;
     this.deleteFlag = false;
     this.salesReturnForm.reset(s);
-    const productObj = _.find(this.productsList, function (o) { return o.id === s.productId; });
-    this.onSelectProduct({ item: productObj });
+    const productObj = _.find(this.productsList, function(o) {return o.id === s.productId; });
+    this.onSelectProduct({item : productObj});
   }
 }

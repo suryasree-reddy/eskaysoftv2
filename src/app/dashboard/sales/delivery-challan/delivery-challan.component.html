@@ -75,7 +75,7 @@
 			<div class="col-xs-12">
 				<p>{{'deliveryChallan.dcNo' | translate}}: * &emsp;(<a style="cursor: pointer" (click)="resetForm('CloseOrder')">Close
 						Order</a>) &emsp; <span *ngIf="nameFlag">(<a style="cursor: pointer" (click)="deleteOrder()">Delete Order</a>)</span></p>
-				<input id="dcNo" maxlength="40" #focus [readonly]=true class="form-control" [formControl]="deliveryChallanForm.controls['dcNo']">
+				<input id="dcNo" type="number" maxlength="40" #focus [readonly]=true class="form-control" [formControl]="deliveryChallanForm.controls['dcNo']">
 			</div>
 			<div class="col-xs-4">
 				<p>{{'purchase.gstIN' | translate}}: *</p>
