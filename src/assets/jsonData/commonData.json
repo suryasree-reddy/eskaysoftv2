@@ -1678,13 +1678,29 @@
   ],
   "SalesOrderColumns": [
     {
-      "headerName": "S No",
-      "field": "id",
-      "width": 150,
+      "headerName": "Order No",
+      "field": "orderNumber",
+      "width": 200,
       "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "S No",
+      "field": "serialNumber",
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1714,10 +1730,13 @@
     },
     {
       "headerName": "Packing",
-      "field": "packing",
+      "field": "pack",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1726,9 +1745,12 @@
     {
       "headerName": "Qty",
       "field": "qty",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1737,9 +1759,12 @@
     {
       "headerName": "Free",
       "field": "free",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1748,9 +1773,12 @@
     {
       "headerName": "Rate",
       "field": "rate",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -1759,9 +1787,12 @@
     {
       "headerName": "Value",
       "field": "value",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
