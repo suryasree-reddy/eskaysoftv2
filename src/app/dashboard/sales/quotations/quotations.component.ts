@@ -6,6 +6,8 @@ import { ButtonsComponent } from 'src/app/commonComponents/buttons/buttons.compo
 import { SharedDataService } from 'src/app/shared/model/shared-data.service';
 import 'src/assets/styles/mainstyles.scss';
 
+import * as _ from 'lodash';
+
 @Component({
   selector: 'app-quotations',
   templateUrl: './quotations.component.html'
@@ -18,13 +20,11 @@ export class QuotationsComponent implements OnInit {
   private formSuccess: boolean = false;
   private formRequiredError: boolean = false;
   private nameFlag: boolean = false;
-  private duplicateName: boolean = false;
-  private duplicateOrderNo: boolean = false;
-  private duplicateMessage: string = null;
-  private duplicateMessageParam: string = null;
-  private quotationList: any = [];
+  public gridDataList: any = [];
   private productsList: any = [];
   private customersList: any = [];
+  private savedSupplierId = 0;
+  private totalValue;
 
   @ViewChild('focus') focusField: ElementRef;
   @ViewChild(ButtonsComponent) buttonsComponent: ButtonsComponent;
@@ -38,29 +38,47 @@ export class QuotationsComponent implements OnInit {
 
   ngOnInit() {
     this.quotationForm = this.fb.group({
-      id: ['', Validators.required],
-      orderNumber: ['', Validators.required],
+      id: [],
+      orderNumber: [''],
+      serialNumber:[''],
       accountInformationId: ['', Validators.required],
       customer: ['', Validators.required],
       remarks: [],
-      date: [],
+      date: ['', Validators.required],
       productId: ['', Validators.required],
       productName: ['', Validators.required],
       productcode: ['', Validators.required],
-      pack: [],
-      qty: [],
-      rate: [],
-      amount: [],
+      packing:['', Validators.required],
+      qty: ['', Validators.required],
+      rate: ['', Validators.required],
+      ammount:['', Validators.required]
     });
     this.loadProductData();
     this.loadCustomerData();
   }
 
-  checkForDuplicateOrderNo() {
-    if (!this.nameFlag) {
-      this.duplicateOrderNo = this.masterService.hasDataExist(this.quotationList, 'orderNumber', this.quotationForm.value.orderNumber);
-      this.getDuplicateErrorMessages();
-    }
+  onInitialDataLoad(dataList: any[]) {
+    this.gridDataList = dataList;
+    this.totalCalculation();
+  }
+  totalCalculation(){
+    let total = 0;
+    this.gridDataList.forEach(element => { 
+      total += parseInt(element.ammount);     
+    });
+    this.totalValue = total;
+  }
+  loadGridData() {
+    this.masterService.getData(this.endPoint);
+    this.masterService.dataObject.subscribe(list => {
+      this.gridDataList = list;
+      this.totalCalculation();
+      localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
+    });
+  }
+
+  valueChange(selectedRow: any[]): void {
+    this.editable(selectedRow);
   }
 
   loadProductData() {
@@ -74,31 +92,46 @@ export class QuotationsComponent implements OnInit {
       this.customersList = list;
     });
   }
+
   onSelectProduct(event) {
-    this.quotationForm.patchValue({ pack: event.item.packing });
-    this.quotationForm.patchValue({ free: event.item.free });
-
-  }
-  onSelectCustomer(event) {
-   
-      this.quotationForm.patchValue({ accountInformationId: event.item.id });
-   
-    }
-  
-
-  getDuplicateErrorMessages(): void {
-    if (!this.duplicateOrderNo) {
-      this.formRequiredError = false;
-      this.duplicateMessage = null;
-      this.duplicateMessageParam = null;
-    }
-    if (this.duplicateOrderNo) {
-      this.duplicateMessage = "quotation.duplicateNameErrorMessage";
-      this.duplicateMessageParam = this.quotationForm.value.orderNumber;
-    }
+    this.quotationForm.patchValue({ packing: event.item.packing });
+    this.quotationForm.patchValue({ productId: event.item.id });
+    this.quotationForm.patchValue({ productcode: event.item.productcode });
+    this.calculateRate();    
   }
 
+  calculateRate() {
+    // this.quotationForm.patchValue({ rate: this.quotationForm.value.qty * this.quotationForm.value.qty });
+  this.quotationForm.patchValue({ ammount: this.quotationForm.value.rate * this.quotationForm.value.qty });
+   
+  }
+
+  onSelectSupplier(event) {    
+    this.quotationForm.patchValue({ accountInformationId: event.item.id });   
+  }
+  generateOrderNo(){
+    if(!this.quotationForm.value.orderNumber){
+      if(this.gridDataList && this.gridDataList.length == 0){
+        this.quotationForm.patchValue({ orderNumber: 1});
+      }else{
+        let orderN0 = Math.max.apply(Math, this.gridDataList.map(function(o) { return o.orderNumber; }))
+        this.quotationForm.patchValue({ orderNumber: orderN0+1});
+      } 
+    }        
+  }
+  generateSerialNo(){
+    let subList = this.gridDataList.filter(v => v.orderNumber === this.quotationForm.value.orderNumber)
+    if(subList && subList.length == 0){
+      this.quotationForm.patchValue({ serialNumber: 1});
+    }else{
+      let serialN0 = Math.max.apply(Math, subList.map(function(o) { return o.serialNumber; }))
+      this.quotationForm.patchValue({ serialNumber: serialN0+1});
+    }
+  }
   save() {
+    this.savedSupplierId = this.quotationForm.value.accountInformationId;     
+    this.generateOrderNo(); 
+    this.generateSerialNo();     
     this.buttonsComponent.save();
   }
 
@@ -106,27 +139,51 @@ export class QuotationsComponent implements OnInit {
     this.buttonsComponent.delete();
   }
 
+  deleteOrder() {
+    this.buttonsComponent.manualDelete(this.endPoint + 'orderNumber/', this.quotationForm.value.orderNumber);
+  }
+
   successMsg() {
     this.formSuccess = true;
     this.formRequiredError = false;
-    this.resetForm();
-  }
+    const tempSupplierId = this.quotationForm.value.accountInformationId;
+    const tempSupplierName = this.quotationForm.value.customer;
+    this.resetForm(null);
+    this.quotationForm.value.accountInformationId = tempSupplierId;
+    this.quotationForm.value.customer = tempSupplierName;
+    }
 
   requiredErrMsg() {
-    if (this.duplicateMessage == null) {
       this.formRequiredError = true;
       this.formSuccess = false;
-    }
   }
 
-  resetForm() {
+  resetForm(param) {
+    const tempSupplierId = this.quotationForm.value.accountInformationId;
+    const tempSupplierName = this.quotationForm.value.customer;
+    const tempOrderNum = this.quotationForm.value.orderNumber;
+    const tempDate = this.quotationForm.value.date;
+    const tempRemarks = this.quotationForm.value.remarks;
     this.quotationForm.reset();
+    if ((param === undefined || param === null ) && !this.nameFlag) {
+      this.quotationForm.patchValue({ accountInformationId: tempSupplierId });
+      this.quotationForm.patchValue({ customer: tempSupplierName });
+      this.quotationForm.patchValue({ orderNumber: tempOrderNum });
+      this.quotationForm.patchValue({ date: tempDate });
+      this.quotationForm.patchValue({ remarks: tempRemarks });
+    }
     this.deleteFlag = true;
-    this.duplicateMessage = null;
-    this.duplicateMessageParam = null;
     this.nameFlag = false;
-    this.duplicateOrderNo = false;
     this.formRequiredError = this.formSuccess = false;
+    this.loadGridData();
   }
 
+  editable(s) {
+    this.nameFlag = true;
+    this.formRequiredError = false;
+    this.deleteFlag = false;
+    this.quotationForm.reset(s);
+    const productObj = _.find(this.productsList, function(o) {return o.id === s.productId; });
+    this.onSelectProduct({item : productObj});
+  }
 }
