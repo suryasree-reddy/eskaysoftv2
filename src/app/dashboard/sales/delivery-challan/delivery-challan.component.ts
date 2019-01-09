@@ -14,8 +14,8 @@ import * as _ from 'lodash';
   templateUrl: './delivery-challan.component.html'
 })
 export class DeliveryChallanComponent implements OnInit {
+ 
   public deliveryChallanForm: FormGroup;
-  public productForm: FormGroup;
   private deleteFlag: boolean = true;
   private endPoint = 'gSTChallan/';
   private formSuccess = false;
@@ -28,7 +28,7 @@ export class DeliveryChallanComponent implements OnInit {
   public accGstTypeList: any = [];
   private savedSupplierId = 0;
   private saveProductId = 0;
-
+  private totalValue;
 
 
   @ViewChild('focus') focusField: ElementRef;
@@ -62,7 +62,7 @@ export class DeliveryChallanComponent implements OnInit {
       sRate: ['', Validators.required],
       disc: ['', Validators.required],
       dcNo: [''],
-      serialNumber: [],
+      serialNumber: [''],
       gstp: ['', Validators.required]
       
 
@@ -76,11 +76,12 @@ export class DeliveryChallanComponent implements OnInit {
   onInitialDataLoad(dataList: any[]) {
     this.gridDataList = dataList;
   }
-
+  
   loadGridData() {
     this.masterService.getData(this.endPoint);
     this.masterService.dataObject.subscribe(list => {
       this.gridDataList = list;
+    
       localStorage.setItem('rowDataLength', JSON.stringify(this.gridDataList.length));
     });
   }
@@ -154,7 +155,7 @@ export class DeliveryChallanComponent implements OnInit {
   }
 
   deleteOrder() {
-    this.buttonsComponent.manualDelete(this.endPoint + '/dcno', this.deliveryChallanForm.value.dcNo);
+    this.buttonsComponent.manualDelete(this.endPoint + 'dcno/', this.deliveryChallanForm.value.dcNo);
   }
 
   successMsg() {
@@ -162,9 +163,13 @@ export class DeliveryChallanComponent implements OnInit {
     this.formRequiredError = false;
     const tempSupplierId = this.deliveryChallanForm.value.accountInformationId;
     const tempSupplierName = this.deliveryChallanForm.value.supplier;
+    const tempProductId = this.deliveryChallanForm.value.productId;
+    const tempproductName = this.deliveryChallanForm.value.productName;
     this.resetForm(null);
     this.deliveryChallanForm.value.accountInformationId = tempSupplierId;
     this.deliveryChallanForm.value.supplier = tempSupplierName;
+    this.deliveryChallanForm.value.productId = tempProductId;
+    this.deliveryChallanForm.value.productName = tempproductName;
   }
 
   requiredErrMsg() {
@@ -180,6 +185,7 @@ export class DeliveryChallanComponent implements OnInit {
     const tempOrderNum = this.deliveryChallanForm.value.dcNo;
     const tempFree = this.deliveryChallanForm.value.free;
     const tempDcdate = this.deliveryChallanForm.value.date;
+    const tempproductId = this.deliveryChallanForm.value.productId;
     const tempproduct = this.deliveryChallanForm.value.productName;
     const tempproductcode = this.deliveryChallanForm.value.productcode;
     this.deliveryChallanForm.reset();
@@ -188,6 +194,7 @@ export class DeliveryChallanComponent implements OnInit {
       this.deliveryChallanForm.patchValue({ customer: tempSupplierName });
       this.deliveryChallanForm.patchValue({gstIN: tempGstIn});
       this.deliveryChallanForm.patchValue({deliverTo: tempdelv});
+      this.deliveryChallanForm.patchValue({productId: tempproductId});
       this.deliveryChallanForm.patchValue({productName: tempproduct});
       this.deliveryChallanForm.patchValue({ dcNo: tempOrderNum });
       this.deliveryChallanForm.patchValue({free: tempFree});

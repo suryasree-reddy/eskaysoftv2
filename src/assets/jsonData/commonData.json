@@ -1801,6 +1801,35 @@
   ],
   "GSTChallanColumns": [
     {
+      "headerName": "D No",
+      "field": "dcNo",
+      "width": 200,
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "S No",
+      "field": "serialNumber",
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
       "headerName": "Code",
       "field": "productcode",
       "filterParams": {
@@ -2029,6 +2058,35 @@
     }
   ],
   "SalesReturnColumns": [
+    {
+      "headerName": "R No",
+      "field": "salesReturnNo",
+      "width": 200,
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "S No",
+      "field": "serialNumber",
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
     {
       "headerName": "Code",
       "field": "productcode",
