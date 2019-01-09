@@ -41,13 +41,13 @@ export class SalesOrdersComponent implements OnInit {
   ngOnInit() {
     this.salesOrderForm = this.fb.group({
       id: [],
-      accountInformationId: [],
+      accountInformationId: ['', Validators.required],
       orderNumber: [''],
       serialNumber:[''],
       customer: ['', Validators.required],
       remarks: [],
       date: ['', Validators.required],
-      productId: [],
+      productId: ['', Validators.required],
       productName: ['', Validators.required],
       productcode: ['', Validators.required],
       pack: ['', Validators.required],

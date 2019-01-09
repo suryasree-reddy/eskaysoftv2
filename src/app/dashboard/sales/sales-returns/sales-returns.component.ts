@@ -42,7 +42,7 @@ export class SalesReturnsComponent implements OnInit {
       accountInformationId: ['', Validators.required],
       gstIN: ['', Validators.required],
       customer: ['', Validators.required],
-      salesReturnNo: [],
+      salesReturnNo: [''],
       serialNumber: [''],
       salesReturnDate: ['', Validators.required],
       productId: ['', Validators.required],
@@ -121,7 +121,7 @@ export class SalesReturnsComponent implements OnInit {
       if(this.gridDataList && this.gridDataList.length == 0){
         this.salesReturnForm.patchValue({ salesReturnNo: 1});
       }else{
-        let orderN0 = Math.max.apply(Math, this.gridDataList.map(function(o) { return o.salesReturnNo; }))
+        let orderN0 = Math.max.apply(Math, this.gridDataList.map(function(o) { return o.salesReturnNo; }));
         this.salesReturnForm.patchValue({ salesReturnNo: orderN0+1});
       } 
     }        
@@ -147,7 +147,7 @@ export class SalesReturnsComponent implements OnInit {
   }
 
   deleteOrder() {
-    this.buttonsComponent.manualDelete(this.endPoint + '/salesReturnForm', this.salesReturnForm.value.salesReturnNo);
+    this.buttonsComponent.manualDelete(this.endPoint + 'returnNo/', this.salesReturnForm.value.salesReturnNo);
   }
 
   
@@ -156,9 +156,13 @@ export class SalesReturnsComponent implements OnInit {
     this.formRequiredError = false;
     const tempSupplierId = this.salesReturnForm.value.accountInformationId;
     const tempSupplierName = this.salesReturnForm.value.customer;
+    const tempProductId = this.salesReturnForm.value.productId;
+    const tempProductName = this.salesReturnForm.value.productName;
     this.resetForm(null);
     this.salesReturnForm.value.accountInformationId = tempSupplierId;
     this.salesReturnForm.value.customer = tempSupplierName;
+    this.salesReturnForm.value.productId = tempProductId;
+    this.salesReturnForm.value.productName = tempProductName;
     }
 
   requiredErrMsg() {
@@ -171,6 +175,8 @@ export class SalesReturnsComponent implements OnInit {
     const tempSupplierName = this.salesReturnForm.value.customer;
     const tempOrderNum = this.salesReturnForm.value.salesReturnNo;
     const tempDate = this.salesReturnForm.value.date;
+    const tempGstIn = this.salesReturnForm.value.gstIN;
+    
    
     this.salesReturnForm.reset();
     if ((param === undefined || param === null ) && !this.nameFlag) {
@@ -178,6 +184,7 @@ export class SalesReturnsComponent implements OnInit {
       this.salesReturnForm.patchValue({ customer: tempSupplierName });
       this.salesReturnForm.patchValue({ salesReturnNo: tempOrderNum });
       this.salesReturnForm.patchValue({ date: tempDate });
+      this.salesReturnForm.patchValue({gstIN: tempGstIn});
       
     }
     this.deleteFlag = true;
