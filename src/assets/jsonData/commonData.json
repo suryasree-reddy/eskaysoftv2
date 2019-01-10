@@ -1707,6 +1707,17 @@
       "suppressSizeToFit": false
     },
     {
+      "headerName": "Customer",
+      "field": "customer",
+      "filterParams": {
+        "filterOptions": [
+          "contains"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
       "headerName": "Code",
       "field": "productcode",
       "filterParams": {
@@ -1824,6 +1835,17 @@
           "equals",
           "lessThan",
           "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Customer",
+      "field": "customer",
+      "filterParams": {
+        "filterOptions": [
+          "contains"
         ],
         "newRowsAction": "keep"
       },
@@ -1958,6 +1980,46 @@
   ],
   "salesInvoiceColumns": [
     {
+      "headerName": "Inv No",
+      "field": "salesInvNo",
+      "width": 180,
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "S No",
+      "field": "serialNumber",
+      "filter": "agNumberColumnFilter",
+      "filterParams": {
+        "filterOptions": [
+          "equals",
+          "lessThan",
+          "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Customer",
+      "field": "customer",
+      "filterParams": {
+        "filterOptions": [
+          "contains"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
       "headerName": "Code",
       "field": "productcode",
       "filterParams": {
@@ -1992,7 +2054,7 @@
     },
     {
       "headerName": "Exp",
-      "field": "exp",
+      "field": "expiry",
       "filterParams": {
         "filterOptions": [
           "contains"
@@ -2004,9 +2066,12 @@
     {
       "headerName": "Qty",
       "field": "qty",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -2015,9 +2080,12 @@
     {
       "headerName": "Free",
       "field": "free",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -2026,9 +2094,12 @@
     {
       "headerName": "S.Rate",
       "field": "sRate",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -2037,9 +2108,12 @@
     {
       "headerName": "Disc",
       "field": "disc",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -2047,15 +2121,26 @@
     },
     {
       "headerName": "GST%",
-      "field": "gstPerc",
+      "field": "gstp",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
       "suppressSizeToFit": false
-    }
+    },
+  
+  {
+    "headerName": "Status",
+    "field": "deleteFlag",
+    "cellRenderer": "deltaIndicator",
+    "suppressFilter": true,
+    "suppressSizeToFit": false
+  }
   ],
   "SalesReturnColumns": [
     {
@@ -2082,6 +2167,17 @@
           "equals",
           "lessThan",
           "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },
+    {
+      "headerName": "Customer",
+      "field": "customer",
+      "filterParams": {
+        "filterOptions": [
+          "contains"
         ],
         "newRowsAction": "keep"
       },
@@ -2123,9 +2219,12 @@
     {
       "headerName": "Expiry",
       "field": "expiry",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -2134,9 +2233,12 @@
     {
       "headerName": "Qty",
       "field": "qty",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -2145,9 +2247,12 @@
     {
       "headerName": "Free",
       "field": "free",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -2156,9 +2261,12 @@
     {
       "headerName": "S.Rate",
       "field": "sRate",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -2167,9 +2275,12 @@
     {
       "headerName": "Disc",
       "field": "disc",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -2178,9 +2289,12 @@
     {
       "headerName": "GST%",
       "field": "gstp",
+      "filter": "agNumberColumnFilter",
       "filterParams": {
         "filterOptions": [
-          "contains"
+          "equals",
+          "lessThan",
+          "greaterThan"
         ],
         "newRowsAction": "keep"
       },
@@ -2219,6 +2333,16 @@
           "equals",
           "lessThan",
           "greaterThan"
+        ],
+        "newRowsAction": "keep"
+      },
+      "suppressSizeToFit": false
+    },{
+      "headerName": "Customer",
+      "field": "customer",
+      "filterParams": {
+        "filterOptions": [
+          "contains"
         ],
         "newRowsAction": "keep"
       },
@@ -2302,6 +2426,5 @@
       },
       "suppressSizeToFit": false
     }
-  ]
-  
+]
 }
