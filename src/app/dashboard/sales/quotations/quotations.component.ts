@@ -97,17 +97,19 @@ export class QuotationsComponent implements OnInit {
     this.quotationForm.patchValue({ packing: event.item.packing });
     this.quotationForm.patchValue({ productId: event.item.id });
     this.quotationForm.patchValue({ productcode: event.item.productcode });
-    this.calculateRate();    
+    this.calculateRate();   
+      
   }
 
   calculateRate() {
-    // this.quotationForm.patchValue({ rate: this.quotationForm.value.qty * this.quotationForm.value.qty });
-  this.quotationForm.patchValue({ ammount: this.quotationForm.value.rate * this.quotationForm.value.qty });
+  this.quotationForm.patchValue({ rate: this.quotationForm.value.packing * this.quotationForm.value.packing });
+  this.quotationForm.patchValue({ ammount: this.quotationForm.value.rate * this.quotationForm.value.packing });
    
   }
 
   onSelectSupplier(event) {    
-    this.quotationForm.patchValue({ accountInformationId: event.item.id });   
+    this.quotationForm.patchValue({ accountInformationId: event.item.id }); 
+ 
   }
   generateOrderNo(){
     if(!this.quotationForm.value.orderNumber){

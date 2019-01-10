@@ -490,6 +490,7 @@
     "sRate": "S.Rate",
     "disc": "Discount",
     "gstPerc": "GST%",
+    
     "saveConfirmationMessage": "Are you sure you want to save Sales Invoice?",
     "saveInformationMessage": "Sales Invoice record has been saved successfully.",
     "duplicateNameErrorMessage": "The Sales Invoice Number '{{duplicateMessageParam}}' already exists.",
@@ -529,6 +530,7 @@
     "exp": "Exp",
     "sRate": "S Rate",
     "gst": "GST %",
+    "ammount": "Amount",
     "saveConfirmationMessage": "Are you sure you want to save Delivery Challan?",
     "saveInformationMessage": "Delivery Challan record has been saved successfully.",
     "duplicateNameErrorMessage": "The Delivery Challan Name '{{duplicateMessageParam}}' already exists with this Name.",
